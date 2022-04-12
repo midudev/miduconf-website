@@ -1,0 +1,16 @@
+---
+export interface Props {
+  action: 'close' | 'minimize' | 'maximize'
+}
+
+const ACTIONS = {
+  close: 'FF605C',
+  minimize: 'FFBD44',
+  maximize: '00CA4E'
+}
+
+const {action} = Astro.props as Props
+const backgroundColor = ACTIONS[action]
+---
+
+<div class={`w-3 h-3 rounded-full bg-[#${backgroundColor}]`} ></div>

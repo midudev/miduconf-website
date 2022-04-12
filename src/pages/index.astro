@@ -1,0 +1,63 @@
+---
+import WindowButton from '../components/WindowButton.astro'
+import TextWithDegradation from '../components/TextWithDegradation.astro'
+import SpeakerCard from '../components/SpeakerCard.astro'
+import { getAllSpeakers } from '../services/speakers.js'
+
+const speakers = await getAllSpeakers()
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>miduConf - La conferencia de Desarrollo y Programación Web de la comunidad</title>
+	</head>
+	<body>
+
+		<header class='container h-40'>
+			<div class='flex'>
+			
+			</div>
+		</header>
+		
+		<p class='text-center text-gray-800 text-lg leading-snug uppercase tracking-wider leading-0'>
+			Disfruta de la
+		</p>
+
+		<h1 class='text-8xl uppercase font-black text-center mb-5'>
+			<TextWithDegradation color='orange'>midu</TextWithDegradation>
+			<TextWithDegradation color='purple'>conf</TextWithDegradation>
+		</h1>
+
+		<p class='text-center text-gray-400 text-lg leading-snug'>
+			¡Entra y disfruta de la conferencia<br />de Desarrollo y Programación Web de la comunidad!
+		</p>
+
+		<section class='mt-24 px-10 flex items-center justify-center flex-col'>
+			
+			<div class='mx-auto w-full max-w-3xl border-2 border-gray-900 rounded-lg'>
+				<header class="h-8 bg-gray-900 w-full flex space-x-1.5 items-center px-2">
+					<WindowButton action='close' />
+					<WindowButton action='minimize' />
+					<WindowButton action='maximize' />
+				</header>
+
+				<div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full p-5'>
+				{
+					speakers.map(({avatar, name, description}) => (
+						<SpeakerCard
+							avatar={avatar.url}
+							speaker={name}
+							description={description}
+						/>
+					))
+				}	
+				</div>
+				
+			</div>
+
+		</section>
+
+	</body>
+</html>

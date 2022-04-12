@@ -1,0 +1,15 @@
+---
+const {avatar, speaker, description} = Astro.props
+---
+
+<div class="rounded-lg border-2 border-gray-900 overflow-hidden h-72">
+  <img src={avatar} />
+  <div class='flex flex-col items-between'>
+    <h4 class='font-semibold p-2 m-0'>
+      {speaker}
+    </h4>
+    <p class='px-2 leading-snug text-sm text-gray-800'>
+      {description}
+    </p>
+  </div>
+</div>
