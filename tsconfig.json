@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@services/*":["src/services/*"]
+    }
   }
 }

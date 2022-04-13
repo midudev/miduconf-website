@@ -1,8 +1,8 @@
 ---
-import WindowButton from '../components/WindowButton.astro'
-import TextWithDegradation from '../components/TextWithDegradation.astro'
-import SpeakerCard from '../components/SpeakerCard.astro'
-import { getAllSpeakers } from '../services/speakers.js'
+import WindowButton from '@components/WindowButton.astro'
+import TextWithDegradation from '@components/TextWithDegradation.astro'
+import SpeakerCard from '@components/SpeakerCard.astro'
+import { getAllSpeakers } from '@services/speakers.js'
 
 const speakers = await getAllSpeakers()
 ---
