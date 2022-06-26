@@ -1,9 +1,9 @@
 ---
 const COLORS = {
-  orange: ['#FF8008', '#FFC837'],
-  purple: ['#D676EA', '#8227FE']
+  orange: ['from-miduconf-orange-200', 'to-miduconf-orange-100'],
+  purple: ['from-miduconf-purple-200', 'to-miduconf-purple-100'],
 }
 
 const [from, to] = COLORS[Astro.props.color]
 ---
-<span class={`bg-clip-text bg-gradient-to-r from-[${from}] to-[${to}] text-transparent tracking-tigh`}><slot /></span>
+<span class={`bg-clip-text bg-gradient-to-r ${from} ${to} text-transparent tracking-tigh`}><slot /></span>
