@@ -1,0 +1,17 @@
+---
+  const {
+    title = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad',
+    description = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad'
+  } = Astro.props
+---
+<html lang="es" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{title}</title>
+    <meta name="description" content={description} />
+	</head>
+	<body>
+    <slot />
+  </body>
+</html>

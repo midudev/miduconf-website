@@ -1,0 +1,12 @@
+--- 
+const {href, text} = Astro.props
+---
+
+<div class="relative inline-block">
+  
+  <div class="w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0"></div>
+
+  <a
+    class="relative inline-block px-5 py-2 text-lg font-bold text-center text-gray-900 no-underline whitespace-no-wrap align-middle transition-colors bg-white border-2 border-gray-900 border-solid rounded-md shadow-xs cursor-pointer select-none hover:bg-yellow-100 hover:shadow-xs hover:text-gray-900 focus:shadow-xs" href={href}>{text}</a>
+    
+</div>
