@@ -145,8 +145,8 @@ const speakers = await getAllSpeakers()
 	const hero = document.getElementById('icons')
 	const svgs = Array.from(hero.querySelectorAll('svg'))
 
-	const w = hero.offsetWidth;
-	const h = hero.offsetHeight;
+	const w = window.innerWidth
+	const h = window.innerHeight
 
 	function animateBackgroundIcons () {
 		const availableSvgs = svgs.filter(svg => !svg.isAnimating)
