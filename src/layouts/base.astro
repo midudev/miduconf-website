@@ -1,20 +1,31 @@
 ---
-  const {
-    title = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad',
-    description = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad'
-  } = Astro.props
+const {
+  title = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad',
+  description = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad'
+} = Astro.props
 ---
+
 <html lang="es" class="scroll-smooth">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#fff600">
-    <link rel="icon" href="/favicon.svg">
-    <link rel="mask-icon" href="/mask-icon.svg" color="#000000">
-	</head>
-	<body>
-    <slot />
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#fff600">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="mask-icon" href="/mask-icon.svg" color="#000000">
+
+  <meta property="og:url"
+    content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="/og.png" />
+</head>
+
+<body>
+  <slot />
+</body>
+
 </html>
