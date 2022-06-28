@@ -1,7 +1,7 @@
 ---
 const {
-  title = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad',
-  description = 'miduConf - La conferencia de Desarrollo y Programación Web de la comunidad'
+  title = 'miduConf - Conferencia en remoto de Desarrollo y Programación Web',
+  description = '¡Descubre las últimas tendencias de desarrollo y programación web de la mano de gente tremenda y GRATIS!'
 } = Astro.props
 ---
 
@@ -16,12 +16,18 @@ const {
   <link rel="icon" href="/favicon.svg">
   <link rel="mask-icon" href="/mask-icon.svg" color="#000000">
 
-  <meta property="og:url"
-    content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+  <meta property="og:url" content="https://miduconf.com" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content="https://miduconf.com/og.png" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@midudev">
+  <meta name="twitter:creator" content="@midudev">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="https://miduconf.com/og.png">
 </head>
 
 <body>
