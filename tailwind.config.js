@@ -3,22 +3,22 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'moving-background': 'moving-background 5s ease-in-out',
+        "moving-background": "moving-background 5s ease-in-out",
       },
       keyframes: {
-        'moving-background': {
-          '0%': {
-            transform: 'translateY(0)',
-            opacity: 0
+        "moving-background": {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: 0,
           },
-          '66%': {
-            opacity: .4
-          },  
-          '100%': {
-            transform: 'translateY(-150px)',
-            opacity: 0
-          }
-        }   
+          "66%": {
+            opacity: 0.4,
+          },
+          "100%": {
+            transform: "translateY(-150px)",
+            opacity: 0,
+          },
+        },
       },
       colors: {
         miduconf: {
@@ -31,11 +31,11 @@ module.exports = {
             200: "#D676EA",
           },
           yellow: {
-            100: '#fff601'
-          }
+            100: "#fff601",
+          },
         },
       },
     },
   },
   plugins: [],
-}
+};

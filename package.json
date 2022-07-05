@@ -9,11 +9,14 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "format": "prettier -w 'src/**/*.{js,jsx,ts,tsx,astro}'"
   },
   "devDependencies": {
     "@astrojs/tailwind": "0.2.1",
     "astro": "1.0.0-beta.56",
+    "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.1.1",
     "tailwindcss": "3.1.4"
   }
 }
