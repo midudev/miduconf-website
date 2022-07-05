@@ -1,39 +1,40 @@
 ---
 const {
-  title = 'miduConf - Conferencia en remoto de Desarrollo y Programación Web',
-  description = '¡Descubre las últimas tendencias de desarrollo y programación web de la mano de gente tremenda y GRATIS!'
-} = Astro.props
+  title = "miduConf - Conferencia en remoto de Desarrollo y Programación Web",
+  description = "¡Descubre las últimas tendencias de desarrollo y programación web de la mano de gente tremenda y GRATIS!",
+} = Astro.props;
 ---
 
 <html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fff600" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="mask-icon" href="/mask-icon.svg" color="#000000" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta name="theme-color" content="#fff600">
-  <link rel="icon" href="/favicon.svg">
-  <link rel="mask-icon" href="/mask-icon.svg" color="#000000">
+    <meta property="og:url" content="https://miduconf.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://miduconf.com/og.jpg" />
 
-  <meta property="og:url" content="https://miduconf.com" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content="https://miduconf.com/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@midudev" />
+    <meta name="twitter:creator" content="@midudev" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://miduconf.com/og.jpg" />
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@midudev">
-  <meta name="twitter:creator" content="@midudev">
-  <meta name="twitter:title" content={title}>
-  <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content="https://miduconf.com/og.jpg">
+    <script src="https://cdn.usefathom.com/script.js" data-site="RCIEAOAU" defer
+    >
 
-  <script src="https://cdn.usefathom.com/script.js" data-site="RCIEAOAU" defer></script>
-</head>
+    </script>
+  </head>
 
-<body>
-  <slot />
-</body>
-
+  <body>
+    <slot></slot>
+  </body>
 </html>
