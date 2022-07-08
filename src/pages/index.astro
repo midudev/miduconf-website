@@ -16,7 +16,7 @@ import FAQ from "@components/Faq.astro";
     class="relative w-full overflow-hidden bg-gradient-to-r from-miduconf-yellow-100 via-miduconf-yellow-100 to-miduconf-orange-100"
     style="clip-path: polygon(25% 0%, 100% 0, 100% 95%, 0 100%, 0 100%, 0 0)"
   >
-    <header class="flex items-center lg:justify-center p-6 text-center">
+    <header class="flex items-center p-6 text-center lg:justify-center">
       <input type="checkbox" id="menu" hidden class="peer " />
       <label
         for="menu"
@@ -24,7 +24,7 @@ import FAQ from "@components/Faq.astro";
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 first"
+          class="w-6 h-6 first"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -37,7 +37,7 @@ import FAQ from "@components/Faq.astro";
         </svg>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 last hidden"
+          class="hidden w-6 h-6 last"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -50,7 +50,7 @@ import FAQ from "@components/Faq.astro";
         </svg>
       </label>
       <nav
-        class="peer-checked:block hidden absolute lg:block lg:static top-0 left-0 right-0 py-24 bg-white lg:bg-inherit lg:py-0 lg:min-h-0 bg-opacity-40 backdrop-blur-lg z-40 min-h-screen"
+        class="absolute top-0 left-0 right-0 z-40 hidden min-h-screen py-24 bg-white peer-checked:block lg:block lg:static lg:bg-inherit lg:py-0 lg:min-h-0 bg-opacity-40 backdrop-blur-lg lg:backdrop-blur-0"
       >
         <ul
           class="flex flex-col items-center lg:items-start lg:flex-row font-semibold tracking-tight gap-x-8 text-slate-700 [&>li>a]:border-b-2 [&>li>a]:border-b-transparent [&>li>a]:transition-all gap-y-4"
