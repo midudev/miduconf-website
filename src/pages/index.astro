@@ -7,6 +7,8 @@ import HomeSpeakers from "@components/HomeSpeakers.astro";
 import Footer from "@components/Footer.astro";
 import FAQ from "@components/Faq.astro";
 
+import AddToCalendar from '@components/AddToCalendar.astro';
+
  // const speakers = await getAllSpeakers();
 ---
 
@@ -213,12 +215,15 @@ import FAQ from "@components/Faq.astro";
           >
             #miduConf
           </p>
-
-          <p
-            class="font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700"
-          >
-            MARTES 13 de SEPTIEMBRE 2022 - 17:00 CET
-          </p>
+            
+          <AddToCalendar>
+            <p
+              class="font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700"
+            >
+              MARTES 13 de SEPTIEMBRE 2022 - 17:00 CET
+            </p>
+          </AddToCalendar>
+          
           <p
             class="flex items-center font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-900"
           >

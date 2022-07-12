@@ -1,0 +1,19 @@
+---
+const VCALENDAR_TEMPLATE = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+URL:https://twitch.tv/midudev
+DTSTART:${(new Date(2022, 9, 13, 17, 0, 0)).toISOString()}
+DTEND:${(new Date(2022, 9, 13, 22, 0, 0)).toISOString()}
+SUMMARY:[MIDUCONF]
+DESCRIPTION:La mejor conferencia de habla-hispana a la que vas a poder asistir
+LOCATION:https://twitch.tv/midudev
+END:VEVENT
+END:VCALENDAR`
+---
+
+<div>
+    <a class="flex flex-row items-center justify-center gap-2 cursor-pointer" href={VCALENDAR_TEMPLATE} alt="Acceso a Calendar MiduConf" target="_blank" rel="noopener noreferrer">
+        <slot />
+    </a>
+</div>
