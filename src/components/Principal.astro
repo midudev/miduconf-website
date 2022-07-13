@@ -1,5 +1,6 @@
 ---
 import Button from "@components/Button.astro";
+import EventDateDropdown from "@components/EventDateDropdown.astro";
 ---
 
 <div class="block px-6 mx-auto max-w-7xl">
@@ -11,13 +12,8 @@ import Button from "@components/Button.astro";
                 #miduConf
             </h1>
 
-            <p
-                class="font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700">
-                <a target="_blank" rel='noopener noreferrer'
-                    href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NmVsZDFsa2lhOTRzNmRjdWVkdnNpYmx2bG8gbWlkdWdhQG0&amp;tmsrc=miduga%40gmail.com">
-                    MARTES 13 de SEPTIEMBRE 2022 - 17:00 CET
-                </a>
-            </p>
+            <EventDateDropdown />
+
             <p
                 class="flex items-center font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-900">
                 <svg class="w-8 h-8 pr-2 text-purple-600" viewBox="0 0 24 24">
