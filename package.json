@@ -22,5 +22,8 @@
     "prettier": "2.7.1",
     "prettier-plugin-astro": "0.1.1",
     "tailwindcss": "3.1.4"
+  },
+  "dependencies": {
+    "calendar-link": "^2.2.0"
   }
 }

@@ -1,0 +1,101 @@
+---
+import type { CalendarEvent } from 'calendar-link'
+import { google, outlook, office365, yahoo, ics } from 'calendar-link'
+
+import googleCalendar from './icons/google.svg'
+import outlookCalendar from './icons/outlook.svg'
+import office365Calendar from './icons/office365.svg'
+import yahooCalendar from './icons/yahoo.svg'
+import apple from './icons/apple.svg'
+
+const icons = {
+  google: googleCalendar,
+  outlook: outlookCalendar,
+  office365: office365Calendar,
+  yahoo: yahooCalendar,
+  apple: apple,
+}
+
+const eventDetails: CalendarEvent = {
+  title: 'miduConf',
+  description: `Conferencia de Programación y Desarrollo Web gratuita para que sigas subiendo de nivel.
+
+👩‍💻 Más de 18 speakers TOP
+💬 Charlas para todos los niveles
+🎁 Sorteos y sorpresas
+💻 JavaScript, HTML, CSS, Soft Skills y más
+
+🔗 Link: https://twitch.tv/midudev
+`,
+  start: '2022-09-13T17:00:00+02:00',
+  end: '2022-09-13T19:00:00+02:00',
+  url: 'https://twitch.tv/midudev',
+  allDay: false,
+}
+
+const links = [
+  {
+    name: 'Google Calendar',
+    icon: icons.google,
+    url: google(eventDetails),
+  },
+  {
+    name: 'Outlook Calendar',
+    icon: icons.outlook,
+    url: outlook(eventDetails),
+  },
+  {
+    name: 'Office 365 Calendar',
+    icon: icons.office365,
+    url: office365(eventDetails),
+  },
+  {
+    name: 'Yahoo Calendar',
+    icon: icons.yahoo,
+    url: yahoo(eventDetails),
+  },
+  {
+    name: 'Apple Calendar',
+    icon: icons.apple,
+    url: ics(eventDetails),
+  },
+]
+---
+
+<div class='group relative'>
+  <button
+    title='Añadelo a tu calendario'
+    class='font-bold text-xs lg:text-base uppercase py-1 px-2 rounded bg-miduconf-orange-200/30 hover:bg-miduconf-orange-200/40 text-orange-800 inline-flex gap-2 items-center mb-2 transition-colors'
+  >
+    Martes, 13 de Septiembre de 2022 — 17:00 CET
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      class='h-5 w-5 transition-transform duration-300 group-focus-within:rotate-180'
+      viewBox='0 0 20 20'
+      fill='currentColor'
+    >
+      <path
+        fill-rule='evenodd'
+        d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+        clip-rule='evenodd'></path>
+    </svg>
+  </button>
+  <ul
+    class='invisible opacity-0 group-focus-within:-translate-y-1 group-focus-within:visible group-focus-within:opacity-100 transition duration-200 ease-in absolute bg-white w-full rounded ring-1 ring-black/10 shadow-2xl origin-center text-left divide-y divide-gray-200 overflow-hidden z-50'
+  >
+    {links.map(({ name, icon, url }) => (
+      <li>
+        <a
+          href={url}
+          class="flex items-center gap-2 p-2 hover:bg-gray-100"
+          target="_blank"
+          rel="noopener noreferrer"
+          download={name === 'Apple Calendar' ? 'miduConf.ics' : undefined}
+        >
+          <img src={icon} class="h-5 w-5" alt={name} />
+          {name}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
