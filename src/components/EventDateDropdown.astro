@@ -82,12 +82,13 @@ const links = [
   </button>
   <ul
     class='invisible opacity-0 group-focus-within:-translate-y-1 group-focus-within:visible group-focus-within:opacity-100 transition duration-200 ease-in absolute bg-white w-full rounded ring-1 ring-black/10 shadow-2xl origin-center text-left divide-y divide-gray-200 overflow-hidden z-50'
+    tabindex={0}
   >
     {links.map(({ name, icon, url }) => (
       <li>
         <a
           href={url}
-          class="flex items-center gap-2 p-2 hover:bg-gray-100"
+          class="flex items-center gap-2 p-2 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
           target="_blank"
           rel="noopener noreferrer"
           download={name === 'Apple Calendar' ? 'miduConf.ics' : undefined}
