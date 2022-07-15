@@ -1,8 +1,11 @@
 ---
 import Layout from "@layouts/base.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 ---
 
 <Layout>
+  <Header/>
   <section class="p-10 mx-auto max-w-prose">
     <h1
       class="mb-4 text-5xl font-extrabold"
@@ -224,4 +227,5 @@ import Layout from "@layouts/base.astro";
       </a>
     </p>
   </section>
+  <Footer/>
 </Layout>
