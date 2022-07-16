@@ -10,7 +10,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier -w 'src/**/*.{js,jsx,ts,tsx,astro}'",
+    "format": "prettier -w .",
     "lint:eslint": "eslint . --ext .js,.astro"
   },
   "devDependencies": {
