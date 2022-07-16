@@ -7,10 +7,16 @@ on:
 jobs:
   prettier:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actionsx/prettier@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          # prettier CLI arguments.
-          args: -w .
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
+
+      - name: Run prettier
+        uses: creyD/prettier_action@v4.2
+        with:
+          # This part is also where you can pass other options, for example:
+          prettier_options: --write .
