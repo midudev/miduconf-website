@@ -1,4 +1,4 @@
-import { queryGraphQL } from "../utils/graphql.js";
+import { queryGraphQL } from "../utils/graphql";
 
 export const getAllSpeakers = async () => {
   const query = `{
