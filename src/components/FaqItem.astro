@@ -1,20 +1,27 @@
 ---
-const { question } = Astro.props
+const { question } = Astro.props;
 ---
 
-<div class="relative px-6 py-2 overflow-hidden text-black border-2 border-gray-800 rounded-lg select-none">
-  <button class="flex items-center justify-between w-full text-gray-700 transition-colors cursor-pointer hover:text-black gap-x-2">
-    <h4
-      class="py-4 pr-2 text-base font-extrabold text-left gap-x-2 sm:text-lg">
-      <span>{question}
-      </span>
-    </h4>
-    <svg class="flex-shrink-0 w-4 h-4 transition-all duration-200 ease-out transform rotate-90" fill="none" stroke="currentColor"
-      viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-  </button>
-  <p class="hidden px-1 pt-0 mt-1 text-black sm:text-lg py-7">
-    <slot />
-  </p>
+<div
+	class='relative px-6 py-2 overflow-hidden text-black border-2 border-gray-800 rounded-lg select-none'
+>
+	<button
+		class='flex items-center justify-between w-full text-gray-700 transition-colors cursor-pointer hover:text-black gap-x-2'
+	>
+		<h4 class='py-4 pr-2 text-base font-extrabold text-left gap-x-2 sm:text-lg'>
+			<span>{question}</span>
+		</h4>
+		<svg
+			class='flex-shrink-0 w-4 h-4 transition-all duration-200 ease-out transform rotate-90'
+			fill='none'
+			stroke='currentColor'
+			viewBox='0 0 24 24'
+		>
+			<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'
+			></path>
+		</svg>
+	</button>
+	<p class='hidden px-1 pt-0 mt-1 text-black sm:text-lg py-7'>
+		<slot></slot>
+	</p>
 </div>
