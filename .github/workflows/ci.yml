@@ -1,0 +1,21 @@
+name: Run CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  eslint:
+    name: Check for code issues with ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install modules
+        run: npm i
+      - name: Run eslint
+        run: npm run lint:eslint

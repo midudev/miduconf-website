@@ -10,7 +10,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier -w 'src/**/*.{js,jsx,ts,tsx,astro}'",
+    "format": "prettier -w .",
     "lint:eslint": "eslint . --ext .js,.astro"
   },
   "devDependencies": {
@@ -20,7 +20,7 @@
     "eslint": "^8.19.0",
     "eslint-plugin-astro": "^0.14.0",
     "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.1.1",
+    "prettier-plugin-astro": "^0.1.1",
     "tailwindcss": "3.1.4"
   }
 }
