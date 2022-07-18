@@ -1,18 +1,18 @@
 ---
 // import { getAllSpeakers } from "@services/speakers.js";
-import Layout from '@layouts/base.astro';
+import FAQ from '@components/Faq.astro';
+import Footer from '@components/Footer.astro';
 import Header from '@components/Header.astro';
 import HomePrincipal from '@components/HomePrincipal.astro';
-import HomeSponsors from '@components/HomeSponsors.astro';
 import HomeSpeakers from '@components/HomeSpeakers.astro';
-import Footer from '@components/Footer.astro';
-import FAQ from '@components/Faq.astro';
+import HomeSponsors from '@components/HomeSponsors.astro';
+import Layout from '@layouts/base.astro';
  // const speakers = await getAllSpeakers();
 ---
 
 <Layout>
-  <main class='overflow-auto h-screen'>
-    <Header />
+  <main class='overflow-auto h-screen scroll-smooth'>
+    <Header bgClasses='bg-gradient-to-r from-miduconf-yellow-100 via-miduconf-yellow-100 to-miduconf-orange-100' />
     <HomePrincipal />
     <HomeSponsors />
     <HomeSpeakers />
