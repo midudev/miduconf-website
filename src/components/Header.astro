@@ -35,7 +35,7 @@ const {bgClasses} = Astro.props
 			class='flex flex-col items-center lg:items-start lg:flex-row font-semibold tracking-tight gap-x-8 text-slate-700 [&>li>a]:border-b-2 [&>li>a]:border-b-transparent [&>li>a]:transition-all gap-y-4'
 		>
 			<li class='flex-1'>
-				<a href='/' class='hover:border-b-black hover:text-black' onclick="document.getElementById('menu').click()">Inicio</a>
+				<a href='/' class='menuLink hover:border-b-black hover:text-black'>Inicio</a>
 			</li>
 			<li class='relative flex lg:flex-col'>
 				<a
@@ -53,15 +53,15 @@ const {bgClasses} = Astro.props
 				</div>
 			</li>
 			<li>
-				<a class='hover:border-b-black hover:text-black' href='/#patrocinadores' onclick="document.getElementById('menu').click()">Patrocinadores</a>
+				<a class='menuLink hover:border-b-black hover:text-black' href='/#patrocinadores'>Patrocinadores</a>
 			</li>
 			<li>
-				<a class='hover:border-b-black hover:text-black' href='/#speakers' onclick="document.getElementById('menu').click()">Speakers</a>
+				<a class='menuLink hover:border-b-black hover:text-black' href='/#speakers'>Speakers</a>
 			</li>
 			<li class='relative flex lg:flex-col'>
 				<a
-					class='relative opacity-50 pointer-events-none hover:border-b-black hover:text-black'
-					href='#agenda' onclick="document.getElementById('menu').click()">
+					class='menuLink relative opacity-50 pointer-events-none hover:border-b-black hover:text-black'
+					href='#agenda'>
 					Agenda
 				</a>
 				<div class='pl-2'>
@@ -79,3 +79,9 @@ const {bgClasses} = Astro.props
 		</ul>
 	</nav>
 </header>
+
+<script type="module">
+	document.querySelectorAll('.menuLink').forEach(menuLink => menuLink.addEventListener("click", () => {
+		document.getElementById('menu').click()
+	}))
+</script>
