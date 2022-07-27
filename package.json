@@ -14,13 +14,16 @@
     "lint:eslint": "eslint . --ext .js,.astro"
   },
   "devDependencies": {
-    "@astrojs/tailwind": "0.2.4",
-    "@typescript-eslint/parser": "^5.30.6",
-    "astro": "1.0.0-beta.72",
+    "@astrojs/tailwind": "0.2.5",
+    "@typescript-eslint/parser": "^5.31.0",
+    "astro": "1.0.0-rc.1",
     "eslint": "^8.20.0",
     "eslint-plugin-astro": "0.15.0",
     "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.1.1",
+    "prettier-plugin-astro": "0.1.2",
     "tailwindcss": "3.1.6"
+  },
+  "dependencies": {
+    "atropos": "1.0.2"
   }
 }

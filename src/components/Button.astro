@@ -1,13 +1,29 @@
 ---
-const { href, text } = Astro.props;
+import TwitterIcon from '@components/logos/Twitter.astro'
+import LinkIcon from '@components/icons/Link.astro'
+import CalendarIcon from '@components/icons/Calendar.astro'
+
+const { href, text, flavour = 'default' } = Astro.props;
+
+const colors = {
+	default: 'text-gray-900 bg-white border-gray-900 hover:bg-yellow-100 hover:text-gray-900',
+	calendar: 'text-white bg-red-500 border-gray-900 hover:bg-red-600',
+	twitter: 'text-white bg-[#00acee] border-black/60 hover:bg-[#0685c5] hover:text-gray-50'
+}
+
+const classesForButton = colors[flavour] ?? colors['default']
 ---
 
 <div class='relative inline-block'>
 	<div class='w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0'></div>
 
 	<a
-		class='relative inline-block px-5 py-2 text-lg font-bold text-center text-gray-900 no-underline whitespace-no-wrap align-middle transition-colors bg-white border-2 border-gray-900 border-solid rounded-md shadow-xs cursor-pointer select-none hover:bg-yellow-100 hover:shadow-xs hover:text-gray-900 focus:shadow-xs'
+		class={`relative inline-flex gap-x-2 items-center px-5 py-2 text-lg font-bold text-center no-underline whitespace-no-wrap align-middle transition-colors border-2 border-solid rounded-md shadow-xs cursor-pointer select-none hover:shadow-xs focus:shadow-xs ${classesForButton}`}
 		href={href}
-		>{text}
+		>
+		{flavour === 'twitter' && <TwitterIcon />}
+		{flavour === 'link' && <LinkIcon />}
+		{flavour === 'calendar' && <CalendarIcon />}
+		{text}
 	</a>
 </div>

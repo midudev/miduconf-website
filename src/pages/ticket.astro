@@ -1,0 +1,182 @@
+---
+import Layout from '@layouts/base.astro'
+import YellowBackground from '@components/YellowBackground.astro';
+import Technologies from '@components/Technologies.astro'
+import Button from '@components/Button.astro';
+---
+
+<style>
+  :root {
+    --border-card: #0000009e;
+    --background-card: #ffffff5e;
+    --text-card: #000;
+  }
+</style>
+
+<Layout>
+  <YellowBackground>
+    <div class="py-40">
+      <Technologies />
+
+      <div class="grid place-content-center">
+
+        <div class="atropos w-[700px] aspect-[16/8] m-auto">
+          
+          <div class="atropos-scale">
+            <div class="atropos-rotate">
+              <div class="transition-all duration-700 relative p-4 border-2 rounded-md shadow-2xl atropos-inner border-[color:var(--border-card)] bg-[color:var(--background-card)] backdrop-blur-sm">
+                <h4 class="transition-all duration-700 absolute top-0 right-0 flex flex-col p-4 font-mono text-2xl font-bold opacity-90 text-[color:var(--text-card)]">
+                  <div class="block text-xs font-black uppercase text-black/90">Ticket number</div>
+                  <div>#000001</div>
+                </h4>
+                
+                <div class="flex items-center space-x-4">
+                  <img class="rounded-full w-14 h-14" src="https://avatars.githubusercontent.com/u/1561955?v=4&size=200" alt="">
+                  <div class="">
+                      <div class="font-mono font-bold text-blue-800">@midudev</div>
+                      <div class="text-2xl font-bold text-slate-900">Miguel Angel Duran</div>
+                  </div>
+                  
+                </div>
+                
+                <h1
+                  class='pt-10 m-0 mx-auto font-black leading-none text-center text-transparent text-7xl bg-clip-text bg-gradient-to-r from-gray-700 via-gray-900 to-black'
+                  data-atropos-offset="2"
+                >
+                  #miduConf
+                </h1>
+
+                <div class="flex items-center justify-center" data-atropos-offset="5">
+                  <h2 class="inline-block px-3 py-1 text-lg font-bold text-center text-white rounded-full bg-black/90">
+                    SEPTIEMBRE 13 • Online • 5PM CET
+                  </h2>
+                </div>
+
+                <h3 data-atropos-offset="5" class="flex items-center justify-center pt-8 text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-purple-500">
+                  <svg class="w-16 h-16 pr-2 text-purple-900" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z">
+                    </path>
+                  </svg>
+                  <div class="flex flex-col items-start justify-center leading-none">
+                    <span class="block -mb-1 text-lg text-black">Streaming en</span>
+                    <a href='https://twitch.tv/midudev' rel="noopener" target='_blank'>twitch.tv/midudev</a>
+                  </div>
+                </h3>
+      
+                <div id="card-icon" class="absolute opacity-30 top-20 -left-32 w-96 h-96 -z-10 contrast-200">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-10">
+          <Button flavour="twitter" text="Compartir en Twitter" />
+          <Button flavour="calendar" text="Añadir al Calendario" />
+          <Button flavour="link" text="Copiar enlace" />
+        </div>
+
+        <ul id="select" class="flex p-16 space-x-4">
+          <li>
+            <button data-tech='react' class="flex w-24 h-24 p-4 border-2 rounded-lg place-content-center hover:border-black/50 border-black/80 bg-white/80 backdrop-blur-xl">
+              <svg viewBox="0 0 128 128">
+                <g fill="#61DAFB"><circle cx="64" cy="64" r="11.4"></circle><path d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3.9 4.7 1.5 7.1-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2.1 2.3-4.2 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3.1 4.6.2 6.9.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.2 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2.1-2.3 4.2-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2.1-2.2-4.2-3.4-6.2zM31.7 35c-1.7-10.5-.3-17.9 3.8-20.3 1-.6 2.2-.9 3.5-.9 6 0 13.5 4.9 21 12.3-3.5 3.8-7 8.2-10.4 13-5.8.5-11.3 1.4-16.5 2.5-.6-2.3-1-4.5-1.4-6.6zM7 64c0-4.7 5.7-9.7 15.7-13.4 2-.8 4.2-1.5 6.4-2.1 1.6 5 3.6 10.3 6 15.6-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64zm28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3.3-2.1.8-4.3 1.4-6.6 5.2 1.2 10.7 2 16.5 2.5 3.4 4.8 6.9 9.1 10.4 13-7.4 7.3-14.9 12.3-21 12.3-1.3 0-2.5-.3-3.5-.9zM96.3 93c1.7 10.5.3 17.9-3.8 20.3-1 .6-2.2.9-3.5.9-6 0-13.5-4.9-21-12.3 3.5-3.8 7-8.2 10.4-13 5.8-.5 11.3-1.4 16.5-2.5.6 2.3 1 4.5 1.4 6.6zm9-15.6c-2 .8-4.2 1.5-6.4 2.1-1.6-5-3.6-10.3-6-15.6 2.4-5.3 4.5-10.5 6-15.5 13.8 4 22.1 10 22.1 15.6 0 4.7-5.8 9.7-15.7 13.4z"></path></g>
+                </svg>
+            </button>
+        </li>
+        
+          <li>
+            <button data-tech='vue' class="flex w-24 h-24 p-4 border-2 rounded-lg place-content-center hover:border-black/50 border-black/20 bg-white/80 backdrop-blur-xl">
+              <svg viewBox="0 0 128 128">
+                <path d="M0 8.934l49.854.158 14.167 24.47 14.432-24.47L128 8.935l-63.834 110.14zm126.98.637l-24.36.02-38.476 66.053L25.691 9.592.942 9.572l63.211 107.89zm-25.149-.008l-22.745.168-15.053 24.647L49.216 9.73l-22.794-.168 37.731 64.476zm-75.834-.17l23.002.009m-23.002-.01l23.002.01" fill="none"></path><path d="M25.997 9.393l23.002.009L64.035 34.36 79.018 9.404 102 9.398 64.15 75.053z" fill="#35495e"></path><path d="M.91 9.569l25.067-.172 38.15 65.659L101.98 9.401l25.11.026-62.966 108.06z" fill="#41b883"></path>
+                </svg>
+            </button>
+          </li>
+
+          <li>
+            <button data-tech='svelte' class="flex w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 place-content-center border-blue/50 bg-white/80 backdrop-blur-xl">
+              <svg class="-mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98.1 118" xml:space="preserve"><path d="M91.8 15.6C80.9-.1 59.2-4.7 43.6 5.2L16.1 22.8C8.6 27.5 3.4 35.2 1.9 43.9c-1.3 7.3-.2 14.8 3.3 21.3-2.4 3.6-4 7.6-4.7 11.8-1.6 8.9.5 18.1 5.7 25.4 11 15.7 32.6 20.3 48.2 10.4l27.5-17.5c7.5-4.7 12.7-12.4 14.2-21.1 1.3-7.3.2-14.8-3.3-21.3 2.4-3.6 4-7.6 4.7-11.8 1.7-9-.4-18.2-5.7-25.5" style="fill:#ff3e00"/><path d="M40.9 103.9c-8.9 2.3-18.2-1.2-23.4-8.7-3.2-4.4-4.4-9.9-3.5-15.3.2-.9.4-1.7.6-2.6l.5-1.6 1.4 1c3.3 2.4 6.9 4.2 10.8 5.4l1 .3-.1 1c-.1 1.4.3 2.9 1.1 4.1 1.6 2.3 4.4 3.4 7.1 2.7.6-.2 1.2-.4 1.7-.7L65.5 72c1.4-.9 2.3-2.2 2.6-3.8.3-1.6-.1-3.3-1-4.6-1.6-2.3-4.4-3.3-7.1-2.6-.6.2-1.2.4-1.7.7l-10.5 6.7c-1.7 1.1-3.6 1.9-5.6 2.4-8.9 2.3-18.2-1.2-23.4-8.7-3.1-4.4-4.4-9.9-3.4-15.3.9-5.2 4.1-9.9 8.6-12.7l27.5-17.5c1.7-1.1 3.6-1.9 5.6-2.5 8.9-2.3 18.2 1.2 23.4 8.7 3.2 4.4 4.4 9.9 3.5 15.3-.2.9-.4 1.7-.7 2.6l-.5 1.6-1.4-1c-3.3-2.4-6.9-4.2-10.8-5.4l-1-.3.1-1c.1-1.4-.3-2.9-1.1-4.1-1.6-2.3-4.4-3.3-7.1-2.6-.6.2-1.2.4-1.7.7L32.4 46.1c-1.4.9-2.3 2.2-2.6 3.8s.1 3.3 1 4.6c1.6 2.3 4.4 3.3 7.1 2.6.6-.2 1.2-.4 1.7-.7l10.5-6.7c1.7-1.1 3.6-1.9 5.6-2.5 8.9-2.3 18.2 1.2 23.4 8.7 3.2 4.4 4.4 9.9 3.5 15.3-.9 5.2-4.1 9.9-8.6 12.7l-27.5 17.5c-1.7 1.1-3.6 1.9-5.6 2.5" style="fill:#fff"/></svg>
+            </button>
+          </li>
+
+          <li>
+            <button data-tech="angular" class="flex w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 place-content-center border-blue/50 bg-white/80 backdrop-blur-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="iconify iconify--logos" viewBox="0 0 256 272"><path fill="#E23237" d="M.1 45.522 125.908.697l129.196 44.028-20.919 166.45-108.277 59.966-106.583-59.169L.1 45.522Z"/><path fill="#B52E31" d="M255.104 44.725 125.908.697v270.444l108.277-59.866 20.919-166.55Z"/><path fill="#FFF" d="M126.107 32.274 47.714 206.693l29.285-.498 15.739-39.347h70.325l17.233 39.845 27.99.498-82.179-174.917Zm.2 55.882 26.496 55.383h-49.806l23.31-55.383Z"/></svg>
+            </button>
+          </li>
+            
+        </ul>
+      
+      </div>
+    </div>
+
+    <ul>
+
+    </ul>
+  </YellowBackground>
+</Layout>
+
+<style>
+  .atropos{position:relative;display:block;perspective:1200px;transform:translate3d(0,0,0)}.atropos-rotate-scroll-x,.atropos-rotate-scroll-y,.atropos-rotate-touch{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.atropos-rotate-touch-scroll-y{touch-action:pan-y}.atropos-rotate-touch-scroll-x{touch-action:pan-x}.atropos-rotate-touch{touch-action:none}.atropos-rotate,.atropos-scale{width:100%;height:100%;transform-style:preserve-3d;transition-property:transform;display:block}.atropos-highlight,.atropos-shadow{position:absolute;pointer-events:none;transition-property:transform,opacity;display:block;opacity:0}.atropos-shadow{z-index:-1;background:#000;left:0;top:0;width:100%;height:100%;filter:blur(30px)}.atropos-highlight{left:-50%;top:-50%;width:200%;height:200%;background-image:radial-gradient(circle at 50%,rgba(255,255,255,.25),transparent 50%);z-index:0}.atropos-rotate{position:relative}.atropos-inner{width:100%;height:100%;position:relative;overflow:hidden;transform-style:preserve-3d;transform:translate3d(0,0,0);display:block}.atropos-active{z-index:1}.atropos-active .atropos-shadow{opacity:1!important}[data-atropos-offset]{transition-property:transform}[data-atropos-opacity]{transition-property:opacity}[data-atropos-offset][data-atropos-opacity]{transition-property:transform,opacity}
+</style>
+
+<script type="module">
+  !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).Atropos=e()}(this,(function(){"use strict";function t(){return(t=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var o=arguments[e];for(var a in o)Object.prototype.hasOwnProperty.call(o,a)&&(t[a]=o[a])}return t}).apply(this,arguments)}var e=function(t,e){return t.querySelector(e)},o=function(t){void 0===t&&(t={});var e={};return Object.keys(t).forEach((function(o){void 0!==t[o]&&(e[o]=t[o])})),e};return function(a){void 0===a&&(a={});var n,r,i,s,c,u,p,l,d,f,v,h=a,m=h.el,y=h.eventsEl,g={__atropos__:!0,params:t({alwaysActive:!1,activeOffset:50,shadowOffset:50,shadowScale:1,duration:300,rotate:!0,rotateTouch:!0,rotateXMax:15,rotateYMax:15,rotateXInvert:!1,rotateYInvert:!1,stretchX:0,stretchY:0,stretchZ:0,commonOrigin:!0,shadow:!0,highlight:!0,onEnter:null,onLeave:null,onRotate:null},o(a||{})),destroyed:!1,isActive:!1},M=g.params,x=[];!function t(){v=requestAnimationFrame((function(){x.forEach((function(t){if("function"==typeof t)t();else{var e=t.element,o=t.prop,a=t.value;e.style[o]=a}})),x.splice(0,x.length),t()}))}();var w,O=function(t,e){x.push({element:t,prop:"transitionDuration",value:e})},b=function(t,e){x.push({element:t,prop:"transitionTimingFunction",value:e})},T=function(t,e){x.push({element:t,prop:"transform",value:e})},X=function(t,e){x.push({element:t,prop:"opacity",value:e})},Y=function(t,e,o,a){return t.addEventListener(e,o,a)},_=function(t,e,o,a){return t.removeEventListener(e,o,a)},L=function(t){var e=t.rotateXPercentage,o=void 0===e?0:e,a=t.rotateYPercentage,n=void 0===a?0:a,r=t.duration,i=t.opacityOnly,s=t.easeOut;(function(t,e){return t.querySelectorAll(e)})(m,"[data-atropos-offset], [data-atropos-opacity]").forEach((function(t){O(t,r),b(t,s?"ease-out":"");var e=function(t){if(t.dataset.atroposOpacity&&"string"==typeof t.dataset.atroposOpacity)return t.dataset.atroposOpacity.split(";").map((function(t){return parseFloat(t)}))}(t);if(0===o&&0===n)i||T(t,"translate3d(0, 0, 0)"),e&&X(t,e[0]);else{var a=parseFloat(t.dataset.atroposOffset)/100;if(Number.isNaN(a)||i||T(t,"translate3d("+-n*-a+"%, "+o*-a+"%, 0)"),e){var c=e[0],u=e[1],p=Math.max(Math.abs(o),Math.abs(n));X(t,c+(u-c)*p/100)}}}))},A=function(t,e){var o=m!==y;if(s||(s=m.getBoundingClientRect()),o&&!c&&(c=y.getBoundingClientRect()),void 0===t&&void 0===e){var a=o?c:s;t=a.left+a.width/2,e=a.top+a.height/2}var r,i=0,u=0,l=s,d=l.top,f=l.left,v=l.width,h=l.height;if(o){var g=c,w=g.top,Y=g.left,_=g.width,A=g.height,E=v/2+(f-Y),R=h/2+(d-w),I=t-Y,P=e-w;u=M.rotateYMax*(I-E)/(_-v/2)*-1,i=M.rotateXMax*(P-R)/(A-h/2),r=t-f+"px "+(e-d)+"px"}else{var j=v/2,D=h/2,F=t-f,C=e-d;u=M.rotateYMax*(F-j)/(v/2)*-1,i=M.rotateXMax*(C-D)/(h/2)}i=Math.min(Math.max(-i,-M.rotateXMax),M.rotateXMax),M.rotateXInvert&&(i=-i),u=Math.min(Math.max(-u,-M.rotateYMax),M.rotateYMax),M.rotateYInvert&&(u=-u);var S,k,q=i/M.rotateXMax*100,N=u/M.rotateYMax*100,B=(o?N/100*M.stretchX:0)*(M.rotateYInvert?-1:1),Z=(o?q/100*M.stretchY:0)*(M.rotateXInvert?-1:1),z=o?Math.max(Math.abs(q),Math.abs(N))/100*M.stretchZ:0;T(n,"translate3d("+B+"%, "+-Z+"%, "+-z+"px) rotateX("+i+"deg) rotateY("+u+"deg)"),r&&M.commonOrigin&&(S=n,k=r,x.push({element:S,prop:"transformOrigin",value:k})),p&&(O(p,M.duration+"ms"),b(p,"ease-out"),T(p,"translate3d("+.25*-N+"%, "+.25*q+"%, 0)"),X(p,Math.max(Math.abs(q),Math.abs(N))/100)),L({rotateXPercentage:q,rotateYPercentage:N,duration:M.duration+"ms",easeOut:!0}),"function"==typeof M.onRotate&&M.onRotate(i,u)},E=function(){x.push((function(){return m.classList.add("atropos-active")})),O(n,M.duration+"ms"),b(n,"ease-out"),T(r,"translate3d(0,0, "+M.activeOffset+"px)"),O(r,M.duration+"ms"),b(r,"ease-out"),u&&(O(u,M.duration+"ms"),b(u,"ease-out")),g.isActive=!0},R=function(t){if(l=void 0,!("pointerdown"===t.type&&"mouse"===t.pointerType||"pointerenter"===t.type&&"mouse"!==t.pointerType)){if("pointerdown"===t.type&&t.preventDefault(),d=t.clientX,f=t.clientY,M.alwaysActive)return s=void 0,void(c=void 0);E(),"function"==typeof M.onEnter&&M.onEnter()}},I=function(t){!1===l&&t.cancelable&&t.preventDefault()},P=function(t){if(M.rotate&&g.isActive){if("mouse"!==t.pointerType){if(!M.rotateTouch)return;t.preventDefault()}var e=t.clientX,o=t.clientY,a=e-d,n=o-f;if("string"==typeof M.rotateTouch&&(0!==a||0!==n)&&void 0===l){if(a*a+n*n>=25){var r=180*Math.atan2(Math.abs(n),Math.abs(a))/Math.PI;l="scroll-y"===M.rotateTouch?r>45:90-r>45}!1===l&&(m.classList.add("atropos-rotate-touch"),t.cancelable&&t.preventDefault())}"mouse"!==t.pointerType&&l||A(e,o)}},j=function(t){if(s=void 0,c=void 0,g.isActive&&!(t&&"pointerup"===t.type&&"mouse"===t.pointerType||t&&"pointerleave"===t.type&&"mouse"!==t.pointerType)){if("string"==typeof M.rotateTouch&&l&&m.classList.remove("atropos-rotate-touch"),M.alwaysActive)return A(),"function"==typeof M.onRotate&&M.onRotate(0,0),void("function"==typeof M.onLeave&&M.onLeave());x.push((function(){return m.classList.remove("atropos-active")})),O(r,M.duration+"ms"),b(r,""),T(r,"translate3d(0,0, 0px)"),u&&(O(u,M.duration+"ms"),b(u,"")),p&&(O(p,M.duration+"ms"),b(p,""),T(p,"translate3d(0, 0, 0)"),X(p,0)),O(n,M.duration+"ms"),b(n,""),T(n,"translate3d(0,0,0) rotateX(0deg) rotateY(0deg)"),L({duration:M.duration+"ms"}),g.isActive=!1,"function"==typeof M.onRotate&&M.onRotate(0,0),"function"==typeof M.onLeave&&M.onLeave()}},D=function(t){var e=t.target;!y.contains(e)&&e!==y&&g.isActive&&j()};return g.destroy=function(){g.destroyed=!0,cancelAnimationFrame(v),_(document,"click",D),_(y,"pointerdown",R),_(y,"pointerenter",R),_(y,"pointermove",P),_(y,"touchmove",I),_(y,"pointerleave",j),_(y,"pointerup",j),_(y,"lostpointercapture",j),delete m.__atropos__},"string"==typeof m&&(m=e(document,m)),m&&(m.__atropos__||(void 0!==y?"string"==typeof y&&(y=e(document,y)):y=m,Object.assign(g,{el:m}),n=e(m,".atropos-rotate"),r=e(m,".atropos-scale"),i=e(m,".atropos-inner"),m.__atropos__=g)),m&&y&&(M.shadow&&((u=e(m,".atropos-shadow"))||((u=document.createElement("span")).classList.add("atropos-shadow"),w=!0),T(u,"translate3d(0,0,-"+M.shadowOffset+"px) scale("+M.shadowScale+")"),w&&n.appendChild(u)),M.highlight&&function(){var t;(p=e(m,".atropos-highlight"))||((p=document.createElement("span")).classList.add("atropos-highlight"),t=!0),T(p,"translate3d(0,0,0)"),t&&i.appendChild(p)}(),M.rotateTouch&&("string"==typeof M.rotateTouch?m.classList.add("atropos-rotate-touch-"+M.rotateTouch):m.classList.add("atropos-rotate-touch")),e(m,"[data-atropos-opacity]")&&L({opacityOnly:!0}),Y(document,"click",D),Y(y,"pointerdown",R),Y(y,"pointerenter",R),Y(y,"pointermove",P),Y(y,"touchmove",I),Y(y,"pointerleave",j),Y(y,"pointerup",j),Y(y,"lostpointercapture",j),M.alwaysActive&&(E(),A())),g}}));
+
+  Atropos({
+    el: '.atropos',
+    activeOffset: 40,
+    shadowScale: 1.5,
+  });
+
+</script>
+
+<script type="module">
+  const styles = {
+    react: {
+      borderColor: '#007acca3',
+      backgroundColor: '#1bceffee',
+      textColor: '#e0f2ff'
+    },
+    vue: {
+      borderColor: 'rgb(6 95 70 / 0.5)',
+      backgroundColor: 'rgb(209 250 229 / 0.5)',
+      textColor: 'rgb(16 185 129)'
+    },
+    svelte: {
+      borderColor: '#be7b00',
+      backgroundColor: '#ff3d0078',
+      textColor: '#764c00'
+    },
+    angular: {
+      borderColor: '#ae000075',
+      backgroundColor: '#ff00004a',
+      textColor: '#7d0000'
+    }
+  }
+  
+  document.querySelectorAll('#select button').forEach(button => button.addEventListener('click', (event) => {
+    event.preventDefault()
+
+    const {currentTarget} = event
+
+    const tech = currentTarget.getAttribute('data-tech')
+
+    const currentActive = document.querySelector('#select .border-black\\/80')
+    currentActive?.classList.remove('border-black/80')
+    currentActive?.classList.add('border-black/20')
+
+    currentTarget.classList.remove('border-black/20')
+    currentTarget.classList.add('border-black/80')
+    
+    const cssStyles = styles[tech]
+
+    document.documentElement.style.setProperty('--border-card', cssStyles.borderColor)
+    document.documentElement.style.setProperty('--background-card', cssStyles.backgroundColor)
+    document.documentElement.style.setProperty('--text-card', cssStyles.textColor)
+
+    document.querySelector('#card-icon').innerHTML = currentTarget.innerHTML
+
+
+  }))
+</script>
