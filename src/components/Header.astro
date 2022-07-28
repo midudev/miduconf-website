@@ -1,4 +1,7 @@
-<header class='flex items-center p-6 text-center lg:justify-center'>
+---
+const {bgClasses} = Astro.props
+---
+<header class={`flex items-center p-6 text-center lg:justify-center ${bgClasses}`}>
 	<input type='checkbox' id='menu' hidden class='peer ' />
 	<label
 		for='menu'
@@ -32,7 +35,7 @@
 			class='flex flex-col items-center lg:items-start lg:flex-row font-semibold tracking-tight gap-x-8 text-slate-700 [&>li>a]:border-b-2 [&>li>a]:border-b-transparent [&>li>a]:transition-all gap-y-4'
 		>
 			<li class='flex-1'>
-				<a href='/' class='hover:border-b-black hover:text-black'>Inicio</a>
+				<a href='/' class='menuLink hover:border-b-black hover:text-black'>Inicio</a>
 			</li>
 			<li class='relative flex lg:flex-col'>
 				<a
@@ -50,16 +53,15 @@
 				</div>
 			</li>
 			<li>
-				<a class='hover:border-b-black hover:text-black' href='/#patrocinadores'>Patrocinadores</a>
+				<a class='menuLink hover:border-b-black hover:text-black' href='/#patrocinadores'>Patrocinadores</a>
 			</li>
 			<li>
-				<a class='hover:border-b-black hover:text-black' href='/#speakers'>Speakers</a>
+				<a class='menuLink hover:border-b-black hover:text-black' href='/#speakers'>Speakers</a>
 			</li>
 			<li class='relative flex lg:flex-col'>
 				<a
-					class='relative opacity-50 pointer-events-none hover:border-b-black hover:text-black'
-					href='#agenda'
-				>
+					class='menuLink relative opacity-50 pointer-events-none hover:border-b-black hover:text-black'
+					href='#agenda'>
 					Agenda
 				</a>
 				<div class='pl-2'>
@@ -77,3 +79,9 @@
 		</ul>
 	</nav>
 </header>
+
+<script type="module">
+	document.querySelectorAll('.menuLink').forEach(menuLink => menuLink.addEventListener("click", () => {
+		document.getElementById('menu').click()
+	}))
+</script>
