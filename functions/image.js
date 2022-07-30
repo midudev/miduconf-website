@@ -19,7 +19,7 @@ exports.handler = async function (event) {
 	} = event;
 	const { executablePath, url } = await getConfig();
 
-	const browser = await puppeteer.launch({
+	const browser = await chromium.puppeteer.launch({
 		executablePath,
 		headless: true,
 	});
