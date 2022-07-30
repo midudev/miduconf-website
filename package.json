@@ -6,6 +6,7 @@
     "node": "14.x"
   },
   "scripts": {
+    "phoenix": "rm -f package-lock.json && rm -rf ./node_modules && npm install --no-fund --no-audit --no-package-lock",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -14,16 +15,22 @@
     "lint:eslint": "eslint . --ext .js,.astro"
   },
   "devDependencies": {
+    "@astrojs/preact": "0.5.2",
     "@astrojs/tailwind": "0.2.5",
-    "@typescript-eslint/parser": "^5.31.0",
-    "astro": "1.0.0-rc.1",
-    "eslint": "^8.20.0",
-    "eslint-plugin-astro": "0.15.0",
+    "@typescript-eslint/parser": "5.31.0",
+    "astro": "1.0.0-rc.3",
+    "eslint": "8.20.0",
+    "eslint-plugin-astro": "0.16.0",
     "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.1.2",
-    "tailwindcss": "3.1.6"
+    "prettier-plugin-astro": "0.2.0",
+    "tailwindcss": "3.1.7"
   },
   "dependencies": {
-    "atropos": "1.0.2"
+    "@netlify/functions": "^1.0.0",
+    "@supabase/supabase-js": "1.35.4",
+    "atropos": "1.0.2",
+    "chrome-aws-lambda": "^10.1.0",
+    "preact": "10.10.0",
+    "puppeteer-core": "^15.5.0"
   }
 }
