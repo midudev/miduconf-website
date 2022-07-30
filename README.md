@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hero.png" alt="Astro logo">
+  <a href="https://miduconf.com" target="_blank"><img src="assets/hero.png" alt="miduconf hero"></a>
   <br/><br/>
   Descubre las últimas tendencias de desarrollo y programación web de la mano de gente tremenda y GRATIS.
   <br/><br/>
