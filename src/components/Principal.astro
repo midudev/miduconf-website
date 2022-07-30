@@ -1,5 +1,5 @@
 ---
-import Button from '@components/Button.astro';
+import { LoginButton } from '@components/LoginButton';
 ---
 
 <div class='block px-6 mx-auto max-w-7xl'>
@@ -50,29 +50,8 @@ import Button from '@components/Button.astro';
 			</p>
 
 			<div class='pt-5 space-y-4 leading-6 text-center xl:pt-8 xl:space-y-5'>
-				<Button text='¡Quiero enviar una propuesta!' href='https://forms.gle/1Jtfi7Fh4iee7Qv29' />
-				<p class='flex items-center content-center justify-center text-sm font-semibold'>
-					¡Abierto hasta el 15 de Agosto!<svg
-						viewBox='0 0 72 72'
-						class='w-8 h-8 -mt-4 animate-bounce'
-					>
-						<path
-							fill='#3F3F3F'
-							d='M40.1841 12 26.1294 26.8587l3.7285 3.413 7.5107-7.9438v16.4924c0 10.5232-5.7598 15.6386-17.6094 15.6386h-1V60h1c14.9902 0 23.2461-7.522 23.2461-21.1797V22.3331l7.5078 7.9386 3.7275-3.413L40.1841 12z'
-						>
-						</path>
-						<path
-							fill='none'
-							stroke='#000'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-							stroke-miterlimit='10'
-							stroke-width='2'
-							d='M40.1841 12 26.1294 26.8587l3.7285 3.413 7.5107-7.9438v16.4924c0 10.5232-5.7598 15.6386-17.6094 15.6386h-1V60h1c14.9902 0 23.2461-7.522 23.2461-21.1797V22.3331l7.5078 7.9386 3.7275-3.413L40.1841 12z'
-						>
-						</path>
-					</svg>
-				</p>
+				
+				<LoginButton client:visible />
 			</div>
 		</div>
 	</div>

@@ -2,6 +2,7 @@
 const {
 	title = 'miduConf - Conferencia en remoto de Desarrollo y Programación Web',
 	description = '¡Descubre las últimas tendencias de desarrollo y programación web de la mano de gente tremenda y GRATIS!',
+	image = 'https://miduconf.com/og.jpg'
 } = Astro.props;
 ---
 
@@ -19,14 +20,14 @@ const {
 		<meta property='og:type' content='website' />
 		<meta property='og:title' content={title} />
 		<meta property='og:description' content={description} />
-		<meta property='og:image' content='https://miduconf.com/og.jpg' />
+		<meta property='og:image' content={image} />
 
 		<meta name='twitter:card' content='summary_large_image' />
 		<meta name='twitter:site' content='@midudev' />
 		<meta name='twitter:creator' content='@midudev' />
 		<meta name='twitter:title' content={title} />
 		<meta name='twitter:description' content={description} />
-		<meta name='twitter:image' content='https://miduconf.com/og.jpg' />
+		<meta name='twitter:image' content={image} />
 
 		<script src='https://cdn.usefathom.com/script.js' data-site='RCIEAOAU' defer>
 

@@ -3,7 +3,10 @@ import TwitterIcon from '@components/logos/Twitter.astro'
 import LinkIcon from '@components/icons/Link.astro'
 import CalendarIcon from '@components/icons/Calendar.astro'
 
-const { href, text, flavour = 'default' } = Astro.props;
+const { id, href, text, flavour = 'default', openInNewWindow } = Astro.props
+
+const rel = openInNewWindow ? 'noopener nofollow' : null
+const target = openInNewWindow ? '_blank' : null
 
 const colors = {
 	default: 'text-gray-900 bg-white border-gray-900 hover:bg-yellow-100 hover:text-gray-900',
@@ -18,8 +21,11 @@ const classesForButton = colors[flavour] ?? colors['default']
 	<div class='w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0'></div>
 
 	<a
+		id={id}
 		class={`relative inline-flex gap-x-2 items-center px-5 py-2 text-lg font-bold text-center no-underline whitespace-no-wrap align-middle transition-colors border-2 border-solid rounded-md shadow-xs cursor-pointer select-none hover:shadow-xs focus:shadow-xs ${classesForButton}`}
 		href={href}
+		rel={rel}
+		target={target}
 		>
 		{flavour === 'twitter' && <TwitterIcon />}
 		{flavour === 'link' && <LinkIcon />}
