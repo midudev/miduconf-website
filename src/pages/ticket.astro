@@ -16,6 +16,8 @@ import {UserTicketNumber} from '@components/UserTicketNumber';
   }
 </style>
 
+<wc-toast></wc-toast>
+
 <Layout>
   <YellowBackground>
     <LogoutButton client:visible />
@@ -71,7 +73,7 @@ import {UserTicketNumber} from '@components/UserTicketNumber';
         <div class="py-10">
           <Button id="share-twitter" openInNewWindow flavour="twitter" text="Compartir en Twitter" />
           <Button flavour="calendar" text="Añadir al Calendario" />
-          <Button flavour="link" text="Copiar enlace" />
+          <Button id="copy-link" flavour="link" text="Copiar enlace" />
         </div>
 
         <ul id="select" class="flex justify-center p-16 space-x-4">
@@ -130,10 +132,25 @@ import {UserTicketNumber} from '@components/UserTicketNumber';
 </script>
 
 <script type="module">
+  import { toast } from 'https://cdn.skypack.dev/wc-toast'
+
   const shareTwitter = document.querySelector('#share-twitter')
 
   shareTwitter.setAttribute('href', `https://twitter.com/intent/tweet?text=¡Ya tengo mi ticket 🎟 para la %23MiduConf!%0A%0AConferencia de Desarrollo y Programación Web.%0A¡Totalmente gratis!%0A%0A➡&url=${window.location.href}`)
 
+
+  const copyLink = document.querySelector('#copy-link')
+
+  copyLink.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => {
+        toast('¡Enlace copiado con éxito!', {
+          icon: {
+            type: 'success'
+          }
+        })
+      })
+      })
 </script>
 
 <script type="module">
