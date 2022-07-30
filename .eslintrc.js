@@ -12,6 +12,10 @@ module.exports = {
   rules: {},
   overrides: [
     {
+      files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser',
+    },
+    {
       files: ['*.astro'],
       parser: 'astro-eslint-parser',
       parserOptions: {
