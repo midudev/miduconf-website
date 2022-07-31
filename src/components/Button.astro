@@ -17,12 +17,13 @@ const colors = {
 const classesForButton = colors[flavour] ?? colors['default']
 ---
 
-<div class='relative inline-block'>
+
+<div class='relative flex mt-4'>
 	<div class='w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0'></div>
 
 	<a
 		id={id}
-		class={`relative inline-flex gap-x-2 items-center px-5 py-2 text-lg font-bold text-center no-underline whitespace-no-wrap align-middle transition-colors border-2 border-solid rounded-md shadow-xs cursor-pointer select-none hover:shadow-xs focus:shadow-xs ${classesForButton}`}
+		class={`relative inline-flex justify-center w-full gap-x-2 items-center px-5 py-2 text-lg font-bold text-center no-underline whitespace-no-wrap align-middle transition-colors border-2 border-solid rounded-md shadow-xs cursor-pointer select-none hover:shadow-xs focus:shadow-xs ${classesForButton}`}
 		href={href}
 		rel={rel}
 		target={target}
@@ -33,3 +34,4 @@ const classesForButton = colors[flavour] ?? colors['default']
 		{text}
 	</a>
 </div>
+
