@@ -38,11 +38,11 @@ import Vite from '@components/logos/Vite.astro';
                 <div class="atropos-inner transition-all duration-700 relative p-2 border-2 rounded-md shadow-2xl border-[color:var(--border-card)] bg-[color:var(--background-card)] backdrop-blur-sm flex flex-col">
                   <div class="atropos-inner transition-all duration-700 relative p-4 border-4 rounded-md shadow-2xl border-[color:var(--border-card)] bg-[color:var(--background-card)] backdrop-blur-sm flex flex-col">
                     
-                    <div class="flex justify-between flex-col-reverse sm:flex-row">
+                    <div class="flex flex-col-reverse justify-between sm:flex-row">
                       <div>
                         <UserTicketInfo client:visible />
                       </div>
-                      <div class="flex justify-center items-center pb-2">
+                      <div class="flex items-center justify-center pb-2">
                         <h4 class="transition-all duration-700 top-0 right-0 flex flex-col font-mono text-2xl font-bold opacity-90 text-[color:var(--text-card)]">
                           <div class="block text-xs font-black uppercase text-black/90">Ticket number</div>
                           <UserTicketNumber client:visible />
@@ -63,7 +63,7 @@ import Vite from '@components/logos/Vite.astro';
                       </h2>
                     </div>
 
-                    <h3 data-atropos-offset="5" class="flex items-center justify-center pt-6 text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-purple-500 flex-col pb-6 md:flex-row">
+                    <h3 data-atropos-offset="5" class="flex flex-col items-center justify-center pt-6 pb-6 text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-purple-500 md:flex-row">
                       <svg class="w-16 h-16 pr-2 text-purple-900" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z">
                         </path>
@@ -84,8 +84,8 @@ import Vite from '@components/logos/Vite.astro';
 
         </div>
 
-        <div class="py-10 flex items-center justify-center w-full flex-col md:flex-row">
-          <div class="block gap-4 flex-col w-72 sm:w-80 md:flex md:flex-row md:w-full">
+        <div class="flex flex-col items-center justify-center w-full py-10 md:flex-row">
+          <div class="flex-col block gap-4 w-72 sm:w-80 md:flex md:flex-row md:w-full">
             <Button id="share-twitter" openInNewWindow flavour="twitter" text="Compartir en Twitter" />
             <Button flavour="calendar" text="Añadir al Calendario" />
             <Button id="copy-link" flavour="link" text="Copiar enlace" />
@@ -207,8 +207,8 @@ import Vite from '@components/logos/Vite.astro';
     },
     vite: {
       borderColor: 'rgba(100, 108, 255, 1)',
-      backgroundColor: 'rgba(102, 110, 255, 0.76)',
-      textColor: 'rgba(86, 92, 220, 1)'
+      backgroundColor: '#afb3ffc2',
+      textColor: '#4148bd'
     }
   }
   
