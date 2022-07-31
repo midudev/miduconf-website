@@ -116,7 +116,7 @@
 	const svgs = Array.from(hero.querySelectorAll('svg'));
 
 	const w = window.innerWidth;
-	const h = window.innerHeight - 100;
+	const h = window.innerHeight - 300;
 
 	function animateBackgroundIcons() {
 		const availableSvgs = svgs.filter((svg) => !svg.isAnimating);
@@ -135,10 +135,8 @@
 
 		svgToAnimate.setAttribute(
 			'style',
-			`
-              top: ${Math.floor(Math.random() * h)}px;
-              left: ${Math.floor(Math.random() * w)}px;
-          `
+			`top: ${Math.floor(Math.random() * h)}px;
+				left: ${Math.floor(Math.random() * w)}px;`
 		);
 
 		svgToAnimate.classList.add('animate-moving-background');
