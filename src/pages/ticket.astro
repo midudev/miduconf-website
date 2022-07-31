@@ -10,6 +10,8 @@ import React from '@components/logos/React.astro';
 import Angular from '@components/logos/Angular.astro';
 import Svelte from '@components/logos/Svelte.astro';
 import Vue from '@components/logos/Vue.astro';
+import Bun from '@components/logos/Bun.astro';
+import Vite from '@components/logos/Vite.astro';
 ---
 
 <style>
@@ -104,6 +106,16 @@ import Vue from '@components/logos/Vue.astro';
                <Angular />
             </button>
           </li>
+
+          <li>
+            <button data-tech="bun" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 border-blue/50 bg-white/80 backdrop-blur-xl">
+               <Bun />
+            </button>
+          </li>
+
+          <li>
+            <button data-tech="vite" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 border-blue/50 bg-white/80 backdrop-blur-xl">
+               <Vite />
             </button>
           </li>
             
@@ -177,6 +189,16 @@ import Vue from '@components/logos/Vue.astro';
       borderColor: '#ae000075',
       backgroundColor: '#ff00004a',
       textColor: '#7d0000'
+    },
+    bun: {
+      borderColor: 'rgba(239, 195, 128, 1)',
+      backgroundColor: 'rgba(251, 240, 223, 0.86)',
+      textColor: 'rgba(245, 182, 86, 1)'
+    },
+    vite: {
+      borderColor: 'rgba(100, 108, 255, 1)',
+      backgroundColor: 'rgba(102, 110, 255, 0.76)',
+      textColor: 'rgba(86, 92, 220, 1)'
     }
   }
   
