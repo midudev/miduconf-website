@@ -6,7 +6,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "phoenix": "rm -f package-lock.json && rm -rf ./node_modules && npm install --no-fund --no-audit --no-package-lock",
+    "phoenix": "rm -f package-lock.json && rm -rf ./node_modules && npm install --no-fund --no-audit --no-package-lock --legacy-peer-deps",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -26,11 +26,11 @@
     "tailwindcss": "3.1.7"
   },
   "dependencies": {
-    "@netlify/functions": "^1.0.0",
+    "@netlify/functions": "1.0.0",
     "@supabase/supabase-js": "1.35.4",
     "atropos": "1.0.2",
-    "chrome-aws-lambda": "^10.1.0",
+    "chrome-aws-lambda": "10.1.0",
     "preact": "10.10.0",
-    "puppeteer-core": "^15.5.0"
+    "puppeteer-core": "15.5.0"
   }
 }
