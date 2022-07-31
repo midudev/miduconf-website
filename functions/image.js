@@ -1,5 +1,4 @@
 const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
 
 const isLocal = process.env.NETLIFY_LOCAL === 'true';
 
