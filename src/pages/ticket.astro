@@ -76,13 +76,14 @@ import {UserTicketNumber} from '@components/UserTicketNumber';
               </div>
             </div>
 
-          
         </div>
 
-        <div class="py-10 flex items-center justify-center gap-4 flex-col md:flex-row">
-          <Button id="share-twitter" openInNewWindow flavour="twitter" text="Compartir en Twitter" />
-          <Button flavour="calendar" text="Añadir al Calendario" />
-          <Button id="copy-link" flavour="link" text="Copiar enlace" />
+        <div class="py-10 flex items-center justify-center w-full flex-col md:flex-row">
+          <div class="block gap-4 flex-col w-72 sm:w-80 md:flex md:flex-row md:w-full">
+            <Button id="share-twitter" openInNewWindow flavour="twitter" text="Compartir en Twitter" />
+            <Button flavour="calendar" text="Añadir al Calendario" />
+            <Button id="copy-link" flavour="link" text="Copiar enlace" />
+          </div>
         </div>
 
         <ul id="select" class="flex justify-center p-16 space-x-4">
