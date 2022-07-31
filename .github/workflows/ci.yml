@@ -16,6 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install modules
-        run: npm i
+        run: npm i --legacy-peer-deps
       - name: Run eslint
         run: npm run lint:eslint

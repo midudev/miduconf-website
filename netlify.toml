@@ -1,0 +1,5 @@
+[functions]
+  directory = "functions"
+
+[dev]
+  functionsPort = 1234

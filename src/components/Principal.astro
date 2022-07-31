@@ -1,5 +1,5 @@
 ---
-import Button from '@components/Button.astro';
+import { LoginButton } from '@components/LoginButton';
 ---
 
 <div class='block px-6 mx-auto max-w-7xl'>
@@ -34,29 +34,8 @@ import Button from '@components/Button.astro';
 				
 			</div>
 
-			<div class='pt-5 space-y-4 leading-6 text-center xl:pt-8 xl:space-y-5'>
-				<div class='flex gap-x-4'>
-					<div class='relative'>
-						<div class='w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0'></div>
-				
-						<a
-							class='relative inline-flex items-center justify-center px-5 py-2 text-lg font-bold text-center text-gray-900 no-underline whitespace-no-wrap align-middle transition-colors bg-white border-2 border-gray-900 border-solid rounded-md shadow-xs cursor-pointer select-none hover:bg-yellow-100 hover:shadow-xs hover:text-gray-900 focus:shadow-xs'
-							href="/ticket"
-							><svg class="w-8 h-8 mr-1" viewBox="0 0 72 72"><path fill="#FCEA2B" d="M48.7127 23.515c-3.4279-3.5522-4.0284-8.7836-1.8682-12.9334l-3.6009-3.7315L6.8857 41.9362l3.8016 3.9394c4.0722-1.5735 8.8681-.6711 12.09 2.6676 3.2219 3.3387 3.9531 8.1636 2.2356 12.1773l3.8016 3.9394 36.3579-35.0861-3.6009-3.7315c-4.2242 2.0111-9.4309 1.2248-12.8588-2.3273z"/><path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M48.1546 23.505c-3.4279-3.5522-4.0284-8.7836-1.8682-12.9334l-3.6009-3.7315L6.3276 41.9262l3.8016 3.9394c4.0722-1.5735 8.8681-.6711 12.09 2.6676s3.9531 8.1636 2.2356 12.1773l3.8016 3.9394 36.3579-35.0861-3.6009-3.7315c-4.2242 2.0111-9.4309 1.2249-12.8588-2.3273z"/><circle cx="37.1223" cy="22.122" transform="rotate(-44.781 37.124422 22.122526)" r="2"/><circle cx="43.6116" cy="28.6606" transform="rotate(-44.781 43.614127 28.6613)" r="2"/><circle cx="50.101" cy="35.1992" transform="rotate(-44.781 50.103953 35.200124)" r="2"/></svg>¡Consigue tu ticket!
-						</a>
-					</div>
-					
-					<div class='relative'>
-						<div class='w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0'></div>
-						
-						<a
-							class='relative inline-flex items-center justify-center px-5 py-2 text-lg font-bold text-center text-gray-900 no-underline whitespace-no-wrap align-middle transition-colors bg-white border-2 border-gray-900 border-solid rounded-md shadow-xs cursor-pointer select-none hover:bg-yellow-100 hover:shadow-xs hover:text-gray-900 focus:shadow-xs'
-							href="/ticket"
-							><svg class="w-8 h-8 mr-1" viewBox="0 0 72 72"><path fill="#FFF" d="m11.9726 28.2042.123 31.8059 31.6009-.082L59.9274 47.55l.1229-19.4688-48.0777.123z"/><path fill="#ea5a47" d="M12.1421 28.1401h47.71V12.2523h-47.71v15.8878zm37.8551-11.3806h.0307c.841.0081 1.6281.3433 2.2169.9435.5897.6004.9094 1.3941.901 2.2351-.0162 1.7261-1.426 3.1186-3.1479 3.1186h-.0307c-1.7357-.017-3.134-1.4429-3.1179-3.1786.0162-1.7261 1.426-3.1186 3.1479-3.1186zm-30.2703.848c.6109-.5985 1.4156-.9273 2.2694-.9273h.0317c1.7866.0174 3.2267 1.4852 3.2101 3.2719-.0166 1.7768-1.4678 3.2102-3.2403 3.2102h-.0316c-1.7867-.0175-3.2267-1.4852-3.2101-3.2719.0078-.8656.3528-1.6763.9708-2.2829z"/><path fill="#d0cfce" d="M56.9559 49.0381H44.1387v4.4795c0 .5527-.4473 1-1 1-.502 0-.8992-.3752-.9712-.8569v5.4255l1.1596-.0003 13.6288-10.0478z"/><g><circle cx="21.997" cy="19.9408" transform="matrix(.0096 -1 1 .0096 1.8467 41.746)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" clip-rule="evenodd" r="3"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M11.997 12.2142h48v16h-48z"/><circle cx="49.9976" cy="19.9408" transform="matrix(.0096 -1 1 .0096 29.5794 69.7454)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" clip-rule="evenodd" r="3"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M11.997 28.0918v32l31.6594-.0054L59.997 48.0382V28.0918"/><circle cx="18.2166" cy="33.6726" transform="matrix(.0096 -1 1 .0096 -15.6284 51.5668)" r="2"/><circle cx="24.2166" cy="33.6726" transform="matrix(.0096 -1 1 .0096 -9.6857 57.5665)" r="2"/><circle cx="30.2166" cy="33.6726" transform="matrix(.0096 -1 1 .0096 -3.743 63.5662)" r="2"/><circle cx="36.2166" cy="33.6726" transform="matrix(.0096 -1 1 .0096 2.1997 69.566)" r="2"/><circle cx="18.2166" cy="39.6726" transform="matrix(.0096 -1 1 .0096 -21.6282 57.5095)" r="2"/><circle cx="24.2166" cy="39.6726" transform="matrix(.0096 -1 1 .0096 -15.6855 63.5092)" r="2"/><circle cx="30.2166" cy="39.6726" transform="matrix(.0096 -1 1 .0096 -9.7428 69.5089)" r="2"/><circle cx="36.2166" cy="39.6726" transform="matrix(.0096 -1 1 .0096 -3.8001 75.5087)" r="2"/><circle cx="18.2166" cy="45.6726" transform="matrix(.0096 -1 1 .0096 -27.6279 63.4522)" r="2"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M59.8694 48.0382h-16.731v5.4793"/></g></svg>Guardar en el calendario
-						</a>
-					</div>
-				</div>
-				
+			<div class='pt-5 space-y-4 leading-6 text-center xl:pt-20 xl:space-y-5'>
+				<LoginButton client:visible />
 			</div>
 		</div>
 	</div>
