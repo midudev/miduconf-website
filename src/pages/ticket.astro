@@ -4,7 +4,6 @@ import YellowBackground from '@components/YellowBackground.astro';
 import Technologies from '@components/Technologies.astro'
 import Button from '@components/Button.astro';
 import {UserTicketInfo} from '@components/UserTicketInfo'
-import {LogoutButton} from '@components/LoginButton';
 import {UserTicketNumber} from '@components/UserTicketNumber';
 import React from '@components/logos/React.astro';
 import Angular from '@components/logos/Angular.astro';
@@ -12,6 +11,7 @@ import Svelte from '@components/logos/Svelte.astro';
 import Vue from '@components/logos/Vue.astro';
 import Bun from '@components/logos/Bun.astro';
 import Vite from '@components/logos/Vite.astro';
+import Header from '@components/Header.astro';
 ---
 
 <style>
@@ -26,8 +26,9 @@ import Vite from '@components/logos/Vite.astro';
 
 <Layout>
   <YellowBackground>
-    <LogoutButton client:visible />
-    <div class="py-40">
+  <Header />
+    
+    <div class="py-20">
       <Technologies />
 
       <div class="grid place-content-center">

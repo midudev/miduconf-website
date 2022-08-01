@@ -1,5 +1,6 @@
 ---
 	import MenuIcon from './icons/Menu.astro'
+	import { LogoutButton } from '@components/LoginButton';
 ---
 
 <header class='flex items-center p-6 text-center lg:justify-center'>
@@ -61,4 +62,5 @@
 			</li>
 		</ul>
 	</nav>
+	<LogoutButton client:visible />
 </header>
