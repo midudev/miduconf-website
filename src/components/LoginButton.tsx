@@ -46,6 +46,7 @@ export function LoginButton() {
 	useEffect(() => {
 		const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
 			if (event !== 'SIGNED_IN') return
+
 			const newUser = extractInfoFrom(session?.user)
       window.location.href = `/ticket?username=${newUser.userName}`
 		})

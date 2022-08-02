@@ -4,7 +4,7 @@ import YellowBackground from '@components/YellowBackground.astro';
 import Technologies from '@components/Technologies.astro'
 import Button from '@components/Button.astro';
 import {UserTicketInfo} from '@components/UserTicketInfo'
-import {LogoutButton} from '@components/LoginButton';
+import {LoginButton, LogoutButton} from '@components/LoginButton';
 import {UserTicketNumber} from '@components/UserTicketNumber';
 import React from '@components/logos/React.astro';
 import JavaScript from '@components/logos/JavaScript.astro';
@@ -17,6 +17,7 @@ import VSCode from '@components/logos/VSCode.astro';
 import GitHub from '@components/logos/GitHub.astro';
 
 import {supabase} from '../lib/supabase.js'
+import ClientSideEffects from '@components/ClientSideEffects';
 
 // use supabase to get the ticket
 const username = Astro.url.searchParams.get('username')
@@ -92,6 +93,7 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
 
 <Layout image={ogImage}>
   <YellowBackground>
+    <ClientSideEffects userName={userName} client:visible />
     <LogoutButton client:visible />
     <div class="grid place-content-center min-h-[110vh] pt-10 pb-20">
       <Technologies />
@@ -164,8 +166,13 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
           </div>
         </div>
 
+        <div id="get-your-ticket" class="relative flex flex-col justify-center hidden h-auto">
+          <div>
+            <LoginButton client:visible />
+          </div>
+        </div>
 
-        <div class="relative flex flex-col h-auto">
+        <div id="select-flavour" class="relative flex flex-col justify-center hidden h-auto">
           <div class="relative w-full grid-cols-2 p-2 text-lg font-bold text-center text-gray-900 no-underline whitespace-no-wrap align-middle bg-white border-2 border-gray-900 border-solid rounded-md shadow-xs select-none hover:shadow-xs focus:shadow-xs">
             <div class="-z-10 w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0"></div>
             <h3 class="text-lg text-center">Elige tu sabor de ticket</h3>

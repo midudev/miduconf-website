@@ -4,11 +4,9 @@ export async function post({request}) {
   const { flavour } = await request.json()
 
 	const accessToken = request.headers.get('x-supabase-auth');
-  console.log({accessToken})
 
 	// You can now use it within a Supabase Client
 	const { user } = supabase.auth.setAuth(accessToken);
-  console.log(user)
 
 	if (!user) {
 		return new Response(JSON.stringify({ message: 'Invalid access token' }), { status: 401 });
