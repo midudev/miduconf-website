@@ -12,6 +12,8 @@ import Svelte from '@components/logos/Svelte.astro';
 import Vue from '@components/logos/Vue.astro';
 import Bun from '@components/logos/Bun.astro';
 import Vite from '@components/logos/Vite.astro';
+import VSCode from '@components/logos/VSCode.astro';
+import GitHub from '@components/logos/GitHub.astro';
 
 // use supabase to get the ticket
 ---
@@ -137,6 +139,18 @@ import Vite from '@components/logos/Vite.astro';
                   <Vite />
                 </button>
               </li>
+
+              <li>
+                <button data-tech="vscode" class="button-ticket">
+                  <VSCode />
+                </button>
+              </li>
+
+              <li>
+                <button data-tech="github" class="button-ticket">
+                  <GitHub />
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -228,6 +242,16 @@ Conferencia de Desarrollo y Programación Web.
       borderColor: 'rgba(100, 108, 255, 1)',
       backgroundColor: '#afb3ffc2',
       textColor: '#4148bd'
+    },
+    vscode: {
+      borderColor: 'rgba(0, 120, 215, 1)',
+      backgroundColor: 'rgba(88, 181, 255, .35)',
+      textColor: '#4148bd'
+    },
+    github: {
+      borderColor: 'rgba(0, 0, 0, 1)',
+      backgroundColor: 'rgba(255, 255, 255, .7)',
+      textColor: '#111'
     }
   }
 
