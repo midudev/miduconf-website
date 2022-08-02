@@ -1,9 +1,7 @@
 [[redirects]]
   from = "/ticket/*"
-  to = "/ticket"
+  to = "/ticket?username=:splat"
   status = 200
-  force = true
-  query = { username = ":splat" }
 
 [functions]
   directory = "functions"
