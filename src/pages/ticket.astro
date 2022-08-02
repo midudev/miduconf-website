@@ -96,7 +96,7 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
 
       <div class="grid xl:grid-cols-[minmax(900px,_1fr)_250px] m-auto max-w-7xl">
         <div class="flex flex-col items-center justify-center">
-          <div class="atropos w-[280px] m-auto sm:w-[480px] md:w-[700px] md:aspect-[16/8]">
+          <div class="atropos p-8 w-[280px] m-auto sm:w-[480px] md:w-[800px] md:aspect-[16/9]">
 
             <div class="atropos-scale">
               <div class="atropos-rotate">
@@ -200,7 +200,7 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
 
   window.Atropos({
     el: '.atropos',
-    activeOffset: 200,
+    activeOffset: 120,
     shadowScale: 5,
   });
 
