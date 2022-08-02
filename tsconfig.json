@@ -8,10 +8,12 @@
     // Enable stricter transpilation for better output.
     "isolatedModules": true,
     // Add type definitions for our Vite runtime.
-    "types": ["vite/client"],
+    "types": ["vite/client", "preact"],
     // Tell TypeScript where your build output is
     "outDir": "./dist",
     "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],

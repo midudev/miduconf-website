@@ -7,6 +7,7 @@
   },
   "scripts": {
     "phoenix": "rm -f package-lock.json && rm -rf ./node_modules && npm install --no-fund --no-audit --no-package-lock --legacy-peer-deps",
+    "phoenix-win": "del /s /q package-lock.json && echo 'Borrando node_modules...' && rmdir /s /q node_modules && cls && echo 'Instalando Dependencias' && npm install --no-fund --no-audit --no-package-lock --legacy-peer-deps",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
