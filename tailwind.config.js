@@ -2,6 +2,9 @@ module.exports = {
 	content: ['./src/**/*.{html,js,astro,jsx,ts,tsx}'],
 	theme: {
 		extend: {
+			dropShadow: {
+				'4xl': ['0px 0px 20px rgba(255, 221, 31, 0.75)', '0 0px 30px rgba(255, 221, 31, 0.95)'],
+			},
 			animation: {
 				'moving-background': 'moving-background 5s ease-in-out',
 			},
