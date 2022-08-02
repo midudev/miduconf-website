@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/tickets/*
-  to = "/tickets?username=:splat"
+  from = "/ticket/*
+  to = "/ticket?username=:splat"
   status = 200
   force = true
 
