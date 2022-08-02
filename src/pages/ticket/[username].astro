@@ -20,6 +20,7 @@ import {supabase} from '../../lib/supabase.js'
 
 // use supabase to get the ticket
 const { username } = Astro.params
+const animate = Astro.url.searchParams.get('static') === null
 
 const { error, data } = await supabase
   .from('ticket')
@@ -113,7 +114,7 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
                       <div class="flex items-center justify-center pb-2">
                         <h4 class="transition-all duration-700 top-0 right-0 flex flex-col font-mono text-2xl font-bold opacity-90 text-[color:var(--text-card)]">
                           <div class="block text-xs font-black uppercase text-black/90">Ticket number</div>
-                          <UserTicketNumber ticketNumber={ticketNumber} client:visible />
+                          <UserTicketNumber animate={animate} ticketNumber={ticketNumber} client:visible />
                         </h4>
                       </div>
                     </div>

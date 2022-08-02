@@ -1,10 +1,15 @@
 import { useProgressiveNumber } from "@hooks/useProgressiveNumber"
 import { useEffect } from "preact/hooks"
 
-export const UserTicketNumber = ({ ticketNumber }) => {
-  const [number, setNumber] = useProgressiveNumber(0)
+export const UserTicketNumber = ({ ticketNumber, animate }) => {
+  const [number, setNumber] = useProgressiveNumber(() => {
+    if (animate) return 0
+    return ticketNumber
+  })
 
   useEffect(() => {
+    if (!animate) return
+  
     setTimeout(() => {
       setNumber(+ticketNumber)
     }, 500)

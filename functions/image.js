@@ -33,11 +33,9 @@ exports.handler = async function (event) {
 		deviceScaleFactor: 2,
 	});
 
-	await page.goto(`${url}${username}`);
+	await page.goto(`${url}${username}?static=true`);
 
 	const el = await page.$('.atropos');
-
-	await page.waitForTimeout(600);
 
 	const screenshot = await el.screenshot();
 
