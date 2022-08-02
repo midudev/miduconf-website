@@ -1,3 +1,9 @@
+[[redirects]]
+  from = "/tickets/*
+  to = "/tickets?username=:splat"
+  status = 200
+  force = true
+
 [functions]
   directory = "functions"
 
