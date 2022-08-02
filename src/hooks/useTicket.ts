@@ -28,11 +28,19 @@ export const useTicket = () => {
       }
 
       const [ticketInfo] = data
-
+      const { flavour } = ticketInfo
+      
       setTimeout(() => {
         document.querySelector('.atropos').setAttribute('data-ready', '')
       }, 250)
 
+      document.querySelector('.flavour-selected')?.classList.remove('flavour-selected')
+      
+      const button = document.querySelector(`#select button[data-tech="${flavour}"]`) as HTMLButtonElement
+
+      button?.classList.add('flavour-selected')
+      button?.click()
+    
       setTicket(ticketInfo)
     }
 

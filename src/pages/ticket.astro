@@ -12,6 +12,8 @@ import Svelte from '@components/logos/Svelte.astro';
 import Vue from '@components/logos/Vue.astro';
 import Bun from '@components/logos/Bun.astro';
 import Vite from '@components/logos/Vite.astro';
+
+// use supabase to get the ticket
 ---
 
 <style>
@@ -58,7 +60,7 @@ import Vite from '@components/logos/Vite.astro';
                     </h1>
 
                     <div class="flex items-center justify-center pt-2 sm:pt-4 md:pt-0" data-atropos-offset="5">
-                      <h2 class="inline-block px-3 py-1 text-lg font-bold text-center text-white rounded-full bg-black/90">
+                      <h2 class="inline-block w-40 px-3 py-1 text-xs font-bold text-center text-white rounded-full md:w-2/3 md:text-lg bg-black/90">
                         SEPTIEMBRE 13 • Online • 5PM CET
                       </h2>
                     </div>
@@ -68,7 +70,7 @@ import Vite from '@components/logos/Vite.astro';
                         <path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z">
                         </path>
                       </svg>
-                      <div class="flex flex-col items-start justify-center leading-none">
+                      <div class="flex flex-col items-center justify-center leading-none md:items-start">
                         <span class="block -mb-1 text-lg text-black">Streaming en</span>
                         <a href='https://twitch.tv/midudev' rel="noopener" target='_blank'>twitch.tv/midudev</a>
                       </div>
@@ -94,37 +96,37 @@ import Vite from '@components/logos/Vite.astro';
 
         <ul id="select" class="flex justify-center p-16 space-x-4">
           <li>
-            <button data-tech='react' class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/80 bg-white/80 backdrop-blur-xl">
+            <button data-tech='react' class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 bg-white/80 backdrop-blur-xl">
               <React />
             </button>
           </li>
         
           <li>
-            <button data-tech='vue' class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 bg-white/80 backdrop-blur-xl">
+            <button data-tech='vue' class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 bg-white/80 backdrop-blur-xl">
               <Vue />
             </button>
           </li>
 
           <li>
-            <button data-tech='svelte' class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 border-blue/50 bg-white/80 backdrop-blur-xl">
+            <button data-tech='svelte' class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 bg-white/80 backdrop-blur-xl">
               <Svelte />
             </button>
           </li>
 
           <li>
-            <button data-tech="angular" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 border-blue/50 bg-white/80 backdrop-blur-xl">
+            <button data-tech="angular" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 bg-white/80 backdrop-blur-xl">
                <Angular />
             </button>
           </li>
 
           <li>
-            <button data-tech="bun" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 border-blue/50 bg-white/80 backdrop-blur-xl">
+            <button data-tech="bun" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 bg-white/80 backdrop-blur-xl">
                <Bun />
             </button>
           </li>
 
           <li>
-            <button data-tech="vite" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 border-black/20 border-blue/50 bg-white/80 backdrop-blur-xl">
+            <button data-tech="vite" class="flex items-center w-24 h-24 p-4 border-2 rounded-lg hover:border-black/50 bg-white/80 backdrop-blur-xl">
                <Vite />
             </button>
           </li>
@@ -175,7 +177,7 @@ import Vite from '@components/logos/Vite.astro';
           }
         })
       })
-      })
+    })
 </script>
 
 <script type="module">
@@ -217,13 +219,10 @@ import Vite from '@components/logos/Vite.astro';
 
     const tech = currentTarget.getAttribute('data-tech')
 
-    const currentActive = document.querySelector('#select .border-black\\/80')
+    const currentActive = document.querySelector('#select .flavour-selected')
 
-    currentActive?.classList.remove('border-black/80')
-    currentActive?.classList.add('border-black/20')
-
-    currentTarget.classList.remove('border-black/20')
-    currentTarget.classList.add('border-black/80')
+    currentActive?.classList.remove('flavour-selected')
+    currentTarget.classList.add('flavour-selected')
     
     const cssStyles = styles[tech]
 
