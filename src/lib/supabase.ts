@@ -8,6 +8,16 @@ export type User = {
 	id: string
 }
 
+export type Ticket = {
+	id: string
+	created_at: string
+	user_name: string
+	user_id: string
+	flavour: string
+	ticket_number: number
+	user_fullname: string
+}
+
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
