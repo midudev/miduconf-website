@@ -6,7 +6,7 @@ const LOCAL_CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google
 const LOCAL_URL = 'http://localhost:3000/ticket?username=';
 
 const getConfig = async () => {
-	const executablePath = isLocal ? LOCAL_CHROME_PATH : await chromium.executablePath();
+	const executablePath = isLocal ? LOCAL_CHROME_PATH : await chromium.executablePath;
 	const url = isLocal ? LOCAL_URL : 'https://miduconf.com/ticket?username=';
 
 	return { executablePath, url };
