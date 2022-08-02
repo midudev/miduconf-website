@@ -55,6 +55,8 @@ export function LoginButton() {
 	const login = async () => {
 		const { error } = await supabase.auth.signIn({
 			provider: 'github',
+		}, {
+			redirectTo: window.location.origin
 		})
 
 		// TODO: Send this error to somewhere more useful!!! 🤣
