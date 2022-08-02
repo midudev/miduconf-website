@@ -1,9 +1,11 @@
 import { useTicket } from "@hooks/useTicket"
 import { useProgressiveNumber } from "@hooks/useProgressiveNumber"
 import { useEffect } from "preact/hooks"
+import { useChangeFlavour } from "@hooks/useChangeFlavour.js"
 
 export const UserTicketNumber = () => {
   const ticket = useTicket()
+  useChangeFlavour()
   const [number, setNumber] = useProgressiveNumber(0)
 
   useEffect(() => {
