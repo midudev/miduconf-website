@@ -1,5 +1,6 @@
 module.exports = {
 	content: ['./src/**/*.{html,js,astro,jsx,ts,tsx}'],
+	plugins: [],
 	theme: {
 		extend: {
 			dropShadow: {
@@ -40,5 +41,4 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
 };
