@@ -15,7 +15,63 @@ import Vite from '@components/logos/Vite.astro';
 import VSCode from '@components/logos/VSCode.astro';
 import GitHub from '@components/logos/GitHub.astro';
 
+import {supabase} from '../lib/supabase.js'
+
 // use supabase to get the ticket
+const username = Astro.url.searchParams.get('username')
+
+const { error, data } = await supabase
+  .from('ticket')
+  .select('*')
+  .eq('user_name', username)
+
+if (error) {
+  // hacer un redirect a otra pagina
+  console.error(error)
+}
+
+const [ticketData] = data
+
+const {
+  user_name: userName,
+  flavour,
+  ticket_number: ticketNumber,
+  user_fullname: userFullName
+} = ticketData
+
+const originEndpoint = import.meta.env.PROD
+  ? Astro.url.origin
+  : 'http://localhost:1234'
+
+const ogImage = `${originEndpoint}/.netlify/functions/image?username=${userName}`
+
+const techs = [{
+  tech: 'react',
+  Icon: React
+}, {
+  tech: 'vue',
+  Icon: Vue
+}, {
+  tech: 'svelte',
+  Icon: Svelte
+}, {
+  tech: 'angular',
+  Icon: Angular
+}, {
+  tech: 'bun',
+  Icon: Bun
+}, {
+  tech: 'vite',
+  Icon: Vite
+}, {
+  tech: 'vscode',
+  Icon: VSCode
+}, {
+  tech: 'github',
+  Icon: GitHub
+}]
+
+const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon
 ---
 
 <style>
@@ -28,7 +84,7 @@ import GitHub from '@components/logos/GitHub.astro';
 
 <wc-toast></wc-toast>
 
-<Layout>
+<Layout image={ogImage}>
   <YellowBackground>
     <LogoutButton client:visible />
     <div class="grid place-content-center min-h-[110vh] pt-10 pb-20">
@@ -45,12 +101,15 @@ import GitHub from '@components/logos/GitHub.astro';
 
                     <div class="flex flex-col-reverse justify-between sm:flex-row">
                       <div>
-                        <UserTicketInfo client:visible />
+                        <UserTicketInfo
+                          userName={userName}
+                          userFullName={userFullName}
+                        />
                       </div>
                       <div class="flex items-center justify-center pb-2">
                         <h4 class="transition-all duration-700 top-0 right-0 flex flex-col font-mono text-2xl font-bold opacity-90 text-[color:var(--text-card)]">
                           <div class="block text-xs font-black uppercase text-black/90">Ticket number</div>
-                          <UserTicketNumber client:visible />
+                          <UserTicketNumber ticketNumber={ticketNumber} client:visible />
                         </h4>
                       </div>
                     </div>
@@ -80,6 +139,7 @@ import GitHub from '@components/logos/GitHub.astro';
                     </h3>
 
                     <div id="card-icon" class="absolute opacity-30 top-20 -left-32 w-96 h-96 -z-10 contrast-200">
+                      <FlavourIcon />
                     </div>
 
                   </div>
@@ -104,53 +164,17 @@ import GitHub from '@components/logos/GitHub.astro';
             <div class="-z-10 w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0"></div>
             <h3 class="text-lg text-center">Elige tu sabor de ticket</h3>
             <ul id="select" class="flex flex-col flex-wrap items-center justify-center sm:flex-row">
-              <li>
-                <button data-tech='react' class="button-ticket">
-                  <React />
-                </button>
-              </li>
-          
-              <li>
-                <button data-tech='vue' class="button-ticket">
-                  <Vue />
-                </button>
-              </li>
-          
-              <li>
-                <button data-tech='svelte' class="button-ticket">
-                  <Svelte />
-                </button>
-              </li>
-          
-              <li>
-                <button data-tech="angular" class="button-ticket">
-                  <Angular />
-                </button>
-              </li>
-          
-              <li>
-                <button data-tech="bun" class="button-ticket">
-                  <Bun />
-                </button>
-              </li>
-          
-              <li>
-                <button data-tech="vite" class="button-ticket">
-                  <Vite />
-                </button>
-              </li>
 
-              <li>
-                <button data-tech="vscode" class="button-ticket">
-                  <VSCode />
-                </button>
-              </li>
+              {techs.map(({tech, Icon}) => {
+                return (
+                <li>
+                  <button data-tech={tech} class={`button-ticket ${flavour === tech ? 'flavour-selected' : ''}`} >
+                    <Icon />
+                  </button>
+                </li>
+                )
+              })}
 
-              <li>
-                <button data-tech="github" class="button-ticket">
-                  <GitHub />
-                </button>
-              </li>
             </ul>
           </div>
         </div>
@@ -196,7 +220,6 @@ Conferencia de Desarrollo y Programación Web.
 
   shareTwitter.setAttribute('href', urlTwitter.toString())
 
-
   const copyLink = document.querySelector('#copy-link')
 
   copyLink.addEventListener('click', () => {
@@ -211,7 +234,7 @@ Conferencia de Desarrollo y Programación Web.
     })
 </script>
 
-<script type="module">
+<script define:vars={{ tech: flavour }}>
   const styles = {
     react: {
       borderColor: '#007acca3',
@@ -255,6 +278,20 @@ Conferencia de Desarrollo y Programación Web.
     }
   }
 
+  const updateCustomProperties = (tech) => {
+    const {
+      borderColor,
+      backgroundColor,
+      textColor
+    } = styles[tech]
+
+    document.documentElement.style.setProperty('--border-card', borderColor)
+    document.documentElement.style.setProperty('--background-card', backgroundColor)
+    document.documentElement.style.setProperty('--text-card', textColor)
+  }
+
+  updateCustomProperties(tech)  
+
   document.querySelectorAll('#select button').forEach(button => button.addEventListener('click', (event) => {
     const {currentTarget} = event
 
@@ -265,11 +302,7 @@ Conferencia de Desarrollo y Programación Web.
     currentActive?.classList.remove('flavour-selected')
     currentTarget.classList.add('flavour-selected')
     
-    const cssStyles = styles[tech]
-
-    document.documentElement.style.setProperty('--border-card', cssStyles.borderColor)
-    document.documentElement.style.setProperty('--background-card', cssStyles.backgroundColor)
-    document.documentElement.style.setProperty('--text-card', cssStyles.textColor)
+    updateCustomProperties(tech)
 
     document.querySelector('#card-icon').innerHTML = currentTarget.innerHTML
   }))
