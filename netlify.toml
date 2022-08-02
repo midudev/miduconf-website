@@ -2,6 +2,7 @@
   from = "/ticket/*"
   to = "/ticket?username=:splat"
   status = 200
+  force = true
 
 [functions]
   directory = "functions"
