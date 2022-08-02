@@ -35,7 +35,7 @@ exports.handler = async function (event) {
 	await page.waitForSelector('.atropos[data-ready]');
 	const el = await page.$('.atropos');
 
-	const screenshot = await el.screenshot({ path: './image.png' });
+	const screenshot = await el.screenshot();
 
 	await browser.close();
 
