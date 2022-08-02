@@ -7,6 +7,7 @@ import {UserTicketInfo} from '@components/UserTicketInfo'
 import {LogoutButton} from '@components/LoginButton';
 import {UserTicketNumber} from '@components/UserTicketNumber';
 import React from '@components/logos/React.astro';
+import JavaScript from '@components/logos/JavaScript.astro';
 import Angular from '@components/logos/Angular.astro';
 import Svelte from '@components/logos/Svelte.astro';
 import Vue from '@components/logos/Vue.astro';
@@ -33,7 +34,7 @@ if (error) {
 const [ticketData] = data
 
 const {
-  flavour = 'react',
+  flavour = 'javascript',
   user_name: userName,
   ticket_number: ticketNumber,
   user_fullname: userFullName
@@ -46,6 +47,9 @@ const originEndpoint = import.meta.env.PROD
 const ogImage = `${originEndpoint}/.netlify/functions/image?username=${userName}`
 
 const techs = [{
+  tech: 'javascript',
+  Icon: JavaScript
+}, {
   tech: 'react',
   Icon: React
 }, {
@@ -71,7 +75,7 @@ const techs = [{
   Icon: GitHub
 }]
 
-const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? React
+const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
 ---
 
 <style>
@@ -275,6 +279,11 @@ Conferencia de Desarrollo y Programación Web.
       borderColor: 'rgba(0, 0, 0, 1)',
       backgroundColor: 'rgba(255, 255, 255, .7)',
       textColor: '#111'
+    },
+    javascript: {
+      borderColor: 'rgba(111, 111, 111, 1)',
+      backgroundColor: 'rgba(255, 245, 58, 0.8)',
+      textColor: '#111'
     }
   }
 
@@ -283,7 +292,7 @@ Conferencia de Desarrollo y Programación Web.
       borderColor,
       backgroundColor,
       textColor
-    } = styles[tech]
+    } = styles[tech] ?? styles.javascript
 
     document.documentElement.style.setProperty('--border-card', borderColor)
     document.documentElement.style.setProperty('--background-card', backgroundColor)
