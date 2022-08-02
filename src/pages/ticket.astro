@@ -35,11 +35,12 @@ if (error) {
 const [ticketData] = data
 
 const {
-  flavour = 'javascript',
   user_name: userName,
   ticket_number: ticketNumber,
   user_fullname: userFullName
 } = ticketData
+
+const flavour = ticketData?.flavour || 'javascript'
 
 const originEndpoint = import.meta.env.PROD
   ? Astro.url.origin
