@@ -32,6 +32,7 @@
     "@supabase/supabase-js": "1.35.4",
     "atropos": "1.0.2",
     "chrome-aws-lambda": "10.1.0",
+    "puppeteer-core": "10.4.0",
     "preact": "10.10.0"
   }
 }
