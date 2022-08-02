@@ -7,5 +7,12 @@ import netlify from '@astrojs/netlify/functions';
 export default defineConfig({
 	output: 'server',
 	adapter: netlify(),
-	integrations: [tailwind(), preact()],
+	integrations: [
+		tailwind({
+			config: {
+				applyBaseStyles: false,
+			},
+		}),
+		preact(),
+	],
 });
