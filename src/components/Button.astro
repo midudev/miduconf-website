@@ -28,10 +28,9 @@ const classesForButton = colors[flavour] ?? colors['default']
 		rel={rel}
 		target={target}
 		>
-		{flavour === 'twitter' && <TwitterIcon />}
-		{flavour === 'link' && <LinkIcon />}
-		{flavour === 'calendar' && <CalendarIcon />}
+			{flavour === 'twitter' &&  <><TwitterIcon /></>}
+			{flavour === 'link' && <><LinkIcon /></>}
+			{flavour === 'calendar' && <><CalendarIcon /></>}
 		{text}
 	</a>
 </div>
-
