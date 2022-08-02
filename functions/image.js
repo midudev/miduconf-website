@@ -20,6 +20,7 @@ exports.handler = async function (event) {
 
 	const browser = await chromium.puppeteer.launch({
 		args: chromium.args,
+		defaultViewport: chromium.defaultViewport,
 		executablePath,
 		headless: true,
 		ignoreHTTPSErrors: true,
