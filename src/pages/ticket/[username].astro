@@ -16,10 +16,10 @@ import Vite from '@components/logos/Vite.astro';
 import VSCode from '@components/logos/VSCode.astro';
 import GitHub from '@components/logos/GitHub.astro';
 
-import {supabase} from '../lib/supabase.js'
+import {supabase} from '../../lib/supabase.js'
 
 // use supabase to get the ticket
-const username = Astro.url.searchParams.get('username')
+const { username } = Astro.params
 
 const { error, data } = await supabase
   .from('ticket')
@@ -299,7 +299,7 @@ Conferencia de Desarrollo y Programación Web.
     document.documentElement.style.setProperty('--text-card', textColor)
   }
 
-  updateCustomProperties(tech)  
+  updateCustomProperties(tech)
 
   document.querySelectorAll('#select button').forEach(button => button.addEventListener('click', (event) => {
     const {currentTarget} = event
@@ -310,7 +310,7 @@ Conferencia de Desarrollo y Programación Web.
 
     currentActive?.classList.remove('flavour-selected')
     currentTarget.classList.add('flavour-selected')
-    
+
     updateCustomProperties(tech)
 
     document.querySelector('#card-icon').innerHTML = currentTarget.innerHTML
