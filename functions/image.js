@@ -3,11 +3,11 @@ const chromium = require('chrome-aws-lambda');
 const isLocal = process.env.NETLIFY_LOCAL === 'true';
 
 const LOCAL_CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const LOCAL_URL = 'http://localhost:3000/ticket?username=';
+const LOCAL_URL = 'http://localhost:3000/ticket?static=true&username=';
 
 const getConfig = async () => {
 	const executablePath = isLocal ? LOCAL_CHROME_PATH : await chromium.executablePath;
-	const url = isLocal ? LOCAL_URL : 'https://miduconf.com/ticket?username=';
+	const url = isLocal ? LOCAL_URL : 'https://miduconf.com/ticket?static=true&username=';
 
 	return { executablePath, url };
 };
@@ -36,8 +36,6 @@ exports.handler = async function (event) {
 	await page.goto(`${url}${username}`);
 
 	const el = await page.$('.atropos');
-
-	await page.waitForTimeout(600);
 
 	const screenshot = await el.screenshot();
 
