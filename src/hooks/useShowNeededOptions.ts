@@ -5,7 +5,7 @@ export const useShowNeededOptions = ({ userName }) => {
   const user = useUser()
 
   useEffect(() => {
-    const isYourTicket = user.userName === userName
+    const isYourTicket = user?.userName === userName
 
     if (isYourTicket) {
       document.querySelector('#select-flavour')?.classList.remove('hidden')
