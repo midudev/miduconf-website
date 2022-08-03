@@ -13,7 +13,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier -w .",
-    "lint:eslint": "eslint . --ext .js,.astro"
+    "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx",
+    "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx --fix"
   },
   "devDependencies": {
     "@astrojs/preact": "0.5.2",
