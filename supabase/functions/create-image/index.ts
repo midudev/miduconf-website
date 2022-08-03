@@ -35,12 +35,14 @@ serve(async (req) => {
     .from('tickets')
     .upload(`ticket_${userName}.png`, arrayBuffer, {
       contentType: 'image/png',
+      upsert: true
     })
 
   console.log(uploadedImage)
 
   if (errorUploadingImage) {
     console.error('Error uploading image')
+    console.error(errorUploadingImage)
     return json({ message: 'Error uploading image' }, { status: 400 })
   }
 
