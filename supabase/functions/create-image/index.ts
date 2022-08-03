@@ -48,7 +48,7 @@ serve(async (req) => {
 
   const { error: errorUpdating } = await supabase
     .from('ticket')
-    .update({ image: 'todotodoaaaaa.png' })
+    .update({ image: `https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets/ticket_${userName}.png` })
     .match({ user_name: userName })
 
   if (errorUpdating) {

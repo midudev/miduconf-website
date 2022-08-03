@@ -36,6 +36,7 @@ if (error) {
 const [ticketData] = data
 
 const {
+  image,
   user_name: userName,
   ticket_number: ticketNumber,
   user_fullname: userFullName
@@ -89,7 +90,7 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
 
 <Layout image={ogImage}>
   <YellowBackground>
-    <ClientSideEffects userName={userName} client:visible />
+    <ClientSideEffects image={image} userName={userName} client:visible />
     <LogoutButton client:visible />
     <div class="grid place-content-center min-h-[110vh] pt-10 pb-20">
       <Technologies />
