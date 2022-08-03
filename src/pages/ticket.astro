@@ -43,11 +43,7 @@ const {
 
 const flavour = ticketData?.flavour || 'javascript'
 
-const originEndpoint = import.meta.env.PROD
-  ? Astro.url.origin
-  : 'http://localhost:1234'
-
-const ogImage = `${originEndpoint}/.netlify/functions/image?username=${userName}`
+const ogImage = `https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets/ticket_${userName}.png`
 
 const techs = [{
   tech: 'javascript',
