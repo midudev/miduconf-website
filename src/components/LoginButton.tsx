@@ -48,7 +48,7 @@ export function LoginButton() {
 			if (event !== 'SIGNED_IN') return
 
 			const newUser = extractInfoFrom(session?.user)
-      window.location.href = `/ticket?username=${newUser.userName}`
+      window.location.href = `/ticket/${newUser.userName}`
 		})
 
 		return () => listener?.unsubscribe()
@@ -70,7 +70,7 @@ export function LoginButton() {
 	if (user !== null) {
 		return (
       <Button onClick={() => {
-        window.location.href = `/ticket?username=${user.userName}`
+        window.location.href = `/ticket/${user.userName}`
       }}>
         {ticketIcon}
         ¡Ver mi ticket!
