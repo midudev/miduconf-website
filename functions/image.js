@@ -1,11 +1,6 @@
 const chromium = require('chrome-aws-lambda');
-const { createClient } = require('@supabase/supabase-js');
 
 const isLocal = process.env.NETLIFY_LOCAL === 'true';
-const supabaseUrl = process.env.PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.PUBLIC_SUPABASE_ANON_KEY;
-
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 const LOCAL_CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const LOCAL_URL = 'http://localhost:3000/ticket?static=true&username=';
@@ -33,14 +28,11 @@ exports.handler = async function (event) {
 
 	// check if image is already available in supabase to return it
 	if (!skipCache) {
-		const { error, data } = await supabase.from('ticket').select('image').eq('user_name', username);
-
-		const [{ image }] = data ?? [];
-
-		if (!error && image) {
-			const res = await fetch(image);
-			const blob = await res.arrayBuffer();
-			return returnImage(Buffer.from(blob));
+		const res = await fetch(
+			`${process.env.URL}/.netlify/functions/image-from-storage?username=${username}`
+		);
+		if (res.ok) {
+			returnImage(res.arrayBuffer());
 		}
 	}
 
