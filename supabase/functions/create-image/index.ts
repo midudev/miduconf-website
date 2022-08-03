@@ -14,8 +14,13 @@ const json = (data: object, {status = 200} = {}) => {
 }
 
 serve(async (req) => {
-  const { record } = await req.json()
-  const { user_name: userName } = record ?? {}
+  const reqJson = await req.json()
+  const { type, old_record: oldRecord, record } = reqJson
+  const { user_name: userName, image } = record ?? {}
+
+  if (type === 'UPDATE' && oldRecord.flavour === record.flavour && Boolean(image)) {
+    return json({ message: 'Image already set' })
+  }
 
   if (!userName) {
     console.error('userName is required')

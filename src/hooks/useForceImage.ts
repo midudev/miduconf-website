@@ -10,14 +10,14 @@ export const useForceImage = ({ image }) => {
     if (!user) return
     if (Boolean(image) === true && !wrongImage) return
 
-    const forceImage = async () => {
-      await supabase
-      .from('ticket')
-      .update({ image: '' })
-      .match({ user_id: user.id })
-    }
+    // const forceImage = async () => {
+    //   await supabase
+    //   .from('ticket')
+    //   .update({ image: '' })
+    //   .match({ user_id: user.id })
+    // }
     
-    forceImage()
+    // forceImage()
 
   }, [])
 }
