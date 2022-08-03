@@ -1,5 +1,5 @@
 import type { FunctionalComponent } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { useState, useEffect } from 'preact/hooks'
 import { supabase, extractInfoFrom } from '../lib/supabase'
 import { useUser } from 'src/hooks/useUser'
 
@@ -26,6 +26,13 @@ const Button: FunctionalComponent<{onClick: () => void}> = ({ onClick, children 
 }
 
 export function LogoutButton() {
+	const user = useUser()
+	const [hidden, setHidden] = useState(true)
+
+	useEffect(() => {
+		if (user) setHidden(false)
+	}, [])
+
   const logout = async () => {
 		const { error } = await supabase.auth.signOut()
     window.location.href = '/'
@@ -34,7 +41,7 @@ export function LogoutButton() {
 	}
 
   return (
-    <button class="absolute top-4 right-4" onClick={logout}>
+    <button id="logout-button" class={`absolute top-4 right-4 ${hidden ? 'hidden' : ''}`} onClick={logout}>
       {logoutIcon}
     </button>
   )
