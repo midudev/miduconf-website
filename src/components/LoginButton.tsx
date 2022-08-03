@@ -8,7 +8,7 @@ const ticketIcon = (
 )
 
 const logoutIcon = (
-	<svg class="w-8 h-8" viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+	<svg class="w-10 h-10" viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
 )
 
 const Button: FunctionalComponent<{onClick: () => void}> = ({ onClick, children }) => {
@@ -31,7 +31,7 @@ export function LogoutButton() {
 
 	useEffect(() => {
 		if (user) setHidden(false)
-	}, [])
+	}, [user])
 
   const logout = async () => {
 		const { error } = await supabase.auth.signOut()
@@ -41,21 +41,23 @@ export function LogoutButton() {
 	}
 
   return (
-    <button id="logout-button" class={`absolute top-4 right-4 ${hidden ? 'hidden' : ''}`} onClick={logout}>
-      {logoutIcon}
-    </button>
+		<div class='absolute top-4 right-4'>
+			<button id="logout-button" class={`${hidden ? 'hidden' : ''}`} onClick={logout}>
+				{logoutIcon}
+			</button>
+		</div>
   )
 }
 
-export function LoginButton() {
+export function LoginButton({ redirect }) {
 	const user = useUser()
 
 	useEffect(() => {
 		const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-			if (event !== 'SIGNED_IN') return
-
-			const newUser = extractInfoFrom(session?.user)
-      window.location.href = `/ticket?username=${newUser.userName}`
+			if (redirect) {
+				const newUser = extractInfoFrom(session?.user)
+				window.location.href = `/ticket?username=${newUser.userName}`
+			}
 		})
 
 		return () => listener?.unsubscribe()
