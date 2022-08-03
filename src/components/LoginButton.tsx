@@ -79,7 +79,7 @@ export function LoginButton({ redirect }) {
 	if (user !== null) {
 		return (
       <Button onClick={() => {
-        window.location.href = `/ticket?username=${user.userName}`
+        window.location.href = `/ticket/${user.userName}`
       }}>
         {ticketIcon}
         ¡Ver mi ticket!
