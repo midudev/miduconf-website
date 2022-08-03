@@ -1,17 +1,18 @@
 module.exports = {
   printWidth: 100,
-  semi: true,
+  semi: false,
   singleQuote: true,
-  jsxSingleQuote: false,
+  jsxSingleQuote: true,
   tabWidth: 2,
-  trailingComma: 'es5',
+  trailingComma: 'none',
   useTabs: true,
   overrides: [
     {
       files: ['.*', '*.json', '*.md', '*.toml', '*.yml'],
       options: {
-        useTabs: false,
-      },
-    },
+        useTabs: false
+      }
+    }
   ],
-};
+  endOfLine: 'lf'
+}
