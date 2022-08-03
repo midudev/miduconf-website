@@ -5,7 +5,7 @@ const isLocal = process.env.NETLIFY_LOCAL === 'true';
 const supabaseUrl = process.env.PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.PUBLIC_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const LOCAL_CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const LOCAL_URL = 'http://localhost:3000/ticket?static=true&username=';
