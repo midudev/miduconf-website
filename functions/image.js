@@ -23,18 +23,8 @@ const returnImage = (buffer) => ({
 
 exports.handler = async function (event) {
 	const {
-		queryStringParameters: { username, skipCache },
+		queryStringParameters: { username },
 	} = event;
-
-	// check if image is already available in supabase to return it
-	if (!skipCache) {
-		const res = await fetch(
-			`${process.env.URL}/.netlify/functions/image-from-storage?username=${username}`
-		);
-		if (res.ok) {
-			returnImage(res.arrayBuffer());
-		}
-	}
 
 	// if not available, create the image
 	const { executablePath, url } = await getConfig();
