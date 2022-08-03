@@ -1,6 +1,11 @@
 const chromium = require('chrome-aws-lambda');
+const { createClient } = require('@supabase/supabase-js');
 
 const isLocal = process.env.NETLIFY_LOCAL === 'true';
+const supabaseUrl = process.env.PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.PUBLIC_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 const LOCAL_CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const LOCAL_URL = 'http://localhost:3000/ticket?static=true&username=';
@@ -12,10 +17,34 @@ const getConfig = async () => {
 	return { executablePath, url };
 };
 
+const returnImage = (buffer) => ({
+	headers: {
+		'Content-Type': 'image/png',
+	},
+	statusCode: 200,
+	body: buffer.toString('base64'),
+	isBase64Encoded: true,
+});
+
 exports.handler = async function (event) {
 	const {
-		queryStringParameters: { username },
+		queryStringParameters: { username, skipCache },
 	} = event;
+
+	// check if image is already available in supabase to return it
+	if (!skipCache) {
+		const { error, data } = await supabase.from('ticket').select('image').eq('user_name', username);
+
+		const [{ image }] = data ?? [];
+
+		if (!error && image) {
+			const res = await fetch(image);
+			const blob = await res.arrayBuffer();
+			return returnImage(Buffer.from(blob));
+		}
+	}
+
+	// if not available, create the image
 	const { executablePath, url } = await getConfig();
 
 	const browser = await chromium.puppeteer.launch({
@@ -41,12 +70,5 @@ exports.handler = async function (event) {
 
 	await browser.close();
 
-	return {
-		headers: {
-			'Content-Type': 'image/png',
-		},
-		statusCode: 200,
-		body: screenshot.toString('base64'),
-		isBase64Encoded: true,
-	};
+	return returnImage(screenshot);
 };
