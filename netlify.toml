@@ -1,7 +1,9 @@
 [functions]
   directory = "functions"
-  external_node_modules = ["chrome-aws-lambda"]
   node_bundler = "esbuild"
 
 [dev]
   functionsPort = 1234
+
+[functions.image]
+  external_node_modules = ["chrome-aws-lambda"]
