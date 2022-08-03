@@ -15,6 +15,7 @@ import Bun from '@components/logos/Bun.astro';
 import Vite from '@components/logos/Vite.astro';
 import VSCode from '@components/logos/VSCode.astro';
 import GitHub from '@components/logos/GitHub.astro';
+import Node from '@components/logos/Node.astro';
 
 import {supabase} from '../../lib/supabase.js'
 import ClientSideEffects from '@components/ClientSideEffects';
@@ -62,6 +63,9 @@ const techs = [{
   tech: 'angular',
   Icon: Angular
 }, {
+  tech: 'node',
+  Icon: Node,
+},{
   tech: 'bun',
   Icon: Bun
 }, {
@@ -86,9 +90,8 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
   }
 </style>
 
-<wc-toast></wc-toast>
-
 <Layout image={ogImage}>
+  <wc-toast></wc-toast>
   <YellowBackground>
     <ClientSideEffects image={image} userName={userName} client:visible />
     <LogoutButton client:visible />
@@ -97,7 +100,7 @@ const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
 
       <div class="grid xl:grid-cols-[minmax(900px,_1fr)_250px] m-auto max-w-7xl">
         <div class="flex flex-col items-center justify-center">
-          <div class="atropos p-8 w-[280px] m-auto sm:w-[480px] md:w-[800px] md:aspect-[1.91:1]">
+          <div class="atropos p-8 w-full m-auto sm:w-[480px] md:w-[800px] md:aspect-[1.91:1]">
 
             <div class="atropos-scale">
               <div class="atropos-rotate">
@@ -290,6 +293,11 @@ Conferencia de Desarrollo y Programación Web.
       borderColor: 'rgba(111, 111, 111, 1)',
       backgroundColor: 'rgba(255, 245, 58, 0.8)',
       textColor: '#111'
+    },
+    node: {
+      borderColor: '#00ff50',
+      backgroundColor: '#21573238',
+      textColor: '#83CD29'
     }
   }
 
