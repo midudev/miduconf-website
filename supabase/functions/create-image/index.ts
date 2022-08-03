@@ -22,7 +22,7 @@ serve(async (req) => {
     return json({ message: 'Error querying database' }, { status: 400 })
   }
 
-  const res = await fetch('https://miduconf.com/.netlify/functions/image?username=midudev&skipCache=true')
+  const res = await fetch(`https://miduconf.com/.netlify/functions/image?username=${userName}`)
 
   if (!res.ok) {
     console.error('Error generating image')
