@@ -6,21 +6,28 @@ import Button from '@components/Button.astro'
 import { UserTicketInfo } from '@components/UserTicketInfo'
 import { LoginButton, LogoutButton } from '@components/LoginButton'
 import { UserTicketNumber } from '@components/UserTicketNumber'
-import React from '@components/logos/React.astro'
-import JavaScript from '@components/logos/JavaScript.astro'
+import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
+
 import Angular from '@components/logos/Angular.astro'
-import Svelte from '@components/logos/Svelte.astro'
-import Vue from '@components/logos/Vue.astro'
 import Bun from '@components/logos/Bun.astro'
+import Css3 from '@components/logos/Css3.astro'
+import GitHub from '@components/logos/GitHub.astro'
+import Html5 from '@components/logos/Html5.astro'
+import JavaScript from '@components/logos/JavaScript.astro'
+import Nextjs from '@components/logos/Nextjs.astro'
+import Node from '@components/logos/Node.astro'
+import React from '@components/logos/React.astro'
+import Svelte from '@components/logos/Svelte.astro'
+import TypeScript from '@components/logos/TypeScript.astro'
 import Vite from '@components/logos/Vite.astro'
 import VSCode from '@components/logos/VSCode.astro'
-import GitHub from '@components/logos/GitHub.astro'
+import Vue from '@components/logos/Vue.astro'
 
-import { supabase } from '../lib/supabase.js'
+import { supabase } from '../../lib/supabase.js'
 import ClientSideEffects from '@components/ClientSideEffects'
 
 // use supabase to get the ticket
-const username = Astro.url.searchParams.get('username')
+const { username } = Astro.params
 const animate = Astro.url.searchParams.get('static') === null
 
 const { error, data } = await supabase
@@ -36,6 +43,7 @@ if (error) {
 const [ticketData] = data
 
 const {
+	image,
 	user_name: userName,
 	ticket_number: ticketNumber,
 	user_fullname: userFullName
@@ -43,15 +51,20 @@ const {
 
 const flavour = ticketData?.flavour || 'javascript'
 
-const originEndpoint = import.meta.env.PROD
-	? Astro.url.origin
-	: 'http://localhost:1234'
-
-const ogImage = `${originEndpoint}/.netlify/functions/image?username=${userName}`
+const ogImage = `https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets/ticket_${userName}.png?v=${Date.now()}`
 
 const techs = [{
 	tech: 'javascript',
 	Icon: JavaScript
+}, {
+	tech: 'typescript',
+	Icon: TypeScript
+}, {
+	tech: 'html5',
+	Icon: Html5
+}, {
+	tech: 'css3',
+	Icon: Css3
 }, {
 	tech: 'react',
 	Icon: React
@@ -65,6 +78,12 @@ const techs = [{
 	tech: 'angular',
 	Icon: Angular
 }, {
+	tech: 'node',
+	Icon: Node
+}, {
+	tech: 'github',
+	Icon: GitHub
+}, {
 	tech: 'bun',
 	Icon: Bun
 }, {
@@ -74,8 +93,8 @@ const techs = [{
 	tech: 'vscode',
 	Icon: VSCode
 }, {
-	tech: 'github',
-	Icon: GitHub
+	tech: 'nextjs',
+	Icon: Nextjs
 }]
 
 const FlavourIcon = techs.find(({ tech }) => tech === flavour)?.Icon ?? JavaScript
@@ -89,18 +108,20 @@ const FlavourIcon = techs.find(({ tech }) => tech === flavour)?.Icon ?? JavaScri
 	}
 </style>
 
-<wc-toast></wc-toast>
+
 
 <Layout image={ogImage}>
+	<wc-toast></wc-toast>
 	<YellowBackground>
-		<ClientSideEffects userName={userName} client:visible />
+		<CalendarScriptAndStyles />
+		<ClientSideEffects image={image} userName={userName} client:visible />
 		<LogoutButton client:visible />
 		<div class="grid place-content-center min-h-[110vh] pt-10 pb-20">
 			<Technologies />
 
 			<div class="grid xl:grid-cols-[minmax(900px,_1fr)_250px] m-auto max-w-7xl">
 				<div class="flex flex-col items-center justify-center">
-					<div class="atropos p-8 w-[280px] m-auto sm:w-[480px] md:w-[800px] md:aspect-[1.91:1]">
+					<div class="atropos p-8 w-full m-auto sm:w-[480px] md:w-[800px] md:aspect-[1.91:1]">
 
 						<div class="atropos-scale">
 							<div class="atropos-rotate">
@@ -162,7 +183,7 @@ const FlavourIcon = techs.find(({ tech }) => tech === flavour)?.Icon ?? JavaScri
 					<div class="flex justify-center w-full py-10">
 						<div class="flex flex-col items-center justify-center gap-4 md:flex-row w-72 sm:w-80 md:flex md:w-full">
 							<Button id="share-twitter" openInNewWindow flavour="twitter" text="Compartir en Twitter" />
-							<Button flavour="calendar" text="Añadir al Calendario" />
+							<Button id="add-to-calendar" flavour="calendar" text="Añadir al Calendario" />
 							<Button id="copy-link" flavour="link" text="Copiar enlace" />
 						</div>
 					</div>
@@ -170,16 +191,16 @@ const FlavourIcon = techs.find(({ tech }) => tech === flavour)?.Icon ?? JavaScri
 
 				<div id="get-your-ticket" class="relative flex flex-col justify-center hidden h-auto">
 					<div>
-						<LoginButton client:visible />
+						<LoginButton redirect={false} client:visible />
 					</div>
 				</div>
 
-				<div id="select-flavour" class="relative flex flex-col justify-center hidden h-auto">
+				<div id="select-flavour" class="relative flex flex-col justify-center hidden h-auto p-8 lg:p-0">
 					<div
 						class="relative w-full grid-cols-2 p-2 text-lg font-bold text-center text-gray-900 no-underline whitespace-no-wrap align-middle bg-white border-2 border-gray-900 border-solid rounded-md shadow-xs select-none hover:shadow-xs focus:shadow-xs">
 						<div class="-z-10 w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0"></div>
 						<h3 class="text-lg text-center">Elige tu sabor de ticket</h3>
-						<ul id="select" class="flex flex-col flex-wrap items-center justify-center sm:flex-row">
+						<ul id="select" class="flex flex-wrap items-center justify-center">
 
 							{techs.map(({ tech, Icon }) => {
 								return (
@@ -396,6 +417,31 @@ copyLink.addEventListener('click', () => {
 			borderColor: 'rgba(111, 111, 111, 1)',
 			backgroundColor: 'rgba(255, 245, 58, 0.8)',
 			textColor: '#111'
+		},
+		node: {
+			borderColor: '#00ff50',
+			backgroundColor: '#21573238',
+			textColor: '#83CD29'
+		},
+		nextjs: {
+			borderColor: '#000',
+			backgroundColor: 'rgba(255, 255, 255, .8)',
+			textColor: '#000'
+		},
+		typescript: {
+			borderColor: '#007acc',
+			backgroundColor: 'rgb(0 150 255 / 43%)',
+			textColor: '#007acc'
+		},
+		html5: {
+			borderColor: '#f1652a',
+			backgroundColor: 'rgb(230 97 41 / 14%)',
+			textColor: '#f1652a'
+		},
+		css3: {
+			borderColor: '#1172b6',
+			backgroundColor: 'rgb(51 169 220 / 22%)',
+			textColor: '#1172b6'
 		}
 	}
 

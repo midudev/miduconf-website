@@ -22,3 +22,5 @@ package-lock.json
 
 # pnpm
 pnpm-lock.yaml
+# Local Netlify folder
+.netlify

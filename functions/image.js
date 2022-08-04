@@ -3,19 +3,30 @@ const chromium = require('chrome-aws-lambda')
 const isLocal = process.env.NETLIFY_LOCAL === 'true'
 
 const LOCAL_CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-const LOCAL_URL = 'http://localhost:3000/ticket?static=true&username='
+const LOCAL_URL = 'http://localhost:3000/ticket/'
 
 const getConfig = async () => {
 	const executablePath = isLocal ? LOCAL_CHROME_PATH : await chromium.executablePath
-	const url = isLocal ? LOCAL_URL : 'https://miduconf.com/ticket?static=true&username='
+	const url = isLocal ? LOCAL_URL : 'https://miduconf.com/ticket/'
 
 	return { executablePath, url }
 }
+
+const returnImage = (buffer) => ({
+	headers: {
+		'Content-Type': 'image/png'
+	},
+	statusCode: 200,
+	body: buffer.toString('base64'),
+	isBase64Encoded: true
+})
 
 exports.handler = async function (event) {
 	const {
 		queryStringParameters: { username }
 	} = event
+
+	// if not available, create the image
 	const { executablePath, url } = await getConfig()
 
 	const browser = await chromium.puppeteer.launch({
@@ -33,7 +44,7 @@ exports.handler = async function (event) {
 		deviceScaleFactor: 2
 	})
 
-	await page.goto(`${url}${username}`)
+	await page.goto(`${url}${username}?static=true`)
 
 	const el = await page.$('.atropos')
 
@@ -41,12 +52,5 @@ exports.handler = async function (event) {
 
 	await browser.close()
 
-	return {
-		headers: {
-			'Content-Type': 'image/png'
-		},
-		statusCode: 200,
-		body: screenshot.toString('base64'),
-		isBase64Encoded: true
-	}
+	return returnImage(screenshot)
 }
