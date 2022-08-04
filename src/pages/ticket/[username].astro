@@ -15,7 +15,9 @@ import Svelte from '@components/logos/Svelte.astro';
 import Vue from '@components/logos/Vue.astro';
 import Bun from '@components/logos/Bun.astro';
 import Vite from '@components/logos/Vite.astro';
+import Nextjs from '@components/logos/Nextjs.astro';
 import VSCode from '@components/logos/VSCode.astro';
+import TypeScript from '@components/logos/TypeScript.astro';
 import GitHub from '@components/logos/GitHub.astro';
 import Node from '@components/logos/Node.astro';
 
@@ -53,6 +55,9 @@ const techs = [{
   tech: 'javascript',
   Icon: JavaScript
 }, {
+  tech: 'typescript',
+  Icon: TypeScript
+}, {
   tech: 'react',
   Icon: React
 }, {
@@ -67,7 +72,10 @@ const techs = [{
 }, {
   tech: 'node',
   Icon: Node,
-},{
+}, {
+  tech: 'github',
+  Icon: GitHub
+}, {
   tech: 'bun',
   Icon: Bun
 }, {
@@ -77,8 +85,8 @@ const techs = [{
   tech: 'vscode',
   Icon: VSCode
 }, {
-  tech: 'github',
-  Icon: GitHub
+  tech: 'nextjs',
+  Icon: Nextjs
 }]
 
 const FlavourIcon = techs.find(({tech}) => tech === flavour)?.Icon ?? JavaScript
@@ -303,6 +311,16 @@ Conferencia de Desarrollo y Programación Web.
       borderColor: '#00ff50',
       backgroundColor: '#21573238',
       textColor: '#83CD29'
+    },
+    nextjs: {
+      borderColor: '#000',
+      backgroundColor: 'rgba(255, 255, 255, .8)',
+      textColor: '#000'
+    },
+    typescript: {
+      borderColor: '#007acc',
+      backgroundColor: 'rgb(0 150 255 / 43%)',
+      textColor: '#007acc'
     }
   }
 
