@@ -7,7 +7,7 @@ export const useUser = () => {
 	const [user] = useState<User>(() => {
 		const rawUser = supabase.auth.user()
 
-    if (rawUser !== null) return extractInfoFrom(rawUser)
+		if (rawUser !== null) return extractInfoFrom(rawUser)
 		return null
 	})
 

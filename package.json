@@ -13,7 +13,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier -w .",
-    "lint:eslint": "eslint . --ext .js,.astro"
+    "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx",
+    "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx --fix"
   },
   "devDependencies": {
     "@astrojs/preact": "0.5.2",
@@ -21,7 +22,11 @@
     "@typescript-eslint/parser": "5.32.0",
     "astro": "1.0.0-rc.4",
     "eslint": "8.21.0",
+    "eslint-config-standard": "17.0.0",
     "eslint-plugin-astro": "0.16.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.4",
+    "eslint-plugin-promise": "6.0.0",
     "prettier": "2.7.1",
     "prettier-plugin-astro": "0.2.0",
     "tailwindcss": "3.1.7"

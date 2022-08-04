@@ -1,4 +1,4 @@
-import { queryGraphQL } from '../utils/graphql';
+import { queryGraphQL } from '../utils/graphql'
 
 export const getAllSpeakers = async () => {
 	const query = `{
@@ -10,9 +10,9 @@ export const getAllSpeakers = async () => {
         url
       }
     }
-  }`;
+  }`
 
-	const { data } = await queryGraphQL({ query });
-	const { speakers } = data;
-	return speakers;
-};
+	const { data } = await queryGraphQL({ query })
+	const { speakers } = data
+	return speakers
+}
