@@ -8,18 +8,20 @@ import {LoginButton, LogoutButton} from '@components/LoginButton';
 import {UserTicketNumber} from '@components/UserTicketNumber';
 import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro';
 
-import React from '@components/logos/React.astro';
-import JavaScript from '@components/logos/JavaScript.astro';
 import Angular from '@components/logos/Angular.astro';
-import Svelte from '@components/logos/Svelte.astro';
-import Vue from '@components/logos/Vue.astro';
 import Bun from '@components/logos/Bun.astro';
-import Vite from '@components/logos/Vite.astro';
-import Nextjs from '@components/logos/Nextjs.astro';
-import VSCode from '@components/logos/VSCode.astro';
-import TypeScript from '@components/logos/TypeScript.astro';
+import Css3 from '@components/logos/Css3.astro';
 import GitHub from '@components/logos/GitHub.astro';
+import Html5 from '@components/logos/Html5.astro'
+import JavaScript from '@components/logos/JavaScript.astro';
+import Nextjs from '@components/logos/Nextjs.astro';
 import Node from '@components/logos/Node.astro';
+import React from '@components/logos/React.astro';
+import Svelte from '@components/logos/Svelte.astro';
+import TypeScript from '@components/logos/TypeScript.astro';
+import Vite from '@components/logos/Vite.astro';
+import VSCode from '@components/logos/VSCode.astro';
+import Vue from '@components/logos/Vue.astro';
 
 import {supabase} from '../../lib/supabase.js'
 import ClientSideEffects from '@components/ClientSideEffects';
@@ -57,6 +59,12 @@ const techs = [{
 }, {
   tech: 'typescript',
   Icon: TypeScript
+}, {
+  tech: 'html5',
+  Icon: Html5
+}, {
+  tech: 'css3',
+  Icon: Css3
 }, {
   tech: 'react',
   Icon: React
@@ -321,6 +329,16 @@ Conferencia de Desarrollo y Programación Web.
       borderColor: '#007acc',
       backgroundColor: 'rgb(0 150 255 / 43%)',
       textColor: '#007acc'
+    },
+    html5: {
+      borderColor: '#f1652a',
+      backgroundColor: 'rgb(230 97 41 / 14%)',
+      textColor: '#f1652a'
+    },
+    css3: {
+      borderColor: '#1172b6',
+      backgroundColor: 'rgb(51 169 220 / 22%)',
+      textColor: '#1172b6'
     }
   }
 
