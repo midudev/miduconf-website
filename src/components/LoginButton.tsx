@@ -73,7 +73,7 @@ export function LoginButton ({ redirect }) {
 		const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
 			if (redirect) {
 				const newUser = extractInfoFrom(session?.user)
-				window.location.href = `/ticket?username=${newUser.userName}`
+				window.location.href = `/ticket/${newUser.userName}`
 			}
 		})
 
