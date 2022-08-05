@@ -14,7 +14,7 @@ const colors = {
 	twitter: 'text-white bg-[#00acee] border-black/60 hover:bg-[#0685c5] hover:text-gray-50'
 }
 
-const classesForButton = colors[flavour] ?? colors['default']
+const classesForButton = colors[flavour] ?? colors.default
 ---
 
 
@@ -27,10 +27,10 @@ const classesForButton = colors[flavour] ?? colors['default']
 		href={href}
 		rel={rel}
 		target={target}
-		>
-			{flavour === 'twitter' &&  <><TwitterIcon /></>}
-			{flavour === 'link' && <><LinkIcon /></>}
-			{flavour === 'calendar' && <><CalendarIcon /></>}
+	>
+		{flavour === 'twitter' && <><TwitterIcon /></>}
+		{flavour === 'link' && <><LinkIcon /></>}
+		{flavour === 'calendar' && <><CalendarIcon /></>}
 		{text}
 	</a>
 </div>

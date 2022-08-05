@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  .button-ticket {
-    @apply flex items-center w-24 h-24 p-4 rounded-lg hover:scale-110 hover:opacity-100 hover:contrast-100 transition-all opacity-60 contrast-75
-  }
+	.button-ticket {
+		@apply flex items-center w-24 h-24 p-4 rounded-lg hover:scale-110 hover:opacity-100 hover:contrast-100 transition-all opacity-60 contrast-75;
+	}
 
-  .flavour-selected {
-    @apply pointer-events-none opacity-100 contrast-100 drop-shadow-4xl
-  }
+	.flavour-selected {
+		@apply pointer-events-none opacity-100 contrast-100 drop-shadow-4xl;
+	}
 }

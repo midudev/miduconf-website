@@ -24,7 +24,7 @@ import { TicketsSold } from '@components/TicketsSold';
 					<span class="text-lg">17H - Europa/Madrid</span>
 				</p>
 				<a href='https://twitch.tv/midudev' rel='noopener'
-				target='_blank' class='flex flex-col items-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700'>
+					target='_blank' class='flex flex-col items-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700'>
 					<svg class='block w-20 h-24 pr-2 text-purple-600' viewBox='0 0 24 24'>
 						<path fill='currentColor'
 							d='M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z'>
@@ -32,7 +32,7 @@ import { TicketsSold } from '@components/TicketsSold';
 					</svg>
 					<span class='pl-2 text-2xl font-bold tracking-wider text-transparent underline bg-clip-text bg-gradient-to-r from-purple-600 to-purple-900'>twitch.tv<br />/midudev</span>
 				</a>
-				
+
 			</div>
 
 			<div class='pt-5 space-y-4 leading-6 text-center xl:pt-20 xl:space-y-5'>
@@ -49,7 +49,7 @@ import { TicketsSold } from '@components/TicketsSold';
 	const timestamp = 1663081200000
 	const date = new Date(timestamp)
 
-	const {timeZone} = Intl.DateTimeFormat().resolvedOptions()
+	const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
 
 	console.log(date, timeZone)
 </script>

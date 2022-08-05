@@ -15,7 +15,7 @@
 			>
 			</path>
 		</svg>
-		
+
 		<svg viewBox='0 0 24 24'>
 			<path
 				d='M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L2.203 12.424l-.401.562a1.04 1.04 0 0 0 .836 1.659H12v8.959a.396.396 0 0 0 .716.233l9.081-12.261.401-.562a1.04 1.04 0 0 0-.836-1.66z'
@@ -112,37 +112,37 @@
 	</div>
 </div>
 <script type='module'>
-	const hero = document.getElementById('icons');
-	const svgs = Array.from(hero.querySelectorAll('svg'));
+const hero = document.getElementById('icons')
+const svgs = Array.from(hero.querySelectorAll('svg'))
 
-	const w = window.innerWidth;
-	const h = window.innerHeight - 300;
+const w = window.innerWidth
+const h = window.innerHeight - 300
 
-	function animateBackgroundIcons() {
-		const availableSvgs = svgs.filter((svg) => !svg.isAnimating);
-		const svgToAnimate = availableSvgs[Math.floor(Math.random() * availableSvgs.length)];
-		if (!svgToAnimate) return;
+function animateBackgroundIcons () {
+	const availableSvgs = svgs.filter((svg) => !svg.isAnimating)
+	const svgToAnimate = availableSvgs[Math.floor(Math.random() * availableSvgs.length)]
+	if (!svgToAnimate) return
 
-		svgToAnimate.addEventListener(
-			'animationend',
-			() => {
-				svgToAnimate.classList.remove('animate-moving-background');
-				svgToAnimate.removeAttribute('style');
-				svgToAnimate.isAnimating = false;
-			},
-			{ once: true }
-		);
+	svgToAnimate.addEventListener(
+		'animationend',
+		() => {
+			svgToAnimate.classList.remove('animate-moving-background')
+			svgToAnimate.removeAttribute('style')
+			svgToAnimate.isAnimating = false
+		},
+		{ once: true }
+	)
 
-		svgToAnimate.setAttribute(
-			'style',
-			`top: ${Math.floor(Math.random() * h)}px;
+	svgToAnimate.setAttribute(
+		'style',
+		`top: ${Math.floor(Math.random() * h)}px;
 				left: ${Math.floor(Math.random() * w)}px;`
-		);
+	)
 
-		svgToAnimate.classList.add('animate-moving-background');
-		svgToAnimate.isAnimating = true;
-	}
+	svgToAnimate.classList.add('animate-moving-background')
+	svgToAnimate.isAnimating = true
+}
 
-	setInterval(animateBackgroundIcons, 1000);
-	animateBackgroundIcons();
+setInterval(animateBackgroundIcons, 1000)
+animateBackgroundIcons()
 </script>
