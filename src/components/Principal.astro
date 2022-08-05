@@ -1,5 +1,6 @@
 ---
 import { LoginButton } from '@components/LoginButton';
+import { TicketsSold } from '@components/TicketsSold'; 
 ---
 
 <div class='block px-6 mx-auto max-w-7xl'>
@@ -35,7 +36,10 @@ import { LoginButton } from '@components/LoginButton';
 			</div>
 
 			<div class='pt-5 space-y-4 leading-6 text-center xl:pt-20 xl:space-y-5'>
-				<LoginButton redirect={true} client:visible />
+				<TicketsSold client:visible />
+				<div>
+					<LoginButton redirect={true} client:visible />
+				</div>
 			</div>
 		</div>
 	</div>
