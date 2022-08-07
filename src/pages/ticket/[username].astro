@@ -95,7 +95,7 @@ const techs = [{
 }, {
 	tech: 'nextjs',
 	Icon: Nextjs
-}]
+}].sort((a, b) => a.tech.toLowerCase().localeCompare(b.tech.toLowerCase()))
 
 const FlavourIcon = techs.find(({ tech }) => tech === flavour)?.Icon ?? JavaScript
 ---
