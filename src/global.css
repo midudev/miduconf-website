@@ -10,4 +10,12 @@
 	.flavour-selected {
 		@apply pointer-events-none opacity-100 contrast-100 drop-shadow-4xl;
 	}
+
+	.ticket-only {
+		@apply grid xl:grid-cols-[minmax(900px,_1fr)_0px] max-w-7xl gap-4;
+	}
+	
+	.ticket-with-flavours {
+		@apply grid xl:grid-cols-[minmax(900px,_1fr)_250px] max-w-7xl gap-4;
+	}
 }

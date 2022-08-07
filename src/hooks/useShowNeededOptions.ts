@@ -8,8 +8,10 @@ export const useShowNeededOptions = ({ userName }) => {
 		const isYourTicket = user?.userName === userName
 
 		if (isYourTicket) {
-			document.querySelector('#select-flavour')?.classList.remove('hidden')
-			return
+			document.querySelector('#ticket-grid')?.classList.remove('ticket-only')
+			document.querySelector('#ticket-grid')?.classList.add('ticket-with-flavours')
+
+			return document.querySelector('#select-flavour')?.classList.remove('hidden')
 		}
 
 		document.querySelector('#get-your-ticket')?.classList.remove('hidden')
