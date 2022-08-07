@@ -1,7 +1,7 @@
 import { useEffect } from 'preact/hooks'
 import { useUser } from './useUser.js'
 
-const unhideElement = (selector) => {
+const unhideElement = (selector: string) => {
 	const el = document.querySelector(selector) as HTMLElement | null
 	if (el) {
 		el.style.display = 'flex'
@@ -16,11 +16,7 @@ export const useShowNeededOptions = ({ userName }) => {
 		const isYourTicket = user?.userName === userName
 
 		if (isYourTicket) {
-			document.querySelector('#ticket-grid')?.classList.remove('ticket-only')
-			document.querySelector('#ticket-grid')?.classList.add('ticket-with-flavours')
-
-			unhideElement('#select-flavour')
-			return
+			return unhideElement('#select-flavour')
 		}
 
 		unhideElement('#get-your-ticket')
