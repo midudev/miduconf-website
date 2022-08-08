@@ -1,0 +1,79 @@
+---
+import Angular from '@components/logos/Angular.astro'
+import Bun from '@components/logos/Bun.astro'
+import Css3 from '@components/logos/Css3.astro'
+import GitHub from '@components/logos/GitHub.astro'
+import Html5 from '@components/logos/Html5.astro'
+import JavaScript from '@components/logos/JavaScript.astro'
+import Nextjs from '@components/logos/Nextjs.astro'
+import Node from '@components/logos/Node.astro'
+import React from '@components/logos/React.astro'
+import Svelte from '@components/logos/Svelte.astro'
+import TypeScript from '@components/logos/TypeScript.astro'
+import Vite from '@components/logos/Vite.astro'
+import VSCode from '@components/logos/VSCode.astro'
+import Vue from '@components/logos/Vue.astro'
+
+//
+export const techs = [
+	{
+		tech: 'javascript',
+		Icon: JavaScript
+	},
+	{
+		tech: 'typescript',
+		Icon: TypeScript
+	},
+	{
+		tech: 'html5',
+		Icon: Html5
+	},
+	{
+		tech: 'css3',
+		Icon: Css3
+	},
+	{
+		tech: 'react',
+		Icon: React
+	},
+	{
+		tech: 'vue',
+		Icon: Vue
+	},
+	{
+		tech: 'svelte',
+		Icon: Svelte
+	},
+	{
+		tech: 'angular',
+		Icon: Angular
+	},
+	{
+		tech: 'node',
+		Icon: Node
+	},
+	{
+		tech: 'github',
+		Icon: GitHub
+	},
+	{
+		tech: 'bun',
+		Icon: Bun
+	},
+	{
+		tech: 'vite',
+		Icon: Vite
+	},
+	{
+		tech: 'vscode',
+		Icon: VSCode
+	},
+	{
+		tech: 'nextjs',
+		Icon: Nextjs
+	}
+].sort((a, b) => a.tech.toLowerCase().localeCompare(b.tech.toLowerCase()))
+
+export const defaultTechId = 'javascript'
+export const DefaultTechIcon = JavaScript
+---
