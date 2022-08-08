@@ -1,5 +1,5 @@
 ---
-import { sortedTechs, defaultTechId } from '@components/FlavourTechs.astro'
+import { techs, defaultTechId } from '@components/FlavourTechs.astro'
 import { getTicketDataByUsername } from 'src/services/get-ticket'
 
 const { username } = Astro.params
@@ -13,7 +13,7 @@ const flavour = ticketData?.flavour || defaultTechId
 		<div class="-z-10 w-full h-full bg-gray-900 ml-0.5 mt-0.5 rounded-lg absolute left-0 top-0"></div>
 		<h3 class="text-lg text-center">Elige el sabor de tu ticket</h3>
 		<ul id="select" class="flex flex-wrap items-center justify-center overflow-y-auto overflow-x-hidden max-h-[75vh] pb-2">
-			{sortedTechs.map(({ tech, Icon }) => {
+			{techs.map(({ tech, Icon }) => {
 				return (
 					<li class='flex items-center justify-center'>
 						<button data-tech={tech} class={`button-ticket ${flavour === tech ? 'flavour-selected' : ''}`}>
