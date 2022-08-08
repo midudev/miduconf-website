@@ -1,0 +1,43 @@
+---
+import Button from '@components/Button.astro'
+---
+
+<div class="flex justify-center w-full">
+	<div class="flex flex-col items-center justify-center gap-4 md:flex-row w-72 sm:w-80 md:flex md:w-full">
+		<Button id="share-twitter" openInNewWindow flavour="twitter" text="Compartir en Twitter" />
+		<Button id="add-to-calendar" flavour="calendar" text="Añadir al Calendario" />
+		<Button id="copy-link" flavour="link" text="Copiar enlace" />
+	</div>
+</div>
+
+<script type="module">
+import { toast } from 'https://cdn.skypack.dev/wc-toast'
+
+const shareTwitter = document.querySelector('#share-twitter')
+
+const messageTwitter = `¡Ya tengo mi ticket 🎟 para la #MiduConf!
+
+Conferencia de Desarrollo y Programación Web.
+¡Totalmente GRATIS! ¡Consigue el tuyo!
+
+⬇️`
+
+const urlTwitter = new URL('https://twitter.com/intent/tweet')
+urlTwitter.searchParams.set('text', messageTwitter)
+urlTwitter.searchParams.set('url', window.location.href)
+
+shareTwitter.setAttribute('href', urlTwitter.toString())
+
+const copyLink = document.querySelector('#copy-link')
+
+copyLink.addEventListener('click', () => {
+	navigator.clipboard.writeText(window.location.href)
+		.then(() => {
+			toast('¡Enlace copiado con éxito!', {
+				icon: {
+					type: 'success'
+				}
+			})
+		})
+})
+</script>
