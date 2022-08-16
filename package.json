@@ -17,27 +17,27 @@
     "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx --fix"
   },
   "devDependencies": {
-    "@astrojs/preact": "0.5.2",
-    "@astrojs/tailwind": "0.2.5",
-    "@typescript-eslint/parser": "5.32.0",
-    "astro": "1.0.0-rc.7",
-    "eslint": "8.21.0",
+    "@astrojs/preact": "1.0.2",
+    "@astrojs/tailwind": "1.0.0",
+    "@typescript-eslint/parser": "5.33.1",
+    "astro": "1.0.6",
+    "eslint": "8.22.0",
     "eslint-config-standard": "17.0.0",
-    "eslint-plugin-astro": "0.16.0",
+    "eslint-plugin-astro": "0.17.1",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.4",
     "eslint-plugin-promise": "6.0.0",
     "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.3.0",
+    "prettier-plugin-astro": "0.5.0",
     "tailwindcss": "3.1.8"
   },
   "dependencies": {
-    "@astrojs/netlify": "0.5.0",
-    "@netlify/functions": "1.0.0",
+    "@astrojs/netlify": "1.0.1",
+    "@netlify/functions": "1.1.0",
     "@supabase/supabase-js": "1.35.6",
     "atropos": "1.0.2",
     "chrome-aws-lambda": "10.1.0",
-    "preact": "10.10.1",
+    "preact": "10.10.3",
     "puppeteer-core": "10.4.0"
   }
 }
