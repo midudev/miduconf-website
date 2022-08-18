@@ -47,3 +47,29 @@ import MenuIcon from './icons/Menu.astro'
 		</ul>
 	</nav>
 </header>
+
+<script type="module">
+const menuCheckbox = document.getElementById('menu')
+const mediaQuery = window.matchMedia('(min-width: 1024px)') // Breakpoint lg
+
+/** @param {boolean} value */
+function hideOverFlow (value) {
+	if (value) {
+		window.scrollTo(0, 0)
+		document.body.style.overflowY = 'hidden'
+	} else {
+		document.body.style.overflowY = 'auto'
+	}
+}
+
+menuCheckbox.addEventListener('change', (e) =>
+	e.target.checked ? hideOverFlow(true) : hideOverFlow(false)
+)
+
+mediaQuery.addEventListener('change', (e) => {
+	if (e.matches) {
+		hideOverFlow(false)
+		menuCheckbox.checked = false
+	}
+})
+</script>
