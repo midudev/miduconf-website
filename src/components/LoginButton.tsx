@@ -71,9 +71,11 @@ export function LoginButton ({ redirect }) {
 
 	useEffect(() => {
 		const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-			if (redirect) {
+			if (!redirect) return
+			if (sessionStorage.getItem('redirect')) {
 				const newUser = extractInfoFrom(session?.user)
 				window.location.href = `/ticket/${newUser.userName}`
+				sessionStorage.removeItem('redirect')
 			}
 		})
 
@@ -81,6 +83,8 @@ export function LoginButton ({ redirect }) {
 	}, [])
 
 	const login = async () => {
+		sessionStorage.setItem('redirect', 'true')
+
 		const { error } = await supabase.auth.signIn(
 			{
 				provider: 'github'
