@@ -1,25 +1,26 @@
 ---
 const {
-	avatar = '/peep-67.png',
+	avatar = '#',
 	speaker = 'Muy pronto',
-	// description,
+	description = '-',
 	twitter = '#',
 	github = '#'
 } = Astro.props
 ---
 
 <div class='text-center'>
-	<div class='relative w-48 h-48 p-2 mx-auto md:w-56 md:h-56'>
+	<div class='relative w-48 h-48 p-2 mx-auto md:w-80 md:h-80'>
 		<img
-			class='border-b-black border-b-2 relative z-20 object-cover w-full h-full drop-shadow-[0_20px_53px_#fff20077]'
+			class='relative object-cover w-full h-full border-4 border-yellow-300 rounded'
 			src={avatar}
 			alt={speaker}
 		/>
 	</div>
 	<div class='space-y-2'>
+		<h3 class="text-3xl font-black text-yellow-300">{speaker}</h3>
 		<div class='space-y-1 text-lg font-medium leading-6'>
-			<h3>{speaker}</h3>
-			<p class='text-pink-500'>-</p>
+			
+			<p class='text-yellow-500 text-md'>{description}</p>
 		</div>
 		<div class='relative flex items-center justify-center space-x-3'>
 			<a href={twitter} class='text-gray-300 hover:text-gray-400'>
