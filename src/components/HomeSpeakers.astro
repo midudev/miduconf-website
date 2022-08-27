@@ -1,5 +1,48 @@
 ---
 import SpeakerCard from '@components/SpeakerCard.astro'
+
+const speakers = [
+	{
+		avatar: 'rauchg.png',
+		twitter: 'https://twitter.com/rauchg',
+		github: 'https://github.com/rauchg',
+		speaker: 'Guillermo Rauch',
+		description: 'CEO y Fundador, Vercel'
+	},
+	{
+		avatar: "obrien.png",
+		twitter: "https://twitter.com/debs_obrien",
+		github: "https://github.com/debs-obrien",
+		speaker: "Debbie O'Brien",
+		description: "Senior Program Manager, Microsoft"
+	},
+	{
+		avatar: "teffcode.png",
+		twitter: "https://twitter.com/teffcode",
+		github: "https://github.com/teffcode",
+		speaker: "Estefany Aguilar",
+		description: "Sr. Frontend Dev, LaHaus"
+	}, {
+		avatar: "delacruz.webp",
+		twitter: "https://twitter.com/danidlcdev",
+		github: "https://github.com/delacruz-dev",
+		speaker: "Dani de la Cruz",
+		description: "Team Lead en Datadog",
+	},
+	{
+		avatar: "samar.jpg",
+		twitter: "https://twitter.com/samarj_h",
+		github: "https://github.com/samarjaffal",
+		speaker: "Samar Jaffal",
+		description: "Software Engineer"
+	},
+	{
+		avatar: "irene-morgado.jpg",
+		twitter: "https://twitter.com/IrnMM",
+		speaker: "Irene M. Morgado",
+		description: "Head Talent & Brand Kairós DS"
+	}
+]
 ---
 
 <section class='w-full px-10 mx-auto lg:py-24 max-w-7xl'>
@@ -16,12 +59,9 @@ import SpeakerCard from '@components/SpeakerCard.astro'
 		<div
 			class='pb-20 mx-auto space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl'
 		>
-			<SpeakerCard avatar="rauchg.png" twitter="https://twitter.com/rauchg" github="https://github.com/rauchg" speaker="Guillermo Rauch" description="CEO y Fundador, Vercel" />
-			<SpeakerCard avatar="obrien.png" twitter="https://twitter.com/debs_obrien" github="https://github.com/debs-obrien" speaker="Debbie O'Brien" description="Senior Program Manager, Microsoft" />
-			<SpeakerCard avatar="teffcode.png" twitter="https://twitter.com/teffcode" github="https://github.com/teffcode" speaker="Estefany Aguilar" description="Sr. Frontend Dev, LaHaus" />
-			<SpeakerCard avatar="delacruz.webp" twitter="https://twitter.com/danidlcdev" github="https://github.com/delacruz-dev" speaker="Dani de la Cruz" description="Team Lead en Datadog" />
-			<SpeakerCard avatar="samar.jpg" twitter="https://twitter.com/samarj_h" github="https://github.com/samarjaffal" speaker="Samar Jaffal" description="Software Engineer" />
-			<SpeakerCard avatar="irene-morgado.jpg" twitter="https://twitter.com/IrnMM" speaker="Irene M. Morgado" description="Head Talent & Brand Kairós DS" />
+			{
+				speakers.map(speaker => <SpeakerCard {...speaker} />)	
+			}
 		</div>
 	</div>
 </section>
