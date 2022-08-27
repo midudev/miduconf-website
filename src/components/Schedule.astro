@@ -76,10 +76,11 @@ const schedule = [
 
 <section id="agenda" class='w-full max-w-5xl px-10 mx-auto lg:py-24 pb-60'>
 
-	<h2 class='py-24 text-4xl font-black text-center text-white sm:text-6xl'>
-		<span id='speakers' class='text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-500 to-blue-100'
+	<h2 class='flex flex-col py-24 text-4xl font-black text-center text-white sm:text-6xl'>
+		<span id='speakers' class='leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-500 to-blue-100'
 		>Agenda
 		</span>
+		<span class="mt-2 text-xl text-white" id="timezone"></span>
 	</h2>
 
 	<div class="border-4 border-yellow-300 rounded bg-slate-700">
@@ -89,3 +90,11 @@ const schedule = [
 	}
 </div>
 </section>
+
+<script>
+	const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
+	const diff = new Date().getTimezoneOffset() / 60 * -1
+	const gmt = diff > 0 ? `GMT+${diff}` : `GMT-${Math.abs(diff)}`
+
+	document.getElementById('timezone').innerText = `${timeZone} — ${gmt}`
+</script>
