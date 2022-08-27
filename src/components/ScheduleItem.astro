@@ -1,0 +1,42 @@
+---
+const { start, duration, title, speaker, speakerPhoto } = Astro.props
+---
+
+<article class='flex items-center justify-between border-b border-b-yellow-400'>
+
+	<div class='flex flex-col items-center px-8 font-bold gap-x-2'>
+		<h4 class="text-3xl text-yellow-300">{start}</h4>
+		<small class="text-sm italic text-yellow-100">{duration}</small>
+	</div>
+
+	<div class='flex flex-col flex-1 gap-y-1'>
+		<h2 class='pr-12 text-3xl font-bold leading-none tracking-tight text-white'>{title}</h2>
+		{
+			speaker && <h3 class='flex items-center text-lg font-semibold text-white gap-x-1'><span class="opacity-70">por</span><span class="text-xl font-bold text-rose-400">{speaker}</span></h3>
+		}
+	</div>
+
+	<div class="relative pl-2">
+		<!--
+			<div class="absolute top-0 left-0 w-2/3 h-full bg-gradient-to-r from-slate-700 via-transparent to-transparent"></div>
+			<img
+				class='object-cover w-48 h-48'
+				src={speakerPhoto}
+				loading='lazy'
+				alt=''
+			/>
+		-->
+
+			<img
+				class='object-cover w-48 h-48'
+				src={speakerPhoto}
+				loading='lazy'
+				alt=''
+				style='clip-path: polygon(10% 1%, 100% 0, 100% 100%, 0 100%);'
+			/>
+
+			
+
+	</div>
+	
+</article>

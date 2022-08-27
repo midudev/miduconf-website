@@ -1,0 +1,91 @@
+---
+import ScheduleItem from './ScheduleItem.astro'
+
+const schedule = [
+	{
+		start: '17:00',
+		duration: '30 min.',
+		speaker: 'Guillermo Rauch, CEO de Vercel',
+		speakerPhoto: 'rauchg.png',
+		title: '🚀 El futuro de la web'
+	},
+	{
+		start: '17:35',
+		duration: '15 min.',
+		speaker: 'Codely Team',
+		speakerPhoto: 'codely.png',
+		title: '⚛️ Programación Reactiva de 0 a 100'
+	},
+	{
+		start: '18:00',
+		duration: '15 min.',
+		speaker: 'Freddy Vega, CEO de Platzi',
+		speakerPhoto: 'freddier.png',
+		title: '📚 Programación y enseñanza'
+	},
+	{
+		start: '18:15',
+		duration: '5 min.',
+		speakerPhoto: 'platzi.jpg',
+		title: '🎟️ Sorteo de suscripciones Platzi'
+	},
+	{
+		start: '18:20',
+		duration: '20 min.',
+		speaker: 'Irene M. Morgado',
+		speakerPhoto: 'irene-morgado.jpg',
+		title: '💬 Lo que quieres saber en las entrevistas y no preguntas'
+	},
+	{
+		start: '18:40',
+		duration: '10 min.',
+		speaker: 'Daniel de la Cruz',
+		speakerPhoto: 'delacruz.webp',
+		title: '🙅‍♂️ El código no es el fin'
+	},
+	{
+		start: '19:00',
+		duration: '15 min.',
+		speaker: 'Romulo Cintra',
+		speakerPhoto: 'romulo.jpg',
+		title: '☕ TC39: De propuesta a JavaScript'
+	},
+	{
+		start: '19:20',
+		duration: '15 min.',
+		speaker: 'Debbie O\'Brien',
+		speakerPhoto: 'obrien.png',
+		title: '✅ Tests E2E con Playwright'		
+	},
+	{
+		start: '19:40',
+		duration: '15 min.',
+		speaker: 'Yodra Lopez',
+		speakerPhoto: 'yodra.png',
+		title: '🏗 Refactor sin tests'		
+	},
+	{
+		start: '20:00',
+		duration: '15 min.',
+		speaker: 'Nerea Luis',
+		speakerPhoto: 'nerea.jpg',
+		title: '🤖 ¿Por qué debería interesarte la Inteligencia Artificial?'		
+	}
+]
+---
+
+<section class='w-full max-w-5xl px-10 mx-auto lg:py-24 pb-60'>
+
+	<h2 class='py-24 text-4xl font-black text-center text-white sm:text-6xl'>
+		<span id='speakers' class='text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-500 to-blue-100'
+		>Agenda
+		</span>
+	</h2>
+
+	<div class="border-4 border-yellow-300 rounded bg-slate-700">
+
+{
+	schedule.map(item => <ScheduleItem {...item} />)
+}
+</div>
+</section>
