@@ -46,6 +46,10 @@ import { TicketsSold } from '@components/TicketsSold'
 </div>
 
 <script type="module">
+	const transformCities = {
+		'Canary': 'Islas Canarias',
+	}
+
 	const d = new Date('2022-09-13T17:00:00+02:00') // UTC
 	const date = d.toLocaleTimeString('es-ES', { hour: '2-digit' })
 
@@ -54,6 +58,9 @@ import { TicketsSold } from '@components/TicketsSold'
 
 	const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
 
-	$timezone.innerText = timeZone.replaceAll('_', ' ')
+	const cityTimeZone = timeZone.replaceAll('_', ' ').split('/').pop()
+	const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
+
+	$timezone.innerText = cleanCityTimeZone
 	$hour.innerText = date
 </script>
