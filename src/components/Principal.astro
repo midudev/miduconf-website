@@ -54,6 +54,6 @@ import { TicketsSold } from '@components/TicketsSold'
 
 	const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
 
-	$timezone.innerText = timeZone
+	$timezone.innerText = timeZone.replace('_', ' ')
 	$hour.innerText = date
 </script>
