@@ -48,7 +48,18 @@ const FlavourIcon = techs.find(({ tech }) => tech === flavour)?.Icon ?? DefaultT
 					<div class="flex items-center justify-center pt-2 sm:pt-4 md:pt-0" data-atropos-offset="5">
 						<h2
 							class="inline-block w-40 px-3 py-1 text-xs font-bold text-center text-white rounded-full md:w-2/3 md:text-lg bg-black/90">
-							SEPTIEMBRE 13 • Online • 5PM CET
+							Online • 13 de SEPTIEMBRE • <span>
+								<script is:inline>
+									const d = new Date(`2022-09-13T17:00:00+02:00`)
+									const date = d.toLocaleTimeString('es-ES', { hour12: false, hour: '2-digit' })
+
+									const diff = new Date().getTimezoneOffset() / 60 * -1
+									const gmt = diff > 0 ? `GMT+${diff}` : `GMT-${Math.abs(diff)}`
+
+									const selfScript = document.currentScript
+									selfScript.parentNode.innerHTML = `${date}:00 ${gmt}`
+								</script>
+								</span>
 						</h2>
 					</div>
 
