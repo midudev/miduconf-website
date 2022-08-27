@@ -1,0 +1,149 @@
+---
+import ScheduleItem from './ScheduleItem.astro'
+
+const schedule = [
+	{
+		start: '17:00',
+		duration: '30 min.',
+		speaker: 'Guillermo Rauch, CEO de Vercel',
+		speakerPhoto: 'rauchg.png',
+		title: '🚀 El futuro de la web'
+	},
+	{
+		start: '17:35',
+		duration: '15 min.',
+		speaker: 'Codely Team',
+		speakerPhoto: 'codely.png',
+		title: '⚛️ Programación Reactiva de 0 a 100'
+	},
+	{
+		start: '18:00',
+		duration: '15 min.',
+		speaker: 'Freddy Vega, CEO de Platzi',
+		speakerPhoto: 'freddier.png',
+		title: '📚 Programación y enseñanza'
+	},
+	{
+		start: '18:15',
+		duration: '5 min.',
+		speakerPhoto: 'platzi.jpg',
+		title: '🎟️ Sorteo de suscripciones Platzi'
+	},
+	{
+		start: '18:20',
+		duration: '20 min.',
+		speaker: 'Irene M. Morgado',
+		speakerPhoto: 'irene-morgado.jpg',
+		title: '💬 Lo que quieres saber en las entrevistas y no preguntas'
+	},
+	{
+		start: '18:40',
+		duration: '10 min.',
+		speaker: 'Daniel de la Cruz',
+		speakerPhoto: 'delacruz.webp',
+		title: '🙅‍♂️ El código no es el fin'
+	},
+	{
+		start: '19:00',
+		duration: '15 min.',
+		speaker: 'Romulo Cintra',
+		speakerPhoto: 'romulo.jpg',
+		title: '☕ TC39: De propuesta a JavaScript'
+	},
+	{
+		start: '19:20',
+		duration: '15 min.',
+		speaker: 'Debbie O\'Brien',
+		speakerPhoto: 'obrien.png',
+		title: '✅ Tests E2E con Playwright'		
+	},
+	{
+		start: '19:40',
+		duration: '15 min.',
+		speaker: 'Yodra Lopez',
+		speakerPhoto: 'yodra.png',
+		title: '🏗 ¿Refactor sin tests? Qué aventura...'		
+	},
+	{
+		start: '20:00',
+		duration: '15 min.',
+		speaker: 'Nerea Luis',
+		speakerPhoto: 'nerea.jpg',
+		title: '🤖 ¿Por qué debería interesarte la Inteligencia Artificial?'		
+	},
+	{
+		start: '20:20',
+		duration: '20 min.',
+		speaker: 'Carlos Blé',
+		speakerPhoto: 'carlos.png',
+		title: '🚦 Código sostenible'
+	},
+	{
+		start: '20:45',
+		duration: '15 min.',
+		speaker: 'Estefany Aguilar',
+		speakerPhoto: 'teffcode.png',
+		title: '🎨 UX para Developers'
+	},
+	{
+		start: '21:05',
+		duration: '10 min.',
+		speaker: 'Leonardo Poza',
+		speakerPhoto: 'leonardo.png',
+		title: '💼 Dale caña a tu CV para ser contratado'
+	},
+	{
+		start: '21:20',
+		duration: '15 min.',
+		speaker: 'Marta Arcones',
+		speakerPhoto: 'marta.png',
+		title: '🧪 Probando... 1, 2, 3 con Cypress'
+	},
+	{
+		start: '21:40',
+		duration: '15 min.',
+		title: '👩🏻‍💻 ¿Cómo crecer profesionalmente y generar un impacto en los demás?',
+		speaker: 'Samar Jaffal',
+		speakerPhoto: 'samar.png'
+	},
+	{
+		start: '22:00',
+		duration: '20 min.',
+		title: '♻️ Si empezase de nuevo en programación...',
+		speaker: 'Goncy Pozzo & vamoacodear',
+		speakerPhoto: 'goncy-noe.png'
+	}
+]
+---
+
+<section id="agenda" class='w-full max-w-5xl px-6 mx-auto'>
+
+	<h2 class='flex flex-col py-24 text-4xl font-black text-center text-white sm:text-6xl'>
+		<span id='speakers' class='leading-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-500 to-amber-100'
+		>Agenda
+		</span>
+		<span class="mt-2 text-xl font-bold text-white opacity-85" id="timezone"></span>
+	</h2>
+
+	<div class="border-4 border-yellow-300 rounded bg-slate-700">
+
+	{
+		schedule.map(item => <ScheduleItem {...item} />)
+	}
+</div>
+</section>
+
+<script>
+	const transformCities = {
+		'Canary': 'Islas Canarias',
+	}
+
+	const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
+	const cityTimeZone = timeZone.replaceAll('_', ' ')
+	const diff = new Date().getTimezoneOffset() / 60 * -1
+	const gmt = diff > 0 ? `GMT+${diff}` : `GMT-${Math.abs(diff)}`
+
+	const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
+
+	document.getElementById('timezone').innerText = `Horarios para ${cleanCityTimeZone} — ${gmt}`
+</script>

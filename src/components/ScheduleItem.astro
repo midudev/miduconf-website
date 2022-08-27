@@ -1,0 +1,46 @@
+---
+const { start, duration, title, speaker, speakerPhoto } = Astro.props
+---
+
+<article class='flex flex-col items-center justify-between py-4 border-b md:py-0 gap-y-4 md:flex-row md:gap-y-0 border-b-yellow-400'>
+
+	<div class='flex flex-col items-center order-3 px-8 font-bold md:-order-none gap-x-2'>
+		<h4 class="text-xl text-yellow-300 md:text-3xl">
+			<script define:vars={{ start }}>
+				const d = new Date(`2022-09-13T${start}:00+02:00`)
+				const date = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
+
+				const selfScript = document.currentScript
+				selfScript.parentNode.innerHTML = date
+			</script>
+		</h4>
+		<small class="text-sm italic text-yellow-100">{duration}</small>
+	</div>
+
+	<div class='flex flex-col items-center justify-center flex-1 order-1 md:order-none md:items-start gap-y-1'>
+		<h2 class='px-4 text-2xl font-bold leading-none tracking-tight text-center text-white sm:px-0 md:text-left sm:text-3xl sm:pr-12'>{title}</h2>
+		{
+			speaker && <h3 class='flex items-center text-sm font-semibold text-white sm:text-lg gap-x-1'><span class="opacity-70">por</span><span class="font-bold sm:text-xl text-rose-400">{speaker}</span></h3>
+		}
+	</div>
+
+	<div class="relative order-2 pb-2 pl-2 md:pb-0 md:order-none">
+		<!--
+			<div class="absolute top-0 left-0 w-2/3 h-full bg-gradient-to-r from-slate-700 via-transparent to-transparent"></div>
+			<img
+				class='object-cover w-48 h-48'
+				src={speakerPhoto}
+				loading='lazy'
+				alt=''
+			/>
+		-->
+
+			<img
+				class='object-cover w-24 h-24 rounded-3xl md:rounded-none md:[clip-path:polygon(10%_1%,_100%_0,_100%_100%,_0_100%)] sm:w-48 sm:h-48'
+				src={speakerPhoto}
+				loading='lazy'
+				alt=''
+			/>
+	</div>
+	
+</article>

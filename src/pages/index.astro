@@ -6,13 +6,15 @@ import HomeSponsors from '@components/HomeSponsors.astro'
 import HomeSpeakers from '@components/HomeSpeakers.astro'
 import Footer from '@components/Footer.astro'
 import FAQ from '@components/Faq.astro'
+import HomeSchedule from '@components/Schedule.astro'
 // const speakers = await getAllSpeakers()
 ---
 
 <Layout>
 	<HomePrincipal />
-	<HomeSponsors />
+	<HomeSchedule />
 	<HomeSpeakers />
+	<HomeSponsors />
 	<FAQ />
 	<Footer />
 </Layout>
