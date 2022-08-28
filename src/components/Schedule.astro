@@ -55,21 +55,21 @@ const schedule = [
 		duration: '15 min.',
 		speaker: 'Debbie O\'Brien',
 		speakerPhoto: 'obrien.webp',
-		title: '✅ Tests E2E con Playwright'		
+		title: '✅ Tests E2E con Playwright'
 	},
 	{
 		start: '19:40',
 		duration: '15 min.',
 		speaker: 'Yodra Lopez',
 		speakerPhoto: 'yodra.webp',
-		title: '🏗 ¿Refactor sin tests? Qué aventura...'		
+		title: '🏗 ¿Refactor sin tests? Qué aventura...'
 	},
 	{
 		start: '20:00',
 		duration: '15 min.',
 		speaker: 'Nerea Luis',
 		speakerPhoto: 'nerea.webp',
-		title: '🤖 ¿Por qué debería interesarte la Inteligencia Artificial?'		
+		title: '🤖 ¿Por qué debería interesarte la Inteligencia Artificial?'
 	},
 	{
 		start: '20:20',
@@ -127,23 +127,23 @@ const schedule = [
 
 	<div class="border-4 border-yellow-300 rounded bg-slate-700">
 
-	{
-		schedule.map(item => <ScheduleItem {...item} />)
-	}
-</div>
+		{
+			schedule.map(item => <ScheduleItem {...item} />)
+		}
+	</div>
 </section>
 
 <script>
-	const transformCities = {
-		'Canary': 'Islas Canarias',
-	}
+const transformCities = {
+	Canary: 'Islas Canarias'
+}
 
-	const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
-	const cityTimeZone = timeZone.replaceAll('_', ' ')
-	const diff = new Date().getTimezoneOffset() / 60 * -1
-	const gmt = diff > 0 ? `GMT+${diff}` : `GMT-${Math.abs(diff)}`
+const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
+const cityTimeZone = timeZone.replaceAll('_', ' ')
+const diff = new Date().getTimezoneOffset() / 60 * -1
+const gmt = diff > 0 ? `GMT+${diff}` : `GMT-${Math.abs(diff)}`
 
-	const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
+const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
 
-	document.getElementById('timezone').innerText = `Horarios para ${cleanCityTimeZone} — ${gmt}`
+document.getElementById('timezone').innerText = `Horarios para ${cleanCityTimeZone} — ${gmt}`
 </script>

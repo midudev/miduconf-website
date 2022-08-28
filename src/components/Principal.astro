@@ -52,21 +52,21 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 </div>
 
 <script type="module">
-	const transformCities = {
-		'Canary': 'Islas Canarias',
-	}
+const transformCities = {
+	Canary: 'Islas Canarias'
+}
 
-	const d = new Date('2022-09-13T17:00:00+02:00')
-	const date = d.toLocaleTimeString('es-ES', { hour: '2-digit' })
+const d = new Date('2022-09-13T17:00:00+02:00')
+const date = d.toLocaleTimeString('es-ES', { hour: '2-digit' })
 
-	const $hour = document.querySelector('#conference-hour')
-	const $timezone = document.querySelector('#conference-timezone')
+const $hour = document.querySelector('#conference-hour')
+const $timezone = document.querySelector('#conference-timezone')
 
-	const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
+const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
 
-	const cityTimeZone = timeZone.replaceAll('_', ' ').split('/').pop()
-	const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
+const cityTimeZone = timeZone.replaceAll('_', ' ').split('/').pop()
+const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
 
-	$timezone.innerText = cleanCityTimeZone
-	$hour.innerText = date
+$timezone.innerText = cleanCityTimeZone
+$hour.innerText = date
 </script>
