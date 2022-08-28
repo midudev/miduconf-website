@@ -5,7 +5,7 @@ type CountdownProps = {
 }
 
 export const Countdown = ({ targetDate }: CountdownProps) => {
-	const { days, hours, minutes, seconds } = useRemainingTime(targetDate)
+	const { days, hours, minutes, seconds, countdownEnded } = useRemainingTime(targetDate)
 	const time = [
 		{ label: 'Días', value: days },
 		{ label: 'Horas', value: hours },
@@ -13,15 +13,20 @@ export const Countdown = ({ targetDate }: CountdownProps) => {
 		{ label: 'Segundos', value: seconds }
 	]
 	return (
-		<section class='flex'>
-			{time.map(({ label, value }) => (
-				<div class='flex-col w-24'>
-					<div class='text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 '>
-						{value}
+		<>
+			<div class='mb-2 font-bold'>
+				{!countdownEnded ? '¡Ya falta muy poco!' : 'Empieza la #miduConf 🎊'}
+			</div>
+			<section class='flex'>
+				{time.map(({ label, value }) => (
+					<div class='flex-col w-24'>
+						<div class='text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 '>
+							{value}
+						</div>
+						<span class='text-blue-700'>{label}</span>
 					</div>
-					<span class='text-blue-700'>{label}</span>
-				</div>
-			))}
-		</section>
+				))}
+			</section>
+		</>
 	)
 }
