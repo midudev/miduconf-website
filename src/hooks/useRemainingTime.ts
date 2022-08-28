@@ -48,5 +48,5 @@ export const useRemainingTime = (targetDate: Date) => {
 		return () => clearInterval(timer)
 	}, [continueCountdown])
 
-	return fillZeros(remainingDate)
+	return { ...fillZeros(remainingDate), countdownEnded: continueCountdown }
 }
