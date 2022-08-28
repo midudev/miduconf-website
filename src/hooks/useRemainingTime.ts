@@ -14,13 +14,15 @@ const mapValues = (object: { [key: string]: unknown }, iterator: Function) => {
 	}, {})
 }
 
+const alwaysPositive = (value: number) => Math.max(0, value)
+
 const getRemainingTime = (targetDate: Date) => {
 	const currentDate = new Date()
 	const diff = targetDate.getTime() - currentDate.getTime()
-	const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-	const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-	const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-	const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+	const days = alwaysPositive(Math.floor(diff / (1000 * 60 * 60 * 24)))
+	const hours = alwaysPositive(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))
+	const minutes = alwaysPositive(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)))
+	const seconds = alwaysPositive(Math.floor((diff % (1000 * 60)) / 1000))
 	return { days, hours, minutes, seconds }
 }
 
@@ -32,16 +34,19 @@ export const useRemainingTime = (targetDate: Date) => {
 	const [remainingDate, setRemainingDate] = useState(getRemainingTime(targetDate))
 
 	const { seconds, minutes, hours, days } = remainingDate
-	const continueCountdown = days > 0 && hours > 0 && minutes > 0 && seconds > 0
+	const continueCountdown = days === 0 && hours === 0 && minutes === 0 && seconds === 0
 
 	useEffect(() => {
 		const timer =
-			continueCountdown &&
+			!continueCountdown &&
 			setInterval(() => {
 				setRemainingDate(getRemainingTime(targetDate))
 			}, 1000)
-		return () => clearInterval(timer)
-	}, [])
 
-	return fillZeros(remainingDate)
+		if (continueCountdown) clearInterval(timer)
+
+		return () => clearInterval(timer)
+	}, [continueCountdown])
+
+	return { ...fillZeros(remainingDate), countdownEnded: continueCountdown }
 }
