@@ -20,7 +20,7 @@ const { start, duration, title, speaker, speakerPhoto } = Astro.props
 	<div class='flex flex-col items-center justify-center flex-1 order-1 md:order-none md:items-start gap-y-1'>
 		<h2 class='px-4 text-2xl font-bold leading-none tracking-tight text-center text-white sm:px-0 md:text-left sm:text-3xl sm:pr-12'>{title}</h2>
 		{
-			speaker && <h3 class='flex items-center text-sm font-semibold text-white sm:text-lg gap-x-1'><span class="opacity-70">por</span><span class="font-bold sm:text-xl text-rose-400">{speaker}</span></h3>
+			speaker && <h3 class='flex items-center text-sm font-semibold text-white sm:text-lg gap-x-1'><span class="font-bold sm:text-xl text-rose-400">{speaker}</span></h3>
 		}
 	</div>
 
