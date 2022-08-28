@@ -19,25 +19,25 @@
   "devDependencies": {
     "@astrojs/preact": "1.0.2",
     "@astrojs/tailwind": "1.0.0",
-    "@typescript-eslint/parser": "5.33.1",
-    "astro": "1.0.6",
-    "eslint": "8.22.0",
+    "@typescript-eslint/parser": "5.35.1",
+    "astro": "1.1.1",
+    "eslint": "8.23.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-astro": "0.17.1",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-n": "15.2.4",
-    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-n": "15.2.5",
+    "eslint-plugin-promise": "6.0.1",
     "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.5.0",
+    "prettier-plugin-astro": "0.5.3",
     "tailwindcss": "3.1.8"
   },
   "dependencies": {
     "@astrojs/netlify": "1.0.1",
-    "@netlify/functions": "1.1.0",
+    "@netlify/functions": "1.2.0",
     "@supabase/supabase-js": "1.35.6",
     "atropos": "1.0.2",
     "chrome-aws-lambda": "10.1.0",
-    "preact": "10.10.3",
+    "preact": "10.10.6",
     "puppeteer-core": "10.4.0"
   }
 }
