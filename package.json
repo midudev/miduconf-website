@@ -19,8 +19,8 @@
   "devDependencies": {
     "@astrojs/preact": "1.0.2",
     "@astrojs/tailwind": "1.0.0",
-    "@typescript-eslint/parser": "5.35.1",
-    "astro": "1.1.1",
+    "@typescript-eslint/parser": "5.36.1",
+    "astro": "1.1.2",
     "eslint": "8.23.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-astro": "0.17.1",
