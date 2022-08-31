@@ -17,6 +17,9 @@ const schedule = [
 		title: '⚛️ Programación Reactiva de 0 a 100'
 	},
 	{
+		title: '👩‍🎓 Sorteo suscripciones a CodelyTV por 3 meses'
+	},
+	{
 		start: '18:00',
 		duration: '15 min.',
 		speaker: 'Freddy Vega, CEO de Platzi',
@@ -24,10 +27,7 @@ const schedule = [
 		title: '📚 Programación y enseñanza'
 	},
 	{
-		start: '18:15',
-		duration: '5 min.',
-		speakerPhoto: 'platzi.webp',
-		title: '🎟️ Sorteo de suscripciones Platzi'
+		title: '🎓 Sorteo suscripciones a Platzi'
 	},
 	{
 		start: '18:20',
@@ -37,11 +37,17 @@ const schedule = [
 		title: '💬 Lo que quieres saber en las entrevistas y no preguntas'
 	},
 	{
+		title: '📘 25 libros de Aprendiendo Git'
+	},
+	{
 		start: '18:40',
 		duration: '10 min.',
 		speaker: 'Daniel de la Cruz',
 		speakerPhoto: 'delacruz.webp',
 		title: '🙅‍♂️ Tu trabajo no es escribir código'
+	},
+	{
+		title: '⌨️ Sorteo teclado Keychron K3 version 2'
 	},
 	{
 		start: '19:00',
@@ -58,11 +64,17 @@ const schedule = [
 		title: '✅ Tests E2E con Playwright'
 	},
 	{
+		title: '📘 25 libros de Aprendiendo Git'
+	},
+	{
 		start: '19:40',
 		duration: '15 min.',
 		speaker: 'Yodra Lopez',
 		speakerPhoto: 'yodra.webp',
 		title: '🏗 Refactorizar sin test y no morir en el intento'
+	},
+	{
+		title: '👩‍💻 Sorteo licencia para 1 Año de Intellij'
 	},
 	{
 		start: '20:00',
@@ -79,11 +91,17 @@ const schedule = [
 		title: '🚦 Código sostenible'
 	},
 	{
+		title: '📚 Sorteo libro Código Sostenible'
+	},
+	{
 		start: '20:45',
 		duration: '15 min.',
 		speaker: 'Estefany Aguilar',
 		speakerPhoto: 'teffcode.webp',
 		title: '🎨 UX para Developers'
+	},
+	{
+		title: '📘 25 libros de Aprendiendo Git'
 	},
 	{
 		start: '21:05',
@@ -93,11 +111,17 @@ const schedule = [
 		title: '💼 Dale caña a tu CV para ser contratado'
 	},
 	{
+		title: '🎟️ Sorteo entrada a la Tarugo Conf'
+	},
+	{
 		start: '21:20',
 		duration: '15 min.',
 		speaker: 'Marta Arcones',
 		speakerPhoto: 'marta.webp',
 		title: '🧪 Probando... 1, 2, 3 con Cypress'
+	},
+	{
+		title: '🎟️ Sorteo suscripciones de CodelyTV por 6 meses'
 	},
 	{
 		start: '21:40',
@@ -107,11 +131,17 @@ const schedule = [
 		speakerPhoto: 'samar.webp'
 	},
 	{
+		title: '📘 25 libros de Aprendiendo Git'
+	},
+	{
 		start: '22:00',
 		duration: '20 min.',
 		title: '♻️ Si empezase de nuevo en programación...',
 		speaker: 'Goncy Pozzo & vamoacodear',
 		speakerPhoto: 'goncy-noe.webp'
+	},
+	{
+		title: '🎟️ Sorteo suscripciones de CodelyTV por 1 año'
 	}
 ]
 ---
@@ -128,7 +158,19 @@ const schedule = [
 	<div class="border-4 border-yellow-300 rounded bg-slate-700">
 
 		{
-			schedule.map(item => <ScheduleItem {...item} />)
+			schedule.map(item => {
+				if (!item.start) {
+					return (
+						<article class='flex flex-col items-center justify-center py-4 text-center border-b bg-slate-800 gap-y-4 md:flex-row md:gap-y-0 border-b-yellow-400'>
+							<div class='flex flex-col items-center order-3 px-8 font-bold md:-order-none gap-x-2'>
+								<h4 class="text-xl text-yellow-300 md:text-3xl">{item.title}</h4>
+							</div>
+						</article>
+					)
+				}
+
+				return <ScheduleItem {...item} />
+			})
 		}
 	</div>
 </section>
