@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks'
+import { localeDate } from 'src/utils/dates'
 
 type RemainingDate<T> = {
 	days: T
@@ -17,7 +18,7 @@ const mapValues = (object: { [key: string]: unknown }, iterator: Function) => {
 const alwaysPositive = (value: number) => Math.max(0, value)
 
 const getRemainingTime = (targetDate: Date) => {
-	const currentDate = new Date()
+	const currentDate = localeDate()
 	const diff = targetDate.getTime() - currentDate.getTime()
 	const days = alwaysPositive(Math.floor(diff / (1000 * 60 * 60 * 24)))
 	const hours = alwaysPositive(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))

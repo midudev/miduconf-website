@@ -12,6 +12,7 @@ export const Countdown = ({ targetDate }: CountdownProps) => {
 		{ label: 'Minutos', value: minutes },
 		{ label: 'Segundos', value: seconds }
 	]
+
 	return (
 		<>
 			<div class='mb-2 font-bold'>
