@@ -1,8 +1,4 @@
 ---
 const username = Astro.url.searchParams.get('username')
-if (username) {
-	return Astro.redirect(`/ticket/${username}`)
-} else {
-	return Astro.redirect('/')
-}
+return Astro.redirect(username ? `/ticket/${username}` : '/')
 ---
