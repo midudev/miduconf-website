@@ -157,6 +157,46 @@ const schedule = [
 ]
 ---
 
-<div>
-	Hola mundo
-</div>
+<section id="agenda" class='w-full max-w-5xl px-6 mx-auto'>
+
+	<h2 class='flex flex-col py-24 text-4xl font-black text-center text-white sm:text-6xl'>
+		<span class='leading-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-500 to-amber-100'
+		>Agenda
+		</span>
+		<span class="mt-2 text-xl font-bold text-white opacity-85" id="timezone"></span>
+	</h2>
+
+	<div class="border-4 border-yellow-300 rounded bg-slate-700">
+
+		{
+			schedule.map(item => {
+				if (!item.start) {
+					return (
+						<article class='flex flex-col items-center justify-center py-4 text-center border-b bg-slate-800 gap-y-4 md:flex-row md:gap-y-0 border-b-yellow-400'>
+							<div class='flex flex-col items-center order-3 px-8 font-bold md:-order-none gap-x-2'>
+								<h4 class="text-xl text-yellow-300 md:text-3xl">{item.title}</h4>
+							</div>
+						</article>
+					)
+				}
+
+				return <ScheduleItem {...item} />
+			})
+		}
+	</div>
+</section>
+
+<script>
+const transformCities = {
+	Canary: 'Islas Canarias'
+}
+
+const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
+const cityTimeZone = timeZone.replaceAll('_', ' ')
+const diff = new Date().getTimezoneOffset() / 60 * -1
+const gmt = diff > 0 ? `GMT+${diff}` : `GMT-${Math.abs(diff)}`
+
+const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
+
+document.getElementById('timezone').innerText = `Horarios para ${cleanCityTimeZone} — ${gmt}`
+</script>
