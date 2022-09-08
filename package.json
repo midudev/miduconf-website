@@ -19,8 +19,8 @@
   "devDependencies": {
     "@astrojs/preact": "1.0.2",
     "@astrojs/tailwind": "1.0.0",
-    "@typescript-eslint/parser": "5.36.1",
-    "astro": "1.1.2",
+    "@typescript-eslint/parser": "5.36.2",
+    "astro": "1.1.5",
     "eslint": "8.23.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-astro": "0.17.1",
@@ -28,11 +28,11 @@
     "eslint-plugin-n": "15.2.5",
     "eslint-plugin-promise": "6.0.1",
     "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.5.3",
+    "prettier-plugin-astro": "0.5.4",
     "tailwindcss": "3.1.8"
   },
   "dependencies": {
-    "@astrojs/netlify": "1.0.1",
+    "@astrojs/netlify": "1.0.2",
     "@netlify/functions": "1.2.0",
     "@supabase/supabase-js": "1.35.6",
     "atropos": "1.0.2",
