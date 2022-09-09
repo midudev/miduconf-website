@@ -2,15 +2,15 @@
 import Button from '@components/Button.astro'
 ---
 
-<div class="flex justify-center w-full">
-	<div class="flex flex-col items-center justify-center gap-4 md:flex-row w-72 sm:w-80 md:flex md:w-full">
-		<Button id="share-twitter" openInNewWindow flavour="twitter" text="Compartir en Twitter" />
-		<Button id="add-to-calendar" flavour="calendar" text="Añadir al Calendario" />
-		<Button id="copy-link" flavour="link" text="Copiar enlace" />
+<div class='flex justify-center w-full'>
+	<div class='flex flex-col items-center justify-center gap-4 md:flex-row w-72 sm:w-80 md:flex md:w-full'>
+		<Button id='share-twitter' openInNewWindow flavour='twitter' text='Compartir en Twitter' />
+		<Button id='add-to-calendar' flavour='calendar' text='Añadir al Calendario' />
+		<Button id='copy-link' flavour='link' text='Copiar enlace' />
 	</div>
 </div>
 
-<script type="module">
+<script type='module'>
 import { toast } from 'https://cdn.skypack.dev/wc-toast'
 
 const shareTwitter = document.querySelector('#share-twitter')

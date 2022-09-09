@@ -62,7 +62,7 @@ const schedule = [
 	{
 		start: '19:00',
 		duration: '15 min.',
-		speaker: 'Romulo Cintra',
+		speaker: 'Rómulo Cintra',
 		speakerPhoto: 'romulo.webp',
 		title: '☕ TC39: De propuesta a JavaScript'
 	},
@@ -79,7 +79,7 @@ const schedule = [
 	{
 		start: '19:40',
 		duration: '15 min.',
-		speaker: 'Yodra Lopez',
+		speaker: 'Yodra López',
 		speakerPhoto: 'yodra.webp',
 		title: '🏗 Refactorizar sin test y no morir en el intento'
 	},
@@ -157,16 +157,16 @@ const schedule = [
 ]
 ---
 
-<section id="agenda" class='w-full max-w-5xl px-6 pb-40 mx-auto'>
+<section id='agenda' class='w-full max-w-5xl px-6 pb-40 mx-auto'>
 
 	<h2 class='flex flex-col py-24 text-4xl font-black text-center text-white sm:text-6xl'>
 		<span class='leading-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-500 to-amber-100'
 		>Agenda
 		</span>
-		<span class="mt-2 text-xl font-bold text-white opacity-85" id="timezone"></span>
+		<span class='mt-2 text-xl font-bold text-white opacity-85' id='timezone'></span>
 	</h2>
 
-	<div class="border-4 border-yellow-300 rounded bg-slate-700">
+	<div class='border-4 border-yellow-300 rounded bg-slate-700'>
 
 		{
 			schedule.map(item => {
@@ -174,7 +174,7 @@ const schedule = [
 					return (
 						<article class='flex flex-col items-center justify-center py-4 text-center border-b bg-slate-800 gap-y-4 md:flex-row md:gap-y-0 border-b-yellow-400'>
 							<div class='flex flex-col items-center order-3 px-8 font-bold md:-order-none gap-x-2'>
-								<h4 class="text-xl text-yellow-300 md:text-3xl">{item.title}</h4>
+								<h4 class='text-xl text-yellow-300 md:text-3xl'>{item.title}</h4>
 							</div>
 						</article>
 					)

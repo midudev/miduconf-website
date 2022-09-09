@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const chromium = require('chrome-aws-lambda')
 
 const isLocal = process.env.NETLIFY_LOCAL === 'true'
