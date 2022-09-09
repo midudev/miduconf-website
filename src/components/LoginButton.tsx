@@ -23,7 +23,7 @@ const ticketIcon = (
 )
 
 const logoutIcon = (
-	<svg class="w-10 h-10" viewBox="0 0  24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+	<svg class='w-10 h-10' viewBox='0 0  24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9'/></svg>
 )
 
 const Button: FunctionalComponent<{ onClick: () => void }> = ({ onClick, children }) => {
@@ -59,7 +59,7 @@ export function LogoutButton () {
 
 	return (
 		<div class='absolute top-4 right-4'>
-			<button id="logout-button" class={`${hidden ? 'hidden' : ''}`} onClick={logout}>
+			<button id='logout-button' class={`${hidden ? 'hidden' : ''}`} onClick={logout}>
 				{logoutIcon}
 			</button>
 		</div>

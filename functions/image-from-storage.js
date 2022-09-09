@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createClient } = require('@supabase/supabase-js')
 
 const supabaseUrl = process.env.PUBLIC_SUPABASE_URL

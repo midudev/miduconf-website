@@ -42,20 +42,20 @@ const ogImage = `https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/publ
 		<LogoutButton client:visible />
 
 		<a href='/' class='absolute flex items-center justify-center font-bold gap-x-2 top-4 left-4 hover:underline hover:text-blue-800'>
-			<svg class="w-10 h-10" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"/><path d="m12 8-4 4 4 4M16 12H8"/></svg>
+			<svg class='w-10 h-10' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-arrow-left-circle'><circle cx='12' cy='12' r='10'/><path d='m12 8-4 4 4 4M16 12H8'/></svg>
 			Volver a la portada
 		</a>
 
-		<div class="grid place-content-center min-h-[110vh] pt-10 pb-20">
+		<div class='grid place-content-center min-h-[110vh] pt-10 pb-20'>
 			<Technologies />
 
-			<div class="grid xl:grid-cols-[minmax(900px,_1fr)_250px] max-w-7xl gap-4">
-				<div class="flex flex-col items-center justify-center">
+			<div class='grid xl:grid-cols-[minmax(900px,_1fr)_250px] max-w-7xl gap-4'>
+				<div class='flex flex-col items-center justify-center'>
 					<TicketCard />
 					<TicketButtons />
 				</div>
 
-				<div id="get-your-ticket" class="relative flex-col justify-center hidden h-auto">
+				<div id='get-your-ticket' class='relative flex-col justify-center hidden h-auto'>
 					<div>
 						<LoginButton redirect={false} client:visible />
 					</div>

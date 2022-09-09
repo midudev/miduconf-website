@@ -19,12 +19,12 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 				CONFERENCIA DE PROGRAMACIÓN y DESARROLLO
 			</h4>
 
-			<div class="flex pt-4 text-left gap-x-8">
-				<p id="add-to-calendar" class='flex flex-col items-center text-6xl font-bold text-transparent transition cursor-pointer bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 hover:contrast-200 hover:scale-125'>
-					<span class="h-24 font-black text-8xl">13
+			<div class='flex pt-4 text-left gap-x-8'>
+				<p id='add-to-calendar' class='flex flex-col items-center text-6xl font-bold text-transparent transition cursor-pointer bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 hover:contrast-200 hover:scale-125'>
+					<span class='h-24 font-black text-8xl'>13
 					</span>
-					<span class="text-3xl">Septiembre</span>
-					<span class="text-lg"><span id="conference-hour">17</span>H - <span id="conference-timezone">Madrid</span></span>
+					<span class='text-3xl'>Septiembre</span>
+					<span class='text-lg'><span id='conference-hour'>17</span>H - <span id='conference-timezone'>Madrid</span></span>
 				</p>
 				<a href='https://twitch.tv/midudev' rel='noopener'
 					target='_blank' class='flex flex-col items-center font-bold text-transparent transition bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 hover:scale-125 hover:contrast-200'>
@@ -37,7 +37,7 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 				</a>
 
 			</div>
-			<div class="pt-10 xl:pt-20">
+			<div class='pt-10 xl:pt-20'>
 				<Countdown targetDate={new Date('2022-09-13T17:00:00+02:00')} client:visible />
 			</div>
 			<div class='pt-5 space-y-4 leading-6 text-center xl:pt-20 xl:space-y-5'>
@@ -50,7 +50,7 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 	</div>
 </div>
 
-<script type="module">
+<script type='module'>
 const transformCities = {
 	Canary: 'Islas Canarias'
 }
