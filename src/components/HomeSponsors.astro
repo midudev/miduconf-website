@@ -9,6 +9,7 @@ import Manfred from '@components/logos/Manfred.astro'
 import Platzi from '@components/logos/Platzi.astro'
 import AstroLogo from '@components/logos/Astro.astro'
 import Talently from '@components/logos/Talently.astro'
+import PlainConcepts from '@components/logos/PlainConcepts.astro'
 ---
 
 	<section class='flex flex-col items-center justify-center px-10 pb-40 mx-auto max-w-7xl'>
@@ -32,11 +33,15 @@ import Talently from '@components/logos/Talently.astro'
 				<Manfred />
 				<Codely />
 			</div>
-			<div class="flex flex-wrap items-center justify-center max-w-md">
+			<div class="flex flex-col items-center justify-center max-w-md">
+
+				<a class="flex items-center w-64 h-32 text-white transition-all hover:contrast-200 hover:scale-125" target="_blank" href="https://www.plainconcepts.com/es/">
+					<PlainConcepts />
+				</a>
 				<a class="flex items-center w-64 h-32 transition-all hover:contrast-200 hover:scale-125" target="_blank" href="https://midu.link/astro">
 					<AstroLogo />
 				</a>
-				<div class="flex flex-wrap items-center justify-center gap-8">
+				<div class="flex flex-wrap items-center justify-center max-w-[350px] gap-8">
 					<Algolia />
 					<Rapid />
 					<Twilio />
