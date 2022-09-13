@@ -53,11 +53,12 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 
 <!-- Create a Twitch.Player object. This will render within the placeholder div -->
 <script type='text/javascript'>
- new Twitch.Player('twitch-embed', {
- 	channel: 'midudev',
+	// eslint-disable-next-line no-new, no-undef
+	new Twitch.Player('twitch-embed', {
+		channel: 'midudev',
 		width: 854,
- 	height: 480
- })
+		height: 480
+	})
 </script>
 
 <script type='module'>
