@@ -18,8 +18,8 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 			<h4 class='text-sm font-bold tracking-widest text-gray-700'>
 				CONFERENCIA DE PROGRAMACIÓN y DESARROLLO
 			</h4>
-			<div class="mt-10">
-				<div id="twitch-embed" class="w-full aspect-video"></div>
+			<div class='mt-10'>
+				<div id='twitch-embed' class='w-full aspect-video'></div>
 			</div>
 			<div class='flex pt-4 text-left gap-x-8'>
 				<p id='add-to-calendar' class='flex flex-col items-center text-6xl font-bold text-transparent transition cursor-pointer bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 hover:contrast-200 hover:scale-125'>
@@ -53,15 +53,15 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 </div>
 
 <!-- Load the Twitch embed script -->
-<script is:inline src="https://player.twitch.tv/js/embed/v1.js"></script>
+<script is:inline src='https://player.twitch.tv/js/embed/v1.js'></script>
 
 <!-- Create a Twitch.Player object. This will render within the placeholder div -->
-<script type="text/javascript">
-  new Twitch.Player("twitch-embed", {
-    channel: "midudev",
-	width: 854,
-    height: 480,
-  });
+<script type='text/javascript'>
+ new Twitch.Player('twitch-embed', {
+ 	channel: 'midudev',
+		width: 854,
+ 	height: 480
+ })
 </script>
 
 <script type='module'>
