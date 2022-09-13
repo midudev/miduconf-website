@@ -17,7 +17,7 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 			<h4 class='text-sm font-bold tracking-widest text-gray-700'>
 				CONFERENCIA DE PROGRAMACIÓN y DESARROLLO
 			</h4>
-			<div class='mt-10'>
+			<div class='mt-10 w-full'>
 				<div id='twitch-embed' class='w-full aspect-video'></div>
 			</div>
 			<div class='flex pt-4 text-left gap-x-8'>
@@ -56,8 +56,8 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 	// eslint-disable-next-line no-new, no-undef
 	new Twitch.Player('twitch-embed', {
 		channel: 'midudev',
-		width: 854,
-		height: 480
+		width: '100%',
+		height: '100%'
 	})
 </script>
 
