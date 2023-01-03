@@ -15,7 +15,7 @@ export const TicketsSold = () => {
 
 	return (
 		<strong class='text-gray-700 text-center text-xl flex items-center justify-center space-x-4 my-2'>
-      ¡Ya se han repartido <span class='text-4xl font-black bg-clip-text text-transparent mx-1 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500'>{tickets.toFixed(0).toString()}</span> tickets!
+      ¡Se repartieron <span class='text-4xl font-black bg-clip-text text-transparent mx-1 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500'>{tickets.toFixed(0).toString()}</span> tickets!
 		</strong>
 	)
 }

@@ -1,7 +1,6 @@
 ---
 import { LoginButton } from '@components/LoginButton'
 import { TicketsSold } from '@components/TicketsSold'
-import { Countdown } from '@components/Countdown'
 import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 ---
 
@@ -36,9 +35,6 @@ import CalendarScriptAndStyles from '@components/CalendarScriptAndStyles.astro'
 					<span class='pl-2 text-2xl font-bold tracking-wider text-transparent underline bg-clip-text bg-gradient-to-r from-purple-600 to-purple-900'>twitch.tv<br />/midudev</span>
 				</a>
 
-			</div>
-			<div class='pt-10 xl:pt-20'>
-				<Countdown targetDate={new Date('2022-09-13T17:00:00+02:00')} client:visible />
 			</div>
 			<div class='pt-5 space-y-4 leading-6 text-center xl:pt-20 xl:space-y-5'>
 				<TicketsSold client:visible />
