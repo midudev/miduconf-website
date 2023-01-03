@@ -11,3 +11,23 @@
 		@apply pointer-events-none opacity-100 contrast-100 drop-shadow-4xl;
 	}
 }
+
+#twitch-embed-parent {
+	background: #9046ffc2;
+	padding: 16px;
+	animation: twitch-bg 3s ease infinite;
+	border-radius: 16px;
+	box-shadow: 0px 0px 100px 5px rgba(140, 0, 255, 0.52);
+}
+
+@keyframes twitch-bg {
+	0% {
+		background: #9046ffc2;
+	}
+	50% {
+		background: #d146ff;
+	}
+	100% {
+		background: #9046ffc2;
+	}
+}
