@@ -2,6 +2,7 @@
 import TwitterIcon from '@components/logos/Twitter.astro'
 import LinkIcon from '@components/icons/Link.astro'
 import CalendarIcon from '@components/icons/Calendar.astro'
+import MegaphoneIcon from '@components/icons/Megaphone.astro'
 
 const { id, href, text, flavour = 'default', openInNewWindow } = Astro.props
 
@@ -28,6 +29,7 @@ const classesForButton = colors[flavour] ?? colors.default
 		rel={rel}
 		target={target}
 	>
+		{flavour === 'c4p' && <><MegaphoneIcon /></>}
 		{flavour === 'twitter' && <><TwitterIcon /></>}
 		{flavour === 'link' && <><LinkIcon /></>}
 		{flavour === 'calendar' && <><CalendarIcon /></>}

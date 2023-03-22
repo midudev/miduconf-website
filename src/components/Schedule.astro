@@ -198,5 +198,9 @@ const gmt = diff > 0 ? `GMT+${diff}` : `GMT-${Math.abs(diff)}`
 
 const cleanCityTimeZone = transformCities[cityTimeZone] || cityTimeZone
 
-document.getElementById('timezone').innerText = `Horarios para ${cleanCityTimeZone} — ${gmt}`
+const timeZoneEl = document.getElementById('timezone')
+
+if (timeZoneEl) {
+	timeZoneEl.innerText = `Horarios para ${cleanCityTimeZone} — ${gmt}`
+}
 </script>

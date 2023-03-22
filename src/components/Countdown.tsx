@@ -15,16 +15,16 @@ export const Countdown = ({ targetDate }: CountdownProps) => {
 
 	return (
 		<>
-			<div class='mb-2 font-bold'>
-				{!countdownEnded ? '¡Ya falta muy poco!' : 'Empieza la #miduConf 🎊'}
+			<div class='mb-2 mt-10 font-bold opacity-70'>
+				{!countdownEnded ? 'Volvemos en...' : 'Empieza la #miduConf 🎊'}
 			</div>
 			<section class='flex'>
 				{time.map(({ label, value }) => (
-					<div class='flex-col w-24'>
-						<div class='text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 '>
+					<div class='flex-col w-24 md:w-32'>
+						<div class='text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 '>
 							{value}
 						</div>
-						<span class='text-blue-700'>{label}</span>
+						<span class='text-black text-xl uppercase font-bold'>{label}</span>
 					</div>
 				))}
 			</section>
