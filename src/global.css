@@ -8,16 +8,12 @@
 	}
 
 	.flavour-selected {
-		@apply pointer-events-none opacity-100 contrast-100 drop-shadow-4xl;
+		@apply opacity-100 pointer-events-none contrast-100 drop-shadow-4xl;
 	}
 }
 
-#twitch-embed-parent {
-	background: #9046ffc2;
-	padding: 16px;
-	animation: twitch-bg 3s ease infinite;
-	border-radius: 16px;
-	box-shadow: 0px 0px 100px 5px rgba(140, 0, 255, 0.52);
+body {
+	background: #000214;
 }
 
 @keyframes twitch-bg {

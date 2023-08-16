@@ -2,9 +2,7 @@
 import FaqItem from './FaqItem.astro'
 ---
 
-<section
-	class='pt-20 pb-10 bg-gradient-to-r from-miduconf-yellow-100 via-miduconf-yellow-100 to-miduconf-orange-100 sm:py-16 md:py-20 lg:py-24'
->
+<section class='pt-20 pb-10 sm:py-16 md:py-20 lg:py-24'>
 	<div class='max-w-6xl px-8 mx-auto lg:px-16'>
 		<h2 class='mb-2 text-4xl font-black text-gray-800 xl:text-5xl'>
 			<svg class='inline-block w-20 h-20' viewBox='0 0 72 72'>
@@ -56,7 +54,7 @@ import FaqItem from './FaqItem.astro'
 						href='https://twitch.tv/midudev'
 						target='_blank'
 						rel='noopener'
-					>Twitch de midudev
+						>Twitch de midudev
 					</a> totalmente gratis.
 				</FaqItem>
 
@@ -86,19 +84,19 @@ import FaqItem from './FaqItem.astro'
 </section>
 
 <script type='module'>
-const $faq = document.getElementById('faq')
+	const $faq = document.getElementById('faq')
 
-$faq.querySelectorAll('button').forEach((button) => {
-	button.addEventListener('click', (event) => {
-		const { currentTarget } = event
+	$faq.querySelectorAll('button').forEach((button) => {
+		button.addEventListener('click', (event) => {
+			const { currentTarget } = event
 
-		const svg = currentTarget.querySelector('svg')
-		const isClosed = svg.classList.contains('rotate-90')
+			const svg = currentTarget.querySelector('svg')
+			const isClosed = svg.classList.contains('rotate-90')
 
-		currentTarget.nextElementSibling.classList.toggle('hidden', !isClosed)
+			currentTarget.nextElementSibling.classList.toggle('hidden', !isClosed)
 
-		const [from, to] = isClosed ? ['rotate-90', 'rotate-0'] : ['rotate-0', 'rotate-90']
-		svg.classList.replace(from, to)
+			const [from, to] = isClosed ? ['rotate-90', 'rotate-0'] : ['rotate-0', 'rotate-90']
+			svg.classList.replace(from, to)
+		})
 	})
-})
 </script>

@@ -1,20 +1,32 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "types": ["astro/client", "preact"],
-    "outDir": "./dist",
-    "moduleResolution": "node",
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact",
-    "baseUrl": ".",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@services/*": ["src/services/*"]
-    }
-  }
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"types": [
+			"astro/client",
+			"preact"
+		],
+		"outDir": "./dist",
+		"moduleResolution": "node",
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": [
+				"src/components/*"
+			],
+			"@hooks/*": [
+				"src/hooks/*"
+			],
+			"@layouts/*": [
+				"src/layouts/*"
+			],
+			"@services/*": [
+				"src/services/*"
+			]
+		}
+	}
 }

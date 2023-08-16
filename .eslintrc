@@ -18,6 +18,7 @@
 		"sourceType": "module"
 	},
 	"rules": {
+		"space-before-function-paren": "off",
 		"no-unused-vars": "warn",
 		"@typescript-eslint/no-unused-vars": [
 			"warn",
@@ -29,21 +30,35 @@
 		],
 		"no-multiple-empty-lines": "off",
 		"no-tabs": "off",
-		"indent": ["warn", "tab"],
-		"quotes": ["warn", "single"],
-		"jsx-quotes": ["warn", "prefer-single"],
+		"indent": [
+			"warn",
+			"tab"
+		],
+		"quotes": [
+			"warn",
+			"single"
+		],
+		"jsx-quotes": [
+			"warn",
+			"prefer-single"
+		],
 		"eol-last": "off"
 	},
 	"overrides": [
 		{
-			"files": ["*.astro"],
+			"files": [
+				"*.astro"
+			],
 			"parser": "astro-eslint-parser",
 			"parserOptions": {
 				"parser": "@typescript-eslint/parser",
-				"extraFileExtensions": [".astro"]
+				"extraFileExtensions": [
+					".astro"
+				]
 			},
 			"rules": {
-				"astro/no-set-html-directive": "error"
+				"astro/no-set-html-directive": "error",
+				"space-before-function-paren": "off"
 			}
 		}
 	]
