@@ -68,6 +68,13 @@ export const getServerSideProps = async (ctx) => {
 	const { ticket } = ctx.query
 	// create supabase client
 	const supabase = createPagesServerClient(ctx)
+	// if no ticket, return empty props
+	if (!ticket) {
+		return {
+			props: {}
+		}
+	}
+
 	// search ticket for user
 	const { data, error } = await supabase.from('ticket').select('*').eq('user_name', ticket)
 	// check if we have results
