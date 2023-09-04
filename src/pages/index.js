@@ -22,8 +22,10 @@ const description =
 const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
-export default function Home({ username, flavor, ticketNumber }) {
-	const ogImage = username ? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg` : `${url}${defaultOgImage}`
+export default function Home({ username, flavor, ticketNumber, burst }) {
+	const ogImage = username
+		? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?c=${burst}`
+		: `${url}${defaultOgImage}`
 
 	return (
 		<>
@@ -72,6 +74,7 @@ export const getServerSideProps = async (ctx) => {
 	if (data.length > 0 && !error) {
 		return {
 			props: {
+				burst: crypto.randomUUID(),
 				ticketNumber: data[0].ticket_number,
 				username: data[0].user_name,
 				flavor: data[0].flavour
