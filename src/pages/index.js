@@ -19,7 +19,7 @@ const PREFIX_CDN = 'https://uqfzwvabnygcbokitxqs.supabase.co/storage/v1/object/p
 const title = 'miduConf - La conferencia de programación y desarrollo'
 const description =
 	'Conferencia de programación y tecnología para el día del programador y la programadora'
-const defaultOgImage = '/og-image.png'
+const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
 export default function Home({ username, flavor, ticketNumber }) {
