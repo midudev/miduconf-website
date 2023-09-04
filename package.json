@@ -1,45 +1,39 @@
 {
-  "name": "miduconf",
-  "version": "0.5.3",
+  "name": "miduconf.com",
+  "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "14.x"
-  },
   "scripts": {
-    "phoenix": "rm -f package-lock.json && rm -rf ./node_modules && npm install --no-fund --no-audit --no-package-lock --legacy-peer-deps",
-    "phoenix-win": "del /s /q package-lock.json && echo 'Borrando node_modules...' && rmdir /s /q node_modules && cls && echo 'Instalando Dependencias' && npm install --no-fund --no-audit --no-package-lock --legacy-peer-deps",
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "format": "prettier -w .",
-    "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx",
-    "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx --fix"
-  },
-  "devDependencies": {
-    "@astrojs/preact": "1.0.2",
-    "@astrojs/tailwind": "1.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "5.36.2",
-    "astro": "1.1.5",
-    "eslint": "8.23.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-config-standard": "17.0.0",
-    "eslint-plugin-astro": "0.17.1",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-n": "15.2.5",
-    "eslint-plugin-promise": "6.0.1",
-    "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.5.4",
-    "tailwindcss": "3.1.8"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@astrojs/netlify": "1.0.2",
-    "@netlify/functions": "1.2.0",
-    "@supabase/supabase-js": "1.35.6",
-    "atropos": "1.0.2",
-    "chrome-aws-lambda": "10.1.0",
-    "preact": "10.10.6",
-    "puppeteer-core": "10.4.0"
+    "@supabase/auth-helpers-nextjs": "^0.7.4",
+    "@supabase/auth-helpers-react": "^0.4.2",
+    "@supabase/supabase-js": "2.33.1",
+    "@tabler/icons-react": "2.32.0",
+    "@vercel/kv": "0.2.2",
+    "atropos": "2.0.2",
+    "autoprefixer": "10.4.15",
+    "canvas-confetti": "1.6.0",
+    "eslint": "8.48.0",
+    "eslint-config-next": "13.4.19",
+    "flowbite": "1.8.1",
+    "html-to-image": "1.11.11",
+    "next": "13.4.19",
+    "postcss": "8.4.29",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-fast-marquee": "1.6.0",
+    "zustand": "4.4.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.21",
+    "clsx": "2.0.0",
+    "tailwind-merge": "1.14.0",
+    "tailwindcss": "3.3.3",
+    "tailwindcss-textshadow": "2.1.3",
+    "typescript": "5.2.2"
   }
 }
