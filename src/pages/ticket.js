@@ -138,7 +138,7 @@ https://miduconf.com?ticket=${username}`
 			</header>
 
 			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20`}>
-				<div className='flex items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center'>
+				<div className='flex flex-col items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center md:flex-row'>
 					<a
 						className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
 						href='/'
@@ -165,7 +165,7 @@ https://miduconf.com?ticket=${username}`
 					<button
 						onClick={handleShare}
 						type='button'
-						className={`text-white cursor-pointer hover:bg- bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-125 ${
+						className={`text-white cursor-pointer hover:bg- bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-125 [text-wrap:balance] ${
 							buttonText !== STEPS_LOADING.ready
 								? 'pointer-events-none opacity-70 bg-slate-700'
 								: ''
