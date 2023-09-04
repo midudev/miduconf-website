@@ -19,10 +19,12 @@ const PREFIX_CDN = 'https://uqfzwvabnygcbokitxqs.supabase.co/storage/v1/object/p
 const title = 'miduConf - La conferencia de programación y desarrollo'
 const description =
 	'Conferencia de programación y tecnología para el día del programador y la programadora'
-const ogImage = '/og-image.png'
+const defaultOgImage = '/og-image.png'
 const url = 'https://miduconf.com'
 
-export default function Home ({ username, flavor, ticketNumber }) {
+export default function Home({ username, flavor, ticketNumber }) {
+	const ogImage = username ? `${PREFIX_CDN}/ticket-${ticketNumber}.png` : `${url}${defaultOgImage}`
+
 	return (
 		<>
 			<Head>

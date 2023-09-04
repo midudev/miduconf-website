@@ -21,7 +21,7 @@ export const interTight = InterTight({
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
-async function dataUrlToFile (dataUrl, fileName) {
+async function dataUrlToFile(dataUrl, fileName) {
 	const res = await fetch(dataUrl)
 	const blob = await res.blob()
 	return new File([blob], fileName, { type: 'image/jpg' })
@@ -40,7 +40,7 @@ const getInfoFromUser = ({ user }) => {
 	return { avatar, fullname, username }
 }
 
-export default function Ticket ({ user, ticketNumber, selectedFlavor = 'javascript' }) {
+export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascript' }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
 	const [number, setNumber] = useState(ticketNumber)
 	const [flavorKey, setFlavorKey] = useState(selectedFlavor)
@@ -194,15 +194,14 @@ https://miduconf.com?ticket=${username}`
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
-							class='icon icon-tabler icon-tabler-logout'
 							width='24'
 							height='24'
 							viewBox='0 0 24 24'
-							stroke-width='1.5'
+							strokeWidth='1.5'
 							stroke='currentColor'
 							fill='none'
-							stroke-linecap='round'
-							stroke-linejoin='round'
+							strokeLinecap='round'
+							strokeLinejoin='round'
 						>
 							<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
 							<path d='M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2'></path>
