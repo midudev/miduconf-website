@@ -40,7 +40,10 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: 'github',
 			options: {
-				redirectTo: 'http://localhost:3000/api/auth/callback'
+				redirectTo:
+					process.env.NODE_ENV !== 'production'
+						? 'http://localhost:3000/api/auth/callback'
+						: 'https://miduconf.com/api/auth/callback'
 			}
 		})
 	}
