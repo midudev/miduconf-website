@@ -34,7 +34,7 @@ export const Gifts = () => {
 				</a>
 				!
 			</p>
-			<div className='bg-[#000214] group-hover:bg-[#000214]/10 w-full px-6 py-10 rounded transition grid grid-cols-3 gap-8'>
+			<div className='bg-[#000214] group-hover:bg-[#000214]/10 w-full px-6 py-10 rounded transition grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
 				{GIFTS.map((gift, index) => (
 					<div
 						key={index}

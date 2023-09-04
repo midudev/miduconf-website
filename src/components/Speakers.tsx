@@ -26,7 +26,7 @@ const SPEAKERS = [
 		img: 'david'
 	},
 	{
-		name: 'Debbie O\'Brien',
+		name: "Debbie O'Brien",
 		title: 'DevRel @ Microsoft',
 		twitter: 'debs_obrien',
 		img: 'debbie'
@@ -39,7 +39,7 @@ const SPEAKERS = [
 	}
 ]
 
-function Speaker ({ name, title, twitter, img }) {
+function Speaker({ name, title, twitter, img }) {
 	return (
 		<article className='relative flex flex-col items-center justify-center w-full p-[1px] transition-all rounded-md bg-gradient-to-b from-white/20 via-transparent to-transparent hover:via-white/10 group'>
 			<div className='bg-[#000214] group-hover:bg-[#000214]/10 w-full px-6 py-10 rounded transition'>
@@ -65,7 +65,7 @@ function Speaker ({ name, title, twitter, img }) {
 	)
 }
 
-export function Speakers () {
+export function Speakers() {
 	return (
 		<section className='flex flex-col flex-wrap items-center justify-center my-48'>
 			<h2 className='text-6xl font-bold text-center text-white'>Speakers</h2>
@@ -73,7 +73,7 @@ export function Speakers () {
 				Los mejores oradores, colaboradores y educadores de la comunidad de programación y
 				tecnología.
 			</p>
-			<div className='grid grid-cols-3 my-16 gap-x-8 gap-y-8'>
+			<div className='grid grid-cols-1 my-16 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8'>
 				{SPEAKERS.map((speaker) => (
 					<Speaker key={speaker.twitter} {...speaker} />
 				))}
