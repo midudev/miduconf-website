@@ -282,16 +282,19 @@ export const getServerSideProps = async (ctx) => {
 
 	if (error) console.error(error)
 
+	const userId = session?.user?.id
+	const metadata = session?.user?.user_metadata ?? {}
+	const { full_name: userFullName, preferred_username: username } = metadata
+
 	// if no ticket present, create one
 	if (data.length === 0) {
 		console.info('[info] No ticket. Creating for user {')
 		const { error } = await supabase.from('ticket').insert({
+			flavour: 'javascript',
 			id: session.user.id,
-			user_fullname: session.user.user_metadata.full_name,
-			user_id: session.user.id,
-			user_name:
-				session.user.user_metadata.preferred_username ?? session.user.user_metadata.full_name,
-			flavour: 'javascript'
+			user_fullname: userFullName,
+			user_id: userId,
+			user_name: username ?? userFullName
 		})
 
 		if (error) console.error(error)
@@ -310,7 +313,7 @@ export const getServerSideProps = async (ctx) => {
 			selectedFlavor,
 			ticketNumber,
 			initialSession: session,
-			user: getInfoFromUser({ user: session.user })
+			user: getInfoFromUser({ user: session?.user })
 		}
 	}
 }
