@@ -23,7 +23,7 @@ const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
 export default function Home({ username, flavor, ticketNumber }) {
-	const ogImage = username ? `${PREFIX_CDN}/ticket-${ticketNumber}.png` : `${url}${defaultOgImage}`
+	const ogImage = username ? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg` : `${url}${defaultOgImage}`
 
 	return (
 		<>
