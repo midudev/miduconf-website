@@ -14,7 +14,7 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
 export const interTight = InterTight({ weight: ['500', '800', '900'], subsets: ['latin'] })
 
-const PREFIX_CDN = 'https://uqfzwvabnygcbokitxqs.supabase.co/storage/v1/object/public/tickets'
+const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
 const title = 'miduConf - La conferencia de programación y desarrollo'
 const description =
