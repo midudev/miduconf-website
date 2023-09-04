@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import Marquee from '@/components/magicui/Marquee'
 import { DonDominio } from '@/components/logos/dondominio'
+import { ReactNode } from 'react'
 
 const reviews = [
 	{
@@ -157,7 +158,15 @@ const reviews = [
 	}
 ]
 
-const ReviewCard = ({ logo, name, link }: { logo: string; name: string; link: string }) => {
+const ReviewCard = ({
+	logo,
+	name,
+	link
+}: {
+	logo: string | ReactNode
+	name: string
+	link: string
+}) => {
 	return (
 		<a
 			href={link}
