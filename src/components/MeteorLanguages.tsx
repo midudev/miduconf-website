@@ -28,7 +28,7 @@ export const Meteors = ({ number = 20 }: MeteorsProps) => {
 	return (
 		<div
 			ref={ref}
-			className='absolute inset-0 w-full h-full animate-fade animate-once animate-duration-1000 z-[-1]'
+			className='absolute inset-0 w-full h-full overflow-hidden animate-fade animate-once animate-duration-1000 z-[-1]'
 		>
 			{[...meteorStyles].map((style, idx) => (
 				// Meteor Head
