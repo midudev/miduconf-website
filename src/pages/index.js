@@ -52,7 +52,7 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 				<HeaderCountdown />
 			</header>
 
-			<main className={`${inter.className} max-w-5xl m-auto mt-36 pb-20`}>
+			<main className={`${inter.className} max-w-5xl m-auto mt-36 pb-20 px-4`}>
 				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
 				<Speakers />
 				<Sponsors />
