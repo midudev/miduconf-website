@@ -32,7 +32,7 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 		fetch('/api/number')
 			.then((res) => res.json())
 			.then((response) => {
-				setNumber(response.number)
+				setNumber(+response.number + 100)
 			})
 	}, [])
 
