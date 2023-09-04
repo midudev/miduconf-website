@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Inter, Inter_Tight } from 'next/font/google'
+import { useState } from 'react'
+import { Inter, Inter_Tight as InterTight } from 'next/font/google'
 import Head from 'next/head'
 import { toJpeg } from 'html-to-image'
 
@@ -14,11 +14,14 @@ import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
 
 export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
-export const interTight = Inter_Tight({ weight: ['500', '800', '900'], subsets: ['latin'] })
+export const interTight = InterTight({
+	weight: ['500', '800', '900'],
+	subsets: ['latin']
+})
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
-async function dataUrlToFile(dataUrl, fileName) {
+async function dataUrlToFile (dataUrl, fileName) {
 	const res = await fetch(dataUrl)
 	const blob = await res.blob()
 	return new File([blob], fileName, { type: 'image/jpg' })
@@ -37,7 +40,7 @@ const getInfoFromUser = ({ user }) => {
 	return { avatar, fullname, username }
 }
 
-export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascript' }) {
+export default function Ticket ({ user, ticketNumber, selectedFlavor = 'javascript' }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
 	const [number, setNumber] = useState(ticketNumber)
 	const [flavorKey, setFlavorKey] = useState(selectedFlavor)
@@ -48,7 +51,8 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	const { username, avatar, name } = user
 
 	const title = 'miduConf - Conferencia de Programación y Tecnología'
-	const description = `¡No te pierdas la miduConf el 13 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!`
+	const description =
+		'¡No te pierdas la miduConf el 13 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!'
 	const url = `https://miduconf.com?ticket=${username}`
 	const ogImage = `${PREFIX_CDN}/ticket-${number}.jpg?${crypto.randomUUID()}=_buster`
 

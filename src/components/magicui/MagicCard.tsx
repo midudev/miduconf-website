@@ -4,7 +4,7 @@ import clsx, { ClassValue } from 'clsx'
 import { CSSProperties, ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export function cn(...inputs: ClassValue[]) {
+export function cn (...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
 
@@ -13,7 +13,7 @@ interface MousePosition {
 	y: number
 }
 
-function useMousePosition(): MousePosition {
+function useMousePosition (): MousePosition {
 	const [mousePosition, setMousePosition] = useState<MousePosition>({
 		x: 0,
 		y: 0
@@ -89,9 +89,9 @@ const MagicContainer = ({ children, className }: MagicContainerProps) => {
 				box.style.setProperty('--mouse-y', `${boxY}px`)
 
 				if (inside) {
-					box.style.setProperty('--opacity', `1`)
+					box.style.setProperty('--opacity', '1')
 				} else {
-					box.style.setProperty('--opacity', `0`)
+					box.style.setProperty('--opacity', '0')
 				}
 			})
 		}

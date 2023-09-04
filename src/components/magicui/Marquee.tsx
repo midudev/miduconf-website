@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils'
-import { Children, cloneElement } from 'react'
+import { Children, ReactNode, cloneElement } from 'react'
 
 interface MarqueeProps {
 	className?: string
 	reverse?: boolean
 	pauseOnHover?: boolean
-	children?: React.ReactNode
-	[key: string]: any
+	children?: ReactNode
+	[key: string]: unknown
 }
 
 export const Marquee = ({

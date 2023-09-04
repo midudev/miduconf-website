@@ -48,19 +48,19 @@ interface RadialProps {
 }
 
 export const RadialGradient = ({
-  type = 'circle',
-  from = 'rgba(120,119,198,0.3)',
-  to = 'hsla(0, 0%, 0%, 0)',
-  size = 300,
-  origin = 'center',
-  className,
+	type = 'circle',
+	from = 'rgba(120,119,198,0.3)',
+	to = 'hsla(0, 0%, 0%, 0)',
+	size = 300,
+	origin = 'center',
+	className
 }: RadialProps) => {
-  const styles: CSSProperties = {
-    position: 'absolute',
-    pointerEvents: 'none',
-    inset: 0,
-    backgroundImage: `radial-gradient(${type} ${size}px at ${origin}, ${from}, ${to})`,
-  }
+	const styles: CSSProperties = {
+		position: 'absolute',
+		pointerEvents: 'none',
+		inset: 0,
+		backgroundImage: `radial-gradient(${type} ${size}px at ${origin}, ${from}, ${to})`
+	}
 
-  return <div className={className} style={styles} />
+	return <div className={className} style={styles} />
 }

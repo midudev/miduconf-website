@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { CSSProperties } from 'react'
+import { CSSProperties, ReactNode } from 'react'
 
 interface ShimmerButtonProps {
 	shimmerColor?: string
@@ -8,8 +8,8 @@ interface ShimmerButtonProps {
 	shimmerDuration?: string
 	background?: string
 	className?: string
-	children?: React.ReactNode
-	[key: string]: any // ...props
+	children?: ReactNode
+	[key: string]: unknown // ...props
 }
 
 export const ShimmerButton = ({

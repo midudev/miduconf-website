@@ -24,7 +24,7 @@ const BackgroundPattern = () => (
 	</svg>
 )
 
-export default function Ticket({ transition, number, flavor, user }) {
+export default function Ticket ({ transition, number, flavor, user }) {
 	const { username, avatar, name } = user ?? {}
 
 	return (
@@ -81,7 +81,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 							</div>
 
 							<div
-								className={`absolute z-10 overflow-hidden opacity-30 -right-8 -bottom-10 h-full rounded-r-2xl flex items-end`}
+								className={'absolute z-10 overflow-hidden opacity-30 -right-8 -bottom-10 h-full rounded-r-2xl flex items-end'}
 							>
 								<figure className={`${flavor.figure} w-96 h-96 -rotate-6 p-8 -z-10`}>
 									<flavor.component className='w-full h-auto' />

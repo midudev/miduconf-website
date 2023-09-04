@@ -12,11 +12,10 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	useEffect(() => {
 		if (initialFlavor) return
 
-		let intervalId
 		const keys = Object.keys(FLAVORS)
 		const length = keys.length
 
-		intervalId = setInterval(() => {
+		const intervalId = setInterval(() => {
 			// get a random key from FLAVORS object
 			const randomKey = keys[Math.floor(Math.random() * length)]
 			setFlavor(FLAVORS[randomKey])

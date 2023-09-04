@@ -1,4 +1,4 @@
-export function ShareTicketButton({ children, size = 'small' }) {
+export function ShareTicketButton ({ children, size = 'small' }) {
 	return (
 		<a
 			href='#ticket'

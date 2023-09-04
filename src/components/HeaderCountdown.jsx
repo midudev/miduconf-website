@@ -3,7 +3,7 @@ import { useRemainingTime } from '../hooks/useRemainingTime'
 import { useEffect, useState } from 'react'
 import { ShareTicketButton } from './ShareTicketButton'
 
-export function HeaderCountdown() {
+export function HeaderCountdown () {
 	const { seconds, minutes, hours, days } = useRemainingTime(new Date(1694628000000), {
 		fillingZeros: false
 	})

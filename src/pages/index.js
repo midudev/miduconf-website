@@ -1,4 +1,4 @@
-import { Inter, Inter_Tight } from 'next/font/google'
+import { Inter, Inter_Tight as InterTight } from 'next/font/google'
 import Head from 'next/head'
 
 import { Background } from '@/components/Background'
@@ -12,7 +12,7 @@ import { Agenda } from '@/sections/agenda'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
-export const interTight = Inter_Tight({ weight: ['500', '800', '900'], subsets: ['latin'] })
+export const interTight = InterTight({ weight: ['500', '800', '900'], subsets: ['latin'] })
 
 const PREFIX_CDN = 'https://uqfzwvabnygcbokitxqs.supabase.co/storage/v1/object/public/tickets'
 
@@ -22,7 +22,7 @@ const description =
 const ogImage = '/og-image.png'
 const url = 'https://miduconf.com'
 
-export default function Home({ username, flavor, ticketNumber }) {
+export default function Home ({ username, flavor, ticketNumber }) {
 	return (
 		<>
 			<Head>
