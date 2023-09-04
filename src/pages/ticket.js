@@ -275,6 +275,7 @@ export const getServerSideProps = async (ctx) => {
 
 	// if no ticket present, create one
 	if (data.length === 0) {
+		console.info('[info] No ticket. Creating for user {')
 		const { error } = await supabase.from('ticket').insert({
 			id: session.user.id,
 			user_fullname: session.user.user_metadata.full_name,
@@ -288,11 +289,11 @@ export const getServerSideProps = async (ctx) => {
 
 		const { data } = await supabase.from('ticket').select('*').eq('id', session.user.id)
 
-		selectedFlavor = data[0].flavour
-		ticketNumber = data[0].ticket_number
+		selectedFlavor = data[0].flavour ?? 'javascript'
+		ticketNumber = data[0].ticket_number ?? 0
 	} else {
-		selectedFlavor = data[0].flavour
-		ticketNumber = data[0].ticket_number
+		selectedFlavor = data[0].flavour ?? 'javascript'
+		ticketNumber = data[0].ticket_number ?? 0
 	}
 
 	return {
