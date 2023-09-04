@@ -45,7 +45,6 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	const [number, setNumber] = useState(ticketNumber)
 	const [flavorKey, setFlavorKey] = useState(selectedFlavor)
 	const supabase = useSupabaseClient()
-
 	const flavor = FLAVORS[flavorKey]
 
 	const { username, avatar, name } = user
@@ -288,14 +287,12 @@ export const getServerSideProps = async (ctx) => {
 		if (error) console.error(error)
 
 		const { data } = await supabase.from('ticket').select('*').eq('id', session.user.id)
-
-		selectedFlavor = data[0].flavour ?? 'javascript'
-		ticketNumber = data[0].ticket_number ?? 0
+		selectedFlavor = data[0].flavour || 'javascript'
+		ticketNumber = data[0].ticket_number || 0
 	} else {
-		selectedFlavor = data[0].flavour ?? 'javascript'
-		ticketNumber = data[0].ticket_number ?? 0
+		selectedFlavor = data[0].flavour || 'javascript'
+		ticketNumber = data[0].ticket_number || 0
 	}
-
 	return {
 		props: {
 			selectedFlavor,
