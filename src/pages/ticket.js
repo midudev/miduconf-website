@@ -254,15 +254,24 @@ export const getServerSideProps = async (ctx) => {
 
 	// Check if we have a session
 	const {
+		error: errorSession,
 		data: { session }
 	} = await supabase.auth.getSession()
 
-	if (!session) {
-		console.log('NOOOO')
-
+	if (errorSession) {
+		console.error(errorSession)
 		return {
 			redirect: {
-				destination: '/',
+				destination: '/?error=session_error',
+				permanent: false
+			}
+		}
+	}
+
+	if (!session) {
+		return {
+			redirect: {
+				destination: '/?error=not_logged_in',
 				permanent: false
 			}
 		}
