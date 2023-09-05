@@ -559,5 +559,193 @@ export const FLAVORS = {
 			month: 'text-[#1070b3]',
 			time: 'text-[#1070b3]'
 		}
+	},
+	dart: {
+		component: ({ className }) => (
+			<svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 136.02 136.02'>
+				<defs>
+					<radialGradient
+						id='id_radial_gradient_dart'
+						cx='68.005'
+						cy='1936.561'
+						fx='68.005'
+						fy='1936.561'
+						r='68'
+						gradientTransform='translate(0 -1868.556)'
+						gradientUnits='userSpaceOnUse'
+					>
+						<stop offset='0' stop-color='#fff' stop-opacity='.1' />
+						<stop offset='1' stop-color='#fff' stop-opacity='0' />
+					</radialGradient>
+				</defs>
+				<path
+					d='m27.74,108.28l-23.27-23.27c-2.76-2.83-4.47-6.83-4.47-10.74,0-1.81,1.02-4.64,1.79-6.26L23.27,23.27l4.47,85.01Z'
+					fill='#01579b'
+				/>
+				<path
+					d='m107.39,27.74l-23.27-23.27c-2.03-2.04-6.26-4.47-9.84-4.47-3.08,0-6.1.62-8.05,1.79L23.28,23.27l84.11,4.47Z'
+					fill='#40c4ff'
+				/>
+				<polygon
+					points='55.48 136.02 111.86 136.02 111.86 111.86 69.8 98.43 31.32 111.86 55.48 136.02'
+					fill='#40c4ff'
+				/>
+				<path
+					d='m23.27,95.75c0,7.18.9,8.94,4.47,12.53l3.58,3.58h80.54l-39.37-44.74L23.27,23.27v72.48Z'
+					fill='#29b6f6'
+				/>
+				<path
+					d='m94.86,23.26H23.27l88.59,88.59h24.16v-55.48l-28.64-28.64c-4.02-4.03-7.59-4.47-12.52-4.47Z'
+					fill='#01579b'
+				/>
+				<path
+					d='m28.64,109.17c-3.58-3.59-4.47-7.13-4.47-13.42V24.16l-.89-.89v72.48c-.01,6.29-.01,8.03,5.36,13.42l2.68,2.68h0l-2.68-2.68Z'
+					fill='#fff'
+					isolation='isolate'
+					opacity='.2'
+				/>
+				<polygon
+					points='135.13 55.48 135.13 110.96 110.97 110.96 111.86 111.86 136.02 111.86 136.02 56.37 135.13 55.48'
+					fill='#263238'
+					isolation='isolate'
+					opacity='.2'
+				/>
+				<path
+					d='m107.39,27.74c-4.44-4.44-8.07-4.47-13.42-4.47H23.28l.89.89h69.8c2.67,0,9.41-.45,13.42,3.58h0Z'
+					fill='#fff'
+					isolation='isolate'
+					opacity='.2'
+				/>
+				<path
+					d='m135.13,55.48l-27.74-27.74-23.27-23.27c-2.03-2.04-6.26-4.47-9.84-4.47-3.08,0-6.1.62-8.05,1.79L23.28,23.27,1.8,68.01c-.77,1.63-1.79,4.46-1.79,6.26,0,3.91,1.72,7.9,4.47,10.74l21.44,21.29c.51.63,1.11,1.27,1.82,1.98l.89.89,2.68,2.68,23.27,23.27.89.89h56.37v-24.16h24.16v-55.48l-.87-.89Z'
+					fill='url(#id_radial_gradient_dart)'
+					isolation='isolate'
+					opacity='.2'
+				/>
+			</svg>
+		),
+		colors: {
+			ticket: 'bg-[#01579B]/30',
+			border: 'border-[#01579B]',
+			text: 'text-[#FFFFFF]',
+			month: 'text-[#29B6F6]',
+			time: 'text-[#29B6F6]'
+		}
+	},
+	flutter: {
+		component: ({ className }) => (
+			<svg width='100%' height='97%' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35.064 43.413'>
+				<path d='m35.063,20.038h-13.357l-11.686,11.689,6.677,6.677,18.366-18.366Z' fill='#54c5f8' />
+				<path d='m6.68,28.386L0,21.706,21.706,0h13.358L6.68,28.386Z' fill='#54c5f8' />
+				<path d='m16.698,38.404l5.009,5.009h13.358l-11.689-11.686-6.677,6.677Z' fill='#01579b' />
+				<path d='m16.698,38.404l9.906-3.429-3.229-3.248-6.677,6.677Z' fill='none' />
+				<path d='m16.697,25.046l-6.678,6.677,6.678,6.678,6.677-6.678-6.677-6.677Z' fill='#29b6f6' />
+			</svg>
+		),
+		colors: {
+			ticket: 'bg-[#01579B]/30',
+			border: 'border-[#01579B]',
+			text: 'text-[#FFFFFF]',
+			month: 'text-[#54C5F8]',
+			time: 'text-[#54C5F8]'
+		}
+	},
+	firebase: {
+		component: ({ className }) => (
+			<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 57.52 57.52'>
+				<defs>
+					<clipPath id='clippath'>
+						<path
+							d='m42.99,14.2c-.107-.656-.723-1.102-1.38-1-.248.033-.477.149-.65.33l-6.24,6.23-4.88-9.32c-.306-.588-1.03-.817-1.618-.511,0,0-.001,0-.002,0-.212.122-.388.298-.51.51l-2.66,5.1-6.71-12.52c-.315-.577-1.039-.788-1.615-.473-.002,0-.003.002-.005.003-.33.176-.562.492-.63.86l-6.5,41.52,17.35,9.78c1.087.596,2.403.596,3.49,0l17.5-9.74-4.94-30.77Z'
+							fill='none'
+						/>
+					</clipPath>
+					<linearGradient
+						id='id_radial_gradient_firebase'
+						x1='17.055'
+						y1='294.68'
+						x2='14.665'
+						y2='295.93'
+						gradientTransform='translate(0 325.41) scale(1 -1)'
+						gradientUnits='userSpaceOnUse'
+					>
+						<stop offset='0' stop-color='#a52714' />
+						<stop offset='.4' stop-color='#a52714' stop-opacity='.5' />
+						<stop offset='.8' stop-color='#a52714' stop-opacity='0' />
+					</linearGradient>
+					<linearGradient
+						id='id_radial_gradient_firebase_2'
+						x1='27.235'
+						y1='298.175'
+						x2='26.165'
+						y2='299.245'
+						gradientTransform='translate(0 325.41) scale(1 -1)'
+						gradientUnits='userSpaceOnUse'
+					>
+						<stop offset='0' stop-color='#a52714' stop-opacity='.8' />
+						<stop offset='.5' stop-color='#a52714' stop-opacity='.21' />
+						<stop offset='1' stop-color='#a52714' stop-opacity='0' />
+					</linearGradient>
+					<linearGradient
+						id='id_radial_gradient_firebase_3'
+						x1='-1164.023'
+						y1='2663.651'
+						x2='-1149.033'
+						y2='2678.651'
+						gradientTransform='translate(3116.512 -7100.276) scale(2.67)'
+						gradientUnits='userSpaceOnUse'
+					>
+						<stop offset='0' stop-color='#fff' stop-opacity='.1' />
+						<stop offset='1' stop-color='#fff' stop-opacity='0' />
+					</linearGradient>
+				</defs>
+				<g clip-path='url(#clippath)'>
+					<g>
+						<path
+							d='m9.59,44.93L16.09,3.41c.103-.639.7-1.076,1.34-.98.368.067.686.295.87.62l6.71,12.53,2.66-5.1c.306-.588,1.03-.817,1.618-.511,0,0,.001,0,.002,0,.212.122.388.298.51.51l18.1,34.45H9.59Z'
+							fill='#ffa000'
+						/>
+						<path
+							d='m31.76,2.71L0,0v57.52l9.59-12.59L31.76,2.71Z'
+							fill='url(#id_radial_gradient_firebase)'
+							isolation='isolate'
+							opacity='.12'
+						/>
+						<path d='m32.03,28.76l-7-13.21-15.44,29.38,22.44-16.17Z' fill='#f57c00' />
+						<path
+							d='m0,0h57.52v57.52H0V0Z'
+							fill='url(#id_radial_gradient_firebase_2)'
+							isolation='isolate'
+							opacity='.2'
+						/>
+						<path
+							d='m47.94,44.93l-5-30.76c-.107-.656-.723-1.102-1.38-1-.247.035-.476.151-.65.33l-31.32,31.43,17.35,9.78c1.087.596,2.403.596,3.49,0l17.51-9.78Z'
+							fill='#ffca28'
+						/>
+						<path
+							d='m42.99,14.2c-.107-.656-.723-1.102-1.38-1-.248.033-.477.149-.65.33l-6.24,6.23-4.88-9.32c-.306-.588-1.03-.817-1.618-.511,0,0-.001,0-.002,0-.212.122-.388.298-.51.51l-2.66,5.1-6.71-12.52c-.315-.577-1.039-.788-1.615-.473-.002,0-.003.002-.005.003-.33.176-.562.492-.63.86l-6.5,41.52h0l.18.09,25-25,6.24-6.23c.452-.469,1.199-.484,1.668-.032.011.01.021.021.032.032.185.174.302.408.33.66l4.92,30.46h.06l-5.03-30.71ZM9.65,44.87L16.09,3.71c.086-.64.675-1.09,1.316-1.004.008.001.016.002.024.004.369.063.69.292.87.62l6.71,12.53,2.66-5.1c.298-.586,1.015-.818,1.601-.52.007.003.013.007.019.01.212.122.388.298.51.51l4.79,9.11-24.94,25Z'
+							fill='rgba(255, 255, 255, .2)'
+						/>
+						<path
+							d='m30.43,54.37c-1.09.6-2.41.6-3.5,0l-17.31-9.66v.27l17.32,9.73c1.087.596,2.403.596,3.49,0l17.5-9.74v-.27l-17.5,9.67Z'
+							fill='#a52714'
+							isolation='isolate'
+							opacity='.2'
+						/>
+						<path
+							d='m42.99,14.2c-.107-.656-.723-1.102-1.38-1-.248.033-.477.149-.65.33l-6.24,6.23-4.88-9.32c-.306-.588-1.03-.817-1.618-.511,0,0-.001,0-.002,0-.212.122-.388.298-.51.51l-2.66,5.1-6.71-12.52c-.315-.577-1.039-.788-1.615-.473-.002,0-.003.002-.005.003-.33.176-.562.492-.63.86l-6.5,41.52,17.35,9.78c1.087.596,2.403.596,3.49,0l17.5-9.74-4.94-30.77Z'
+							fill='url(#id_radial_gradient_firebase_3)'
+						/>
+					</g>
+				</g>
+			</svg>
+		),
+		colors: {
+			ticket: 'bg-[#FFA000]/30',
+			border: 'border-[#FFA000]',
+			text: 'text-[#FFFFFF]',
+			month: 'text-[#FFCA28]',
+			time: 'text-[#FFCA28]'
+		}
 	}
 }
