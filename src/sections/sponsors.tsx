@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils'
 import Marquee from '@/components/magicui/Marquee'
 import { DonDominio } from '@/components/logos/dondominio'
 import { ReactNode } from 'react'
+import { Malt } from '@/components/logos/maltes'
 
 const reviews = [
 	{
@@ -118,6 +119,7 @@ const reviews = [
 	},
 	{
 		name: 'Codely',
+		premium: true,
 		link: 'https://codely.com/',
 		logo: (
 			<svg height='50' viewBox='0 0 118 29' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
@@ -153,19 +155,25 @@ const reviews = [
 	},
 	{
 		name: 'Don Dominio',
+		premium: true,
 		link: 'https://www.dondominio.com/',
 		logo: <DonDominio className='' fill='currentColor' />
+	},
+	{
+		name: 'Malt',
+		premium: true,
+		link: 'https://malt.es',
+		logo: <Malt className='w-auto h-[60px]' fill='currentColor' />
 	}
 ]
 
 const ReviewCard = ({
 	logo,
-	name,
 	link
 }: {
-	logo: string | ReactNode
-	name: string
+	logo?: string | ReactNode
 	link: string
+	premium?: boolean
 }) => {
 	return (
 		<a
@@ -190,22 +198,35 @@ export const Sponsors = () => {
 			<p className='max-w-xl text-xl text-sky-200 text-center [†ext-wrap:balance] mt-4'>
 				¡Gracias a ellos hacemos posible el evento!
 			</p>
+
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<Marquee pauseOnHover className='[--duration:40s]'>
-					{reviews.map((review) => (
-						<ReviewCard key={review.name} {...review} />
-					))}
-				</Marquee>
-				<Marquee reverse pauseOnHover className='[--duration:40s]'>
+				<Marquee size='large' className='[--duration:0s]'>
 					{reviews
-						.slice()
-						.reverse()
+						.filter(({ premium }) => premium)
 						.map((review) => (
 							<ReviewCard key={review.name} {...review} />
 						))}
 				</Marquee>
-				<div className='absolute inset-y-0 left-0 w-40 pointer-events-none from-[#000214] to-transparent bg-gradient-to-r '></div>
-				<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
+				<div className='relative flex flex-col w-full overflow-hidden gap-y-4'>
+					<Marquee reverse pauseOnHover className='[--duration:40s]'>
+						{reviews
+							.filter(({ premium }) => !premium)
+							.slice()
+							.reverse()
+							.map((review) => (
+								<ReviewCard key={review.name} {...review} />
+							))}
+					</Marquee>
+					<Marquee pauseOnHover className='[--duration:40s]'>
+						{[...reviews.slice(4), ...reviews.slice(0, 4)]
+							.filter(({ premium }) => !premium)
+							.map((review) => (
+								<ReviewCard key={review.name} {...review} />
+							))}
+					</Marquee>
+					<div className='absolute inset-y-0 left-0 w-40 pointer-events-none from-[#000214] to-transparent bg-gradient-to-r '></div>
+					<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
+				</div>
 			</div>
 		</section>
 	)
