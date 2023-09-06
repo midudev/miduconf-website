@@ -43,7 +43,14 @@ const getInfoFromUser = ({ user }) => {
 export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascript' }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
 	const [number, setNumber] = useState(ticketNumber)
-	const [flavorKey, setFlavorKey] = useState(selectedFlavor)
+	const [flavorKey, setFlavorKey] = useState(() => {
+		// check selectedFlavor is valid
+		if (Object.keys(FLAVORS).includes(selectedFlavor)) {
+			return selectedFlavor
+		}
+		// by default we select javascript
+		return 'javascript'
+	})
 	const supabase = useSupabaseClient()
 	const flavor = FLAVORS[flavorKey]
 
