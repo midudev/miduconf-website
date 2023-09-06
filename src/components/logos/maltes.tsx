@@ -1,11 +1,11 @@
-export const Malt = ({ className, fill = '#A9AAAC' }) => (
+export const Malt = ({ className }) => (
 	<svg
 		className={className}
 		xmlns='http://www.w3.org/2000/svg'
 		x='0'
 		y='0'
 		viewBox='0 0 840 239.3'
-		fill='#fff'
+		fill='currentColor'
 		width='840'
 		height='240'
 	>

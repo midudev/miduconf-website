@@ -18,6 +18,10 @@ const GIFTS = [
 	{
 		name: 'Dominios y hosting de DonDominio',
 		img: 'dondominio'
+	},
+	{
+		name: 'Suscripciones a Elsa Speak',
+		img: 'elsa'
 	}
 ]
 
