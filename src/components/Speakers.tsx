@@ -8,12 +8,6 @@ const SPEAKERS = [
 		img: 'rauchg'
 	},
 	{
-		name: 'Javier Santaolalla',
-		title: 'Divulgador de ciencia',
-		twitter: 'JaSantaolalla',
-		img: 'javier'
-	},
-	{
 		name: 'Carmen Ansio',
 		title: 'UX Engineer Freelance',
 		twitter: 'carmenansio',
