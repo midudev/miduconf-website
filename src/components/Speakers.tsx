@@ -74,10 +74,9 @@ function Speaker({ name, title, twitter, img }) {
 export function Speakers() {
 	return (
 		<section className='flex flex-col flex-wrap items-center justify-center my-48'>
-			<h2 className='text-6xl font-bold text-center text-white'>Speakers</h2>
+			<h2 className='text-6xl font-bold text-center text-white'>Invitados</h2>
 			<p className='max-w-xl text-xl text-sky-200 text-center [†ext-wrap:balance] mt-4'>
-				Los mejores oradores, colaboradores y educadores de la comunidad de programación y
-				tecnología.
+				Divulgadores y profesionales de la comunidad de programación, ciencia y tecnología.
 			</p>
 			<div className='grid grid-cols-1 my-16 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8'>
 				{SPEAKERS.map((speaker) => (
