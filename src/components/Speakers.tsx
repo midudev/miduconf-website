@@ -36,6 +36,12 @@ const SPEAKERS = [
 		title: 'Responsable IA @ Sngular',
 		twitter: '@sailormerqury',
 		img: 'nerea'
+	},
+	{
+		name: 'Fernando Herrera',
+		title: 'Full Stack Developer y profesor',
+		twitter: 'Fernando_Her85',
+		img: 'fernando'
 	}
 ]
 
