@@ -151,7 +151,7 @@ const reviews = [
 	{
 		name: 'Platzi',
 		link: 'https://platzi.com/',
-		logo: <img src='/platzi.png' alt='Logo de Platzi' className='w-auto h-[60px]' />
+		logo: <img src='/platzi.png' alt='Logo de Platzi' className='w-full h-auto' />
 	},
 	{
 		name: 'Don Dominio',
@@ -169,20 +169,24 @@ const reviews = [
 
 const ReviewCard = ({
 	logo,
-	link
+	link,
+	size
 }: {
 	logo?: string | ReactNode
 	link: string
 	premium?: boolean
+	size: string
 }) => {
 	return (
 		<a
 			href={link}
 			target='_blank'
 			rel='noopener noreferrer'
-			className={
-				'relative min-w-[250px] flex justify-center items-center overflow-hidden rounded-xl border bg-slate-800/50 border-slate-900 w-full py-4 px-12 transition hover:bg-slate-800/75 hover:border-slate-900/75 hover:shadow-lg group'
-			}
+			className={`relative ${
+				size === 'large'
+					? 'min-w-[250px] border-yellow-300 hover:border-yellow-200'
+					: 'min-w-[50px] border-slate-900 hover:border-slate-900/75'
+			} flex justify-center items-center overflow-hidden rounded-xl border bg-slate-800/50 w-full py-4 px-12 transition hover:bg-slate-800/75 hover:shadow-lg group`}
 		>
 			<div className='flex flex-row items-center justify-center w-full h-auto gap-2 text-white transition group-hover:scale-110'>
 				{logo}
@@ -200,11 +204,11 @@ export const Sponsors = () => {
 			</p>
 
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<Marquee size='large' className='[--duration:0s]'>
+				<Marquee className='[--duration:0s]'>
 					{reviews
 						.filter(({ premium }) => premium)
 						.map((review) => (
-							<ReviewCard key={review.name} {...review} />
+							<ReviewCard size='large' key={review.name} {...review} />
 						))}
 				</Marquee>
 				<div className='relative flex flex-col w-full overflow-hidden gap-y-4'>
