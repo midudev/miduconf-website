@@ -181,7 +181,7 @@ const ReviewCard = ({
 	logo?: string | ReactNode
 	link: string
 	premium?: boolean
-	size: string
+	size?: string
 }) => {
 	return (
 		<a
