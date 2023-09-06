@@ -164,7 +164,7 @@ const reviews = [
 		name: 'Malt',
 		premium: true,
 		link: 'https://midu.link/malt',
-		logo: <Malt className='w-auto h-[60px]' fill='currentColor' />
+		logo: <Malt className='w-auto h-[60px]' />
 	},
 	{
 		name: 'Twitch',
