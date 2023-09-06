@@ -210,7 +210,7 @@ export const Sponsors = () => {
 			</p>
 
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<Marquee className='[--duration:0s]'>
+				<Marquee size='large' className='[--duration:0s]'>
 					{reviews
 						.filter(({ premium }) => premium)
 						.map((review) => (
