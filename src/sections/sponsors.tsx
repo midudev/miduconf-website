@@ -163,7 +163,7 @@ const reviews = [
 	{
 		name: 'Malt',
 		premium: true,
-		link: 'https://malt.es',
+		link: 'https://midu.link/malt',
 		logo: <Malt className='w-auto h-[60px]' fill='currentColor' />
 	},
 	{
