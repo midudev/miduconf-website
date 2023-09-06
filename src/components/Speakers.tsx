@@ -32,10 +32,10 @@ const SPEAKERS = [
 		img: 'debbie'
 	},
 	{
-		name: 'Próximamente...',
-		title: '¡Sorpresa!',
-		twitter: 'prox',
-		img: 'anon'
+		name: 'Nerea Luis',
+		title: 'Responsable IA @ Sngular',
+		twitter: '@sailormerqury',
+		img: 'nerea'
 	}
 ]
 

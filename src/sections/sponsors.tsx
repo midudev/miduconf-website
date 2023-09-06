@@ -2,6 +2,8 @@ import { cn } from '@/lib/utils'
 import Marquee from '@/components/magicui/Marquee'
 import { DonDominio } from '@/components/logos/dondominio'
 import { ReactNode } from 'react'
+import { Malt } from '@/components/logos/maltes'
+import { TwitchLogo } from '@/components/TwitchLogo'
 
 const reviews = [
 	{
@@ -118,6 +120,7 @@ const reviews = [
 	},
 	{
 		name: 'Codely',
+		premium: true,
 		link: 'https://codely.com/',
 		logo: (
 			<svg height='50' viewBox='0 0 118 29' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
@@ -149,32 +152,47 @@ const reviews = [
 	{
 		name: 'Platzi',
 		link: 'https://platzi.com/',
-		logo: <img src='/platzi.png' alt='Logo de Platzi' className='w-auto h-[60px]' />
+		logo: <img src='/platzi.png' alt='Logo de Platzi' className='w-full h-auto' />
 	},
 	{
 		name: 'Don Dominio',
+		premium: true,
 		link: 'https://www.dondominio.com/',
 		logo: <DonDominio className='' fill='currentColor' />
+	},
+	{
+		name: 'Malt',
+		premium: true,
+		link: 'https://midu.link/malt',
+		logo: <Malt className='w-auto h-[60px]' />
+	},
+	{
+		name: 'Twitch',
+		link: 'https://twitch.tv/midudev',
+		logo: <TwitchLogo className='h-[40px] w-auto' />
 	}
 ]
 
 const ReviewCard = ({
 	logo,
-	name,
-	link
+	link,
+	size
 }: {
-	logo: string | ReactNode
-	name: string
+	logo?: string | ReactNode
 	link: string
+	premium?: boolean
+	size?: string
 }) => {
 	return (
 		<a
 			href={link}
 			target='_blank'
 			rel='noopener noreferrer'
-			className={
-				'relative min-w-[250px] flex justify-center items-center overflow-hidden rounded-xl border bg-slate-800/50 border-slate-900 w-full py-4 px-12 transition hover:bg-slate-800/75 hover:border-slate-900/75 hover:shadow-lg group'
-			}
+			className={`relative ${
+				size === 'large'
+					? 'min-w-[250px] border-yellow-300 hover:border-yellow-200'
+					: 'min-w-[50px] border-slate-900 hover:border-slate-900/75'
+			} flex justify-center items-center overflow-hidden rounded-xl border bg-slate-800/50 w-full py-4 px-12 transition hover:bg-slate-800/75 hover:shadow-lg group`}
 		>
 			<div className='flex flex-row items-center justify-center w-full h-auto gap-2 text-white transition group-hover:scale-110'>
 				{logo}
@@ -190,22 +208,35 @@ export const Sponsors = () => {
 			<p className='max-w-xl text-xl text-sky-200 text-center [†ext-wrap:balance] mt-4'>
 				¡Gracias a ellos hacemos posible el evento!
 			</p>
+
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<Marquee pauseOnHover className='[--duration:40s]'>
-					{reviews.map((review) => (
-						<ReviewCard key={review.name} {...review} />
-					))}
-				</Marquee>
-				<Marquee reverse pauseOnHover className='[--duration:40s]'>
+				<Marquee className='[--duration:0s]'>
 					{reviews
-						.slice()
-						.reverse()
+						.filter(({ premium }) => premium)
 						.map((review) => (
-							<ReviewCard key={review.name} {...review} />
+							<ReviewCard size='large' key={review.name} {...review} />
 						))}
 				</Marquee>
-				<div className='absolute inset-y-0 left-0 w-40 pointer-events-none from-[#000214] to-transparent bg-gradient-to-r '></div>
-				<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
+				<div className='relative flex flex-col w-full overflow-hidden gap-y-4'>
+					<Marquee reverse pauseOnHover className='[--duration:40s]'>
+						{reviews
+							.filter(({ premium }) => !premium)
+							.slice()
+							.reverse()
+							.map((review) => (
+								<ReviewCard key={review.name} {...review} />
+							))}
+					</Marquee>
+					<Marquee pauseOnHover className='[--duration:40s]'>
+						{[...reviews.slice(4), ...reviews.slice(0, 4)]
+							.filter(({ premium }) => !premium)
+							.map((review) => (
+								<ReviewCard key={review.name} {...review} />
+							))}
+					</Marquee>
+					<div className='absolute inset-y-0 left-0 w-40 pointer-events-none from-[#000214] to-transparent bg-gradient-to-r '></div>
+					<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
+				</div>
 			</div>
 		</section>
 	)
