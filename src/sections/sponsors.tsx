@@ -3,6 +3,7 @@ import Marquee from '@/components/magicui/Marquee'
 import { DonDominio } from '@/components/logos/dondominio'
 import { ReactNode } from 'react'
 import { Malt } from '@/components/logos/maltes'
+import { TwitchLogo } from '@/components/TwitchLogo'
 
 const reviews = [
 	{
@@ -164,6 +165,11 @@ const reviews = [
 		premium: true,
 		link: 'https://malt.es',
 		logo: <Malt className='w-auto h-[60px]' fill='currentColor' />
+	},
+	{
+		name: 'Twitch',
+		link: 'https://twitch.tv/midudev',
+		logo: <TwitchLogo className='h-[40px] w-auto' />
 	}
 ]
 
