@@ -3,10 +3,10 @@
 import 'atropos/css'
 import Atropos from 'atropos/react'
 import { Logo } from './Logo'
-import { interTight } from '../pages'
 import { Codely } from '@/components/logos/codely'
 import { DonDominio } from '@/components/logos/dondominio'
 import { Malt } from '@/components/logos/maltes'
+import { LemonCode } from '@/components/logos/lemoncode'
 
 const BackgroundPattern = () => (
 	<svg id='patternId' width='200%' height='200%' xmlns='http://www.w3.org/2000/svg'>
@@ -49,19 +49,42 @@ export default function Ticket({ transition, number, flavor, user }) {
 
 								<div className='mt-12'>
 									<div className='relative block'>
-										<Logo className='w-[500px]' />
+										<Logo />
 									</div>
 								</div>
 
 								<h4
-									className={`${interTight.className} ${
+									className={`hidden md:block ${
 										transition && 'transition duration-500 ease-in-out'
 									} ${
 										flavor.colors.text
-									} font-medium text-2xl text-center [text-wrap:balance] max-w-2xl text-shadow-lg z-50 opacity-[99%]`}
+									} font-medium text-2xl text-center [text-wrap:balance] max-w-2xl text-shadow-lg z-50 opacity-80 -mt-6`}
 								>
-									Conferencia de Programación y Tecnología para aprender, inspirarte y divertirte.
+									Conferencia de Programación y Tecnología
 								</h4>
+								<div
+									className={`${transition && 'transition duration-500 ease-in-out'} ${
+										flavor.colors.text
+									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center md:mt-6`}
+								>
+									<svg
+										className='w-8 h-auto'
+										width='256px'
+										height='268px'
+										viewBox='0 0 256 268'
+										version='1.1'
+										xmlns='http://www.w3.org/2000/svg'
+										preserveAspectRatio='xMidYMid'
+									>
+										<g>
+											<path
+												d='M17.4579119,0 L0,46.5559188 L0,232.757287 L63.9826001,232.757287 L63.9826001,267.690956 L98.9144853,267.690956 L133.811571,232.757287 L186.171922,232.757287 L256,162.954193 L256,0 L17.4579119,0 Z M40.7166868,23.2632364 L232.73141,23.2632364 L232.73141,151.29179 L191.992415,192.033461 L128,192.033461 L93.11273,226.918947 L93.11273,192.033461 L40.7166868,192.033461 L40.7166868,23.2632364 Z M104.724985,139.668381 L127.999822,139.668381 L127.999822,69.843872 L104.724985,69.843872 L104.724985,139.668381 Z M168.721862,139.668381 L191.992237,139.668381 L191.992237,69.843872 L168.721862,69.843872 L168.721862,139.668381 Z'
+												fill='currentColor'
+											></path>
+										</g>
+									</svg>
+									<span>twitch.tv/midudev</span>
+								</div>
 							</div>
 							<div className='absolute items-center p-4 overflow-hidden font-mono text-white md:p-6 left-2 top-2'>
 								<strong className='text-3xl font-extrabold'>
@@ -77,6 +100,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 									<Codely className='h-auto w-36' />
 									<DonDominio className='h-auto w-36' />
 									<Malt className='w-24 h-auto' />
+									<LemonCode className='h-auto w-28' />
 								</div>
 							</div>
 
@@ -85,7 +109,9 @@ export default function Ticket({ transition, number, flavor, user }) {
 									'absolute z-10 overflow-hidden opacity-30 -right-8 -bottom-10 h-full rounded-r-2xl flex items-end'
 								}
 							>
-								<figure className={`${flavor.figure} w-96 h-96 -rotate-6 p-8 -z-10`}>
+								<figure
+									className={`${flavor.figure} w-48 h-48 md:w-96 md:h-96 -rotate-6 p-8 -z-10`}
+								>
 									<flavor.component className='w-full h-auto' />
 								</figure>
 							</div>
@@ -102,7 +128,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 								<div className='absolute z-50 flex flex-col items-center justify-center p-4 overflow-hidden font-mono text-white md:p-6 right-2 top-2 gap-y-2'>
 									<img
 										crossOrigin='anonymous'
-										className='block w-20 h-20 rounded-full'
+										className='block w-10 h-10 rounded-full md:w-20 md:h-20'
 										src={avatar}
 										alt={`Avatar de ${username}`}
 									/>
