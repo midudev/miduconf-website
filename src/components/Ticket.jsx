@@ -62,9 +62,9 @@ export default function Ticket({ transition, number, flavor, user }) {
 									Conferencia de Programación y Tecnología
 								</h4>
 								<div
-									className={`${transition && 'mt-6 transition duration-500 ease-in-out'} ${
+									className={`${transition && 'transition duration-500 ease-in-out'} ${
 										flavor.colors.text
-									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center`}
+									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center mt-6`}
 								>
 									<svg
 										className='w-8 h-auto'
