@@ -3,7 +3,6 @@
 import 'atropos/css'
 import Atropos from 'atropos/react'
 import { Logo } from './Logo'
-import { interTight } from '../pages'
 import { Codely } from '@/components/logos/codely'
 import { DonDominio } from '@/components/logos/dondominio'
 import { Malt } from '@/components/logos/maltes'
@@ -50,12 +49,14 @@ export default function Ticket({ transition, number, flavor, user }) {
 
 								<div className='mt-12'>
 									<div className='relative block'>
-										<Logo className='w-[500px]' />
+										<Logo />
 									</div>
 								</div>
 
 								<h4
-									className={` ${transition && 'transition duration-500 ease-in-out'} ${
+									className={`hidden md:block ${
+										transition && 'transition duration-500 ease-in-out'
+									} ${
 										flavor.colors.text
 									} font-medium text-2xl text-center [text-wrap:balance] max-w-2xl text-shadow-lg z-50 opacity-80 -mt-6`}
 								>
@@ -64,7 +65,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 								<div
 									className={`${transition && 'transition duration-500 ease-in-out'} ${
 										flavor.colors.text
-									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center mt-6`}
+									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center md:mt-6`}
 								>
 									<svg
 										className='w-8 h-auto'
@@ -108,7 +109,9 @@ export default function Ticket({ transition, number, flavor, user }) {
 									'absolute z-10 overflow-hidden opacity-30 -right-8 -bottom-10 h-full rounded-r-2xl flex items-end'
 								}
 							>
-								<figure className={`${flavor.figure} w-96 h-96 -rotate-6 p-8 -z-10`}>
+								<figure
+									className={`${flavor.figure} w-48 h-48 md:w-96 md:h-96 -rotate-6 p-8 -z-10`}
+								>
 									<flavor.component className='w-full h-auto' />
 								</figure>
 							</div>
@@ -125,7 +128,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 								<div className='absolute z-50 flex flex-col items-center justify-center p-4 overflow-hidden font-mono text-white md:p-6 right-2 top-2 gap-y-2'>
 									<img
 										crossOrigin='anonymous'
-										className='block w-20 h-20 rounded-full'
+										className='block w-10 h-10 rounded-full md:w-20 md:h-20'
 										src={avatar}
 										alt={`Avatar de ${username}`}
 									/>

@@ -95,9 +95,7 @@ https://miduconf.com?ticket=${username}`
 			.eq('user_name', username)
 
 		const dataURL = await toJpeg(document.getElementById('ticket'), {
-			quality: 0.8,
-			width: 1500,
-			height: 1500
+			quality: 0.8
 		})
 
 		document.querySelector('#image').setAttribute('src', dataURL)
@@ -224,7 +222,7 @@ https://miduconf.com?ticket=${username}`
 
 				<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
 
-				<div className='w-full z-[99999] opacity-[.99]'>
+				<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
 					<h2 className='font-light text-center text-white uppercase opacity-70'>
 						Selecciona tu sabor:
 					</h2>
