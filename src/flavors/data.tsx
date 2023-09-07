@@ -958,9 +958,9 @@ export const FLAVORS = {
 		colors: {
 			ticket: 'bg-[#777bb3]/50',
 			border: 'border-[#777bb3]',
-			text: 'text-[#777bb3]',
-			month: 'text-[#777bb3]',
-			time: 'text-[#777bb3]'
+			text: 'text-[#AEB2D5]/80',
+			month: 'text-[#AEB2D5]',
+			time: 'text-[#AEB2D5]'
 		}
 	},
 	mysql: {
