@@ -305,11 +305,9 @@ export const Sponsors = () => {
 							))}
 					</Marquee>
 					<Marquee pauseOnHover className='[--duration:40s]'>
-						{[...reviews.slice(4), ...reviews.slice(0, 4)]
-							.filter(({ premium }) => !premium)
-							.map((review) => (
-								<ReviewCard key={review.name} {...review} />
-							))}
+						{[...reviews.slice(4), ...reviews.slice(0, 4)].map((review) => (
+							<ReviewCard key={review.name} {...review} />
+						))}
 					</Marquee>
 					<div className='absolute inset-y-0 left-0 w-40 pointer-events-none from-[#000214] to-transparent bg-gradient-to-r '></div>
 					<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
