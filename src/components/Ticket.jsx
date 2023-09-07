@@ -7,6 +7,7 @@ import { interTight } from '../pages'
 import { Codely } from '@/components/logos/codely'
 import { DonDominio } from '@/components/logos/dondominio'
 import { Malt } from '@/components/logos/maltes'
+import { LemonCode } from '@/components/logos/lemoncode'
 
 const BackgroundPattern = () => (
 	<svg id='patternId' width='200%' height='200%' xmlns='http://www.w3.org/2000/svg'>
@@ -77,6 +78,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 									<Codely className='h-auto w-36' />
 									<DonDominio className='h-auto w-36' />
 									<Malt className='w-24 h-auto' />
+									<LemonCode className='h-auto w-28' />
 								</div>
 							</div>
 
