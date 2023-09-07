@@ -31,7 +31,7 @@ const reviews = [
 	{
 		name: 'Twitch',
 		link: 'https://twitch.tv/midudev',
-		logo: <TwitchLogo className='h-[32px] w-auto' />
+		logo: <TwitchLogo className='h-[30px] w-auto' />
 	},
 	{
 		name: 'Vercel',
