@@ -1,5 +1,3 @@
-import { MagicCard } from './magicui/MagicCard'
-
 const SPEAKERS = [
 	{
 		name: 'Guillermo Rauch',
