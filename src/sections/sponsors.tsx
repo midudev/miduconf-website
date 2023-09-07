@@ -272,7 +272,7 @@ const ReviewCard = ({
 				size === 'large'
 					? 'min-w-[250px] border-yellow-300 hover:border-yellow-200'
 					: 'min-w-[50px] border-slate-900 hover:border-slate-900/75'
-			} flex justify-center items-center overflow-hidden rounded-xl border bg-slate-800/50 w-full py-4 px-12 transition hover:bg-slate-800/75 hover:shadow-lg group`}
+			} flex justify-center items-center overflow-hidden rounded-xl border bg-slate-800/50 w-full py-4 h-24 px-12 transition hover:bg-slate-800/75 hover:shadow-lg group`}
 		>
 			<div className='flex flex-row items-center justify-center w-full h-auto gap-2 text-white transition group-hover:scale-110'>
 				{logo}
