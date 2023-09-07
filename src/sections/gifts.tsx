@@ -29,7 +29,7 @@ export const Gifts = () => {
 	return (
 		<section className='flex flex-col flex-wrap items-center justify-center my-48'>
 			<h2 className='text-6xl font-bold text-center text-white'>Regalos</h2>
-			<p className='max-w-xl text-xl text-sky-200 text-center [†ext-wrap:balance] mt-4'>
+			<p className='max-w-xl text-xl text-sky-200 text-center [text-wrap:balance] mt-4'>
 				256 regalos para todo el mundo.
 				<br />
 				¡Necesitas tener{' '}
