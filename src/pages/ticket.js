@@ -67,7 +67,7 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 		const text = `¡No te pierdas la miduConf!
 Conferencia de Programación y Tecnología.
 
-👩‍💻 10 Speakers TOP
+👩‍💻 7 Speakers TOP
 💬 Charlas para todos los niveles
 🎁 +256 regalos y premios
 ...¡y muchas sorpresas!
@@ -94,7 +94,11 @@ https://miduconf.com?ticket=${username}`
 			.update({ flavour: selectedFlavorKey, user_id: user.id })
 			.eq('user_name', username)
 
-		const dataURL = await toJpeg(document.getElementById('ticket'), { quality: 0.8 })
+		const dataURL = await toJpeg(document.getElementById('ticket'), {
+			quality: 0.8,
+			width: 1500,
+			height: 1500
+		})
 
 		document.querySelector('#image').setAttribute('src', dataURL)
 
