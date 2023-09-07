@@ -833,7 +833,7 @@ export const FLAVORS = {
 	},
 	php: {
 		component: ({ className }) => (
-			<svg height='383.5975' viewBox='0 0 711.20123 383.5975' width='711.20123'>
+			<svg className='h-auto' height='383.5975' viewBox='0 0 711.20123 383.5975' width='711.20123'>
 				<defs id='defs3434'>
 					<clipPath clipPathUnits='userSpaceOnUse' id='clipPath3444'>
 						<path
