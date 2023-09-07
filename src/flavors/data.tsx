@@ -646,8 +646,8 @@ export const FLAVORS = {
 						gradientTransform='translate(0 -1868.556)'
 						gradientUnits='userSpaceOnUse'
 					>
-						<stop offset='0' stop-color='#fff' stop-opacity='.1' />
-						<stop offset='1' stop-color='#fff' stop-opacity='0' />
+						<stop offset='0' stop-color='#fff' stopOpacity='.1' />
+						<stop offset='1' stop-color='#fff' stopOpacity='0' />
 					</radialGradient>
 				</defs>
 				<path
@@ -738,8 +738,8 @@ export const FLAVORS = {
 						gradientUnits='userSpaceOnUse'
 					>
 						<stop offset='0' stop-color='#a52714' />
-						<stop offset='.4' stop-color='#a52714' stop-opacity='.5' />
-						<stop offset='.8' stop-color='#a52714' stop-opacity='0' />
+						<stop offset='.4' stop-color='#a52714' stopOpacity='.5' />
+						<stop offset='.8' stop-color='#a52714' stopOpacity='0' />
 					</linearGradient>
 					<linearGradient
 						id='id_radial_gradient_firebase_2'
@@ -750,9 +750,9 @@ export const FLAVORS = {
 						gradientTransform='translate(0 325.41) scale(1 -1)'
 						gradientUnits='userSpaceOnUse'
 					>
-						<stop offset='0' stop-color='#a52714' stop-opacity='.8' />
-						<stop offset='.5' stop-color='#a52714' stop-opacity='.21' />
-						<stop offset='1' stop-color='#a52714' stop-opacity='0' />
+						<stop offset='0' stop-color='#a52714' stopOpacity='.8' />
+						<stop offset='.5' stop-color='#a52714' stopOpacity='.21' />
+						<stop offset='1' stop-color='#a52714' stopOpacity='0' />
 					</linearGradient>
 					<linearGradient
 						id='id_radial_gradient_firebase_3'
@@ -763,8 +763,8 @@ export const FLAVORS = {
 						gradientTransform='translate(3116.512 -7100.276) scale(2.67)'
 						gradientUnits='userSpaceOnUse'
 					>
-						<stop offset='0' stop-color='#fff' stop-opacity='.1' />
-						<stop offset='1' stop-color='#fff' stop-opacity='0' />
+						<stop offset='0' stop-color='#fff' stopOpacity='.1' />
+						<stop offset='1' stop-color='#fff' stopOpacity='0' />
 					</linearGradient>
 				</defs>
 				<g clip-path='url(#clippath)'>
@@ -882,7 +882,7 @@ export const FLAVORS = {
 									id='path3474'
 									fill='#777bb3'
 									fill-opacity='1'
-									fill-rule='nonzero'
+									fillRule='nonzero'
 									stroke='none'
 								/>
 							</g>
@@ -896,7 +896,7 @@ export const FLAVORS = {
 									id='path3486'
 									fill='#000000'
 									fill-opacity='1'
-									fill-rule='nonzero'
+									fillRule='nonzero'
 									stroke='none'
 								/>
 							</g>
@@ -906,7 +906,7 @@ export const FLAVORS = {
 									id='path3490'
 									fill='#ffffff'
 									fill-opacity='1'
-									fill-rule='nonzero'
+									fillRule='nonzero'
 									stroke='none'
 								/>
 							</g>
@@ -916,7 +916,7 @@ export const FLAVORS = {
 									id='path3494'
 									fill='#000000'
 									fill-opacity='1'
-									fill-rule='nonzero'
+									fillRule='nonzero'
 									stroke='none'
 								/>
 							</g>
@@ -926,7 +926,7 @@ export const FLAVORS = {
 									id='path3498'
 									fill='#ffffff'
 									fill-opacity='1'
-									fill-rule='nonzero'
+									fillRule='nonzero'
 									stroke='none'
 								/>
 							</g>
@@ -936,7 +936,7 @@ export const FLAVORS = {
 									id='path3502'
 									fill='#000000'
 									fill-opacity='1'
-									fill-rule='nonzero'
+									fillRule='nonzero'
 									stroke='none'
 								/>
 							</g>
@@ -946,7 +946,7 @@ export const FLAVORS = {
 									id='path3506'
 									fill='#ffffff'
 									fill-opacity='1'
-									fill-rule='nonzero'
+									fillRule='nonzero'
 									stroke='none'
 								/>
 							</g>
