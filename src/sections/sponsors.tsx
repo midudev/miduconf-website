@@ -290,7 +290,7 @@ export const Sponsors = () => {
 			</p>
 
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<div className='grid grid-cols-2 gap-4'>
+				<div className='grid gap-4 md:grid-cols-2'>
 					{premiums.map((premium) => (
 						<ReviewCard key={premium.name} {...premium} size='large' />
 					))}
