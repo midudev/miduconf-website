@@ -47,7 +47,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 									</div>
 								</div>
 
-								<div className='mt-12'>
+								<div className='z-50 mt-12'>
 									<div className='relative block'>
 										<Logo />
 									</div>
