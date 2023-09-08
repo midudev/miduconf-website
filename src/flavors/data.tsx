@@ -1275,45 +1275,45 @@ export const FLAVORS = {
 			<svg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'>
 				<defs>
 					<linearGradient x1='0%' y1='50%' x2='99.799%' y2='50%' id='a'>
-						<stop stop-color='#F97A12' offset='26%' />
-						<stop stop-color='#B07B58' offset='46%' />
-						<stop stop-color='#577BAE' offset='72%' />
-						<stop stop-color='#1E7CE5' offset='91%' />
-						<stop stop-color='#087CFA' offset='100%' />
+						<stop stopColor='#F97A12' offset='26%' />
+						<stop stopColor='#B07B58' offset='46%' />
+						<stop stopColor='#577BAE' offset='72%' />
+						<stop stopColor='#1E7CE5' offset='91%' />
+						<stop stopColor='#087CFA' offset='100%' />
 					</linearGradient>
 					<linearGradient x1='.345%' y1='34.54%' x2='121.182%' y2='77.619%' id='b'>
-						<stop stop-color='#F97A12' offset='0%' />
-						<stop stop-color='#CB7A3E' offset='7%' />
-						<stop stop-color='#9E7B6A' offset='15%' />
-						<stop stop-color='#757B91' offset='24%' />
-						<stop stop-color='#537BB1' offset='33%' />
-						<stop stop-color='#387CCC' offset='43%' />
-						<stop stop-color='#237CE0' offset='54%' />
-						<stop stop-color='#147CEF' offset='66%' />
-						<stop stop-color='#0B7CF7' offset='79%' />
-						<stop stop-color='#087CFA' offset='100%' />
+						<stop stopColor='#F97A12' offset='0%' />
+						<stop stopColor='#CB7A3E' offset='7%' />
+						<stop stopColor='#9E7B6A' offset='15%' />
+						<stop stopColor='#757B91' offset='24%' />
+						<stop stopColor='#537BB1' offset='33%' />
+						<stop stopColor='#387CCC' offset='43%' />
+						<stop stopColor='#237CE0' offset='54%' />
+						<stop stopColor='#147CEF' offset='66%' />
+						<stop stopColor='#0B7CF7' offset='79%' />
+						<stop stopColor='#087CFA' offset='100%' />
 					</linearGradient>
 					<linearGradient x1='78.169%' y1='97.749%' x2='30.106%' y2='-6.624%' id='c'>
-						<stop stop-color='#FE315D' offset='0%' />
-						<stop stop-color='#CB417E' offset='8%' />
-						<stop stop-color='#9E4E9B' offset='16%' />
-						<stop stop-color='#755BB4' offset='25%' />
-						<stop stop-color='#5365CA' offset='34%' />
-						<stop stop-color='#386DDB' offset='44%' />
-						<stop stop-color='#2374E9' offset='54%' />
-						<stop stop-color='#1478F3' offset='66%' />
-						<stop stop-color='#0B7BF8' offset='79%' />
-						<stop stop-color='#087CFA' offset='100%' />
+						<stop stopColor='#FE315D' offset='0%' />
+						<stop stopColor='#CB417E' offset='8%' />
+						<stop stopColor='#9E4E9B' offset='16%' />
+						<stop stopColor='#755BB4' offset='25%' />
+						<stop stopColor='#5365CA' offset='34%' />
+						<stop stopColor='#386DDB' offset='44%' />
+						<stop stopColor='#2374E9' offset='54%' />
+						<stop stopColor='#1478F3' offset='66%' />
+						<stop stopColor='#0B7BF8' offset='79%' />
+						<stop stopColor='#087CFA' offset='100%' />
 					</linearGradient>
 					<linearGradient x1='20%' y1='24.087%' x2='103.422%' y2='132.676%' id='d'>
-						<stop stop-color='#FE315D' offset='0%' />
-						<stop stop-color='#F63462' offset='4%' />
-						<stop stop-color='#DF3A71' offset='10%' />
-						<stop stop-color='#C24383' offset='17%' />
-						<stop stop-color='#AD4A91' offset='29%' />
-						<stop stop-color='#755BB4' offset='55%' />
-						<stop stop-color='#1D76ED' offset='92%' />
-						<stop stop-color='#087CFA' offset='100%' />
+						<stop stopColor='#FE315D' offset='0%' />
+						<stop stopColor='#F63462' offset='4%' />
+						<stop stopColor='#DF3A71' offset='10%' />
+						<stop stopColor='#C24383' offset='17%' />
+						<stop stopColor='#AD4A91' offset='29%' />
+						<stop stopColor='#755BB4' offset='55%' />
+						<stop stopColor='#1D76ED' offset='92%' />
+						<stop stopColor='#087CFA' offset='100%' />
 					</linearGradient>
 				</defs>
 				<path fill='url(#a)' d='M64.8 199.6l-62-48.8 30.8-57.2L122 128z' />
