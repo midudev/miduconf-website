@@ -65,10 +65,10 @@ export default function Ticket({ transition, number, flavor, user }) {
 								<div
 									className={`${transition && 'transition duration-500 ease-in-out'} ${
 										flavor.colors.text
-									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center md:mt-6`}
+									} font-semibold z-10 text-base sm:text-xl leading-6 gap-x-2 text-shadow-xl flex justify-center items-center md:mt-6`}
 								>
 									<svg
-										className='w-8 h-auto'
+										className='w-4 h-auto sm:w-8'
 										width='256px'
 										height='268px'
 										viewBox='0 0 256 268'
@@ -87,7 +87,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 								</div>
 							</div>
 							<div className='absolute items-center p-4 overflow-hidden font-mono text-white md:p-6 left-2 top-2'>
-								<strong className='text-3xl font-extrabold'>
+								<strong className='text-sm font-extrabold md:text-3xl'>
 									#{number != null ? number.toString().padStart(5, '0') : ''}
 								</strong>
 							</div>
@@ -119,7 +119,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 							<div
 								className={`${
 									transition && 'transition duration-500 ease-in-out'
-								} absolute inset-0 flex items-start justify-center z-20 left-0 right-0 w-full h-full border-[6px] ${
+								} absolute inset-0 flex items-start justify-center z-20 left-0 right-0 w-full h-full border md:border-[6px] ${
 									flavor.colors.border
 								} rounded-2xl`}
 							></div>
@@ -138,11 +138,15 @@ export default function Ticket({ transition, number, flavor, user }) {
 
 							<div className='absolute z-50 items-center p-4 overflow-hidden font-mono text-white md:p-6 left-2 bottom-2'>
 								<div className='z-50 flex flex-col gap-0 leading-none text-shadow-xl'>
-									<span className={`text-[23px] leading-none font-black ${flavor.colors.month}`}>
+									<span
+										className={`text-xs sm:text-[23px] leading-none font-black ${flavor.colors.month}`}
+									>
 										SEP
 									</span>
-									<span className='text-4xl font-bold leading-none text-white'>13</span>
-									<span className={`text-[22px] leading-none ${flavor.colors.time}`}>6PM</span>
+									<span className='text-xl font-bold leading-none text-white sm:text-4xl'>13</span>
+									<span className={`text-xs sm:text-[22px] leading-none ${flavor.colors.time}`}>
+										6PM
+									</span>
 								</div>
 							</div>
 						</div>

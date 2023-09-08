@@ -55,7 +55,7 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	return (
 		<div>
 			<div className='block w-full h-full'>
-				<div className='mt-10 flex items-center justify-center flex-0 max-w-5xl scale-[0.9] sm:scale-[0.7] md:scale-[.9] xl:scale-100 mx-auto'>
+				<div className='flex items-center justify-center max-w-5xl mx-auto mt-10 flex-0'>
 					<Ticket
 						transition={!initialFlavor}
 						number={number}
