@@ -1357,6 +1357,7 @@ export const FLAVORS = {
 			text: 'text-[#CB7651]',
 			month: 'text-[#BE5426]',
 			time: 'text-[#FFF]'
-		}
+		},
+		figure: '-right-16 -bottom-16'
 	}
 }
