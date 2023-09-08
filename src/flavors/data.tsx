@@ -1358,5 +1358,5 @@ export const FLAVORS = {
 			month: 'text-[#EDCFC2]',
 			time: 'text-[#BE5426]'
 		}
-	},
+	}
 }
