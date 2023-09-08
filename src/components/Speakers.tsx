@@ -71,7 +71,7 @@ function Speaker({ name, title, twitter, img }) {
 
 export function Speakers() {
 	return (
-		<section className='flex flex-col flex-wrap items-center justify-center mt-48 mb-24'>
+		<section id='speakers' className='flex flex-col flex-wrap items-center justify-center pt-48'>
 			<h2 className='text-6xl font-bold text-center text-white'>Invitados</h2>
 			<p className='max-w-xl text-xl text-sky-200 text-center [†ext-wrap:balance] mt-4'>
 				Divulgadores y profesionales de la comunidad de programación y la tecnología.

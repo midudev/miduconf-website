@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { Background } from '@/components/Background'
 import { Speakers } from '@/components/Speakers'
 import { Sponsors } from '@/sections/sponsors'
+import { HeaderIndex } from '@/components/HeaderIndex'
 import { HeaderCountdown } from '@/components/HeaderCountdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import { TicketHome } from '@/sections/ticket-home'
@@ -52,7 +53,9 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 				<HeaderCountdown />
 			</header>
 
-			<main className={`${inter.className} max-w-5xl m-auto mt-36 pb-20 px-4`}>
+			<HeaderIndex />
+
+			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
 				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
 				<Speakers />
 				<Sponsors />
