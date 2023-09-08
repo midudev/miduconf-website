@@ -136,13 +136,17 @@ export default function Ticket({ transition, number, flavor, user }) {
 								</div>
 							)}
 
-							<div className='absolute z-50 items-center p-4 overflow-hidden font-mono text-white md:p-6 left-2 bottom-2'>
+							<div className='absolute z-50 items-center p-4 overflow-hidden font-mono text-white md:p-6 right-2 top-2'>
 								<div className='z-50 flex flex-col gap-0 leading-none text-shadow-xl'>
-									<span className={`text-[23px] leading-none font-black ${flavor.colors.month}`}>
+									<span
+										className={`text-xl md:text-2xl leading-none font-black ${flavor.colors.month}`}
+									>
 										SEP
 									</span>
-									<span className='text-4xl font-bold leading-none text-white'>13</span>
-									<span className={`text-[22px] leading-none ${flavor.colors.time}`}>6PM</span>
+									<span className='text-2xl font-bold leading-none text-white'>13</span>
+									<span className={`text-xl md:text-2xl leading-none ${flavor.colors.time}`}>
+										6PM
+									</span>
 								</div>
 							</div>
 						</div>
