@@ -26,7 +26,7 @@ const SPEAKERS = [
 	{
 		name: 'Nerea Luis',
 		title: 'Responsable IA @ Sngular',
-		twitter: '@sailormerqury',
+		twitter: 'sailormerqury',
 		img: 'nerea'
 	},
 	{
@@ -38,7 +38,7 @@ const SPEAKERS = [
 	{
 		name: 'David East',
 		title: 'Lead DevRel @ Google',
-		twitter: 'https://twitter.com/_davideast',
+		twitter: '_davideast',
 		img: 'east'
 	}
 ]
