@@ -40,7 +40,7 @@ const SPEAKERS = [
 function Speaker({ name, title, twitter, img }) {
 	return (
 		<article className='relative flex flex-col items-center justify-center w-full p-[1px] transition-all rounded-md bg-gradient-to-b from-white/20 via-transparent to-transparent hover:via-white/10 group'>
-			<div className='bg-[#000214] group-hover:bg-[#000214]/10 w-full px-6 py-10 rounded transition'>
+			<div className='bg-[#000214]/50 flex-1 group-hover:bg-[#000214]/10 w-full px-6 py-10 rounded transition'>
 				<figure className='flex items-center justify-center'>
 					<img
 						className='object-cover w-40 h-40 transition bg-white rounded-full group-hover:scale-110'
