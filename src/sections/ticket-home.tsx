@@ -48,6 +48,10 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 		})
 	}
 
+	const handleGoToDiscord = () => {
+		window.open('https://discord.gg/EuxacQb2?event=1146458434682748939', '_blank')
+	}
+
 	return (
 		<div>
 			<div className='block w-full h-full'>
@@ -62,9 +66,18 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 						}}
 					/>
 				</div>
-				<div className='flex items-center justify-center mx-auto'>
+				<div className='flex flex-col items-center justify-center gap-4 mx-auto scale-90 md:flex-row sm:scale-100'>
 					<ShimmerButton onClick={handleLogin} size='large'>
 						¡Consigue tu entrada GRATIS!
+					</ShimmerButton>
+					<ShimmerButton
+						shimmerDuration='0'
+						shimmerSize='0'
+						type='secondary'
+						onClick={handleGoToDiscord}
+						size='large'
+					>
+						Guarda la fecha del evento
 					</ShimmerButton>
 				</div>
 			</div>
