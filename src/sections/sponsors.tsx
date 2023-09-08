@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils'
 import Marquee from '@/components/magicui/Marquee'
 import { DonDominio } from '@/components/logos/dondominio'
 import { ReactNode } from 'react'
@@ -283,7 +282,7 @@ const ReviewCard = ({
 
 export const Sponsors = () => {
 	return (
-		<section className='flex flex-col flex-wrap items-center justify-center my-48'>
+		<section className='flex flex-col flex-wrap items-center justify-center mb-48'>
 			<h2 className='text-6xl font-bold text-center text-white'>Sponsors</h2>
 			<p className='max-w-xl text-xl text-sky-200 text-center [†ext-wrap:balance] mt-4'>
 				¡Gracias a ellos hacemos posible el evento!

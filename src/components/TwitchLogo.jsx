@@ -1,6 +1,11 @@
-export function TwitchLogo ({ className }) {
+export function TwitchLogo({ className }) {
 	return (
-		<svg className={`${className} h-auto`} width='454.93066' height='280.76587' viewBox='0 0 454.93066 280.76587'>
+		<svg
+			className={`${className}`}
+			width='454.93066'
+			height='280.76587'
+			viewBox='0 0 454.93066 280.76587'
+		>
 			<path
 				d='m0 0-13.652-13.651h-21.445l-11.699-11.697v11.697h-17.548v56.544H0V0Zm-72.146 50.692-3.899-15.599v-70.19h17.55v-9.751h9.746l9.752 9.751h15.596L7.795-3.905v54.597h-79.941z'
 				fill='currentColor'
