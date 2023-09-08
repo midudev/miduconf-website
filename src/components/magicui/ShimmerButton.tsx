@@ -9,6 +9,7 @@ interface ShimmerButtonProps {
 	background?: string
 	className?: string
 	children?: ReactNode
+	type?: string
 	[key: string]: unknown // ...props
 }
 
@@ -20,6 +21,7 @@ export const ShimmerButton = ({
 	background = 'radial-gradient(ellipse 80% 50% at 50% 120%,rgba(62, 61, 117),rgba(18, 18, 38))',
 	className,
 	children,
+	type = 'primary',
 	...props
 }: ShimmerButtonProps) => {
 	return (
@@ -37,7 +39,8 @@ export const ShimmerButton = ({
 			className={cn(
 				'group border border-white/30 relative cursor-pointer overflow-hidden whitespace-nowrap px-6 py-4 [background:var(--bg)] [border-radius:var(--radius)] ',
 				'transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_8px_rgba(62,61,117,0.7)]',
-				className
+				className,
+				{ 'hue-rotate-180': type === 'secondary' }
 			)}
 			{...props}
 		>
