@@ -1352,11 +1352,11 @@ export const FLAVORS = {
 		),
 
 		colors: {
-			ticket: 'bg-[#B7410E]/30',
-			border: 'border-[#dba086]',
-			text: 'text-[#EDCFC2]',
-			month: 'text-[#EDCFC2]',
-			time: 'text-[#BE5426]'
+			ticket: 'bg-[#000]/30',
+			border: 'border-[#BE5426]',
+			text: 'text-[#CB7651]',
+			month: 'text-[#BE5426]',
+			time: 'text-[#FFF]'
 		}
 	}
 }
