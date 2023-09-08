@@ -1340,5 +1340,24 @@ export const FLAVORS = {
 			month: 'text-[#F19193]',
 			time: 'text-[#DE7173]'
 		}
+	},
+	markdown: {
+		component: ({ className }) => (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				fill='#ffffff'
+				viewBox='0 0 32 32'
+				className={className}
+			>
+				<path d='M29.693 25.849h-27.385c-1.271 0-2.307-1.036-2.307-2.307v-15.083c0-1.271 1.036-2.307 2.307-2.307h27.385c1.271 0 2.307 1.036 2.307 2.307v15.078c0 1.276-1.031 2.307-2.307 2.307zM7.693 21.229v-6l3.078 3.849 3.073-3.849v6h3.078v-10.458h-3.078l-3.073 3.849-3.078-3.849h-3.078v10.464zM28.307 16h-3.078v-5.229h-3.073v5.229h-3.078l4.615 5.385z' />
+			</svg>
+		),
+		colors: {
+			ticket: 'bg-[#000000]/30',
+			border: 'border-[#ffffff]/60',
+			text: 'text-[#ffffff]',
+			month: 'text-[#ffffff]',
+			time: 'text-[#ffffff]'
+		}
 	}
 }
