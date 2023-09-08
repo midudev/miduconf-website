@@ -34,6 +34,12 @@ const SPEAKERS = [
 		title: 'Full Stack Developer y profesor',
 		twitter: 'Fernando_Her85',
 		img: 'fernando'
+	},
+	{
+		name: 'David East',
+		title: 'Lead DevRel @ Google',
+		twitter: 'https://twitter.com/_davideast',
+		img: 'east'
 	}
 ]
 
