@@ -47,7 +47,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 									</div>
 								</div>
 
-								<div className='z-50 mt-12'>
+								<div className='z-50 mt-9 sm:mt-12'>
 									<div className='relative block'>
 										<Logo />
 									</div>
@@ -65,10 +65,10 @@ export default function Ticket({ transition, number, flavor, user }) {
 								<div
 									className={`${transition && 'transition duration-500 ease-in-out'} ${
 										flavor.colors.text
-									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center md:mt-6`}
+									} font-semibold z-10 text-xl leading-6 gap-x-2  text-shadow-xl flex justify-center items-center -mt-5 md:mt-6`}
 								>
 									<svg
-										className='w-8 h-auto'
+										className='w-4 sm:w-8 h-auto'
 										width='256px'
 										height='268px'
 										viewBox='0 0 256 268'
