@@ -1395,7 +1395,7 @@ export const FLAVORS = {
 		component: ({ className }) => (
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
-				viewBox='0 0 295 296'
+				viewBox='-24 0 295 296'
 				preserveAspectRatio='xMinYMin meet'
 			>
 				<defs>
