@@ -20,7 +20,6 @@ export const FLAVORS = {
 		component: ({ className }) => (
 			<svg className={className} width='80' height='80' fill='none' viewBox='0 0 512 512'>
 				<rect width='512' height='512' fill='#3178c6' rx='50' />
-				<rect width='512' height='512' fill='#3178c6' rx='50' />
 				<path
 					fill='#fff'
 					fillRule='evenodd'
@@ -414,6 +413,23 @@ export const FLAVORS = {
 		colors: {
 			ticket: 'bg-[#faf1e1]/50',
 			border: 'border-pink-400',
+			text: 'text-white',
+			month: 'text-pink-300',
+			time: 'text-pink-400'
+		}
+	},
+	npm: {
+		component: ({ className }) => (
+			<svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+				<title>npm</title>
+				<g fill='#CB3837'>
+					<path d='M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z' />
+				</g>
+			</svg>
+		),
+		colors: {
+			ticket: 'bg-[#CB3837]/50',
+			border: 'border-red-400',
 			text: 'text-white',
 			month: 'text-pink-300',
 			time: 'text-pink-400'
@@ -1306,7 +1322,6 @@ export const FLAVORS = {
 			time: 'text-[#DE7173]'
 		}
 	},
-
 	rust: {
 		component: ({ className }) => (
 			<svg
@@ -1392,11 +1407,286 @@ export const FLAVORS = {
 			time: 'text-[#F8BF11]'
 		}
 	},
+	ruby: {
+		component: ({ className }) => (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				viewBox='-24 0 295 296'
+				preserveAspectRatio='xMinYMin meet'
+			>
+				<defs>
+					<linearGradient x1='84.75%' y1='111.399%' x2='58.254%' y2='64.584%' id='q1'>
+						<stop stopColor='#FB7655' offset='0%' />
+						<stop stopColor='#FB7655' offset='0%' />
+						<stop stopColor='#E42B1E' offset='41%' />
+						<stop stopColor='#900' offset='99%' />
+						<stop stopColor='#900' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='116.651%' y1='60.89%' x2='1.746%' y2='19.288%' id='b1'>
+						<stop stopColor='#871101' offset='0%' />
+						<stop stopColor='#871101' offset='0%' />
+						<stop stopColor='#911209' offset='99%' />
+						<stop stopColor='#911209' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='75.774%' y1='219.327%' x2='38.978%' y2='7.829%' id='c1'>
+						<stop stopColor='#871101' offset='0%' />
+						<stop stopColor='#871101' offset='0%' />
+						<stop stopColor='#911209' offset='99%' />
+						<stop stopColor='#911209' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='50.012%' y1='7.234%' x2='66.483%' y2='79.135%' id='d1'>
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#E57252' offset='23%' />
+						<stop stopColor='#DE3B20' offset='46%' />
+						<stop stopColor='#A60003' offset='99%' />
+						<stop stopColor='#A60003' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='46.174%' y1='16.348%' x2='49.932%' y2='83.047%' id='e1'>
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#E4714E' offset='23%' />
+						<stop stopColor='#BE1A0D' offset='56%' />
+						<stop stopColor='#A80D00' offset='99%' />
+						<stop stopColor='#A80D00' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='36.965%' y1='15.594%' x2='49.528%' y2='92.478%' id='f1'>
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#E46342' offset='18%' />
+						<stop stopColor='#C82410' offset='40%' />
+						<stop stopColor='#A80D00' offset='99%' />
+						<stop stopColor='#A80D00' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='13.609%' y1='58.346%' x2='85.764%' y2='-46.717%' id='g1'>
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#C81F11' offset='54%' />
+						<stop stopColor='#BF0905' offset='99%' />
+						<stop stopColor='#BF0905' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='27.624%' y1='21.135%' x2='50.745%' y2='79.056%' id='h1'>
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#FFF' offset='0%' />
+						<stop stopColor='#DE4024' offset='31%' />
+						<stop stopColor='#BF190B' offset='99%' />
+						<stop stopColor='#BF190B' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='-20.667%' y1='122.282%' x2='104.242%' y2='-6.342%' id='i1'>
+						<stop stopColor='#BD0012' offset='0%' />
+						<stop stopColor='#BD0012' offset='0%' />
+						<stop stopColor='#FFF' offset='7%' />
+						<stop stopColor='#FFF' offset='17%' />
+						<stop stopColor='#C82F1C' offset='27%' />
+						<stop stopColor='#820C01' offset='33%' />
+						<stop stopColor='#A31601' offset='46%' />
+						<stop stopColor='#B31301' offset='72%' />
+						<stop stopColor='#E82609' offset='99%' />
+						<stop stopColor='#E82609' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='58.792%' y1='65.205%' x2='11.964%' y2='50.128%' id='j1'>
+						<stop stopColor='#8C0C01' offset='0%' />
+						<stop stopColor='#8C0C01' offset='0%' />
+						<stop stopColor='#990C00' offset='54%' />
+						<stop stopColor='#A80D0E' offset='99%' />
+						<stop stopColor='#A80D0E' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='79.319%' y1='62.754%' x2='23.088%' y2='17.888%' id='k1'>
+						<stop stopColor='#7E110B' offset='0%' />
+						<stop stopColor='#7E110B' offset='0%' />
+						<stop stopColor='#9E0C00' offset='99%' />
+						<stop stopColor='#9E0C00' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='92.88%' y1='74.122%' x2='59.841%' y2='39.704%' id='l1'>
+						<stop stopColor='#79130D' offset='0%' />
+						<stop stopColor='#79130D' offset='0%' />
+						<stop stopColor='#9E120B' offset='99%' />
+						<stop stopColor='#9E120B' offset='100%' />
+					</linearGradient>
+					<radialGradient cx='32.001%' cy='40.21%' fx='32.001%' fy='40.21%' r='69.573%' id='m1'>
+						<stop stopColor='#A80D00' offset='0%' />
+						<stop stopColor='#A80D00' offset='0%' />
+						<stop stopColor='#7E0E08' offset='99%' />
+						<stop stopColor='#7E0E08' offset='100%' />
+					</radialGradient>
+					<radialGradient cx='13.549%' cy='40.86%' fx='13.549%' fy='40.86%' r='88.386%' id='n1'>
+						<stop stopColor='#A30C00' offset='0%' />
+						<stop stopColor='#A30C00' offset='0%' />
+						<stop stopColor='#800E08' offset='99%' />
+						<stop stopColor='#800E08' offset='100%' />
+					</radialGradient>
+					<linearGradient x1='56.57%' y1='101.717%' x2='3.105%' y2='11.993%' id='o1'>
+						<stop stopColor='#8B2114' offset='0%' />
+						<stop stopColor='#8B2114' offset='0%' />
+						<stop stopColor='#9E100A' offset='43%' />
+						<stop stopColor='#B3100C' offset='99%' />
+						<stop stopColor='#B3100C' offset='100%' />
+					</linearGradient>
+					<linearGradient x1='30.87%' y1='35.599%' x2='92.471%' y2='100.694%' id='p1'>
+						<stop stopColor='#B31000' offset='0%' />
+						<stop stopColor='#B31000' offset='0%' />
+						<stop stopColor='#910F08' offset='44%' />
+						<stop stopColor='#791C12' offset='99%' />
+						<stop stopColor='#791C12' offset='100%' />
+					</linearGradient>
+				</defs>
+				<path
+					d='M197.467 167.764l-145.52 86.41 188.422-12.787L254.88 51.393l-57.414 116.37z'
+					fill='url(#q1)'
+				/>
+				<path d='M240.677 241.257L224.482 129.48l-44.113 58.25 60.308 53.528z' fill='url(#b1)' />
+				<path d='M240.896 241.257l-118.646-9.313-69.674 21.986 188.32-12.673z' fill='url(#c1)' />
+				<path d='M52.744 253.955l29.64-97.1L17.16 170.8l35.583 83.154z' fill='url(#d1)' />
+				<path d='M180.358 188.05L153.085 81.226l-78.047 73.16 105.32 33.666z' fill='url(#e1)' />
+				<path d='M248.693 82.73l-73.777-60.256-20.544 66.418 94.321-6.162z' fill='url(#f1)' />
+				<path d='M214.191.99L170.8 24.97 143.424.669l70.767.322z' fill='url(#g1)' />
+				<path d='M0 203.372l18.177-33.151-14.704-39.494L0 203.372z' fill='url(#h1)' />
+				<path
+					d='M2.496 129.48l14.794 41.963 64.283-14.422 73.39-68.207 20.712-65.787L143.063 0 87.618 20.75c-17.469 16.248-51.366 48.396-52.588 49-1.21.618-22.384 40.639-32.534 59.73z'
+					fill='#FFF'
+				/>
+				<path
+					d='M54.442 54.094c37.86-37.538 86.667-59.716 105.397-40.818 18.72 18.898-1.132 64.823-38.992 102.349-37.86 37.525-86.062 60.925-104.78 42.027-18.73-18.885.515-66.032 38.375-103.558z'
+					fill='url(#i1)'
+				/>
+				<path
+					d='M52.744 253.916l29.408-97.409 97.665 31.376c-35.312 33.113-74.587 61.106-127.073 66.033z'
+					fill='url(#j1)'
+				/>
+				<path
+					d='M155.092 88.622l25.073 99.313c29.498-31.016 55.972-64.36 68.938-105.603l-94.01 6.29z'
+					fill='url(#k1)'
+				/>
+				<path
+					d='M248.847 82.833c10.035-30.282 12.35-73.725-34.966-81.791l-38.825 21.445 73.791 60.346z'
+					fill='url(#l1)'
+				/>
+				<path
+					d='M0 202.935c1.39 49.979 37.448 50.724 52.808 51.162l-35.48-82.86L0 202.935z'
+					fill='#9E1209'
+				/>
+				<path
+					d='M155.232 88.777c22.667 13.932 68.35 41.912 69.276 42.426 1.44.81 19.695-30.784 23.838-48.64l-93.114 6.214z'
+					fill='url(#m1)'
+				/>
+				<path
+					d='M82.113 156.507l39.313 75.848c23.246-12.607 41.45-27.967 58.121-44.42l-97.434-31.428z'
+					fill='url(#n1)'
+				/>
+				<path
+					d='M17.174 171.34l-5.57 66.328c10.51 14.357 24.97 15.605 40.136 14.486-10.973-27.311-32.894-81.92-34.566-80.814z'
+					fill='url(#o1)'
+				/>
+				<path
+					d='M174.826 22.654l78.1 10.96c-4.169-17.662-16.969-29.06-38.787-32.623l-39.313 21.663z'
+					fill='url(#p1)'
+				/>
+			</svg>
+		),
+		colors: {
+			ticket: 'bg-[#C40000]/40',
+			border: 'border-red-400',
+			text: 'text-red-200',
+			month: 'text-red-300',
+			time: 'text-red-400'
+		},
+		figure: '-right-16 -bottom-16'
+	},
+	tailwind: {
+		component: ({ className }) => (
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				className={className}
+				viewBox='0 0 32 32'
+				height='auto'
+				fill='#44a8b3'
+			>
+				<path d='M9,13.7q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q11.1,10.9,9,13.7ZM2,22.1q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q4.1,19.3,2,22.1Z' />
+			</svg>
+		),
+		colors: {
+			ticket: 'bg-[#44a8b3]/30',
+			border: 'border-[#ffffff]/60',
+			text: 'text-[#ffffff]',
+			month: 'text-[#ffffff]',
+			time: 'text-[#ffffff]'
+		}
+	},
 	c: {
 		component: ({ className }) => (
 			<svg
-				xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='330' height='330' viewBox='0 0 48 48'>
-				<linearGradient id='9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1' x1='22.48' x2='31.833' y1='19.823' y2='45.52' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#3940a4'></stop><stop offset='1' stop-color='#293091'></stop></linearGradient><path fill='url(#9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1)' fill-rule='evenodd' d='M22.903,3.286c0.679-0.381,1.515-0.381,2.193,0	c3.355,1.883,13.451,7.551,16.807,9.434C42.582,13.1,43,13.804,43,14.566c0,3.766,0,15.101,0,18.867	c0,0.762-0.418,1.466-1.097,1.847c-3.355,1.883-13.451,7.551-16.807,9.434c-0.679,0.381-1.515,0.381-2.193,0	c-3.355-1.883-13.451-7.551-16.807-9.434C5.418,34.899,5,34.196,5,33.434c0-3.766,0-15.101,0-18.867	c0-0.762,0.418-1.466,1.097-1.847C9.451,10.837,19.549,5.169,22.903,3.286z' clip-rule='evenodd'></path><linearGradient id='9nBOzQEsA2vJDj4A8wborb_shQTXiDQiQVR_gr2' x1='16.43' x2='26.687' y1='3.382' y2='31.562' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#7b83eb'></stop><stop offset='1' stop-color='#5961c3'></stop></linearGradient><path fill='url(#9nBOzQEsA2vJDj4A8wborb_shQTXiDQiQVR_gr2)' fill-rule='evenodd' d='M5.304,34.404C5.038,34.048,5,33.71,5,33.255c0-3.744,0-15.014,0-18.759c0-0.758,0.417-1.458,1.094-1.836	c3.343-1.872,13.405-7.507,16.748-9.38c0.677-0.379,1.594-0.371,2.271,0.008c3.343,1.872,13.371,7.459,16.714,9.331	c0.27,0.152,0.476,0.335,0.66,0.576L5.304,34.404z' clip-rule='evenodd'></path><path fill='#fff' fill-rule='evenodd' d='M24,10c7.727,0,14,6.273,14,14s-6.273,14-14,14s-14-6.273-14-14	S16.273,10,24,10z M24,17c3.863,0,7,3.136,7,7c0,3.863-3.137,7-7,7s-7-3.137-7-7C17,20.136,20.136,17,24,17z' clip-rule='evenodd'></path><linearGradient id='9nBOzQEsA2vJDj4A8wborc_shQTXiDQiQVR_gr3' x1='31.031' x2='39.734' y1='12.865' y2='36.777' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#5c65d6'></stop><stop offset='.999' stop-color='#464eb0'></stop></linearGradient><path fill='url(#9nBOzQEsA2vJDj4A8wborc_shQTXiDQiQVR_gr3)' fill-rule='evenodd' d='M42.485,13.205c0.516,0.483,0.506,1.211,0.506,1.784c0,3.795-0.032,14.589,0.009,18.384c0.004,0.396-0.127,0.813-0.323,1.127	L23.593,24L42.485,13.205z' clip-rule='evenodd'></path><path d='M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9C15.729,9,9,15.729,9,24s6.729,15,15,15c5.367,0,10.36-2.908,13.03-7.59l0.503-0.882l-0.89-0.49 l-6.132-3.374l-0.851-0.468l-0.493,0.837C28.09,28.863,26.11,30,24,30c-3.308,0-6-2.692-6-6s2.692-6,6-6 c2.099,0,4.011,1.076,5.115,2.879l0.507,0.828l0.842-0.481l6.073-3.47l0.882-0.504l-0.518-0.874C34.205,11.827,29.262,9,24,9L24,9 z' opacity='.05'></path><path d='M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9.5C16.005,9.5,9.5,16.005,9.5,24S16.005,38.5,24,38.5c5.188,0,10.014-2.812,12.595-7.337l0.252-0.441 l-0.445-0.245l-6.132-3.374l-0.425-0.234l-0.246,0.418C28.431,29.269,26.286,30.5,24,30.5c-3.584,0-6.5-2.916-6.5-6.5 s2.916-6.5,6.5-6.5c2.275,0,4.346,1.166,5.542,3.118l0.253,0.414l0.421-0.241l6.073-3.47l0.441-0.252l-0.259-0.437 C33.864,12.233,29.086,9.5,24,9.5L24,9.5z' opacity='.07'></path>
+				xmlns='http://www.w3.org/2000/svg'
+				x='0px'
+				y='0px'
+				width='330'
+				height='330'
+				viewBox='0 0 48 48'
+			>
+				<linearGradient
+					id='9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1'
+					x1='22.48'
+					x2='31.833'
+					y1='19.823'
+					y2='45.52'
+					gradientUnits='userSpaceOnUse'
+				>
+					<stop offset='0' stop-color='#3940a4'></stop>
+					<stop offset='1' stop-color='#293091'></stop>
+				</linearGradient>
+				<path
+					fill='url(#9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1)'
+					fill-rule='evenodd'
+					d='M22.903,3.286c0.679-0.381,1.515-0.381,2.193,0	c3.355,1.883,13.451,7.551,16.807,9.434C42.582,13.1,43,13.804,43,14.566c0,3.766,0,15.101,0,18.867	c0,0.762-0.418,1.466-1.097,1.847c-3.355,1.883-13.451,7.551-16.807,9.434c-0.679,0.381-1.515,0.381-2.193,0	c-3.355-1.883-13.451-7.551-16.807-9.434C5.418,34.899,5,34.196,5,33.434c0-3.766,0-15.101,0-18.867	c0-0.762,0.418-1.466,1.097-1.847C9.451,10.837,19.549,5.169,22.903,3.286z'
+					clip-rule='evenodd'
+				></path>
+				<linearGradient
+					id='9nBOzQEsA2vJDj4A8wborb_shQTXiDQiQVR_gr2'
+					x1='16.43'
+					x2='26.687'
+					y1='3.382'
+					y2='31.562'
+					gradientUnits='userSpaceOnUse'
+				>
+					<stop offset='0' stop-color='#7b83eb'></stop>
+					<stop offset='1' stop-color='#5961c3'></stop>
+				</linearGradient>
+				<path
+					fill='url(#9nBOzQEsA2vJDj4A8wborb_shQTXiDQiQVR_gr2)'
+					fill-rule='evenodd'
+					d='M5.304,34.404C5.038,34.048,5,33.71,5,33.255c0-3.744,0-15.014,0-18.759c0-0.758,0.417-1.458,1.094-1.836	c3.343-1.872,13.405-7.507,16.748-9.38c0.677-0.379,1.594-0.371,2.271,0.008c3.343,1.872,13.371,7.459,16.714,9.331	c0.27,0.152,0.476,0.335,0.66,0.576L5.304,34.404z'
+					clip-rule='evenodd'
+				></path>
+				<path
+					fill='#fff'
+					fill-rule='evenodd'
+					d='M24,10c7.727,0,14,6.273,14,14s-6.273,14-14,14s-14-6.273-14-14	S16.273,10,24,10z M24,17c3.863,0,7,3.136,7,7c0,3.863-3.137,7-7,7s-7-3.137-7-7C17,20.136,20.136,17,24,17z'
+					clip-rule='evenodd'
+				></path>
+				<linearGradient
+					id='9nBOzQEsA2vJDj4A8wborc_shQTXiDQiQVR_gr3'
+					x1='31.031'
+					x2='39.734'
+					y1='12.865'
+					y2='36.777'
+					gradientUnits='userSpaceOnUse'
+				>
+					<stop offset='0' stop-color='#5c65d6'></stop>
+					<stop offset='.999' stop-color='#464eb0'></stop>
+				</linearGradient>
+				<path
+					fill='url(#9nBOzQEsA2vJDj4A8wborc_shQTXiDQiQVR_gr3)'
+					fill-rule='evenodd'
+					d='M42.485,13.205c0.516,0.483,0.506,1.211,0.506,1.784c0,3.795-0.032,14.589,0.009,18.384c0.004,0.396-0.127,0.813-0.323,1.127	L23.593,24L42.485,13.205z'
+					clip-rule='evenodd'
+				></path>
+				<path
+					d='M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9C15.729,9,9,15.729,9,24s6.729,15,15,15c5.367,0,10.36-2.908,13.03-7.59l0.503-0.882l-0.89-0.49 l-6.132-3.374l-0.851-0.468l-0.493,0.837C28.09,28.863,26.11,30,24,30c-3.308,0-6-2.692-6-6s2.692-6,6-6 c2.099,0,4.011,1.076,5.115,2.879l0.507,0.828l0.842-0.481l6.073-3.47l0.882-0.504l-0.518-0.874C34.205,11.827,29.262,9,24,9L24,9 z'
+					opacity='.05'
+				></path>
+				<path
+					d='M24,10c5.128,0,9.602,2.771,12.041,6.887l-6.073,3.47C28.737,18.347,26.527,17,24,17c-3.864,0-7,3.136-7,7 c0,3.863,3.137,7,7,7c2.57,0,4.812-1.392,6.029-3.459l6.132,3.374C33.75,35.142,29.21,38,24,38c-7.727,0-14-6.273-14-14 S16.273,10,24,10 M24,9.5C16.005,9.5,9.5,16.005,9.5,24S16.005,38.5,24,38.5c5.188,0,10.014-2.812,12.595-7.337l0.252-0.441 l-0.445-0.245l-6.132-3.374l-0.425-0.234l-0.246,0.418C28.431,29.269,26.286,30.5,24,30.5c-3.584,0-6.5-2.916-6.5-6.5 s2.916-6.5,6.5-6.5c2.275,0,4.346,1.166,5.542,3.118l0.253,0.414l0.421-0.241l6.073-3.47l0.441-0.252l-0.259-0.437 C33.864,12.233,29.086,9.5,24,9.5L24,9.5z'
+					opacity='.07'
+				></path>
 			</svg>
 		),
 		colors: {
