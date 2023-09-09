@@ -1404,7 +1404,7 @@ export const FLAVORS = {
 			border: 'border-[#a7adf3]',
 			text: 'text-[#FFFFFF]',
 			month: 'text-[#9198f0]',
-			time: 'text-[#9198f0]/30'
+			time: 'text-[#9198f0]'
 		}
 	}
 }
