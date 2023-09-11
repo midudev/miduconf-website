@@ -9,7 +9,7 @@ body {
 
 @keyframes add-shadow {
 	to {
-		box-shadow: 0 5px 5px -3px rgba(255, 255, 255,.25);
+		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, .1), 0 0 0 1px hsla(0, 0%, 100%, .10);
 		background: rgba(0, 0, 0, .3);
 	}
 }
