@@ -4,7 +4,7 @@ const GIFTS = [
 		special: 'super',
 		count: 1,
 		name: 'Ordenador Mac Mini',
-		detail: 'Si llegamos a 10.000 tickets'
+		detail: 'Si llegamos a 10.000 tickets...'
 	},
 	{
 		special: 'super',
@@ -17,6 +17,12 @@ const GIFTS = [
 		count: 1,
 		name: 'Bootcamp de JavaScript',
 		detail: '100% online. Estimado en 890€'
+	},
+	{
+		special: 'super',
+		count: 1,
+		name: 'Consola Nintendo Switch',
+		detail: 'Para descansar de tanto programar'
 	},
 	{
 		special: 'super',
@@ -85,7 +91,7 @@ export const Gifts = () => {
 				<br />
 			</p>
 
-			<div className='bg-[#000214] group-hover:bg-[#000214]/10 w-full px-6 py-10 rounded transition flex flex-col gap-2 max-w-xl m-auto'>
+			<div className='bg-[#000214] group-hover:bg-[#000214]/10 w-full px-6 py-10 rounded transition flex flex-col gap-2 max-w-xl m-auto gap-y-4'>
 				{GIFTS.map((gift, index) => (
 					<div key={index} className='flex flex-col transition cursor-crosshair hover:scale-110'>
 						{gift.img && (
@@ -106,6 +112,7 @@ export const Gifts = () => {
 						>
 							{gift.count}x {gift.name}
 						</h5>
+						{gift.detail && <p className='-mt-2 text-sm text-sky-200 opacity-90'>{gift.detail}</p>}
 					</div>
 				))}
 			</div>
