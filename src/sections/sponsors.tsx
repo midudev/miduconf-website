@@ -191,6 +191,14 @@ const premiums = [
 				/>
 			</svg>
 		)
+	},
+	{
+		name: 'KeepCoding',
+		premium: true,
+		link: 'https://midu.link/keepcoding',
+		logo: (
+			<img className='w-auto h-full py-20' src='/img/keepcoding.webp' alt='logo de KeepCoding' />
+		)
 	}
 ]
 
@@ -231,7 +239,7 @@ export const Sponsors = () => {
 			</p>
 
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<div className='grid gap-4 md:grid-cols-2'>
+				<div className='grid max-w-3xl gap-4 md:grid-cols-2'>
 					{premiums.map((premium) => (
 						<ReviewCard key={premium.name} {...premium} size='large' />
 					))}

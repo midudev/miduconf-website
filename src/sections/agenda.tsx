@@ -231,7 +231,7 @@ export const Agenda = () => {
 									title: 'Profesor y divulgador en Devtalles'
 								}}
 							/>
-							<AgendaRaffle title='¡Sorteo de una Nintendo Switch!' />
+							<AgendaRaffle sponsor={null} title='¡Sorteo de una Nintendo Switch!' />
 							<AgendaItem
 								timestamp={1694635800000}
 								duration={20 * 60 * 1000}

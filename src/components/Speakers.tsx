@@ -24,6 +24,12 @@ const SPEAKERS = [
 		img: 'debbie'
 	},
 	{
+		name: 'Fernando Rodriguez',
+		title: 'Co-Fundador de KeepCoding',
+		twitter: 'frr149',
+		img: 'frr149'
+	},
+	{
 		name: 'Nerea Luis',
 		title: 'Responsable IA @ Sngular',
 		twitter: 'sailormerqury',
