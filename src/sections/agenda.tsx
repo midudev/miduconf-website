@@ -1,4 +1,7 @@
-// import { DonDominio } from '@/components/logos/dondominio'
+import { Codely } from '@/components/logos/codely'
+import { DonDominio } from '@/components/logos/dondominio'
+import { LemonCode } from '@/components/logos/lemoncode'
+import { Malt } from '@/components/logos/maltes'
 import { useEffect, useState } from 'react'
 
 const useTime = ({ timestamp, duration }) => {
@@ -34,23 +37,30 @@ const useGetTimezone = () => {
 	return timezone
 }
 
-const AgendaRaffle = ({ timestamp, duration, title, sponsor }) => {
-	const time = useTime({ timestamp, duration })
-
+const AgendaRaffle = ({ title, sponsor }) => {
 	return (
 		<div className='flex flex-col gap-4 sm:flex-row sm:items-stretch '>
-			<p className='w-auto text-sm font-medium text-gray-400 sm:text-right sm:w-32 shrink-0'>
-				{time}
-			</p>
+			<p className='w-auto text-sm font-medium text-gray-400 sm:text-right sm:w-32 shrink-0'></p>
 			<div className='flex-1 pb-8 sm:pb-12'>
 				<div className='p-4 space-y-4 bg-gray-900 rounded-lg to-black'>
 					<h4 className='text-xl font-bold text-white'>{title}</h4>
-					<div>
-						<p className='text-base font-medium text-gray-400'>Patrocinado por:</p>
-						<div className='flex flex-wrap items-center mt-2 gap-x-6 gap-y-4'>
-							<sponsor.logo />
+					{sponsor?.logo && (
+						<div className='flex flex-row items-center justify-start gap-x-4'>
+							<p className='flex items-center justify-center h-full text-base font-medium text-gray-400'>
+								Patrocinado por:
+							</p>
+							<div className='flex flex-wrap items-center'>
+								<a
+									className='flex items-center justify-center'
+									href={sponsor.url}
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<sponsor.logo />
+								</a>
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 			</div>
 		</div>
@@ -58,23 +68,7 @@ const AgendaRaffle = ({ timestamp, duration, title, sponsor }) => {
 }
 
 const AgendaItem = ({ timestamp, duration, title, description, speaker }) => {
-	const [time, setTime] = useState(null)
-
-	useEffect(() => {
-		// get HH:MM in the local user timezone
-		const localTime = new Date(timestamp).toLocaleTimeString([], {
-			hour: '2-digit',
-			minute: '2-digit'
-		})
-
-		// use the duration in milliseconds to calculate the end time
-		const endTime = new Date(timestamp + duration).toLocaleTimeString([], {
-			hour: '2-digit',
-			minute: '2-digit'
-		})
-
-		setTime(`${localTime} - ${endTime}`)
-	}, [])
+	const time = useTime({ timestamp, duration })
 
 	return (
 		<div className='flex flex-col gap-4 sm:flex-row sm:items-stretch'>
@@ -154,15 +148,13 @@ export const Agenda = () => {
 									title: 'CEO de Vercel'
 								}}
 							/>
-							{/* <AgendaRaffle
-								timestamp={1694623800000}
-								duration={10 * 60 * 1000}
-								title='Sorteos con DonDominio'
+							<AgendaRaffle
+								title='Sorteo suscripciones de CodelyTV'
 								sponsor={{
-									logo: () => <DonDominio className='w-40' />,
-									url: 'https://www.dondominio.com/'
+									logo: () => <Codely className='w-40' />,
+									url: 'https://codely.com/pro/midudev'
 								}}
-							/> */}
+							/>
 							<AgendaItem
 								timestamp={1694624400000}
 								duration={30 * 60 * 1000}
@@ -172,6 +164,13 @@ export const Agenda = () => {
 									img: 'david',
 									name: 'David Bonilla',
 									title: 'CEO de Manfred'
+								}}
+							/>
+							<AgendaRaffle
+								title='Sorteo 2x Bootcamp JavaScript'
+								sponsor={{
+									logo: () => <LemonCode className='w-40' />,
+									url: 'https://lemoncode.net/master-frontend#inicio-banner'
 								}}
 							/>
 							<AgendaItem
@@ -185,6 +184,13 @@ export const Agenda = () => {
 									title: 'Senior Program Manager en Microsoft'
 								}}
 							/>
+							<AgendaRaffle
+								title='Sorteo regalos GitHub'
+								sponsor={{
+									logo: () => <Malt className='w-40 h-auto text-white' />,
+									url: 'https://midu.link/malt'
+								}}
+							/>
 							<AgendaItem
 								timestamp={1694629800000}
 								duration={30 * 60 * 1000}
@@ -194,6 +200,13 @@ export const Agenda = () => {
 									img: 'nerea',
 									name: 'Nerea Luis',
 									title: 'Responsable del área de Inteligencia Artificial en Sngular'
+								}}
+							/>
+							<AgendaRaffle
+								title='Sorteo de 5 dominios .dev + hosting con SSL'
+								sponsor={{
+									logo: () => <DonDominio className='w-40 h-auto' />,
+									url: 'https://midu.link/dondominio'
 								}}
 							/>
 							<AgendaItem
@@ -218,6 +231,7 @@ export const Agenda = () => {
 									title: 'Profesor y divulgador en Devtalles'
 								}}
 							/>
+							<AgendaRaffle title='¡Sorteo de una Nintendo Switch!' />
 							<AgendaItem
 								timestamp={1694635800000}
 								duration={20 * 60 * 1000}
