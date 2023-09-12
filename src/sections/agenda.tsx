@@ -100,7 +100,7 @@ export const Agenda = () => {
 	return (
 		<section id='agenda' className='flex flex-col flex-wrap items-center justify-center pt-48'>
 			<h2 className='text-6xl font-bold text-center text-white'>Agenda</h2>
-			<p className='max-w-xl text-xl text-sky-200 text-center [†ext-wrap:balance] mt-4'>
+			<p className='max-w-xl text-xl text-sky-200 text-center [text-wrap:balance] mt-4'>
 				Todas las charlas son en directo y en español
 			</p>
 

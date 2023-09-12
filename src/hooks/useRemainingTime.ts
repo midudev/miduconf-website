@@ -41,21 +41,21 @@ export const useRemainingTime = (targetDate: Date, { fillingZeros = true }) => {
 	const [remainingDate, setRemainingDate] = useState(getRemainingTime(targetDate))
 
 	const { seconds, minutes, hours, days } = remainingDate
-	const continueCountdown = days === 0 && hours === 0 && minutes === 0 && seconds === 0
+	const countdownEnded = days === 0 && hours === 0 && minutes === 0 && seconds === 0
 
 	useEffect(() => {
 		const timer =
-			!continueCountdown &&
+			!countdownEnded &&
 			setInterval(() => {
 				setRemainingDate(getRemainingTime(targetDate))
 			}, 1000)
 
-		if (continueCountdown) clearInterval(timer)
+		if (countdownEnded) clearInterval(timer)
 
 		return () => clearInterval(timer)
-	}, [continueCountdown, targetDate])
+	}, [countdownEnded, targetDate])
 
 	const remainingDateToReturn = fillingZeros ? fillZeros(remainingDate) : remainingDate
 
-	return { ...remainingDateToReturn, countdownEnded: continueCountdown }
+	return { ...remainingDateToReturn, countdownEnded }
 }
