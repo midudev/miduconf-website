@@ -59,7 +59,7 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	const title = 'miduConf - Conferencia de Programación y Tecnología'
 	const description =
 		'¡No te pierdas la miduConf el 13 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!'
-	const url = `https://miduconf.com/?ticket=${username}`
+	const url = `https://miduconf.com/ticket/${username}`
 	const ogImage = `${PREFIX_CDN}/ticket-${number}.jpg?${crypto.randomUUID()}=_buster`
 
 	const handleShare = async () => {
@@ -74,7 +74,7 @@ Conferencia de Programación y Tecnología.
 
 Apunta la fecha: 13 de SEPTIEMBRE
 
-https://miduconf.com/?ticket=${username}`
+https://miduconf.com/ticket/${username}`
 
 		window.open(`${intent}?text=${encodeURIComponent(text)}`)
 	}

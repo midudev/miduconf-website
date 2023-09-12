@@ -4,6 +4,14 @@ const nextConfig = {
   experimental: {
     esmExternals: false, // THIS IS THE FLAG THAT MATTERS
   },
+  async rewrites() {
+	return [
+		{
+			source: "/ticket/:username",
+			destination: "/?ticket=:username"
+		}
+	]
+  }
 }
 
 module.exports = nextConfig
