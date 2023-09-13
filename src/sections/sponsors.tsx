@@ -81,13 +81,13 @@ const premiums = [
 	{
 		name: 'Don Dominio',
 		premium: true,
-		link: 'https://www.dondominio.com/',
+		link: 'https://midu.link/dondominio',
 		logo: <DonDominio className='' fill='currentColor' />
 	},
 	{
 		name: 'Codely',
 		premium: true,
-		link: 'https://codely.com/',
+		link: 'https://midu.link/codely',
 		logo: (
 			<svg height='50' viewBox='0 0 118 29' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 				<g>
