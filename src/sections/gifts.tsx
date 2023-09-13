@@ -56,7 +56,7 @@ const GIFTS = [
 	},
 	{
 		count: 5,
-		name: '5 dominios + hosting profesional + SSL durante 1 año'
+		name: 'Dominios + hosting profesional + SSL durante 1 año'
 	},
 	{
 		count: 10,
