@@ -13,6 +13,18 @@ export function HeaderCountdown() {
 		setShow(true)
 	}, [])
 
+	useEffect(() => {
+		setShow(true);
+
+		// Cuando la cuenta atrás haya terminado (por ejemplo, después de 5 segundos), muestra el iframe de Twitch.
+		const countdownTimeout = setTimeout(() => {
+			setShowTwitchEmbed(true);
+		}, 5000); // 5000 milisegundos (5 segundos)
+
+		return () => clearTimeout(countdownTimeout);
+	}, []);
+
+
 	return (
 		<>
 			<div className='relative w-full h-14 p-2 flex items-center justify-center text-white !bg-cover !bg-center overflow-hidden'>
@@ -56,6 +68,16 @@ export function HeaderCountdown() {
 							<ShareTicketButton>Conseguir Ticket</ShareTicketButton>
 						</div>
 					</div>
+					{showTwitchEmbed ? (
+						<iframe
+							src="https://www.twitch.com/midudev"
+							width="600"
+							height="400"
+							frameborder="0"
+							scrolling="no"
+							allowfullscreen="true">
+						</iframe>
+					) : null}
 				</div>
 			</div>
 		</>
