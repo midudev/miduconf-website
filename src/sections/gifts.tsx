@@ -55,8 +55,16 @@ const GIFTS = [
 		name: 'Suscripciones 6 meses en CodelyTV'
 	},
 	{
+		count: 5,
+		name: '5 dominios + hosting profesional + SSL durante 1 año'
+	},
+	{
 		count: 10,
 		name: 'Suscripciones 1 mes de CodelyTV'
+	},
+	{
+		count: 10,
+		name: 'Suscripciones 3 meses en DevTalles'
 	},
 	{
 		count: 25,
