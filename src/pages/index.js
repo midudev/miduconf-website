@@ -10,6 +10,7 @@ import { Meteors } from '@/components/MeteorLanguages'
 import { TicketHome } from '@/sections/ticket-home'
 import { Gifts } from '@/sections/gifts'
 import { Agenda } from '@/sections/agenda'
+import { Live } from '@/sections/live'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
@@ -56,6 +57,7 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 			<HeaderIndex />
 
 			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
+				<Live />
 				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
 				<Speakers />
 				<Sponsors />
