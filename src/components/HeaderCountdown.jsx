@@ -70,7 +70,7 @@ export function HeaderCountdown() {
 					</div>
 					{showTwitchEmbed ? (
 						<iframe
-							src="https://www.twitch.com/midudev"
+							src="https://player.twitch.tv/midudev"
 							width="600"
 							height="400"
 							frameborder="0"
