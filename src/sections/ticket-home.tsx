@@ -49,7 +49,7 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	}
 
 	const handleGoToDiscord = () => {
-		window.open('https://discord.gg/EuxacQb2?event=1146458434682748939', '_blank')
+		window.open('https://discord.gg/qNqRXh3f?event=1146458434682748939', '_blank')
 	}
 
 	return (

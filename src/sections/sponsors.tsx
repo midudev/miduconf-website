@@ -6,9 +6,9 @@ import { TwitchLogo } from '@/components/TwitchLogo'
 
 const reviews = [
 	{
-		name: 'Twitch',
-		link: 'https://twitch.tv/midudev',
-		logo: <TwitchLogo className='h-[30px] w-auto' />
+		name: 'Autentia',
+		link: 'https://midu.link/autentia',
+		logo: <img className='w-auto h-full py-20' src='/img/autentia.svg' alt='logo de Autentia' />
 	},
 	{
 		name: 'Vercel',
