@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Inter, Inter_Tight as InterTight } from 'next/font/google'
 import Head from 'next/head'
 import { toJpeg } from 'html-to-image'
@@ -40,7 +40,7 @@ const getInfoFromUser = ({ user }) => {
 	return { avatar, fullname, username }
 }
 
-export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascript' }) {
+export default function Ticket({ user, ticketNumber, selectedFlavor }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
 	const [number, setNumber] = useState(ticketNumber)
 	const [flavorKey, setFlavorKey] = useState(() => {
@@ -54,7 +54,15 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	const supabase = useSupabaseClient()
 	const flavor = FLAVORS[flavorKey]
 
+	console.log(flavorKey)
+
 	const { username, avatar, name } = user
+
+	useEffect(() => {
+		if (selectedFlavor !== null) {
+			createShareImage()
+		}
+	}, [])
 
 	const title = 'miduConf - Conferencia de Programación y Tecnología'
 	const description =
@@ -85,6 +93,16 @@ https://miduconf.com/ticket/${username}`
 		window.location.href = '/'
 	}
 
+	const createShareImage = async () => {
+		const dataURL = await toJpeg(document.getElementById('ticket'), {
+			quality: 0.8
+		})
+
+		document.querySelector('#image').setAttribute('src', dataURL)
+
+		return dataURL
+	}
+
 	const changeFlavorKey = (selectedFlavorKey) => async () => {
 		setButtonText(STEPS_LOADING.generate)
 		setFlavorKey(selectedFlavorKey)
@@ -94,11 +112,7 @@ https://miduconf.com/ticket/${username}`
 			.update({ flavour: selectedFlavorKey, user_id: user.id })
 			.eq('user_name', username)
 
-		const dataURL = await toJpeg(document.getElementById('ticket'), {
-			quality: 0.8
-		})
-
-		document.querySelector('#image').setAttribute('src', dataURL)
+		const dataURL = await createShareImage()
 
 		const file = await dataUrlToFile(dataURL, 'ticket.jpg')
 		const filename = `ticket-${number}.jpg`
@@ -257,7 +271,7 @@ export const getServerSideProps = async (ctx) => {
 	// Create authenticated Supabase Client
 	const supabase = createPagesServerClient(ctx)
 
-	let selectedFlavor = 'javascript'
+	let selectedFlavor = null
 	let ticketNumber = 0
 
 	// Check if we have a session
