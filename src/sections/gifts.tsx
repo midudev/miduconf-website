@@ -4,7 +4,7 @@ const GIFTS = [
 		special: 'super',
 		count: 1,
 		name: 'Ordenador Mac Mini',
-		detail: 'Si llegamos a 10.000 tickets...'
+		detail: 'Si no se puede enviar, se buscará una alternativa'
 	},
 	{
 		special: 'super',
@@ -22,7 +22,7 @@ const GIFTS = [
 		special: 'super',
 		count: 1,
 		name: 'Consola Nintendo Switch',
-		detail: 'Para descansar de tanto programar'
+		detail: 'Si no se puede enviar, se buscará una alternativa'
 	},
 	{
 		special: 'super',
