@@ -104,6 +104,10 @@ const MagicContainer = ({ children, className }: MagicContainerProps) => {
 	)
 }
 
+function volvi(fast:boolean):string {
+	return 'sss'
+}
+
 interface MagicCardProps {
 	/**
 	 * @default <div />
