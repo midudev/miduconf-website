@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Inter, Inter_Tight as InterTight } from 'next/font/google'
 import Head from 'next/head'
 import { toJpeg } from 'html-to-image'
+import { GeistSans } from 'geist/font/sans'
 
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
@@ -12,12 +12,6 @@ import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
-
-export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
-export const interTight = InterTight({
-	weight: ['500', '800', '900'],
-	subsets: ['latin']
-})
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
@@ -146,7 +140,7 @@ https://miduconf.com/ticket/${username}`
 				<Countdown />
 			</header>
 
-			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
+			<main className={`${GeistSans.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
 				<div className='flex flex-col items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center md:flex-row'>
 					<a
 						className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
