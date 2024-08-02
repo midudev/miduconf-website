@@ -2,14 +2,13 @@ import { Inter, Inter_Tight as InterTight } from 'next/font/google'
 import Head from 'next/head'
 
 import { Background } from '@/components/Background'
-import { Speakers } from '@/components/Speakers'
-import { Sponsors } from '@/sections/sponsors'
-import { HeaderIndex } from '@/components/HeaderIndex'
-import { HeaderCountdown } from '@/components/HeaderCountdown'
+import { Header } from '@/components/Header'
 import { Meteors } from '@/components/MeteorLanguages'
-import { TicketHome } from '@/sections/ticket-home'
-import { Gifts } from '@/sections/gifts'
+import { Speakers } from '@/components/Speakers'
 import { Agenda } from '@/sections/agenda'
+import { Gifts } from '@/sections/gifts'
+import { Sponsors } from '@/sections/sponsors'
+import { TicketHome } from '@/sections/ticket-home'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
@@ -49,11 +48,15 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 			<Meteors />
 			<Background />
 
-			<header id='header' className='relative w-full mb-10 overflow-hidden z-[99999]'>
-				<HeaderCountdown />
-			</header>
+			<Header />
 
-			<HeaderIndex />
+			{/* <HeaderIndex /> */}
+			<div class='text-4xl md:text-8xl mx-auto text-center max-w-[20ch] text-white font-semibold'>
+				<p>
+					Conoce el <span className='text-blue-600'>futuro</span> del{' '}
+					<span className='text-blue-600'>desarrollo</span> web
+				</p>
+			</div>
 
 			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
 				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
