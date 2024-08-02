@@ -7,24 +7,23 @@ body {
 	overflow-x: hidden;
 }
 
-@keyframes add-shadow {
+@layer components {
+	.header-animate {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		backdrop-filter: blur(10px);
+		animation: reduce-header linear both;
+		animation-timeline: scroll();
+		animation-range: 0 150px;
+	}
+}
+
+@keyframes reduce-header {
 	to {
 		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, .1), 0 0 0 1px hsla(0, 0%, 100%, .10);
 		background: rgba(0, 0, 0, .3);
 		padding-block: 1rem;
 	}
-}
-
-#header {
-	backdrop-filter: blur(10px);
-	animation: add-shadow linear both;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-}
-
-#header {
-	animation-timeline: scroll();
-	animation-range: 0 150px;
 }
