@@ -91,22 +91,22 @@ export function Header() {
 
 const NAV_ITEMS = [
 	{
-		href: '/',
+		href: '#speakers',
 		title: 'Speakers',
 		Icon: NavbarIcons.SpeakersIcon
 	},
 	{
-		href: '/',
+		href: '#sponsors',
 		title: 'Patrocinadores',
 		Icon: NavbarIcons.SponsorsIcon
 	},
 	{
-		href: '/',
+		href: '#regalos',
 		title: 'Regalos',
 		Icon: NavbarIcons.GiftIcon
 	},
 	{
-		href: '',
+		href: '#agenda',
 		title: 'Agenda',
 		Icon: NavbarIcons.ScheduleIcon
 	}
