@@ -57,7 +57,7 @@ export function Header() {
 						Discord
 					</Button>
 					<button
-						className='flex items-center justify-center py-2 pl-2 md:hidden'
+						className='flex items-center justify-center py-2 md:hidden'
 						onClick={() => setIsNavbarOpen(!isNavbarOpen)}
 						aria-expanded='false'
 						aria-controls='navbar'
