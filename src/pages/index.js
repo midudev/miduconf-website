@@ -55,10 +55,10 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 
 			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
 				<div className='animate-fade-in-up text-6xl md:text-8xl mx-auto text-center max-w-[20ch] text-white font-bold mt-40'>
-					<h1>
+					<h2>
 						Conoce el <span className='text-blue-600'>futuro</span> del{' '}
 						<span className='text-blue-600'>desarrollo</span> web
-					</h1>
+					</h2>
 				</div>
 				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
 				<Countdown />
