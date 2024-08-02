@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@midudev/tailwind-animations": "^0.0.7",
     "@supabase/auth-helpers-nextjs": "0.10.0",
     "@supabase/auth-helpers-react": "0.5.0",
     "@supabase/supabase-js": "2.45.0",
