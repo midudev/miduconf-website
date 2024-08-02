@@ -103,7 +103,7 @@ export function Speakers() {
 			<p className='px-10 text-[18px] text-white/80 text-center [text-wrap:balance] mt-4'>
 				Divulgadores y profesionales de programación y la tecnología.
 			</p>
-			<div className='grid grid-cols-1 my-16 sm:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8'>
+			<div className='grid grid-cols-1 my-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8'>
 				{SPEAKERS.map((speaker) => (
 					<Speaker key={speaker.twitter} {...speaker} />
 				))}

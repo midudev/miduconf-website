@@ -1,5 +1,6 @@
-import { Inter, Inter_Tight as InterTight } from 'next/font/google'
 import Head from 'next/head'
+
+import { GeistSans } from 'geist/font/sans'
 
 import { Background } from '@/components/Background'
 import { Countdown } from '@/components/Countdown'
@@ -11,9 +12,6 @@ import { Gifts } from '@/sections/gifts'
 import { Sponsors } from '@/sections/sponsors'
 import { TicketHome } from '@/sections/ticket-home'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
-
-export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
-export const interTight = InterTight({ weight: ['500', '800', '900'], subsets: ['latin'] })
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
@@ -51,7 +49,7 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 
 			<Header />
 
-			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
+			<main className={`${GeistSans.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
 				<div className='animate-fade-in-up text-6xl md:text-8xl mx-auto text-center max-w-[20ch] text-white font-bold mt-40'>
 					<h2>
 						Conoce el <span className='text-blue-600'>futuro</span> del{' '}
