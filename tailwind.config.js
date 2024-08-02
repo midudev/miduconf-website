@@ -77,5 +77,9 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [require('flowbite/plugin'), require('tailwindcss-textshadow')]
+	plugins: [
+		require('flowbite/plugin'),
+		require('tailwindcss-textshadow'),
+		require('@midudev/tailwind-animations')
+	]
 }
