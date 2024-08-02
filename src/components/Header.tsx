@@ -28,7 +28,7 @@ export function Header() {
 						}
 					)}
 				>
-					<ul className='flex flex-col items-center overflow-x-auto md:overflow-hidden md:flex-row'>
+					<ul className='flex flex-col items-center overflow-x-auto overflow-y-hidden md:overflow-hidden md:flex-row'>
 						{NAV_ITEMS.map(({ Icon, href, title }, index) => (
 							<li
 								key={index}
