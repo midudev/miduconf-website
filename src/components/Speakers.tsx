@@ -8,7 +8,7 @@ const SPEAKERS = [
 	},
 	{
 		name: 'Carmen Ansio',
-		title: 'UX Engineer Freelance',
+		title: 'Design Engineer @ LottieFiles',
 		twitter: 'carmenansio',
 		img: 'carmen',
 		country: '🇪🇸'
@@ -22,9 +22,9 @@ const SPEAKERS = [
 	},
 	{
 		name: 'Alba Silvente',
-		title: 'DevRel @ Microsoft',
-		twitter: 'debs_obrien',
-		img: 'debbie',
+		title: 'FullStack @ StoryBlok',
+		twitter: 'dawntraoz',
+		img: 'dawntraoz',
 		country: '🇪🇸'
 	},
 	{
@@ -43,7 +43,7 @@ const SPEAKERS = [
 	},
 	{
 		name: 'Estefany Aguilar',
-		title: 'Sr. Frontend Dev',
+		title: 'Sr. Frontend Dev @ Platzi',
 		twitter: 'teffcode',
 		img: 'teffcode',
 		country: '🇨🇴'
