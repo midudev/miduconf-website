@@ -8,10 +8,11 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 import { Background } from '@/components/Background'
-import { HeaderCountdown } from '@/components/HeaderCountdown'
+import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
+import { Countdown } from '../components/Countdown'
 
 export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
 export const interTight = InterTight({
@@ -143,7 +144,7 @@ https://miduconf.com/ticket/${username}`
 			<Background />
 
 			<header id='header' className='relative w-full mb-10 overflow-hidden z-[99999]'>
-				<HeaderCountdown />
+				<Countdown />
 			</header>
 
 			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
