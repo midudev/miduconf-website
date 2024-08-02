@@ -12,7 +12,6 @@ import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
-import { Countdown } from '../components/Countdown'
 
 export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
 export const interTight = InterTight({
