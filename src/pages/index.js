@@ -51,14 +51,14 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 			<Header />
 
 			{/* <HeaderIndex /> */}
-			<div class='text-4xl md:text-8xl mx-auto text-center max-w-[20ch] text-white font-semibold'>
-				<p>
-					Conoce el <span className='text-blue-600'>futuro</span> del{' '}
-					<span className='text-blue-600'>desarrollo</span> web
-				</p>
-			</div>
 
 			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
+				<div class='text-6xl md:text-8xl mx-auto text-center max-w-[20ch] text-white font-bold mt-40'>
+					<p>
+						Conoce el <span className='text-blue-600'>futuro</span> del{' '}
+						<span className='text-blue-600'>desarrollo</span> web
+					</p>
+				</div>
 				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
 				<Speakers />
 				<Sponsors />
