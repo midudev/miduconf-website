@@ -51,8 +51,6 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 
 			<Header />
 
-			{/* <HeaderIndex /> */}
-
 			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
 				<div className='animate-fade-in-up text-6xl md:text-8xl mx-auto text-center max-w-[20ch] text-white font-bold mt-40'>
 					<h2>
