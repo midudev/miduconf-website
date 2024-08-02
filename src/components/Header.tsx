@@ -3,11 +3,13 @@
 import { MiduLogo } from '@/components/logos/midudev'
 import { NavbarIcons } from '@/components/icons'
 import { Button } from '@/components/Button'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 export function Header() {
 	const [isNavbarOpen, setIsNavbarOpen] = useState(false)
+	const navbarId = useId()
+
 	return (
 		<header className='header-animate w-full mb-10 overflow-hidden z-[99999] py-8'>
 			<div className='grid items-center justify-center md:justify-normal w-full grid-cols-[auto_1fr] mx-auto text-white gap-x-10 md:flex max-w-screen-base'>
@@ -20,7 +22,7 @@ export function Header() {
 					<MiduLogo className='w-10 h-12' />
 				</a>
 				<nav
-					id='navbar'
+					id={navbarId}
 					className={cn(
 						'col-span-full overflow-x-auto row-[2/3] grid md:block grid-rows-[0fr] transition-[grid-template-rows] ',
 						{
@@ -60,7 +62,7 @@ export function Header() {
 						className='flex items-center justify-center py-2 md:hidden'
 						onClick={() => setIsNavbarOpen(!isNavbarOpen)}
 						aria-expanded='false'
-						aria-controls='navbar'
+						aria-controls={navbarId}
 						title='Mostrar Menú'
 						aria-label='Mostrar menú'
 					>
