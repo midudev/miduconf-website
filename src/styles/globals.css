@@ -11,14 +11,17 @@ body {
 	to {
 		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, .1), 0 0 0 1px hsla(0, 0%, 100%, .10);
 		background: rgba(0, 0, 0, .3);
+		padding-block: 1rem;
 	}
 }
 
 #header {
 	backdrop-filter: blur(10px);
 	animation: add-shadow linear both;
-	position: sticky;
+	position: fixed;
 	top: 0;
+	left: 0;
+	right: 0;
 }
 
 #header {
