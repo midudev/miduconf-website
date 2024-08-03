@@ -66,7 +66,7 @@ function Speaker({ name, title, twitter, img, country }) {
 						alt={`speaker: ${name}`}
 					/>
 				</figure>
-				<header className='mt-4 flex justify-between items-center gap-x-2'>
+				<header className='flex items-center justify-between mt-4 gap-x-2'>
 					<h3 className='text-[16px] font-bold text-left text-white'>
 						<a
 							href={`https://twitter.com/${twitter}`}
@@ -85,7 +85,7 @@ function Speaker({ name, title, twitter, img, country }) {
 						@{twitter}
 					</a>
 				</header>
-				<footer className='flex justify-between items-center gap-x-2'>
+				<footer className='flex items-center justify-between gap-x-2'>
 					<p className='text-xs text-left text-white/60'>{title}</p>
 					<span>{country}</span>
 				</footer>
@@ -96,7 +96,10 @@ function Speaker({ name, title, twitter, img, country }) {
 
 export function Speakers() {
 	return (
-		<section id='speakers' className='flex flex-col flex-wrap items-center justify-center pt-48'>
+		<section
+			id='speakers'
+			className='flex flex-col flex-wrap items-center justify-center max-w-5xl pt-48 mx-auto'
+		>
 			<h2 className='text-5xl font-bold text-center text-white'>
 				Sobre nuestros <span className='text-blue-600'>speakers</span>
 			</h2>
