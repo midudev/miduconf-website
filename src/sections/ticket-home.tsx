@@ -68,8 +68,11 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 						}}
 					/>
 				</div>
-				<div className='flex flex-col items-center justify-center gap-4 mx-auto scale-90 md:flex-row sm:scale-100'>
-					<Button onClick={handleLogin} className='px-6 py-5 text-3xl font-bold rounded-xl'>
+				<div className='flex flex-col items-center justify-center gap-4 mx-auto mt-16 scale-90 md:flex-row sm:scale-100'>
+					<Button
+						onClick={handleLogin}
+						className='px-6 py-5 text-lg font-bold md:text-3xl rounded-xl'
+					>
 						<TicketIcon className='mr-3' />
 						Conseguir mi ticket
 					</Button>
