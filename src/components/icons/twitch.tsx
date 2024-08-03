@@ -9,7 +9,7 @@ export function TwitchIcon({ className = '', ...props }) {
 			{...props}
 			xmlns='http://www.w3.org/2000/svg'
 		>
-			<g clip-path='url(#clip0_33_542)'>
+			<g clipPath='url(#clip0_33_542)'>
 				<path
 					d='M500 0L0 500V2300H600V2800L1100 2300H1500L2400 1400V0H500ZM2200 1300L1800 1700H1400L1050 2050V1700H600V200H2200V1300Z'
 					fill='currentColor'
