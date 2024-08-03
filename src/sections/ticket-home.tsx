@@ -3,6 +3,8 @@ import Ticket from '@/components/Ticket'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useEffect, useState } from 'react'
 import { FLAVORS } from '@/flavors/data'
+import { Button } from '@/components/Button'
+import { TicketIcon } from '@/components/icons'
 
 export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	const supabase = useSupabaseClient()
@@ -55,7 +57,7 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	return (
 		<div>
 			<div className='block w-full h-full'>
-				<div className='flex items-center justify-center max-w-5xl mx-auto mt-10 flex-0'>
+				<div className='flex items-center justify-center max-w-[668px] mx-auto mt-16 flex-0'>
 					<Ticket
 						transition={!initialFlavor}
 						number={number}
@@ -67,7 +69,11 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 					/>
 				</div>
 				<div className='flex flex-col items-center justify-center gap-4 mx-auto scale-90 md:flex-row sm:scale-100'>
-					<ShimmerButton onClick={handleLogin} size='large'>
+					<Button onClick={handleLogin} className='px-6 py-5 text-3xl font-bold rounded-xl'>
+						<TicketIcon className='mr-3' />
+						Conseguir mi ticket
+					</Button>
+					{/* 	<ShimmerButton onClick={handleLogin} size='large'>
 						<svg
 							className='mr-3'
 							width='32'
@@ -114,7 +120,7 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 							<path d='M15 19l2 2l4 -4'></path>
 						</svg>
 						Guarda la fecha del evento
-					</ShimmerButton>
+					</ShimmerButton> */}
 				</div>
 			</div>
 		</div>
