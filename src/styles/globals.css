@@ -19,6 +19,15 @@ body {
 	}
 }
 
+@layer components {
+	.ticket-dash-border {
+		background-image: linear-gradient(hsla(0, 0%, 100%, 0.2) 0%, hsla(0, 0%, 100%, 0.2) 50%, transparent 50%);
+		background-size: 0.0625rem 1.125rem;
+		background-position: 100% 0;
+		background-repeat: repeat-y;
+	}
+}
+
 @keyframes reduce-header {
 	to {
 		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, .1), 0 0 0 1px hsla(0, 0%, 100%, .10);
