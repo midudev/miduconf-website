@@ -15,6 +15,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 				<div className='h-full sm:px-12'>
 					<Atropos
 						id='ticket'
+						highlight={false}
 						innerClassName='backdrop-blur-xl rounded-[60px]'
 						className='block w-full h-auto mx-auto shadow-2xl aspect-video [box-sizing:border-box]'
 					>
@@ -63,7 +64,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 										href='https://www.twitch.tv/midudev'
 										target='_blank'
 										rel='nofollow'
-										className='flex items-center justify-end gap-2 p-5 mt-auto ml-auto text-xl font-bold text-white col-span-full w-max hover:text-[#b9a3e3] transition-colors'
+										className='flex items-center justify-self-end justify-end self-end gap-2 p-5 text-xl font-bold text-white col-span-full w-max hover:text-[#b9a3e3] transition-colors'
 									>
 										<TwitchIcon className='w-5 h-auto' />
 										twitch.tv/midudev
