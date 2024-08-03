@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import Head from 'next/head'
-import { toJpeg } from 'html-to-image'
 import { GeistSans } from 'geist/font/sans'
+import { toJpeg } from 'html-to-image'
+import Head from 'next/head'
+import { useState } from 'react'
 
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
@@ -140,7 +140,7 @@ https://miduconf.com/ticket/${username}`
 				<Countdown />
 			</header>
 
-			<main className={`${GeistSans.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
+			<main className={`${GeistSans.className} max-w-screen-base m-auto mt-16 pb-20 px-4`}>
 				<div className='flex flex-col items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center md:flex-row'>
 					<a
 						className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
@@ -214,7 +214,9 @@ https://miduconf.com/ticket/${username}`
 					</button>
 				</div>
 
-				<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
+				<div className='max-w-[700px] mx-auto'>
+					<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
+				</div>
 
 				<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
 					<h2 className='font-light text-center text-white uppercase opacity-70'>
