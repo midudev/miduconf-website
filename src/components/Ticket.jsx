@@ -51,7 +51,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 										<div className='p-5'>
 											<MiduLogo className='h-auto ml-auto w-9' />
 											<time
-												datetime='2024-09-12T06:00:00'
+												dateTime='2024-09-12T06:00:00'
 												className='block mt-2 font-bold text-right text-white'
 											>
 												Sept. 12 2024
