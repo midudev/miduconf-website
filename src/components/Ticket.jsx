@@ -12,7 +12,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 	return (
 		<div className='relative z-[1000] w-full h-auto mx-auto aspect-video'>
 			<div className='h-full opacity-100 isolate aspect-video'>
-				<div className='h-full sm:px-12'>
+				<div className='h-full'>
 					<Atropos
 						id='ticket'
 						highlight={false}
@@ -29,8 +29,8 @@ export default function Ticket({ transition, number, flavor, user }) {
 								<span className='ticket-dash-border h-full px-4 font-mono text-center text-white md:px-7 text-sm font-bold md:text-[40px] [writing-mode:vertical-lr]'>
 									{ticketNumber}
 								</span>
-								<div class='grid w-full grid-rows-2 z-10'>
-									<div class='grid grid-cols-2'>
+								<div className='z-10 grid w-full grid-rows-2'>
+									<div className='grid grid-cols-2'>
 										<div className='flex justify-center gap-4 p-5 font-mono text-white h-max md:p-6 gap-y-2'>
 											{avatar && (
 												<>
