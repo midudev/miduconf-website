@@ -1,5 +1,5 @@
-import { useRemainingTime } from '../hooks/useRemainingTime'
 import { useEffect, useState } from 'react'
+import { useRemainingTime } from '../hooks/useRemainingTime'
 
 const LITERALS = ['Días', null, 'Horas', null, 'Minutos', null, 'Segundos']
 
@@ -22,13 +22,15 @@ export function Countdown() {
 
 	return (
 		<>
-			<div className='animate-blurred-fade-in flex flex-row gap-x-12 text-white justify-center items-center mt-12'>
+			<div className='flex flex-row items-center justify-center gap-4 mt-12 text-white animate-blurred-fade-in md:gap-x-12'>
 				{[days, null, hours, null, minutes, null, seconds].map((value, index) => {
 					return (
 						<div key={index}>
 							<div className='flex flex-col items-center justify-center text-center'>
-								<strong className='text-8xl tabular-nums'>{showValue(value)}</strong>
-								<span className='text-xl font-light'>{value === null ? ' ' : LITERALS[index]}</span>
+								<strong className='text-3xl md:text-7xl tabular-nums'>{showValue(value)}</strong>
+								<span className='text-sm font-light md:text-xl'>
+									{value === null ? ' ' : LITERALS[index]}
+								</span>
 							</div>
 						</div>
 					)
