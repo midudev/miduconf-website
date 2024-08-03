@@ -44,19 +44,22 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 				<link rel='icon' href='/favicon.svg' />
 			</Head>
 
-			<Meteors />
-			<Background />
-
 			<Header />
 
-			<main className={`${GeistSans.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
-				<h2 className='animate-fade-in-up text-6xl md:text-[80px] mx-auto text-center max-w-[20ch] text-white font-bold mt-40'>
-					Conoce el <span className='text-midu-primary'>futuro</span> del{' '}
-					<span className='text-midu-primary'>desarrollo</span> web
-				</h2>
+			<main className={`${GeistSans.className}`}>
+				<section className='relative px-4 pb-20 before:bg-gradient-to-t before:from-[rgba(11_33_125_/_30%)] before:inset-0 before:to-[rgba(2_6_23_/_40%)] before:size-full before:absolute'>
+					<Meteors />
+					<Background />
+					<div className='max-w-5xl mx-auto'>
+						<h2 className='animate-fade-in-up text-6xl md:text-[80px] mx-auto text-center max-w-[20ch] text-white font-bold pt-40'>
+							Conoce el <span className='text-midu-primary'>futuro</span> del{' '}
+							<span className='text-midu-primary'>desarrollo</span> web
+						</h2>
 
-				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
-				<Countdown />
+						<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
+						<Countdown />
+					</div>
+				</section>
 				<Speakers />
 				<Sponsors />
 				<Gifts />
