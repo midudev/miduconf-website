@@ -10,14 +10,14 @@ export default function Ticket({ transition, number, flavor, user }) {
 	const ticketNumber = `#${number != null ? number.toString().padStart(5, '0') : ''}`
 
 	return (
-		<div className='relative z-[1000] w-full h-auto mx-auto aspect-video'>
-			<div className='h-full opacity-100 isolate aspect-video'>
+		<div className='relative z-[1000] w-full h-auto mx-auto aspect-[9/10] md:aspect-video'>
+			<div className='h-full opacity-100 isolate aspect-[9/10] md:aspect-video'>
 				<div className='h-full'>
 					<Atropos
 						id='ticket'
 						highlight={false}
 						innerClassName='backdrop-blur-xl rounded-[60px]'
-						className='block w-full h-auto mx-auto shadow-2xl aspect-video [box-sizing:border-box]'
+						className='block w-full h-auto mx-auto shadow-2xl aspect-[9/10] md:aspect-video [box-sizing:border-box]'
 					>
 						<div
 							className={`block h-full overflow-hidden opacity-100 rounded-[60px] shadow-[inset_0_4px_30px] shadow-midu-primary/25 bg-transparent border border-midu-primary/10 p-5 ${
@@ -29,15 +29,15 @@ export default function Ticket({ transition, number, flavor, user }) {
 								<span className='ticket-dash-border h-full px-4 font-mono text-center text-white md:px-7 text-sm font-bold md:text-[40px] [writing-mode:vertical-lr]'>
 									{ticketNumber}
 								</span>
-								<div className='z-10 grid w-full grid-rows-2'>
-									<div className='grid grid-cols-2'>
-										<div className='flex justify-center gap-4 p-5 font-mono text-white h-max md:p-6 gap-y-2'>
+								<div className='z-10 grid w-full h-auto grid-rows-2 pt-5 md:h-full md:pt-0'>
+									<div className='grid md:grid-cols-2'>
+										<div className='h-max'>
 											{avatar && (
-												<>
+												<div className='flex flex-col items-end justify-center gap-4 p-5 font-mono text-white md:items-start md:flex-row md:p-6 gap-y-2'>
 													<img
 														src={avatar}
 														crossOrigin='anonymous'
-														className='block w-10 h-10 rounded-full md:w-[78px] md:h-[78px]'
+														className='block w-20 h-20 rounded-full md:w-[78px] md:h-[78px]'
 														alt={`Avatar de ${username}`}
 														width='78'
 														height='78'
@@ -45,14 +45,14 @@ export default function Ticket({ transition, number, flavor, user }) {
 													<div>
 														<p className={`text-xl font-bold`}>{username ?? name}</p>
 													</div>
-												</>
+												</div>
 											)}
 										</div>
-										<div className='p-5'>
-											<MiduLogo className='h-auto ml-auto w-9' />
+										<div className='flex items-center gap-4 p-5 md:block'>
+											<MiduLogo className='order-1 h-auto ml-0 md:ml-auto w-9' />
 											<time
 												dateTime='2024-09-12T06:00:00'
-												className='block mt-2 font-bold text-right text-white'
+												className='block mt-2 ml-auto font-bold text-right text-white md:ml-0'
 											>
 												Sept. 12 2024
 												<span className='block text-sm font-normal text-white/60'>06:00 GTM-6</span>
@@ -64,9 +64,9 @@ export default function Ticket({ transition, number, flavor, user }) {
 										href='https://www.twitch.tv/midudev'
 										target='_blank'
 										rel='nofollow'
-										className='flex items-center justify-self-end justify-end self-end gap-2 p-5 text-xl font-bold text-white col-span-full w-max hover:text-[#b9a3e3] transition-colors'
+										className='flex items-center justify-self-end justify-end self-end gap-2 p-5 text-md md:text-xl font-bold text-white col-span-full w-max hover:text-[#b9a3e3] transition-colors'
 									>
-										<TwitchIcon className='w-5 h-auto' />
+										<TwitchIcon className='w-4 h-auto md:w-5' />
 										twitch.tv/midudev
 									</a>
 								</div>
