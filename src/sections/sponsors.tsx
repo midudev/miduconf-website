@@ -2,6 +2,8 @@ import Marquee from '@/components/magicui/Marquee'
 import { DonDominio } from '@/components/logos/dondominio'
 import { ReactNode } from 'react'
 import { Malt } from '@/components/logos/maltes'
+import { Button } from '@/components/Button'
+import { TicketIcon } from '@/components/icons'
 
 const reviews = [
 	{
@@ -249,6 +251,14 @@ export const Sponsors = () => {
 					<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
 				</div>
 			</div>
+
+			<Button
+				as='a'
+				href='mailto:miduga@gmail.com'
+				className='px-4 py-3 text-lg font-bold md:text-xl rounded-xl'
+			>
+				Convertirse en Patrocinador ✨
+			</Button>
 		</section>
 	)
 }
