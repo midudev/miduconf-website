@@ -11,16 +11,12 @@ const useTime = ({ timestamp, duration }) => {
 		// get HH:MM in the local user timezone
 		const localTime = new Date(timestamp).toLocaleTimeString([], {
 			hour: '2-digit',
-			minute: '2-digit'
+			minute: '2-digit',
+			hour12: false
 		})
 
-		// use the duration in milliseconds to calculate the end time
-		const endTime = new Date(timestamp + duration).toLocaleTimeString([], {
-			hour: '2-digit',
-			minute: '2-digit'
-		})
-
-		setTime(`${localTime} - ${endTime}`)
+		// setTime(`${localTime} - ${endTime}`)
+		setTime(localTime)
 	}, [])
 
 	return time
@@ -71,27 +67,26 @@ const AgendaItem = ({ timestamp, duration, title, description, speaker }) => {
 	const time = useTime({ timestamp, duration })
 
 	return (
-		<div className='flex flex-col gap-4 sm:flex-row sm:items-stretch'>
-			<p className='w-auto text-sm font-medium text-gray-300 sm:text-right sm:w-32 shrink-0'>
+		<article className='bg-[#121226] rounded-[20px] shadow relative flex flex-col gap-5 sm:flex-row sm:items-stretch p-6 overflow-hidden'>
+			<p className='flex justify-center items-center w-auto text-5xl font-bold text-white/60 sm:text-right sm:w-32 shrink-0'>
 				{time}
 			</p>
-			<div className='hidden w-px bg-gray-700 sm:shrink-0 sm:block' />
-			<div className='flex-1 pb-4'>
-				<h4 className='mb-2 -mt-2 text-xl font-bold text-yellow-200'>{title}</h4>
-				<p className='text-base font-normal text-sky-200 [text-wrap:balance] mb-6'>{description}</p>
+			<div className='flex-1'>
+				<header className='flex flex-row gap-x-2 items-center'>
+					<h4 className='font-medium leading-tight text-midu-primary'>{speaker.name}</h4>
+					<span className='text-white/70'>- {speaker.title}</span>
+				</header>
+				<h4 className='text-xl font-bold text-white mt-2'>{title}</h4>
 				<div className='flex items-center gap-3'>
 					<img
-						className='object-cover w-12 h-12 rounded-full shrink-0'
+						className='object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
 						src={`/img/speakers/${speaker.img}.jpg`}
 						alt={`Foto de ${speaker.name}`}
+						style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 90%)' }}
 					/>
-					<div>
-						<p className='text-lg font-medium leading-tight text-white'>{speaker.name}</p>
-						<p className='text-sm font-normal text-white/70'>{speaker.title}</p>
-					</div>
 				</div>
 			</div>
-		</div>
+		</article>
 	)
 }
 export const Agenda = () => {
@@ -100,14 +95,14 @@ export const Agenda = () => {
 	return (
 		<section id='agenda' className='flex flex-col flex-wrap items-center justify-center pt-48'>
 			<h2 className='text-6xl font-bold text-center text-white'>Agenda</h2>
-			<p className='max-w-xl text-xl text-sky-200 text-center [text-wrap:balance] mt-4'>
+			<p className='max-w-xl text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				Todas las charlas son en directo y en español
 			</p>
 
 			<section className='antialiased'>
-				<div className='max-w-2xl px-4 py-4 mx-auto lg:px-6'>
+				<div className='max-w-4xl px-4 py-4 mx-auto lg:px-6'>
 					<div className='w-full max-w-xl mx-auto space-y-4 text-center'>
-						<span className='inline-flex items-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300'>
+						<span className='inline-flex items-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300 shadow-inset shadow-white'>
 							<svg
 								aria-hidden='true'
 								className='w-3 h-3 mr-1'
