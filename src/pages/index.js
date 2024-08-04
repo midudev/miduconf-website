@@ -6,6 +6,7 @@ import { Background } from '@/components/Background'
 import { Countdown } from '@/components/Countdown'
 import { Header } from '@/components/Header'
 import { Meteors } from '@/components/MeteorLanguages'
+import { Stars } from '@/components/Stars'
 import { Speakers } from '@/components/Speakers'
 import { Agenda } from '@/sections/agenda'
 import { Gifts } from '@/sections/gifts'
@@ -47,7 +48,8 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 			<Header />
 
 			<main className={`${GeistSans.className}`}>
-				<section className='relative px-4 pb-20 before:bg-gradient-to-t before:from-[rgba(11_33_125_/_30%)] before:-z-10 before:inset-0 before:to-[rgba(2_6_23_/_40%)] before:size-full before:absolute'>
+				<section className='relative px-4 pb-20 before:bg-gradient-to-b before:from-[#020617] before:via-[#020617] before:-z-10 before:inset-0 before:to-[#0B217D] before:size-full before:absolute border-b border-midu-primary inset-0 m-auto'>
+					<Stars />
 					<Meteors />
 					<Background />
 					<div className='max-w-5xl mx-auto'>
