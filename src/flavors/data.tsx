@@ -1630,8 +1630,8 @@ export const FLAVORS = {
 					y2='45.52'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop offset='0' stop-color='#3940a4'></stop>
-					<stop offset='1' stop-color='#293091'></stop>
+					<stop offset='0' stopColor='#3940a4'></stop>
+					<stop offset='1' stopColor='#293091'></stop>
 				</linearGradient>
 				<path
 					fill='url(#9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1)'
@@ -1647,8 +1647,8 @@ export const FLAVORS = {
 					y2='31.562'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop offset='0' stop-color='#7b83eb'></stop>
-					<stop offset='1' stop-color='#5961c3'></stop>
+					<stop offset='0' stopColor='#7b83eb'></stop>
+					<stop offset='1' stopColor='#5961c3'></stop>
 				</linearGradient>
 				<path
 					fill='url(#9nBOzQEsA2vJDj4A8wborb_shQTXiDQiQVR_gr2)'
@@ -1670,8 +1670,8 @@ export const FLAVORS = {
 					y2='36.777'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop offset='0' stop-color='#5c65d6'></stop>
-					<stop offset='.999' stop-color='#464eb0'></stop>
+					<stop offset='0' stopColor='#5c65d6'></stop>
+					<stop offset='.999' stopColor='#464eb0'></stop>
 				</linearGradient>
 				<path
 					fill='url(#9nBOzQEsA2vJDj4A8wborc_shQTXiDQiQVR_gr3)'
@@ -1699,7 +1699,16 @@ export const FLAVORS = {
 	},
 	alpinejs: {
 		component: ({ className }) => (
-			<svg className={className} xmlns='http://www.w3.org/2000/svg' width='63' height='63' viewBox='0 0 256 118'><path fill='#77C1D2' d='M199.111 0L256 56.639l-56.889 56.64l-56.889-56.64z'/><path fill='#2D3441' d='m56.889 0l117.938 117.421H61.049L0 56.639z'/></svg>
+			<svg
+				className={className}
+				xmlns='http://www.w3.org/2000/svg'
+				width='63'
+				height='63'
+				viewBox='0 0 256 118'
+			>
+				<path fill='#77C1D2' d='M199.111 0L256 56.639l-56.889 56.64l-56.889-56.64z' />
+				<path fill='#2D3441' d='m56.889 0l117.938 117.421H61.049L0 56.639z' />
+			</svg>
 		),
 		colors: {
 			ticket: 'bg-[#77c1d2]/50',
