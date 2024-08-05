@@ -1623,7 +1623,6 @@ export const FLAVORS = {
 				viewBox='0 0 48 48'
 			>
 				<linearGradient
-					id='9nBOzQEsA2vJDj4A8wbora_shQTXiDQiQVR_gr1'
 					x1='22.48'
 					x2='31.833'
 					y1='19.823'
