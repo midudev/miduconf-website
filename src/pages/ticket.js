@@ -237,7 +237,6 @@ https://miduconf.com/ticket/${username}`
 									<figure className='flex items-center justify-center w-16 h-16 transition group-hover:scale-110'>
 										<Icon />
 									</figure>
-									{name}
 								</button>
 							)
 						})}
