@@ -22,7 +22,7 @@ export function Stars() {
 	return (
 		<div ref={divRef} className='-z-10 pointer-events-none absolute size-full inset-0 m-auto'>
 			{Array.from({ length: NUM_STARS }, (_, i) => i).map((i) => (
-				<div className='absolute bg-white' key={i} />
+				<div className='absolute bg-white rounded-full' key={i} />
 			))}
 		</div>
 	)
