@@ -42,13 +42,13 @@ export const Meteors = ({ number = 5 }: MeteorsProps) => {
 				<span
 					key={idx}
 					className={clsx(
-						'pointer-events-none lala absolute left-1/2 top-1/2 h-1 w-1 animate-meteor opacity-0 rounded-full'
+						'pointer-events-none lala absolute left-1/2 top-1/2 h-0.5 w-0.5 animate-meteor opacity-0 rounded-full'
 					)}
 					style={head}
 				>
 					{/* Meteor Tail */}
 					<div
-						className='absolute h-1 -translate-y-1/2 rounded-full pointer-events-none top-1/2 -z-10 w-44 bg-gradient-to-r'
+						className='absolute h-0.5 -translate-y-1/2 rounded-full pointer-events-none top-1/2 -z-10 w-44 bg-gradient-to-r'
 						style={tail}
 					/>
 				</span>
