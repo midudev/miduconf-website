@@ -1,5 +1,3 @@
-import Marquee from '@/components/magicui/Marquee'
-import { ReactNode } from 'react'
 import { Button } from '@/components/Button'
 import { SponsorIcons } from '@/components/icons/sponsors'
 
@@ -57,27 +55,19 @@ export const premiums = [
 	{
 		name: 'Platzi',
 		link: 'https://platzi.com/',
-		Logo: SponsorIcons.platzi,
+		logo: <SponsorIcons.platzi className='w-auto h-12' />,
 		slogan: 'Plataforma de aprendizaje profesional online'
 	},
 	{
 		name: 'Don Dominio',
 		link: 'https://midu.link/dondominio',
-		Logo: SponsorIcons.donDominio,
+		logo: <SponsorIcons.donDominio className='w-full h-8' />,
 		slogan: 'Registro de dominios, hosting, correo y SSL'
 	},
 	{
 		name: 'KeepCoding',
 		link: 'https://midu.link/keepcoding',
-		Logo: ({ className = '' }) => (
-			<img
-				className={className}
-				src='/img/sponsors/keepcoding.webp'
-				width='727'
-				height='163'
-				alt='logo de KeepCoding'
-			/>
-		),
+		logo: <SponsorIcons.keepCoding className='w-52 ' />,
 		slogan: 'Los Mejores Bootcamps Online'
 	}
 	// {
@@ -196,15 +186,22 @@ export const premiums = [
 	// },
 ]
 
+/* 
+	name: 'Platzi',
+		link: 'https://platzi.com/',
+		Logo: SponsorIcons.platzi,
+		slogan: 'Plataforma de aprendizaje profesional online'
+*/
 const ReviewCard = ({
 	logo,
 	link,
-	size
+	size,
+	slogan
 }: {
-	logo?: string | ReactNode
+	logo?: JSX.Element
 	link: string
-	premium?: boolean
 	size?: string
+	slogan: string
 }) => {
 	return (
 		<a
@@ -215,10 +212,11 @@ const ReviewCard = ({
 				size === 'large'
 					? 'min-w-[250px] '
 					: 'min-w-[50px] border-slate-900 hover:border-slate-900/75'
-			} flex justify-center items-center overflow-hidden rounded-xl  w-full py-4 h-24 px-12 transition hover:bg-slate-800/75 hover:shadow-lg group`}
+			} flex justify-center items-center overflow-hidden rounded-xl  w-full py-8  px-12 transition hover:bg-slate-800/75 hover:shadow-lg group`}
 		>
-			<div className='flex flex-row items-center justify-center w-full h-auto gap-2 text-white transition group-hover:scale-110'>
+			<div className='flex flex-col items-center justify-center w-full gap-4 text-white transition h-max group-hover:scale-110'>
 				{logo}
+				<p className='text-lg text-center text-white/60 max-w-[20ch]'>{slogan}</p>
 			</div>
 		</a>
 	)
@@ -226,32 +224,22 @@ const ReviewCard = ({
 
 export const Sponsors = () => {
 	return (
-		<section id='sponsors' className='flex flex-col flex-wrap items-center justify-center pt-32'>
+		<section
+			id='sponsors'
+			className='flex flex-col flex-wrap items-center justify-center px-4 pt-32'
+		>
 			<h2 className='text-4xl font-bold text-center text-white md:text-6xl'>Patrocinadores</h2>
 			<p className='max-w-xl text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				¡Gracias a ellos hacemos posible el evento!
 			</p>
 
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<div className='grid max-w-3xl gap-4 md:grid-cols-2'>
+				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
 					{premiums.map((premium) => (
 						<ReviewCard key={premium.name} {...premium} size='large' />
 					))}
 				</div>
 				<div className='relative flex flex-col w-full overflow-hidden gap-y-4'>
-					<Marquee reverse pauseOnHover className='[--duration:40s]'>
-						{reviews
-							.slice()
-							.reverse()
-							.map((review) => (
-								<ReviewCard key={review.name} {...review} />
-							))}
-					</Marquee>
-					<Marquee pauseOnHover className='[--duration:40s]'>
-						{[...reviews.slice(4), ...reviews.slice(0, 4)].map((review) => (
-							<ReviewCard key={review.name} {...review} />
-						))}
-					</Marquee>
 					<div className='absolute inset-y-0 left-0 w-40 pointer-events-none from-[#000214] to-transparent bg-gradient-to-r '></div>
 					<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
 				</div>

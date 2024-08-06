@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import 'atropos/css'
 import { TwitchIcon } from './icons'
 import { MiduLogo } from './logos/midudev'
-import { premiums } from '@/sections/sponsors'
+import { SponsorIcons } from '@/components/icons/sponsors'
 
 interface Props {
 	transition?: boolean
@@ -180,8 +180,8 @@ export default function Ticket({
 									isSizeFixed ? 'rounded-full' : 'rounded md:rounded-full '
 								)}
 							>
-								{premiums.map(({ Logo, name }) => (
-									<Logo className='w-auto h-auto text-white max-h-5' key={name} />
+								{LIST_OF_TICKET_SPONSORS.map(({ Icon, name }) => (
+									<Icon className='w-auto h-auto text-white max-h-5' key={name} />
 								))}
 							</div>
 						</div>
@@ -205,3 +205,18 @@ export default function Ticket({
 		</div>
 	)
 }
+
+const LIST_OF_TICKET_SPONSORS = [
+	{
+		name: 'platzi',
+		Icon: SponsorIcons.platzi
+	},
+	{
+		name: 'donDominio',
+		Icon: SponsorIcons.donDominio
+	},
+	{
+		name: 'keepCode',
+		Icon: SponsorIcons.keepCoding
+	}
+]
