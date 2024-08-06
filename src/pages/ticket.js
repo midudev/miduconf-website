@@ -47,7 +47,6 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	})
 	const supabase = useSupabaseClient()
 	const flavor = FLAVORS[flavorKey]
-
 	const { username, avatar, name } = user
 
 	const title = 'miduConf - Conferencia de Programación y Tecnología'
@@ -222,8 +221,8 @@ https://miduconf.com/ticket/${username}`
 					<h2 className='font-light text-center text-white uppercase opacity-70'>
 						Selecciona tu sabor:
 					</h2>
-					<div className='flex flex-row flex-wrap justify-center w-full p-8 text-center gap-x-4 gap-y-12'>
-						{Object.entries(FLAVORS).map(([key, { name, component: Icon }]) => {
+					<div className='flex flex-row flex-wrap justify-center w-full p-8 text-center gap-x-8 gap-y-12'>
+						{Object.entries(FLAVORS).map(([key, { icon: Icon }]) => {
 							return (
 								<button
 									key={key}
@@ -234,9 +233,9 @@ https://miduconf.com/ticket/${username}`
 									}`}
 									onClick={changeFlavorKey(key)}
 								>
-									<figure className='flex items-center justify-center w-16 h-16 transition group-hover:scale-110'>
-										<Icon />
-									</figure>
+									<div className='flex items-center justify-center w-16 h-16 transition group-hover:scale-110'>
+										<Icon className='h-auto' />
+									</div>
 								</button>
 							)
 						})}
