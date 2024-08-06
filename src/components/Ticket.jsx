@@ -1,34 +1,64 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import 'atropos/css'
 import Atropos from 'atropos/react'
 import { TwitchIcon } from './icons'
 import { MiduLogo } from './logos/midudev'
 
-export default function Ticket({ transition, number, flavor, user }) {
+export default function Ticket({ transition, number, flavor: { icon: Icon, colorPalette }, user }) {
 	const { username, avatar, name } = user ?? {}
 	const ticketNumber = `#${number != null ? number.toString().padStart(5, '0') : ''}`
 
+	const currentTicketStyles = {
+		background: colorPalette?.bg ?? 'bg-[#101E5B]/65',
+		borders: {
+			outside: colorPalette?.borders.outside ?? 'border-midu-primary/10',
+			inside: colorPalette?.borders.inside ?? 'border-midu-primary/20'
+		},
+		shadowColor: colorPalette?.shadowColor ?? 'shadow-midu-primary/25'
+	}
+
 	return (
-		<div className='relative z-[1000] w-full h-auto mx-auto aspect-[9/10] md:aspect-video'>
-			<div className='h-full opacity-100 isolate aspect-[9/10] md:aspect-video'>
+		<div className='relative z-[1000] w-full h-auto mx-auto aspect-[9/10] md:aspect-[2/1]'>
+			<div className='h-full opacity-100 isolate aspect-[9/10] md:aspect-[2/1]'>
 				<div className='h-full'>
 					<Atropos
 						id='ticket'
 						highlight={false}
 						innerClassName='backdrop-blur-xl rounded-[60px]'
-						className='block w-full h-auto mx-auto shadow-2xl aspect-[9/10] md:aspect-video [box-sizing:border-box]'
+						className='block w-full h-auto mx-auto shadow-2xl aspect-[9/10] md:aspect-[2/1] [box-sizing:border-box]'
 					>
 						<div
-							className={`block h-full overflow-hidden opacity-100 rounded-[60px] shadow-[inset_0_4px_30px] shadow-midu-primary/25 bg-transparent border border-midu-primary/10 p-5 ${
-								transition && 'transition duration-500 ease-in-out'
-							} `}
+							className={cn(
+								'block h-full overflow-hidden opacity-100 rounded-[60px] shadow-[inset_0_4px_30px] bg-transparent border p-5',
+								currentTicketStyles.borders.outside,
+								currentTicketStyles.shadowColor,
+								{
+									'transition duration-500 ease-in-out': transition
+								}
+							)}
 						>
-							<div className='relative flex h-full overflow-hidden bg-[#101E5B]/65 border border-midu-primary/20 rounded-[40px]'>
+							<div
+								className={cn(
+									'relative flex h-full overflow-hidden border rounded-[40px]',
+									currentTicketStyles.background,
+									currentTicketStyles.borders.inside
+								)}
+							>
 								<div className='absolute w-1/2 rotate-45 h-[300%] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#41b3ff00] via-[#b0a9ff13] to-[#41b3ff00]'></div>
 								<span className='ticket-dash-border h-full px-4 font-mono text-center text-white md:px-7 text-sm font-bold md:text-[40px] [writing-mode:vertical-lr]'>
 									{ticketNumber}
 								</span>
+								{
+									<div key={name} className='absolute bottom-[10%] -rotate-12 left-[25%] h-[40%]'>
+										<Icon className='absolute w-auto h-full' />
+										<Icon
+											className='absolute w-auto h-full scale-105 blur-xl -z-10 opacity-40'
+											key={`${name}-shadow`}
+										/>
+									</div>
+								}
 								<div className='z-10 grid w-full h-auto grid-rows-2 pt-5 md:h-full md:pt-0'>
 									<div className='grid md:grid-cols-2'>
 										<div className='h-max'>
@@ -44,6 +74,12 @@ export default function Ticket({ transition, number, flavor, user }) {
 													/>
 													<div>
 														<p className={`text-xl font-bold`}>{username ?? name}</p>
+														<span className='block px-2 py-1 mt-2 text-sm rounded w-max bg-white/10'>
+															Ticket{' '}
+															<span className='inline-block' aria-disabled>
+																⭐️
+															</span>
+														</span>
 													</div>
 												</div>
 											)}
@@ -59,7 +95,6 @@ export default function Ticket({ transition, number, flavor, user }) {
 											</time>
 										</div>
 									</div>
-
 									<a
 										href='https://www.twitch.tv/midudev'
 										target='_blank'
@@ -70,7 +105,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 										twitch.tv/midudev
 									</a>
 								</div>
-								<div
+								{/* <div
 									className={
 										'absolute overflow-hidden opacity-30 -right-8 -bottom-10 h-auto rounded-r-2xl flex items-end'
 									}
@@ -78,7 +113,7 @@ export default function Ticket({ transition, number, flavor, user }) {
 									<figure className={`${flavor.figure} max-w-52 max-h-52 -rotate-6 p-8 -z-10`}>
 										<flavor.component className='w-full h-auto ' />
 									</figure>
-								</div>
+								</div> */}
 							</div>
 
 							{/* <div className='absolute items-center p-4 overflow-hidden font-mono text-white z-[1000] md:p-6 left-20 bottom-2 opacity-100 hidden md:block'>
