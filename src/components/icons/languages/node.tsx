@@ -56,7 +56,7 @@ export function NodeIcon({ className = '', ...props }) {
 			<path
 				d='M13.4 180.345V461.662C13.4 471.153 18.4568 479.925 26.67 484.681L268.717 624.848C276.95 629.616 287.101 629.624 295.341 624.869L538.294 484.688C546.527 479.937 551.6 471.153 551.6 461.648V181.706C551.6 172.246 546.576 163.498 538.406 158.731L295.873 17.2148C287.623 12.4009 277.425 12.3801 269.155 17.1603L275.461 28.069L269.155 17.1603L26.6881 157.316C18.4648 162.069 13.4 170.847 13.4 180.345Z'
 				stroke='white'
-				stroke-width='25.2'
+				strokeWidth='25.2'
 			/>
 			<defs>
 				<linearGradient
@@ -67,11 +67,11 @@ export function NodeIcon({ className = '', ...props }) {
 					y2='53481.5'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#41873F' />
-					<stop offset='0.3288' stop-color='#418B3D' />
-					<stop offset='0.6352' stop-color='#419637' />
-					<stop offset='0.9319' stop-color='#3FA92D' />
-					<stop offset='1' stop-color='#3FAE2A' />
+					<stop stopColor='#41873F' />
+					<stop offset='0.3288' stopColor='#418B3D' />
+					<stop offset='0.6352' stopColor='#419637' />
+					<stop offset='0.9319' stopColor='#3FA92D' />
+					<stop offset='1' stopColor='#3FAE2A' />
 				</linearGradient>
 				<linearGradient
 					id='paint1_linear_7_100'
@@ -81,10 +81,10 @@ export function NodeIcon({ className = '', ...props }) {
 					y2='-2062.4'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop offset='0.1376' stop-color='#41873F' />
-					<stop offset='0.4032' stop-color='#54A044' />
-					<stop offset='0.7136' stop-color='#66B848' />
-					<stop offset='0.9081' stop-color='#6CC04A' />
+					<stop offset='0.1376' stopColor='#41873F' />
+					<stop offset='0.4032' stopColor='#54A044' />
+					<stop offset='0.7136' stopColor='#66B848' />
+					<stop offset='0.9081' stopColor='#6CC04A' />
 				</linearGradient>
 				<linearGradient
 					id='paint2_linear_7_100'
@@ -94,10 +94,10 @@ export function NodeIcon({ className = '', ...props }) {
 					y2='31484.6'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop offset='0.09192' stop-color='#6CC04A' />
-					<stop offset='0.2864' stop-color='#66B848' />
-					<stop offset='0.5968' stop-color='#54A044' />
-					<stop offset='0.8624' stop-color='#41873F' />
+					<stop offset='0.09192' stopColor='#6CC04A' />
+					<stop offset='0.2864' stopColor='#66B848' />
+					<stop offset='0.5968' stopColor='#54A044' />
+					<stop offset='0.8624' stopColor='#41873F' />
 				</linearGradient>
 			</defs>
 		</svg>

@@ -28,7 +28,7 @@ export function NextIcon({ className = '', ...props }) {
 					d='M330.12 649C506.299 649 649.12 506.179 649.12 330C649.12 153.821 506.299 11 330.12 11C153.941 11 11.1201 153.821 11.1201 330C11.1201 506.179 153.941 649 330.12 649Z'
 					fill='black'
 					stroke='white'
-					stroke-width='25.2'
+					strokeWidth='25.2'
 				/>
 				<path
 					d='M548.316 577.573L253.641 198H198.12V461.89H242.537V254.407L513.45 604.432C525.674 596.251 537.32 587.272 548.316 577.573Z'
@@ -45,8 +45,8 @@ export function NextIcon({ className = '', ...props }) {
 					y2='588.5'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='white' />
-					<stop offset='1' stop-color='white' stop-opacity='0' />
+					<stop stopColor='white' />
+					<stop offset='1' stopColor='white' stopOpacity='0' />
 				</linearGradient>
 				<linearGradient
 					id='paint1_linear_7_173'
@@ -56,8 +56,8 @@ export function NextIcon({ className = '', ...props }) {
 					y2='391.875'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='white' />
-					<stop offset='1' stop-color='white' stop-opacity='0' />
+					<stop stopColor='white' />
+					<stop offset='1' stopColor='white' stopOpacity='0' />
 				</linearGradient>
 			</defs>
 		</svg>

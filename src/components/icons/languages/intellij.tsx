@@ -20,14 +20,14 @@ export function IntellijIcon({ className = '', ...props }) {
 			>
 				<rect fill='white' x='-0.156006' y='-0.627441' width='676' height='678' />
 				<path
-					fill-rule='evenodd'
-					clip-rule='evenodd'
+					fillRule='evenodd'
+					clipRule='evenodd'
 					d='M267.525 566.188C265.893 567.781 263.939 569.007 261.794 569.783L101.33 627.836C89.0488 632.279 76.9052 620.931 80.5075 608.377L112.47 496.992L142.001 397.673V397.463L127.589 445.8C124.355 456.647 111.189 460.799 102.318 453.768L38.8143 403.438C32.735 398.62 30.9876 390.135 34.6681 383.307L76.3103 306.052C80 299.207 88.077 296.006 95.4542 298.465L142.001 313.981V313.955L36.7736 278.759C28.2271 275.9 23.7265 266.55 26.823 258.087L108.125 35.8757C110.672 28.9145 117.667 24.6142 125.028 25.4838L312.263 47.6035C316.39 48.0909 320.164 50.1645 322.789 53.3854L383.935 128.418C380.538 122.532 381.206 115.003 385.852 109.787L443.001 45.6323C448.648 39.2938 458.261 38.468 464.906 43.7507L636.957 180.537C644.499 186.533 645.069 197.786 638.172 204.514L543.588 296.772C541.331 298.974 538.604 300.366 535.751 300.971V304.459L622.773 219.545C633.079 209.488 650.386 217.1 649.939 231.493L640.174 546.33C639.977 552.686 636.034 558.321 630.131 560.686L404.883 650.923C400.065 652.853 394.609 652.326 390.25 649.508L281.892 579.49C273.266 573.916 272.051 561.773 279.402 554.6L298.591 535.875H298.585L267.525 566.188Z'
 				/>
 			</mask>
 			<path
-				fill-rule='evenodd'
-				clip-rule='evenodd'
+				fillRule='evenodd'
+				clipRule='evenodd'
 				d='M267.525 566.188C265.893 567.781 263.939 569.007 261.794 569.783L101.33 627.836C89.0488 632.279 76.9052 620.931 80.5075 608.377L112.47 496.992L142.001 397.673V397.463L127.589 445.8C124.355 456.647 111.189 460.799 102.318 453.768L38.8143 403.438C32.735 398.62 30.9876 390.135 34.6681 383.307L76.3103 306.052C80 299.207 88.077 296.006 95.4542 298.465L142.001 313.981V313.955L36.7736 278.759C28.2271 275.9 23.7265 266.55 26.823 258.087L108.125 35.8757C110.672 28.9145 117.667 24.6142 125.028 25.4838L312.263 47.6035C316.39 48.0909 320.164 50.1645 322.789 53.3854L383.935 128.418C380.538 122.532 381.206 115.003 385.852 109.787L443.001 45.6323C448.648 39.2938 458.261 38.468 464.906 43.7507L636.957 180.537C644.499 186.533 645.069 197.786 638.172 204.514L543.588 296.772C541.331 298.974 538.604 300.366 535.751 300.971V304.459L622.773 219.545C633.079 209.488 650.386 217.1 649.939 231.493L640.174 546.33C639.977 552.686 636.034 558.321 630.131 560.686L404.883 650.923C400.065 652.853 394.609 652.326 390.25 649.508L281.892 579.49C273.266 573.916 272.051 561.773 279.402 554.6L298.591 535.875H298.585L267.525 566.188Z'
 				fill='black'
 			/>
@@ -69,11 +69,11 @@ export function IntellijIcon({ className = '', ...props }) {
 					y2='8207.81'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop offset='0.09' stop-color='#FC801D' />
-					<stop offset='0.23' stop-color='#B07F61' />
-					<stop offset='0.41' stop-color='#577DB3' />
-					<stop offset='0.53' stop-color='#1E7CE6' />
-					<stop offset='0.59' stop-color='#087CFA' />
+					<stop offset='0.09' stopColor='#FC801D' />
+					<stop offset='0.23' stopColor='#B07F61' />
+					<stop offset='0.41' stopColor='#577DB3' />
+					<stop offset='0.53' stopColor='#1E7CE6' />
+					<stop offset='0.59' stopColor='#087CFA' />
 				</linearGradient>
 				<linearGradient
 					id='paint1_linear_9_453'
@@ -83,16 +83,16 @@ export function IntellijIcon({ className = '', ...props }) {
 					y2='342.072'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#FE2857' />
-					<stop offset='0.08' stop-color='#CB3979' />
-					<stop offset='0.16' stop-color='#9E4997' />
-					<stop offset='0.25' stop-color='#7557B2' />
-					<stop offset='0.34' stop-color='#5362C8' />
-					<stop offset='0.44' stop-color='#386CDA' />
-					<stop offset='0.54' stop-color='#2373E8' />
-					<stop offset='0.66' stop-color='#1478F2' />
-					<stop offset='0.79' stop-color='#0B7BF8' />
-					<stop offset='1' stop-color='#087CFA' />
+					<stop stopColor='#FE2857' />
+					<stop offset='0.08' stopColor='#CB3979' />
+					<stop offset='0.16' stopColor='#9E4997' />
+					<stop offset='0.25' stopColor='#7557B2' />
+					<stop offset='0.34' stopColor='#5362C8' />
+					<stop offset='0.44' stopColor='#386CDA' />
+					<stop offset='0.54' stopColor='#2373E8' />
+					<stop offset='0.66' stopColor='#1478F2' />
+					<stop offset='0.79' stopColor='#0B7BF8' />
+					<stop offset='1' stopColor='#087CFA' />
 				</linearGradient>
 				<linearGradient
 					id='paint2_linear_9_453'
@@ -102,14 +102,14 @@ export function IntellijIcon({ className = '', ...props }) {
 					y2='74356.9'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#FE2857' />
-					<stop offset='0.08' stop-color='#FE295F' />
-					<stop offset='0.21' stop-color='#FF2D76' />
-					<stop offset='0.3' stop-color='#FF318C' />
-					<stop offset='0.38' stop-color='#EA3896' />
-					<stop offset='0.55' stop-color='#B248AE' />
-					<stop offset='0.79' stop-color='#5A63D6' />
-					<stop offset='1' stop-color='#087CFA' />
+					<stop stopColor='#FE2857' />
+					<stop offset='0.08' stopColor='#FE295F' />
+					<stop offset='0.21' stopColor='#FF2D76' />
+					<stop offset='0.3' stopColor='#FF318C' />
+					<stop offset='0.38' stopColor='#EA3896' />
+					<stop offset='0.55' stopColor='#B248AE' />
+					<stop offset='0.79' stopColor='#5A63D6' />
+					<stop offset='1' stopColor='#087CFA' />
 				</linearGradient>
 			</defs>
 		</svg>

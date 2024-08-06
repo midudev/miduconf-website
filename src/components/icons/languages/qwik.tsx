@@ -20,14 +20,14 @@ export function QwikIcon({ className = '', ...props }) {
 			>
 				<rect fill='white' width='650' height='691' />
 				<path
-					fill-rule='evenodd'
-					clip-rule='evenodd'
+					fillRule='evenodd'
+					clipRule='evenodd'
 					d='M220.827 26.006L384.391 28.9602L439.454 28.5078C471.27 28.8745 500.124 46.2036 515.252 73.9431L575.557 183.759L576.024 183.301L580.537 191.857L592.043 213.813L592.048 213.811L614.158 256.56C630.625 288.224 626.035 326.771 602.666 353.836L599.428 357.524L494.199 543.079L550.088 658.854C552.564 663.666 546.073 668.143 542.209 664.231L449.903 570.247L447.314 571.798L488.044 630.5L543.559 665.457L264.165 577.294L212.766 576.707C181.773 576.352 153.272 559.738 137.965 532.961L37.5741 358.416C20.3405 328.275 22.6494 291.236 42.5177 263.758L42.3741 263.656L144.844 67.7391C161.078 41.352 189.889 25.6486 220.827 26.006ZM430.696 549.705L430.758 550.142L309.439 569.607L192.914 305.373L254.401 248.504L301.044 235L144.633 245.803L122.825 185.796L223.842 45.5166L452.17 307.102L409.514 348.641L430.359 550.089L430.696 549.705Z'
 				/>
 			</mask>
 			<path
-				fill-rule='evenodd'
-				clip-rule='evenodd'
+				fillRule='evenodd'
+				clipRule='evenodd'
 				d='M220.827 26.006L384.391 28.9602L439.454 28.5078C471.27 28.8745 500.124 46.2036 515.252 73.9431L575.557 183.759L576.024 183.301L580.537 191.857L592.043 213.813L592.048 213.811L614.158 256.56C630.625 288.224 626.035 326.771 602.666 353.836L599.428 357.524L494.199 543.079L550.088 658.854C552.564 663.666 546.073 668.143 542.209 664.231L449.903 570.247L447.314 571.798L488.044 630.5L543.559 665.457L264.165 577.294L212.766 576.707C181.773 576.352 153.272 559.738 137.965 532.961L37.5741 358.416C20.3405 328.275 22.6494 291.236 42.5177 263.758L42.3741 263.656L144.844 67.7391C161.078 41.352 189.889 25.6486 220.827 26.006ZM430.696 549.705L430.758 550.142L309.439 569.607L192.914 305.373L254.401 248.504L301.044 235L144.633 245.803L122.825 185.796L223.842 45.5166L452.17 307.102L409.514 348.641L430.359 550.089L430.696 549.705Z'
 				fill='url(#paint0_linear_8_253)'
 			/>
@@ -77,9 +77,9 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='6868.52'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#4340C4' />
-					<stop offset='0.12' stop-color='#4642C8' />
-					<stop offset='1' stop-color='#594EE4' />
+					<stop stopColor='#4340C4' />
+					<stop offset='0.12' stopColor='#4642C8' />
+					<stop offset='1' stopColor='#594EE4' />
 				</linearGradient>
 				<linearGradient
 					id='paint1_linear_8_253'
@@ -89,9 +89,9 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='12257.4'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#4340C4' />
-					<stop offset='0.12' stop-color='#4642C8' />
-					<stop offset='1' stop-color='#594EE4' />
+					<stop stopColor='#4340C4' />
+					<stop offset='0.12' stopColor='#4642C8' />
+					<stop offset='1' stopColor='#594EE4' />
 				</linearGradient>
 				<linearGradient
 					id='paint2_linear_8_253'
@@ -101,9 +101,9 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='26087.9'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#4340C4' />
-					<stop offset='0.74' stop-color='#534ADB' />
-					<stop offset='1' stop-color='#594EE4' />
+					<stop stopColor='#4340C4' />
+					<stop offset='0.74' stopColor='#534ADB' />
+					<stop offset='1' stopColor='#594EE4' />
 				</linearGradient>
 				<linearGradient
 					id='paint3_linear_8_253'
@@ -113,10 +113,10 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='14501.1'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#4340C4' />
-					<stop offset='0.23' stop-color='#4340C4' />
-					<stop offset='0.6' stop-color='#4F48D5' />
-					<stop offset='1' stop-color='#594EE4' />
+					<stop stopColor='#4340C4' />
+					<stop offset='0.23' stopColor='#4340C4' />
+					<stop offset='0.6' stopColor='#4F48D5' />
+					<stop offset='1' stopColor='#594EE4' />
 				</linearGradient>
 				<linearGradient
 					id='paint4_linear_8_253'
@@ -126,8 +126,8 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='26421.6'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#0080FF' />
-					<stop offset='1' stop-color='#00B9FF' />
+					<stop stopColor='#0080FF' />
+					<stop offset='1' stopColor='#00B9FF' />
 				</linearGradient>
 				<linearGradient
 					id='paint5_linear_8_253'
@@ -137,11 +137,11 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='14219.6'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#0080FF' />
-					<stop offset='0.17' stop-color='#008BFF' />
-					<stop offset='0.47' stop-color='#00A7FF' />
-					<stop offset='0.63' stop-color='#00B9FF' />
-					<stop offset='1' stop-color='#00B9FF' />
+					<stop stopColor='#0080FF' />
+					<stop offset='0.17' stopColor='#008BFF' />
+					<stop offset='0.47' stopColor='#00A7FF' />
+					<stop offset='0.63' stopColor='#00B9FF' />
+					<stop offset='1' stopColor='#00B9FF' />
 				</linearGradient>
 				<linearGradient
 					id='paint6_linear_8_253'
@@ -151,11 +151,11 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='6605.9'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#00B9FF' />
-					<stop offset='0.3' stop-color='#0080FF' />
-					<stop offset='0.6' stop-color='#2D67F1' />
-					<stop offset='0.86' stop-color='#4D55E8' />
-					<stop offset='1' stop-color='#594EE4' />
+					<stop stopColor='#00B9FF' />
+					<stop offset='0.3' stopColor='#0080FF' />
+					<stop offset='0.6' stopColor='#2D67F1' />
+					<stop offset='0.86' stopColor='#4D55E8' />
+					<stop offset='1' stopColor='#594EE4' />
 				</linearGradient>
 				<linearGradient
 					id='paint7_linear_8_253'
@@ -165,9 +165,9 @@ export function QwikIcon({ className = '', ...props }) {
 					y2='6868.52'
 					gradientUnits='userSpaceOnUse'
 				>
-					<stop stop-color='#4340C4' />
-					<stop offset='0.12' stop-color='#4642C8' />
-					<stop offset='1' stop-color='#594EE4' />
+					<stop stopColor='#4340C4' />
+					<stop offset='0.12' stopColor='#4642C8' />
+					<stop offset='1' stopColor='#594EE4' />
 				</linearGradient>
 			</defs>
 		</svg>
