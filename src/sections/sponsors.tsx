@@ -1,9 +1,7 @@
 import Marquee from '@/components/magicui/Marquee'
-import { DonDominio } from '@/components/logos/dondominio'
 import { ReactNode } from 'react'
-import { Malt } from '@/components/logos/maltes'
 import { Button } from '@/components/Button'
-import { TicketIcon } from '@/components/icons'
+import { SponsorIcons } from '@/components/icons/sponsors'
 
 const reviews = [
 	{
@@ -55,25 +53,26 @@ const reviews = [
 	}
 ]
 
-const premiums = [
+export const premiums = [
 	{
 		name: 'Platzi',
 		link: 'https://platzi.com/',
-		logo: <img src='/platzi.png' alt='Logo de Platzi' className='w-full h-auto' />
+		Logo: SponsorIcons.platzi,
+		slogan: 'Aprende de expertos en tecnología'
 	},
 	{
 		name: 'Don Dominio',
-		premium: true,
 		link: 'https://midu.link/dondominio',
-		logo: <DonDominio className='' fill='currentColor' />
+		Logo: SponsorIcons.donDominio,
+		slogan: 'El hosting más barato del mundo'
 	},
 	{
 		name: 'KeepCoding',
-		premium: true,
 		link: 'https://midu.link/keepcoding',
-		logo: (
-			<img className='w-auto h-full py-20' src='/img/keepcoding.webp' alt='logo de KeepCoding' />
-		)
+		Logo: ({ className = '' }) => (
+			<img className={className} src='/img/sponsors/keepcoding.webp' alt='logo de KeepCoding' />
+		),
+		slogan: 'Aprende a programar desde cero'
 	}
 	// {
 	// 	name: 'Malt',
