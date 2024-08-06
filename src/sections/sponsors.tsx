@@ -58,21 +58,27 @@ export const premiums = [
 		name: 'Platzi',
 		link: 'https://platzi.com/',
 		Logo: SponsorIcons.platzi,
-		slogan: 'Aprende de expertos en tecnología'
+		slogan: 'Plataforma de aprendizaje profesional online'
 	},
 	{
 		name: 'Don Dominio',
 		link: 'https://midu.link/dondominio',
 		Logo: SponsorIcons.donDominio,
-		slogan: 'El hosting más barato del mundo'
+		slogan: 'Registro de dominios, hosting, correo y SSL'
 	},
 	{
 		name: 'KeepCoding',
 		link: 'https://midu.link/keepcoding',
 		Logo: ({ className = '' }) => (
-			<img className={className} src='/img/sponsors/keepcoding.webp' alt='logo de KeepCoding' />
+			<img
+				className={className}
+				src='/img/sponsors/keepcoding.webp'
+				width='727'
+				height='163'
+				alt='logo de KeepCoding'
+			/>
 		),
-		slogan: 'Aprende a programar desde cero'
+		slogan: 'Los Mejores Bootcamps Online'
 	}
 	// {
 	// 	name: 'Malt',
