@@ -1,4 +1,3 @@
-import { AlphineIcon } from './alphine'
 import { AngularIcon } from './angular'
 import { AstroIcon } from './astro'
 import { BunIcon } from './bun'
@@ -80,6 +79,5 @@ export const FLAVORS_ICONS = {
 	linux: LinuxIcon,
 	ruby: RubyIcon,
 	tailwind: TailwindIcon,
-	c: CIcon,
-	alphine: AlphineIcon
+	c: CIcon
 }

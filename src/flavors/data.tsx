@@ -440,17 +440,6 @@ export const FLAVORS = {
 			},
 			shadowColor: 'shadow-blue-400/25'
 		}
-	},
-	alphine: {
-		icon: FLAVORS_ICONS.alphine,
-		colorPalette: {
-			bg: 'bg-[#77C1D2]/50',
-			borders: {
-				inside: 'border-blue-300/20',
-				outside: 'border-blue-400/10'
-			},
-			shadowColor: 'shadow-blue-400/25'
-		}
 	}
 }
 
