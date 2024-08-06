@@ -26,6 +26,13 @@ body {
 		background-position: 100% 0;
 		background-repeat: repeat-y;
 	}
+
+	.ticket-dash-border-top {
+		background-image: linear-gradient(to right, hsla(0, 0%, 100%, 0.2) 0%, hsla(0, 0%, 100%, 0.2) 50%, transparent 50%);
+		background-size: 1.125rem 0.0625rem;
+		background-position: 0 0;
+		background-repeat: repeat-x;
+	}
 }
 
 @keyframes reduce-header {
