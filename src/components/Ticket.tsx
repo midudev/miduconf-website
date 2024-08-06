@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import 'atropos/css'
 import { TwitchIcon } from './icons'
 import { MiduLogo } from './logos/midudev'
+import { premiums } from '@/sections/sponsors'
 
 interface Props {
 	transition?: boolean
@@ -72,8 +73,8 @@ export default function Ticket({
 					className={cn(
 						'h-full font-mono text-center text-white font-bold',
 						isSizeFixed
-							? 'ticket-dash-border px-4 text-[40px] py-0 leading-none [writing-mode:vertical-lr]'
-							: 'ticket-dash-border-top row-[3/4] px-4 py-4 md:py-0 text-4xl md:px-7 md:text-[40px] md:[writing-mode:vertical-lr] md:ticket-dash-border'
+							? 'ticket-dash-border px-4 text-3xl py-0 leading-none [writing-mode:vertical-lr]'
+							: 'ticket-dash-border-top row-[3/4] px-4 py-4 md:py-0 text-4xl md:px-4 md:text-3xl md:[writing-mode:vertical-lr] md:ticket-dash-border'
 					)}
 				>
 					{ticketNumber}
@@ -84,8 +85,8 @@ export default function Ticket({
 						className={cn(
 							'-rotate-12',
 							isSizeFixed
-								? 'absolute bottom-[10%] left-[25%] mb-0 h-[40%] w-auto block'
-								: 'md:w-auto row-[2/3] mb-8 md:mb-0 left-0 mx-auto md:mx-0 h-32 md:h-[40%] relative flex justify-center w-full md:block bottom-0 md:left-[25%] md:bottom-[10%]  md:absolute'
+								? 'absolute bottom-[20%] left-[25%] mb-0 h-[40%] w-auto block'
+								: 'md:w-auto row-[2/3] mb-8 md:mb-0 left-0 mx-auto md:mx-0 h-32 md:h-[40%] relative flex justify-center w-full md:block bottom-0 md:left-[25%] md:bottom-[20%]  md:absolute'
 						)}
 					>
 						<Icon className='absolute w-auto h-full' />
@@ -108,7 +109,7 @@ export default function Ticket({
 							{avatar && (
 								<div
 									className={cn(
-										'flex items-end justify-center gap-4 font-mono text-white gap-y-2',
+										'flex items-end justify-center font-mono gap-4 text-white gap-y-2',
 										isSizeFixed
 											? 'items-start flex-row p-6 text-left'
 											: 'p-5 flex-col md:items-start md:flex-row md:p-6 items-center text-center md:text-left'
@@ -126,9 +127,9 @@ export default function Ticket({
 										height='78'
 									/>
 									<div>
-										<p className={`text-xl font-bold`}>{username}</p>
-										<span className='block px-2 py-1 mt-1 text-sm rounded w-max bg-white/10 text-white/60'>
-											Ticket regular
+										<p className='text-xl font-bold'>{username}</p>
+										<span className='block px-2 py-1 mt-1 text-sm font-medium rounded w-max text-white/80 bg-white/10'>
+											Normal Ticket
 										</span>
 									</div>
 								</div>
@@ -158,18 +159,47 @@ export default function Ticket({
 							</time>
 						</div>
 					</div>
-					<a
-						href='https://www.twitch.tv/midudev'
-						target='_blank'
-						rel='nofollow'
+					<div
 						className={cn(
-							'flex items-center justify-self-end justify-end self-end gap-2 p-5 font-bold text-white col-span-full w-max hover:text-[#b9a3e3] transition-colors',
-							isSizeFixed ? 'text-xl mx-0' : 'text-md md:text-xl mx-auto md:mx-0'
+							'grid self-end gap-4',
+							isSizeFixed ? 'grid-cols-[1fr_auto] ' : ' grid-cols-1 md:grid-cols-[1fr_auto]'
 						)}
 					>
-						<TwitchIcon className={cn('h-auto', isSizeFixed ? 'w-5' : 'w-4 md:w-5')} />
-						twitch.tv/midudev
-					</a>
+						<div
+							className={cn(
+								'flex flex-col justify-end',
+								isSizeFixed
+									? 'mx-0 px-0 pb-5 pl-5 items-start w-auto'
+									: 'px-2 md:px-0 items-center w-full md:w-auto md:items-start pb-0 md:pl-5 md:pb-5 mx-auto md:mx-0'
+							)}
+						>
+							<span className='pb-1 pl-2 text-sm text-white/80'>Gracias a:</span>
+							<div
+								className={cn(
+									'flex items-center justify-start grid-cols-3 gap-4 px-4 py-2 bg-white/10 w-auto',
+									isSizeFixed ? 'rounded-full' : 'rounded md:rounded-full '
+								)}
+							>
+								{premiums.map(({ Logo, name }) => (
+									<Logo className='w-auto h-auto text-white max-h-5' key={name} />
+								))}
+							</div>
+						</div>
+						<a
+							href='https://www.twitch.tv/midudev'
+							target='_blank'
+							rel='nofollow'
+							className={cn(
+								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-[#b9a3e3] transition-colors',
+								isSizeFixed
+									? 'text-xl mx-0 pt-5'
+									: 'pt-0 text-md md:text-xl mx-auto md:mx-0 md:pt-5'
+							)}
+						>
+							<TwitchIcon className={cn('h-auto', isSizeFixed ? 'w-5' : 'w-4 md:w-5')} />
+							twitch.tv/midudev
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

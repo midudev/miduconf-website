@@ -1,7 +1,7 @@
 'use client'
 
 import { MiduLogo } from '@/components/logos/midudev'
-import { NavbarIcons } from '@/components/icons'
+import { NavbarIcons } from '@/components/icons/navbar'
 import { Button } from '@/components/Button'
 import { useId, useState } from 'react'
 import { cn } from '@/lib/utils'
