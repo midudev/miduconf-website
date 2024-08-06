@@ -222,7 +222,7 @@ const ReviewCard = ({
 export const Sponsors = () => {
 	return (
 		<section id='sponsors' className='flex flex-col flex-wrap items-center justify-center pt-32'>
-			<h2 className='text-6xl font-bold text-center text-white'>Patrocinadores</h2>
+			<h2 className='text-4xl font-bold text-center text-white md:text-6xl'>Patrocinadores</h2>
 			<p className='max-w-xl text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				¡Gracias a ellos hacemos posible el evento!
 			</p>
