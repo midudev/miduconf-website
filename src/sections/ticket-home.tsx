@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { FLAVORS } from '@/flavors/data'
 import { Button } from '@/components/Button'
 import { TicketIcon } from '@/components/icons'
+import { Container3D } from '@/components/Container3D'
 
 export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	const supabase = useSupabaseClient()
@@ -58,15 +59,17 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 		<div>
 			<div className='block w-full h-full'>
 				<div className='flex items-center justify-center max-w-[668px] mx-auto mt-16 flex-0'>
-					<Ticket
-						transition={!initialFlavor}
-						number={number}
-						flavor={flavor}
-						user={{
-							avatar: username ? `https://unavatar.io/github/${username}` : null,
-							username
-						}}
-					/>
+					<Container3D>
+						<Ticket
+							transition={initialFlavor}
+							number={number}
+							flavor={flavor}
+							user={{
+								avatar: username ? `https://unavatar.io/github/${username}` : null,
+								username
+							}}
+						/>
+					</Container3D>
 				</div>
 				<div className='flex flex-col items-center justify-center gap-4 mx-auto mt-16 scale-90 md:flex-row sm:scale-100'>
 					<Button
