@@ -8,6 +8,7 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 import { Background } from '@/components/Background'
+import { Container3D } from '@/components/Container3D'
 import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import TicketComponent from '@/components/Ticket'
@@ -91,8 +92,6 @@ https://miduconf.com/ticket/${username}`
 			quality: 0.8
 		})
 
-		document.querySelector('#image').setAttribute('src', dataURL)
-
 		const file = await dataUrlToFile(dataURL, 'ticket.jpg')
 		const filename = `ticket-${number}.jpg`
 
@@ -135,7 +134,7 @@ https://miduconf.com/ticket/${username}`
 			<Meteors />
 			<Background />
 
-			<header id='header' className='relative w-full mb-10 overflow-hidden z-[99999]'>
+			<header className='relative w-full mb-10 overflow-hidden z-[99999]'>
 				<Countdown />
 			</header>
 
@@ -214,7 +213,19 @@ https://miduconf.com/ticket/${username}`
 				</div>
 
 				<div className='max-w-[700px] mx-auto'>
-					<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
+					<Container3D>
+						<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
+					</Container3D>
+				</div>
+				<div aria-disabled className='w-[732px] -mb-[366px] relative -left-[200vw]'>
+					<div id='ticket' className='border-[16px] border-transparent'>
+						<TicketComponent
+							isSizeFixed
+							number={number}
+							flavor={flavor}
+							user={{ username, avatar, name }}
+						/>
+					</div>
 				</div>
 
 				<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
@@ -241,7 +252,6 @@ https://miduconf.com/ticket/${username}`
 						})}
 					</div>
 				</div>
-				<img id='image' src='' className='w-full h-auto' />
 			</main>
 		</>
 	)
