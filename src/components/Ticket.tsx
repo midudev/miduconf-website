@@ -52,7 +52,7 @@ export default function Ticket({
 			id={id}
 			className={cn(
 				'block h-full overflow-hidden opacity-100 rounded-[60px] shadow-[inset_0_4px_30px] bg-transparent border p-5',
-				isSizeFixed ? 'aspect-[2/1] w-full' : 'aspect-[9/10] md:aspect-[2/1]',
+				isSizeFixed ? 'aspect-[2/1] w-full' : 'aspect-none w-full md:aspect-[2/1]',
 				currentTicketStyles.borders.outside,
 				currentTicketStyles.shadowColor,
 				transition ? 'transition duration-500 ease-in-out' : ''
@@ -60,7 +60,8 @@ export default function Ticket({
 		>
 			<div
 				className={cn(
-					'relative flex h-full overflow-hidden border rounded-[40px]',
+					'relative h-full overflow-hidden border rounded-[40px]',
+					isSizeFixed ? 'flex' : 'grid md:flex',
 					currentTicketStyles.background,
 					currentTicketStyles.borders.inside,
 					transition ? 'transition duration-500 ease-in-out' : ''
@@ -69,14 +70,24 @@ export default function Ticket({
 				<div className='absolute w-1/2 rotate-45 h-[300%] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#41b3ff00] via-[#b0a9ff13] to-[#41b3ff00]'></div>
 				<span
 					className={cn(
-						'ticket-dash-border h-full font-mono text-center text-white font-bold [writing-mode:vertical-lr]',
-						isSizeFixed ? 'px-4 text-[40px] leading-none' : 'px-4 text-sm md:px-7 md:text-[40px]'
+						'h-full font-mono text-center text-white font-bold',
+						isSizeFixed
+							? 'ticket-dash-border px-4 text-[40px] py-0 leading-none [writing-mode:vertical-lr]'
+							: 'ticket-dash-border-top row-[3/4] px-4 py-4 md:py-0 text-4xl md:px-7 md:text-[40px] md:[writing-mode:vertical-lr] md:ticket-dash-border'
 					)}
 				>
 					{ticketNumber}
 				</span>
 				{
-					<div key={username} className='absolute bottom-[10%] -rotate-12 left-[25%] h-[40%]'>
+					<div
+						key={username}
+						className={cn(
+							'-rotate-12',
+							isSizeFixed
+								? 'absolute bottom-[10%] left-[25%] mb-0 h-[40%] w-auto block'
+								: 'md:w-auto row-[2/3] mb-8 md:mb-0 left-0 mx-auto md:mx-0 h-32 md:h-[40%] relative flex justify-center w-full md:block bottom-0 md:left-[25%] md:bottom-[10%]  md:absolute'
+						)}
+					>
 						<Icon className='absolute w-auto h-full' />
 						<Icon
 							className='absolute w-auto h-full scale-105 blur-xl -z-10 opacity-40'
@@ -87,7 +98,9 @@ export default function Ticket({
 				<div
 					className={cn(
 						'z-10 grid w-full grid-rows-2',
-						isSizeFixed ? 'h-full pd-0' : 'h-auto md:h-full pt-5 md:pt-0'
+						isSizeFixed
+							? 'h-full pd-0 grid-rows-2'
+							: 'h-auto md:h-full pt-5 md:pt-0 grid-rows-[1fr_auto] md:grid-rows-2'
 					)}
 				>
 					<div className={cn('grid', isSizeFixed ? 'grid-cols-2' : 'md:grid-cols-2')}>
@@ -97,8 +110,8 @@ export default function Ticket({
 									className={cn(
 										'flex items-end justify-center gap-4 font-mono text-white gap-y-2',
 										isSizeFixed
-											? 'items-start flex-row p-6'
-											: 'p-5 flex-col md:items-start md:flex-row md:p-6 '
+											? 'items-start flex-row p-6 text-left'
+											: 'p-5 flex-col md:items-start md:flex-row md:p-6 items-center text-center md:text-left'
 									)}
 								>
 									<img
@@ -121,13 +134,24 @@ export default function Ticket({
 								</div>
 							)}
 						</div>
-						<div className={cn('items-center gap-4 p-5', isSizeFixed ? 'block' : 'flex md:block')}>
+						<div
+							className={cn(
+								'items-center gap-4 p-5 flex-row',
+								isSizeFixed && avatar
+									? 'block'
+									: `${avatar ? 'hidden' : 'flex'} md:block flex-col-reverse md:flex-row`,
+								avatar == null ?? 'hidden'
+							)}
+						>
 							<MiduLogo
 								className={cn('order-1 h-auto w-9', isSizeFixed ? 'ml-auto' : ' ml-0 md:ml-auto')}
 							/>
 							<time
 								dateTime='2024-09-12T06:00:00'
-								className='block mt-2 ml-auto font-bold text-right text-white md:ml-0'
+								className={cn(
+									'block mt-2 ml-auto font-bold text-right text-white md:ml-0',
+									isSizeFixed ? 'text-right mr-0' : 'text-center mr-auto md:mr-0 md:text-right'
+								)}
 							>
 								Sept. 12 2024
 								<span className='block text-sm font-normal text-white/60'>06:00 GTM-6</span>
@@ -140,7 +164,7 @@ export default function Ticket({
 						rel='nofollow'
 						className={cn(
 							'flex items-center justify-self-end justify-end self-end gap-2 p-5 font-bold text-white col-span-full w-max hover:text-[#b9a3e3] transition-colors',
-							isSizeFixed ? 'text-xl' : 'text-md md:text-xl'
+							isSizeFixed ? 'text-xl mx-0' : 'text-md md:text-xl mx-auto md:mx-0'
 						)}
 					>
 						<TwitchIcon className={cn('h-auto', isSizeFixed ? 'w-5' : 'w-4 md:w-5')} />
