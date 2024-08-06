@@ -1,4 +1,3 @@
-import { ShimmerButton } from '@/components/magicui/ShimmerButton'
 import Ticket from '@/components/Ticket'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useEffect, useState } from 'react'
