@@ -128,7 +128,7 @@ export default function Ticket({
 									/>
 									<div>
 										<p className='text-xl font-bold'>{username}</p>
-										<span className='block px-2 py-1 mt-1 text-sm font-medium rounded w-max text-white/80 bg-white/10'>
+										<span className='block px-2 py-1 mt-1 text-xs font-medium rounded w-max text-white/80 bg-white/10'>
 											Normal Ticket
 										</span>
 									</div>
@@ -180,9 +180,9 @@ export default function Ticket({
 									isSizeFixed ? 'rounded-full' : 'rounded md:rounded-full '
 								)}
 							>
-								{LIST_OF_TICKET_SPONSORS.map(({ Icon, name }) => (
-									<Icon className='w-auto h-auto text-white max-h-5' key={name} />
-								))}
+								<LIST_OF_TICKET_SPONSORS.platzi className='w-auto h-auto text-white max-h-3 md:max-h-4' />
+								<LIST_OF_TICKET_SPONSORS.donDominio className='w-auto h-auto text-white max-h-2.5 md:max-h-3' />
+								<LIST_OF_TICKET_SPONSORS.keepCode className='w-auto h-auto text-white max-h-4' />
 							</div>
 						</div>
 						<a
@@ -206,17 +206,8 @@ export default function Ticket({
 	)
 }
 
-const LIST_OF_TICKET_SPONSORS = [
-	{
-		name: 'platzi',
-		Icon: SponsorIcons.platzi
-	},
-	{
-		name: 'donDominio',
-		Icon: SponsorIcons.donDominio
-	},
-	{
-		name: 'keepCode',
-		Icon: SponsorIcons.keepCoding
-	}
-]
+const LIST_OF_TICKET_SPONSORS = {
+	platzi: SponsorIcons.platzi,
+	donDominio: SponsorIcons.donDominio,
+	keepCode: SponsorIcons.keepCoding
+}
