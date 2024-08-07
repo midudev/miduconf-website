@@ -67,19 +67,19 @@ const AgendaItem = ({ timestamp, duration, title, description, speaker }) => {
 	const time = useTime({ timestamp, duration })
 
 	return (
-		<article className='bg-[#121226] rounded-[20px] shadow relative flex flex-col gap-5 sm:flex-row sm:items-stretch p-6 overflow-hidden'>
-			<p className='flex justify-center items-center w-auto text-5xl font-bold text-white/60 sm:text-right sm:w-32 shrink-0'>
+		<article className='rounded-[20px] before:absolute before:inset-0 before:w-full before:h-full before:bg-[#121226] before:-z-10 shadow relative flex flex-col gap-5 sm:flex-row sm:items-stretch p-6 overflow-hidden'>
+			<p className='flex items-center justify-center w-auto text-5xl font-bold text-white/60 sm:text-right sm:w-32 shrink-0'>
 				{time}
 			</p>
 			<div className='flex-1'>
-				<header className='flex flex-row gap-x-2 items-center'>
+				<header className='flex flex-row items-center gap-x-2'>
 					<h4 className='font-medium leading-tight text-midu-primary'>{speaker.name}</h4>
 					<span className='text-white/70'>- {speaker.title}</span>
 				</header>
-				<h4 className='text-xl font-bold text-white mt-2'>{title}</h4>
+				<h4 className='mt-2 text-xl font-bold text-white'>{title}</h4>
 				<div className='flex items-center gap-3'>
 					<img
-						className='object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
+						className='brightness-50 sm:brightness-100 -z-10 object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
 						src={`/img/speakers/${speaker.img}.jpg`}
 						alt={`Foto de ${speaker.name}`}
 						style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 90%)' }}
@@ -123,7 +123,7 @@ export const Agenda = () => {
 						<div className='space-y-8'>
 							<AgendaItem
 								timestamp={1694620800000}
-								duration={20 * 60 * 1000}
+								duration={30 * 60 * 1000}
 								title='¡Hola, miduConf 👋!'
 								description='Anunciamos próximos proyectos en la comunidad de programación y tecnología de midudev.'
 								speaker={{
@@ -135,7 +135,7 @@ export const Agenda = () => {
 							<AgendaItem
 								timestamp={1694622000000}
 								duration={30 * 60 * 1000}
-								title='Hablamos con Guillermo Rauch'
+								title='Como la IA Revolucionará el mundo Web'
 								description='El futuro de la programación, Next.js, Vercel y la IA. ¡Conoce a Guillermo Rauch!'
 								speaker={{
 									img: 'rauchg',
@@ -143,71 +143,17 @@ export const Agenda = () => {
 									title: 'CEO de Vercel'
 								}}
 							/>
-							<AgendaRaffle
+							{/* <AgendaRaffle
 								title='Sorteo suscripciones de CodelyTV'
 								sponsor={{
 									logo: () => <Codely className='w-40' />,
 									url: 'https://codely.com/pro/midudev'
 								}}
-							/>
-							<AgendaItem
-								timestamp={1694624400000}
-								duration={30 * 60 * 1000}
-								title='Estado real del Mercado Laboral Tech'
-								description='¿Qué está pasando en el mercado laboral tech? ¿Cuál es la evolución? Lo vemos con datos reales.'
-								speaker={{
-									img: 'david',
-									name: 'David Bonilla',
-									title: 'CEO de Manfred'
-								}}
-							/>
-							<AgendaRaffle
-								title='Sorteo 2x Bootcamp JavaScript'
-								sponsor={{
-									logo: () => <LemonCode className='w-40' />,
-									url: 'https://lemoncode.net/master-frontend#inicio-banner'
-								}}
-							/>
-							<AgendaItem
-								timestamp={1694627100000}
-								duration={30 * 60 * 1000}
-								title='Todo el mundo puede escribir tests fácil'
-								description='Vas a aprender a crear tests de forma sencilla y sin complicaciones. Para que no tengas excusas.'
-								speaker={{
-									img: 'debbie',
-									name: "Debbie O'brien",
-									title: 'Senior Program Manager en Microsoft'
-								}}
-							/>
-							<AgendaRaffle
-								title='Sorteo regalos GitHub'
-								sponsor={{
-									logo: () => <Malt className='w-40 h-auto text-white' />,
-									url: 'https://midu.link/malt'
-								}}
-							/>
-							<AgendaItem
-								timestamp={1694629800000}
-								duration={30 * 60 * 1000}
-								title='Mesa redonda: El impacto de la IA en la programación'
-								description='¿Vale la pena aprender programación con la irrupción de la IA? ¿Cuál es su futuro? ¡Lo comentamos!'
-								speaker={{
-									img: 'nerea',
-									name: 'Nerea Luis',
-									title: 'Responsable del área de Inteligencia Artificial en Sngular'
-								}}
-							/>
-							<AgendaRaffle
-								title='Sorteo de 5 dominios .dev + hosting con SSL'
-								sponsor={{
-									logo: () => <DonDominio className='w-40 h-auto' />,
-									url: 'https://midu.link/dondominio'
-								}}
-							/>
+							/> */}
 							<AgendaItem
 								timestamp={1694632200000}
 								duration={30 * 60 * 1000}
-								title='¡Mira lo que puede hacer CSS!'
+								title='20 Cosas que te perdiste de CSS en 2024'
 								description='CSS no deja de evolucionar rápidamente. Te traigo demos y ejemplos de lo que puedes hacer con CSS ahora'
 								speaker={{
 									img: 'carmen',
@@ -216,26 +162,92 @@ export const Agenda = () => {
 								}}
 							/>
 							<AgendaItem
-								timestamp={1694634000000}
+								timestamp={1694624400000}
 								duration={30 * 60 * 1000}
-								title='El futuro de la programación web'
-								description='Hablamos de las tendencias y tecnologías que están cambiando la forma de programar en la web.'
+								title='Trucos con ChatGPT 4.0 que no conocías 🤯'
+								description='¿Qué está pasando en el mercado laboral tech? ¿Cuál es la evolución? Lo vemos con datos reales.'
 								speaker={{
-									img: 'fernando',
-									name: 'Fernando Herrera',
-									title: 'Profesor y divulgador en Devtalles'
+									img: 'dotcsv',
+									name: 'Carlos Santana',
+									title: 'Divulgador de IA'
 								}}
 							/>
-							<AgendaRaffle sponsor={null} title='¡Sorteo de una Nintendo Switch!' />
+							{/* <AgendaRaffle
+								title='Sorteo 2x Bootcamp JavaScript'
+								sponsor={{
+									logo: () => <LemonCode className='w-40' />,
+									url: 'https://lemoncode.net/master-frontend#inicio-banner'
+								}}
+							/> */}
+							<AgendaItem
+								timestamp={1694627100000}
+								duration={30 * 60 * 1000}
+								title='Primeros pasos para hacer testing en tu App'
+								description='Vas a aprender a crear tests de forma sencilla y sin complicaciones. Para que no tengas excusas.'
+								speaker={{
+									img: 'debbie',
+									name: "Debbie O'brien",
+									title: 'Senior Program Manager en Microsoft'
+								}}
+							/>
+							<AgendaItem
+								timestamp={1694627100000}
+								duration={30 * 60 * 1000}
+								title='...'
+								description='Vas a aprender a crear tests de forma sencilla y sin complicaciones. Para que no tengas excusas.'
+								speaker={{
+									img: 'dawntraoz',
+									name: 'Alba Silvente',
+									title: 'FullStack @ StoryBlok'
+								}}
+							/>
+							{/* <AgendaRaffle
+								title='Sorteo regalos GitHub'
+								sponsor={{
+									logo: () => <Malt className='w-40 h-auto text-white' />,
+									url: 'https://midu.link/malt'
+								}}
+							/> */}
+							<AgendaItem
+								timestamp={1694629800000}
+								duration={30 * 60 * 1000}
+								title='Todo lo que debes saber de DevOps'
+								description='¿Vale la pena aprender programación con la irrupción de la IA? ¿Cuál es su futuro? ¡Lo comentamos!'
+								speaker={{
+									img: 'pablokbs',
+									name: 'Pablo Fredrikson',
+									title: 'Divulgador DevOps'
+								}}
+							/>
+							{/* <AgendaRaffle
+								title='Sorteo de 5 dominios .dev + hosting con SSL'
+								sponsor={{
+									logo: () => <DonDominio className='w-40 h-auto' />,
+									url: 'https://midu.link/dondominio'
+								}}
+							/> */}
+
+							<AgendaItem
+								timestamp={1694634000000}
+								duration={30 * 60 * 1000}
+								title='¡Hey! Que tal Coders 🚀'
+								description='Hablamos de las tendencias y tecnologías que están cambiando la forma de programar en la web.'
+								speaker={{
+									img: 'fazt',
+									name: 'Fazt',
+									title: 'Ingeniero de Software'
+								}}
+							/>
+							{/* <AgendaRaffle sponsor={null} title='¡Sorteo de una Nintendo Switch!' /> */}
 							<AgendaItem
 								timestamp={1694635800000}
 								duration={20 * 60 * 1000}
-								title='Proyecto IDX, el editor de código de Google'
+								title='UX para developers'
 								description='Hablamos con uno de los responsables de IDX, el editor en la nube de Google que ha sorprendido a todos'
 								speaker={{
-									img: 'east',
-									name: 'David East',
-									title: 'Lead DevRel de IDX'
+									img: 'teffcode',
+									name: 'Estefany Aguilar',
+									title: 'Sr. Frontend Dev'
 								}}
 							/>
 						</div>
