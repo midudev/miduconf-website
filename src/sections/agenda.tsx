@@ -1,95 +1,24 @@
+import { HideContentBox } from '@/components/HideContentBox'
+import { NavbarIcons } from '@/components/icons/navbar'
 import { Codely } from '@/components/logos/codely'
 import { DonDominio } from '@/components/logos/dondominio'
 import { LemonCode } from '@/components/logos/lemoncode'
 import { Malt } from '@/components/logos/maltes'
 import { useEffect, useState } from 'react'
 
-const useTime = ({ timestamp, duration }) => {
-	const [time, setTime] = useState(null)
-
-	useEffect(() => {
-		// get HH:MM in the local user timezone
-		const localTime = new Date(timestamp).toLocaleTimeString([], {
-			hour: '2-digit',
-			minute: '2-digit',
-			hour12: false
-		})
-
-		// setTime(`${localTime} - ${endTime}`)
-		setTime(localTime)
-	}, [])
-
-	return time
-}
-
-const useGetTimezone = () => {
-	const [timezone, setTimezone] = useState(null)
-
-	useEffect(() => {
-		const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-		setTimezone(timezone)
-	}, [])
-
-	return timezone
-}
-
-const AgendaRaffle = ({ title, sponsor }) => {
-	return (
-		<div className='flex flex-col gap-4 sm:flex-row sm:items-stretch '>
-			<p className='w-auto text-sm font-medium text-gray-400 sm:text-right sm:w-32 shrink-0'></p>
-			<div className='flex-1 pb-8 sm:pb-12'>
-				<div className='p-4 space-y-4 bg-gray-900 rounded-lg to-black'>
-					<h4 className='text-xl font-bold text-white'>{title}</h4>
-					{sponsor?.logo && (
-						<div className='flex flex-row items-center justify-start gap-x-4'>
-							<p className='flex items-center justify-center h-full text-base font-medium text-gray-400'>
-								Patrocinado por:
-							</p>
-							<div className='flex flex-wrap items-center'>
-								<a
-									className='flex items-center justify-center'
-									href={sponsor.url}
-									target='_blank'
-									rel='noopener noreferrer'
-								>
-									<sponsor.logo />
-								</a>
-							</div>
-						</div>
-					)}
-				</div>
-			</div>
-		</div>
-	)
-}
-
-const AgendaItem = ({ timestamp, duration, title, description, speaker }) => {
-	const time = useTime({ timestamp, duration })
-
-	return (
-		<article className='rounded-[20px] before:absolute before:inset-0 before:w-full before:h-full before:bg-[#121226] before:-z-10 shadow relative flex flex-col gap-5 sm:flex-row sm:items-stretch p-6 overflow-hidden'>
-			<p className='flex items-center justify-center w-auto text-5xl font-bold text-white/60 sm:text-right sm:w-32 shrink-0'>
-				{time}
-			</p>
-			<div className='flex-1'>
-				<header className='flex flex-row items-center gap-x-2'>
-					<h4 className='font-medium leading-tight text-midu-primary'>{speaker.name}</h4>
-					<span className='text-white/70'>- {speaker.title}</span>
-				</header>
-				<h4 className='mt-2 text-xl font-bold text-white'>{title}</h4>
-				<div className='flex items-center gap-3'>
-					<img
-						className='brightness-50 sm:brightness-100 -z-10 object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
-						src={`/img/speakers/${speaker.img}.jpg`}
-						alt={`Foto de ${speaker.name}`}
-						style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 90%)' }}
-					/>
-				</div>
-			</div>
-		</article>
-	)
-}
 export const Agenda = () => {
+	return (
+		<section id='agenda' className='px-4 pt-20 pb-20'>
+			<HideContentBox
+				title='Agenda'
+				subtitle='¡Muy pronto desvelaremos la agenda!'
+				BgIcon={NavbarIcons.ScheduleIcon}
+			/>
+		</section>
+	)
+}
+
+const AgendaInProgress = () => {
 	const timezone = useGetTimezone()
 
 	return (
@@ -98,13 +27,13 @@ export const Agenda = () => {
 			className='flex flex-col flex-wrap items-center justify-center pt-48 pb-20'
 		>
 			<h2 className='text-6xl font-bold text-center text-white'>Agenda</h2>
-			<p className='max-w-xl text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
+			<p className='text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				Todas las charlas son en directo y en español
 			</p>
 
-			<section className='antialiased'>
-				<div className='max-w-4xl px-4 py-4 mx-auto lg:px-6'>
-					<div className='w-full max-w-xl mx-auto space-y-4 text-center'>
+			<section className='w-full antialiased'>
+				<div className='px-4 py-4 mx-auto max-w-[802px] lg:px-6'>
+					<div className='w-full mx-auto space-y-4 text-center'>
 						<span className='inline-flex items-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300 shadow-inset shadow-white'>
 							<svg
 								aria-hidden='true'
@@ -259,4 +188,90 @@ export const Agenda = () => {
 			</section>
 		</section>
 	)
+}
+
+const AgendaItem = ({ timestamp, duration, title, description, speaker }) => {
+	const time = useTime({ timestamp, duration })
+
+	return (
+		<article className='w-full rounded-[20px] before:absolute before:inset-0 before:w-full before:h-full before:bg-[#121226] before:-z-10 shadow relative flex flex-col gap-5 sm:flex-row sm:items-stretch p-6 overflow-hidden'>
+			<p className='flex items-center justify-center w-auto text-5xl font-bold text-white/60 sm:text-right sm:w-32 shrink-0'>
+				{time}
+			</p>
+			<div className='flex-1'>
+				<header className='flex flex-row items-center gap-x-2'>
+					<h4 className='font-medium leading-tight text-midu-primary'>{speaker.name}</h4>
+					<span className='text-white/70'>- {speaker.title}</span>
+				</header>
+				<h4 className='mt-2 text-xl font-bold text-white'>{title}</h4>
+				<div className='flex items-center gap-3'>
+					<img
+						className='brightness-50 sm:brightness-100 -z-10 object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
+						src={`/img/speakers/${speaker.img}.jpg`}
+						alt={`Foto de ${speaker.name}`}
+						style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 90%)' }}
+					/>
+				</div>
+			</div>
+		</article>
+	)
+}
+
+const AgendaRaffle = ({ title, sponsor }) => {
+	return (
+		<div className='flex flex-col gap-4 sm:flex-row sm:items-stretch '>
+			<p className='w-auto text-sm font-medium text-gray-400 sm:text-right sm:w-32 shrink-0'></p>
+			<div className='flex-1 pb-8 sm:pb-12'>
+				<div className='p-4 space-y-4 bg-gray-900 rounded-lg to-black'>
+					<h4 className='text-xl font-bold text-white'>{title}</h4>
+					{sponsor?.logo && (
+						<div className='flex flex-row items-center justify-start gap-x-4'>
+							<p className='flex items-center justify-center h-full text-base font-medium text-gray-400'>
+								Patrocinado por:
+							</p>
+							<div className='flex flex-wrap items-center'>
+								<a
+									className='flex items-center justify-center'
+									href={sponsor.url}
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<sponsor.logo />
+								</a>
+							</div>
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
+	)
+}
+
+const useTime = ({ timestamp, duration }) => {
+	const [time, setTime] = useState(null)
+
+	useEffect(() => {
+		// get HH:MM in the local user timezone
+		const localTime = new Date(timestamp).toLocaleTimeString([], {
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false
+		})
+
+		// setTime(`${localTime} - ${endTime}`)
+		setTime(localTime)
+	}, [])
+
+	return time
+}
+
+const useGetTimezone = () => {
+	const [timezone, setTimezone] = useState(null)
+
+	useEffect(() => {
+		const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+		setTimezone(timezone)
+	}, [])
+
+	return timezone
 }
