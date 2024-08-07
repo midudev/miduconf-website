@@ -232,7 +232,7 @@ https://miduconf.com/ticket/${username}`
 					<h2 className='font-light text-center text-white uppercase opacity-70'>
 						Selecciona tu sabor:
 					</h2>
-					<div className='flex flex-row flex-wrap justify-center w-full p-8 text-center gap-x-8 gap-y-12'>
+					<div className='flex flex-row justify-center w-full p-8 overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12'>
 						{Object.entries(FLAVORS).map(([key, { icon: Icon }]) => {
 							return (
 								<button
