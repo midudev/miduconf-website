@@ -125,7 +125,7 @@ export const Agenda = () => {
 					<div className='grid mt-12 lg:mt-16 gap-y-12 gap-x-16'>
 						<div className='space-y-8'>
 							<AgendaItem
-								timestamp={1694620800000}
+								timestamp={1726153200000}
 								duration={30 * 60 * 1000}
 								title='¡Hola, miduConf 👋!'
 								description='Anunciamos próximos proyectos en la comunidad de programación y tecnología de midudev.'
@@ -136,7 +136,7 @@ export const Agenda = () => {
 								}}
 							/>
 							<AgendaItem
-								timestamp={1694622000000}
+								timestamp={1726154100000}
 								duration={30 * 60 * 1000}
 								title='Como la IA Revolucionará el mundo Web'
 								description='El futuro de la programación, Next.js, Vercel y la IA. ¡Conoce a Guillermo Rauch!'
@@ -154,9 +154,9 @@ export const Agenda = () => {
 								}}
 							/> */}
 							<AgendaItem
-								timestamp={1694632200000}
+								timestamp={1726155900000}
 								duration={30 * 60 * 1000}
-								title='20 Cosas que te perdiste de CSS en 2024'
+								title='CSS en 2024'
 								description='CSS no deja de evolucionar rápidamente. Te traigo demos y ejemplos de lo que puedes hacer con CSS ahora'
 								speaker={{
 									img: 'carmen',
@@ -164,17 +164,7 @@ export const Agenda = () => {
 									title: 'UX Engineer Freelance'
 								}}
 							/>
-							<AgendaItem
-								timestamp={1694624400000}
-								duration={30 * 60 * 1000}
-								title='Trucos con ChatGPT 4.0 que no conocías 🤯'
-								description='¿Qué está pasando en el mercado laboral tech? ¿Cuál es la evolución? Lo vemos con datos reales.'
-								speaker={{
-									img: 'dotcsv',
-									name: 'Carlos Santana',
-									title: 'Divulgador de IA'
-								}}
-							/>
+
 							{/* <AgendaRaffle
 								title='Sorteo 2x Bootcamp JavaScript'
 								sponsor={{
@@ -186,7 +176,7 @@ export const Agenda = () => {
 								timestamp={1694627100000}
 								duration={30 * 60 * 1000}
 								title='Primeros pasos para hacer testing en tu App'
-								description='Vas a aprender a crear tests de forma sencilla y sin complicaciones. Para que no tengas excusas.'
+								description=''
 								speaker={{
 									img: 'debbie',
 									name: "Debbie O'brien",
@@ -196,8 +186,8 @@ export const Agenda = () => {
 							<AgendaItem
 								timestamp={1694627100000}
 								duration={30 * 60 * 1000}
-								title='...'
-								description='Vas a aprender a crear tests de forma sencilla y sin complicaciones. Para que no tengas excusas.'
+								title='Charla por confirmar...'
+								description=''
 								speaker={{
 									img: 'dawntraoz',
 									name: 'Alba Silvente',
@@ -215,7 +205,7 @@ export const Agenda = () => {
 								timestamp={1694629800000}
 								duration={30 * 60 * 1000}
 								title='Todo lo que debes saber de DevOps'
-								description='¿Vale la pena aprender programación con la irrupción de la IA? ¿Cuál es su futuro? ¡Lo comentamos!'
+								description=''
 								speaker={{
 									img: 'pablokbs',
 									name: 'Pablo Fredrikson',
@@ -233,20 +223,31 @@ export const Agenda = () => {
 							<AgendaItem
 								timestamp={1694634000000}
 								duration={30 * 60 * 1000}
-								title='¡Hey! Que tal Coders 🚀'
-								description='Hablamos de las tendencias y tecnologías que están cambiando la forma de programar en la web.'
+								title='¡Hey! Qué tal Coders 🚀'
+								description=''
 								speaker={{
 									img: 'fazt',
 									name: 'Fazt',
 									title: 'Ingeniero de Software'
 								}}
 							/>
+							<AgendaItem
+								timestamp={1726167600000}
+								duration={30 * 60 * 1000}
+								title='El futuro del Desarrollo y la IA'
+								description='¿Qué está pasando en el mercado laboral tech? ¿Cuál es la evolución? Lo vemos con datos reales.'
+								speaker={{
+									img: 'dotcsv',
+									name: 'Carlos Santana',
+									title: 'Divulgador de IA'
+								}}
+							/>
 							{/* <AgendaRaffle sponsor={null} title='¡Sorteo de una Nintendo Switch!' /> */}
 							<AgendaItem
 								timestamp={1694635800000}
 								duration={20 * 60 * 1000}
-								title='UX para developers'
-								description='Hablamos con uno de los responsables de IDX, el editor en la nube de Google que ha sorprendido a todos'
+								title='Charla por confirmar...'
+								description=''
 								speaker={{
 									img: 'teffcode',
 									name: 'Estefany Aguilar',
