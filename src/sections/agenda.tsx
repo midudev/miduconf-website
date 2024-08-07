@@ -266,7 +266,7 @@ const useTime = ({ timestamp, duration }) => {
 	return time
 }
 
-const useGetTimezone = () => {
+export const useGetTimezone = () => {
 	const [timezone, setTimezone] = useState(null)
 
 	useEffect(() => {
