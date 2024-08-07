@@ -11,7 +11,7 @@ export function HideContentBox({ title, subtitle, BgIcon }: Props) {
 				<div className='pointer-events-none absolute w-1/2 rotate-45 h-[300%] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#41b3ff00] via-[#b0a9ff13] to-[#41b3ff00]'></div>
 				<h2 className='text-6xl font-bold text-center text-white'>{title}</h2>
 				{subtitle && (
-					<p className='text-4xl font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+					<p className='text-4xl font-semibold text-center max-w-[24ch] text-yellow-300 mx-auto px-4'>
 						{subtitle}
 					</p>
 				)}

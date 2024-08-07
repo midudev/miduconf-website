@@ -63,10 +63,10 @@ Conferencia de Programación y Tecnología.
 
 👩‍💻 7 Speakers TOP
 💬 Charlas para todos los niveles
-🎁 +256 regalos y premios
+🎁 Muchos regalos y premios
 ...¡y muchas sorpresas!
 
-Apunta la fecha: 13 de SEPTIEMBRE
+Apunta la fecha: 12 de SEPTIEMBRE
 
 https://miduconf.com/ticket/${username}`
 

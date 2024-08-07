@@ -7,13 +7,63 @@ import { Malt } from '@/components/logos/maltes'
 import { useEffect, useState } from 'react'
 
 export const Agenda = () => {
+	const timezone = useGetTimezone()
+
 	return (
-		<section id='agenda' className='px-4 pt-20 pb-20'>
-			<HideContentBox
-				title='Agenda'
-				subtitle='¡Muy pronto desvelaremos la agenda!'
-				BgIcon={NavbarIcons.ScheduleIcon}
-			/>
+		<section id='agenda' className='px-4 pt-20 pb-40 max-w-[802px] mx-auto'>
+			<h2 className='text-6xl font-bold text-center text-white'>Agenda</h2>
+			<p className='text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
+				Todas las charlas son en directo y en español
+			</p>
+			<div className='w-full mx-auto space-y-4 text-center'>
+				<span className='inline-flex items-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300 shadow-inset shadow-white'>
+					<svg
+						aria-hidden='true'
+						className='w-3 h-3 mr-1'
+						xmlns='http://www.w3.org/2000/svg'
+						viewBox='0 0 20 20'
+						fill='#fff'
+					>
+						<path
+							fillRule='evenodd'
+							d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z'
+							clipRule='evenodd'
+						/>
+					</svg>
+					<span className='mr-1 opacity-75'>Zona horaria de la agenda:</span> {timezone}
+				</span>
+			</div>
+
+			<div
+				className='flex flex-col gap-8 mt-12 lg:mt-16'
+				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 90%)' }}
+			>
+				<AgendaItem
+					timestamp={1726153200000}
+					duration={30 * 60 * 1000}
+					title='¡Hola, miduConf 👋!'
+					description='Anunciamos próximos proyectos en la comunidad de programación y tecnología de midudev.'
+					speaker={{
+						img: 'midudev',
+						name: 'Miguel Ángel Durán',
+						title: 'Creador de contenido y divulgador'
+					}}
+				/>
+				<AgendaItem
+					timestamp={1726154100000}
+					duration={30 * 60 * 1000}
+					title='Como la IA Revolucionará el mundo Web'
+					description='El futuro de la programación, Next.js, Vercel y la IA. ¡Conoce a Guillermo Rauch!'
+					speaker={{
+						img: 'rauchg',
+						name: 'Guillermo Rauch',
+						title: 'CEO de Vercel'
+					}}
+				/>
+			</div>
+			<p className='text-4xl mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+				¡Muy pronto desvelaremos la agenda!
+			</p>
 		</section>
 	)
 }
