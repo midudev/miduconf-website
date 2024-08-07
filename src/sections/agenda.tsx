@@ -93,7 +93,10 @@ export const Agenda = () => {
 	const timezone = useGetTimezone()
 
 	return (
-		<section id='agenda' className='flex flex-col flex-wrap items-center justify-center pt-48'>
+		<section
+			id='agenda'
+			className='flex flex-col flex-wrap items-center justify-center pt-48 pb-20'
+		>
 			<h2 className='text-6xl font-bold text-center text-white'>Agenda</h2>
 			<p className='max-w-xl text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				Todas las charlas son en directo y en español

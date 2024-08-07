@@ -98,7 +98,7 @@ export function Speakers() {
 	return (
 		<section
 			id='speakers'
-			className='flex flex-col flex-wrap items-center justify-center max-w-5xl pt-48 mx-auto'
+			className='flex flex-col flex-wrap items-center justify-center max-w-5xl px-4 pt-48 mx-auto'
 		>
 			<h2 className='text-5xl font-bold text-center text-white'>
 				Sobre nuestros <span className='text-blue-600'>speakers</span>
