@@ -1,3 +1,6 @@
+import { HideContentBox } from '@/components/HideContentBox'
+import { NavbarIcons } from '@/components/icons/navbar'
+
 const GIFTS = [
 	{
 		img: null,
@@ -85,6 +88,18 @@ const GIFTS = [
 ]
 
 export const Gifts = () => {
+	return (
+		<section id='regalos' className='px-4 pt-24'>
+			<HideContentBox
+				title='Regalos'
+				subtitle='¡Muy pronto desvelaremos todos los regalos!'
+				BgIcon={NavbarIcons.GiftIcon}
+			/>
+		</section>
+	)
+}
+
+const GiftsSection = () => {
 	return (
 		<section id='regalos' className='flex flex-col flex-wrap items-center justify-center pt-24'>
 			<h2 className='text-6xl font-bold text-center text-white'>Regalos</h2>

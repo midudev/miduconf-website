@@ -10,6 +10,12 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			boxShadow: {
+				button:
+					'inset 0 6px 12px #4C64D2, 0 0 17px rgba(110, 137, 255, 0.77), inset 0 1px 10px rgba(255, 255, 255, 0.55)',
+				['button-hover']:
+					' inset 0 6px 12px #4C64D2, 0 0 34px rgba(110, 137, 255, 0.77), inset 0 1px 10px rgba(255, 255, 255, 0.55)'
+			},
 			animation: {
 				marquee: 'marquee var(--duration) linear infinite',
 				meteor: 'meteor 5s linear infinite',
@@ -47,13 +53,16 @@ module.exports = {
 					}
 				},
 				meteor: {
-					'0%': { transform: 'rotate(215deg) translateX(0)', opacity: 1 },
-					'70%': { opacity: 1 },
+					'0%': { transform: 'rotate(-40deg) translateX(0)', opacity: 0 },
+					'30%': { opacity: 1 },
 					'100%': {
-						transform: 'rotate(215deg) translateX(-500px)',
+						transform: 'rotate(-40deg) translateX(-500px)',
 						opacity: 0
 					}
 				}
+			},
+			screens: {
+				base: '1000px'
 			},
 			colors: {
 				midu: {
@@ -63,9 +72,14 @@ module.exports = {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				button: 'linear-gradient(to bottom, #3152DF95, #1E254595)'
 			}
 		}
 	},
-	plugins: [require('flowbite/plugin'), require('tailwindcss-textshadow')]
+	plugins: [
+		require('flowbite/plugin'),
+		require('tailwindcss-textshadow'),
+		require('@midudev/tailwind-animations')
+	]
 }

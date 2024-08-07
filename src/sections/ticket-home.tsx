@@ -1,8 +1,10 @@
-import { ShimmerButton } from '@/components/magicui/ShimmerButton'
 import Ticket from '@/components/Ticket'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useEffect, useState } from 'react'
 import { FLAVORS } from '@/flavors/data'
+import { Button } from '@/components/Button'
+import { TicketIcon } from '@/components/icons'
+import { Container3D } from '@/components/Container3D'
 
 export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	const supabase = useSupabaseClient()
@@ -55,66 +57,27 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	return (
 		<div>
 			<div className='block w-full h-full'>
-				<div className='flex items-center justify-center max-w-5xl mx-auto mt-10 flex-0'>
-					<Ticket
-						transition={!initialFlavor}
-						number={number}
-						flavor={flavor}
-						user={{
-							avatar: username ? `https://unavatar.io/github/${username}` : null,
-							username
-						}}
-					/>
+				<div className='flex items-center justify-center max-w-[668px] mx-auto mt-16 flex-0'>
+					<Container3D>
+						<Ticket
+							transition={initialFlavor}
+							number={number}
+							flavor={flavor}
+							user={{
+								avatar: username ? `https://unavatar.io/github/${username}` : null,
+								username
+							}}
+						/>
+					</Container3D>
 				</div>
-				<div className='flex flex-col items-center justify-center gap-4 mx-auto scale-90 md:flex-row sm:scale-100'>
-					<ShimmerButton onClick={handleLogin} size='large'>
-						<svg
-							className='mr-3'
-							width='32'
-							height='32'
-							viewBox='0 0 24 24'
-							strokeWidth='1'
-							stroke='currentColor'
-							fill='none'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						>
-							<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-							<path d='M15 5l0 2'></path>
-							<path d='M15 11l0 2'></path>
-							<path d='M15 17l0 2'></path>
-							<path d='M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2'></path>
-						</svg>
-						¡Consigue tu entrada GRATIS!
-					</ShimmerButton>
-					<ShimmerButton
-						shimmerDuration='0'
-						shimmerSize='0'
-						type='secondary'
-						onClick={handleGoToDiscord}
-						size='large'
+				<div className='flex flex-col items-center justify-center gap-4 mx-auto mt-16 scale-90 md:flex-row sm:scale-100'>
+					<Button
+						onClick={handleLogin}
+						className='px-6 py-5 text-lg font-bold md:text-3xl rounded-xl'
 					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							className='mr-3'
-							width='32'
-							height='32'
-							viewBox='0 0 24 24'
-							strokeWidth='1.5'
-							stroke='currentColor'
-							fill='none'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						>
-							<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-							<path d='M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6'></path>
-							<path d='M16 3v4'></path>
-							<path d='M8 3v4'></path>
-							<path d='M4 11h16'></path>
-							<path d='M15 19l2 2l4 -4'></path>
-						</svg>
-						Guarda la fecha del evento
-					</ShimmerButton>
+						<TicketIcon className='mr-3' />
+						Conseguir mi ticket
+					</Button>
 				</div>
 			</div>
 		</div>

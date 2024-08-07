@@ -2,26 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	background: #000214;
 	overflow-x: hidden;
 }
 
-@keyframes add-shadow {
-	to {
-		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, .1), 0 0 0 1px hsla(0, 0%, 100%, .10);
-		background: rgba(0, 0, 0, .3);
+@layer components {
+	.header-animate {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		animation: reduce-header linear both;
+		animation-timeline: scroll();
+		animation-range: 0 150px;
 	}
 }
 
-#header {
-	backdrop-filter: blur(10px);
-	animation: add-shadow linear both;
-	position: sticky;
-	top: 0;
+@layer components {
+	.ticket-dash-border {
+		background-image: linear-gradient(hsla(0, 0%, 100%, 0.2) 0%, hsla(0, 0%, 100%, 0.2) 50%, transparent 50%);
+		background-size: 0.0625rem 1.125rem;
+		background-position: 100% 0;
+		background-repeat: repeat-y;
+	}
+
+	.ticket-dash-border-top {
+		background-image: linear-gradient(to right, hsla(0, 0%, 100%, 0.2) 0%, hsla(0, 0%, 100%, 0.2) 50%, transparent 50%);
+		background-size: 1.125rem 0.0625rem;
+		background-position: 0 0;
+		background-repeat: repeat-x;
+	}
 }
 
-#header {
-	animation-timeline: scroll();
-	animation-range: 0 150px;
+@keyframes reduce-header {
+	to {
+		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, .1), 0 0 0 1px hsla(0, 0%, 100%, .10);
+		background: rgba(0, 0, 0, .3);
+		padding-block: 1rem;
+		backdrop-filter: blur(10px);
+	}
 }

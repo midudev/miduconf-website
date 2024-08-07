@@ -1,23 +1,18 @@
-import { useState } from 'react'
-import { Inter, Inter_Tight as InterTight } from 'next/font/google'
-import Head from 'next/head'
+import { GeistSans } from 'geist/font/sans'
 import { toJpeg } from 'html-to-image'
+import Head from 'next/head'
+import { useState } from 'react'
 
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 import { Background } from '@/components/Background'
-import { HeaderCountdown } from '@/components/HeaderCountdown'
+import { Container3D } from '@/components/Container3D'
+import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
-
-export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
-export const interTight = InterTight({
-	weight: ['500', '800', '900'],
-	subsets: ['latin']
-})
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
@@ -53,7 +48,6 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	})
 	const supabase = useSupabaseClient()
 	const flavor = FLAVORS[flavorKey]
-
 	const { username, avatar, name } = user
 
 	const title = 'miduConf - Conferencia de Programación y Tecnología'
@@ -69,10 +63,10 @@ Conferencia de Programación y Tecnología.
 
 👩‍💻 7 Speakers TOP
 💬 Charlas para todos los niveles
-🎁 +256 regalos y premios
+🎁 Muchos regalos y premios
 ...¡y muchas sorpresas!
 
-Apunta la fecha: 13 de SEPTIEMBRE
+Apunta la fecha: 12 de SEPTIEMBRE
 
 https://miduconf.com/ticket/${username}`
 
@@ -97,8 +91,6 @@ https://miduconf.com/ticket/${username}`
 		const dataURL = await toJpeg(document.getElementById('ticket'), {
 			quality: 0.8
 		})
-
-		document.querySelector('#image').setAttribute('src', dataURL)
 
 		const file = await dataUrlToFile(dataURL, 'ticket.jpg')
 		const filename = `ticket-${number}.jpg`
@@ -142,11 +134,11 @@ https://miduconf.com/ticket/${username}`
 			<Meteors />
 			<Background />
 
-			<header id='header' className='relative w-full mb-10 overflow-hidden z-[99999]'>
-				<HeaderCountdown />
+			<header className={`${GeistSans.className} relative w-full mb-10 overflow-hidden z-[99999]`}>
+				<Countdown />
 			</header>
 
-			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
+			<main className={`${GeistSans.className} max-w-screen-base m-auto mt-16 pb-20 px-4`}>
 				<div className='flex flex-col items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center md:flex-row'>
 					<a
 						className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
@@ -220,14 +212,28 @@ https://miduconf.com/ticket/${username}`
 					</button>
 				</div>
 
-				<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
+				<div className='max-w-[700px] mx-auto'>
+					<Container3D>
+						<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
+					</Container3D>
+				</div>
+				<div aria-disabled className='w-[732px] -mb-[366px] relative -left-[200vw]'>
+					<div id='ticket' className='border-[16px] border-transparent'>
+						<TicketComponent
+							isSizeFixed
+							number={number}
+							flavor={flavor}
+							user={{ username, avatar, name }}
+						/>
+					</div>
+				</div>
 
 				<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
 					<h2 className='font-light text-center text-white uppercase opacity-70'>
 						Selecciona tu sabor:
 					</h2>
-					<div className='flex flex-row flex-wrap justify-center w-full p-8 text-center gap-x-4 gap-y-12'>
-						{Object.entries(FLAVORS).map(([key, { name, component: Icon }]) => {
+					<div className='flex flex-row justify-center w-full p-8 overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12'>
+						{Object.entries(FLAVORS).map(([key, { icon: Icon }]) => {
 							return (
 								<button
 									key={key}
@@ -238,16 +244,14 @@ https://miduconf.com/ticket/${username}`
 									}`}
 									onClick={changeFlavorKey(key)}
 								>
-									<figure className='flex items-center justify-center w-16 h-16 transition group-hover:scale-110'>
-										<Icon />
-									</figure>
-									{name}
+									<div className='flex items-center justify-center w-16 h-16 transition group-hover:scale-110'>
+										<Icon className='h-auto' />
+									</div>
 								</button>
 							)
 						})}
 					</div>
 				</div>
-				<img id='image' src='' className='w-full h-auto' />
 			</main>
 		</>
 	)

@@ -1,19 +1,18 @@
-import { Inter, Inter_Tight as InterTight } from 'next/font/google'
 import Head from 'next/head'
 
-import { Background } from '@/components/Background'
-import { Speakers } from '@/components/Speakers'
-import { Sponsors } from '@/sections/sponsors'
-import { HeaderIndex } from '@/components/HeaderIndex'
-import { HeaderCountdown } from '@/components/HeaderCountdown'
-import { Meteors } from '@/components/MeteorLanguages'
-import { TicketHome } from '@/sections/ticket-home'
-import { Gifts } from '@/sections/gifts'
-import { Agenda } from '@/sections/agenda'
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { GeistSans } from 'geist/font/sans'
 
-export const inter = Inter({ weight: ['400', '500', '600', '700', '900'], subsets: ['latin'] })
-export const interTight = InterTight({ weight: ['500', '800', '900'], subsets: ['latin'] })
+import { Background } from '@/components/Background'
+import { Countdown } from '@/components/Countdown'
+import { Header } from '@/components/Header'
+import { Meteors } from '@/components/MeteorLanguages'
+import { Speakers } from '@/components/Speakers'
+import { Stars } from '@/components/Stars'
+import { Agenda } from '@/sections/agenda'
+import { Gifts } from '@/sections/gifts'
+import { Sponsors } from '@/sections/sponsors'
+import { TicketHome } from '@/sections/ticket-home'
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
@@ -46,17 +45,23 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 				<link rel='icon' href='/favicon.svg' />
 			</Head>
 
-			<Meteors />
-			<Background />
+			<Header />
 
-			<header id='header' className='relative w-full mb-10 overflow-hidden z-[99999]'>
-				<HeaderCountdown />
-			</header>
+			<main className={`${GeistSans.className}`}>
+				<section className='relative px-4 pb-20 before:bg-gradient-to-b before:from-[#020617] before:via-[#020617] before:-z-10 before:inset-0 before:to-[#0B217D] before:size-full before:absolute border-b border-midu-primary inset-0 m-auto'>
+					<Stars />
+					<Meteors />
+					<Background />
+					<div className='max-w-5xl mx-auto'>
+						<h2 className='animate-fade-in-up text-6xl md:text-[80px] mx-auto text-center max-w-[20ch] text-white font-bold pt-40'>
+							Conoce el <span className='text-midu-primary'>futuro</span> del{' '}
+							<span className='text-midu-primary'>desarrollo</span> web
+						</h2>
 
-			<HeaderIndex />
-
-			<main className={`${inter.className} max-w-5xl m-auto mt-16 pb-20 px-4`}>
-				<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
+						<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
+						<Countdown />
+					</div>
+				</section>
 				<Speakers />
 				<Sponsors />
 				<Gifts />
@@ -81,6 +86,7 @@ export const getServerSideProps = async (ctx) => {
 	// search ticket for user
 	const { data, error } = await supabase.from('ticket').select('*').eq('user_name', ticket)
 	// check if we have results
+
 	if (data.length > 0 && !error) {
 		return {
 			props: {
