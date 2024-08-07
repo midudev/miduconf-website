@@ -86,8 +86,6 @@ const GIFTS = [
 	}
 ]
 
-/* Próximamente desvelaremos <strong>todos</storng> los regalos!
- */
 export const Gifts = () => {
 	return (
 		<section id='regalos' className='px-4 pt-24'>
