@@ -134,7 +134,7 @@ https://miduconf.com/ticket/${username}`
 			<Meteors />
 			<Background />
 
-			<header className='relative w-full mb-10 overflow-hidden z-[99999]'>
+			<header className={`${GeistSans.className} relative w-full mb-10 overflow-hidden z-[99999]`}>
 				<Countdown />
 			</header>
 
