@@ -440,6 +440,17 @@ export const FLAVORS = {
 			},
 			shadowColor: 'shadow-blue-400/25'
 		}
+	},
+	nextJSJp: {
+		icon: FLAVORS_ICONS.figma,
+		colorPalette: {
+			bg: 'bg-[#fe2d9a]/50',
+			borders: {
+				inside: 'border-blue-300/20',
+				outside: 'border-blue-400/10'
+			},
+			shadowColor: 'shadow-blue-400/25'
+		}
 	}
 }
 
