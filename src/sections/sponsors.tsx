@@ -54,7 +54,7 @@ const reviews = [
 export const premiums = [
 	{
 		name: 'Platzi',
-		link: 'https://platzi.com/',
+		link: 'https://midu.link/platzi',
 		logo: <SponsorIcons.platzi className='w-auto h-12' />,
 		slogan: 'Plataforma de aprendizaje profesional online'
 	},
