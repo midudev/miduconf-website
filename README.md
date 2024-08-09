@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-Este proyecto es el código fuente del sitio web oficial de **miduConf**, una conferencia de programación y desarrollo web en español que se celebrará el **13 de septiembre de 2023**. El sitio web se desarrolla utilizando Next.js y tiene como objetivo informar a los asistentes y a la comunidad en general sobre los detalles de la conferencia, incluidos los oradores, el horario, los regalos y sorteos, y cómo registrarse para el evento.
+Este proyecto es el código fuente del sitio web oficial de **miduConf**, una conferencia de programación y desarrollo web en español que se celebrará el **12 de septiembre de 2024**. El sitio web se desarrolla utilizando Next.js y tiene como objetivo informar a los asistentes y a la comunidad en general sobre los detalles de la conferencia, incluidos los oradores, el horario, los regalos y sorteos, y cómo registrarse para el evento.
 
 ## Prerrequisitos
 
