@@ -186,12 +186,15 @@ export const premiums = [
 	// },
 ]
 
-/* 
-	name: 'Platzi',
-		link: 'https://platzi.com/',
-		Logo: SponsorIcons.platzi,
-		slogan: 'Plataforma de aprendizaje profesional online'
-*/
+export const sponsors = [
+	{
+		name: 'InfoJobs',
+		link: 'https://midu.link/infojobs',
+		logo: <SponsorIcons.infoJobs className='w-auto h-full text-white' />,
+		slogan: '¿La de trabajar, te la sabes?'
+	}
+]
+
 const ReviewCard = ({
 	logo,
 	link,
@@ -239,6 +242,7 @@ export const Sponsors = () => {
 						<ReviewCard key={premium.name} {...premium} size='large' />
 					))}
 				</div>
+
 				<div className='relative flex flex-col w-full overflow-hidden gap-y-4'>
 					<div className='absolute inset-y-0 left-0 w-40 pointer-events-none from-[#000214] to-transparent bg-gradient-to-r '></div>
 					<div className='absolute inset-y-0 right-0 w-1/3 pointer-events-none bg-gradient-to-l from-[#000214]'></div>
