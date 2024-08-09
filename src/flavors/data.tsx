@@ -440,7 +440,18 @@ export const FLAVORS = {
 			},
 			shadowColor: 'shadow-blue-400/25'
 		}
-	}
+	},
+	spring: {
+		icon: FLAVORS_ICONS.spring,
+		colorPalette: {
+			bg: 'bg-[#6DB33F]/50',
+			borders: {
+				inside: 'border-green-300/20',
+				outside: 'border-green-400/10'
+			},
+			shadowColor: 'shadow-green-400/25'
+		}
+	},
 }
 
 /* 
