@@ -440,6 +440,17 @@ export const FLAVORS = {
 			},
 			shadowColor: 'shadow-blue-400/25'
 		}
+	},
+	snaplet: {
+		icon: FLAVORS_ICONS.snaplet,
+		colorPalette: {
+			bg: 'bg-[#6878ed]/60',
+			borders: {
+				inside: 'border-purple-300/20',
+				outside: 'border-purple-400/10'
+			},
+			shadowColor: 'shadow-blue-400/25'
+		}
 	}
 }
 

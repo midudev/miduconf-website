@@ -30,6 +30,7 @@ import { ReactIcon } from './react'
 import { RubyIcon } from './ruby'
 import { RustIcon } from './rust'
 import { ScalaIcon } from './scala'
+import { SnapletIcon } from './snaplet'
 import { SolidIcon } from './solid'
 import { SvelteIcon } from './svelte'
 import { TailwindIcon } from './tailwind'
@@ -79,5 +80,6 @@ export const FLAVORS_ICONS = {
 	linux: LinuxIcon,
 	ruby: RubyIcon,
 	tailwind: TailwindIcon,
-	c: CIcon
+	c: CIcon,
+	snaplet: SnapletIcon
 }
