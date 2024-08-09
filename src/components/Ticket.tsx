@@ -39,7 +39,6 @@ export default function Ticket({
 	id
 }: Props) {
 	const timeZone = useGetTimezone()
-	console.log(timeZone)
 	const { username, avatar } = user ?? {}
 	const ticketNumber = `#${number != null ? number.toString().padStart(5, '0') : ''}`
 
