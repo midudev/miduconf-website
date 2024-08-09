@@ -192,6 +192,12 @@ export const sponsors = [
 		link: 'https://midu.link/infojobs',
 		logo: <SponsorIcons.infoJobs className='w-auto h-full text-white' />,
 		slogan: '¿La de trabajar, te la sabes?'
+	},
+	{
+		name: 'Cloudinary',
+		link: 'https://cloudinary.com/',
+		logo: null,
+		slogan: 'Una plataforma de almacenamiento de imágenes y video'
 	}
 ]
 
