@@ -13,6 +13,8 @@ import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
+import { DownloadIcon } from '@/components/icons'
+import { Button } from '@/components/Button'
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
@@ -111,6 +113,16 @@ https://miduconf.com/ticket/${username}`
 		}
 
 		setButtonText(STEPS_LOADING.ready)
+	}
+
+	const downloadTicket = async () => {
+		const dataURL = await toJpeg(document.getElementById('ticket'), {
+			quality: 0.98
+		})
+		const link = document.createElement('a')
+		link.href = dataURL
+		link.download = `ticket-${number}.jpg`
+		link.click()
 	}
 
 	return (
@@ -216,6 +228,15 @@ https://miduconf.com/ticket/${username}`
 					<Container3D>
 						<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
 					</Container3D>
+				</div>
+				<div className='flex justify-center mt-10'>
+					<Button
+						className='px-6 py-5 text-lg font-bold md:text-3xl rounded-xl'
+						onClick={downloadTicket}
+					>
+						<DownloadIcon className='mr-3' />
+						Descargar ticket
+					</Button>
 				</div>
 				<div aria-disabled className='w-[732px] -mb-[366px] relative -left-[200vw]'>
 					<div id='ticket' className='border-[16px] border-transparent'>
