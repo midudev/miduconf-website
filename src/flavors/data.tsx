@@ -441,7 +441,7 @@ export const FLAVORS = {
 			shadowColor: 'shadow-blue-400/25'
 		}
 	},
-	nextJSJp: {
+	figma: {
 		icon: FLAVORS_ICONS.figma,
 		colorPalette: {
 			bg: 'bg-[#fe2d9a]/50',

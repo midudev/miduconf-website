@@ -1,4 +1,4 @@
-export function figmaIcon({ className = '', ...props }) {
+export function FigmaIcon({ className = '', ...props }) {
 	return (
 		<svg
 		viewBox='0 0 1965 942'
