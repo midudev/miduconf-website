@@ -65,9 +65,15 @@ export const premiums = [
 		slogan: 'Registro de dominios, hosting, correo y SSL'
 	},
 	{
+		name: 'LemonCode',
+		link: 'https://midu.link/lemoncode',
+		logo: <SponsorIcons.lemonCode className='w-auto h-12' />,
+		slogan: 'Formaciones con los mejores profesionales'
+	},
+	{
 		name: 'KeepCoding',
 		link: 'https://midu.link/keepcoding',
-		logo: <SponsorIcons.keepCoding className='w-52 ' />,
+		logo: <SponsorIcons.keepCoding className='w-full h-12 object-contain' />,
 		slogan: 'Los Mejores Bootcamps Online'
 	}
 	// {
@@ -190,8 +196,14 @@ export const sponsors = [
 	{
 		name: 'InfoJobs',
 		link: 'https://midu.link/infojobs',
-		logo: <SponsorIcons.infoJobs className='w-auto h-full text-white' />,
+		logo: <SponsorIcons.infoJobs className='w-auto max-w-full h-8 text-white' />,
 		slogan: '¿La de trabajar, te la sabes?'
+	},
+	{
+		name: 'Cloudinary',
+		link: 'https://cloudinary.com/',
+		logo: <SponsorIcons.cloudinary className='w-auto max-w-full h-12 text-white' />,
+		slogan: 'La mejor plataforma para tus imágenes'
 	}
 ]
 
@@ -212,14 +224,20 @@ const ReviewCard = ({
 			target='_blank'
 			rel='noopener noreferrer'
 			className={`relative ${
-				size === 'large'
-					? 'min-w-[250px] '
-					: 'min-w-[50px] border-slate-900 hover:border-slate-900/75'
-			} flex justify-center items-center overflow-hidden rounded-xl  w-full py-8  px-12 transition hover:bg-slate-800/75 hover:shadow-lg group`}
+				size === 'large' ? 'min-w-[250px] px-12 w-full' : 'w-[200px] px-4 inline-block'
+			} flex justify-center items-center overflow-hidden rounded-xl py-8 transition hover:bg-slate-800/75 hover:shadow-lg group`}
 		>
 			<div className='flex flex-col items-center justify-center w-full gap-4 text-white transition h-max group-hover:scale-110'>
-				{logo}
-				<p className='text-lg text-center text-white/60 max-w-[20ch]'>{slogan}</p>
+				<figure className={`${size === 'large' ? 'h-12' : 'h-8'} flex items-center justify-center`}>
+					{logo}
+				</figure>
+				<p
+					className={`${
+						size === 'large' ? 'text-base' : 'text-sm'
+					} text-center text-white/60 max-w-[20ch] text-balance leading-tight font-light`}
+				>
+					{slogan}
+				</p>
 			</div>
 		</a>
 	)
@@ -236,10 +254,16 @@ export const Sponsors = () => {
 				¡Gracias a ellos hacemos posible el evento!
 			</p>
 
-			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background'>
-				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background max-w-5xl'>
+				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-2'>
 					{premiums.map((premium) => (
 						<ReviewCard key={premium.name} {...premium} size='large' />
+					))}
+				</div>
+
+				<div className='flex flex-wrap justify-center flex-row'>
+					{sponsors.map((sponsor) => (
+						<ReviewCard key={sponsor.name} {...sponsor} />
 					))}
 				</div>
 

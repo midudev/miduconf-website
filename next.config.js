@@ -10,6 +10,10 @@ const nextConfig = {
 			{
 				source: '/ticket/:username',
 				destination: '/?ticket=:username'
+			},
+			{
+				source: '/ticket/:username/:hash',
+				destination: '/?ticket=:username'
 			}
 		]
 	}
