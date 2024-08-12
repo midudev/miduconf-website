@@ -23,7 +23,7 @@ async function dataUrlToFile(dataUrl, fileName) {
 }
 
 const STEPS_LOADING = {
-	ready: '¡Comparte el ticket en Twitter!',
+	ready: 'Compartir ticket en X',
 	generate: 'Generando nuevo ticket...',
 	sharing: 'Compartiendo ticket...'
 }
@@ -64,7 +64,7 @@ Conferencia de Programación y Tecnología.
 
 👩‍💻 7 Speakers TOP
 💬 Charlas para todos los niveles
-🎁 Muchos regalos y premios
+🎁 +256 regalos y premios
 ...¡y muchas sorpresas!
 
 Apunta la fecha: 12 de SEPTIEMBRE
@@ -167,23 +167,23 @@ Apunta la fecha: 12 de SEPTIEMBRE
 					<button
 						onClick={handleShare}
 						type='button'
-						className={`text-white cursor-pointer hover:bg- bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-125 [text-wrap:balance] ${
+						className={`text-white cursor-pointer hover:bg- bg-[#14171A] hover:bg-[#14171A]/90 focus:ring-4 focus:outline-none focus:ring-[#14171A]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#14171A]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-125 [text-wrap:balance] ${
 							buttonText !== STEPS_LOADING.ready
 								? 'pointer-events-none opacity-70 bg-slate-700'
 								: ''
 						}`}
 					>
 						<svg
-							className='w-6 h-6 mr-2'
-							aria-hidden='true'
 							xmlns='http://www.w3.org/2000/svg'
-							fill='currentColor'
-							viewBox='0 0 20 17'
+							className='w-4 h-4 mr-2'
+							width='1200'
+							height='1227'
+							fill='none'
+							viewBox='0 0 1200 1227'
 						>
 							<path
-								fillRule='evenodd'
-								d='M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z'
-								clipRule='evenodd'
+								fill='#fff'
+								d='M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z'
 							/>
 						</svg>
 						{buttonText}
