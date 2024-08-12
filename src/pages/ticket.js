@@ -113,6 +113,22 @@ https://miduconf.com/ticket/${username}`
 		setButtonText(STEPS_LOADING.ready)
 	}
 
+	function getTwitchAuthorizeUrl() {
+		const redirectUrl =
+			process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/' : 'https://www.miduconf.com/'
+
+		const authorizeTwitchUrl = new URL('https://id.twitch.tv/oauth2/authorize')
+		authorizeTwitchUrl.searchParams.append('client_id', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
+		authorizeTwitchUrl.searchParams.append(
+			'redirect_uri',
+			'http://localhost:3000/api/special-ticket/twitch/'
+		)
+		authorizeTwitchUrl.searchParams.append('scope', 'user:read:subscriptions')
+		authorizeTwitchUrl.searchParams.append('response_type', 'code')
+
+		return authorizeTwitchUrl.href
+	}
+
 	return (
 		<>
 			<Head>
@@ -210,6 +226,9 @@ https://miduconf.com/ticket/${username}`
 						</svg>
 						Cerrar sesión
 					</button>
+					<a className='text-white' href={getTwitchAuthorizeUrl()}>
+						Connect with Twitch
+					</a>
 				</div>
 
 				<div className='max-w-[700px] mx-auto'>
