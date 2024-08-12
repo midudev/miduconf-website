@@ -167,7 +167,7 @@ Apunta la fecha: 12 de SEPTIEMBRE
 					<button
 						onClick={handleShare}
 						type='button'
-						className={`text-white cursor-pointer hover:bg- bg-[#14171A] hover:bg-[#14171A]/90 focus:ring-4 focus:outline-none focus:ring-[#14171A]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#14171A]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-125 [text-wrap:balance] ${
+						className={`text-white cursor-pointer hover:bg- bg-[#14171A] hover:bg-[#14171A]/90 focus:ring-4 focus:outline-none focus:ring-[#14171A]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#14171A]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out border border-white/40 hover:scale-125 [text-wrap:balance] ${
 							buttonText !== STEPS_LOADING.ready
 								? 'pointer-events-none opacity-70 bg-slate-700'
 								: ''
