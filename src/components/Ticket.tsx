@@ -109,10 +109,10 @@ export default function Ticket({
 				>
 					<div className={cn('grid', isSizeFixed ? 'grid-cols-2' : 'md:grid-cols-2')}>
 						<div className='h-max'>
-							{avatar && (
+							{avatar ? (
 								<div
 									className={cn(
-										'flex items-end justify-center font-mono gap-4 text-white gap-y-2',
+										'flex items-end justify-start font-mono gap-4 text-white gap-y-2',
 										isSizeFixed
 											? 'items-start flex-row p-6 text-left'
 											: 'p-5 flex-col md:items-start md:flex-row md:p-6 items-center text-center md:text-left'
@@ -136,6 +136,8 @@ export default function Ticket({
 										</span>
 									</div>
 								</div>
+							) : (
+								<NotAvatarUser isSizeFixed={isSizeFixed} />
 							)}
 						</div>
 						<div
@@ -206,6 +208,41 @@ export default function Ticket({
 						</a>
 					</div>
 				</div>
+			</div>
+		</div>
+	)
+}
+
+const NotAvatarUser = ({ isSizeFixed }: { isSizeFixed: boolean }) => {
+	const miduAvatar = '/img/midudev.webp'
+
+	return (
+		<div
+			className={cn(
+				'flex items-end justify-start gap-4 text-white gap-y-2',
+				isSizeFixed
+					? 'items-start flex-row p-6 text-left'
+					: 'p-5 flex-col md:items-start md:flex-row md:p-6 items-center text-center md:text-left'
+			)}
+		>
+			{/* <img
+				src={miduAvatar}
+				crossOrigin='anonymous'
+				className={cn(
+					'block rounded-full',
+					isSizeFixed ? 'w-[78px] h-[78px]' : 'w-20 h-20 md:w-[78px] md:h-[78px]'
+				)}
+				alt={`Avatar de midudev`}
+				width='78'
+				height='78'
+			/> */}
+			<div>
+				<p className='text-xl font-bold'>
+					<span className='opacity-75 text-midu-primary'>#</span>miduConf
+				</p>
+				<span className='block text-sm font-normal w-max text-white/60'>
+					Evento de Programación
+				</span>
 			</div>
 		</div>
 	)
