@@ -196,7 +196,7 @@ export const sponsors = [
 	{
 		name: 'InfoJobs',
 		link: 'https://midu.link/infojobs',
-		logo: <SponsorIcons.infoJobs className='w-auto max-w-full h-12 text-white' />,
+		logo: <SponsorIcons.infoJobs className='w-auto max-w-full h-8 text-white' />,
 		slogan: '¿La de trabajar, te la sabes?'
 	},
 	{
@@ -224,11 +224,13 @@ const ReviewCard = ({
 			target='_blank'
 			rel='noopener noreferrer'
 			className={`relative ${
-				size === 'large' ? 'min-w-[250px]  px-12' : 'min-w-[50px] px-4'
-			} flex justify-center items-center overflow-hidden rounded-xl  w-full py-8 transition hover:bg-slate-800/75 hover:shadow-lg group`}
+				size === 'large' ? 'min-w-[250px] px-12 w-full' : 'w-[200px] px-4 inline-block'
+			} flex justify-center items-center overflow-hidden rounded-xl py-8 transition hover:bg-slate-800/75 hover:shadow-lg group`}
 		>
 			<div className='flex flex-col items-center justify-center w-full gap-4 text-white transition h-max group-hover:scale-110'>
-				{logo}
+				<figure className={`${size === 'large' ? 'h-12' : 'h-8'} flex items-center justify-center`}>
+					{logo}
+				</figure>
 				<p
 					className={`${
 						size === 'large' ? 'text-base' : 'text-sm'
@@ -259,7 +261,7 @@ export const Sponsors = () => {
 					))}
 				</div>
 
-				<div className='grid gap-4 md:grid-cols-4 lg:grid-cols-5'>
+				<div className='flex flex-wrap justify-center flex-row'>
 					{sponsors.map((sponsor) => (
 						<ReviewCard key={sponsor.name} {...sponsor} />
 					))}
