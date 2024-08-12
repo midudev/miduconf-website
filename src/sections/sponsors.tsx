@@ -67,13 +67,13 @@ export const premiums = [
 	{
 		name: 'LemonCode',
 		link: 'https://midu.link/lemoncode',
-		logo: <SponsorIcons.lemonCode className='w-auto h-12' />,
+		logo: <SponsorIcons.lemonCodeVertical className='w-auto h-12' />,
 		slogan: 'Formaciones con los mejores profesionales'
 	},
 	{
 		name: 'KeepCoding',
 		link: 'https://midu.link/keepcoding',
-		logo: <SponsorIcons.keepCoding className='w-full h-12 object-contain' />,
+		logo: <SponsorIcons.keepCoding className='object-contain w-full h-12' />,
 		slogan: 'Los Mejores Bootcamps Online'
 	}
 	// {
@@ -196,13 +196,13 @@ export const sponsors = [
 	{
 		name: 'InfoJobs',
 		link: 'https://midu.link/infojobs',
-		logo: <SponsorIcons.infoJobs className='w-auto max-w-full h-8 text-white' />,
+		logo: <SponsorIcons.infoJobs className='w-auto h-8 max-w-full text-white' />,
 		slogan: '¿La de trabajar, te la sabes?'
 	},
 	{
 		name: 'Cloudinary',
 		link: 'https://cloudinary.com/',
-		logo: <SponsorIcons.cloudinary className='w-auto max-w-full h-12 text-white' />,
+		logo: <SponsorIcons.cloudinary className='w-auto h-12 max-w-full text-white' />,
 		slogan: 'La mejor plataforma para tus imágenes'
 	}
 ]
@@ -254,14 +254,14 @@ export const Sponsors = () => {
 				¡Gracias a ellos hacemos posible el evento!
 			</p>
 
-			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background max-w-5xl'>
+			<div className='relative flex flex-col items-center justify-center w-full h-full max-w-5xl gap-4 py-20 overflow-hidden rounded-lg bg-background'>
 				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-2'>
 					{premiums.map((premium) => (
 						<ReviewCard key={premium.name} {...premium} size='large' />
 					))}
 				</div>
 
-				<div className='flex flex-wrap justify-center flex-row'>
+				<div className='flex flex-row flex-wrap justify-center'>
 					{sponsors.map((sponsor) => (
 						<ReviewCard key={sponsor.name} {...sponsor} />
 					))}

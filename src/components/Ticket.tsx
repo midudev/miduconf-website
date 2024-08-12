@@ -2,11 +2,11 @@
 
 import { cn } from '@/lib/utils'
 import 'atropos/css'
-import { TwitchIcon } from './icons'
 import { MiduLogo } from './logos/midudev'
 import { SponsorIcons } from '@/components/icons/sponsors'
 import { useGetTimezone } from '@/sections/agenda'
 import { formatEventTimeWithTimeZoneName } from './utilities/timezone'
+import { TwitchIcon } from './icons'
 
 interface Props {
 	transition?: boolean
@@ -189,6 +189,7 @@ export default function Ticket({
 							>
 								<LIST_OF_TICKET_SPONSORS.platzi className='w-auto h-auto text-white max-h-3 md:max-h-4' />
 								<LIST_OF_TICKET_SPONSORS.donDominio className='w-auto h-auto text-white max-h-2.5 md:max-h-3' />
+								<LIST_OF_TICKET_SPONSORS.lemonCode className='w-auto h-auto text-white max-h-4' />
 								<LIST_OF_TICKET_SPONSORS.keepCode className='w-auto h-auto text-white max-h-4' />
 							</div>
 						</div>
@@ -199,11 +200,11 @@ export default function Ticket({
 							className={cn(
 								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-[#b9a3e3] transition-colors',
 								isSizeFixed
-									? 'text-xl mx-0 pt-5'
-									: 'pt-0 text-md md:text-xl mx-auto md:mx-0 md:pt-5'
+									? 'text-base mx-0 pt-5'
+									: 'pt-0 text-md md:text-base mx-auto md:mx-0 md:pt-5'
 							)}
 						>
-							<TwitchIcon className={cn('h-auto', isSizeFixed ? 'w-5' : 'w-4 md:w-5')} />
+							<TwitchIcon className={cn('h-auto w-4')} />
 							twitch.tv/midudev
 						</a>
 					</div>
@@ -214,8 +215,6 @@ export default function Ticket({
 }
 
 const NotAvatarUser = ({ isSizeFixed }: { isSizeFixed: boolean }) => {
-	const miduAvatar = '/img/midudev.webp'
-
 	return (
 		<div
 			className={cn(
@@ -225,17 +224,6 @@ const NotAvatarUser = ({ isSizeFixed }: { isSizeFixed: boolean }) => {
 					: 'p-5 flex-col md:items-start md:flex-row md:p-6 items-center text-center md:text-left'
 			)}
 		>
-			{/* <img
-				src={miduAvatar}
-				crossOrigin='anonymous'
-				className={cn(
-					'block rounded-full',
-					isSizeFixed ? 'w-[78px] h-[78px]' : 'w-20 h-20 md:w-[78px] md:h-[78px]'
-				)}
-				alt={`Avatar de midudev`}
-				width='78'
-				height='78'
-			/> */}
 			<div>
 				<p className='text-xl font-bold'>
 					<span className='opacity-75 text-midu-primary'>#</span>miduConf
@@ -251,5 +239,6 @@ const NotAvatarUser = ({ isSizeFixed }: { isSizeFixed: boolean }) => {
 const LIST_OF_TICKET_SPONSORS = {
 	platzi: SponsorIcons.platzi,
 	donDominio: SponsorIcons.donDominio,
-	keepCode: SponsorIcons.keepCoding
+	keepCode: SponsorIcons.keepCoding,
+	lemonCode: SponsorIcons.lemonCodeHorizontal
 }
