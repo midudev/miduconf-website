@@ -3,7 +3,8 @@ import { KeepCodingIcon } from './keepcode'
 import { PlatziIcon } from './platzi'
 import { InfoJobsIcon } from './infojobs'
 import { CloudinaryIcon } from './cloudinary'
-import { LemonCodeIcon } from './lemon'
+import { LemonCodeHorizontalIcon } from './lemon-horizontal'
+import { LemonCodeVerticalIcon } from './lemon-vertical'
 
 export const SponsorIcons = {
 	platzi: PlatziIcon,
@@ -11,5 +12,6 @@ export const SponsorIcons = {
 	keepCoding: KeepCodingIcon,
 	infoJobs: InfoJobsIcon,
 	cloudinary: CloudinaryIcon,
-	lemonCode: LemonCodeIcon
+	lemonCodeHorizontal: LemonCodeHorizontalIcon,
+	lemonCodeVertical: LemonCodeVerticalIcon
 }
