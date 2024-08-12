@@ -61,7 +61,7 @@ export const premiums = [
 	{
 		name: 'Don Dominio',
 		link: 'https://midu.link/dondominio',
-		logo: <SponsorIcons.donDominio className='w-full h-12' />,
+		logo: <SponsorIcons.donDominio className='w-full h-8' />,
 		slogan: 'Registro de dominios, hosting, correo y SSL'
 	},
 	{
@@ -73,7 +73,7 @@ export const premiums = [
 	{
 		name: 'KeepCoding',
 		link: 'https://midu.link/keepcoding',
-		logo: <SponsorIcons.keepCoding className='w-full h-12' />,
+		logo: <SponsorIcons.keepCoding className='w-full h-12 object-contain' />,
 		slogan: 'Los Mejores Bootcamps Online'
 	}
 	// {
@@ -231,8 +231,8 @@ const ReviewCard = ({
 				{logo}
 				<p
 					className={`${
-						size === 'large' ? 'text-lg' : 'text-sm'
-					} text-center text-white/60 max-w-[20ch]`}
+						size === 'large' ? 'text-base' : 'text-sm'
+					} text-center text-white/60 max-w-[20ch] text-balance leading-tight font-light`}
 				>
 					{slogan}
 				</p>
@@ -253,7 +253,7 @@ export const Sponsors = () => {
 			</p>
 
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg bg-background max-w-5xl'>
-				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-2'>
 					{premiums.map((premium) => (
 						<ReviewCard key={premium.name} {...premium} size='large' />
 					))}
