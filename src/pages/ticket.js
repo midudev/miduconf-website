@@ -1,6 +1,6 @@
+import { Layout } from '@/sections/layout'
 import { GeistSans } from 'geist/font/sans'
 import { toJpeg } from 'html-to-image'
-import Head from 'next/head'
 import { useState } from 'react'
 
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
@@ -9,8 +9,8 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 import { Background } from '@/components/Background'
 import { Container3D } from '@/components/Container3D'
-import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
+import { Stars } from '@/components/Stars'
 import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
 
@@ -114,56 +114,21 @@ Apunta la fecha: 12 de SEPTIEMBRE
 		setButtonText(STEPS_LOADING.ready)
 	}
 
-	return (
-		<>
-			<Head>
-				<title>{title}</title>
-				<meta name='description' content={description} />
-				<meta property='og:image' content={ogImage} />
-				<meta property='twitter:image' content={ogImage} />
-				<meta property='og:title' content={title} />
-				<meta property='twitter:title' content={title} />
-				<meta property='og:description' content={description} />
-				<meta property='twitter:description' content={description} />
-				<meta property='og:url' content={url} />
-				<meta property='twitter:url' content={url} />
-				<meta property='og:type' content='website' />
-				<meta property='twitter:card' content='summary_large_image' />
-				<link rel='icon' href='/favicon.svg' />
-			</Head>
+	const metadata = {
+		title,
+		description,
+		ogImage,
+		url
+	}
 
+	return (
+		<Layout meta={metadata}>
+			<Stars />
 			<Meteors />
 			<Background />
 
-			<header className={`${GeistSans.className} relative w-full mb-10 overflow-hidden z-[99999]`}>
-				<Countdown />
-			</header>
-
-			<main className={`${GeistSans.className} max-w-screen-base m-auto mt-16 pb-20 px-4`}>
+			<main className={`${GeistSans.className} max-w-screen-base m-auto mt-40 pb-20 px-4`}>
 				<div className='flex flex-col items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center md:flex-row'>
-					<a
-						className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
-						href='/'
-					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							width='24'
-							height='24'
-							viewBox='0 0 24 24'
-							strokeWidth='1.5'
-							stroke='currentColor'
-							fill='none'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						>
-							<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-							<path d='M9 21v-6a2 2 0 0 1 2 -2h2c.247 0 .484 .045 .702 .127'></path>
-							<path d='M19 12h2l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h5'></path>
-							<path d='M16 22l5 -5'></path>
-							<path d='M21 21.5v-4.5h-4.5'></path>
-						</svg>
-						Volver a la portada
-					</a>
 					<button
 						onClick={handleShare}
 						type='button'
@@ -254,7 +219,7 @@ Apunta la fecha: 12 de SEPTIEMBRE
 					</div>
 				</div>
 			</main>
-		</>
+		</Layout>
 	)
 }
 
