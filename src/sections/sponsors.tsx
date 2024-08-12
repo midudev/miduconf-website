@@ -65,6 +65,12 @@ export const premiums = [
 		slogan: 'Registro de dominios, hosting, correo y SSL'
 	},
 	{
+		name: 'LemonCode',
+		link: 'https://midu.link/lemoncode',
+		logo: <SponsorIcons.lemonCode className='w-auto h-12' />,
+		slogan: 'Formaciones con los mejores profesionales'
+	},
+	{
 		name: 'KeepCoding',
 		link: 'https://midu.link/keepcoding',
 		logo: <SponsorIcons.keepCoding className='w-52 ' />,
