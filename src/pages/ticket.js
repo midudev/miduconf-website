@@ -188,27 +188,27 @@ Apunta la fecha: 12 de SEPTIEMBRE
 								className='w-6 h-6'
 								xmlns='http://www.w3.org/2000/svg'
 							>
-								<g clip-path='url(#clip0_90_2554)'>
+								<g clipPath='url(#clip0_90_2554)'>
 									<path
 										d='M5 21.75V24.25C5 24.913 5.26339 25.5489 5.73223 26.0178C6.20107 26.4866 6.83696 26.75 7.5 26.75H22.5C23.163 26.75 23.7989 26.4866 24.2678 26.0178C24.7366 25.5489 25 24.913 25 24.25V21.75'
 										stroke='white'
-										stroke-width='1.5'
-										stroke-linecap='round'
-										stroke-linejoin='round'
+										strokeWidth='1.5'
+										strokeLinecap='round'
+										strokeLinejoin='round'
 									/>
 									<path
 										d='M8.75 14.25L15 20.5L21.25 14.25'
 										stroke='white'
-										stroke-width='1.5'
-										stroke-linecap='round'
-										stroke-linejoin='round'
+										strokeWidth='1.5'
+										strokeLinecap='round'
+										strokeLinejoin='round'
 									/>
 									<path
 										d='M15 5.5V20.5'
 										stroke='white'
-										stroke-width='1.5'
-										stroke-linecap='round'
-										stroke-linejoin='round'
+										strokeWidth='1.5'
+										strokeLinecap='round'
+										strokeLinejoin='round'
 									/>
 								</g>
 								<defs>
