@@ -52,12 +52,11 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	const handleShare = async () => {
 		const intent = 'https://twitter.com/intent/tweet'
 		const text = `¡No te pierdas la miduConf!
-Conferencia de Programación y Tecnología.
 
-👩‍💻 7 Speakers TOP
-💬 Charlas para todos los niveles
-🎁 +256 regalos y premios
-...¡y muchas sorpresas!
+👩‍💻 Conferencia de programación gratuita
+🔥 Speakers TOP internacionales
+🎁 +256 regalos para todos
+...¡y muchas sorpresas más!
 
 Apunta la fecha: 12 de SEPTIEMBRE
 
