@@ -47,6 +47,13 @@ const SPEAKERS = [
 		twitter: 'teffcode',
 		img: 'teffcode',
 		country: '🇨🇴'
+	},
+	{
+		name: 'S4vitar',
+		title: 'Hack4u CEO & Founder',
+		twitter: 's4vitar',
+		img: 's4vitar',
+		country: '🇪🇸'
 	}
 ]
 
