@@ -54,8 +54,8 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 					<Background />
 					<div className='max-w-5xl mx-auto'>
 						<h2 className='animate-fade-in-up text-6xl md:text-[80px] mx-auto text-center max-w-[20ch] text-white font-bold pt-40'>
-							Conoce el <span className='text-midu-primary'>futuro</span> del{' '}
-							<span className='text-midu-primary'>desarrollo</span> web
+							Conoce el <span className='text-midu-primary'>futuro</span> de la{' '}
+							<span className='text-midu-primary'>programación</span>
 						</h2>
 
 						<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
