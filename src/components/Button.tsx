@@ -6,12 +6,14 @@ type Props<C extends React.ElementType> = {
 	children: React.ReactNode
 	className?: string
 	variant?: 'primary' | 'secondary'
+	disabled?: boolean
 } & ComponentPropsWithoutRef<C>
 
 export const Button = <C extends React.ElementType = 'button'>({
 	as,
 	children,
 	variant = 'primary',
+	disabled,
 	...restOfProps
 }: Props<C>) => {
 	const As = as ?? 'button'
@@ -25,10 +27,12 @@ export const Button = <C extends React.ElementType = 'button'>({
 	return (
 		<As
 			{...restOfProps}
+			disabled={disabled}
 			className={cn(
-				'flex items-center gap-2 rounded-lg text-white px-3 py-[10px] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed',
+				'flex items-center cursor-pointer gap-2 rounded-lg text-white px-3 py-[10px] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed',
 				variantStyle[variant],
-				restOfProps.className
+				restOfProps.className,
+				disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
 			)}
 		>
 			{children}

@@ -1,7 +1,7 @@
 import { Layout } from '@/sections/layout'
 import { GeistSans } from 'geist/font/sans'
 import { toJpeg } from 'html-to-image'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
@@ -25,6 +25,11 @@ const MATERIALS_AVAILABLE = {
 export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascript' }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
 	const [selectedMaterial, setSelectedMaterial] = useState(MATERIALS_AVAILABLE.STANDARD)
+
+	const { generatedImage, handleSaveImage, saveButtonText } = useTicketSave({
+		buttonStatus: buttonText
+	})
+
 	const [flavorKey, setFlavorKey] = useState(() => {
 		// check selectedFlavor is valid
 		if (Object.keys(FLAVORS).includes(selectedFlavor)) {
@@ -80,6 +85,8 @@ Apunta la fecha: 12 de SEPTIEMBRE
 			quality: 0.8
 		})
 
+		handleSaveImage(dataURL)
+
 		const file = await dataUrlToFile(dataURL, 'ticket.jpg')
 		const filename = `ticket-${ticketNumber}.jpg`
 
@@ -124,7 +131,7 @@ Apunta la fecha: 12 de SEPTIEMBRE
 				</div>
 			</div>
 			<main
-				className={`${GeistSans.className} max-w-screen-xl m-auto mt-40 pb-20 gap-8 px-4 lg:grid grid-cols-[auto_1fr] items-center`}
+				className={`${GeistSans.className} max-w-screen-xl m-auto mt-40 pb-20 gap-8 px-4 flex flex-col lg:grid grid-cols-[auto_1fr] items-center`}
 			>
 				<div>
 					<div className='w-auto'>
@@ -144,15 +151,12 @@ Apunta la fecha: 12 de SEPTIEMBRE
 							)}
 						></div>
 					</div>
-					<div className='flex flex-col items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center lg:mb-0 lg:mt-4 md:flex-row'>
-						<button
+					<div className='flex flex-col items-center w-full px-8 mt-16 mb-16 gap-x-10 gap-y-4 lg:mb-0 lg:mt-4 md:flex-row'>
+						<Button
+							variant='secondary'
 							onClick={handleShare}
 							type='button'
-							className={`text-white cursor-pointer hover:bg- bg-[#14171A] hover:bg-[#14171A]/90 focus:ring-4 focus:outline-none focus:ring-[#14171A]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#14171A]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out border border-white/40 hover:scale-125 [text-wrap:balance] ${
-								buttonText !== STEPS_LOADING.ready
-									? 'pointer-events-none opacity-70 bg-slate-700'
-									: ''
-							}`}
+							disabled={buttonText !== STEPS_LOADING.ready}
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -168,10 +172,56 @@ Apunta la fecha: 12 de SEPTIEMBRE
 								/>
 							</svg>
 							{buttonText}
-						</button>
+						</Button>
+						<Button
+							as='a'
+							href={generatedImage}
+							download
+							variant='secondary'
+							disabled={buttonText !== STEPS_LOADING.ready}
+						>
+							<svg
+								width='30'
+								height='31'
+								viewBox='0 0 30 31'
+								fill='none'
+								className='w-6 h-6'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<g clip-path='url(#clip0_90_2554)'>
+									<path
+										d='M5 21.75V24.25C5 24.913 5.26339 25.5489 5.73223 26.0178C6.20107 26.4866 6.83696 26.75 7.5 26.75H22.5C23.163 26.75 23.7989 26.4866 24.2678 26.0178C24.7366 25.5489 25 24.913 25 24.25V21.75'
+										stroke='white'
+										stroke-width='1.5'
+										stroke-linecap='round'
+										stroke-linejoin='round'
+									/>
+									<path
+										d='M8.75 14.25L15 20.5L21.25 14.25'
+										stroke='white'
+										stroke-width='1.5'
+										stroke-linecap='round'
+										stroke-linejoin='round'
+									/>
+									<path
+										d='M15 5.5V20.5'
+										stroke='white'
+										stroke-width='1.5'
+										stroke-linecap='round'
+										stroke-linejoin='round'
+									/>
+								</g>
+								<defs>
+									<clipPath id='clip0_90_2554'>
+										<rect width='30' height='30' fill='white' transform='translate(0 0.5)' />
+									</clipPath>
+								</defs>
+							</svg>
+							{saveButtonText}
+						</Button>
 						<button
 							onClick={handleLogout}
-							className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
+							className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100 lg:ml-auto'
 							href='/'
 						>
 							<svg
@@ -194,7 +244,7 @@ Apunta la fecha: 12 de SEPTIEMBRE
 						</button>
 					</div>
 				</div>
-				<div>
+				<div className='w-full -order-1 md:order-none'>
 					<div>
 						<h2 className='text-2xl font-bold text-white lg:pl-8'>Material</h2>
 						<div className='flex flex-wrap items-center px-8 py-3 gap-x-6 gap-y-2'>
@@ -244,9 +294,9 @@ async function dataUrlToFile(dataUrl, fileName) {
 }
 
 const STEPS_LOADING = {
-	ready: 'Compartir ticket en X',
-	generate: 'Generando nuevo ticket...',
-	sharing: 'Compartiendo ticket...'
+	ready: 'Compartir',
+	generate: 'Generando...',
+	sharing: 'Compartiendo...'
 }
 
 const getInfoFromUser = ({ user }) => {
@@ -254,6 +304,27 @@ const getInfoFromUser = ({ user }) => {
 	const { avatar_url: avatar, full_name: fullname, preferred_username: username } = meta
 
 	return { avatar, fullname, username }
+}
+
+const useTicketSave = ({ buttonStatus }) => {
+	const [generatedImage, setGeneratedImage] = useState(null)
+
+	const saveButtonText = useMemo(() => {
+		if (buttonStatus === STEPS_LOADING.generate) return 'Creando...'
+		return 'Guardar'
+	}, [buttonStatus])
+
+	useEffect(() => {
+		toJpeg(document.getElementById('ticket'), {
+			quality: 0.8
+		}).then(handleSaveImage)
+	}, [])
+
+	const handleSaveImage = (dataURL) => {
+		setGeneratedImage(dataURL)
+	}
+
+	return { generatedImage, handleSaveImage, saveButtonText }
 }
 
 export const getServerSideProps = async (ctx) => {
