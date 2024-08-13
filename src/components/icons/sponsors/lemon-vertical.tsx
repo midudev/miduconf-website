@@ -1,4 +1,4 @@
-export function LemonCodeIcon({ className = '', ...props }) {
+export function LemonCodeVerticalIcon({ className = '', ...props }) {
 	return (
 		<svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 289.19 103.75'>
 			<g id='Capa_2' data-name='Capa 2'>

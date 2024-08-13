@@ -1,43 +1,35 @@
+import { Layout } from '@/sections/layout'
 import { GeistSans } from 'geist/font/sans'
 import { toJpeg } from 'html-to-image'
-import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 import { Background } from '@/components/Background'
+import { Button } from '@/components/Button'
 import { Container3D } from '@/components/Container3D'
-import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
+import { Stars } from '@/components/Stars'
 import TicketComponent from '@/components/Ticket'
 import { FLAVORS } from '@/flavors/data.tsx'
+import { cn } from '@/lib/utils'
 
-const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
-
-async function dataUrlToFile(dataUrl, fileName) {
-	const res = await fetch(dataUrl)
-	const blob = await res.blob()
-	return new File([blob], fileName, { type: 'image/jpg' })
-}
-
-const STEPS_LOADING = {
-	ready: '¡Comparte el ticket en Twitter!',
-	generate: 'Generando nuevo ticket...',
-	sharing: 'Compartiendo ticket...'
-}
-
-const getInfoFromUser = ({ user }) => {
-	const { user_metadata: meta } = user
-	const { avatar_url: avatar, full_name: fullname, preferred_username: username } = meta
-
-	return { avatar, fullname, username }
+const MATERIALS_AVAILABLE = {
+	STANDARD: 'standard',
+	GRANITE: 'granite',
+	PLATINUM: 'platinum'
 }
 
 export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascript' }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
-	const [number, setNumber] = useState(ticketNumber)
+	const [selectedMaterial, setSelectedMaterial] = useState(MATERIALS_AVAILABLE.STANDARD)
+
+	const { generatedImage, handleSaveImage, saveButtonText } = useTicketSave({
+		buttonStatus: buttonText
+	})
+
 	const [flavorKey, setFlavorKey] = useState(() => {
 		// check selectedFlavor is valid
 		if (Object.keys(FLAVORS).includes(selectedFlavor)) {
@@ -55,7 +47,7 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 		'¡No te pierdas la miduConf el 13 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!'
 	const hash = crypto.randomUUID().split('-')[0]
 	const url = `https://miduconf.com/ticket/${username}/${hash}`
-	const ogImage = `${PREFIX_CDN}/ticket-${number}.jpg?${hash}=_buster`
+	const ogImage = `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?${hash}=_buster`
 
 	const handleShare = async () => {
 		const intent = 'https://twitter.com/intent/tweet'
@@ -64,7 +56,7 @@ Conferencia de Programación y Tecnología.
 
 👩‍💻 7 Speakers TOP
 💬 Charlas para todos los niveles
-🎁 Muchos regalos y premios
+🎁 +256 regalos y premios
 ...¡y muchas sorpresas!
 
 Apunta la fecha: 12 de SEPTIEMBRE
@@ -93,8 +85,10 @@ Apunta la fecha: 12 de SEPTIEMBRE
 			quality: 0.8
 		})
 
+		handleSaveImage(dataURL)
+
 		const file = await dataUrlToFile(dataURL, 'ticket.jpg')
-		const filename = `ticket-${number}.jpg`
+		const filename = `ticket-${ticketNumber}.jpg`
 
 		const { data: dataStorage, error: errorStorage } = await supabase.storage
 			.from('tickets')
@@ -114,148 +108,223 @@ Apunta la fecha: 12 de SEPTIEMBRE
 		setButtonText(STEPS_LOADING.ready)
 	}
 
-	return (
-		<>
-			<Head>
-				<title>{title}</title>
-				<meta name='description' content={description} />
-				<meta property='og:image' content={ogImage} />
-				<meta property='twitter:image' content={ogImage} />
-				<meta property='og:title' content={title} />
-				<meta property='twitter:title' content={title} />
-				<meta property='og:description' content={description} />
-				<meta property='twitter:description' content={description} />
-				<meta property='og:url' content={url} />
-				<meta property='twitter:url' content={url} />
-				<meta property='og:type' content='website' />
-				<meta property='twitter:card' content='summary_large_image' />
-				<link rel='icon' href='/favicon.svg' />
-			</Head>
+	const metadata = {
+		title,
+		description,
+		ogImage,
+		url
+	}
 
+	return (
+		<Layout meta={metadata}>
+			<Stars />
 			<Meteors />
 			<Background />
-
-			<header className={`${GeistSans.className} relative w-full mb-10 overflow-hidden z-[99999]`}>
-				<Countdown />
-			</header>
-
-			<main className={`${GeistSans.className} max-w-screen-base m-auto mt-16 pb-20 px-4`}>
-				<div className='flex flex-col items-center justify-between w-full px-16 m-auto mt-16 mb-16 text-center md:flex-row'>
-					<a
-						className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
-						href='/'
-					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							width='24'
-							height='24'
-							viewBox='0 0 24 24'
-							strokeWidth='1.5'
-							stroke='currentColor'
-							fill='none'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						>
-							<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-							<path d='M9 21v-6a2 2 0 0 1 2 -2h2c.247 0 .484 .045 .702 .127'></path>
-							<path d='M19 12h2l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h5'></path>
-							<path d='M16 22l5 -5'></path>
-							<path d='M21 21.5v-4.5h-4.5'></path>
-						</svg>
-						Volver a la portada
-					</a>
-					<button
-						onClick={handleShare}
-						type='button'
-						className={`text-white cursor-pointer hover:bg- bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-125 [text-wrap:balance] ${
-							buttonText !== STEPS_LOADING.ready
-								? 'pointer-events-none opacity-70 bg-slate-700'
-								: ''
-						}`}
-					>
-						<svg
-							className='w-6 h-6 mr-2'
-							aria-hidden='true'
-							xmlns='http://www.w3.org/2000/svg'
-							fill='currentColor'
-							viewBox='0 0 20 17'
-						>
-							<path
-								fillRule='evenodd'
-								d='M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z'
-								clipRule='evenodd'
-							/>
-						</svg>
-						{buttonText}
-					</button>
-					<button
-						onClick={handleLogout}
-						className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100'
-						href='/'
-					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							width='24'
-							height='24'
-							viewBox='0 0 24 24'
-							strokeWidth='1.5'
-							stroke='currentColor'
-							fill='none'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						>
-							<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-							<path d='M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2'></path>
-							<path d='M9 12h12l-3 -3'></path>
-							<path d='M18 15l3 -3'></path>
-						</svg>
-						Cerrar sesión
-					</button>
+			<div aria-disabled className='w-[732px] -mb-[366px] relative -left-[200vw]'>
+				<div id='ticket' className='border-[16px] border-transparent'>
+					<TicketComponent
+						isSizeFixed
+						number={ticketNumber}
+						flavor={flavor}
+						user={{ username, avatar, name }}
+					/>
 				</div>
-
-				<div className='max-w-[700px] mx-auto'>
-					<Container3D>
-						<TicketComponent number={number} flavor={flavor} user={{ username, avatar, name }} />
-					</Container3D>
-				</div>
-				<div aria-disabled className='w-[732px] -mb-[366px] relative -left-[200vw]'>
-					<div id='ticket' className='border-[16px] border-transparent'>
-						<TicketComponent
-							isSizeFixed
-							number={number}
-							flavor={flavor}
-							user={{ username, avatar, name }}
-						/>
+			</div>
+			<main
+				className={`${GeistSans.className} max-w-screen-xl m-auto mt-40 pb-20 gap-8 px-4 flex flex-col lg:grid grid-cols-[auto_1fr] items-center`}
+			>
+				<div>
+					<div className='w-auto'>
+						<div className='max-w-[400px] md:max-w-[700px] mx-auto'>
+							<Container3D>
+								<TicketComponent
+									number={ticketNumber}
+									flavor={flavor}
+									user={{ username, avatar, name }}
+								/>
+							</Container3D>
+						</div>
+						<div
+							className={cn(
+								'w-2/3 mx-auto h-6 rounded-[50%] mt-6 transition-colors duration-300 blur-xl',
+								flavor.colorPalette?.bg
+							)}
+						></div>
+					</div>
+					<div className='flex flex-col items-center w-full px-8 mt-16 mb-16 gap-x-10 gap-y-4 lg:mb-0 lg:mt-4 md:flex-row'>
+						<Button
+							variant='secondary'
+							onClick={handleShare}
+							type='button'
+							disabled={buttonText !== STEPS_LOADING.ready}
+						>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='w-4 h-4 mr-2'
+								width='1200'
+								height='1227'
+								fill='none'
+								viewBox='0 0 1200 1227'
+							>
+								<path
+									fill='#fff'
+									d='M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z'
+								/>
+							</svg>
+							{buttonText}
+						</Button>
+						<Button
+							as='a'
+							href={generatedImage}
+							download
+							variant='secondary'
+							disabled={buttonText !== STEPS_LOADING.ready}
+						>
+							<svg
+								width='30'
+								height='31'
+								viewBox='0 0 30 31'
+								fill='none'
+								className='w-6 h-6'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<g clipPath='url(#clip0_90_2554)'>
+									<path
+										d='M5 21.75V24.25C5 24.913 5.26339 25.5489 5.73223 26.0178C6.20107 26.4866 6.83696 26.75 7.5 26.75H22.5C23.163 26.75 23.7989 26.4866 24.2678 26.0178C24.7366 25.5489 25 24.913 25 24.25V21.75'
+										stroke='white'
+										strokeWidth='1.5'
+										strokeLinecap='round'
+										strokeLinejoin='round'
+									/>
+									<path
+										d='M8.75 14.25L15 20.5L21.25 14.25'
+										stroke='white'
+										strokeWidth='1.5'
+										strokeLinecap='round'
+										strokeLinejoin='round'
+									/>
+									<path
+										d='M15 5.5V20.5'
+										stroke='white'
+										strokeWidth='1.5'
+										strokeLinecap='round'
+										strokeLinejoin='round'
+									/>
+								</g>
+								<defs>
+									<clipPath id='clip0_90_2554'>
+										<rect width='30' height='30' fill='white' transform='translate(0 0.5)' />
+									</clipPath>
+								</defs>
+							</svg>
+							{saveButtonText}
+						</Button>
+						<button
+							onClick={handleLogout}
+							className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100 lg:ml-auto'
+							href='/'
+						>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								width='24'
+								height='24'
+								viewBox='0 0 24 24'
+								strokeWidth='1.5'
+								stroke='currentColor'
+								fill='none'
+								strokeLinecap='round'
+								strokeLinejoin='round'
+							>
+								<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+								<path d='M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2'></path>
+								<path d='M9 12h12l-3 -3'></path>
+								<path d='M18 15l3 -3'></path>
+							</svg>
+							Cerrar sesión
+						</button>
 					</div>
 				</div>
-
-				<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
-					<h2 className='font-light text-center text-white uppercase opacity-70'>
-						Selecciona tu sabor:
-					</h2>
-					<div className='flex flex-row justify-center w-full p-8 overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12'>
-						{Object.entries(FLAVORS).map(([key, { icon: Icon }]) => {
-							return (
-								<button
-									key={key}
-									className={`relative flex w-16 h-16 transition cursor:pointer group ${
-										key === flavorKey
-											? 'scale-125 pointer-events-none contrast-125 before:absolute before:rounded-full before:w-2 before:h-2 before:left-0 before:right-0 before:-top-4 before:mx-auto before:bg-yellow-200'
-											: ''
-									}`}
-									onClick={changeFlavorKey(key)}
-								>
-									<div className='flex items-center justify-center w-16 h-16 transition group-hover:scale-110'>
-										<Icon className='h-auto' />
-									</div>
-								</button>
-							)
-						})}
+				<div className='w-full -order-1 md:order-none'>
+					<div>
+						<h2 className='text-2xl font-bold text-white lg:pl-8'>Material</h2>
+						<div className='flex flex-wrap items-center px-8 py-3 gap-x-6 gap-y-2'>
+							<Button className='py-1' variant='secondary'>
+								Estándar{' '}
+								<span className='px-2 py-1 text-xs rounded-full bg-white/10 text-white/60'>
+									Seleccionado
+								</span>
+							</Button>
+							<p className='text-sm text-white/60'>¡Próximamente nuevos materiales!</p>
+						</div>
+					</div>
+					<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
+						<h2 className='text-2xl font-bold text-white lg:pl-8'>Tecnología</h2>
+						<div className='flex flex-row w-full p-8 max-h-[30rem] overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12 lg:pb-20 hidden-scroll lg:flavors-gradient-list'>
+							{Object.entries(FLAVORS).map(([key, { icon: Icon }]) => {
+								return (
+									<button
+										key={key}
+										className={`relative flex w-12 h-12 transition cursor:pointer group ${
+											key === flavorKey
+												? 'scale-125 pointer-events-none contrast-125 before:absolute before:rounded-full before:w-2 before:h-2 before:left-0 before:right-0 before:-top-4 before:mx-auto before:bg-yellow-200'
+												: ''
+										}`}
+										onClick={changeFlavorKey(key)}
+									>
+										<div className='flex items-center justify-center w-12 h-12 transition group-hover:scale-110'>
+											<Icon className='h-auto' />
+										</div>
+									</button>
+								)
+							})}
+						</div>
 					</div>
 				</div>
 			</main>
-		</>
+		</Layout>
 	)
+}
+
+const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
+
+async function dataUrlToFile(dataUrl, fileName) {
+	const res = await fetch(dataUrl)
+	const blob = await res.blob()
+	return new File([blob], fileName, { type: 'image/jpg' })
+}
+
+const STEPS_LOADING = {
+	ready: 'Compartir',
+	generate: 'Generando...',
+	sharing: 'Compartiendo...'
+}
+
+const getInfoFromUser = ({ user }) => {
+	const { user_metadata: meta } = user
+	const { avatar_url: avatar, full_name: fullname, preferred_username: username } = meta
+
+	return { avatar, fullname, username }
+}
+
+const useTicketSave = ({ buttonStatus }) => {
+	const [generatedImage, setGeneratedImage] = useState(null)
+
+	const saveButtonText = useMemo(() => {
+		if (buttonStatus === STEPS_LOADING.generate) return 'Creando...'
+		return 'Guardar'
+	}, [buttonStatus])
+
+	useEffect(() => {
+		toJpeg(document.getElementById('ticket'), {
+			quality: 0.8
+		}).then(handleSaveImage)
+	}, [])
+
+	const handleSaveImage = (dataURL) => {
+		setGeneratedImage(dataURL)
+	}
+
+	return { generatedImage, handleSaveImage, saveButtonText }
 }
 
 export const getServerSideProps = async (ctx) => {
