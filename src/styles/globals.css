@@ -39,6 +39,27 @@ body {
 	}
 }
 
+@layer components {
+	.flavors-gradient-list {
+		mask: linear-gradient(to top, transparent, black 4rem);
+		-webkit-mask: linear-gradient(to top, transparent, black 4rem);
+	}
+}
+
+@layer utilities {
+	.hidden-scroll::-webkit-scrollbar {
+		width: 0;
+	}
+
+	::-webkit-scrollbar-track {
+		/* Customize the scrollbar track */
+	}
+
+	::-webkit-scrollbar-thumb {
+		/* Customize the scrollbar thumb */
+	}
+}
+
 @keyframes reduce-header {
 	to {
 		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, .1), 0 0 0 1px hsla(0, 0%, 100%, .10);
