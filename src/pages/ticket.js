@@ -547,7 +547,7 @@ function getTwitchAuthorizeUrl({ requiredTier = '1' }) {
 	authorizeTwitchUrl.searchParams.append('client_id', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
 	authorizeTwitchUrl.searchParams.append(
 		'redirect_uri',
-		`https://www.miduconf.com/api/special-ticket/twitch/?requiredTier=${requiredTier}`
+		`${redirectUrl}/api/special-ticket/twitch/?requiredTier=${requiredTier}`
 	)
 	authorizeTwitchUrl.searchParams.append('scope', 'user:read:subscriptions')
 	authorizeTwitchUrl.searchParams.append('response_type', 'code')
