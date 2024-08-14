@@ -58,6 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		return res.redirect(`/ticket?${queryParam}`)
 	} catch (err) {
+		console.log(err)
 		if (err instanceof Error) {
 			if (err.name === 'TwitchAuthorizationCodeError') {
 				return res.status(400).json({ message: err.message })
@@ -134,7 +135,7 @@ const getTwitchAccessToken: TwitchAccessTokenResponse = async (authorizationCode
 				client_secret: clientSecret,
 				code: authorizationCode,
 				grant_type: 'authorization_code',
-				redirect_uri: `${rediectUri}/api/special-ticket/twitch/`
+				redirect_uri: `https://miduconf.com/api/special-ticket/twitch/`
 			})
 		})
 
