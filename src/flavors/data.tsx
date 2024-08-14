@@ -309,6 +309,17 @@ export const FLAVORS = {
 			shadowColor: 'shadow-indigo-400/25'
 		}
 	},
+	laravel: {
+		icon: FLAVORS_ICONS.laravel,
+		colorPalette: {
+			bg: 'bg-[#FF2D20]/30',
+			borders: {
+				inside: 'border-red-300/20',
+				outside: 'border-red-400/10'
+			},
+			shadowColor: 'shadow-red-400/25'
+		}
+	},
 	mysql: {
 		icon: FLAVORS_ICONS.mysql,
 		colorPalette: {

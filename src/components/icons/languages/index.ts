@@ -14,6 +14,7 @@ import { HtmlIcon } from './html'
 import { IntellijIcon } from './intellij'
 import { JavaIcon } from './java'
 import { JavaScriptIcon } from './javascript'
+import { LaravelIcon } from './laravel'
 import { LinuxIcon } from './linux'
 import { Markdown } from './markdown'
 import { MySQLIcon } from './mysql'
@@ -68,6 +69,7 @@ export const FLAVORS_ICONS = {
 	nestjs: NestJSIcon,
 	golang: GolangIcon,
 	php: PhpIcon,
+	laravel: LaravelIcon,
 	mysql: MySQLIcon,
 	java: JavaIcon,
 	csharp: CSharpIcon,
