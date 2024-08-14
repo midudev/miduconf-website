@@ -5,7 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		const authorizationCode = getTwitchAuthorizationCode(req)
 		const requiredTier = req.query.requiredTier as '1' | '2' | '3'
-
+		console.log({ authorizationCode, requiredTier })
 		const { error: accessTokenErrorMessage, accessToken } = await getTwitchAccessToken(
 			authorizationCode
 		)
@@ -114,7 +114,7 @@ type TwitchAccessTokenResponse = (
 
 const getTwitchAccessToken: TwitchAccessTokenResponse = async (authorizationCode) => {
 	if (authorizationCode == null) throw new TwitchAuthorizationCodeError('No code provided')
-
+	console.log('getTwitchAccessToken')
 	const clientId = process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID
 	const clientSecret = process.env.PRIVATE_TWITCH_CLIENT_SECRET
 
@@ -135,7 +135,7 @@ const getTwitchAccessToken: TwitchAccessTokenResponse = async (authorizationCode
 				client_secret: clientSecret,
 				code: authorizationCode,
 				grant_type: 'authorization_code',
-				redirect_uri: `https://miduconf.com/api/special-ticket/twitch/`
+				redirect_uri: `${rediectUri}api/special-ticket/twitch/`
 			})
 		})
 
