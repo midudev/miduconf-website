@@ -134,7 +134,7 @@ const getTwitchAccessToken: TwitchAccessTokenResponse = async (authorizationCode
 				client_secret: clientSecret,
 				code: authorizationCode,
 				grant_type: 'authorization_code',
-				redirect_uri: `${rediectUri}api/special-ticket/twitch/`
+				redirect_uri: `https://miduconf.com/api/special-ticket/twitch/`
 			})
 		})
 
