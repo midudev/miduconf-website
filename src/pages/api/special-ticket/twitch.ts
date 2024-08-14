@@ -119,7 +119,7 @@ const getTwitchAccessToken: TwitchAccessTokenResponse = async (authorizationCode
 	const clientSecret = process.env.PRIVATE_TWITCH_CLIENT_SECRET
 
 	const rediectUri =
-		process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/' : 'https://miduconf.com/'
+		process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/' : 'https://www.miduconf.com/'
 
 	if (clientId == null) throw new TwitchClientIdError('No Twitch Client ID provided')
 	if (clientSecret == null) throw new TwitchClientSecretError('No Twitch Client Secret provided')
