@@ -1,10 +1,10 @@
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse } from 'next/server'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
 		const authorizationCode = getTwitchAuthorizationCode(req)
+		const requiredTier = req.query.requiredTier as '1' | '2' | '3'
 
 		const { error: accessTokenErrorMessage, accessToken } = await getTwitchAccessToken(
 			authorizationCode
@@ -22,14 +22,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			userId
 		})
 
+		const invalidTierRequiredMessage =
+			tier != null && Number(tier) > Number(requiredTier) ? 'false' : 'true'
+
 		const queryParam = new URLSearchParams({
 			tier,
+			notAccessTier: invalidTierRequiredMessage,
 			error: tierErrorMessage
 		})
 
-		return res.redirect(`/ticket?${queryParam}`)
-
-		if (tierErrorMessage != null) return res.status(400).json({ message: tierErrorMessage })
+		if (tierErrorMessage != null) return res.redirect(`/ticket?${queryParam}`)
 
 		/* get userSession by supabase */
 		const supabase = createPagesServerClient({
@@ -42,19 +44,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			data: { session }
 		} = await supabase.auth.getSession()
 
-		console.log({
-			errorSession,
-			session
-		})
-
 		const {
 			user: { id: userSessionId }
 		} = session
 
-		/* get user by supabase */
-		const { data } = await supabase.from('ticket').select('*').eq('id', userSessionId)
-		console.log({ data })
-		return res.status(200).json({ tier })
+		/* update tier in supabase */
+		await supabase
+			.from('ticket')
+			.update({
+				twitch_tier: tier
+			})
+			.eq('user_id', userSessionId)
+
+		return res.redirect(`/ticket?${queryParam}`)
 	} catch (err) {
 		if (err instanceof Error) {
 			if (err.name === 'TwitchAuthorizationCodeError') {

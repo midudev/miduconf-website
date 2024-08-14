@@ -10,26 +10,38 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { Background } from '@/components/Background'
 import { Button } from '@/components/Button'
 import { Container3D } from '@/components/Container3D'
+import { TwitchIcon } from '@/components/icons'
 import { Meteors } from '@/components/MeteorLanguages'
+import { Modal } from '@/components/Modal'
 import { Stars } from '@/components/Stars'
 import TicketComponent from '@/components/Ticket'
+import TicketGradient from '@/components/TicketGradient'
+import TicketPlatinum from '@/components/TicketPlatinum'
+import { Tooltip } from '@/components/Tooltip'
 import { FLAVORS } from '@/flavors/data.tsx'
 import { cn } from '@/lib/utils'
 
 const MATERIALS_AVAILABLE = {
 	STANDARD: 'standard',
-	GRANITE: 'granite',
-	PLATINUM: 'platinum'
+	SPECIAL: 'special',
+	PREMIUM: 'premium'
 }
 
-export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascript' }) {
+export default function Ticket({
+	user,
+	ticketNumber,
+	selectedFlavor = 'javascript',
+	twitchTier,
+	material: defaultMaterial,
+	tierQueryData,
+	notAccessTier
+}) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
-	const [selectedMaterial, setSelectedMaterial] = useState(MATERIALS_AVAILABLE.STANDARD)
 
-	const { generatedImage, handleSaveImage, saveButtonText } = useTicketSave({
-		buttonStatus: buttonText
+	const [isModalOpen, setIsModalOpen] = useState(() => {
+		return tierQueryData == null ? false : true
 	})
-
+	const [selectedMaterial, setSelectedMaterial] = useState(defaultMaterial)
 	const [flavorKey, setFlavorKey] = useState(() => {
 		// check selectedFlavor is valid
 		if (Object.keys(FLAVORS).includes(selectedFlavor)) {
@@ -38,7 +50,36 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 		// by default we select javascript
 		return 'javascript'
 	})
+
+	const handleChangeMaterial = async (material) => {
+		setButtonText(STEPS_LOADING.generate)
+		setSelectedMaterial(material)
+
+		const { dataURL } = await handleCreateTicketImage({
+			supabase,
+			selectedFlavorKey: flavorKey,
+			userId: user.id,
+			username,
+			ticketNumber,
+			material
+		})
+
+		handleSaveImage(dataURL)
+		setButtonText(STEPS_LOADING.ready)
+	}
+
+	const handleCloseModal = () => {
+		setIsModalOpen(false)
+		/* remove queryparams in url */
+		window.history.replaceState({}, document.title, window.location.pathname)
+	}
+
 	const supabase = useSupabaseClient()
+	const { generatedImage, handleSaveImage, saveButtonText } = useTicketSave({
+		buttonStatus: buttonText,
+		isMaterialChange: selectedMaterial
+	})
+
 	const flavor = FLAVORS[flavorKey]
 	const { username, avatar, name } = user
 
@@ -46,24 +87,9 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 	const description =
 		'¡No te pierdas la miduConf el 13 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!'
 	const hash = crypto.randomUUID().split('-')[0]
+
 	const url = `https://miduconf.com/ticket/${username}/${hash}`
 	const ogImage = `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?${hash}=_buster`
-
-	const handleShare = async () => {
-		const intent = 'https://twitter.com/intent/tweet'
-		const text = `¡No te pierdas la miduConf!
-
-👩‍💻 Conferencia de programación gratuita
-🔥 Speakers TOP internacionales
-🎁 +256 regalos para todos
-...¡y muchas sorpresas más!
-
-Apunta la fecha: 12 de SEPTIEMBRE
-
-→ miduconf.com/ticket/${username}/${hash}`
-
-		window.open(`${intent}?text=${encodeURIComponent(text)}`)
-	}
 
 	const handleLogout = async () => {
 		await supabase.auth.signOut()
@@ -74,36 +100,17 @@ Apunta la fecha: 12 de SEPTIEMBRE
 	const changeFlavorKey = (selectedFlavorKey) => async () => {
 		setButtonText(STEPS_LOADING.generate)
 		setFlavorKey(selectedFlavorKey)
-		// update ticket in supabase
-		const { error } = await supabase
-			.from('ticket')
-			.update({ flavour: selectedFlavorKey, user_id: user.id })
-			.eq('user_name', username)
 
-		const dataURL = await toJpeg(document.getElementById('ticket'), {
-			quality: 0.8
+		const { dataURL } = await handleCreateTicketImage({
+			supabase,
+			selectedFlavorKey,
+			userId: user.id,
+			username,
+			ticketNumber,
+			material: selectedMaterial
 		})
 
 		handleSaveImage(dataURL)
-
-		const file = await dataUrlToFile(dataURL, 'ticket.jpg')
-		const filename = `ticket-${ticketNumber}.jpg`
-
-		const { data: dataStorage, error: errorStorage } = await supabase.storage
-			.from('tickets')
-			.upload(filename, file, {
-				cacheControl: '3600',
-				upsert: true
-			})
-
-		if (errorStorage) {
-			console.error(errorStorage)
-		}
-
-		if (error) {
-			console.error(error)
-		}
-
 		setButtonText(STEPS_LOADING.ready)
 	}
 
@@ -114,22 +121,6 @@ Apunta la fecha: 12 de SEPTIEMBRE
 		url
 	}
 
-	function getTwitchAuthorizeUrl() {
-		const redirectUrl =
-			process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://www.miduconf.com'
-
-		const authorizeTwitchUrl = new URL('https://id.twitch.tv/oauth2/authorize')
-		authorizeTwitchUrl.searchParams.append('client_id', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
-		authorizeTwitchUrl.searchParams.append(
-			'redirect_uri',
-			`${redirectUrl}/api/special-ticket/twitch/`
-		)
-		authorizeTwitchUrl.searchParams.append('scope', 'user:read:subscriptions')
-		authorizeTwitchUrl.searchParams.append('response_type', 'code')
-
-		return authorizeTwitchUrl.href
-	}
-
 	return (
 		<Layout meta={metadata}>
 			<Stars />
@@ -137,12 +128,30 @@ Apunta la fecha: 12 de SEPTIEMBRE
 			<Background />
 			<div aria-disabled className='w-[732px] -mb-[366px] relative -left-[200vw]'>
 				<div id='ticket' className='border-[16px] border-transparent'>
-					<TicketComponent
-						isSizeFixed
-						number={ticketNumber}
-						flavor={flavor}
-						user={{ username, avatar, name }}
-					/>
+					{selectedMaterial === MATERIALS_AVAILABLE.STANDARD && (
+						<TicketComponent
+							isSizeFixed
+							number={ticketNumber}
+							flavor={flavor}
+							user={{ username, avatar, name }}
+						/>
+					)}
+					{selectedMaterial === MATERIALS_AVAILABLE.SPECIAL && (
+						<TicketGradient
+							isSizeFixed
+							number={ticketNumber}
+							flavor={flavor}
+							user={{ username, avatar, name }}
+						/>
+					)}
+					{selectedMaterial === MATERIALS_AVAILABLE.PREMIUM && (
+						<TicketPlatinum
+							isSizeFixed
+							number={ticketNumber}
+							flavor={flavor}
+							user={{ username, avatar, name }}
+						/>
+					)}
 				</div>
 			</div>
 			<main
@@ -152,24 +161,47 @@ Apunta la fecha: 12 de SEPTIEMBRE
 					<div className='w-auto'>
 						<div className='max-w-[400px] md:max-w-[700px] mx-auto'>
 							<Container3D>
-								<TicketComponent
-									number={ticketNumber}
-									flavor={flavor}
-									user={{ username, avatar, name }}
-								/>
+								{selectedMaterial === MATERIALS_AVAILABLE.STANDARD && (
+									<TicketComponent
+										number={ticketNumber}
+										flavor={flavor}
+										user={{ username, avatar, name }}
+									/>
+								)}
+								{selectedMaterial === MATERIALS_AVAILABLE.SPECIAL && (
+									<TicketGradient
+										number={ticketNumber}
+										flavor={flavor}
+										user={{ username, avatar, name }}
+									/>
+								)}
+								{selectedMaterial === MATERIALS_AVAILABLE.PREMIUM && (
+									<TicketPlatinum
+										number={ticketNumber}
+										flavor={flavor}
+										user={{ username, avatar, name }}
+									/>
+								)}
 							</Container3D>
 						</div>
 						<div
 							className={cn(
 								'w-2/3 mx-auto h-6 rounded-[50%] mt-6 transition-colors duration-300 blur-xl',
-								flavor.colorPalette?.bg
+								flavor.colorPalette?.bg,
+								selectedMaterial === MATERIALS_AVAILABLE.SPECIAL && 'bg-[#9354E9]',
+								selectedMaterial === MATERIALS_AVAILABLE.PREMIUM && 'bg-[#1B1D51]'
 							)}
 						></div>
 					</div>
 					<div className='flex flex-col items-center w-full px-8 mt-16 mb-16 gap-x-10 gap-y-4 lg:mb-0 lg:mt-4 md:flex-row'>
 						<Button
 							variant='secondary'
-							onClick={handleShare}
+							onClick={() =>
+								handleShare({
+									hash,
+									username
+								})
+							}
 							type='button'
 							disabled={buttonText !== STEPS_LOADING.ready}
 						>
@@ -234,9 +266,11 @@ Apunta la fecha: 12 de SEPTIEMBRE
 							</svg>
 							{saveButtonText}
 						</Button>
-						<button
+						<Button
+							variant='secondary'
+							as='a'
+							className='ml-0 lg:ml-auto'
 							onClick={handleLogout}
-							className='flex-row justify-center  text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-110 scale-90 gap-x-2 opacity-70 hover:opacity-100 lg:ml-auto'
 							href='/'
 						>
 							<svg
@@ -256,20 +290,92 @@ Apunta la fecha: 12 de SEPTIEMBRE
 								<path d='M18 15l3 -3'></path>
 							</svg>
 							Cerrar sesión
-						</button>
+						</Button>
 					</div>
 				</div>
 				<div className='w-full -order-1 md:order-none'>
 					<div>
 						<h2 className='text-2xl font-bold text-white lg:pl-8'>Material</h2>
-						<div className='flex flex-wrap items-center px-8 py-3 gap-x-6 gap-y-2'>
-							<Button className='py-1' variant='secondary'>
-								Estándar{' '}
-								<span className='px-2 py-1 text-xs rounded-full bg-white/10 text-white/60'>
-									Seleccionado
-								</span>
+						<div className='flex flex-wrap items-center px-8 py-3 gap-x-2 gap-y-2'>
+							<Button
+								onClick={async () => await handleChangeMaterial(MATERIALS_AVAILABLE.STANDARD)}
+								className={cn(
+									'py-1 transition-all',
+									MATERIALS_AVAILABLE.STANDARD !== selectedMaterial &&
+										'bg-transparent border-transparent'
+								)}
+								variant='secondary'
+							>
+								Estándar
 							</Button>
-							<p className='text-sm text-white/60'>¡Próximamente nuevos materiales!</p>
+							{twitchTier == null ? (
+								<Tooltip
+									tooltipPosition='top'
+									text='Desbloquear con suscripción de Nivel 1 y 2 en Twitch'
+								>
+									<Button
+										as='a'
+										href={getTwitchAuthorizeUrl({ requiredTier: '1' })}
+										className='py-1 bg-transparent border-transparent text-white/40'
+										variant='secondary'
+									>
+										<TwitchIcon className='w-4 h-4' />
+										Special
+									</Button>
+								</Tooltip>
+							) : (
+								<Tooltip
+									tooltipPosition='top'
+									text='Desbloquado con suscripción de Nivel 1 y 2 en Twitch'
+								>
+									<Button
+										onClick={async () => await handleChangeMaterial(MATERIALS_AVAILABLE.SPECIAL)}
+										className={cn(
+											'py-1 transition-all',
+											MATERIALS_AVAILABLE.SPECIAL !== selectedMaterial &&
+												'bg-transparent border-transparent'
+										)}
+										variant='secondary'
+									>
+										<TwitchIcon className='w-4 h-4' />
+										Special
+									</Button>
+								</Tooltip>
+							)}
+							{twitchTier == null || Number(twitchTier) < 3 ? (
+								<Tooltip
+									tooltipPosition='top'
+									text='Desbloquear con suscripción de Nivel 3 en Twitch'
+								>
+									<Button
+										as='a'
+										href={getTwitchAuthorizeUrl({ requiredTier: '3' })}
+										className='py-1 bg-transparent border-transparent text-white/40'
+										variant='secondary'
+									>
+										<TwitchIcon className='w-4 h-4' />
+										Premium
+									</Button>
+								</Tooltip>
+							) : (
+								<Tooltip
+									tooltipPosition='top'
+									text='Desbloquado con suscripción de Nivel 3 en Twitch'
+								>
+									<Button
+										onClick={async () => await handleChangeMaterial(MATERIALS_AVAILABLE.PREMIUM)}
+										className={cn(
+											'py-1 transition-all',
+											MATERIALS_AVAILABLE.PREMIUM !== selectedMaterial &&
+												'bg-transparent border-transparent'
+										)}
+										variant='secondary'
+									>
+										<TwitchIcon className='w-4 h-4' />
+										Premium
+									</Button>
+								</Tooltip>
+							)}
 						</div>
 					</div>
 					<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
@@ -277,30 +383,121 @@ Apunta la fecha: 12 de SEPTIEMBRE
 						<div className='flex flex-row w-full p-8 max-h-[30rem] overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12 lg:pb-20 hidden-scroll lg:flavors-gradient-list'>
 							{Object.entries(FLAVORS).map(([key, { icon: Icon }]) => {
 								return (
-									<button
-										key={key}
-										className={`relative flex w-12 h-12 transition cursor:pointer group ${
-											key === flavorKey
-												? 'scale-125 pointer-events-none contrast-125 before:absolute before:rounded-full before:w-2 before:h-2 before:left-0 before:right-0 before:-top-4 before:mx-auto before:bg-yellow-200'
-												: ''
-										}`}
-										onClick={changeFlavorKey(key)}
-									>
-										<div className='flex items-center justify-center w-12 h-12 transition group-hover:scale-110'>
-											<Icon className='h-auto' />
-										</div>
-									</button>
+									<Tooltip key={key} text={key} offsetNumber={16}>
+										<button
+											className={`relative flex w-12 h-12 transition cursor:pointer group ${
+												key === flavorKey
+													? 'scale-125 pointer-events-none contrast-125 before:absolute before:rounded-full before:w-2 before:h-2 before:left-0 before:right-0 before:-top-4 before:mx-auto before:bg-yellow-200'
+													: ''
+											}`}
+											onClick={changeFlavorKey(key)}
+										>
+											<div className='flex items-center justify-center w-12 h-12 transition group-hover:scale-110'>
+												<Icon className='h-auto' />
+											</div>
+										</button>
+									</Tooltip>
 								)
 							})}
 						</div>
 					</div>
 				</div>
 			</main>
+			<Modal onClose={handleCloseModal} isOpen={isModalOpen}>
+				{tierQueryData?.tier === 'null' && (
+					<div className='flex flex-col gap-2 py-8'>
+						<TwitchIcon className='w-16 h-16 mx-auto mb-6 text-white' />
+						<p className='text-lg font-semibold text-center text-white'>
+							No has podido desbloquear el contenido especial
+						</p>
+						<p className='text-center text-white/80'>
+							Solo los usuarios suscritos en Twitch con{' '}
+							<a
+								className='underline text-midu-primary'
+								target='_blank'
+								href='https://twitch.tv/midudev'
+							>
+								midudev
+							</a>{' '}
+							tiene acceso a este ticket
+						</p>
+					</div>
+				)}
+				{['1', '2', '3'].includes(tierQueryData?.tier) && (
+					<div className='flex flex-col gap-2 py-8'>
+						<TwitchIcon className='w-16 h-16 mx-auto mb-6 text-white' />
+						<p className='text-lg font-semibold text-center text-white'>¡Felicidades! 🚀</p>
+						<p className='text-center text-white/80'>
+							Has desbloqueado el contenido especial de nivel {tierQueryData?.tier} ⭐️
+						</p>
+						<p className='text-center text-white/80'>¡Ahora puedes personalizar más tu ticket!</p>
+					</div>
+				)}
+			</Modal>
 		</Layout>
 	)
 }
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
+
+const handleCreateTicketImage = async ({
+	supabase,
+	selectedFlavorKey,
+	userId,
+	username,
+	ticketNumber,
+	material
+}) => {
+	// update ticket in supabase
+	const { error } = await supabase
+		.from('ticket')
+		.update({ flavour: selectedFlavorKey, user_id: userId, material })
+		.eq('user_name', username)
+
+	const dataURL = await toJpeg(document.getElementById('ticket'), {
+		quality: 0.8
+	})
+
+	const file = await dataUrlToFile(dataURL, 'ticket.jpg')
+	const filename = `ticket-${ticketNumber}.jpg`
+
+	const { data: dataStorage, error: errorStorage } = await supabase.storage
+		.from('tickets')
+		.upload(filename, file, {
+			cacheControl: '3600',
+			upsert: true
+		})
+
+	if (errorStorage) {
+		console.error(errorStorage)
+	}
+
+	if (error) {
+		console.error(error)
+	}
+
+	return {
+		dataURL,
+		file,
+		filename
+	}
+}
+
+const handleShare = async ({ username, hash }) => {
+	const intent = 'https://twitter.com/intent/tweet'
+	const text = `¡No te pierdas la miduConf!
+
+👩‍💻 Conferencia de programación gratuita
+🔥 Speakers TOP internacionales
+🎁 +256 regalos para todos
+...¡y muchas sorpresas más!
+
+Apunta la fecha: 12 de SEPTIEMBRE
+
+→ miduconf.com/ticket/${username}/${hash}`
+
+	window.open(`${intent}?text=${encodeURIComponent(text)}`)
+}
 
 async function dataUrlToFile(dataUrl, fileName) {
 	const res = await fetch(dataUrl)
@@ -321,7 +518,7 @@ const getInfoFromUser = ({ user }) => {
 	return { avatar, fullname, username }
 }
 
-const useTicketSave = ({ buttonStatus }) => {
+const useTicketSave = ({ buttonStatus, isMaterialChange }) => {
 	const [generatedImage, setGeneratedImage] = useState(null)
 
 	const saveButtonText = useMemo(() => {
@@ -333,7 +530,7 @@ const useTicketSave = ({ buttonStatus }) => {
 		toJpeg(document.getElementById('ticket'), {
 			quality: 0.8
 		}).then(handleSaveImage)
-	}, [])
+	}, [isMaterialChange])
 
 	const handleSaveImage = (dataURL) => {
 		setGeneratedImage(dataURL)
@@ -342,9 +539,37 @@ const useTicketSave = ({ buttonStatus }) => {
 	return { generatedImage, handleSaveImage, saveButtonText }
 }
 
+function getTwitchAuthorizeUrl({ requiredTier = '1' }) {
+	const redirectUrl =
+		process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://www.miduconf.com'
+
+	const authorizeTwitchUrl = new URL('https://id.twitch.tv/oauth2/authorize')
+	authorizeTwitchUrl.searchParams.append('client_id', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
+	authorizeTwitchUrl.searchParams.append(
+		'redirect_uri',
+		`${redirectUrl}/api/special-ticket/twitch/?requiredTier=${requiredTier}`
+	)
+	authorizeTwitchUrl.searchParams.append('scope', 'user:read:subscriptions')
+	authorizeTwitchUrl.searchParams.append('response_type', 'code')
+
+	return authorizeTwitchUrl.href
+}
+
 export const getServerSideProps = async (ctx) => {
 	// Create authenticated Supabase Client
 	const supabase = createPagesServerClient(ctx)
+
+	const tierLevelFromQueryParam = ctx.query?.tier
+	const tierErrorFromQueryParam = ctx.query?.error
+	const notAccessTier = ctx.query?.notAccessTier ?? null
+
+	const tierQueryData =
+		tierLevelFromQueryParam == null && tierErrorFromQueryParam == null
+			? null
+			: {
+					tier: tierLevelFromQueryParam,
+					error: tierErrorFromQueryParam
+			  }
 
 	let selectedFlavor = 'javascript'
 	let ticketNumber = 0
@@ -408,7 +633,11 @@ export const getServerSideProps = async (ctx) => {
 			selectedFlavor,
 			ticketNumber,
 			initialSession: session,
-			user: getInfoFromUser({ user: session?.user })
+			user: getInfoFromUser({ user: session?.user }),
+			twitchTier: data[0].twitch_tier,
+			material: data[0].material,
+			notAccessTier: notAccessTier,
+			tierQueryData
 		}
 	}
 }
