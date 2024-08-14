@@ -46,6 +46,162 @@ body {
 	}
 }
 
+@layer components {
+	.ticket-gradient-bg {
+		background: radial-gradient(120% 100% at 90% 10%,
+				#A3D8FF 0%,
+				#3640e2 23%,
+				#6639d9 50%,
+				#657fd8 74%,
+				#95bdf4 100%),
+			radial-gradient(120% 100% at 10% 90%,
+				#a3d9ff50 0%,
+				#3640e250 23%,
+				#6639d950 50%,
+				#657fd850 74%,
+				#95bdf450 100%);
+		background-size: 200% 200%;
+		background-blend-mode: multiply;
+		animation: animateGradient 10s infinite alternate linear;
+		z-index: 1;
+	}
+
+	.ticket-gradient-bg::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		background: linear-gradient(-72deg,
+				#ffffff 0%,
+				rgb(0, 0, 0, .0) 16%,
+				#ffffff 24%,
+				rgb(0, 0, 0, .0) 33%,
+				rgb(0, 0, 0, .0) 40%,
+				#fff8f8 50%,
+				rgb(0, 0, 0, .0) 61%,
+				rgb(0, 0, 0, .0) 74%,
+				#ffffff 83%,
+				rgb(0, 0, 0, .0) 92%,
+				#ffffff 100%);
+		background-size: 200% 100%;
+		opacity: .4;
+		animation: animateLightGradient 120s infinite alternate linear;
+	}
+
+	.ticket-gradient-bg::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		background-image: url(/img/tickets-effect/gradient.png);
+		background-size: 50px 50px;
+		opacity: 0.7;
+	}
+
+	@keyframes animateGradient {
+		0% {
+			background-position: 0% 0%;
+		}
+
+		25% {
+			background-position: 50% 50%;
+		}
+
+		50% {
+			background-position: 100% 100%;
+		}
+
+		75% {
+			background-position: 50% 50%;
+		}
+
+		100% {
+			background-position: 0% 0%;
+		}
+	}
+
+	@keyframes animateLightGradient {
+		0% {
+			background-position: 0% 0%;
+		}
+
+		25% {
+			background-position: 50% 0%;
+		}
+
+		50% {
+			background-position: 100% 0%;
+		}
+
+		75% {
+			background-position: 50% 0%;
+		}
+
+		100% {
+			background-position: 0% 0%;
+		}
+	}
+}
+
+@layer components {
+	.ticket-premium-bg {
+		position: relative;
+		background-image: url(/img/tickets-effect/bg.png);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 1;
+		overflow: hidden;
+	}
+
+	.ticket-premium-bg::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		inset: 0;
+		background: linear-gradient(to left bottom, #a172f750 0%, #a172f700 100%),
+			linear-gradient(to right top, #5bc4f450 0%, #a172f700 0%);
+		opacity: 0.5;
+		animation: animateGradientPremium 10s infinite alternate linear;
+	}
+
+	.ticket-premium-bg::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		inset: 0;
+		background: url(/img/tickets-effect/noise.png);
+		background-size: 50px 50px;
+		opacity: 0.4;
+	}
+
+	@keyframes animateGradientPremium {
+		0% {
+			opacity: 0.5;
+		}
+
+		25% {
+			opacity: 0.7;
+		}
+
+		50% {
+			opacity: 0.9;
+		}
+
+		75% {
+			opacity: 0.7;
+		}
+
+		100% {
+			opacity: 0.5;
+		}
+	}
+}
+
 @layer utilities {
 	.hidden-scroll::-webkit-scrollbar {
 		width: 0;

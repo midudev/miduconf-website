@@ -11,7 +11,6 @@ import { TwitchIcon } from './icons'
 interface Props {
 	transition?: boolean
 	number: number
-	className?: string
 	flavor: {
 		icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
 		colorPalette: {
@@ -23,6 +22,7 @@ interface Props {
 			shadowColor: string
 		}
 	}
+	className?: string
 	user: {
 		username: string
 		avatar: string
@@ -31,7 +31,7 @@ interface Props {
 	id?: string
 }
 
-export default function Ticket({
+export default function TicketGradient({
 	transition = true,
 	number,
 	flavor: { icon: Icon, colorPalette },
@@ -44,33 +44,23 @@ export default function Ticket({
 	const { username, avatar } = user ?? {}
 	const ticketNumber = `#${number != null ? number.toString().padStart(5, '0') : ''}`
 
-	const currentTicketStyles = {
-		background: colorPalette?.bg ?? 'bg-[#101E5B]/65',
-		borders: {
-			outside: colorPalette?.borders.outside ?? 'border-midu-primary/10',
-			inside: colorPalette?.borders.inside ?? 'border-midu-primary/20'
-		},
-		shadowColor: colorPalette?.shadowColor ?? 'shadow-midu-primary/25'
-	}
-
 	return (
 		<div
 			id={id}
 			className={cn(
-				'block h-full overflow-hidden opacity-100 rounded-[60px] shadow-[inset_0_4px_30px] bg-transparent border p-5',
+				'block h-full overflow-hidden rounded-[60px] border p-5',
 				isSizeFixed ? 'aspect-[2/1] w-full' : 'aspect-none w-full md:aspect-[2/1]',
-				currentTicketStyles.borders.outside,
-				currentTicketStyles.shadowColor,
+				'border-white/30',
+				'bg-white/10',
 				transition ? 'transition duration-500 ease-in-out' : '',
 				className
 			)}
 		>
 			<div
 				className={cn(
-					'relative h-full overflow-hidden border rounded-[40px]',
+					'relative h-full overflow-hidden border rounded-[40px] ticket-gradient-bg',
 					isSizeFixed ? 'flex' : 'grid md:flex',
-					currentTicketStyles.background,
-					currentTicketStyles.borders.inside,
+					'border-white/80',
 					transition ? 'transition duration-500 ease-in-out' : ''
 				)}
 			>
@@ -95,7 +85,7 @@ export default function Ticket({
 								: 'md:w-auto row-[2/3] mb-8 md:mb-0 left-0 mx-auto md:mx-0 h-32 md:h-[40%] relative flex justify-center w-full md:block bottom-0 md:left-[25%] md:bottom-[20%]  md:absolute'
 						)}
 					>
-						<Icon className='absolute w-auto h-full' />
+						<Icon className='absolute z-40 w-auto h-full' />
 						<Icon
 							className='absolute w-auto h-full scale-105 blur-xl -z-10 opacity-40'
 							key={`${username}-shadow`}
@@ -134,8 +124,8 @@ export default function Ticket({
 									/>
 									<div>
 										<p className='text-xl font-bold'>{username}</p>
-										<span className='block px-2 py-1 mt-1 text-xs font-medium rounded w-max text-white/80 bg-white/10'>
-											Normal Ticket
+										<span className='block px-3 py-1 mt-1 text-xs font-medium rounded-full w-max text-white/80 bg-black/10'>
+											Special Ticket <span className='inline-block'>⭐️</span>
 										</span>
 									</div>
 								</div>
@@ -186,7 +176,7 @@ export default function Ticket({
 							<span className='pb-1 pl-2 text-sm text-white/80'>Gracias a:</span>
 							<div
 								className={cn(
-									'flex items-center justify-start grid-cols-3 gap-4 px-4 py-2 bg-white/10 w-auto',
+									'flex items-center justify-start grid-cols-3 gap-4 px-4 py-2 bg-black/10 w-auto',
 									isSizeFixed ? 'rounded-full' : 'rounded md:rounded-full '
 								)}
 							>
@@ -201,7 +191,7 @@ export default function Ticket({
 							target='_blank'
 							rel='nofollow'
 							className={cn(
-								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-[#b9a3e3] transition-colors',
+								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-black transition-colors',
 								isSizeFixed
 									? 'text-base mx-0 pt-5'
 									: 'pt-0 text-md md:text-base mx-auto md:mx-0 md:pt-5'

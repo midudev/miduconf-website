@@ -1,6 +1,8 @@
 # build output
 dist/
 .output/
+.env
+.env.local
 
 # dependencies
 node_modules/
