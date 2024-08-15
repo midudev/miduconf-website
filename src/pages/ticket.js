@@ -44,7 +44,7 @@ export default function Ticket({ user, ticketNumber, selectedFlavor = 'javascrip
 
 	const title = 'miduConf - Conferencia de Programación y Tecnología'
 	const description =
-		'¡No te pierdas la miduConf el 13 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!'
+		'¡No te pierdas la miduConf el 12 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!'
 	const hash = crypto.randomUUID().split('-')[0]
 	const url = `https://miduconf.com/ticket/${username}/${hash}`
 	const ogImage = `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?${hash}=_buster`
