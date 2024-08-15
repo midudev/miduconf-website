@@ -21,5 +21,3 @@ Para probar el proyecto, sigue estos pasos:
 
 1. Ejecuta `npm run test` para ejecutar las pruebas unitarias (si las hay).
 2. Abre el navegador y navega a `http://localhost:3000`.
-
-remove this line
