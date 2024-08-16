@@ -34,7 +34,8 @@ export default function Ticket({
 	twitchTier,
 	material: defaultMaterial,
 	tierQueryData,
-	notAccessTier
+	notAccessTier,
+	userHadPreviousTicket
 }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
 
@@ -120,6 +121,18 @@ export default function Ticket({
 		ogImage,
 		url
 	}
+
+	useEffect(() => {
+		if (!userHadPreviousTicket) {
+			handleCreateTicketImage({
+				supabase,
+				selectedFlavorKey: flavorKey,
+				userId: user.id,
+				username,
+				ticketNumber
+			})
+		}
+	}, [])
 
 	return (
 		<Layout meta={metadata}>
@@ -494,7 +507,7 @@ const handleShare = async ({ username, hash }) => {
 
 Apunta la fecha: 12 de SEPTIEMBRE
 
-→ miduconf.com/ticket/${username}/${hash}`
+miduconf.com/ticket/${username}/${hash}`
 
 	window.open(`${intent}?text=${encodeURIComponent(text)}`)
 }
@@ -571,10 +584,12 @@ export const getServerSideProps = async (ctx) => {
 			: {
 					tier: tierLevelFromQueryParam,
 					error: tierErrorFromQueryParam
-			  }
+				}
 
 	let selectedFlavor = 'javascript'
 	let ticketNumber = 0
+	let twitchTier = null
+	let material = 'standard'
 
 	// Check if we have a session
 	const {
@@ -610,6 +625,8 @@ export const getServerSideProps = async (ctx) => {
 	const metadata = session?.user?.user_metadata ?? {}
 	const { full_name: userFullName, preferred_username: username } = metadata
 
+	let userHadPreviousTicket = false
+
 	// if no ticket present, create one
 	if (data.length === 0) {
 		console.info('[info] No ticket. Creating for user {')
@@ -623,22 +640,28 @@ export const getServerSideProps = async (ctx) => {
 
 		if (error) console.error(error)
 
-		const { data } = await supabase.from('ticket').select('*').eq('id', session.user.id)
-		selectedFlavor = data[0].flavour || 'javascript'
-		ticketNumber = data[0].ticket_number || 0
+		const { data } = await supabase.from('ticket').select('ticket_number').eq('id', session.user.id)
+		const [ticketInfo] = data
+		ticketNumber = ticketInfo.ticket_number || 0
 	} else {
-		selectedFlavor = data[0].flavour || 'javascript'
-		ticketNumber = data[0].ticket_number || 0
+		userHadPreviousTicket = true
+		const [ticketInfo] = data
+		selectedFlavor = ticketInfo.flavour || 'javascript'
+		ticketNumber = ticketInfo.ticket_number || 0
+		twitchTier = ticketInfo.twitch_tier
+		material = ticketInfo.material
 	}
+
 	return {
 		props: {
+			userHadPreviousTicket,
 			selectedFlavor,
 			ticketNumber,
 			initialSession: session,
 			user: getInfoFromUser({ user: session?.user }),
-			twitchTier: data[0].twitch_tier,
-			material: data[0].material,
-			notAccessTier: notAccessTier,
+			twitchTier,
+			material,
+			notAccessTier,
 			tierQueryData
 		}
 	}
