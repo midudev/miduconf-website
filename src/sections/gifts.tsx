@@ -192,7 +192,7 @@ function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItem
 	return (
 		<div
 			className={cn(
-				'relative flex items-center justify-center py-5 transition-all duration-500 border bg-button rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 hover:before:backdrop-blur-none cursor-crosshair',
+				'relative flex items-center justify-center py-5 transition-all duration-500 border bg-button rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0  cursor-crosshair group',
 				className,
 				level === 1 && 'bg-midu-primary/30 border-midu-primary',
 				level === 2 && 'bg-[#5C9AFF]/30 border-[#5C9AFF]',
@@ -209,7 +209,7 @@ function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItem
 			</p>
 			<div
 				className={cn(
-					'relative h-auto opacity-20 w-max rotate-6',
+					'relative h-auto opacity-20 w-max rotate-6 z-50 blur-sm group-hover:blur-none',
 					'group-hover:-translate-y-1/3 transition-all duration-500 group-hover:opacity-100'
 				)}
 			>
