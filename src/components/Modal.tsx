@@ -20,7 +20,7 @@ export function Modal({ isOpen = false, onClose, children }: Props) {
 					onClick={onClose}
 					title='Cerrar modal'
 					aria-label='Cerrar modal'
-					className='absolute p-3 transition-transform bg-red-600 rounded-full top-5 right-5 hover:scale-110'
+					className='absolute p-3 transition-transform rounded-full bg-midu-primary/10 top-5 right-5 hover:scale-110'
 				>
 					<svg
 						width='18'

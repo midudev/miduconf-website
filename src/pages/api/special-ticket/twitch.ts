@@ -4,8 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
 		const authorizationCode = getTwitchAuthorizationCode(req)
-		const requiredTier = req.query.requiredTier as '1' | '2' | '3'
-		console.log({ authorizationCode, requiredTier })
+		const requiredTier = req.query?.requiredTier ?? (null as '1' | '2' | '3' | null)
+
 		const { error: accessTokenErrorMessage, accessToken } = await getTwitchAccessToken(
 			authorizationCode
 		)
@@ -22,14 +22,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			userId
 		})
 
-		const invalidTierRequiredMessage =
-			tier != null && Number(tier) > Number(requiredTier) ? 'false' : 'true'
+		const hasTier = tier != null
+		const hasRequiredTier = requiredTier != null
+		const isRequiredTierLessThanTier = hasRequiredTier && Number(requiredTier) < Number(tier)
+		const invalidTierRequiredMessage = isRequiredTierLessThanTier && hasTier ? 'false' : 'true'
 
-		const queryParam = new URLSearchParams({
+		let queryParam = new URLSearchParams({
 			tier,
-			notAccessTier: invalidTierRequiredMessage,
+			notAccessTier: 'false',
 			error: tierErrorMessage
 		})
+
+		if (!hasRequiredTier) {
+			queryParam = new URLSearchParams({
+				tier,
+				notAccessTier: 'false',
+				error: tierErrorMessage
+			})
+		}
+
+		if (hasRequiredTier && !isRequiredTierLessThanTier) {
+			queryParam = new URLSearchParams({
+				tier,
+				notAccessTier: 'true',
+				error: tierErrorMessage
+			})
+		}
 
 		if (tierErrorMessage != null) return res.redirect(`/ticket?${queryParam}`)
 
@@ -114,7 +132,7 @@ type TwitchAccessTokenResponse = (
 
 const getTwitchAccessToken: TwitchAccessTokenResponse = async (authorizationCode) => {
 	if (authorizationCode == null) throw new TwitchAuthorizationCodeError('No code provided')
-	console.log('getTwitchAccessToken')
+
 	const clientId = process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID
 	const clientSecret = process.env.PRIVATE_TWITCH_CLIENT_SECRET
 

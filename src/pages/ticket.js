@@ -1,4 +1,5 @@
 import { Layout } from '@/sections/layout'
+import confetti from 'canvas-confetti'
 import { GeistSans } from 'geist/font/sans'
 import { toJpeg } from 'html-to-image'
 import { useEffect, useMemo, useState } from 'react'
@@ -120,6 +121,28 @@ export default function Ticket({
 		ogImage,
 		url
 	}
+
+	useEffect(() => {
+		const isSuccessDataInModal =
+			['1', '2', '3'].includes(tierQueryData?.tier) && notAccessTier === 'false'
+
+		if (isSuccessDataInModal && isModalOpen) {
+			confetti({
+				particleCount: 50,
+				angle: 60,
+				spread: 55,
+				origin: { x: 0 },
+				zIndex: 9999999
+			})
+			confetti({
+				particleCount: 50,
+				angle: 120,
+				spread: 55,
+				origin: { x: 1 },
+				zIndex: 9999999
+			})
+		}
+	}, [isModalOpen])
 
 	return (
 		<Layout meta={metadata}>
@@ -315,7 +338,7 @@ export default function Ticket({
 								>
 									<Button
 										as='a'
-										href={getTwitchAuthorizeUrl({ requiredTier: '1' })}
+										href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier: twitchTier })}
 										className='py-1 bg-transparent border-transparent text-white/40'
 										variant='secondary'
 									>
@@ -349,7 +372,7 @@ export default function Ticket({
 								>
 									<Button
 										as='a'
-										href={getTwitchAuthorizeUrl({ requiredTier: '3' })}
+										href={getTwitchAuthorizeUrl({ requiredTier: '3', currentTier: twitchTier })}
 										className='py-1 bg-transparent border-transparent text-white/40'
 										variant='secondary'
 									>
@@ -404,7 +427,7 @@ export default function Ticket({
 				</div>
 			</main>
 			<Modal onClose={handleCloseModal} isOpen={isModalOpen}>
-				{tierQueryData?.tier === 'null' && (
+				{tierQueryData?.tier === 'null' && tierQueryData?.error && (
 					<div className='flex flex-col gap-2 py-8'>
 						<TwitchIcon className='w-16 h-16 mx-auto mb-6 text-white' />
 						<p className='text-lg font-semibold text-center text-white'>
@@ -421,9 +444,18 @@ export default function Ticket({
 							</a>{' '}
 							tiene acceso a este ticket
 						</p>
+						<Button
+							className='mx-auto mt-4'
+							as='a'
+							href='https://www.twitch.tv/subs/midudev'
+							target='_blank'
+						>
+							<TwitchIcon className='w-4 h-4 text-white' />
+							Suscribirse para desbloquear contenido especial
+						</Button>
 					</div>
 				)}
-				{['1', '2', '3'].includes(tierQueryData?.tier) && (
+				{['1', '2', '3'].includes(tierQueryData?.tier) && notAccessTier === 'false' && (
 					<div className='flex flex-col gap-2 py-8'>
 						<TwitchIcon className='w-16 h-16 mx-auto mb-6 text-white' />
 						<p className='text-lg font-semibold text-center text-white'>¡Felicidades! 🚀</p>
@@ -431,6 +463,39 @@ export default function Ticket({
 							Has desbloqueado el contenido especial de nivel {tierQueryData?.tier} ⭐️
 						</p>
 						<p className='text-center text-white/80'>¡Ahora puedes personalizar más tu ticket!</p>
+						<Button
+							onClick={async () => {
+								handleCloseModal()
+								const materialToChange =
+									tierQueryData?.tier === '3'
+										? MATERIALS_AVAILABLE.PREMIUM
+										: MATERIALS_AVAILABLE.SPECIAL
+
+								await handleChangeMaterial(materialToChange)
+							}}
+							className='mx-auto mt-4'
+						>
+							Aceptar
+						</Button>
+					</div>
+				)}
+				{notAccessTier === 'true' && tierQueryData?.error === 'null' && (
+					<div className='flex flex-col gap-2 py-8'>
+						<TwitchIcon className='w-16 h-16 mx-auto mb-6 text-white' />
+						<p className='text-lg font-semibold text-center text-white'>¡Ups!</p>
+						<p className='text-center text-white/80'>No puedes desbloquear este contenido.</p>
+						<p className='text-center text-white/80'>
+							¡Para ello debes suscribirte con Nivel 3 en Twitch!
+						</p>
+						<Button
+							className='mx-auto mt-4'
+							as='a'
+							href='https://www.twitch.tv/subs/midudev'
+							target='_blank'
+						>
+							<TwitchIcon className='w-4 h-4 text-white' />
+							Suscribirte en Twitch
+						</Button>
 					</div>
 				)}
 			</Modal>
@@ -539,20 +604,24 @@ const useTicketSave = ({ buttonStatus, isMaterialChange }) => {
 	return { generatedImage, handleSaveImage, saveButtonText }
 }
 
-function getTwitchAuthorizeUrl({ requiredTier = '1' }) {
+function getTwitchAuthorizeUrl({ requiredTier = '1', currentTier }) {
 	const redirectUrl =
 		process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://www.miduconf.com'
 
 	const authorizeTwitchUrl = new URL('https://id.twitch.tv/oauth2/authorize')
 	authorizeTwitchUrl.searchParams.append('client_id', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
-	authorizeTwitchUrl.searchParams.append(
-		'redirect_uri',
-		`${redirectUrl}/api/special-ticket/twitch/`
+
+	const redirectUri = new URL(
+		`${redirectUrl}/api/special-ticket/twitch${currentTier == null ? '/' : ''}`
 	)
+	const requiredTierToSend = requiredTier === '2' ? '1' : requiredTier
+	if (currentTier != null) redirectUri.searchParams.append('requiredTier', requiredTierToSend)
+
+	authorizeTwitchUrl.searchParams.append('redirect_uri', redirectUri.href)
+	authorizeTwitchUrl.searchParams.append('', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
 
 	authorizeTwitchUrl.searchParams.append('scope', 'user:read:subscriptions')
 	authorizeTwitchUrl.searchParams.append('response_type', 'code')
-	authorizeTwitchUrl.searchParams.append('requiredTier', requiredTier)
 
 	return authorizeTwitchUrl.href
 }
