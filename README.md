@@ -6,8 +6,8 @@ Este proyecto es el código fuente del sitio web oficial de **miduConf**, una co
 
 ## Prerrequisitos
 
-- Node.js
-- npm
+- Node.js 14.x
+- npm 6.x
 
 ## Instalación y Configuración
 
@@ -22,4 +22,3 @@ Para probar el proyecto, sigue estos pasos:
 1. Ejecuta `npm run test` para ejecutar las pruebas unitarias (si las hay).
 2. Abre el navegador y navega a `http://localhost:3000`.
 
-remove this line
