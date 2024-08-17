@@ -94,7 +94,7 @@ export const Gifts = () => {
 		<section id='regalos' className='px-4 pt-24'>
 			<HideContentBox
 				title='Regalos'
-				subtitle='¡Muy pronto desvelaremos todos los regalos!'
+				subtitle='¡Muy pronto revelaremos todos los regalos!'
 				BgIcon={NavbarIcons.GiftIcon}
 			/>
 			{/* <GiftsSection /> */}
