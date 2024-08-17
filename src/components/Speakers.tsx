@@ -59,7 +59,7 @@ const SPEAKERS = [
 
 function Speaker({ name, title, twitter, img, country }) {
 	return (
-		<article className='relative flex flex-col items-center justify-center w-full transition-all bg-[#121226]/50 border border-midu-primary/40 rounded-[20px] group overflow-hidden'>
+		<article className='relative flex flex-col items-center justify-center w-full transition-all bg-[#121226]/50 border border-midu-primary/40 rounded-[20px] group overflow-hidden hover:scale-110'>
 			<div className='w-full p-[14px] rounded transition'>
 				<figure className='flex items-center justify-center'>
 					<img
