@@ -37,12 +37,24 @@ export default function Ticket({
 	material: defaultMaterial,
 	tierQueryData,
 	notAccessTier,
-	userHadPreviousTicket
+	userHadPreviousTicket,
+	stickers
 }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
-	const [selectedStickers, setSelectedStickers] = useState({
-		limit: twitchTier == null ? 0 : Number(twitchTier),
-		list: Array.from({ length: 3 }, () => null)
+	const [selectedStickers, setSelectedStickers] = useState(() => {
+		const currentStickers = stickers.map((sticker) => (sticker === 'null' ? null : sticker))
+
+		const currentList = stickers.map((sticker) => {
+			if (sticker === 'null') return null
+			const stickerComponent = STICKERS_LIST.find(({ name }) => name === sticker)
+			return stickerComponent?.StickerImage
+		})
+
+		return {
+			limit: twitchTier == null ? 0 : Number(twitchTier),
+			list: currentList,
+			namesList: currentStickers
+		}
 	})
 
 	const [isModalOpen, setIsModalOpen] = useState(() => {
@@ -68,21 +80,26 @@ export default function Ticket({
 			userId: user.id,
 			username,
 			ticketNumber,
-			material
+			material,
+			stickers: selectedStickers.namesList
 		})
 
 		handleSaveImage(dataURL)
 		setButtonText(STEPS_LOADING.ready)
 	}
 
-	const handleSelectSticker = async (sticker) => {
+	const handleSelectSticker = async (sticker, nameSticker) => {
 		const newStickers = selectedStickers.list
+		const newStickersNames = selectedStickers.namesList
 		const limitStickers = Number(selectedStickers.limit)
 		const index = newStickers.findIndex((sticker, i) => sticker == null && i + 1 <= limitStickers)
 
 		index === -1 ? (newStickers[limitStickers - 1] = sticker) : (newStickers[index] = sticker)
+		index === -1
+			? (newStickersNames[limitStickers - 1] = nameSticker)
+			: (newStickersNames[index] = nameSticker)
 
-		setSelectedStickers({ list: newStickers, limit: twitchTier })
+		setSelectedStickers({ list: newStickers, limit: twitchTier, namesList: newStickersNames })
 
 		setButtonText(STEPS_LOADING.generate)
 
@@ -92,7 +109,8 @@ export default function Ticket({
 			userId: user.id,
 			username,
 			ticketNumber,
-			material: selectedMaterial
+			material: selectedMaterial,
+			stickers: selectedStickers.namesList
 		})
 
 		handleSaveImage(dataURL)
@@ -101,9 +119,11 @@ export default function Ticket({
 
 	const handleRemoveSticker = async (index) => {
 		const newStickers = selectedStickers.list
+		const namesStickers = selectedStickers.namesList
 		newStickers[index] = null
+		namesStickers[index] = null
 
-		setSelectedStickers({ list: newStickers, limit: twitchTier })
+		setSelectedStickers({ list: newStickers, limit: twitchTier, namesList: namesStickers })
 		setButtonText(STEPS_LOADING.generate)
 
 		const { dataURL } = await handleCreateTicketImage({
@@ -112,7 +132,8 @@ export default function Ticket({
 			userId: user.id,
 			username,
 			ticketNumber,
-			material: selectedMaterial
+			material: selectedMaterial,
+			stickers: selectedStickers.namesList
 		})
 
 		handleSaveImage(dataURL)
@@ -158,7 +179,8 @@ export default function Ticket({
 			userId: user.id,
 			username,
 			ticketNumber,
-			material: selectedMaterial
+			material: selectedMaterial,
+			stickers: selectedStickers.namesList
 		})
 
 		handleSaveImage(dataURL)
@@ -179,7 +201,8 @@ export default function Ticket({
 				selectedFlavorKey: flavorKey,
 				userId: user.id,
 				username,
-				ticketNumber
+				ticketNumber,
+				stickers: selectedStickers.namesList
 			})
 		}
 	}, [])
@@ -524,7 +547,7 @@ export default function Ticket({
 							)}
 							{STICKERS_LIST.map(({ name, StickerImage }) => (
 								<button
-									onClick={() => handleSelectSticker(StickerImage)}
+									onClick={() => handleSelectSticker(StickerImage, name)}
 									key={name}
 									className={cn(
 										twitchTier == null && 'user-select-none pointer-events-none opacity-20 -z-10'
@@ -666,12 +689,13 @@ const handleCreateTicketImage = async ({
 	userId,
 	username,
 	ticketNumber,
-	material
+	material,
+	stickers
 }) => {
 	// update ticket in supabase
 	const { error } = await supabase
 		.from('ticket')
-		.update({ flavour: selectedFlavorKey, user_id: userId, material })
+		.update({ flavour: selectedFlavorKey, user_id: userId, material, stickers })
 		.eq('user_name', username)
 
 	const dataURL = await toJpeg(document.getElementById('ticket'), {
@@ -800,6 +824,7 @@ export const getServerSideProps = async (ctx) => {
 	let selectedFlavor = 'javascript'
 	let ticketNumber = 0
 	let twitchTier = null
+	let stickers = ['null', 'null', 'null']
 	let material = 'standard'
 
 	// Check if we have a session
@@ -860,6 +885,7 @@ export const getServerSideProps = async (ctx) => {
 		selectedFlavor = ticketInfo.flavour || 'javascript'
 		ticketNumber = ticketInfo.ticket_number || 0
 		twitchTier = ticketInfo.twitch_tier
+		stickers = ticketInfo.stickers
 		material = ticketInfo.material
 	}
 
@@ -873,6 +899,7 @@ export const getServerSideProps = async (ctx) => {
 			twitchTier,
 			material,
 			notAccessTier,
+			stickers,
 			tierQueryData
 		}
 	}

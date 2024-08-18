@@ -186,7 +186,7 @@ export default function Ticket({
 										'relative h-auto group justify-center flex  text-white items-center opacity-80'
 									)}
 								>
-									{index < selectedStickers.limit && sticker !== null && (
+									{index < selectedStickers.limit && sticker != null && (
 										<button
 											onClick={() => handleRemoveSticker(index)}
 											title='Borrar sticker'
