@@ -7,6 +7,7 @@ import { SponsorIcons } from '@/components/icons/sponsors'
 import { useGetTimezone } from '@/sections/agenda'
 import { formatEventTimeWithTimeZoneName } from './utilities/timezone'
 import { TwitchIcon } from './icons'
+import { Tooltip } from './Tooltip'
 
 interface Props {
 	transition?: boolean
@@ -29,6 +30,11 @@ interface Props {
 	}
 	isSizeFixed?: boolean
 	id?: string
+	handleRemoveSticker: (index: number) => void
+	selectedStickers: {
+		list: (string | null)[]
+		limit: number
+	}
 }
 
 export default function Ticket({
@@ -38,7 +44,9 @@ export default function Ticket({
 	user,
 	isSizeFixed = false,
 	className,
-	id
+	id,
+	handleRemoveSticker,
+	selectedStickers
 }: Props) {
 	const timeZone = useGetTimezone()
 	const { username, avatar } = user ?? {}
@@ -168,6 +176,87 @@ export default function Ticket({
 								</span>
 							</time>
 						</div>
+					</div>
+					<div className='flex flex-row-reverse items-center h-auto gap-2 mx-auto md:mr-4 md:ml-0'>
+						{selectedStickers.list &&
+							selectedStickers.list.map((sticker, index) => (
+								<div
+									key={index}
+									className={cn(
+										'relative h-auto group justify-center flex  text-white items-center opacity-80'
+									)}
+								>
+									{index < selectedStickers.limit && sticker !== null && (
+										<button
+											onClick={() => handleRemoveSticker(index)}
+											title='Borrar sticker'
+											aria-label='Borrar Sticker'
+											className='absolute top-0 right-0 items-center justify-center hidden w-4 h-4 text-sm transition-transform border rounded-full group-hover:flex hover:scale-125 bg-red-400/60 justify-items-center border-white/60'
+										>
+											<svg
+												xmlns='http://www.w3.org/2000/svg'
+												width='24'
+												height='24'
+												viewBox='0 0 24 24'
+												fill='none'
+												stroke='currentColor'
+												strokeWidth='2'
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												className='w-3 h-3'
+											>
+												<line x1='18' y1='6' x2='6' y2='18'></line>
+												<line x1='6' y1='6' x2='18' y2='18'></line>
+											</svg>
+										</button>
+									)}
+									{selectedStickers.limit > index ? (
+										<div
+											className={cn(
+												'p-2',
+												sticker == null &&
+													!isSizeFixed &&
+													'bg-white/10 border w-12 h-12 border-dashed rounded-lg'
+											)}
+										>
+											{sticker}
+										</div>
+									) : (
+										<Tooltip
+											tooltipClassName='w-[200px]'
+											key={index}
+											tooltipPosition='top'
+											text={`Desbloquear con suscripción de Nivel ${index + 1} en Twitch`}
+											offsetNumber={16}
+										>
+											<div
+												className={cn(
+													'flex items-center justify-center w-12 h-12 p-2 border border-dashed rounded-lg opacity-20',
+													isSizeFixed && 'hidden'
+												)}
+											>
+												<svg
+													xmlns='http://www.w3.org/2000/svg'
+													width='24'
+													height='24'
+													viewBox='0 0 24 24'
+													fill='none'
+													stroke='currentColor'
+													strokeWidth='2'
+													strokeLinecap='round'
+													strokeLinejoin='round'
+													className='w-6 h-6'
+												>
+													<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+													<path d='M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z' />
+													<path d='M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0' />
+													<path d='M8 11v-4a4 4 0 1 1 8 0v4' />
+												</svg>
+											</div>
+										</Tooltip>
+									)}
+								</div>
+							))}
 					</div>
 					<div
 						className={cn(
