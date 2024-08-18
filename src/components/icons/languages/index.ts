@@ -1,5 +1,6 @@
 import { AngularIcon } from './angular'
 import { AstroIcon } from './astro'
+import { BlazorIcon } from './blazor'
 import { BunIcon } from './bun'
 import { CIcon } from './c'
 import { CSharpIcon } from './csharp'
@@ -53,6 +54,7 @@ export const FLAVORS_ICONS = {
 	astro: AstroIcon,
 	node: NodeIcon,
 	deno: DenoIcon,
+	blazor: BlazorIcon,
 	bun: BunIcon,
 	npm: NpmIcon,
 	github: GithubIcon,
