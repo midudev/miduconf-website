@@ -239,6 +239,7 @@ export default function Ticket({
 					{selectedMaterial === MATERIALS_AVAILABLE.STANDARD && (
 						<TicketComponent
 							isSizeFixed
+							transition={false}
 							number={ticketNumber}
 							flavor={flavor}
 							user={{ username, avatar, name }}
@@ -249,6 +250,7 @@ export default function Ticket({
 					{selectedMaterial === MATERIALS_AVAILABLE.SPECIAL && (
 						<TicketGradient
 							isSizeFixed
+							transition={false}
 							number={ticketNumber}
 							flavor={flavor}
 							user={{ username, avatar, name }}
@@ -259,6 +261,7 @@ export default function Ticket({
 					{selectedMaterial === MATERIALS_AVAILABLE.PREMIUM && (
 						<TicketPlatinum
 							isSizeFixed
+							transition={false}
 							number={ticketNumber}
 							flavor={flavor}
 							user={{ username, avatar, name }}

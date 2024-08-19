@@ -171,15 +171,20 @@ export default function Ticket({
 								)}
 							>
 								Sept. 12 2024
-								<span className='block text-sm font-normal text-white/60 animate-blurred-fade-in'>
+								<span
+									className={cn(
+										'block text-sm font-normal text-white/60',
+										!isSizeFixed && 'animate-blurred-fade-in'
+									)}
+								>
 									{timeZone == null ? '' : formatEventTimeWithTimeZoneName(1726153200000, timeZone)}
 								</span>
 							</time>
 						</div>
 					</div>
 					<div className='flex flex-row-reverse items-center h-auto gap-2 mx-auto md:mr-4 md:ml-0'>
-						{selectedStickers.list &&
-							selectedStickers.list.map((sticker, index) => (
+						{selectedStickers?.list &&
+							selectedStickers?.list.map((sticker, index) => (
 								<div
 									key={index}
 									className={cn(

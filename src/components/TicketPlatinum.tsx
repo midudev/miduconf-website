@@ -165,8 +165,8 @@ export default function TicketPlatinum({
 						</div>
 					</div>
 					<div className='flex flex-row-reverse items-center h-auto gap-2 mx-auto md:mr-4 md:ml-0'>
-						{selectedStickers.list &&
-							selectedStickers.list.map((sticker, index) => (
+						{selectedStickers?.list &&
+							selectedStickers?.list.map((sticker, index) => (
 								<div
 									key={index}
 									className={cn(
