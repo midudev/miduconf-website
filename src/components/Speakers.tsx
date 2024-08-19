@@ -66,7 +66,7 @@ const SPEAKERS = [
 		name: 'PatoDev',
 		title: 'Media Developer Expert @ Cloudinary',
 		twitter: 'devpato',
-		img: 'devPato',
+		img: 'patoDev',
 		country: '🇺🇸'
 	}
 ]
