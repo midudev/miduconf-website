@@ -12,6 +12,7 @@ import { Background } from '@/components/Background'
 import { Button } from '@/components/Button'
 import { Container3D } from '@/components/Container3D'
 import { TwitchIcon } from '@/components/icons'
+import { Stickers } from '@/components/icons/stickers/index.tsx'
 import { Meteors } from '@/components/MeteorLanguages'
 import { Modal } from '@/components/Modal'
 import { Stars } from '@/components/Stars'
@@ -36,9 +37,25 @@ export default function Ticket({
 	material: defaultMaterial,
 	tierQueryData,
 	notAccessTier,
-	userHadPreviousTicket
+	userHadPreviousTicket,
+	stickers
 }) {
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
+	const [selectedStickers, setSelectedStickers] = useState(() => {
+		const currentStickers = stickers.map((sticker) => (sticker === 'null' ? null : sticker))
+
+		const currentList = stickers.map((sticker) => {
+			if (sticker === 'null') return null
+			const stickerComponent = STICKERS_LIST.find(({ name }) => name === sticker)
+			return stickerComponent?.StickerImage
+		})
+
+		return {
+			limit: twitchTier == null ? 0 : Number(twitchTier),
+			list: currentList,
+			namesList: currentStickers
+		}
+	})
 
 	const [isModalOpen, setIsModalOpen] = useState(() => {
 		return tierQueryData == null ? false : true
@@ -63,7 +80,60 @@ export default function Ticket({
 			userId: user.id,
 			username,
 			ticketNumber,
-			material
+			material,
+			stickers: selectedStickers.namesList
+		})
+
+		handleSaveImage(dataURL)
+		setButtonText(STEPS_LOADING.ready)
+	}
+
+	const handleSelectSticker = async (sticker, nameSticker) => {
+		const newStickers = selectedStickers.list
+		const newStickersNames = selectedStickers.namesList
+		const limitStickers = Number(selectedStickers.limit)
+		const index = newStickers.findIndex((sticker, i) => sticker == null && i + 1 <= limitStickers)
+
+		index === -1 ? (newStickers[limitStickers - 1] = sticker) : (newStickers[index] = sticker)
+		index === -1
+			? (newStickersNames[limitStickers - 1] = nameSticker)
+			: (newStickersNames[index] = nameSticker)
+
+		setSelectedStickers({ list: newStickers, limit: twitchTier, namesList: newStickersNames })
+
+		setButtonText(STEPS_LOADING.generate)
+
+		const { dataURL } = await handleCreateTicketImage({
+			supabase,
+			selectedFlavorKey: flavorKey,
+			userId: user.id,
+			username,
+			ticketNumber,
+			material: selectedMaterial,
+			stickers: selectedStickers.namesList
+		})
+
+		handleSaveImage(dataURL)
+		setButtonText(STEPS_LOADING.ready)
+	}
+
+	const handleRemoveSticker = async (index) => {
+		const newStickers = selectedStickers.list
+		const namesStickers = selectedStickers.namesList
+		newStickers[index] = null
+		namesStickers[index] = null
+
+		setSelectedStickers({ list: newStickers, limit: twitchTier, namesList: namesStickers })
+		setButtonText(STEPS_LOADING.generate)
+
+		const { dataURL } = await handleCreateTicketImage({
+			supabase,
+			selectedFlavorKey: flavorKey,
+			userId: user.id,
+			username,
+			ticketNumber,
+			material: selectedMaterial,
+			stickers: selectedStickers.namesList
 		})
 
 		handleSaveImage(dataURL)
@@ -109,7 +179,8 @@ export default function Ticket({
 			userId: user.id,
 			username,
 			ticketNumber,
-			material: selectedMaterial
+			material: selectedMaterial,
+			stickers: selectedStickers.namesList
 		})
 
 		handleSaveImage(dataURL)
@@ -130,7 +201,8 @@ export default function Ticket({
 				selectedFlavorKey: flavorKey,
 				userId: user.id,
 				username,
-				ticketNumber
+				ticketNumber,
+				stickers: selectedStickers.namesList
 			})
 		}
 	}, [])
@@ -167,25 +239,34 @@ export default function Ticket({
 					{selectedMaterial === MATERIALS_AVAILABLE.STANDARD && (
 						<TicketComponent
 							isSizeFixed
+							transition={false}
 							number={ticketNumber}
 							flavor={flavor}
 							user={{ username, avatar, name }}
+							handleRemoveSticker={handleRemoveSticker}
+							selectedStickers={selectedStickers}
 						/>
 					)}
 					{selectedMaterial === MATERIALS_AVAILABLE.SPECIAL && (
 						<TicketGradient
 							isSizeFixed
+							transition={false}
 							number={ticketNumber}
 							flavor={flavor}
 							user={{ username, avatar, name }}
+							handleRemoveSticker={handleRemoveSticker}
+							selectedStickers={selectedStickers}
 						/>
 					)}
 					{selectedMaterial === MATERIALS_AVAILABLE.PREMIUM && (
 						<TicketPlatinum
 							isSizeFixed
+							transition={false}
 							number={ticketNumber}
 							flavor={flavor}
 							user={{ username, avatar, name }}
+							handleRemoveSticker={handleRemoveSticker}
+							selectedStickers={selectedStickers}
 						/>
 					)}
 				</div>
@@ -202,6 +283,8 @@ export default function Ticket({
 										number={ticketNumber}
 										flavor={flavor}
 										user={{ username, avatar, name }}
+										handleRemoveSticker={handleRemoveSticker}
+										selectedStickers={selectedStickers}
 									/>
 								)}
 								{selectedMaterial === MATERIALS_AVAILABLE.SPECIAL && (
@@ -209,6 +292,8 @@ export default function Ticket({
 										number={ticketNumber}
 										flavor={flavor}
 										user={{ username, avatar, name }}
+										handleRemoveSticker={handleRemoveSticker}
+										selectedStickers={selectedStickers}
 									/>
 								)}
 								{selectedMaterial === MATERIALS_AVAILABLE.PREMIUM && (
@@ -216,6 +301,8 @@ export default function Ticket({
 										number={ticketNumber}
 										flavor={flavor}
 										user={{ username, avatar, name }}
+										handleRemoveSticker={handleRemoveSticker}
+										selectedStickers={selectedStickers}
 									/>
 								)}
 							</Container3D>
@@ -329,7 +416,7 @@ export default function Ticket({
 						</Button>
 					</div>
 				</div>
-				<div className='w-full -order-1 md:order-none'>
+				<div className='w-full md:order-none'>
 					<div>
 						<h2 className='text-2xl font-bold text-white lg:pl-8'>Material</h2>
 						<div className='flex flex-wrap items-center px-8 py-3 gap-x-2 gap-y-2'>
@@ -416,7 +503,7 @@ export default function Ticket({
 					</div>
 					<div className='w-full z-[99999] opacity-[.99] mt-10 md:mt-2'>
 						<h2 className='text-2xl font-bold text-white lg:pl-8'>Tecnología</h2>
-						<div className='flex flex-row w-full p-8 max-h-[30rem] overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12 lg:pb-20 hidden-scroll lg:flavors-gradient-list'>
+						<div className='flex flex-row w-full p-8 max-h-[24rem] overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12 lg:pb-20 hidden-scroll lg:flavors-gradient-list'>
 							{Object.entries(FLAVORS).map(([key, { icon: Icon }]) => {
 								return (
 									<Tooltip key={key} text={key} offsetNumber={16}>
@@ -435,6 +522,48 @@ export default function Ticket({
 									</Tooltip>
 								)
 							})}
+						</div>
+					</div>
+					<div>
+						<h2 className='mt-10 text-2xl font-bold text-white lg:pl-8'>
+							Stickers <div></div>
+						</h2>
+						<div
+							className={cn(
+								'flex flex-row w-full p-8 max-h-[30rem] overflow-x-auto text-center flex-nowrap md:flex-wrap gap-x-8 gap-y-12 lg:pb-20 hidden-scroll h-40 relative',
+								twitchTier == null && 'overflow-hidden'
+							)}
+							style={{
+								maskImage: 'linear-gradient(to top, transparent, #000 40%)'
+							}}
+						>
+							{twitchTier == null && (
+								<Button
+									as='a'
+									href='https://www.twitch.tv/subs/midudev'
+									target='_blank'
+									variant='secondary'
+									className='absolute text-sm -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2'
+								>
+									Desbloquear con suscripción en Twitch
+								</Button>
+							)}
+							{STICKERS_LIST.map(({ name, StickerImage }) => (
+								<button
+									onClick={() => handleSelectSticker(StickerImage, name)}
+									key={name}
+									className={cn(
+										twitchTier == null && 'user-select-none pointer-events-none opacity-20 -z-10'
+									)}
+								>
+									<div
+										className='w-12 h-12 transition-all cursor-pointer hover:scale-125'
+										key={name}
+									>
+										{StickerImage}
+									</div>
+								</button>
+							))}
 						</div>
 					</div>
 				</div>
@@ -518,18 +647,114 @@ export default function Ticket({
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
+const STICKERS_LIST = [
+	{
+		name: 'midu-wink',
+		StickerImage: <Stickers.MiduWink className='w-auto h-12' />
+	},
+	{
+		name: 'midu-boss',
+		StickerImage: <Stickers.MiduBoss className='w-auto h-12' />
+	},
+	{
+		name: 'midu-hype',
+		StickerImage: <Stickers.MiduHype className='w-auto h-12' />
+	},
+	{
+		name: 'midu-wtf',
+		StickerImage: <Stickers.MiduWtf className='w-auto h-12' />
+	},
+	{
+		name: 'midu-f',
+		StickerImage: <Stickers.MiduF className='w-auto h-12' />
+	},
+	{
+		name: 'midu-not-like-this',
+		StickerImage: <Stickers.MiduNotLikeThis className='w-auto h-12' />
+	},
+	{
+		name: 'midu-angry',
+		StickerImage: <Stickers.MiduAngry className='w-auto h-12' />
+	},
+	{
+		name: 'midu-lul',
+		StickerImage: <Stickers.MiduLul className='w-auto h-12' />
+	},
+	{
+		name: 'midu-snif',
+		StickerImage: <Stickers.MiduSnif className='w-auto h-12' />
+	},
+	{
+		name: 'midu-wow',
+		StickerImage: <Stickers.MiduWow className='w-auto h-12' />
+	},
+	{
+		name: 'midu-love',
+		StickerImage: <Stickers.MiduLove className='w-auto h-12' />
+	},
+	{
+		name: 'start',
+		StickerImage: <Stickers.Start className='w-12 h-auto' />
+	},
+	{
+		name: 'mario',
+		StickerImage: <Stickers.Mario className='w-auto h-12' />
+	},
+	{
+		name: 'glasses',
+		StickerImage: <Stickers.Glasses className='w-12 h-auto' />
+	},
+	{
+		name: 'midudev',
+		StickerImage: <Stickers.Midu className='w-12 h-auto' />
+	},
+	{
+		name: 'libro-git',
+		StickerImage: <Stickers.LibroGit className='w-auto h-12' />
+	},
+	{
+		name: 'vercel',
+		StickerImage: <Stickers.Vercel className='w-12 h-auto' />
+	},
+	{
+		name: 'this-is-fine',
+		StickerImage: <Stickers.ThisIsFine className='w-auto h-12' />
+	},
+	{
+		name: 'platzi',
+		StickerImage: <Stickers.Platzi className='w-auto h-12' />
+	},
+	{
+		name: 'don-dominio',
+		StickerImage: <Stickers.DonDominio className='w-auto h-12' />
+	},
+	{
+		name: 'lemon-code',
+		StickerImage: <Stickers.LemonCode className='w-12 h-14' />
+	},
+	{
+		name: 'keep-coding',
+		StickerImage: <Stickers.KeepCoding className='w-12 h-12' />
+	},
+	{
+		name: 'twitch',
+		StickerImage: <Stickers.Twitch className='w-12 h-12' />
+	}
+]
+
 const handleCreateTicketImage = async ({
 	supabase,
 	selectedFlavorKey,
 	userId,
 	username,
 	ticketNumber,
-	material
+	material,
+	stickers
 }) => {
 	// update ticket in supabase
 	const { error } = await supabase
 		.from('ticket')
-		.update({ flavour: selectedFlavorKey, user_id: userId, material })
+		.update({ flavour: selectedFlavorKey, user_id: userId, material, stickers })
 		.eq('user_name', username)
 
 	const dataURL = await toJpeg(document.getElementById('ticket'), {
@@ -658,6 +883,7 @@ export const getServerSideProps = async (ctx) => {
 	let selectedFlavor = 'javascript'
 	let ticketNumber = 0
 	let twitchTier = null
+	let stickers = ['null', 'null', 'null']
 	let material = 'standard'
 
 	// Check if we have a session
@@ -718,6 +944,7 @@ export const getServerSideProps = async (ctx) => {
 		selectedFlavor = ticketInfo.flavour || 'javascript'
 		ticketNumber = ticketInfo.ticket_number || 0
 		twitchTier = ticketInfo.twitch_tier
+		stickers = ticketInfo.stickers
 		material = ticketInfo.material
 	}
 
@@ -731,6 +958,7 @@ export const getServerSideProps = async (ctx) => {
 			twitchTier,
 			material,
 			notAccessTier,
+			stickers,
 			tierQueryData
 		}
 	}

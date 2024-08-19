@@ -54,6 +54,20 @@ const SPEAKERS = [
 		twitter: 's4vitar',
 		img: 's4vitar',
 		country: '🇪🇸'
+	},
+	{
+		name: 'Freddy Vega',
+		title: 'CEO @ Platzi',
+		twitter: 'freddier',
+		img: 'freddyVega',
+		country: '🇨🇴'
+	},
+	{
+		name: 'PatoDev',
+		title: 'Media Developer Expert @ Cloudinary',
+		twitter: 'devpato',
+		img: 'devPato',
+		country: '🇺🇸'
 	}
 ]
 
