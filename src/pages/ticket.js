@@ -549,20 +549,22 @@ export default function Ticket({
 								</Button>
 							)}
 							{STICKERS_LIST.map(({ name, StickerImage }) => (
-								<button
-									onClick={() => handleSelectSticker(StickerImage, name)}
-									key={name}
-									className={cn(
-										twitchTier == null && 'user-select-none pointer-events-none opacity-20 -z-10'
-									)}
-								>
-									<div
-										className='w-12 h-12 transition-all cursor-pointer hover:scale-125'
+								<Tooltip key={name} text={name} offsetNumber={16}>
+									<button
+										onClick={() => handleSelectSticker(StickerImage, name)}
 										key={name}
+										className={cn(
+											twitchTier == null && 'user-select-none pointer-events-none opacity-20 -z-10'
+										)}
 									>
-										{StickerImage}
-									</div>
-								</button>
+										<div
+											className='w-12 h-12 transition-all cursor-pointer hover:scale-125'
+											key={name}
+										>
+											{StickerImage}
+										</div>
+									</button>
+								</Tooltip>
 							))}
 						</div>
 					</div>
@@ -878,7 +880,7 @@ export const getServerSideProps = async (ctx) => {
 			: {
 					tier: tierLevelFromQueryParam,
 					error: tierErrorFromQueryParam
-				}
+			  }
 
 	let selectedFlavor = 'javascript'
 	let ticketNumber = 0
