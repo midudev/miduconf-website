@@ -19,6 +19,7 @@ import { Markdown } from './markdown'
 import { MySQLIcon } from './mysql'
 import { NestJSIcon } from './nestjs'
 import { NextIcon } from './next'
+import { figmaIcon } from './figma'
 import { NodeIcon } from './node'
 import { NpmIcon } from './npm'
 import { NuxtIcon } from './nuxt'
@@ -79,5 +80,6 @@ export const FLAVORS_ICONS = {
 	linux: LinuxIcon,
 	ruby: RubyIcon,
 	tailwind: TailwindIcon,
-	c: CIcon
+	c: CIcon,
+	figma: figmaIcon
 }
