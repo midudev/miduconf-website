@@ -30,8 +30,8 @@ interface Props {
 	}
 	isSizeFixed?: boolean
 	id?: string
-	handleRemoveSticker: (index: number) => void
-	selectedStickers: {
+	handleRemoveSticker?: (index: number) => void
+	selectedStickers?: {
 		list: (string | null)[]
 		limit: number
 	}
