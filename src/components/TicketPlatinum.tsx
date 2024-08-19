@@ -158,7 +158,12 @@ export default function TicketPlatinum({
 								)}
 							>
 								Sept. 12 2024
-								<span className='block text-sm font-normal text-white/60 animate-blurred-fade-in'>
+								<span
+									className={cn(
+										'block text-sm font-normal text-white/60',
+										!isSizeFixed && 'animate-blurred-fade-in'
+									)}
+								>
 									{timeZone == null ? '' : formatEventTimeWithTimeZoneName(1726153200000, timeZone)}
 								</span>
 							</time>
