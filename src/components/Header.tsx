@@ -51,6 +51,7 @@ export function Header() {
 					<Button
 						as='a'
 						href='https://discord.gg/midudev'
+						target='_blank'
 						className='ml-auto font-medium'
 						title='Únete al Discord de la comunidad'
 						aria-label='Únete al Discord de la comunidad'
