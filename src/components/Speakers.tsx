@@ -47,6 +47,27 @@ const SPEAKERS = [
 		twitter: 'teffcode',
 		img: 'teffcode',
 		country: '🇨🇴'
+	},
+	{
+		name: 'S4vitar',
+		title: 'Hack4u CEO & Founder',
+		twitter: 's4vitar',
+		img: 's4vitar',
+		country: '🇪🇸'
+	},
+	{
+		name: 'Freddy Vega',
+		title: 'CEO @ Platzi',
+		twitter: 'freddier',
+		img: 'freddyVega',
+		country: '🇨🇴'
+	},
+	{
+		name: 'PatoDev',
+		title: 'Media Developer Expert @ Cloudinary',
+		twitter: 'devpato',
+		img: 'patoDev',
+		country: '🇺🇸'
 	}
 ]
 

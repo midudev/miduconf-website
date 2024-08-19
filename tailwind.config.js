@@ -10,6 +10,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			dropShadow: {
+				gift: '3px 4px 8px rgba(0, 0, 0, 0.4)'
+			},
 			boxShadow: {
 				button:
 					'inset 0 6px 12px #4C64D2, 0 0 17px rgba(110, 137, 255, 0.77), inset 0 1px 10px rgba(255, 255, 255, 0.55)',
