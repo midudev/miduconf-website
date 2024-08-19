@@ -649,28 +649,84 @@ const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/p
 
 const STICKERS_LIST = [
 	{
-		name: 'midudev',
-		StickerImage: <Stickers.Midu className='w-12 h-12' />
+		name: 'midu-wink',
+		StickerImage: <Stickers.MiduWink className='w-auto h-12' />
 	},
 	{
-		name: 'this-is-fine',
-		StickerImage: <Stickers.ThisIsFine className='w-12 h-12' />
+		name: 'midu-boss',
+		StickerImage: <Stickers.MiduBoss className='w-auto h-12' />
 	},
 	{
-		name: 'yeah',
-		StickerImage: <Stickers.Yeah className='w-12 h-12' />
+		name: 'midu-hype',
+		StickerImage: <Stickers.MiduHype className='w-auto h-12' />
+	},
+	{
+		name: 'midu-wtf',
+		StickerImage: <Stickers.MiduWtf className='w-auto h-12' />
+	},
+	{
+		name: 'midu-f',
+		StickerImage: <Stickers.MiduF className='w-auto h-12' />
+	},
+	{
+		name: 'midu-not-like-this',
+		StickerImage: <Stickers.MiduNotLikeThis className='w-auto h-12' />
+	},
+	{
+		name: 'midu-angry',
+		StickerImage: <Stickers.MiduAngry className='w-auto h-12' />
+	},
+	{
+		name: 'midu-lul',
+		StickerImage: <Stickers.MiduLul className='w-auto h-12' />
+	},
+	{
+		name: 'midu-snif',
+		StickerImage: <Stickers.MiduSnif className='w-auto h-12' />
+	},
+	{
+		name: 'midu-wow',
+		StickerImage: <Stickers.MiduWow className='w-auto h-12' />
+	},
+	{
+		name: 'midu-love',
+		StickerImage: <Stickers.MiduLove className='w-auto h-12' />
 	},
 	{
 		name: 'start',
-		StickerImage: <Stickers.Start className='w-12 h-12' />
+		StickerImage: <Stickers.Start className='w-12 h-auto' />
+	},
+	{
+		name: 'mario',
+		StickerImage: <Stickers.Mario className='w-auto h-12' />
+	},
+	{
+		name: 'glasses',
+		StickerImage: <Stickers.Glasses className='w-12 h-auto' />
+	},
+	{
+		name: 'midudev',
+		StickerImage: <Stickers.Midu className='w-12 h-auto' />
+	},
+	{
+		name: 'libro-git',
+		StickerImage: <Stickers.LibroGit className='w-auto h-12' />
+	},
+	{
+		name: 'vercel',
+		StickerImage: <Stickers.Vercel className='w-12 h-auto' />
+	},
+	{
+		name: 'this-is-fine',
+		StickerImage: <Stickers.ThisIsFine className='w-auto h-12' />
 	},
 	{
 		name: 'platzi',
-		StickerImage: <Stickers.Platzi className='w-12 h-12' />
+		StickerImage: <Stickers.Platzi className='w-auto h-12' />
 	},
 	{
 		name: 'don-dominio',
-		StickerImage: <Stickers.DonDominio className='w-12 h-12' />
+		StickerImage: <Stickers.DonDominio className='w-auto h-12' />
 	},
 	{
 		name: 'lemon-code',
