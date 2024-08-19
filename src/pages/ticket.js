@@ -540,10 +540,10 @@ export default function Ticket({
 							{twitchTier == null && (
 								<Button
 									as='a'
-									href='https://www.twitch.tv/subs/midudev'
+									href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier: twitchTier })}
 									target='_blank'
 									variant='secondary'
-									className='absolute text-sm -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2'
+									className='absolute text-sm -translate-x-1/2 -translate-y-1/2 text-balance left-1/2 top-1/2'
 								>
 									Desbloquear con suscripción en Twitch
 								</Button>
@@ -878,7 +878,7 @@ export const getServerSideProps = async (ctx) => {
 			: {
 					tier: tierLevelFromQueryParam,
 					error: tierErrorFromQueryParam
-				}
+			  }
 
 	let selectedFlavor = 'javascript'
 	let ticketNumber = 0
