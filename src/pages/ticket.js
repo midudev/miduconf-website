@@ -362,7 +362,7 @@ export default function Ticket({
 							) : (
 								<Tooltip
 									tooltipPosition='top'
-									text='Desbloquado con suscripción de Nivel 1 y 2 en Twitch'
+									text='Desbloqueado con suscripción de Nivel 1 y 2 en Twitch'
 								>
 									<Button
 										onClick={async () => await handleChangeMaterial(MATERIALS_AVAILABLE.SPECIAL)}
@@ -396,7 +396,7 @@ export default function Ticket({
 							) : (
 								<Tooltip
 									tooltipPosition='top'
-									text='Desbloquado con suscripción de Nivel 3 en Twitch'
+									text='Desbloqueado con suscripción de Nivel 3 en Twitch'
 								>
 									<Button
 										onClick={async () => await handleChangeMaterial(MATERIALS_AVAILABLE.PREMIUM)}
@@ -653,7 +653,7 @@ export const getServerSideProps = async (ctx) => {
 			: {
 					tier: tierLevelFromQueryParam,
 					error: tierErrorFromQueryParam
-			  }
+				}
 
 	let selectedFlavor = 'javascript'
 	let ticketNumber = 0
