@@ -557,7 +557,7 @@ export default function Ticket({
 									)}
 								>
 									<div
-										className='w-12 h-12 transition-all cursor-pointer hover:scale-125'
+										className='flex items-center justify-center w-12 h-12 transition-all cursor-pointer hover:scale-125'
 										key={name}
 									>
 										{StickerImage}
@@ -735,6 +735,10 @@ const STICKERS_LIST = [
 	{
 		name: 'keep-coding',
 		StickerImage: <Stickers.KeepCoding className='w-12 h-12' />
+	},
+	{
+		name: 'cloudinary',
+		StickerImage: <Stickers.Cloudinary className='w-12 h-auto' />
 	},
 	{
 		name: 'twitch',
