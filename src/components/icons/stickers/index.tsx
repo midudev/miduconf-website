@@ -30,6 +30,9 @@ export const Stickers = {
 	KeepCoding: ({ className }) => (
 		<img className={className} src='/stickers/keep-coding.png' alt='' />
 	),
+	Cloudinary: ({ className }) => (
+		<img className={className} src='/stickers/cloudinary.png' alt='' />
+	),
 	Mario: ({ className }) => <img className={className} src='/stickers/mario.png' alt='' />,
 	LibroGit: ({ className }) => <img className={className} src='/stickers/libro-git.png' alt='' />,
 	Vercel: ({ className }) => <img className={className} src='/stickers/vercel.png' alt='' />
