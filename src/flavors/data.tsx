@@ -166,6 +166,18 @@ export const FLAVORS = {
 			shadowColor: 'shadow-red-400/25'
 		}
 	},
+	pnpm: {
+		icon: FLAVORS_ICONS.pnpm,
+		colorPalette: {
+			bg: 'bg-[#24292e]/50',
+			borders: {
+				inside: 'border-gray-300/20',
+				outside: 'border-gray-400/10'
+			},
+			shadowColor: 'shadow-gray-400/25'
+		}
+	},
+
 	github: {
 		icon: FLAVORS_ICONS.github,
 		colorPalette: {
