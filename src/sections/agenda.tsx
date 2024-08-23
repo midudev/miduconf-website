@@ -16,7 +16,7 @@ export const Agenda = () => {
 			<p className='text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				Todas las charlas son en directo y en español
 			</p>
-			<div className='w-full mx-auto space-y-4 text-center'>
+			<div className='w-full mx-auto space-y-4 pt-2 text-center'>
 				<span className='inline-flex flex-wrap items-center justify-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300 shadow-inset shadow-white'>
 					<span className='flex items-center gap-1 mr-1 opacity-75'>
 						<svg
