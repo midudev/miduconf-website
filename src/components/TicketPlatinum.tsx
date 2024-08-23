@@ -30,7 +30,7 @@ interface Props {
 	}
 	isSizeFixed?: boolean
 	id?: string
-	handleRemoveSticker: (index: number) => void
+	handleRemoveSticker?: (index: number) => void
 	selectedStickers: {
 		list: (string | null)[]
 		limit: number
@@ -178,36 +178,39 @@ export default function TicketPlatinum({
 										'relative h-auto group justify-center flex  text-white items-center opacity-80'
 									)}
 								>
-									{index < selectedStickers.limit && sticker != null && (
-										<button
-											onClick={() => handleRemoveSticker(index)}
-											title='Borrar sticker'
-											aria-label='Borrar Sticker'
-											className='absolute top-0 right-0 items-center justify-center hidden w-4 h-4 text-sm transition-transform border rounded-full group-hover:flex hover:scale-125 bg-red-400/60 justify-items-center border-white/60'
-										>
-											<svg
-												xmlns='http://www.w3.org/2000/svg'
-												width='24'
-												height='24'
-												viewBox='0 0 24 24'
-												fill='none'
-												stroke='currentColor'
-												strokeWidth='2'
-												strokeLinecap='round'
-												strokeLinejoin='round'
-												className='w-3 h-3'
+									{index < selectedStickers.limit &&
+										sticker != null &&
+										handleRemoveSticker != null && (
+											<button
+												onClick={() => handleRemoveSticker(index)}
+												title='Borrar sticker'
+												aria-label='Borrar Sticker'
+												className='absolute top-0 right-0 items-center justify-center hidden w-4 h-4 text-sm transition-transform border rounded-full group-hover:flex hover:scale-125 bg-red-400/60 justify-items-center border-white/60'
 											>
-												<line x1='18' y1='6' x2='6' y2='18'></line>
-												<line x1='6' y1='6' x2='18' y2='18'></line>
-											</svg>
-										</button>
-									)}
+												<svg
+													xmlns='http://www.w3.org/2000/svg'
+													width='24'
+													height='24'
+													viewBox='0 0 24 24'
+													fill='none'
+													stroke='currentColor'
+													strokeWidth='2'
+													strokeLinecap='round'
+													strokeLinejoin='round'
+													className='w-3 h-3'
+												>
+													<line x1='18' y1='6' x2='6' y2='18'></line>
+													<line x1='6' y1='6' x2='18' y2='18'></line>
+												</svg>
+											</button>
+										)}
 									{selectedStickers.limit > index ? (
 										<div
 											className={cn(
 												'p-2',
 												sticker == null &&
 													!isSizeFixed &&
+													handleRemoveSticker != null &&
 													'bg-white/10 border w-12 h-12 border-dashed rounded-lg'
 											)}
 										>

@@ -647,7 +647,7 @@ export default function Ticket({
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
-const STICKERS_LIST = [
+export const STICKERS_LIST = [
 	{
 		name: 'midu-wink',
 		StickerImage: <Stickers.MiduWink className='w-auto h-12' />
