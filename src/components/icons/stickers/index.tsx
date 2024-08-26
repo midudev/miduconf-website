@@ -35,5 +35,6 @@ export const Stickers = {
 	),
 	Mario: ({ className }) => <img className={className} src='/stickers/mario.png' alt='' />,
 	LibroGit: ({ className }) => <img className={className} src='/stickers/libro-git.png' alt='' />,
-	Vercel: ({ className }) => <img className={className} src='/stickers/vercel.png' alt='' />
+	Vercel: ({ className }) => <img className={className} src='/stickers/vercel.png' alt='' />,
+	Malt: ({ className }) => <img className={className} src='/stickers/malt.svg' />
 }
