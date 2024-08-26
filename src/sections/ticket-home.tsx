@@ -83,7 +83,7 @@ export const TicketHome = ({
 	return (
 		<div>
 			<div className='block w-full h-full'>
-				<div className='flex items-center justify-center max-w-[668px] mx-auto mt-16 flex-0'>
+				<div className='flex items-center justify-center max-w-[700px] mx-auto mt-16 flex-0'>
 					<Container3D>
 						{material === 'standard' && (
 							<Ticket
