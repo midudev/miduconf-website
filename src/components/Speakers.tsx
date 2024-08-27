@@ -108,7 +108,7 @@ function Speaker({ name, title, twitter, img, country }) {
 				</header>
 				<footer className='flex items-center justify-between gap-x-2'>
 					<p className='text-xs text-left text-white/60'>{title}</p>
-					<span>{country}</span>
+					<span className='text-white'>{country}</span>
 				</footer>
 			</div>
 		</article>
