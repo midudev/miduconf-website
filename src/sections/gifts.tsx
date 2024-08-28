@@ -92,12 +92,12 @@ const GIFTS = [
 export const Gifts = () => {
 	return (
 		<section id='regalos' className='px-4 pt-24'>
-			<HideContentBox
+			{/* <HideContentBox
 				title='Regalos'
 				subtitle='¡Muy pronto revelaremos todos los regalos!'
 				BgIcon={NavbarIcons.GiftIcon}
-			/>
-			{/* <GiftsSection /> */}
+			/> */}
+			<GiftsSection />
 		</section>
 	)
 }
@@ -133,10 +133,37 @@ const GiftsSection = () => {
 				¡Solo necesitas tener un ticket para participar!
 			</button>
 
-			<div className='grid grid-cols-1 mx-auto sm:grid-cols-2 lg:grid-cols-3 gap-7 my-11 max-w-screen-base'>
+			<div className='relative grid grid-cols-1 mx-auto sm:grid-cols-2 lg:grid-cols-3 gap-7 my-11 max-w-screen-base'>
 				{LIST_OF_GIFTS.map((gift, index) => (
 					<GiftItem key={`${gift.title}-${index}`} {...gift} />
 				))}
+			</div>
+			<div className='relative'>
+				<div
+					className='relative grid grid-cols-1 mx-auto opacity-40 sm:grid-cols-2 lg:grid-cols-3 gap-7 my-11 max-w-screen-base'
+					style={{
+						maskImage: 'linear-gradient(to top, transparent, black)'
+					}}
+				>
+					<GiftItem imgSmallUrl='' imgUrl='' title='Próximamente' isDisabled />
+					<GiftItem
+						imgSmallUrl=''
+						imgUrl=''
+						title='Próximamente'
+						isDisabled
+						className='hidden sm:flex'
+					/>
+					<GiftItem
+						imgSmallUrl=''
+						imgUrl=''
+						title='Próximamente'
+						isDisabled
+						className='hidden lg:flex'
+					/>
+				</div>
+				<p className='absolute bottom-0 left-1/2 -translate-x-1/2 z-[100] text-4xl font-semibold text-center max-w-[24ch] text-yellow-300 mx-auto px-4 h-32'>
+					¡Muy pronto revelaremos todos los regalos!
+				</p>
 			</div>
 
 			<small className='text-center w-auto mx-auto block text-white text-sm max-w-xl opacity-80 [text-wrap:balance] py-8'>
@@ -201,6 +228,15 @@ const LIST_OF_GIFTS = [
 				4 cupones de <br /> GitHub
 			</>
 		)
+	},
+	{
+		imgUrl: '/gifts/keychron.webp',
+		imgSmallUrl: '/gifts/keychron-small.webp',
+		title: (
+			<>
+				2 teclados <br /> Keychron
+			</>
+		)
 	}
 ]
 
@@ -210,9 +246,17 @@ interface GiftItemProps {
 	title: React.ReactNode
 	className?: string
 	level?: 1 | 2 | 3
+	isDisabled?: boolean
 }
 
-function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItemProps) {
+function GiftItem({
+	imgUrl,
+	title,
+	imgSmallUrl,
+	className,
+	level = 1,
+	isDisabled = false
+}: GiftItemProps) {
 	return (
 		<div
 			className={cn(
@@ -226,15 +270,19 @@ function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItem
 			<p
 				className={cn(
 					'absolute z-20 w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch]',
-					' group-hover:translate-y-1/2 transition-all duration-500 z-[60]'
+					'transition-all duration-500 z-[60]',
+					!isDisabled && 'group-hover:translate-y-1/2',
+					isDisabled && 'opacity-20'
 				)}
 			>
 				{title}
 			</p>
 			<div
 				className={cn(
-					'relative h-auto opacity-20 w-max rotate-6 z-50 blur-sm group-hover:blur-none',
-					'group-hover:-translate-y-1/3 transition-all duration-500 group-hover:opacity-100'
+					'relative h-auto opacity-20 w-max rotate-6 z-50 blur-sm ',
+					'transition-all duration-500',
+					!isDisabled &&
+						'group-hover:blur-none group-hover:-translate-y-1/3 group-hover:opacity-100'
 				)}
 			>
 				<img src={imgUrl} className='w-auto h-32 drop-shadow-gift' alt='' />
