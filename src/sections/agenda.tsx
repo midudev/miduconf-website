@@ -53,7 +53,7 @@ export const Agenda = () => {
 				))}
 			</div>
 
-			<p className='text-4xl mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+			<p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
 				¡Muy pronto revelaremos la agenda!
 			</p>
 		</section>
