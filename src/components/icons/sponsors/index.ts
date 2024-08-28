@@ -5,6 +5,7 @@ import { InfoJobsIcon } from './infojobs'
 import { CloudinaryIcon } from './cloudinary'
 import { LemonCodeHorizontalIcon } from './lemon-horizontal'
 import { LemonCodeVerticalIcon } from './lemon-vertical'
+import { MaltIcon } from './malt'
 
 export const SponsorIcons = {
 	platzi: PlatziIcon,
@@ -13,5 +14,6 @@ export const SponsorIcons = {
 	infoJobs: InfoJobsIcon,
 	cloudinary: CloudinaryIcon,
 	lemonCodeHorizontal: LemonCodeHorizontalIcon,
-	lemonCodeVertical: LemonCodeVerticalIcon
+	lemonCodeVertical: LemonCodeVerticalIcon,
+	malt: MaltIcon
 }

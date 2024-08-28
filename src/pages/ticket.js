@@ -276,7 +276,7 @@ export default function Ticket({
 			>
 				<div>
 					<div className='w-auto'>
-						<div className='max-w-[400px] md:max-w-[700px] mx-auto'>
+						<div className='max-w-[400px] md:max-w-[700px] md:w-[700px] mx-auto'>
 							<Container3D>
 								{selectedMaterial === MATERIALS_AVAILABLE.STANDARD && (
 									<TicketComponent
@@ -735,6 +735,10 @@ export const STICKERS_LIST = [
 	{
 		name: 'keep-coding',
 		StickerImage: <Stickers.KeepCoding className='w-12 h-12' />
+	},
+	{
+		name: 'malt',
+		StickerImage: <Stickers.Malt className='w-12 h-auto' />
 	},
 	{
 		name: 'cloudinary',

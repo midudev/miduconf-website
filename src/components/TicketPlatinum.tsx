@@ -169,7 +169,12 @@ export default function TicketPlatinum({
 							</time>
 						</div>
 					</div>
-					<div className='flex flex-row-reverse items-center h-auto gap-2 mx-auto md:mr-4 md:ml-0'>
+					<div
+						className={cn(
+							'flex flex-row-reverse items-center w-auto h-auto gap-2 mx-auto md:ml-0',
+							isSizeFixed ? 'justify-self-end mr-4' : 'justify-center md:justify-self-end md:mr-4'
+						)}
+					>
 						{selectedStickers?.list &&
 							selectedStickers?.list.map((sticker, index) => (
 								<div
@@ -260,27 +265,33 @@ export default function TicketPlatinum({
 					<div
 						className={cn(
 							'grid self-end gap-4',
-							isSizeFixed ? 'grid-cols-[1fr_auto] ' : ' grid-cols-1 md:grid-cols-[1fr_auto]'
+							isSizeFixed
+								? 'grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-0'
+								: ' grid-cols-1 md:grid-cols-[1fr_auto] md:grid-rows-[auto_auto] md:gap-0'
 						)}
 					>
 						<div
 							className={cn(
 								'flex flex-col justify-end',
 								isSizeFixed
-									? 'mx-0 px-0 pb-5 pl-5 items-start w-auto'
-									: 'px-2 md:px-0 items-center w-full md:w-auto md:items-start pb-0 md:pl-5 md:pb-5 mx-auto md:mx-0'
+									? 'mx-0 px-0 pb-5 pl-5 items-start w-auto row-[2/3]'
+									: 'px-2 md:px-0 items-center w-full md:w-auto md:items-start pb-0 md:pl-5 md:pb-5 mx-auto md:mx-0 md:row-[2/3]'
 							)}
 						>
 							<span className='pb-1 pl-2 text-sm text-white/80'>Gracias a:</span>
 							<div
 								className={cn(
-									'flex items-center justify-start grid-cols-3 gap-4 px-4 py-2 bg-white/10 w-auto rounded'
+									'flex items-center flex-wrap justify-center grid-cols-3 gap-4 px-4 py-2 bg-white/10 w-auto',
+									isSizeFixed
+										? 'rounded-full justify-start flex-nowrap'
+										: 'rounded md:rounded-full md:justify-start md:flex-nowrap'
 								)}
 							>
-								<LIST_OF_TICKET_SPONSORS.platzi className='w-auto h-auto text-white max-h-3 md:max-h-4' />
-								<LIST_OF_TICKET_SPONSORS.donDominio className='w-auto h-auto text-white max-h-2.5 md:max-h-3' />
-								<LIST_OF_TICKET_SPONSORS.lemonCode className='w-auto h-auto text-white max-h-4' />
+								<LIST_OF_TICKET_SPONSORS.platzi className='w-auto h-auto text-white max-h-3 md:max-h-3' />
+								<LIST_OF_TICKET_SPONSORS.donDominio className='w-auto h-auto text-white max-h-2.5 md:max-h-2.5' />
+								<LIST_OF_TICKET_SPONSORS.lemonCode className='w-auto h-auto text-white max-h-3' />
 								<LIST_OF_TICKET_SPONSORS.keepCode className='w-auto h-auto text-white max-h-4' />
+								<LIST_OF_TICKET_SPONSORS.malt className='w-auto h-auto text-white max-h-3 md:max-h-3' />
 							</div>
 						</div>
 						<a
@@ -288,13 +299,13 @@ export default function TicketPlatinum({
 							target='_blank'
 							rel='nofollow'
 							className={cn(
-								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-[#a172f7] transition-colors',
+								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-[#b9a3e3] transition-colors',
 								isSizeFixed
-									? 'text-base mx-0 pt-5'
-									: 'pt-0 text-md md:text-base mx-auto md:mx-0 md:pt-5'
+									? 'text-base mx-0 pt-5 col-[1/3] row-[1/2] h-max py-0'
+									: 'pt-0 text-md md:text-base mx-auto md:mx-0 md:pt-5 md:py-0 md:h-max md:row-[1/2] md:col-[1/3]'
 							)}
 						>
-							<TwitchIcon className={cn('h-auto w-4')} />
+							<TwitchIcon className={cn('h-auto w-3.5')} />
 							twitch.tv/midudev
 						</a>
 					</div>
@@ -330,5 +341,6 @@ const LIST_OF_TICKET_SPONSORS = {
 	platzi: SponsorIcons.platzi,
 	donDominio: SponsorIcons.donDominio,
 	keepCode: SponsorIcons.keepCoding,
-	lemonCode: SponsorIcons.lemonCodeHorizontal
+	lemonCode: SponsorIcons.lemonCodeHorizontal,
+	malt: SponsorIcons.malt
 }
