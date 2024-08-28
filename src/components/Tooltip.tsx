@@ -21,9 +21,16 @@ interface Props {
 	text: React.ReactNode
 	tooltipPosition?: Placement
 	offsetNumber?: number
+	tooltipClassName?: string
 }
 
-export function Tooltip({ children, text, tooltipPosition = 'bottom', offsetNumber = 12 }: Props) {
+export function Tooltip({
+	children,
+	text,
+	tooltipPosition = 'bottom',
+	offsetNumber = 12,
+	tooltipClassName = ''
+}: Props) {
 	const [isOpen, setIsOpen] = useState(false)
 	const arrowRef = useRef(null)
 
@@ -59,7 +66,10 @@ export function Tooltip({ children, text, tooltipPosition = 'bottom', offsetNumb
 					ref={refs.setFloating}
 					style={floatingStyles}
 					{...getFloatingProps()}
-					className='px-2 z-10 py-1 text-sm text-white bg-[#121226] border rounded border-midu-primary/20'
+					className={cn(
+						'px-2 z-10 py-1 text-sm text-white bg-[#121226] border rounded border-midu-primary/20',
+						tooltipClassName
+					)}
 				>
 					{text}
 					<FloatingArrow

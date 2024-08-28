@@ -92,12 +92,12 @@ const GIFTS = [
 export const Gifts = () => {
 	return (
 		<section id='regalos' className='px-4 pt-24'>
-			<HideContentBox
+			{/* <HideContentBox
 				title='Regalos'
-				subtitle='¡Muy pronto desvelaremos todos los regalos!'
+				subtitle='¡Muy pronto revelaremos todos los regalos!'
 				BgIcon={NavbarIcons.GiftIcon}
-			/>
-			{/* <GiftsSection /> */}
+			/> */}
+			<GiftsSection />
 		</section>
 	)
 }
@@ -133,10 +133,37 @@ const GiftsSection = () => {
 				¡Solo necesitas tener un ticket para participar!
 			</button>
 
-			<div className='grid grid-cols-1 mx-auto sm:grid-cols-2 lg:grid-cols-3 gap-7 my-11 max-w-screen-base'>
+			<div className='relative grid grid-cols-1 mx-auto sm:grid-cols-2 lg:grid-cols-3 gap-7 my-11 max-w-screen-base'>
 				{LIST_OF_GIFTS.map((gift, index) => (
 					<GiftItem key={`${gift.title}-${index}`} {...gift} />
 				))}
+			</div>
+			<div className='relative'>
+				<div
+					className='relative grid grid-cols-1 mx-auto opacity-40 sm:grid-cols-2 lg:grid-cols-3 gap-7 my-11 max-w-screen-base'
+					style={{
+						maskImage: 'linear-gradient(to top, transparent, black)'
+					}}
+				>
+					<GiftItem imgSmallUrl='' imgUrl='' title='Próximamente' isDisabled />
+					<GiftItem
+						imgSmallUrl=''
+						imgUrl=''
+						title='Próximamente'
+						isDisabled
+						className='hidden sm:flex'
+					/>
+					<GiftItem
+						imgSmallUrl=''
+						imgUrl=''
+						title='Próximamente'
+						isDisabled
+						className='hidden lg:flex'
+					/>
+				</div>
+				<p className='absolute bottom-0 left-1/2 -translate-x-1/2 z-[100] text-4xl font-semibold text-center max-w-[24ch] text-wrap text-yellow-300 mx-auto px-4 h-32'>
+					¡Muy pronto revelaremos todos los regalos!
+				</p>
 			</div>
 
 			<small className='text-center w-auto mx-auto block text-white text-sm max-w-xl opacity-80 [text-wrap:balance] py-8'>
@@ -151,44 +178,85 @@ const LIST_OF_GIFTS = [
 	{
 		imgUrl: '/regalo-libro-git.png',
 		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		title: `10 libros físicos de Aprendiendo Git`
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini Ordenador Mac Mini Ordenador Mac Mini'
+		imgUrl: '/gifts/this-is-fine-small.webp',
+		imgSmallUrl: '/gifts/this-is-fine.webp',
+		title: (
+			<>
+				2 peluches de <br /> This is Fine
+			</>
+		)
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		imgUrl: '/gifts/codigo-sostenible.webp',
+		imgSmallUrl: '/gifts/codigo-sostenible-small.webp',
+		title: '5 libros físicos de Código Sostenible'
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		imgUrl: '/gifts/el-programador-pragmatico.webp',
+		imgSmallUrl: '/gifts/el-programador-pragmatico.webp',
+		title: (
+			<>
+				5 Libros del Programador Pragmático{' '}
+				<span className='inline-flex items-center gap-1 text-lg '>
+					(
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						className='inline w-3 h-3'
+						width='1200'
+						height='1227'
+						fill='none'
+						viewBox='0 0 1200 1227'
+					>
+						<path
+							fill='#fff'
+							d='M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z'
+						/>
+					</svg>
+					)
+				</span>
+			</>
+		)
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini Ordenador Mac Mini Ordenador Mac Mini'
+		imgUrl: '/gifts/cupon-github.webp',
+		imgSmallUrl: '/gifts/cupon-github-small.webp',
+		title: (
+			<>
+				4 cupones de <br /> GitHub
+			</>
+		)
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		imgUrl: '/gifts/keychron.webp',
+		imgSmallUrl: '/gifts/keychron-small.webp',
+		title: (
+			<>
+				2 teclados <br /> Keychron
+			</>
+		)
 	}
 ]
 
 interface GiftItemProps {
 	imgUrl: string
 	imgSmallUrl: string
-	title: string
+	title: React.ReactNode
 	className?: string
 	level?: 1 | 2 | 3
+	isDisabled?: boolean
 }
 
-function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItemProps) {
+function GiftItem({
+	imgUrl,
+	title,
+	imgSmallUrl,
+	className,
+	level = 1,
+	isDisabled = false
+}: GiftItemProps) {
 	return (
 		<div
 			className={cn(
@@ -201,22 +269,26 @@ function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItem
 		>
 			<p
 				className={cn(
-					'absolute z-20 w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2',
-					' group-hover:translate-y-1/2 transition-all duration-500'
+					'absolute z-20 w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch]',
+					'transition-all duration-500 z-[60]',
+					!isDisabled && 'group-hover:translate-y-1/2',
+					isDisabled && 'opacity-20'
 				)}
 			>
 				{title}
 			</p>
 			<div
 				className={cn(
-					'relative h-auto opacity-20 w-max rotate-6 z-50 blur-sm group-hover:blur-none',
-					'group-hover:-translate-y-1/3 transition-all duration-500 group-hover:opacity-100'
+					'relative h-auto opacity-20 w-max rotate-6 z-50 blur-sm ',
+					'transition-all duration-500',
+					!isDisabled &&
+						'group-hover:blur-none group-hover:-translate-y-1/3 group-hover:opacity-100'
 				)}
 			>
-				<img src={imgUrl} className='w-32 h-auto drop-shadow-gift' alt='' />
+				<img src={imgUrl} className='w-auto h-32 drop-shadow-gift' alt='' />
 				<img
 					src={imgSmallUrl}
-					className='w-16 h-auto drop-shadow-gift absolute -bottom-0.5 -right-2'
+					className='h-16 w-auto drop-shadow-gift absolute -bottom-0.5 -right-2'
 					alt=''
 				/>
 			</div>

@@ -7,6 +7,7 @@ import { SponsorIcons } from '@/components/icons/sponsors'
 import { useGetTimezone } from '@/sections/agenda'
 import { formatEventTimeWithTimeZoneName } from './utilities/timezone'
 import { TwitchIcon } from './icons'
+import { Tooltip } from './Tooltip'
 
 interface Props {
 	transition?: boolean
@@ -29,6 +30,11 @@ interface Props {
 	}
 	isSizeFixed?: boolean
 	id?: string
+	handleRemoveSticker?: (index: number) => void
+	selectedStickers: {
+		list: (string | null)[]
+		limit: number
+	}
 }
 
 export default function TicketGradient({
@@ -38,7 +44,9 @@ export default function TicketGradient({
 	user,
 	isSizeFixed = false,
 	className,
-	id
+	id,
+	handleRemoveSticker,
+	selectedStickers
 }: Props) {
 	const timeZone = useGetTimezone()
 	const { username, avatar } = user ?? {}
@@ -153,7 +161,12 @@ export default function TicketGradient({
 								)}
 							>
 								Sept. 12 2024
-								<span className='block text-sm font-normal text-white/60 animate-blurred-fade-in'>
+								<span
+									className={cn(
+										'block text-sm font-normal text-white/60',
+										!isSizeFixed && 'animate-blurred-fade-in'
+									)}
+								>
 									{timeZone == null ? '' : formatEventTimeWithTimeZoneName(1726153200000, timeZone)}
 								</span>
 							</time>
@@ -161,29 +174,127 @@ export default function TicketGradient({
 					</div>
 					<div
 						className={cn(
+							'flex flex-row-reverse items-center w-auto h-auto gap-2 mx-auto md:ml-0',
+							isSizeFixed ? 'justify-self-end mr-4' : 'justify-center md:justify-self-end md:mr-4'
+						)}
+					>
+						{selectedStickers?.list &&
+							selectedStickers?.list.map((sticker, index) => (
+								<div
+									key={index}
+									className={cn(
+										'relative h-auto group justify-center flex  text-white items-center opacity-80'
+									)}
+								>
+									{index < selectedStickers.limit &&
+										sticker != null &&
+										handleRemoveSticker != null && (
+											<button
+												onClick={() => handleRemoveSticker(index)}
+												title='Borrar sticker'
+												aria-label='Borrar Sticker'
+												className='absolute top-0 right-0 items-center justify-center hidden w-4 h-4 text-sm transition-transform border rounded-full group-hover:flex hover:scale-125 bg-red-400/60 justify-items-center border-white/60'
+											>
+												<svg
+													xmlns='http://www.w3.org/2000/svg'
+													width='24'
+													height='24'
+													viewBox='0 0 24 24'
+													fill='none'
+													stroke='currentColor'
+													strokeWidth='2'
+													strokeLinecap='round'
+													strokeLinejoin='round'
+													className='w-3 h-3'
+												>
+													<line x1='18' y1='6' x2='6' y2='18'></line>
+													<line x1='6' y1='6' x2='18' y2='18'></line>
+												</svg>
+											</button>
+										)}
+									{selectedStickers.limit > index ? (
+										<div
+											className={cn(
+												'p-2',
+												sticker == null &&
+													!isSizeFixed &&
+													handleRemoveSticker != null &&
+													'bg-white/10 border w-12 h-12 border-dashed rounded-lg'
+											)}
+										>
+											{sticker}
+										</div>
+									) : (
+										<>
+											{handleRemoveSticker != null && (
+												<Tooltip
+													tooltipClassName='w-[200px]'
+													key={index}
+													tooltipPosition='top'
+													text={`Desbloquear con suscripción de Nivel ${index + 1} en Twitch`}
+													offsetNumber={16}
+												>
+													<div
+														className={cn(
+															'flex items-center justify-center w-12 h-12 p-2 border border-dashed rounded-lg opacity-20',
+															isSizeFixed && 'hidden'
+														)}
+													>
+														<svg
+															xmlns='http://www.w3.org/2000/svg'
+															width='24'
+															height='24'
+															viewBox='0 0 24 24'
+															fill='none'
+															stroke='currentColor'
+															strokeWidth='2'
+															strokeLinecap='round'
+															strokeLinejoin='round'
+															className='w-6 h-6'
+														>
+															<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+															<path d='M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z' />
+															<path d='M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0' />
+															<path d='M8 11v-4a4 4 0 1 1 8 0v4' />
+														</svg>
+													</div>
+												</Tooltip>
+											)}
+										</>
+									)}
+								</div>
+							))}
+					</div>
+					<div
+						className={cn(
 							'grid self-end gap-4',
-							isSizeFixed ? 'grid-cols-[1fr_auto] ' : ' grid-cols-1 md:grid-cols-[1fr_auto]'
+							isSizeFixed
+								? 'grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-0'
+								: ' grid-cols-1 md:grid-cols-[1fr_auto] md:grid-rows-[auto_auto] md:gap-0'
 						)}
 					>
 						<div
 							className={cn(
 								'flex flex-col justify-end',
 								isSizeFixed
-									? 'mx-0 px-0 pb-5 pl-5 items-start w-auto'
-									: 'px-2 md:px-0 items-center w-full md:w-auto md:items-start pb-0 md:pl-5 md:pb-5 mx-auto md:mx-0'
+									? 'mx-0 px-0 pb-5 pl-5 items-start w-auto row-[2/3]'
+									: 'px-2 md:px-0 items-center w-full md:w-auto md:items-start pb-0 md:pl-5 md:pb-5 mx-auto md:mx-0 md:row-[2/3]'
 							)}
 						>
 							<span className='pb-1 pl-2 text-sm text-white/80'>Gracias a:</span>
 							<div
 								className={cn(
-									'flex items-center justify-start grid-cols-3 gap-4 px-4 py-2 bg-black/10 w-auto',
-									isSizeFixed ? 'rounded-full' : 'rounded md:rounded-full '
+									'flex items-center flex-wrap justify-center grid-cols-3 gap-4 px-4 py-2 bg-white/10 w-auto',
+									isSizeFixed
+										? 'rounded-full justify-start flex-nowrap'
+										: 'rounded md:rounded-full md:justify-start md:flex-nowrap'
 								)}
 							>
-								<LIST_OF_TICKET_SPONSORS.platzi className='w-auto h-auto text-white max-h-3 md:max-h-4' />
-								<LIST_OF_TICKET_SPONSORS.donDominio className='w-auto h-auto text-white max-h-2.5 md:max-h-3' />
-								<LIST_OF_TICKET_SPONSORS.lemonCode className='w-auto h-auto text-white max-h-4' />
+								<LIST_OF_TICKET_SPONSORS.platzi className='w-auto h-auto text-white max-h-3 md:max-h-3' />
+								<LIST_OF_TICKET_SPONSORS.donDominio className='w-auto h-auto text-white max-h-2.5 md:max-h-2.5' />
+								<LIST_OF_TICKET_SPONSORS.lemonCode className='w-auto h-auto text-white max-h-3' />
 								<LIST_OF_TICKET_SPONSORS.keepCode className='w-auto h-auto text-white max-h-4' />
+								<LIST_OF_TICKET_SPONSORS.malt className='w-auto h-auto text-white max-h-3 md:max-h-3' />
 							</div>
 						</div>
 						<a
@@ -191,13 +302,13 @@ export default function TicketGradient({
 							target='_blank'
 							rel='nofollow'
 							className={cn(
-								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-black transition-colors',
+								'flex items-center justify-self-end justify-end gap-2 p-5 font-bold text-white w-max hover:text-[#b9a3e3] transition-colors',
 								isSizeFixed
-									? 'text-base mx-0 pt-5'
-									: 'pt-0 text-md md:text-base mx-auto md:mx-0 md:pt-5'
+									? 'text-base mx-0 pt-5 col-[1/3] row-[1/2] h-max py-0'
+									: 'pt-0 text-md md:text-base mx-auto md:mx-0 md:pt-5 md:py-0 md:h-max md:row-[1/2] md:col-[1/3]'
 							)}
 						>
-							<TwitchIcon className={cn('h-auto w-4')} />
+							<TwitchIcon className={cn('h-auto w-3.5')} />
 							twitch.tv/midudev
 						</a>
 					</div>
@@ -233,5 +344,6 @@ const LIST_OF_TICKET_SPONSORS = {
 	platzi: SponsorIcons.platzi,
 	donDominio: SponsorIcons.donDominio,
 	keepCode: SponsorIcons.keepCoding,
-	lemonCode: SponsorIcons.lemonCodeHorizontal
+	lemonCode: SponsorIcons.lemonCodeHorizontal,
+	malt: SponsorIcons.malt
 }

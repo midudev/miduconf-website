@@ -54,12 +54,42 @@ const SPEAKERS = [
 		twitter: 's4vitar',
 		img: 's4vitar',
 		country: '🇪🇸'
+	},
+	{
+		name: 'Freddy Vega',
+		title: 'CEO @ Platzi',
+		twitter: 'freddier',
+		img: 'freddyVega',
+		country: '🇨🇴'
+	},
+	{
+		name: 'PatoDev',
+		title: 'Media Developer @ Cloudinary',
+		twitter: 'devpato',
+		img: 'patoDev',
+		country: '🇺🇸'
+	},
+	{
+		name: 'Grimerloner',
+		title: 'Músico y Productor',
+		instagram: 'grimerloner',
+		img: 'grimerloner',
+		country: '🇪🇸'
 	}
 ]
 
-function Speaker({ name, title, twitter, img, country }) {
+interface Props {
+	name: string
+	title: string
+	twitter?: string
+	img: string
+	country: string
+	instagram?: string
+}
+
+function Speaker({ name, title, twitter, img, country, instagram }: Props) {
 	return (
-		<article className='relative flex flex-col items-center justify-center w-full transition-all bg-[#121226]/50 border border-midu-primary/40 rounded-[20px] group overflow-hidden'>
+		<article className='relative flex flex-col items-center justify-center w-full transition-all bg-[#121226]/50 border border-midu-primary/40 rounded-[20px] group overflow-hidden hover:scale-110'>
 			<div className='w-full p-[14px] rounded transition'>
 				<figure className='flex items-center justify-center'>
 					<img
@@ -76,7 +106,11 @@ function Speaker({ name, title, twitter, img, country }) {
 				<header className='flex items-center justify-between mt-4 gap-x-2'>
 					<h3 className='text-[16px] font-bold text-left text-white'>
 						<a
-							href={`https://twitter.com/${twitter}`}
+							href={
+								twitter
+									? `https://twitter.com/${twitter}`
+									: `https://www.instagram.com/${instagram}`
+							}
 							target='_blank'
 							rel='external noopener nofollow'
 						>
@@ -85,16 +119,18 @@ function Speaker({ name, title, twitter, img, country }) {
 					</h3>
 					<a
 						className='text-[10px] text-white/60 flex items-center'
-						href={`https://twitter.com/${twitter}`}
+						href={
+							twitter ? `https://twitter.com/${twitter}` : `https://www.instagram.com/${instagram}`
+						}
 						target='_blank'
 						rel='external noopener nofollow'
 					>
-						@{twitter}
+						@{twitter ?? instagram}
 					</a>
 				</header>
 				<footer className='flex items-center justify-between gap-x-2'>
 					<p className='text-xs text-left text-white/60'>{title}</p>
-					<span>{country}</span>
+					<span className='text-white'>{country}</span>
 				</footer>
 			</div>
 		</article>
@@ -115,7 +151,7 @@ export function Speakers() {
 			</p>
 			<div className='grid grid-cols-1 my-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-8'>
 				{SPEAKERS.map((speaker) => (
-					<Speaker key={speaker.twitter} {...speaker} />
+					<Speaker key={speaker.name} {...speaker} />
 				))}
 			</div>
 		</section>

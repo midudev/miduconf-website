@@ -57,9 +57,9 @@ export const Sponsors = () => {
 
 			<div className='relative flex flex-col items-center justify-center w-full h-full gap-4 py-20 overflow-hidden rounded-lg max-w-screen-base bg-background'>
 				<h3 className='text-3xl font-bold text-center text-white'>Premium</h3>
-				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-2'>
+				<div className='grid gap-4 md:flex md:flex-wrap md:justify-center md:grid-cols-2 lg:grid-cols-2'>
 					{premiums.map((premium) => (
-						<ReviewCard key={premium.name} {...premium} size='large' />
+						<ReviewCard className='max-w-80' key={premium.name} {...premium} size='large' />
 					))}
 				</div>
 
@@ -111,6 +111,12 @@ export const premiums = [
 		link: 'https://midu.link/keepcoding',
 		logo: <SponsorIcons.keepCoding className='object-contain w-full h-12' />,
 		slogan: 'Los Mejores Bootcamps Online'
+	},
+	{
+		name: 'Malt',
+		link: 'https://malt.es/',
+		logo: <SponsorIcons.malt className='w-auto h-12' />,
+		slogan: 'Encuentra y contrata a los mejores freelancers en Malt'
 	}
 ]
 

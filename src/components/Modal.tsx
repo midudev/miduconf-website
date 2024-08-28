@@ -33,14 +33,14 @@ export function Modal({ isOpen = false, onClose, children }: Props) {
 						<path
 							d='M16.5 1.5L1.5 16.5'
 							stroke='white'
-							stroke-width='2'
+							strokeWidth='2'
 							stroke-linecap='round'
 							stroke-linejoin='round'
 						/>
 						<path
 							d='M1.5 1.5L16.5 16.5'
 							stroke='white'
-							stroke-width='2'
+							strokeWidth='2'
 							stroke-linecap='round'
 							stroke-linejoin='round'
 						/>

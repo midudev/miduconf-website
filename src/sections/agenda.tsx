@@ -3,7 +3,6 @@ import { NavbarIcons } from '@/components/icons/navbar'
 import { Codely } from '@/components/logos/codely'
 import { DonDominio } from '@/components/logos/dondominio'
 import { LemonCode } from '@/components/logos/lemoncode'
-import { Malt } from '@/components/logos/maltes'
 import ReactDOM from 'react-dom'
 import { useEffect, useState } from 'react'
 
@@ -16,7 +15,7 @@ export const Agenda = () => {
 			<p className='text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				Todas las charlas son en directo y en español
 			</p>
-			<div className='w-full mx-auto space-y-4 text-center'>
+			<div className='w-full pt-2 mx-auto space-y-4 text-center'>
 				<span className='inline-flex flex-wrap items-center justify-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300 shadow-inset shadow-white'>
 					<span className='flex items-center gap-1 mr-1 opacity-75'>
 						<svg
@@ -39,7 +38,7 @@ export const Agenda = () => {
 			</div>
 			<div
 				className='flex flex-col gap-8 mt-12 md:hidden lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 90%)' }}
+				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 550px)' }}
 			>
 				{LIST_OF_TALKS.map((talk) => (
 					<AgendaItemMobile key={talk.speaker.name} {...talk} />
@@ -47,15 +46,15 @@ export const Agenda = () => {
 			</div>
 			<div
 				className='flex-col hidden gap-8 mt-12 md:flex lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 90%)' }}
+				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 550px)' }}
 			>
 				{LIST_OF_TALKS.map((talk) => (
 					<AgendaItem key={talk.speaker.name} {...talk} />
 				))}
 			</div>
 
-			<p className='text-4xl mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
-				¡Muy pronto desvelaremos la agenda!
+			<p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+				¡Muy pronto revelaremos la agenda!
 			</p>
 		</section>
 	)
@@ -117,7 +116,7 @@ const AgendaItemMobile = ({ startAt, durationInMinutes, title, speaker }: Agenda
 					src={speaker.imgUrl}
 					alt={`Foto de ${speaker.name}`}
 				/>
-				<h5 className='font-bold text-white'>{title}</h5>
+				<h5 className='flex-1 font-bold text-white'>{title}</h5>
 			</div>
 		</article>
 	)
@@ -201,6 +200,16 @@ export const useGetTimezone = () => {
 }
 
 const LIST_OF_TALKS = [
+	{
+		speaker: {
+			name: 'Grimer Loner',
+			description: 'Músico y Productor',
+			imgUrl: '/img/speakers/grimerloner.jpg'
+		},
+		title: '¡Cuenta atrás! ¡Música en vivo con programación!',
+		startAt: 1726152000000,
+		durationInMinutes: 20
+	},
 	{
 		speaker: {
 			name: 'Miguel Ángel Durán',
