@@ -185,7 +185,7 @@ const LIST_OF_GIFTS = [
 		imgSmallUrl: '/gifts/this-is-fine.webp',
 		title: (
 			<>
-				5 peluches de <br /> This is Fine
+				2 peluches de <br /> This is Fine
 			</>
 		)
 	},

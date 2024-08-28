@@ -206,7 +206,7 @@ const LIST_OF_TALKS = [
 			description: 'Músico y Productor',
 			imgUrl: '/img/speakers/grimerloner.jpg'
 		},
-		title: '¡Arranca la cuenta atrás! Música en vivo con programación!',
+		title: '¡Cuenta atrás! ¡Música en vivo con programación!',
 		startAt: 1726152000000,
 		durationInMinutes: 20
 	},
