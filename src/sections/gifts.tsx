@@ -154,8 +154,8 @@ const LIST_OF_GIFTS = [
 		title: `10 libros físicos de Aprendiendo Git`
 	},
 	{
-		imgUrl: '/gifts/this-is-fine-small.png',
-		imgSmallUrl: '/gifts/this-is-fine.png',
+		imgUrl: '/gifts/this-is-fine-small.webp',
+		imgSmallUrl: '/gifts/this-is-fine.webp',
 		title: (
 			<>
 				5 peluches de <br /> This is Fine
@@ -163,13 +163,13 @@ const LIST_OF_GIFTS = [
 		)
 	},
 	{
-		imgUrl: '/gifts/codigo-sostenible.png',
-		imgSmallUrl: '/gifts/codigo-sostenible-small.png',
+		imgUrl: '/gifts/codigo-sostenible.webp',
+		imgSmallUrl: '/gifts/codigo-sostenible-small.webp',
 		title: '5 libros físicos de Código Sostenible'
 	},
 	{
-		imgUrl: '/gifts/el-programador-pragmatico.png',
-		imgSmallUrl: '/gifts/el-programador-pragmatico.png',
+		imgUrl: '/gifts/el-programador-pragmatico.webp',
+		imgSmallUrl: '/gifts/el-programador-pragmatico.webp',
 		title: (
 			<>
 				5 Libros del Programador Pragmático{' '}
@@ -194,8 +194,8 @@ const LIST_OF_GIFTS = [
 		)
 	},
 	{
-		imgUrl: '/gifts/cupon-github.png',
-		imgSmallUrl: '/gifts/cupon-github-small.png',
+		imgUrl: '/gifts/cupon-github.webp',
+		imgSmallUrl: '/gifts/cupon-github-small.webp',
 		title: (
 			<>
 				4 cupones de <br /> GitHub
