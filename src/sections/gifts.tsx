@@ -151,39 +151,63 @@ const LIST_OF_GIFTS = [
 	{
 		imgUrl: '/regalo-libro-git.png',
 		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		title: `10 libros físicos de Aprendiendo Git`
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini Ordenador Mac Mini Ordenador Mac Mini'
+		imgUrl: '/gifts/this-is-fine-small.png',
+		imgSmallUrl: '/gifts/this-is-fine.png',
+		title: (
+			<>
+				5 peluches de <br /> This is Fine
+			</>
+		)
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		imgUrl: '/gifts/codigo-sostenible.png',
+		imgSmallUrl: '/gifts/codigo-sostenible-small.png',
+		title: '5 libros físicos de Código Sostenible'
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		imgUrl: '/gifts/el-programador-pragmatico.png',
+		imgSmallUrl: '/gifts/el-programador-pragmatico.png',
+		title: (
+			<>
+				5 Libros del Programador Pragmático{' '}
+				<span className='inline-flex items-center gap-1 text-lg '>
+					(
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						className='inline w-3 h-3'
+						width='1200'
+						height='1227'
+						fill='none'
+						viewBox='0 0 1200 1227'
+					>
+						<path
+							fill='#fff'
+							d='M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z'
+						/>
+					</svg>
+					)
+				</span>
+			</>
+		)
 	},
 	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini Ordenador Mac Mini Ordenador Mac Mini'
-	},
-	{
-		imgUrl: '/regalo-libro-git.png',
-		imgSmallUrl: '/regalo-libro-git.png',
-		title: 'Ordenador Mac Mini'
+		imgUrl: '/gifts/cupon-github.png',
+		imgSmallUrl: '/gifts/cupon-github-small.png',
+		title: (
+			<>
+				4 cupones de <br /> GitHub
+			</>
+		)
 	}
 ]
 
 interface GiftItemProps {
 	imgUrl: string
 	imgSmallUrl: string
-	title: string
+	title: React.ReactNode
 	className?: string
 	level?: 1 | 2 | 3
 }
@@ -201,8 +225,8 @@ function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItem
 		>
 			<p
 				className={cn(
-					'absolute z-20 w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2',
-					' group-hover:translate-y-1/2 transition-all duration-500'
+					'absolute z-20 w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch]',
+					' group-hover:translate-y-1/2 transition-all duration-500 z-[60]'
 				)}
 			>
 				{title}
@@ -213,10 +237,10 @@ function GiftItem({ imgUrl, title, imgSmallUrl, className, level = 1 }: GiftItem
 					'group-hover:-translate-y-1/3 transition-all duration-500 group-hover:opacity-100'
 				)}
 			>
-				<img src={imgUrl} className='w-32 h-auto drop-shadow-gift' alt='' />
+				<img src={imgUrl} className='w-auto h-32 drop-shadow-gift' alt='' />
 				<img
 					src={imgSmallUrl}
-					className='w-16 h-auto drop-shadow-gift absolute -bottom-0.5 -right-2'
+					className='h-16 w-auto drop-shadow-gift absolute -bottom-0.5 -right-2'
 					alt=''
 				/>
 			</div>
