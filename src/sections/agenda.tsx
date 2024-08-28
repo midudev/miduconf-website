@@ -38,7 +38,7 @@ export const Agenda = () => {
 			</div>
 			<div
 				className='flex flex-col gap-8 mt-12 md:hidden lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 90%)' }}
+				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 550px)' }}
 			>
 				{LIST_OF_TALKS.map((talk) => (
 					<AgendaItemMobile key={talk.speaker.name} {...talk} />
@@ -46,7 +46,7 @@ export const Agenda = () => {
 			</div>
 			<div
 				className='flex-col hidden gap-8 mt-12 md:flex lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 90%)' }}
+				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 550px)' }}
 			>
 				{LIST_OF_TALKS.map((talk) => (
 					<AgendaItem key={talk.speaker.name} {...talk} />
@@ -116,7 +116,7 @@ const AgendaItemMobile = ({ startAt, durationInMinutes, title, speaker }: Agenda
 					src={speaker.imgUrl}
 					alt={`Foto de ${speaker.name}`}
 				/>
-				<h5 className='font-bold text-white'>{title}</h5>
+				<h5 className='flex-1 font-bold text-white'>{title}</h5>
 			</div>
 		</article>
 	)
@@ -200,6 +200,16 @@ export const useGetTimezone = () => {
 }
 
 const LIST_OF_TALKS = [
+	{
+		speaker: {
+			name: 'Grimer Loner',
+			description: 'Músico y Productor',
+			imgUrl: '/img/speakers/grimerloner.jpg'
+		},
+		title: '¡Arranca la cuenta atrás! Música en vivo con programación!',
+		startAt: 1726152000000,
+		durationInMinutes: 20
+	},
 	{
 		speaker: {
 			name: 'Miguel Ángel Durán',
