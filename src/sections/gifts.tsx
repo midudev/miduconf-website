@@ -161,7 +161,7 @@ const GiftsSection = () => {
 						className='hidden lg:flex'
 					/>
 				</div>
-				<p className='absolute bottom-0 left-1/2 -translate-x-1/2 z-[100] text-4xl font-semibold text-center max-w-[24ch] text-yellow-300 mx-auto px-4 h-32'>
+				<p className='absolute bottom-0 left-1/2 -translate-x-1/2 z-[100] text-4xl font-semibold text-center max-w-[24ch] text-wrap text-yellow-300 mx-auto px-4 h-32'>
 					¡Muy pronto revelaremos todos los regalos!
 				</p>
 			</div>
@@ -185,7 +185,7 @@ const LIST_OF_GIFTS = [
 		imgSmallUrl: '/gifts/this-is-fine.webp',
 		title: (
 			<>
-				5 peluches de <br /> This is Fine
+				2 peluches de <br /> This is Fine
 			</>
 		)
 	},

@@ -53,7 +53,7 @@ export const Agenda = () => {
 				))}
 			</div>
 
-			<p className='text-4xl mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+			<p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
 				¡Muy pronto revelaremos la agenda!
 			</p>
 		</section>
@@ -206,7 +206,7 @@ const LIST_OF_TALKS = [
 			description: 'Músico y Productor',
 			imgUrl: '/img/speakers/grimerloner.jpg'
 		},
-		title: '¡Arranca la cuenta atrás! Música en vivo con programación!',
+		title: '¡Cuenta atrás! ¡Música en vivo con programación!',
 		startAt: 1726152000000,
 		durationInMinutes: 20
 	},

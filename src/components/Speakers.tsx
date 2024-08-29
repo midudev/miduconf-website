@@ -89,7 +89,7 @@ interface Props {
 
 function Speaker({ name, title, twitter, img, country, instagram }: Props) {
 	return (
-		<article className='relative flex flex-col items-center justify-center w-full transition-all bg-[#121226]/50 border border-midu-primary/40 rounded-[20px] group overflow-hidden'>
+		<article className='relative flex flex-col items-center justify-center w-full transition-all bg-[#121226]/50 border border-midu-primary/40 rounded-[20px] group overflow-hidden hover:scale-110'>
 			<div className='w-full p-[14px] rounded transition'>
 				<figure className='flex items-center justify-center'>
 					<img
@@ -130,7 +130,7 @@ function Speaker({ name, title, twitter, img, country, instagram }: Props) {
 				</header>
 				<footer className='flex items-center justify-between gap-x-2'>
 					<p className='text-xs text-left text-white/60'>{title}</p>
-					<span>{country}</span>
+					<span className='text-white'>{country}</span>
 				</footer>
 			</div>
 		</article>
