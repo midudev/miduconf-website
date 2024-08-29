@@ -237,6 +237,29 @@ const LIST_OF_GIFTS = [
 				2 teclados <br /> Keychron
 			</>
 		)
+	},
+	{
+		imgUrl: '/gifts/codely.webp',
+		imgSmallUrl: '/gifts/codely-small.webp',
+		title: (
+			<>
+				17 suscripciones <br /> de Codely
+			</>
+		)
+	},
+	{
+		imgUrl: '',
+		imgSmallUrl: '',
+		title: 'Próximamente',
+		isDisabled: true,
+		className: 'hidden sm:flex'
+	},
+	{
+		imgUrl: '',
+		imgSmallUrl: '',
+		title: 'Próximamente',
+		isDisabled: true,
+		className: 'hidden lg:flex'
 	}
 ]
 
