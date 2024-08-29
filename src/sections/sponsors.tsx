@@ -117,12 +117,6 @@ export const premiums = [
 		link: 'https://malt.es/',
 		logo: <SponsorIcons.malt className='w-auto h-12' />,
 		slogan: 'Encuentra y contrata a los mejores freelancers en Malt'
-	},
-	{
-		name: 'Codely',
-		link: 'https://codely.com/pro/midudev',
-		logo: <SponsorIcons.codely className='w-auto h-12' />,
-		slogan: 'Haz código más mantenible, escalable y testable'
 	}
 ]
 
@@ -138,5 +132,11 @@ export const sponsors = [
 		link: 'https://cloudinary.com/',
 		logo: <SponsorIcons.cloudinary className='w-auto h-12 max-w-full text-white' />,
 		slogan: 'La mejor plataforma para tus imágenes'
+	},
+	{
+		name: 'Codely',
+		link: 'https://codely.com/pro/midudev',
+		logo: <SponsorIcons.codely className='w-auto h-12 max-w-full text-white' />,
+		slogan: 'Codely enseña y entretiene'
 	}
 ]
