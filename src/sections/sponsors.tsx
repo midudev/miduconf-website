@@ -117,6 +117,12 @@ export const premiums = [
 		link: 'https://malt.es/',
 		logo: <SponsorIcons.malt className='w-auto h-12' />,
 		slogan: 'Encuentra y contrata a los mejores freelancers en Malt'
+	},
+	{
+		name: 'Codely',
+		link: 'https://codely.com/pro/midudev',
+		logo: <SponsorIcons.codely className='w-auto h-12' />,
+		slogan: 'Haz código más mantenible, escalable y testable'
 	}
 ]
 
