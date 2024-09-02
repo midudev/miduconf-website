@@ -257,11 +257,40 @@ const LIST_OF_GIFTS = [
 		)
 	},
 	{
-		imgUrl: '',
-		imgSmallUrl: '',
-		title: 'Próximamente',
-		isDisabled: true,
-		className: 'hidden lg:flex'
+		imgUrl: '/gifts/platzi-planes.webp',
+		imgSmallUrl: '/gifts/platzi-planes-small.webp',
+		title: (
+			<>
+				5 suscripciones <br /> de Platzi
+			</>
+		)
+	},
+	{
+		imgUrl: '/gifts/lemon-code-frontend.webp',
+		imgSmallUrl: '/gifts/lemon-code-small.webp',
+		title: (
+			<>
+				Master FrontEnd <br /> LemonCode (2500€)
+			</>
+		)
+	},
+	{
+		imgUrl: '/gifts/supermaven.webp',
+		imgSmallUrl: '/gifts/supermaven-small.webp',
+		title: (
+			<>
+				Suscripciones <br /> de Supermaven
+			</>
+		)
+	},
+	{
+		imgUrl: '/gifts/lemon-code-devops.webp',
+		imgSmallUrl: '/gifts/lemon-code-small.webp',
+		title: (
+			<>
+				Bootcamp DevOps <br /> LemonCode (2200€)
+			</>
+		)
 	}
 ]
 
