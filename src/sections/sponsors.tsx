@@ -138,5 +138,11 @@ export const sponsors = [
 		link: 'https://codely.com/pro/midudev',
 		logo: <SponsorIcons.codely className='w-auto h-12 max-w-full text-white' />,
 		slogan: 'Codely enseña y entretiene'
+	},
+	{
+		name: 'Scrimba',
+		link: 'https://v2.scrimba.com/home',
+		logo: <SponsorIcons.scrimba className='w-auto h-12 max-w-full text-white' />,
+		slogan: 'Aprende programación de forma interactiva'
 	}
 ]
