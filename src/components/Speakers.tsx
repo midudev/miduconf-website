@@ -75,6 +75,20 @@ const SPEAKERS = [
 		instagram: 'grimerloner',
 		img: 'grimerloner',
 		country: '🇪🇸'
+	},
+	{
+		name: 'Javier Ferrer',
+		title: 'Co-Founder @ Codely',
+		twitter: 'CodelyTV',
+		img: 'javi',
+		country: '🇪🇸'
+	},
+	{
+		name: 'Rafa Gomez',
+		title: 'Co-Founder @ Codely',
+		twitter: 'CodelyTV',
+		img: 'rafa',
+		country: '🇪🇸'
 	}
 ]
 
