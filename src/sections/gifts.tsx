@@ -248,11 +248,13 @@ const LIST_OF_GIFTS = [
 		)
 	},
 	{
-		imgUrl: '',
-		imgSmallUrl: '',
-		title: 'Próximamente',
-		isDisabled: true,
-		className: 'hidden sm:flex'
+		imgUrl: '/gifts/scrimba.webp',
+		imgSmallUrl: '/gifts/scrimba-small.webp',
+		title: (
+			<>
+				Suscripciones <br /> de Scrimba
+			</>
+		)
 	},
 	{
 		imgUrl: '',
