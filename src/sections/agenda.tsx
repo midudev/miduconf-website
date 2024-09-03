@@ -40,16 +40,16 @@ export const Agenda = () => {
 				className='flex flex-col gap-8 mt-12 md:hidden lg:mt-16'
 				/* style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }} */
 			>
-				{LIST_OF_TALKS_NEW.map((talk) => (
-					<AgendaItemMobile key={talk.speaker.name} {...talk} />
+				{LIST_OF_TALKS_NEW.map((talk, i) => (
+					<AgendaItemMobile key={`${talk.speaker.name}-${i}`} {...talk} />
 				))}
 			</div>
 			<div
 				className='flex-col hidden gap-8 mt-12 md:flex lg:mt-16'
 				/* style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }} */
 			>
-				{LIST_OF_TALKS_NEW.map((talk) => (
-					<AgendaItem key={talk.speaker.name} {...talk} />
+				{LIST_OF_TALKS_NEW.map((talk, i) => (
+					<AgendaItem key={`${talk.speaker.name}-${i}`} {...talk} />
 				))}
 			</div>
 
