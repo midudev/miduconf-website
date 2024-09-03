@@ -181,6 +181,17 @@ const LIST_OF_GIFTS = [
 		title: `10 libros físicos de Aprendiendo Git`
 	},
 	{
+		imgUrl: '/gifts/mac-mini.webp',
+		imgSmallUrl: '/gifts/mac-mini-small.webp',
+		title: (
+			<>
+				Sorteo de una <br /> Mac mini
+			</>
+		),
+		className: 'row-span-2',
+		level: 2 as const
+	},
+	{
 		imgUrl: '/gifts/this-is-fine-small.webp',
 		imgSmallUrl: '/gifts/this-is-fine.webp',
 		title: (
@@ -291,6 +302,13 @@ const LIST_OF_GIFTS = [
 				Bootcamp DevOps <br /> LemonCode (2200€)
 			</>
 		)
+	},
+	{
+		title: 'Próximamente',
+		className: 'hidden lg:block',
+		imgUrl: '',
+		imgSmallUrl: '',
+		isDisabled: true
 	}
 ]
 
