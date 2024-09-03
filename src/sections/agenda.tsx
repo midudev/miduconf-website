@@ -38,24 +38,24 @@ export const Agenda = () => {
 			</div>
 			<div
 				className='flex flex-col gap-8 mt-12 md:hidden lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }}
+				/* style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }} */
 			>
-				{LIST_OF_TALKS.map((talk) => (
+				{LIST_OF_TALKS_NEW.map((talk) => (
 					<AgendaItemMobile key={talk.speaker.name} {...talk} />
 				))}
 			</div>
 			<div
 				className='flex-col hidden gap-8 mt-12 md:flex lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }}
+				/* style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }} */
 			>
-				{LIST_OF_TALKS.map((talk) => (
+				{LIST_OF_TALKS_NEW.map((talk) => (
 					<AgendaItem key={talk.speaker.name} {...talk} />
 				))}
 			</div>
 
-			<p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+			{/* <p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
 				¡Muy pronto revelaremos la agenda!
-			</p>
+			</p> */}
 		</section>
 	)
 }
@@ -257,3 +257,251 @@ const LIST_OF_TALKS = [
 		durationInMinutes: null
 	}
 ]
+
+const LIST_OF_TALKS_NEW = [
+	{
+		speaker: {
+			name: 'Grimer Loner',
+			description: 'Músico y Productor',
+			imgUrl: '/img/speakers/grimerloner.jpg'
+		},
+		title: '¡Cuenta atrás con Grimer!',
+		startAt: 1726152000000,
+		durationInMinutes: 20
+	},
+	{
+		speaker: {
+			name: 'Guillermo Rauch',
+			description: 'CEO de Vercel',
+			imgUrl: '/img/speakers/rauchg.jpg'
+		},
+		title: 'Q&A con Guillermo Rauch',
+		startAt: 1726153200000,
+		durationInMinutes: 30
+	},
+	{
+		speaker: {
+			name: 'Fernando Rodríguez',
+			description: 'Co-Founder de KeepCoding',
+			imgUrl: '/img/speakers/fernando-rodriguez.jpg'
+		},
+		title: 'Charla KeepCoding + Sorteo',
+		startAt: 1726155000000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Javi y Rafa de Codely',
+			description: 'CodelyTV',
+			imgUrl: '/img/speakers/codely-agenda.jpg'
+		},
+		title: 'Charla con Codely + Sorteo',
+		startAt: 1726155600000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Miguel Ángel Durán',
+			description: 'Creador de contenido y divulgador',
+			imgUrl: '/img/speakers/midudev.jpg'
+		},
+		title: 'Novedades midudev',
+		startAt: 1726156200000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Freddy Vega',
+			description: 'CEO de Platzi',
+			imgUrl: '/img/speakers/freddyVega.jpg'
+		},
+		title: 'Charla con Freddy Vega + Sorteo Platzi',
+		startAt: 1726156800000,
+		durationInMinutes: 30
+	},
+	/* {
+		speaker: {
+			name: 'Platzi',
+			description: 'Sorteo Platzi',
+			imgUrl: '/img/speakers/platzi.jpg'
+		},
+		title: 'Sorteo Platzi',
+		startAt: 1726167000000,
+		durationInMinutes: 5
+	}, */
+	{
+		speaker: {
+			name: 'S4vitar',
+			description: 'Hack4u CEO & Founder',
+			imgUrl: '/img/speakers/s4vitar.jpg'
+		},
+		title: 'S4vitar + Sorteo',
+		startAt: 1726158900000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Carmen Ansio',
+			description: 'Design Engineer en LottieFiles',
+			imgUrl: '/img/speakers/carmen.jpg'
+		},
+		title: 'Animaciones CSS con scroll',
+		startAt: 1726159500000,
+		durationInMinutes: 25
+	},
+	{
+		speaker: {
+			name: 'miduConf',
+			description: 'Sorteos',
+			imgUrl: '/img/speakers/midudev.jpg'
+		},
+		title: '¡Participa en el Mega Trivial!',
+		startAt: 1726161000000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Alba Silvente',
+			description: 'FullStack en StoryBlok',
+			imgUrl: '/img/speakers/dawntraoz.jpg'
+		},
+		title: '¡Lo revelaremos pronto!',
+		startAt: 1726161600000,
+		durationInMinutes: 20
+	},
+	{
+		speaker: {
+			name: 'Malt',
+			description: 'Sorteo',
+			imgUrl: '/img/speakers/malt.jpg'
+		},
+		title: 'Sorteo con Malt',
+		startAt: 1726162800000,
+		durationInMinutes: 5
+	},
+	{
+		speaker: {
+			name: 'Estefany Aguilar',
+			description: 'Sr. Frontend Dev en Platzi',
+			imgUrl: '/img/speakers/teffcode.jpg'
+		},
+		title: '¡Lo revelaremos pronto!',
+		startAt: 1726163100000,
+		durationInMinutes: 30
+	},
+	{
+		speaker: {
+			name: 'miduConf',
+			description: 'Sorteo',
+			imgUrl: '/img/speakers/midudev.jpg'
+		},
+		title: '¡Participa en el Mega Trivial!',
+		startAt: 1726164900000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Pelado Nerd',
+			description: 'Divulgador DevOps',
+			imgUrl: '/img/speakers/pablokbs.jpg'
+		},
+		title: 'Pelado Nerd + Sorteo',
+		startAt: 1726165500000,
+		durationInMinutes: 20
+	},
+	{
+		speaker: {
+			name: 'miduConf',
+			description: 'Sorteo',
+			imgUrl: '/img/speakers/midudev.jpg'
+		},
+		title: 'Sorteos de la #miduConf',
+		startAt: 1726166700000,
+		durationInMinutes: 5
+	},
+	{
+		speaker: {
+			name: 'Cloudinary',
+			description: 'Charla y sorteo',
+			imgUrl: '/img/speakers/cloudinary.jpg'
+		},
+		title: 'Charla Cloudinary + Sorteo',
+		startAt: 1726167000000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Miguel Ángel Durán',
+			description: 'Creador de contenido y divulgador',
+			imgUrl: '/img/speakers/midudev.jpg'
+		},
+		title: '¡Más novedades midudev!',
+		startAt: 1726167600000,
+		durationInMinutes: 5
+	},
+	{
+		speaker: {
+			name: 'miduConf',
+			description: 'Sorteo',
+			imgUrl: '/img/speakers/midudev.jpg'
+		},
+		title: 'Sorteos de la #miduConf',
+		startAt: 1726167900000,
+		durationInMinutes: 5
+	},
+	{
+		speaker: {
+			name: 'Fazt',
+			description: 'Creador de contenido',
+			imgUrl: '/img/speakers/fazt.jpg'
+		},
+		title: 'Charla con Fazt + Sorteo',
+		startAt: 1726168200000,
+		durationInMinutes: 25
+	},
+	{
+		speaker: {
+			name: 'DotCSV',
+			description: 'Divulgador de IA',
+			imgUrl: '/img/speakers/dotcsv.jpg'
+		},
+		title: 'Charla con DotCSV',
+		startAt: 1726169700000,
+		durationInMinutes: 30
+	},
+	{
+		speaker: {
+			name: 'miduConf',
+			description: 'Sorteo',
+			imgUrl: '/img/speakers/midudev.jpg'
+		},
+		title: '¡Participa en el Mega Trivial!',
+		startAt: 1726171500000,
+		durationInMinutes: 10
+	}
+]
+
+/* 
+16:40    17:00    Cuenta atrás con Grimer
+17:00    17:30    Q&A con Guillermo Rauch
+17:30    17:40    Charla KeepCoding + Sorteo
+17:40    17:50    Charla con Codely + Sorteo
+17:50    18:00    Novedades midudev
+18:00    18:30    Charla con Freddy Vega
+18:30    18:35    Sorteo Platzi
+18:35    18:45    S4vitar + Sorteo
+18:45    19:10    Carmen Ansio (Animaciones CSS con scroll)
+19:10    19:20    ¡Participa en el Mega Trivial!
+19:20    19:40    Alba Silvente (???)
+19:40    19:45    Sorteo con Malt
+19:45    20:15    Estefany Aguilar (???)
+20:15    20:25    ¡Participa en el Mega Trivial!
+20:25    20:45    Pelado Nerd + Sorteo
+20:45    20:50    Sorteos
+20:50    21:00    Charla Cloudinary + Sorteo
+21:00    21:05    ¡Más novedades midudev! 
+21:05    21:10    Sorteos
+21:10    21:35    Charla con Fazt + Sorteo
+21:35    22:05    Charla con DotCSV
+22:05    22:15    ¡Participa en el Mega Trivial!
+*/
