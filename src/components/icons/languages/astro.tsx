@@ -7,7 +7,6 @@ export function AstroIcon({ className = '', ...props }) {
 			fill='none'
 			className={className}
 			{...props}
-			xmlns='http://www.w3.org/2000/svg'
 			stroke='white'
 			strokeWidth='4.5'
 			strokeLinecap='round'
