@@ -3,7 +3,6 @@ import { NavbarIcons } from '@/components/icons/navbar'
 import { Codely } from '@/components/logos/codely'
 import { DonDominio } from '@/components/logos/dondominio'
 import { LemonCode } from '@/components/logos/lemoncode'
-import { Malt } from '@/components/logos/maltes'
 import ReactDOM from 'react-dom'
 import { useEffect, useState } from 'react'
 
@@ -16,7 +15,7 @@ export const Agenda = () => {
 			<p className='text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
 				Todas las charlas son en directo y en español
 			</p>
-			<div className='w-full mx-auto space-y-4 text-center'>
+			<div className='w-full pt-2 mx-auto space-y-4 text-center'>
 				<span className='inline-flex flex-wrap items-center justify-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300 shadow-inset shadow-white'>
 					<span className='flex items-center gap-1 mr-1 opacity-75'>
 						<svg
@@ -39,7 +38,7 @@ export const Agenda = () => {
 			</div>
 			<div
 				className='flex flex-col gap-8 mt-12 md:hidden lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 90%)' }}
+				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }}
 			>
 				{LIST_OF_TALKS.map((talk) => (
 					<AgendaItemMobile key={talk.speaker.name} {...talk} />
@@ -47,14 +46,14 @@ export const Agenda = () => {
 			</div>
 			<div
 				className='flex-col hidden gap-8 mt-12 md:flex lg:mt-16'
-				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 90%)' }}
+				style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }}
 			>
 				{LIST_OF_TALKS.map((talk) => (
 					<AgendaItem key={talk.speaker.name} {...talk} />
 				))}
 			</div>
 
-			<p className='text-4xl mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+			<p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
 				¡Muy pronto revelaremos la agenda!
 			</p>
 		</section>
@@ -85,14 +84,16 @@ const AgendaItem = ({ startAt, durationInMinutes, title, speaker }: AgendaItemPr
 					<h4 className='font-medium leading-tight text-midu-primary'>{speaker.name}</h4>
 					<span className='text-white/70'>- {speaker.description}</span>
 				</header>
-				<h4 className='mt-2 text-xl font-bold text-white'>{title}</h4>
+				<h4 className='mt-2 text-xl font-bold text-white md:max-w-[28ch] text-pretty'>{title}</h4>
 				<div className='flex items-center gap-3'>
-					<img
-						className='brightness-50 sm:brightness-100 -z-10 object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
-						src={speaker.imgUrl}
-						alt={`Foto de ${speaker.name}`}
-						style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 90%)' }}
-					/>
+					{speaker.imgUrl && (
+						<img
+							className='brightness-50 sm:brightness-100 -z-10 object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
+							src={speaker.imgUrl}
+							alt={`Foto de ${speaker.name}`}
+							style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 90%)' }}
+						/>
+					)}
 				</div>
 			</div>
 		</article>
@@ -112,12 +113,14 @@ const AgendaItemMobile = ({ startAt, durationInMinutes, title, speaker }: Agenda
 				</span>
 			</header>
 			<div className='flex items-center mt-3 gap-x-3'>
-				<img
-					className='object-cover object-center w-16 h-16 rounded-full'
-					src={speaker.imgUrl}
-					alt={`Foto de ${speaker.name}`}
-				/>
-				<h5 className='font-bold text-white'>{title}</h5>
+				{speaker.imgUrl && (
+					<img
+						className='object-cover object-center w-16 h-16 rounded-full'
+						src={speaker.imgUrl}
+						alt={`Foto de ${speaker.name}`}
+					/>
+				)}
+				<h5 className='flex-1 font-bold text-white'>{title}</h5>
 			</div>
 		</article>
 	)
@@ -166,6 +169,8 @@ type TimeHook = (props: { timestamp: number; durationInMinutes: number }) => nul
 const useTime: TimeHook = ({ timestamp, durationInMinutes }) => {
 	const [time, setTime] = useState(null)
 
+	if (!timestamp) return null
+
 	useEffect(() => {
 		// get HH:MM in the local user timezone
 		const timeFormatConfig = {
@@ -203,6 +208,16 @@ export const useGetTimezone = () => {
 const LIST_OF_TALKS = [
 	{
 		speaker: {
+			name: 'Grimer Loner',
+			description: 'Músico y Productor',
+			imgUrl: '/img/speakers/grimerloner.jpg'
+		},
+		title: '¡Cuenta atrás! ¡Música en vivo con programación!',
+		startAt: 1726152000000,
+		durationInMinutes: 20
+	},
+	{
+		speaker: {
 			name: 'Miguel Ángel Durán',
 			description: 'Creador de contenido y divulgador',
 			imgUrl: '/img/speakers/midudev.jpg'
@@ -217,7 +232,7 @@ const LIST_OF_TALKS = [
 			description: 'CEO de Vercel',
 			imgUrl: '/img/speakers/rauchg.jpg'
 		},
-		title: 'Como la IA Revolucionará el mundo Web',
+		title: 'Hablando con Rauch: Vercel, IA, el futuro de la programación...',
 		startAt: 1726154100000,
 		durationInMinutes: 30
 	},
@@ -227,8 +242,18 @@ const LIST_OF_TALKS = [
 			description: 'UX Engineer Freelance',
 			imgUrl: '/img/speakers/carmen.jpg'
 		},
-		title: 'CSS en 2024',
+		title: 'Animaciones CSS con scroll',
 		startAt: 1726155900000,
 		durationInMinutes: 30
+	},
+	{
+		speaker: {
+			name: '',
+			description: '',
+			imgUrl: ''
+		},
+		title: '',
+		startAt: null,
+		durationInMinutes: null
 	}
 ]

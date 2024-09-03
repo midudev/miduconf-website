@@ -20,7 +20,15 @@ const description =
 const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
-export default function Home({ username, flavor, ticketNumber, burst }) {
+export default function Home({
+	username,
+	flavor,
+	ticketNumber,
+	burst,
+	material,
+	stickers,
+	twitchTier
+}) {
 	const ogImage = username
 		? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?c=${burst}`
 		: `${url}${defaultOgImage}`
@@ -44,8 +52,14 @@ export default function Home({ username, flavor, ticketNumber, burst }) {
 							Conoce el <span className='text-midu-primary'>futuro</span> de la{' '}
 							<span className='text-midu-primary'>programación</span>
 						</h2>
-
-						<TicketHome ticketNumber={ticketNumber} initialFlavor={flavor} username={username} />
+						<TicketHome
+							ticketNumber={ticketNumber}
+							initialFlavor={flavor}
+							username={username}
+							material={material}
+							stickers={stickers}
+							twitchTier={twitchTier}
+						/>
 						<Countdown />
 					</div>
 				</section>
@@ -80,7 +94,10 @@ export const getServerSideProps = async (ctx) => {
 				burst: crypto.randomUUID(),
 				ticketNumber: data[0].ticket_number,
 				username: data[0].user_name,
-				flavor: data[0].flavour
+				flavor: data[0].flavour,
+				material: data[0].material,
+				stickers: data[0].stickers,
+				twitchTier: data[0].twitch_tier
 			}
 		}
 	}

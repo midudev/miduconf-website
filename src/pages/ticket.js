@@ -276,7 +276,7 @@ export default function Ticket({
 			>
 				<div>
 					<div className='w-auto'>
-						<div className='max-w-[400px] md:max-w-[700px] mx-auto'>
+						<div className='max-w-[400px] md:max-w-[700px] md:w-[700px] mx-auto'>
 							<Container3D>
 								{selectedMaterial === MATERIALS_AVAILABLE.STANDARD && (
 									<TicketComponent
@@ -557,7 +557,7 @@ export default function Ticket({
 									)}
 								>
 									<div
-										className='w-12 h-12 transition-all cursor-pointer hover:scale-125'
+										className='flex items-center justify-center w-12 h-12 transition-all cursor-pointer hover:scale-125'
 										key={name}
 									>
 										{StickerImage}
@@ -647,7 +647,7 @@ export default function Ticket({
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
-const STICKERS_LIST = [
+export const STICKERS_LIST = [
 	{
 		name: 'midu-wink',
 		StickerImage: <Stickers.MiduWink className='w-auto h-12' />
@@ -735,6 +735,14 @@ const STICKERS_LIST = [
 	{
 		name: 'keep-coding',
 		StickerImage: <Stickers.KeepCoding className='w-12 h-12' />
+	},
+	{
+		name: 'malt',
+		StickerImage: <Stickers.Malt className='w-12 h-auto' />
+	},
+	{
+		name: 'cloudinary',
+		StickerImage: <Stickers.Cloudinary className='w-12 h-auto' />
 	},
 	{
 		name: 'twitch',

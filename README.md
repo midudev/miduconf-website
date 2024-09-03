@@ -6,13 +6,13 @@ Este proyecto es el código fuente del sitio web oficial de **miduConf**, una co
 
 ## Prerrequisitos
 
-- Node.js
+- Node.js >= v18.17.0
 - npm
 
 ## Instalación y Configuración
 
 1. Clona el repositorio.
-2. Ejecuta `npm install` para instalar las dependencias.
+2. Ejecuta `npm install --legacy-peer-deps` para instalar las dependencias.
 3. Ejecuta `npm run dev` para iniciar el servidor de desarrollo.
 
 ## Cómo Probar el Proyecto
