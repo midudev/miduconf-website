@@ -304,12 +304,44 @@ const LIST_OF_GIFTS = [
 		)
 	},
 	{
+		imgUrl: '/gifts/keep-coding-module.webp',
+		imgSmallUrl: '/gifts/keep-coding-mini.webp',
+		title: (
+			<>
+				1 módulo en directo <br /> bootcamp de libre elección
+			</>
+		)
+	},
+	{
+		imgUrl: '/gifts/keep-coding-clock.webp',
+		imgSmallUrl: '/gifts/keep-coding-mini.webp',
+		title: (
+			<>
+				1h de tutoría con profesor <br /> de bootcamp a elección
+			</>
+		)
+	},
+	{
+		imgUrl: '/gifts/keep-coding-job.webp',
+		imgSmallUrl: '/gifts/keep-coding-mini.webp',
+		title: <>Sesiones de Bolsa de Talento</>
+	},
+	{
+		imgUrl: '/gifts/fazt.webp',
+		imgSmallUrl: '/gifts/fazt-mini.webp',
+		title: (
+			<>
+				2 asesorías privadas <br /> con Fazt
+			</>
+		)
+	}
+	/* {
 		title: 'Próximamente',
 		className: 'hidden lg:block',
 		imgUrl: '',
 		imgSmallUrl: '',
 		isDisabled: true
-	}
+	} */
 ]
 
 interface GiftItemProps {
