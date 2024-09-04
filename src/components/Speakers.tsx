@@ -77,6 +77,13 @@ const SPEAKERS = [
 		country: '🇪🇸'
 	},
 	{
+		name: 'Fernando Rodríguez',
+		title: 'Co-Founder @ KeepCoding',
+		twitter: 'frr149',
+		img: 'fernando-rodriguez',
+		country: '🇪🇸'
+	},
+	{
 		name: 'Javier Ferrer',
 		title: 'Co-Founder @ Codely',
 		twitter: 'CodelyTV',
@@ -88,13 +95,6 @@ const SPEAKERS = [
 		title: 'Co-Founder @ Codely',
 		twitter: 'CodelyTV',
 		img: 'rafa',
-		country: '🇪🇸'
-	},
-	{
-		name: 'Fernando Rodríguez',
-		title: 'Co-Founder @ KeepCoding',
-		twitter: 'frr149',
-		img: 'fernando-rodriguez',
 		country: '🇪🇸'
 	}
 ]
