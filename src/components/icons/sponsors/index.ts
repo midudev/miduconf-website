@@ -8,6 +8,7 @@ import { LemonCodeVerticalIcon } from './lemon-vertical'
 import { MaltIcon } from './malt'
 import { CodelyIcon } from './codely'
 import { Scrimba } from './scrimba'
+import { Strapi } from './strapi'
 
 export const SponsorIcons = {
 	platzi: PlatziIcon,
@@ -19,5 +20,6 @@ export const SponsorIcons = {
 	lemonCodeVertical: LemonCodeVerticalIcon,
 	malt: MaltIcon,
 	codely: CodelyIcon,
-	scrimba: Scrimba
+	scrimba: Scrimba,
+	strapi: Strapi
 }

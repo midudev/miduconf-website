@@ -144,5 +144,11 @@ export const sponsors = [
 		link: 'https://v2.scrimba.com/home',
 		logo: <SponsorIcons.scrimba className='w-auto h-12 max-w-full text-white' />,
 		slogan: 'Aprende programación de forma interactiva'
+	},
+	{
+		name: 'Strapi',
+		link: 'https://strapi.io/',
+		logo: <SponsorIcons.strapi className='w-auto h-8 max-w-full text-white' />,
+		slogan: 'Open source Node.js Headless CMS'
 	}
 ]
