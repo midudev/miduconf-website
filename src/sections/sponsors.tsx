@@ -149,6 +149,6 @@ export const sponsors = [
 		name: 'Strapi',
 		link: 'https://strapi.io/',
 		logo: <SponsorIcons.strapi className='w-auto h-8 max-w-full text-white' />,
-		slogan: 'Open source Node.js Headless CMS'
+		slogan: 'Headless CMS de código abierto en Node.js'
 	}
 ]
