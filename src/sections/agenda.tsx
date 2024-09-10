@@ -385,7 +385,7 @@ const LIST_OF_TALKS_NEW = [
 			description: 'Sr. Frontend Dev en Platzi',
 			imgUrl: '/img/speakers/teffcode.jpg'
 		},
-		title: '¡Lo revelaremos pronto!',
+		title: 'Guía Práctica para Medir la Complejidad Algorítmica',
 		startAt: 1726163100000,
 		durationInMinutes: 30
 	},
