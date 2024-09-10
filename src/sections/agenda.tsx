@@ -281,21 +281,21 @@ const LIST_OF_TALKS_NEW = [
 	},
 	{
 		speaker: {
-			name: 'Fernando Rodríguez',
-			description: 'Co-Founder de KeepCoding',
-			imgUrl: '/img/speakers/fernando-rodriguez.jpg'
-		},
-		title: 'Charla KeepCoding + Sorteo',
-		startAt: 1726155000000,
-		durationInMinutes: 10
-	},
-	{
-		speaker: {
 			name: 'Javi y Rafa de Codely',
 			description: 'CodelyTV',
 			imgUrl: '/img/speakers/codely-agenda.jpg'
 		},
 		title: 'Charla con Codely + Sorteo',
+		startAt: 1726155000000,
+		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Fernando Rodríguez',
+			description: 'Co-Founder de KeepCoding',
+			imgUrl: '/img/speakers/fernando-rodriguez.jpg'
+		},
+		title: 'Charla KeepCoding + Sorteo',
 		startAt: 1726155600000,
 		durationInMinutes: 10
 	},
