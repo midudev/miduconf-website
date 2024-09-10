@@ -295,7 +295,7 @@ const LIST_OF_TALKS_NEW = [
 			description: 'Co-Founder de KeepCoding',
 			imgUrl: '/img/speakers/fernando-rodriguez.jpg'
 		},
-		title: 'Charla KeepCoding + Sorteo',
+		title: 'Del caos al orden: 5 virtudes para un código imbatible',
 		startAt: 1726155600000,
 		durationInMinutes: 10
 	},
@@ -305,7 +305,7 @@ const LIST_OF_TALKS_NEW = [
 			description: 'Creador de contenido y divulgador',
 			imgUrl: '/img/speakers/midudev.jpg'
 		},
-		title: 'Novedades midudev',
+		title: '¡SORPRESA! Notición para 2025...',
 		startAt: 1726156200000,
 		durationInMinutes: 10
 	},
@@ -365,7 +365,7 @@ const LIST_OF_TALKS_NEW = [
 			description: 'FullStack en StoryBlok',
 			imgUrl: '/img/speakers/dawntraoz.jpg'
 		},
-		title: '¡Lo revelaremos pronto!',
+		title: 'El poder de las Web Extensions',
 		startAt: 1726161600000,
 		durationInMinutes: 20
 	},
