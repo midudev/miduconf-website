@@ -92,11 +92,6 @@ const GIFTS = [
 export const Gifts = () => {
 	return (
 		<section id='regalos' className='px-4 pt-24'>
-			{/* <HideContentBox
-				title='Regalos'
-				subtitle='¡Muy pronto revelaremos todos los regalos!'
-				BgIcon={NavbarIcons.GiftIcon}
-			/> */}
 			<GiftsSection />
 		</section>
 	)
@@ -138,31 +133,9 @@ const GiftsSection = () => {
 					<GiftItem key={`${gift.title}-${index}`} {...gift} />
 				))}
 			</div>
-			<div className='relative'>
-				<div
-					className='relative grid grid-cols-1 mx-auto opacity-40 sm:grid-cols-2 lg:grid-cols-3 gap-7 my-11 max-w-screen-base'
-					style={{
-						maskImage: 'linear-gradient(to top, transparent, black)'
-					}}
-				>
-					<GiftItem imgSmallUrl='' imgUrl='' title='Próximamente' isDisabled />
-					<GiftItem
-						imgSmallUrl=''
-						imgUrl=''
-						title='Próximamente'
-						isDisabled
-						className='hidden sm:flex'
-					/>
-					<GiftItem
-						imgSmallUrl=''
-						imgUrl=''
-						title='Próximamente'
-						isDisabled
-						className='hidden lg:flex'
-					/>
-				</div>
-				<p className='absolute bottom-0 left-1/2 -translate-x-1/2 z-[100] text-4xl font-semibold text-center max-w-[24ch] text-wrap text-yellow-300 mx-auto px-4 h-32'>
-					¡Muy pronto revelaremos todos los regalos!
+			<div className='relative flex justify-center items-center w-full'>
+				<p className='mx-auto z-[100] text-4xl font-semibold text-center max-w-[24ch] text-wrap text-yellow-300 px-4 h-32'>
+					¡Y muchas más sorpresas que anunciaremos en directo!
 				</p>
 			</div>
 
@@ -334,20 +307,6 @@ const LIST_OF_GIFTS = [
 				3 suscripciones de <br /> 3 meses a Hack4U
 			</>
 		)
-	},
-	{
-		title: 'Próximamente',
-		className: 'hidden sm:block',
-		imgUrl: '',
-		imgSmallUrl: '',
-		isDisabled: true
-	},
-	{
-		title: 'Próximamente',
-		className: 'hidden lg:block',
-		imgUrl: '',
-		imgSmallUrl: '',
-		isDisabled: true
 	}
 ]
 
