@@ -313,18 +313,9 @@ const LIST_OF_GIFTS = [
 		)
 	},
 	{
-		imgUrl: '/gifts/keep-coding-clock.webp',
-		imgSmallUrl: '/gifts/keep-coding-mini.webp',
-		title: (
-			<>
-				1h de tutoría con profesor <br /> de bootcamp a elección
-			</>
-		)
-	},
-	{
 		imgUrl: '/gifts/keep-coding-job.webp',
 		imgSmallUrl: '/gifts/keep-coding-mini.webp',
-		title: <>Sesiones de Bolsa de Talento</>
+		title: <>1 Sesión de Bolsa de Talento</>
 	},
 	{
 		imgUrl: '/gifts/fazt.webp',
