@@ -205,59 +205,6 @@ export const useGetTimezone = () => {
 	return timezone
 }
 
-const LIST_OF_TALKS = [
-	{
-		speaker: {
-			name: 'Grimer Loner',
-			description: 'Músico y Productor',
-			imgUrl: '/img/speakers/grimerloner.jpg'
-		},
-		title: '¡Cuenta atrás! ¡Música en vivo con programación!',
-		startAt: 1726152000000,
-		durationInMinutes: 20
-	},
-	{
-		speaker: {
-			name: 'Miguel Ángel Durán',
-			description: 'Creador de contenido y divulgador',
-			imgUrl: '/img/speakers/midudev.jpg'
-		},
-		title: '¡Hola, miduConf 👋!',
-		startAt: 1726153200000,
-		durationInMinutes: 15
-	},
-	{
-		speaker: {
-			name: 'Guillermo Rauch',
-			description: 'CEO de Vercel',
-			imgUrl: '/img/speakers/rauchg.jpg'
-		},
-		title: 'Hablando con Rauch: Vercel, IA, el futuro de la programación...',
-		startAt: 1726154100000,
-		durationInMinutes: 30
-	},
-	{
-		speaker: {
-			name: 'Carmen Ansio',
-			description: 'UX Engineer Freelance',
-			imgUrl: '/img/speakers/carmen.jpg'
-		},
-		title: 'Animaciones CSS con scroll',
-		startAt: 1726155900000,
-		durationInMinutes: 30
-	},
-	{
-		speaker: {
-			name: '',
-			description: '',
-			imgUrl: ''
-		},
-		title: '',
-		startAt: null,
-		durationInMinutes: null
-	}
-]
-
 const LIST_OF_TALKS_NEW = [
 	{
 		speaker: {
@@ -271,13 +218,13 @@ const LIST_OF_TALKS_NEW = [
 	},
 	{
 		speaker: {
-			name: 'Guillermo Rauch',
-			description: 'CEO de Vercel',
-			imgUrl: '/img/speakers/rauchg.jpg'
+			name: 'Miguel Ángel Durán',
+			description: 'Creador de contenido y divulgador',
+			imgUrl: '/img/speakers/midudev.jpg'
 		},
-		title: 'Q&A con Guillermo Rauch',
+		title: '¡Bienvenidos a la miduConf! + Sorteo',
 		startAt: 1726153200000,
-		durationInMinutes: 30
+		durationInMinutes: 5
 	},
 	{
 		speaker: {
@@ -286,8 +233,18 @@ const LIST_OF_TALKS_NEW = [
 			imgUrl: '/img/speakers/codely-agenda.jpg'
 		},
 		title: 'Charla con Codely + Sorteo',
-		startAt: 1726155000000,
+		startAt: 1726153500000,
 		durationInMinutes: 10
+	},
+	{
+		speaker: {
+			name: 'Guillermo Rauch',
+			description: 'CEO de Vercel',
+			imgUrl: '/img/speakers/rauchg.jpg'
+		},
+		title: 'Q&A con Guillermo Rauch',
+		startAt: 1726154100000,
+		durationInMinutes: 30
 	},
 	{
 		speaker: {
@@ -296,7 +253,7 @@ const LIST_OF_TALKS_NEW = [
 			imgUrl: '/img/speakers/fernando-rodriguez.jpg'
 		},
 		title: 'Del caos al orden: 5 virtudes para un código imbatible',
-		startAt: 1726155600000,
+		startAt: 1726155900000,
 		durationInMinutes: 10
 	},
 	{
@@ -306,8 +263,8 @@ const LIST_OF_TALKS_NEW = [
 			imgUrl: '/img/speakers/midudev.jpg'
 		},
 		title: '¡SORPRESA! Notición para 2025...',
-		startAt: 1726156200000,
-		durationInMinutes: 10
+		startAt: 1726156500000,
+		durationInMinutes: 5
 	},
 	{
 		speaker: {
@@ -319,16 +276,6 @@ const LIST_OF_TALKS_NEW = [
 		startAt: 1726156800000,
 		durationInMinutes: 30
 	},
-	/* {
-		speaker: {
-			name: 'Platzi',
-			description: 'Sorteo Platzi',
-			imgUrl: '/img/speakers/platzi.jpg'
-		},
-		title: 'Sorteo Platzi',
-		startAt: 1726167000000,
-		durationInMinutes: 5
-	}, */
 	{
 		speaker: {
 			name: 'S4vitar',
