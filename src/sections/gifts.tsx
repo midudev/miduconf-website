@@ -334,14 +334,30 @@ const LIST_OF_GIFTS = [
 				2 asesorías privadas <br /> con Fazt
 			</>
 		)
-	}
-	/* {
+	},
+	{
+		imgUrl: '/gifts/Hack4U.webp',
+		imgSmallUrl: '/gifts/Hack4U-mini.webp',
+		title: (
+			<>
+				3 suscripciones de <br /> 3 meses a Hack4U
+			</>
+		)
+	},
+	{
+		title: 'Próximamente',
+		className: 'hidden sm:block',
+		imgUrl: '',
+		imgSmallUrl: '',
+		isDisabled: true
+	},
+	{
 		title: 'Próximamente',
 		className: 'hidden lg:block',
 		imgUrl: '',
 		imgSmallUrl: '',
 		isDisabled: true
-	} */
+	}
 ]
 
 interface GiftItemProps {
