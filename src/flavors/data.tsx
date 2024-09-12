@@ -144,6 +144,17 @@ export const FLAVORS = {
 			shadowColor: 'shadow-gray-400/25'
 		}
 	},
+	blazor: {
+		icon: FLAVORS_ICONS.blazor,
+		colorPalette: {
+			bg: 'bg-[#5c2992]/50',
+			borders: {
+				inside: 'border-indigo-300/20',
+				outside: 'border-indigo-400/10'
+			},
+			shadowColor: 'shadow-indigo-400/25'
+		}
+	},
 	bun: {
 		icon: FLAVORS_ICONS.bun,
 		colorPalette: {
