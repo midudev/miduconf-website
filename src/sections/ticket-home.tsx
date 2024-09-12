@@ -132,6 +132,11 @@ export const TicketHome = ({
 						Conseguir mi ticket
 					</Button>
 				</div>
+				<div className='flex justify-center'>
+					<p className='inline-block px-4 py-2 mx-auto mt-4 text-3xl font-medium text-center text-white rounded-xl bg-midu-primary/20'>
+						¡Tenemos <span className='font-bold text-midu-primary'>{number}</span> tickets creados!
+					</p>
+				</div>
 			</div>
 		</div>
 	)
