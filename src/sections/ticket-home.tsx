@@ -83,7 +83,7 @@ export const TicketHome = ({
 	return (
 		<div>
 			<div className='block w-full h-full'>
-				<div className='flex items-center justify-center max-w-[700px] mx-auto mt-16 flex-0'>
+				{/* <div className='flex items-center justify-center max-w-[700px] mx-auto mt-16 flex-0'>
 					<Container3D>
 						{material === 'standard' && (
 							<Ticket
@@ -122,7 +122,7 @@ export const TicketHome = ({
 							/>
 						)}
 					</Container3D>
-				</div>
+				</div> */}
 				<div className='flex flex-col items-center justify-center gap-4 mx-auto mt-16 scale-90 md:flex-row sm:scale-100'>
 					<Button
 						onClick={handleLogin}
