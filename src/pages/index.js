@@ -51,7 +51,7 @@ export default function Home({
 							<span className='text-midu-primary'>programación</span>
 						</h2> */}
 						<iframe
-							src='https://player.twitch.tv/?channel=midudev&parent=miduconf.com'
+							src='https://player.twitch.tv/?channel=midudev&parent=www.miduconf.com'
 							frameborder='0'
 							allowfullscreen='true'
 							height='778'
