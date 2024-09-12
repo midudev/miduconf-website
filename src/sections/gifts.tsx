@@ -133,7 +133,7 @@ const GiftsSection = () => {
 					<GiftItem key={`${gift.title}-${index}`} {...gift} />
 				))}
 			</div>
-			<div className='relative flex justify-center items-center w-full'>
+			<div className='relative flex items-center justify-center w-full'>
 				<p className='mx-auto z-[100] text-4xl font-semibold text-center max-w-[24ch] text-wrap text-yellow-300 px-4 h-32'>
 					¡Y muchas más sorpresas que anunciaremos en directo!
 				</p>
@@ -295,7 +295,7 @@ const LIST_OF_GIFTS = [
 		imgSmallUrl: '/gifts/fazt-mini.webp',
 		title: (
 			<>
-				2 asesorías privadas <br /> con Fazt
+				3 asesorías privadas <br /> con Fazt
 			</>
 		)
 	},
