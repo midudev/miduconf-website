@@ -1,7 +1,6 @@
 import { GeistSans } from 'geist/font/sans'
 
 import { Background } from '@/components/Background'
-import { Countdown } from '@/components/Countdown'
 import { Meteors } from '@/components/MeteorLanguages'
 import { Speakers } from '@/components/Speakers'
 import { Stars } from '@/components/Stars'
@@ -9,7 +8,6 @@ import { Agenda } from '@/sections/agenda'
 import { Gifts } from '@/sections/gifts'
 import { Layout } from '@/sections/layout'
 import { Sponsors } from '@/sections/sponsors'
-import { TicketHome } from '@/sections/ticket-home'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
@@ -48,11 +46,22 @@ export default function Home({
 					<Meteors />
 					<Background />
 					<div className='max-w-5xl mx-auto'>
-						<h2 className='animate-fade-in-up text-5xl sm:text-6xl md:text-[80px] mx-auto text-center max-w-[20ch] text-white font-bold pt-40'>
+						{/* 	<h2 className='animate-fade-in-up text-5xl sm:text-6xl md:text-[80px] mx-auto text-center max-w-[20ch] text-white font-bold pt-40'>
 							Conoce el <span className='text-midu-primary'>futuro</span> de la{' '}
 							<span className='text-midu-primary'>programación</span>
-						</h2>
-						<TicketHome
+						</h2> */}
+						<iframe
+							src='https://player.twitch.tv/?channel=midudev&parent=https://www.miduconf.com/'
+							frameborder='0'
+							allowfullscreen='true'
+							height='778'
+							width='1020'
+							className='pt-40 rounded-xl'
+						></iframe>
+						<h1 className='mx-auto mt-10 text-6xl font-bold text-center text-white'>
+							<span className='text-midu-primary'>#</span>miduConf
+						</h1>
+						{/* <TicketHome
 							ticketNumber={ticketNumber}
 							initialFlavor={flavor}
 							username={username}
@@ -60,7 +69,7 @@ export default function Home({
 							stickers={stickers}
 							twitchTier={twitchTier}
 						/>
-						<Countdown />
+						<Countdown /> */}
 					</div>
 				</section>
 				<Speakers />
