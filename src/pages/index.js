@@ -51,17 +51,6 @@ export default function Home({
 							Conoce el <span className='text-midu-primary'>futuro</span> de la{' '}
 							<span className='text-midu-primary'>programación</span>
 						</h2>
-						<iframe
-							src='https://player.twitch.tv/?channel=midudev&parent=www.miduconf.com'
-							frameBorder={0}
-							allowFullScreen={true}
-							height='778'
-							width='1020'
-							className='pt-20 rounded-xl w-full max-w-[1020px] aspect-[1020/778] h-auto'
-						></iframe>
-						{/* <h1 className='mx-auto mt-10 text-6xl font-bold text-center text-white'>
-							<span className='text-midu-primary'>#</span>miduConf
-						</h1> */}
 						<TicketHome
 							ticketNumber={ticketNumber}
 							initialFlavor={flavor}

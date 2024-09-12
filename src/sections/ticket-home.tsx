@@ -83,7 +83,7 @@ export const TicketHome = ({
 	return (
 		<div>
 			<div className='block w-full h-full'>
-				{/* <div className='flex items-center justify-center max-w-[700px] mx-auto mt-16 flex-0'>
+				<div className='flex items-center justify-center max-w-[700px] mx-auto mt-16 flex-0'>
 					<Container3D>
 						{material === 'standard' && (
 							<Ticket
@@ -122,20 +122,15 @@ export const TicketHome = ({
 							/>
 						)}
 					</Container3D>
-				</div> */}
+				</div>
 				<div className='flex flex-col items-center justify-center gap-4 mx-auto mt-16 scale-90 md:flex-row sm:scale-100'>
 					<Button
 						onClick={handleLogin}
 						className='px-6 py-5 text-lg font-bold md:text-3xl rounded-xl'
 					>
 						<TicketIcon className='mr-3' />
-						Conseguir mi ticket
+						Ver mi ticket
 					</Button>
-				</div>
-				<div className='flex justify-center'>
-					<p className='inline-block px-4 py-2 mx-auto mt-4 text-3xl font-medium text-center text-white rounded-xl bg-midu-primary/20'>
-						¡Tenemos <span className='font-bold text-midu-primary'>{number}</span> tickets creados!
-					</p>
 				</div>
 			</div>
 		</div>
