@@ -1,9 +1,11 @@
 import { GeistSans } from 'geist/font/sans'
 
 import { Background } from '@/components/Background'
-import { TicketIcon } from '@/components/icons'
 import { Button } from '@/components/Button'
+import { TicketIcon } from '@/components/icons'
+import { MiduLogo } from '@/components/logos/midudev'
 import { Meteors } from '@/components/MeteorLanguages'
+import { Modal } from '@/components/Modal'
 import { Speakers } from '@/components/Speakers'
 import { Stars } from '@/components/Stars'
 import { Agenda } from '@/sections/agenda'
@@ -12,6 +14,7 @@ import { Layout } from '@/sections/layout'
 import { Sponsors } from '@/sections/sponsors'
 import { TicketHome } from '@/sections/ticket-home'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { useState } from 'react'
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
@@ -28,8 +31,11 @@ export default function Home({
 	burst,
 	material,
 	stickers,
-	twitchTier
+	twitchTier,
+	noUser
 }) {
+	const [showNoUserModal, setShowNoUserModal] = useState(noUser)
+
 	const ogImage = username
 		? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?c=${burst}`
 		: `${url}${defaultOgImage}`
@@ -52,10 +58,10 @@ export default function Home({
 						<h2 className='animate-fade-in-up text-5xl sm:text-6xl md:text-[80px] mx-auto text-center max-w-[20ch] text-white font-bold pt-60 pb-4 text-balance'>
 							¡Gracias por disfrutar la <span className='text-yellow-300'>miduConf 2024</span>!
 						</h2>
-						<h3 className='text-white text-lg text-center pb-4 pt-4'>
+						<h3 className='pt-4 pb-4 text-lg text-center text-white'>
 							Volvemos en el año que viene con más y mejores charlas y sorteos.
 						</h3>
-						<h3 className='text-yellow-300 text-lg text-center pb-4'>
+						<h3 className='pb-4 text-lg text-center text-yellow-300'>
 							Pero el 1 de marzo de 2025 tenemos nueva conferencia:
 						</h3>
 
@@ -63,7 +69,7 @@ export default function Home({
 							<Button
 								as='a'
 								href='https://jsconf.es'
-								className='w-content px-6 py-5 flex text-lg font-bold md:text-3xl rounded-xl bg-yellow-300/90 text-black shadow-yellow-400 hover:shadow-yellow-300 hover:bg-yellow-300 hover:contrast-125'
+								className='flex px-6 py-5 text-lg font-bold text-black w-content md:text-3xl rounded-xl bg-yellow-300/90 shadow-yellow-400 hover:shadow-yellow-300 hover:bg-yellow-300 hover:contrast-125'
 							>
 								<TicketIcon className='mr-3' />
 								Ir a la JSConf España 2025
@@ -87,13 +93,31 @@ export default function Home({
 				<Gifts />
 				<Agenda />
 			</main>
+			<Modal isOpen={showNoUserModal} onClose={() => setShowNoUserModal(false)}>
+				<MiduLogo className='w-20 h-auto mx-auto mt-4' />
+				<h2 className='mt-4 text-4xl text-center text-midu-secondary text-pretty'>
+					No hay ningún Ticket asociado a tu cuenta
+				</h2>
+				<p className='px-4 py-2 my-4 border rounded-lg bg-midu-primary/20 border-midu-primary/20 text-midu-secondary'>
+					¡Nos vemos este año para celebrar la MiduConf 2025!
+				</p>
+			</Modal>
 		</Layout>
 	)
 }
 
 export const getServerSideProps = async (ctx) => {
 	// read query parameter
-	const { ticket } = ctx.query
+	const { ticket, 'no-user': noUser } = ctx.query
+
+	if (noUser != null) {
+		return {
+			props: {
+				noUser: true
+			}
+		}
+	}
+
 	// create supabase client
 	const supabase = createPagesServerClient(ctx)
 	// if no ticket, return empty props

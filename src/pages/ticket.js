@@ -909,7 +909,6 @@ export const getServerSideProps = async (ctx) => {
 			}
 		}
 	}
-
 	if (!session) {
 		return {
 			redirect: {
@@ -924,16 +923,16 @@ export const getServerSideProps = async (ctx) => {
 
 	if (error) console.error(error)
 
-	const userId = session?.user?.id
-	const metadata = session?.user?.user_metadata ?? {}
-	const { full_name: userFullName, preferred_username: username } = metadata
+	/* const userId = session?.user?.id */
+	/* const metadata = session?.user?.user_metadata ?? {} */
+	/* const { full_name: userFullName, preferred_username: username } = metadata */
 
 	let userHadPreviousTicket = false
 
 	// if no ticket present, create one
 	if (data.length === 0) {
 		console.info('[info] No ticket. Creating for user {')
-		const { error } = await supabase.from('ticket').insert({
+		/* const { error } = await supabase.from('ticket').insert({
 			flavour: 'javascript',
 			id: session.user.id,
 			user_fullname: userFullName,
@@ -941,11 +940,18 @@ export const getServerSideProps = async (ctx) => {
 			user_name: username ?? userFullName
 		})
 
-		if (error) console.error(error)
+		if (error) console.error(error) */
 
-		const { data } = await supabase.from('ticket').select('ticket_number').eq('id', session.user.id)
+		/* const { data } = await supabase.from('ticket').select('ticket_number').eq('id', session.user.id)
 		const [ticketInfo] = data
-		ticketNumber = ticketInfo.ticket_number || 0
+		ticketNumber = ticketInfo.ticket_number || 0 */
+
+		return {
+			redirect: {
+				destination: '/?no-user',
+				permanent: false
+			}
+		}
 	} else {
 		userHadPreviousTicket = true
 		const [ticketInfo] = data
