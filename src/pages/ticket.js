@@ -13,6 +13,7 @@ import { Button } from '@/components/Button'
 import { Container3D } from '@/components/Container3D'
 import { TwitchIcon } from '@/components/icons'
 import { Stickers } from '@/components/icons/stickers/index.tsx'
+import { MiduLogo } from '@/components/logos/midudev'
 import { Meteors } from '@/components/MeteorLanguages'
 import { Modal } from '@/components/Modal'
 import { Stars } from '@/components/Stars'
@@ -38,8 +39,10 @@ export default function Ticket({
 	tierQueryData,
 	notAccessTier,
 	userHadPreviousTicket,
-	stickers
+	stickers,
+	showAcheivementModal
 }) {
+	const [isShowAchievementModal, setIsShowAchievementModal] = useState(showAcheivementModal)
 	const [buttonText, setButtonText] = useState(STEPS_LOADING.ready)
 	const [selectedStickers, setSelectedStickers] = useState(() => {
 		const currentStickers = stickers.map((sticker) => (sticker === 'null' ? null : sticker))
@@ -229,6 +232,18 @@ export default function Ticket({
 		}
 	}, [isModalOpen])
 
+	const handleGetAchievement = async () => {
+		try {
+			const res = await fetch('/api/twitch/signin')
+			if (!res.ok) console.log('error in fetch')
+			const data = await res.json()
+
+			console.log(data)
+		} catch (err) {
+			console.log({ err })
+		}
+	}
+
 	return (
 		<Layout meta={metadata}>
 			<Stars />
@@ -275,7 +290,15 @@ export default function Ticket({
 				className={`${GeistSans.className} max-w-screen-xl m-auto mt-40 pb-20 gap-8 px-4 flex flex-col lg:grid grid-cols-[auto_1fr] items-center`}
 			>
 				<div>
-					<div className='w-auto'>
+					<div className='flex flex-col w-auto'>
+						<Button
+							as='a'
+							href={getTwitchAuthorizeUrlForAchievement()}
+							className='inline-flex self-center mx-auto mb-10 text-center'
+						>
+							<MiduLogo className='w-auto h-4' />
+							Conseguir logro en midu.dev con Twitch
+						</Button>
 						<div className='max-w-[400px] md:max-w-[700px] md:w-[700px] mx-auto'>
 							<Container3D>
 								{selectedMaterial === MATERIALS_AVAILABLE.STANDARD && (
@@ -641,6 +664,23 @@ export default function Ticket({
 					</div>
 				)}
 			</Modal>
+			<Modal isOpen={isShowAchievementModal} onClose={() => setIsShowAchievementModal(false)}>
+				<MiduLogo className='w-20 h-auto mx-auto mt-4' />
+				<h2 className='mt-4 text-4xl text-center text-midu-secondary text-pretty'>
+					¡Logro conseguido!
+				</h2>
+				<p className='px-4 py-2 my-4 text-center border rounded-lg bg-midu-primary/20 border-midu-primary/20 text-midu-secondary text-balance'>
+					¡Si eres suscriptor de{' '}
+					<a target='_blank' href='https://twitch.tv/midudev' className='underline'>
+						midudev
+					</a>{' '}
+					en Twitch, podrás ver en{' '}
+					<a href='https://midu.dev/usuario' target='_blank' className='underline'>
+						midu.dev
+					</a>{' '}
+					tu nuevo logro!
+				</p>
+			</Modal>
 		</Layout>
 	)
 }
@@ -872,6 +912,24 @@ function getTwitchAuthorizeUrl({ requiredTier = '1', currentTier }) {
 	return authorizeTwitchUrl.href
 }
 
+function getTwitchAuthorizeUrlForAchievement() {
+	const redirectUrl =
+		process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://www.miduconf.com'
+
+	const authorizeTwitchUrl = new URL('https://id.twitch.tv/oauth2/authorize')
+	authorizeTwitchUrl.searchParams.append('client_id', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
+
+	const redirectUri = new URL(`${redirectUrl}/api/twitch/signin/`)
+
+	authorizeTwitchUrl.searchParams.append('redirect_uri', redirectUri.href)
+	authorizeTwitchUrl.searchParams.append('', process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID)
+
+	authorizeTwitchUrl.searchParams.append('scope', 'user:read:subscriptions')
+	authorizeTwitchUrl.searchParams.append('response_type', 'code')
+
+	return authorizeTwitchUrl.href
+}
+
 export const getServerSideProps = async (ctx) => {
 	// Create authenticated Supabase Client
 	const supabase = createPagesServerClient(ctx)
@@ -879,6 +937,8 @@ export const getServerSideProps = async (ctx) => {
 	const tierLevelFromQueryParam = ctx.query?.tier
 	const tierErrorFromQueryParam = ctx.query?.error
 	const notAccessTier = ctx.query?.notAccessTier ?? null
+
+	const { 'achievement-saved': isAchievementOfAcademySaved } = ctx.query
 
 	const tierQueryData =
 		tierLevelFromQueryParam == null && tierErrorFromQueryParam == null
@@ -966,6 +1026,7 @@ export const getServerSideProps = async (ctx) => {
 		props: {
 			userHadPreviousTicket,
 			selectedFlavor,
+			showAcheivementModal: isAchievementOfAcademySaved != null,
 			ticketNumber,
 			initialSession: session,
 			user: getInfoFromUser({ user: session?.user }),
