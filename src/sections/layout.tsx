@@ -29,9 +29,17 @@ export function Layout({ children, meta: { title, description, ogImage, url } }:
 				<meta property='twitter:card' content='summary_large_image' />
 				<link rel='icon' href='/favicon.svg' />
 			</Head>
-
-			<Header />
-			{children}
+			<div className='bg-[url(/global/bg.jpg)] min-h-screen bg-cover bg-center image-pixelated'>
+				<header className='fixed top-0 left-0 flex items-center justify-between w-full px-8 py-4'>
+					<h1 className='flex items-center text-2xl font-extrabold text-white'>
+						MIDU.<span className='text-midu-primary'>CONF</span>
+						<span className='px-2 py-1 ml-1 text-xs leading-none text-black bg-midu-primary'>
+							2025
+						</span>
+					</h1>
+				</header>
+				{children}
+			</div>
 		</>
 	)
 }
