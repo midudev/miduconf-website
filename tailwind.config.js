@@ -10,6 +10,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			imageRendering: {
+				pixelated: 'pixelated'
+			},
 			dropShadow: {
 				gift: '3px 4px 8px rgba(0, 0, 0, 0.4)'
 			},
