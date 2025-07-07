@@ -27,7 +27,8 @@ export function Layout({ children, meta: { title, description, ogImage, url } }:
 				<meta property='twitter:url' content={url} />
 				<meta property='og:type' content='website' />
 				<meta property='twitter:card' content='summary_large_image' />
-				<link rel='icon' href='/favicon.svg' />
+				<link rel='icon' type='image/png' href='/favicon.png' />
+				<link rel='manifest' href='/site.webmanifest' />
 			</Head>
 			<div className='bg-[url(/global/bg.png)] min-h-screen bg-cover bg-center image-pixelated'>
 				<header className='fixed top-0 left-0 flex items-center justify-between w-full px-8 py-4 animate-fade-in-down'>
