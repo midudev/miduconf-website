@@ -1,5 +1,6 @@
 import { GeistMono } from 'geist/font/mono'
 
+import { Countdown } from '@/components/Countdown'
 import { Layout } from '@/sections/layout'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { useState } from 'react'
@@ -38,7 +39,7 @@ export default function Home({
 	return (
 		<Layout meta={metadata}>
 			<main className={`${GeistMono.className} relative min-h-screen`}>
-				<section className='absolute bottom-0 left-0 flex flex-col items-end justify-between w-full px-8 py-16 md:flex-row gap-y-4 bg-gradient-to-t from-black md:bg-none'>
+				<section className='absolute bottom-0 left-0 flex flex-col items-center justify-between w-full px-8 py-16 md:items-end md:flex-row gap-y-4 bg-gradient-to-t from-black md:bg-none'>
 					<div>
 						<p className='text-white'>
 							Con{' '}
@@ -55,13 +56,17 @@ export default function Home({
 							<span className='text-midu-primary'>Desarrollo Web</span>
 						</h2>
 					</div>
-					<button
-						disabled
-						className='flex [box-shadow:-4px_4px_0_0_#0099FF60] items-center gap-x-4 gap-y-2 py-4 pl-8 pr-6 text-xl text-white bg-midu-primary disabled:cursor-not-allowed md:flex-row flex-col w-full md:w-auto'
-					>
-						Consigue tu Ticket{' '}
-						<span className='w-full px-2 py-1 text-sm bg-black/20 md:w-auto'>Próximamente</span>
-					</button>
+					<div className='animate-fade-in-up'>
+						<p className='mb-2 ml-4 text-sm text-white'>El evento comienza en:</p>
+						<Countdown className='mb-4' />
+						<button
+							disabled
+							className='flex [box-shadow:-4px_4px_0_0_#0099FF60] items-center gap-x-4 gap-y-2 py-4 pl-8 pr-6 text-xl text-white bg-midu-primary disabled:cursor-not-allowed md:flex-row flex-col w-full md:w-auto'
+						>
+							Consigue tu Ticket{' '}
+							<span className='w-full px-2 py-1 text-sm bg-black/20 md:w-auto'>Próximamente</span>
+						</button>
+					</div>
 				</section>
 			</main>
 		</Layout>
