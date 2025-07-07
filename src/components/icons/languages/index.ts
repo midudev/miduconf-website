@@ -23,6 +23,7 @@ import { NodeIcon } from './node'
 import { NpmIcon } from './npm'
 import { NuxtIcon } from './nuxt'
 import { PhpIcon } from './php'
+import { PnpmIcon } from './pnpm'
 import { PreactIcon } from './preact'
 import { PythonIcon } from './python'
 import { QwikIcon } from './qwik'
@@ -79,5 +80,6 @@ export const FLAVORS_ICONS = {
 	linux: LinuxIcon,
 	ruby: RubyIcon,
 	tailwind: TailwindIcon,
-	c: CIcon
+	c: CIcon,
+	pnpm:PnpmIcon
 }

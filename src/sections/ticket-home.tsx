@@ -1,15 +1,41 @@
 import Ticket from '@/components/Ticket'
+import TicketSpecial from '@/components/TicketGradient'
+import TicketPremium from '@/components/TicketPlatinum'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useEffect, useState } from 'react'
 import { FLAVORS } from '@/flavors/data'
 import { Button } from '@/components/Button'
 import { TicketIcon } from '@/components/icons'
 import { Container3D } from '@/components/Container3D'
+import { STICKERS_LIST } from '@/pages/ticket'
 
-export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
+export const TicketHome = ({
+	ticketNumber,
+	username,
+	initialFlavor,
+	material = 'standard',
+	stickers,
+	twitchTier
+}) => {
 	const supabase = useSupabaseClient()
 	const [flavor, setFlavor] = useState(FLAVORS[initialFlavor] ?? FLAVORS.javascript)
 	const [number, setNumber] = useState(ticketNumber ?? 0)
+
+	const [selectedStickers, _] = useState(() => {
+		const currentStickers = stickers?.map((sticker) => (sticker === 'null' ? null : sticker))
+
+		const currentList = stickers?.map((sticker) => {
+			if (sticker === 'null') return null
+			const stickerComponent = STICKERS_LIST.find(({ name }) => name === sticker)
+			return stickerComponent?.StickerImage
+		})
+
+		return {
+			limit: twitchTier == null ? 0 : Number(twitchTier),
+			list: currentList,
+			namesList: currentStickers
+		}
+	})
 
 	useEffect(() => {
 		if (initialFlavor) return
@@ -57,17 +83,44 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 	return (
 		<div>
 			<div className='block w-full h-full'>
-				<div className='flex items-center justify-center max-w-[668px] mx-auto mt-16 flex-0'>
+				<div className='flex items-center justify-center max-w-[700px] mx-auto mt-16 flex-0'>
 					<Container3D>
-						<Ticket
-							transition={initialFlavor}
-							number={number}
-							flavor={flavor}
-							user={{
-								avatar: username ? `https://unavatar.io/github/${username}` : null,
-								username
-							}}
-						/>
+						{material === 'standard' && (
+							<Ticket
+								transition={initialFlavor}
+								number={number}
+								flavor={flavor}
+								selectedStickers={selectedStickers}
+								user={{
+									avatar: username ? `https://unavatar.io/github/${username}` : null,
+									username
+								}}
+							/>
+						)}
+						{material === 'special' && (
+							<TicketSpecial
+								transition={initialFlavor}
+								number={number}
+								flavor={flavor}
+								selectedStickers={selectedStickers}
+								user={{
+									avatar: username ? `https://unavatar.io/github/${username}` : null,
+									username
+								}}
+							/>
+						)}
+						{material === 'premium' && (
+							<TicketPremium
+								transition={initialFlavor}
+								number={number}
+								flavor={flavor}
+								selectedStickers={selectedStickers}
+								user={{
+									avatar: username ? `https://unavatar.io/github/${username}` : null,
+									username
+								}}
+							/>
+						)}
 					</Container3D>
 				</div>
 				<div className='flex flex-col items-center justify-center gap-4 mx-auto mt-16 scale-90 md:flex-row sm:scale-100'>
@@ -76,7 +129,7 @@ export const TicketHome = ({ ticketNumber, username, initialFlavor }) => {
 						className='px-6 py-5 text-lg font-bold md:text-3xl rounded-xl'
 					>
 						<TicketIcon className='mr-3' />
-						Conseguir mi ticket
+						Ver mi ticket
 					</Button>
 				</div>
 			</div>
