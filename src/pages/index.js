@@ -38,8 +38,8 @@ export default function Home({
 
 	return (
 		<Layout meta={metadata}>
-			<main className={`${GeistMono.className} relative min-h-screen`}>
-				<section className='absolute bottom-0 left-0 flex flex-col items-center justify-between w-full px-8 py-16 md:items-end md:flex-row gap-y-4 bg-gradient-to-t from-black md:bg-none'>
+			<main className={`${GeistMono.className} relative min-h-screen overflow-hidden`}>
+				<section className='absolute bottom-0 left-0 flex flex-col items-center justify-between w-full px-8 py-16 md:items-end md:flex-row gap-y-4 bg-gradient-to-t from-black md:bg-none animate-fade-in-up'>
 					<div>
 						<p className='text-white'>
 							Con{' '}
@@ -56,7 +56,7 @@ export default function Home({
 							<span className='text-midu-primary'>Desarrollo Web</span>
 						</h2>
 					</div>
-					<div className='animate-fade-in-up'>
+					<div>
 						<p className='mb-2 text-sm text-center text-white md:ml-4 md:text-start'>
 							<time dateTime='2025-09-10'>10 de Sepiembre 2025</time> | Ver en{' '}
 							<a

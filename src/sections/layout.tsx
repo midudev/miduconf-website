@@ -30,7 +30,7 @@ export function Layout({ children, meta: { title, description, ogImage, url } }:
 				<link rel='icon' href='/favicon.svg' />
 			</Head>
 			<div className='bg-[url(/global/bg.png)] min-h-screen bg-cover bg-center image-pixelated'>
-				<header className='fixed top-0 left-0 flex items-center justify-between w-full px-8 py-4'>
+				<header className='fixed top-0 left-0 flex items-center justify-between w-full px-8 py-4 animate-fade-in-down'>
 					<h1 className='flex items-center text-2xl font-extrabold text-white'>
 						MIDU.<span className='text-midu-primary'>CONF</span>
 						<span className='px-1 py-1 ml-1 text-xs leading-none border text-midu-primary border-midu-primary'>
