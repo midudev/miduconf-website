@@ -58,7 +58,7 @@ export default function Home({
 					</div>
 					<div className='animate-fade-in-up'>
 						<p className='mb-2 text-sm text-center text-white md:ml-4 md:text-start'>
-							<time dateTime='2025-09-10'>10 de Sepiembre de 2025</time> | Ver en{' '}
+							<time dateTime='2025-09-10'>10 de Sepiembre 2025</time> | Ver en{' '}
 							<a
 								href='https://www.twitch.tv/midudev'
 								className='underline text-violet-200'
