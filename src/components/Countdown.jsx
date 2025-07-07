@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react'
 import { useRemainingTime } from '../hooks/useRemainingTime'
 
 const LITERALS = ['Días', null, 'Horas', null, 'Minutos', null, 'Segundos']
+const EVENT_DATE = 1757512800000 // 10 de septiembre de 2025 - 16:00h CEST
 
 export function Countdown({ className }) {
-	const { seconds, minutes, hours, days } = useRemainingTime(new Date(1757685600000), {
+	const { seconds, minutes, hours, days } = useRemainingTime(new Date(1757512800000), {
 		fillingZeros: true
 	})
 	const [show, setShow] = useState(false)

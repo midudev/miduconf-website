@@ -44,7 +44,7 @@ export default function Home({
 						<p className='text-white'>
 							Con{' '}
 							<a
-								href='https://midu.dev'
+								href='https://midu.dev/'
 								target='_blank'
 								className='text-white underline md:text-midu-primary'
 							>
@@ -57,7 +57,16 @@ export default function Home({
 						</h2>
 					</div>
 					<div className='animate-fade-in-up'>
-						<p className='mb-2 ml-4 text-sm text-white'>El evento comienza en:</p>
+						<p className='mb-2 text-sm text-center text-white md:ml-4 md:text-start'>
+							<time dateTime='2025-09-10'>10 de Sepiembre de 2025</time> | Ver en{' '}
+							<a
+								href='https://www.twitch.tv/midudev'
+								className='underline text-violet-200'
+								target='_blank'
+							>
+								Twitch
+							</a>
+						</p>
 						<Countdown className='mb-4' />
 						<button
 							disabled
