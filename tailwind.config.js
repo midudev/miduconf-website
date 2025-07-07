@@ -71,6 +71,7 @@ module.exports = {
 				base: '1000px'
 			},
 			colors: {
+				twitch: '#6441a5',
 				midu: {
 					primary: '#0099FF',
 					secondary: '#DEF2FF'
