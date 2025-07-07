@@ -2,8 +2,6 @@ import { GeistMono } from 'geist/font/mono'
 
 import { Countdown } from '@/components/Countdown'
 import { Layout } from '@/sections/layout'
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
-import { useState } from 'react'
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
@@ -23,8 +21,6 @@ export default function Home({
 	twitchTier,
 	noUser
 }) {
-	const [showNoUserModal, setShowNoUserModal] = useState(noUser)
-
 	const ogImage = username
 		? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?c=${burst}`
 		: `${url}${defaultOgImage}`
@@ -82,7 +78,7 @@ export default function Home({
 	)
 }
 
-export const getServerSideProps = async (ctx) => {
+/* export const getServerSideProps = async (ctx) => {
 	// read query parameter
 	const { ticket, 'no-user': noUser } = ctx.query
 
@@ -124,4 +120,4 @@ export const getServerSideProps = async (ctx) => {
 	return {
 		props: {}
 	}
-}
+} */
