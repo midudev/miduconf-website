@@ -27,7 +27,7 @@ export function Countdown({ className }) {
 	return (
 		<div
 			className={cn(
-				'flex items-center gap-3 text-white font-geist text-xl bg-pallet-b-foreground-primary border border-pallet-border-foreground px-4 py-2 w-max',
+				'text-base md:text-xl flex items-center gap-3 text-white font-geist bg-pallet-b-foreground-primary border border-pallet-border-foreground px-4 py-2 w-max',
 				className
 			)}
 		>
