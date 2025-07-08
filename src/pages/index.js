@@ -1,6 +1,4 @@
-import { GeistMono } from 'geist/font/mono'
-
-import { Countdown } from '@/components/Countdown'
+import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
@@ -34,45 +32,9 @@ export default function Home({
 
 	return (
 		<Layout meta={metadata}>
-			<main className={`${GeistMono.className} relative min-h-screen overflow-hidden`}>
-				<section className='absolute bottom-0 left-0 flex flex-col items-center justify-between w-full px-8 py-16 md:items-end md:flex-row gap-y-4 bg-gradient-to-t from-black md:bg-none animate-fade-in-up'>
-					<div>
-						<p className='text-white'>
-							Con{' '}
-							<a
-								href='https://midu.dev/'
-								target='_blank'
-								className='text-white underline md:text-midu-primary'
-							>
-								@midudev
-							</a>
-						</p>
-						<h2 className='text-4xl leading-normal font-bold max-w-[24ch] text-white text-balance'>
-							Evento de <span className='text-midu-primary'>Programación</span> y{' '}
-							<span className='text-midu-primary'>Desarrollo Web</span>
-						</h2>
-					</div>
-					<div>
-						<p className='mb-2 text-sm text-center text-white md:ml-4 md:text-start'>
-							<time dateTime='2025-09-10'>10 de Sepiembre 2025</time> | Ver en{' '}
-							<a
-								href='https://www.twitch.tv/midudev'
-								className='underline text-violet-200'
-								target='_blank'
-							>
-								Twitch
-							</a>
-						</p>
-						<Countdown className='mb-4' />
-						<button
-							disabled
-							className='flex [box-shadow:-4px_4px_0_0_#0099FF60] items-center gap-x-4 gap-y-2 py-4 pl-8 pr-6 text-xl text-white bg-midu-primary disabled:cursor-not-allowed md:flex-row flex-col w-full md:w-auto'
-						>
-							Consigue tu Ticket{' '}
-							<span className='w-full px-2 py-1 text-sm bg-black/20 md:w-auto'>Próximamente</span>
-						</button>
-					</div>
-				</section>
+			<main>
+				<Hero />
+				<section className='min-h-screen'></section>
 			</main>
 		</Layout>
 	)
