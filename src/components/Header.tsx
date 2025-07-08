@@ -47,7 +47,10 @@ function Navbar() {
 		<nav>
 			<button
 				onClick={toggleMenu}
-				className='z-50 w-auto p-2 text-white border rounded border-pallet-border-foreground aspect-square bg-pallet-background md:hidden'
+				className={cn(
+					'z-50 w-auto p-2 text-white border rounded border-pallet-border-foreground aspect-square bg-pallet-background md:hidden',
+					'focus:outline focus:outline-white focus:border-pallet-ghost'
+				)}
 				aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
 				aria-controls={navbarId}
 				aria-expanded={isOpen}
@@ -72,6 +75,7 @@ function Navbar() {
 						<li key={href}>
 							<Link
 								href={href}
+								tabIndex={!isOpen ? -1 : 0}
 								onClick={() => setIsOpen(false)}
 								className={cn(
 									'px-2.5 py-2 border rounded-md border-transparent hover:border-pallet-primary hover:text-pallet-primary transition uppercase',
