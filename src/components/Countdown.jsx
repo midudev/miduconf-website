@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 import { useRemainingTime } from '../hooks/useRemainingTime'
+import { DiamondIcon } from './icons/diamond'
 
-const LITERALS = ['Días', null, 'Horas', null, 'Minutos', null, 'Segundos']
+const LITERALS = ['d', null, 'h', null, 'm', null, 's']
 const EVENT_DATE = 1757512800000 // 10 de septiembre de 2025 - 16:00h CEST
 
 export function Countdown({ className }) {
@@ -17,32 +18,33 @@ export function Countdown({ className }) {
 	}, [])
 
 	const showValue = (value) => {
-		if (value === null) return ':'
+		if (value === null) return
+
 		if (show) return value
 		return '00'
 	}
 
 	return (
-		<>
-			<div
-				className={cn(
-					'flex flex-row items-center justify-center gap-4 text-white md:gap-x-4',
-					className
-				)}
-			>
+		<div
+			className={cn(
+				'flex items-center gap-3 text-white font-geist text-xl bg-pallet-b-foreground-primary border border-pallet-border-foreground px-4 py-2 w-max',
+				className
+			)}
+		>
+			<DiamondIcon className='text-pallet-primary' />
+			<span className='uppercase text-pallet-ghost'>Empezamos en:</span>
+			<div className='flex items-center gap-1 text-white'>
 				{[days, null, hours, null, minutes, null, seconds].map((value, index) => {
 					return (
 						<div key={index}>
-							<div className='flex flex-col items-center justify-center text-center'>
-								<strong className='text-xl md:text-4xl tabular-nums'>{showValue(value)}</strong>
-								<span className='text-sm font-light md:text-md'>
-									{value === null ? ' ' : LITERALS[index]}
-								</span>
+							<div className='flex items-center justify-center text-center'>
+								<span className='tabular-nums'>{showValue(value)}</span>
+								<span className=''>{value === null ? ' ' : LITERALS[index]}</span>
 							</div>
 						</div>
 					)
 				})}
 			</div>
-		</>
+		</div>
 	)
 }
