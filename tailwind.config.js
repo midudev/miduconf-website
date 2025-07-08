@@ -13,6 +13,10 @@ module.exports = {
 			imageRendering: {
 				pixelated: 'pixelated'
 			},
+			fontFamily: {
+				inter: 'var(--font-inter)',
+				geist: 'var(--font-geist-mono)'
+			},
 			dropShadow: {
 				gift: '3px 4px 8px rgba(0, 0, 0, 0.4)'
 			},
@@ -71,9 +75,23 @@ module.exports = {
 				base: '1000px'
 			},
 			colors: {
+				neutral: {
+					black: '#0F0F0F',
+					white: '#ffffff'
+				},
+				pallet: {
+					background: '#09090E',
+					ghost: '#9799A0',
+					['b-foreground-primary']: '#121319',
+					primary: '#5A8CF6',
+					['border-primary']: '#95B8FB',
+					['bg-foreground-secondary']: '#5A8CF6',
+					default: '#EFF4FF',
+					['border-foreground']: '#1E1F26'
+				},
 				twitch: '#6441a5',
 				midu: {
-					primary: '#0099FF',
+					primary: '#5A8CF6',
 					secondary: '#DEF2FF'
 				}
 			},
