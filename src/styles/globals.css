@@ -7,7 +7,7 @@ html {
 }
 
 body {
-	background: #000214;
+	background: #09090E;
 	overflow-x: hidden;
 }
 
@@ -222,5 +222,20 @@ body {
 		background: rgba(0, 0, 0, .3);
 		padding-block: 1rem;
 		backdrop-filter: blur(10px);
+	}
+}
+
+/* aplicar background al header cuando hacemos scroll */
+.animation-header {
+	animation: animation-header-scroll linear both;
+	animation-timeline: scroll();
+	animation-range: 0 200px;
+}
+
+@keyframes animation-header-scroll {
+	to {
+		background-color: #09090E;
+		padding-inline: 1rem;
+		padding-block: .5rem;
 	}
 }
