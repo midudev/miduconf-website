@@ -14,13 +14,13 @@ export function Modal({ isOpen = false, onClose, children }: Props) {
 			<div className='absolute inset-0 w-dvw h-dvh backdrop-blur-sm bg-black/20 z-[9999999] animate-blurred-fade-in'></div>
 			<dialog
 				open={isOpen}
-				className='max-w-[480px] w-full fixed inset-0 z-[9999999] px-5 py-5 animate-fade-in-up bg-[#121226] border border-midu-primary rounded-3xl shadow-2xl shadow-midu-primary/20'
+				className='max-w-[480px] w-full fixed inset-0 z-[9999999] px-5 py-5 animate-fade-in-up bg-[#121226] border border-pallet-primary rounded-3xl shadow-2xl shadow-pallet-primary/20'
 			>
 				<button
 					onClick={onClose}
 					title='Cerrar modal'
 					aria-label='Cerrar modal'
-					className='absolute p-3 transition-transform rounded-full bg-midu-primary/10 top-5 right-5 hover:scale-110'
+					className='absolute p-3 transition-transform rounded-full bg-pallet-primary/10 top-5 right-5 hover:scale-110'
 				>
 					<svg
 						width='18'

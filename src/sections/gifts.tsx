@@ -118,7 +118,7 @@ const GiftsSection = () => {
 			className='pt-24 bg-button shadow-button rounded-[40px] max-w-screen-xl mx-auto px-4'
 		>
 			<h2 className='text-4xl font-bold text-center text-white sm:text-6xl'>
-				Regalos para la <span className='text-midu-primary'>comunidad</span>
+				Regalos para la <span className='text-pallet-primary'>comunidad</span>
 			</h2>
 			<p className='mt-4 text-lg text-center text-white/80'>+256 regalos para todo el mundo.</p>
 			<button
@@ -332,7 +332,7 @@ function GiftItem({
 			className={cn(
 				'relative flex items-center justify-center py-5 transition-all duration-500 border bg-button rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0  cursor-crosshair group',
 				className,
-				level === 1 && 'bg-midu-primary/30 border-midu-primary',
+				level === 1 && 'bg-pallet-primary/30 border-pallet-primary',
 				level === 2 && 'bg-[#5C9AFF]/30 border-[#5C9AFF]',
 				level === 3 && 'bg-[#93C5FD]/30 border-[#93C5FD]'
 			)}

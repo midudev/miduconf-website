@@ -327,7 +327,7 @@ const NotAvatarUser = ({ isSizeFixed }: { isSizeFixed: boolean }) => {
 		>
 			<div>
 				<p className='text-xl font-bold'>
-					<span className='opacity-75 text-midu-primary'>#</span>miduConf
+					<span className='opacity-75 text-pallet-primary'>#</span>miduConf
 				</p>
 				<span className='block text-sm font-normal w-max text-white/60'>
 					Evento de Programación Gratuito

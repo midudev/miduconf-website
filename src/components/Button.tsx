@@ -21,7 +21,7 @@ export const Button = <C extends React.ElementType = 'button'>({
 	const variantStyle = {
 		primary: 'bg-button text-white shadow-button hover:shadow-button-hover hover:scale-110 ',
 		secondary:
-			'border border-midu-primary/40 bg-[#121226] hover:bg-[#1A1A2E] hover:border-midu-primary/60'
+			'border border-pallet-primary/40 bg-[#121226] hover:bg-[#1A1A2E] hover:border-pallet-primary/60'
 	}
 
 	return (

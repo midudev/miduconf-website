@@ -89,11 +89,7 @@ module.exports = {
 					default: '#EFF4FF',
 					['border-foreground']: '#1E1F26'
 				},
-				twitch: '#6441a5',
-				midu: {
-					primary: '#5A8CF6',
-					secondary: '#DEF2FF'
-				}
+				twitch: '#6441a5'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

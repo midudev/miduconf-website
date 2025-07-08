@@ -601,7 +601,7 @@ export default function Ticket({
 						<p className='text-center text-white/80'>
 							Solo los usuarios suscritos en Twitch con{' '}
 							<a
-								className='underline text-midu-primary'
+								className='underline text-pallet-primary'
 								target='_blank'
 								href='https://twitch.tv/midudev'
 							>
@@ -666,10 +666,10 @@ export default function Ticket({
 			</Modal>
 			<Modal isOpen={isShowAchievementModal} onClose={() => setIsShowAchievementModal(false)}>
 				<MiduLogo className='w-20 h-auto mx-auto mt-4' />
-				<h2 className='mt-4 text-4xl text-center text-midu-secondary text-pretty'>
+				<h2 className='mt-4 text-4xl text-center text-pallet-secondary text-pretty'>
 					¡Logro conseguido!
 				</h2>
-				<p className='px-4 py-2 my-4 text-center border rounded-lg bg-midu-primary/20 border-midu-primary/20 text-midu-secondary text-balance'>
+				<p className='px-4 py-2 my-4 text-center border rounded-lg bg-pallet-primary/20 border-pallet-primary/20 text-pallet-secondary text-balance'>
 					¡Si eres suscriptor de{' '}
 					<a target='_blank' href='https://twitch.tv/midudev' className='underline'>
 						midudev

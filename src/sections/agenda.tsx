@@ -53,7 +53,7 @@ export const Agenda = () => {
 				))}
 			</div>
 
-			{/* <p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-midu-primary mx-auto px-4'>
+			{/* <p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-pallet-primary mx-auto px-4'>
 				¡Muy pronto revelaremos la agenda!
 			</p> */}
 		</section>
@@ -81,7 +81,7 @@ const AgendaItem = ({ startAt, durationInMinutes, title, speaker }: AgendaItemPr
 			</p>
 			<div className='flex-1'>
 				<header className='flex flex-row items-center gap-x-2'>
-					<h4 className='font-medium leading-tight text-midu-primary'>{speaker.name}</h4>
+					<h4 className='font-medium leading-tight text-pallet-primary'>{speaker.name}</h4>
 					<span className='text-white/70'>- {speaker.description}</span>
 				</header>
 				<h4 className='mt-2 text-xl font-bold text-white md:max-w-[28ch] text-pretty'>{title}</h4>
@@ -106,8 +106,8 @@ const AgendaItemMobile = ({ startAt, durationInMinutes, title, speaker }: Agenda
 	return (
 		<article>
 			<header className='flex items-center gap-x-4'>
-				<h4 className='text-sm text-midu-primary'>{speaker.name}</h4>
-				<div className='flex-1 bg-midu-primary w-full h-[1px]'></div>
+				<h4 className='text-sm text-pallet-primary'>{speaker.name}</h4>
+				<div className='flex-1 bg-pallet-primary w-full h-[1px]'></div>
 				<span className='text-sm text-white/50'>
 					{time?.startAt} - {time?.endAt}
 				</span>
@@ -138,7 +138,7 @@ const AgendaRaffle = ({ title, sponsor }: AgendaRaffleProps) => {
 	const accesibilityLink = `Ir al sitio de ${sponsor.name}`
 
 	return (
-		<div className='relative w-full max-w-md p-4 mx-auto overflow-hidden text-white border rounded-2xl border-midu-primary/50 bg-button md:shadow-button group cursor-crosshair'>
+		<div className='relative w-full max-w-md p-4 mx-auto overflow-hidden text-white border rounded-2xl border-pallet-primary/50 bg-button md:shadow-button group cursor-crosshair'>
 			<h4 className='font-bold'>{title}</h4>
 			<div className='flex items-center gap-3 mt-2'>
 				<span className='text-sm text-white/60'>Patrocinado por:</span>

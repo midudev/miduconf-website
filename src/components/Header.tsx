@@ -23,9 +23,9 @@ export function Header() {
 								<Link
 									href={href}
 									className={cn(
-										'px-2.5 py-2 border rounded-md border-transparent hover:border-midu-primary hover:text-midu-primary transition uppercase',
-										'focus-visible:text-midu-primary focus-visible:border-midu-primary focus-visible:outline-none focus-visible:outline focus-visible:outline-white',
-										currentHash === href && 'bg-midu-primary border-midu-primary',
+										'px-2.5 py-2 border rounded-md border-transparent hover:border-pallet-primary hover:text-pallet-primary transition uppercase',
+										'focus-visible:text-pallet-primary focus-visible:border-pallet-primary focus-visible:outline-none focus-visible:outline focus-visible:outline-white',
+										currentHash === href && 'bg-pallet-primary border-pallet-primary',
 										currentHash === href && 'hover:text-white',
 										currentHash === href &&
 											'focus-visible:text-white focus-visible:border-white focus-visible:outline focus-visible:outline-white'
@@ -127,8 +127,8 @@ export function Header() {
 function Title() {
 	return (
 		<h1 className='flex items-center text-2xl font-extrabold text-white'>
-			MIDU.<span className='text-midu-primary'>CONF</span>
-			<span className='px-1 py-1 ml-1 text-xs leading-none border text-midu-primary border-midu-primary'>
+			MIDU.<span className='text-pallet-primary'>CONF</span>
+			<span className='px-1 py-1 ml-1 text-xs leading-none border text-pallet-primary border-pallet-primary'>
 				25
 			</span>
 		</h1>

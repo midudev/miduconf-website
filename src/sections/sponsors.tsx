@@ -23,7 +23,7 @@ const ReviewCard = ({
 			className={cn(
 				size === 'large' ? 'min-w-[250px] px-12 w-full' : 'w-[200px] px-4 inline-block',
 				'relative flex justify-center items-center overflow-hidden rounded-xl py-8 group  transition-all',
-				'before:w-full before:h-[1px] before:bottom-0 before:left-0 before:absolute before:bg-gradient-to-r before:from-transparent before:via-midu-primary before:to-transparent before:scale-x-0 hover:before:scale-x-100 before:transition-all before:opacity-0 hover:before:opacity-100 before:duration-500',
+				'before:w-full before:h-[1px] before:bottom-0 before:left-0 before:absolute before:bg-gradient-to-r before:from-transparent before:via-pallet-primary before:to-transparent before:scale-x-0 hover:before:scale-x-100 before:transition-all before:opacity-0 hover:before:opacity-100 before:duration-500',
 				'after:w-full after:h-1/2 after:rounded-[50%] after:left-0 after:bottom-0 after:absolute after:-z-10 after:bg-[radial-gradient(#0099FF_0%,transparent_80%)] after:opacity-0 after:blur-lg hover:after:opacity-50 after:transition-all after:duration-500 after:translate-y-full hover:after:translate-y-1/2',
 				className
 			)}
