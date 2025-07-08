@@ -1,127 +1,20 @@
 'use client'
-import { useId, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DiscordIcon } from './icons/discord'
+import { HorizontalEllipses } from './icons/horizontal-ellipses'
+import { CrossIcon } from './icons/cross'
 
 export function Header() {
-	const [isNavbarOpen, setIsNavbarOpen] = useState(false)
-	const navbarId = useId()
-
-	const currentHash = useCurrentHashOnLink()
-
 	return (
 		<header className='fixed top-0 left-0 z-50 flex items-center justify-between w-full px-8 py-4 animate-fade-in-down font-geist animation-header'>
 			<Title />
-			<nav>
-				<ul className='flex items-center gap-2 text-white'>
-					{NAV_ITEMS.map(({ href, title }) => {
-						return (
-							<li key={href}>
-								<Link
-									href={href}
-									className={cn(
-										'px-2.5 py-2 border rounded-md border-transparent hover:border-pallet-primary hover:text-pallet-primary transition uppercase',
-										'focus-visible:text-pallet-primary focus-visible:border-pallet-primary focus-visible:outline-none focus-visible:outline focus-visible:outline-white',
-										currentHash === href && 'bg-pallet-primary border-pallet-primary',
-										currentHash === href && 'hover:text-white',
-										currentHash === href &&
-											'focus-visible:text-white focus-visible:border-white focus-visible:outline focus-visible:outline-white'
-									)}
-								>
-									{title}
-								</Link>
-							</li>
-						)
-					})}
-				</ul>
-			</nav>
+			<Navbar />
 			<DiscordLink />
 		</header>
 	)
-
-	/* return (
-		<header className='header-animate backdrop-blur-[10px] md:backdrop-blur-0 w-full mb-10 overflow-hidden z-[99999] py-8'>
-			<div className='grid items-center justify-center md:justify-normal w-full grid-cols-[auto_1fr] mx-auto text-white gap-x-10 md:flex max-w-screen-base'>
-				<a
-					href='/'
-					className='ml-4 transition-transform duration-300 hover:scale-125'
-					title='Ir a la página principal'
-					aria-label='Ir a la página principal'
-				>
-					<MiduLogo className='w-10 h-12' />
-				</a>
-				<nav
-					id={navbarId}
-					className={cn(
-						'col-span-full overflow-x-auto row-[2/3] grid md:block grid-rows-[0fr] transition-[grid-template-rows] ',
-						{
-							'grid-rows-[1fr]': isNavbarOpen
-						}
-					)}
-				>
-					<ul className='flex flex-col items-center overflow-x-auto overflow-y-hidden md:overflow-hidden md:flex-row'>
-						{NAV_ITEMS.map(({ Icon, href, title }, index) => (
-							<li
-								key={index}
-								className='flex justify-center w-full first:mt-5 md:first:mt-0 md:block md:w-auto'
-							>
-								<a
-									href={href}
-									className='flex items-center justify-center w-full gap-1 px-5 py-4 text-xl duration-300 md:w-auto md:py-2 md:text-base hover:scale-110'
-								>
-									<Icon />
-									{title}
-								</a>
-							</li>
-						))}
-					</ul>
-				</nav>
-				<div className='flex items-center gap-4 mr-4 md:ml-auto'>
-					<Button
-						as='a'
-						href='https://discord.gg/midudev'
-						target='_blank'
-						className='ml-auto font-medium'
-						title='Únete al Discord de la comunidad'
-						aria-label='Únete al Discord de la comunidad'
-					>
-						<NavbarIcons.DiscordLogo />
-						Discord
-					</Button>
-					<button
-						className='flex items-center justify-center py-2 md:hidden'
-						onClick={() => setIsNavbarOpen(!isNavbarOpen)}
-						aria-expanded='false'
-						aria-controls={navbarId}
-						title='Mostrar Menú'
-						aria-label='Mostrar menú'
-					>
-						<div className='flex items-center justify-center p-2 cursor-pointer group'>
-							<div className='space-y-2'>
-								<span
-									className={cn(
-										'block h-1 w-8 origin-center rounded-full bg-white/60 transition-transform ease-in-out',
-										{ 'translate-y-1.5 rotate-45': isNavbarOpen }
-									)}
-								></span>
-								<span
-									className={cn(
-										'block h-1 w-8 origin-center rounded-full bg-white/60 transition-transform ease-in-out',
-										{
-											'w-8 -translate-y-1.5 -rotate-45': isNavbarOpen
-										}
-									)}
-								></span>
-							</div>
-						</div>
-					</button>
-				</div>
-			</div>
-		</header>
-	) */
 }
 
 function Title() {
@@ -135,6 +28,70 @@ function Title() {
 	)
 }
 
+function Navbar() {
+	const currentHash = useCurrentHashOnLink()
+	const [isOpen, setIsOpen] = useState(false)
+	const navbarId = useId()
+
+	const toggleMenu = () => setIsOpen(!isOpen)
+
+	useEffect(() => {
+		document.body.style.overflow = isOpen ? 'hidden' : ''
+
+		return () => {
+			document.body.style.overflow = ''
+		}
+	}, [isOpen])
+
+	return (
+		<nav>
+			<button
+				onClick={toggleMenu}
+				className='z-50 w-auto p-2 text-white border rounded border-pallet-border-foreground aspect-square bg-pallet-background md:hidden'
+				aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+				aria-controls={navbarId}
+				aria-expanded={isOpen}
+			>
+				{isOpen ? (
+					<CrossIcon className='w-4 h-auto' />
+				) : (
+					<HorizontalEllipses className='w-4 h-auto' />
+				)}
+			</button>
+			<ul
+				id={navbarId}
+				className={cn(
+					'flex flex-col gap-x-2 gap-y-4 pb-20 pr-4 items-end text-white w-full h-dvh absolute left-0 top-0 -z-10 justify-end text-2xl translate-x-full transition bg-transparent',
+					'md:flex-row md:items-center md:mt-0 md:z-0 md:relative md:translate-x-0 md:justify-start md:h-auto md:pb-0 md:pr-0 md:text-base',
+					isOpen ? 'flex translate-x-0 bg-pallet-background' : 'md:flex',
+					'md:flex'
+				)}
+			>
+				{NAV_ITEMS.map(({ href, title }) => {
+					return (
+						<li key={href}>
+							<Link
+								href={href}
+								onClick={() => setIsOpen(false)}
+								className={cn(
+									'px-2.5 py-2 border rounded-md border-transparent hover:border-pallet-primary hover:text-pallet-primary transition uppercase',
+									'focus-visible:text-pallet-primary focus-visible:border-pallet-primary focus-visible:outline-none focus-visible:outline focus-visible:outline-white',
+									currentHash === href && 'bg-pallet-primary border-pallet-primary',
+									currentHash === href && 'hover:text-white',
+									currentHash === href &&
+										'focus-visible:text-white focus-visible:border-white focus-visible:outline focus-visible:outline-white'
+								)}
+							>
+								{title}
+							</Link>
+						</li>
+					)
+				})}
+			</ul>
+		</nav>
+	)
+}
+
 function DiscordLink() {
 	return (
 		<Link
@@ -142,9 +99,9 @@ function DiscordLink() {
 			target='_blank'
 			rel='noopener noreferrer'
 			className={cn(
-				'inline-flex items-center gap-2 px-4 py-2 text-white uppercase border rounded-md border-pallet-border-foreground',
+				'hidden md:inline-flex items-center gap-2 px-4 py-2 text-white uppercase border rounded-md border-pallet-border-foreground',
 				'hover:bg-pallet-border-foreground hover:border-pallet-ghost transition',
-				'focus-visible:border-pallet-primary focus-visible:outline focus-visible:outline-white focus-visible:bg-pallet-border-foreground focus-visible:border-pallet-ghost'
+				'focus-visible:outline focus-visible:outline-white focus-visible:bg-pallet-border-foreground focus-visible:border-pallet-ghost'
 			)}
 		>
 			<DiscordIcon className='w-5 h-auto' />
