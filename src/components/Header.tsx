@@ -75,7 +75,6 @@ function Navbar() {
 						<li key={href}>
 							<Link
 								href={href}
-								tabIndex={!isOpen ? -1 : 0}
 								onClick={() => setIsOpen(false)}
 								className={cn(
 									'px-2.5 py-2 border rounded-md border-transparent hover:border-pallet-primary hover:text-pallet-primary transition uppercase',
