@@ -1,16 +1,48 @@
 'use client'
-
-import { MiduLogo } from '@/components/logos/midudev'
-import { NavbarIcons } from '@/components/icons/navbar'
-import { Button } from '@/components/Button'
 import { useId, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { DiscordIcon } from './icons/discord'
 
 export function Header() {
 	const [isNavbarOpen, setIsNavbarOpen] = useState(false)
 	const navbarId = useId()
 
+	const currentHash = useCurrentHashOnLink()
+
 	return (
+		<header className='fixed top-0 left-0 z-50 flex items-center justify-between w-full px-8 py-4 animate-fade-in-down font-geist animation-header'>
+			<Title />
+			<nav>
+				<ul className='flex items-center gap-2 text-white'>
+					{NAV_ITEMS.map(({ href, title }) => {
+						return (
+							<li key={href}>
+								<Link
+									href={href}
+									className={cn(
+										'px-2.5 py-2 border rounded-md border-transparent hover:border-midu-primary hover:text-midu-primary transition uppercase',
+										'focus-visible:text-midu-primary focus-visible:border-midu-primary focus-visible:outline-none focus-visible:outline focus-visible:outline-white',
+										currentHash === href && 'bg-midu-primary border-midu-primary',
+										currentHash === href && 'hover:text-white',
+										currentHash === href &&
+											'focus-visible:text-white focus-visible:border-white focus-visible:outline focus-visible:outline-white'
+									)}
+								>
+									{title}
+								</Link>
+							</li>
+						)
+					})}
+				</ul>
+			</nav>
+			<DiscordLink />
+		</header>
+	)
+
+	/* return (
 		<header className='header-animate backdrop-blur-[10px] md:backdrop-blur-0 w-full mb-10 overflow-hidden z-[99999] py-8'>
 			<div className='grid items-center justify-center md:justify-normal w-full grid-cols-[auto_1fr] mx-auto text-white gap-x-10 md:flex max-w-screen-base'>
 				<a
@@ -89,28 +121,58 @@ export function Header() {
 				</div>
 			</div>
 		</header>
+	) */
+}
+
+function Title() {
+	return (
+		<h1 className='flex items-center text-2xl font-extrabold text-white'>
+			MIDU.<span className='text-midu-primary'>CONF</span>
+			<span className='px-1 py-1 ml-1 text-xs leading-none border text-midu-primary border-midu-primary'>
+				25
+			</span>
+		</h1>
 	)
+}
+
+function DiscordLink() {
+	return (
+		<Link
+			href='https://discord.gg/midudev'
+			target='_blank'
+			rel='noopener noreferrer'
+			className={cn(
+				'inline-flex items-center gap-2 px-4 py-2 text-white uppercase border rounded-md border-pallet-border-foreground',
+				'hover:bg-pallet-border-foreground hover:border-pallet-ghost transition',
+				'focus-visible:border-pallet-primary focus-visible:outline focus-visible:outline-white focus-visible:bg-pallet-border-foreground focus-visible:border-pallet-ghost'
+			)}
+		>
+			<DiscordIcon className='w-5 h-auto' />
+			<span>Discord</span>
+		</Link>
+	)
+}
+
+function useCurrentHashOnLink() {
+	const { asPath: currentPath } = useRouter()
+	return currentPath
 }
 
 const NAV_ITEMS = [
 	{
 		href: '/#speakers',
-		title: 'Speakers',
-		Icon: NavbarIcons.SpeakersIcon
+		title: 'Speakers'
 	},
 	{
 		href: '/#sponsors',
-		title: 'Patrocinadores',
-		Icon: NavbarIcons.SponsorsIcon
-	},
-	{
-		href: '/#regalos',
-		title: 'Regalos',
-		Icon: NavbarIcons.GiftIcon
+		title: 'Patrocinadores'
 	},
 	{
 		href: '/#agenda',
-		title: 'Agenda',
-		Icon: NavbarIcons.ScheduleIcon
+		title: 'Agenda'
+	},
+	{
+		href: '/#faqs',
+		title: 'FAQS'
 	}
 ]
