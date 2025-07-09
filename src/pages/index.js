@@ -1,6 +1,7 @@
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
 import { Speakers } from '@/sections/speakers'
+import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
 
 const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
@@ -38,6 +39,7 @@ export default function Home({
 				<Hero />
 				<WhatToExpect />
 				<Speakers />
+				<Sponsors />
 			</main>
 		</Layout>
 	)
