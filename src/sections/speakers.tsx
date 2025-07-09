@@ -2,13 +2,9 @@ import { DiamondIcon } from '@/components/icons/diamond'
 import { DotIcon } from '@/components/icons/dot'
 import { cn } from '@/lib/utils'
 
-interface Props {
-	className?: string
-}
-
-export function Speakers({ className }: Props) {
+export function Speakers() {
 	return (
-		<section id='speakers' className={cn('pt-44', className)}>
+		<section id='speakers' className='pt-44'>
 			<h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
 				<DotIcon className='text-pallet-primary' /> Speakers{' '}
 				<DotIcon className='text-pallet-primary' />
