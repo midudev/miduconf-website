@@ -239,3 +239,47 @@ body {
 		padding-block: .5rem;
 	}
 }
+
+@media (width>768px) {
+
+	/* movimiento y opacidad en las cards de los speakers */
+	.animation-speaker {
+		view-timeline-name: --reveal;
+		animation-name: animation-speaker-scroll;
+		animation-fill-mode: both;
+		animation-timeline: --reveal;
+		animation-range: entry 25% cover 50%;
+	}
+
+	.animation-speaker-peer {
+		view-timeline-name: --reveal-peer;
+		animation-name: animation-speaker-scroll-peer;
+		animation-fill-mode: both;
+		animation-timeline: --reveal-peer;
+		animation-range: entry 25% cover 50%;
+	}
+}
+
+@keyframes animation-speaker-scroll {
+	from {
+		opacity: 0;
+		transform: translateY(4rem);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes animation-speaker-scroll-peer {
+	from {
+		opacity: 0;
+		transform: translateY(8rem);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(4rem);
+	}
+}

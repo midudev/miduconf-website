@@ -18,7 +18,10 @@ export function Speakers() {
 						<li
 							className={cn(
 								'max-w-80 w-full mx-auto relative',
-								(index - 1) % 3 === 0 && 'md:translate-y-24'
+								(index - 1) % 3 === 0
+									? 'animation-speaker-peer md:translate-y-16'
+									: 'animation-speaker',
+								(index - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
 							)}
 						>
 							<div className='relative aspect-[9/12] overflow-hidden w-full rounded-md'>
