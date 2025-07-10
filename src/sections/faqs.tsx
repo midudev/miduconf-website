@@ -56,28 +56,24 @@ function FAQItem({ isOpen, title, content }: Props) {
 
 const LIST_FAQS = [
 	{
-		title: '¿Es gratis el evento?',
+		title: '¿Qué es la miduConf?',
 		content:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non enim eget enim sagittis elementum.'
+			'La miduConf es una conferencia online y gratuita sobre programación, donde podrás conocer las últimas novedades del desarrollo web y mucho más.'
 	},
 	{
 		title: '¿Es gratis el evento?',
-		content:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non enim eget enim sagittis elementum.'
+		content: 'Sí, el evento es completamente gratuito.'
 	},
 	{
-		title: '¿Es gratis el evento?',
-		content:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non enim eget enim sagittis elementum.'
+		title: '¿Cuándo se celebra la miduConf?',
+		content: 'Se celebra el 10 de septiembre de 2025.'
 	},
 	{
-		title: '¿Es gratis el evento?',
-		content:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non enim eget enim sagittis elementum.'
+		title: '¿Dónde se puede ver la miduConf?',
+		content: 'Podrás verla online a través del canal de Twitch de midudev.'
 	},
 	{
-		title: '¿Es gratis el evento?',
-		content:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non enim eget enim sagittis elementum.'
+		title: '¿Hay que registrarse?',
+		content: 'No es necesario registrarse para ver el evento.'
 	}
 ]
