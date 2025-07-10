@@ -27,38 +27,80 @@ export const Agenda = () => {
 				</span>
 				<span className='ml-2 text-white'>{timezone}</span>
 			</p>
-			<div className='grid md:grid-cols-[1fr_auto] gap-8 mt-20 md:px-8 px-4'>
-				<article>
-					<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-pallet-ghost'>
-						<span>Hora</span>
-						<span>Nombre</span>
-						<span>Charla</span>
+			{LIST_OF_TALKS_NEW.length > 0 && (
+				<div className='grid md:grid-cols-[1fr_auto] gap-8 mt-20 md:px-8 px-4'>
+					<article>
+						<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-pallet-ghost'>
+							<span>Hora</span>
+							<span>Nombre</span>
+							<span>Charla</span>
+						</div>
+						<ul>
+							{LIST_OF_TALKS_NEW.map((props, i) => {
+								return (
+									<AgendaItem
+										key={`${props.speaker.name}-${i}`}
+										{...props}
+										index={i}
+										onHover={handleChangeImage}
+									/>
+								)
+							})}
+						</ul>
+					</article>
+					<div className='relative items-start justify-center hidden md:flex'>
+						<img
+							className='max-w-60 rounded-md w-full aspect-[9/12] object-cover sticky top-20'
+							src={LIST_OF_TALKS_NEW[currentIndexHovered].speaker.imgUrl}
+							alt={`Avatar del Speaker ${LIST_OF_TALKS_NEW[currentIndexHovered].title}`}
+						/>
 					</div>
-					<ul>
-						{LIST_OF_TALKS_NEW.map((props, i) => {
-							return (
-								<AgendaItem
-									key={`${props.speaker.name}-${i}`}
-									{...props}
-									index={i}
-									onHover={handleChangeImage}
-								/>
-							)
-						})}
-					</ul>
-				</article>
-				<div className='relative items-start justify-center hidden md:flex'>
-					<img
-						className='max-w-60 rounded-md w-full aspect-[9/12] object-cover sticky top-20'
-						src={LIST_OF_TALKS_NEW[currentIndexHovered].speaker.imgUrl}
-						alt={`Avatar del Speaker ${LIST_OF_TALKS_NEW[currentIndexHovered].title}`}
-					/>
 				</div>
-			</div>
+			)}
+			{LIST_OF_TALKS_NEW.length === 0 && (
+				<>
+					<div className='relative'>
+						<p className='text-4xl text-wrap text-center max-w-[24ch] text-white mx-auto px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase font-bold flex items-center gap-2 z-10'>
+							<DiamondIcon className='w-8 h-auto' />
+							¡Muy pronto revelaremos la agenda!
+							<DiamondIcon className='w-8 h-auto' />
+						</p>
 
-			{/* <p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-pallet-primary mx-auto px-4'>
-				¡Muy pronto revelaremos la agenda!
-			</p> */}
+						<div
+							aria-hidden
+							className='grid relative md:grid-cols-[1fr_auto] gap-8 mt-20 md:px-8 px-4 select-none pointer-events-none [mask-image:linear-gradient(to_bottom,_#000,_transparent)]'
+						>
+							<article>
+								<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-pallet-ghost'>
+									<span>Hora</span>
+									<span>Nombre</span>
+									<span>Charla</span>
+								</div>
+								<ul>
+									{LIST_OF_FAKE_TALKS.map((props, i) => {
+										return (
+											<AgendaItem
+												disabledContent
+												key={`${props.speaker.name}-${i}`}
+												{...props}
+												index={i}
+												onHover={handleChangeImage}
+											/>
+										)
+									})}
+								</ul>
+							</article>
+							<div className='relative items-start justify-center hidden md:flex'>
+								<img
+									className='max-w-60 rounded-md w-full aspect-[9/12] object-cover sticky top-20 opacity-20'
+									src={LIST_OF_FAKE_TALKS[currentIndexHovered].speaker.imgUrl}
+									alt={`Avatar del Speaker ${LIST_OF_FAKE_TALKS[currentIndexHovered].title}`}
+								/>
+							</div>
+						</div>
+					</div>
+				</>
+			)}
 		</section>
 	)
 }
@@ -74,6 +116,7 @@ interface AgendaItemProps {
 	durationInMinutes: number
 	onHover: (index: number) => void
 	index: number
+	disabledContent: boolean
 }
 
 const AgendaItem = ({
@@ -82,7 +125,8 @@ const AgendaItem = ({
 	title,
 	speaker,
 	onHover,
-	index
+	index,
+	disabledContent = false
 }: AgendaItemProps) => {
 	const time = useTime({ timestamp: startAt, durationInMinutes })
 
@@ -95,11 +139,13 @@ const AgendaItem = ({
 				'md:hover:before:translate-y-0 md:hover:text-white md:hover:before:bg-pallet-primary'
 			)}
 		>
-			<p className='transition md:group-hover:translate-x-4'>
+			<p className={cn('transition md:group-hover:translate-x-4', disabledContent && 'blur')}>
 				{time?.startAt} - {time?.endAt}
 			</p>
-			<p>{speaker.name}</p>
-			<p className='text-2xl normal-case text-balance'>{speaker.description}</p>
+			<p className={cn(disabledContent && 'blur')}>{speaker.name}</p>
+			<p className={cn('text-2xl normal-case text-balance', disabledContent && 'blur')}>
+				{speaker.description}
+			</p>
 		</li>
 	)
 }
@@ -148,8 +194,41 @@ export const useGetTimezone = () => {
 	return timezone
 }
 
-const LIST_OF_TALKS_NEW = [
+const LIST_OF_FAKE_TALKS = [
 	{
+		speaker: {
+			name: 'Noexisto',
+			description: 'Aqui no hay nadie',
+			imgUrl: '/speakers/speaker-01.webp'
+		},
+		title: 'que curioso, aquí no dice nada :)',
+		startAt: 1726152000000,
+		durationInMinutes: 20
+	},
+	{
+		speaker: {
+			name: 'Nadie poraqui',
+			description: 'Quien crees que soy',
+			imgUrl: '/speakers/speaker-02.webp'
+		},
+		title: '¡Bienvenidos a la miduConf!',
+		startAt: 1726153200000,
+		durationInMinutes: 5
+	},
+	{
+		speaker: {
+			name: 'Nadie poralli',
+			description: 'Secreto',
+			imgUrl: '/speakers/speaker-03.webp'
+		},
+		title: 'Muy pronto lo revelaremos',
+		startAt: 1726153500000,
+		durationInMinutes: 10
+	}
+]
+
+const LIST_OF_TALKS_NEW = [
+	/* {
 		speaker: {
 			name: 'Grimer Loner',
 			description: 'Músico y Productor',
@@ -368,7 +447,7 @@ const LIST_OF_TALKS_NEW = [
 		title: '¡Participa en el Mega Trivial!',
 		startAt: 1726171500000,
 		durationInMinutes: 10
-	}
+	} */
 ]
 
 /* 
