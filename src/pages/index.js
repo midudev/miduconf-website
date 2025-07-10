@@ -1,4 +1,5 @@
 import { Agenda } from '@/sections/agenda'
+import { FAQS } from '@/sections/faqs'
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
 import { Speakers } from '@/sections/speakers'
@@ -42,6 +43,7 @@ export default function Home({
 				<Speakers />
 				<Sponsors />
 				<Agenda />
+				<FAQS />
 			</main>
 		</Layout>
 	)
