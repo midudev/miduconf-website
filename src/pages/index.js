@@ -1,3 +1,4 @@
+import { Agenda } from '@/sections/agenda'
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
 import { Speakers } from '@/sections/speakers'
@@ -40,6 +41,7 @@ export default function Home({
 				<WhatToExpect />
 				<Speakers />
 				<Sponsors />
+				<Agenda />
 			</main>
 		</Layout>
 	)

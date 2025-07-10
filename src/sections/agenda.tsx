@@ -1,56 +1,59 @@
-import { HideContentBox } from '@/components/HideContentBox'
-import { NavbarIcons } from '@/components/icons/navbar'
-import { Codely } from '@/components/logos/codely'
-import { DonDominio } from '@/components/logos/dondominio'
-import { LemonCode } from '@/components/logos/lemoncode'
-import ReactDOM from 'react-dom'
 import { useEffect, useState } from 'react'
+import { DotIcon } from '@/components/icons/dot'
+import { DiamondIcon } from '@/components/icons/diamond'
+import { cn } from '@/lib/utils'
 
 export const Agenda = () => {
 	const timezone = useGetTimezone()
+	const [currentIndexHovered, setCurrentIndexHovered] = useState(0)
+
+	const handleChangeImage = (index: number) => {
+		setCurrentIndexHovered(index)
+	}
 
 	return (
-		<section id='agenda' className='px-4 pt-20 pb-40 max-w-[802px] mx-auto'>
-			<h2 className='text-6xl font-bold text-center text-white'>Agenda</h2>
-			<p className='text-xl text-white/80 text-center [text-wrap:balance] mt-4'>
-				Todas las charlas son en directo y en español
+		<section id='agenda' className='pt-44'>
+			<h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
+				<DotIcon className='text-pallet-primary' /> Agenda{' '}
+				<DotIcon className='text-pallet-primary' />
+			</h2>
+			<p className='mx-auto text-xl text-white text-pretty max-w-[42ch] text-center mb-4'>
+				Todas las charlas en directo y español
 			</p>
-			<div className='w-full pt-2 mx-auto space-y-4 text-center'>
-				<span className='inline-flex flex-wrap items-center justify-center px-3 py-1 text-sm font-medium text-white rounded-full bg-sky-950 text-primary-300 shadow-inset shadow-white'>
-					<span className='flex items-center gap-1 mr-1 opacity-75'>
-						<svg
-							aria-hidden='true'
-							className='w-3 h-3 mr-1'
-							xmlns='http://www.w3.org/2000/svg'
-							viewBox='0 0 20 20'
-							fill='#fff'
-						>
-							<path
-								fillRule='evenodd'
-								d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z'
-								clipRule='evenodd'
-							/>
-						</svg>
-						Zona horaria de la agenda:
-					</span>{' '}
-					<span>{timezone}</span>
+			<p className='flex flex-col items-center px-4 py-2 mx-auto uppercase border rounded-md md:flex-row text-pallet-ghost w-max bg-pallet-b-foreground-primary border-pallet-border-foreground'>
+				<span className='flex items-center'>
+					<DiamondIcon className='w-3 h-3 mr-3 text-pallet-primary' />
+					Hora zona local:
 				</span>
-			</div>
-			<div
-				className='flex flex-col gap-8 mt-12 md:hidden lg:mt-16'
-				/* style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }} */
-			>
-				{LIST_OF_TALKS_NEW.map((talk, i) => (
-					<AgendaItemMobile key={`${talk.speaker.name}-${i}`} {...talk} />
-				))}
-			</div>
-			<div
-				className='flex-col hidden gap-8 mt-12 md:flex lg:mt-16'
-				/* style={{ maskImage: 'linear-gradient(to bottom, black 10%, transparent 800px)' }} */
-			>
-				{LIST_OF_TALKS_NEW.map((talk, i) => (
-					<AgendaItem key={`${talk.speaker.name}-${i}`} {...talk} />
-				))}
+				<span className='ml-2 text-white'>{timezone}</span>
+			</p>
+			<div className='grid md:grid-cols-[1fr_auto] gap-8 mt-20 md:px-8 px-4'>
+				<article>
+					<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-pallet-ghost'>
+						<span>Hora</span>
+						<span>Nombre</span>
+						<span>Charla</span>
+					</div>
+					<ul>
+						{LIST_OF_TALKS_NEW.map((props, i) => {
+							return (
+								<AgendaItem
+									key={`${props.speaker.name}-${i}`}
+									{...props}
+									index={i}
+									onHover={handleChangeImage}
+								/>
+							)
+						})}
+					</ul>
+				</article>
+				<div className='relative items-start justify-center hidden md:flex'>
+					<img
+						className='max-w-60 rounded-md w-full aspect-[9/12] object-cover sticky top-20'
+						src={LIST_OF_TALKS_NEW[currentIndexHovered].speaker.imgUrl}
+						alt={`Avatar del Speaker ${LIST_OF_TALKS_NEW[currentIndexHovered].title}`}
+					/>
+				</div>
 			</div>
 
 			{/* <p className='text-4xl text-wrap mt-10 font-semibold text-center max-w-[24ch] text-pallet-primary mx-auto px-4'>
@@ -69,95 +72,35 @@ interface AgendaItemProps {
 	title: string
 	startAt: number
 	durationInMinutes: number
+	onHover: (index: number) => void
+	index: number
 }
 
-const AgendaItem = ({ startAt, durationInMinutes, title, speaker }: AgendaItemProps) => {
+const AgendaItem = ({
+	startAt,
+	durationInMinutes,
+	title,
+	speaker,
+	onHover,
+	index
+}: AgendaItemProps) => {
 	const time = useTime({ timestamp: startAt, durationInMinutes })
 
 	return (
-		<article className='w-full rounded-[20px] before:absolute before:inset-0 before:w-full before:h-full before:bg-[#121226] before:-z-10 shadow relative flex flex-col gap-5 sm:flex-row sm:items-stretch p-6 overflow-hidden'>
-			<p className='flex items-center justify-center w-auto text-5xl font-bold text-white/60 sm:text-right sm:w-32 shrink-0'>
-				{time?.startAt}
+		<li
+			onMouseEnter={() => onHover(index)}
+			className={cn(
+				'flex flex-col px-4 md:px-0 md:grid grid-cols-3 py-6 text-xl uppercase border-b text-pallet-ghost border-pallet-border-foreground min-h-32 relative cursor-crosshair overflow-hidden group',
+				'before:w-full before:h-full before:absolute before:block before:bg-transparent before:-z-10 before:top-0 before:left-0 before:translate-y-full before:transition before:duration-300',
+				'md:hover:before:translate-y-0 md:hover:text-white md:hover:before:bg-pallet-primary'
+			)}
+		>
+			<p className='transition md:group-hover:translate-x-4'>
+				{time?.startAt} - {time?.endAt}
 			</p>
-			<div className='flex-1'>
-				<header className='flex flex-row items-center gap-x-2'>
-					<h4 className='font-medium leading-tight text-pallet-primary'>{speaker.name}</h4>
-					<span className='text-white/70'>- {speaker.description}</span>
-				</header>
-				<h4 className='mt-2 text-xl font-bold text-white md:max-w-[28ch] text-pretty'>{title}</h4>
-				<div className='flex items-center gap-3'>
-					{speaker.imgUrl && (
-						<img
-							className='brightness-50 sm:brightness-100 -z-10 object-cover object-center h-full shrink-0 absolute right-0 top-0 w-[200px]'
-							src={speaker.imgUrl}
-							alt={`Foto de ${speaker.name}`}
-							style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 90%)' }}
-						/>
-					)}
-				</div>
-			</div>
-		</article>
-	)
-}
-
-const AgendaItemMobile = ({ startAt, durationInMinutes, title, speaker }: AgendaItemProps) => {
-	const time = useTime({ timestamp: startAt, durationInMinutes })
-
-	return (
-		<article>
-			<header className='flex items-center gap-x-4'>
-				<h4 className='text-sm text-pallet-primary'>{speaker.name}</h4>
-				<div className='flex-1 bg-pallet-primary w-full h-[1px]'></div>
-				<span className='text-sm text-white/50'>
-					{time?.startAt} - {time?.endAt}
-				</span>
-			</header>
-			<div className='flex items-center mt-3 gap-x-3'>
-				{speaker.imgUrl && (
-					<img
-						className='object-cover object-center w-16 h-16 rounded-full'
-						src={speaker.imgUrl}
-						alt={`Foto de ${speaker.name}`}
-					/>
-				)}
-				<h5 className='flex-1 font-bold text-white'>{title}</h5>
-			</div>
-		</article>
-	)
-}
-interface AgendaRaffleProps {
-	title: string
-	sponsor: {
-		logo: () => JSX.Element
-		url: string
-		name: string
-	}
-}
-
-const AgendaRaffle = ({ title, sponsor }: AgendaRaffleProps) => {
-	const accesibilityLink = `Ir al sitio de ${sponsor.name}`
-
-	return (
-		<div className='relative w-full max-w-md p-4 mx-auto overflow-hidden text-white border rounded-2xl border-pallet-primary/50 bg-button md:shadow-button group cursor-crosshair'>
-			<h4 className='font-bold'>{title}</h4>
-			<div className='flex items-center gap-3 mt-2'>
-				<span className='text-sm text-white/60'>Patrocinado por:</span>
-				<a
-					href={sponsor.url}
-					target='_blank'
-					title={accesibilityLink}
-					aria-label={accesibilityLink}
-				>
-					<sponsor.logo />
-				</a>
-			</div>
-			<div
-				aria-disabled
-				className='absolute bottom-0 right-0 h-auto scale-125 opacity-50 w-max -z-10 -rotate-12 group-hover:scale-150 group-hover:-rotate-[24deg] transition-transform'
-			>
-				<sponsor.logo />
-			</div>
-		</div>
+			<p>{speaker.name}</p>
+			<p className='text-2xl normal-case text-balance'>{speaker.description}</p>
+		</li>
 	)
 }
 
