@@ -1,7 +1,10 @@
 import { Agenda } from '@/sections/agenda'
 import { FAQS } from '@/sections/faqs'
+import { Footer } from '@/sections/footer'
+import { GetTicket } from '@/sections/get-ticket'
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
+import { PreFooter } from '@/sections/pre-footer'
 import { Speakers } from '@/sections/speakers'
 import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
@@ -44,6 +47,9 @@ export default function Home({
 				<Sponsors />
 				<Agenda />
 				<FAQS />
+				<GetTicket />
+				<PreFooter />
+				<Footer />
 			</main>
 		</Layout>
 	)

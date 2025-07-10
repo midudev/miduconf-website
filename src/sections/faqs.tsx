@@ -1,7 +1,6 @@
 import { ArrowIcon } from '@/components/icons/arrow'
 import { DotIcon } from '@/components/icons/dot'
 import { cn } from '@/lib/utils'
-import { Fahkwang } from 'next/font/google'
 import { useState } from 'react'
 
 export function FAQS() {

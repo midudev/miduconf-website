@@ -3,7 +3,7 @@ import Marquee from 'react-fast-marquee'
 
 export function WhatToExpect() {
 	return (
-		<section className='pt-32'>
+		<section id='lo-que-puedes-esperar' className='pt-32'>
 			<h2 className='flex items-center justify-center gap-4 mb-16 text-4xl font-bold text-white uppercase'>
 				<DotIcon className='text-pallet-primary' /> Qué esperar{' '}
 				<DotIcon className='text-pallet-primary' />
