@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 export function FAQS() {
 	return (
-		<section id='faqs' className='pt-44'>
+		<section id='faqs' className='px-4 pt-44 md:px-8'>
 			<h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
 				<DotIcon className='text-pallet-primary' /> FAQ'S{' '}
 				<DotIcon className='text-pallet-primary' />

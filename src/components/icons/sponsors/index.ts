@@ -9,6 +9,7 @@ import { MaltIcon } from './malt'
 import { CodelyIcon } from './codely'
 import { Scrimba } from './scrimba'
 import { Strapi } from './strapi'
+import { PlainConcepts } from './plain-concepts'
 
 export const SponsorIcons = {
 	platzi: PlatziIcon,
@@ -21,5 +22,6 @@ export const SponsorIcons = {
 	malt: MaltIcon,
 	codely: CodelyIcon,
 	scrimba: Scrimba,
-	strapi: Strapi
+	strapi: Strapi,
+	plainConcepts: PlainConcepts
 }
