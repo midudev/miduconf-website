@@ -49,7 +49,7 @@ function FAQItem({ isOpen, title, content }: Props) {
 					<ArrowIcon className={cn('w-4 h-auto transition', open && 'rotate-180')} />
 				</button>
 			</header>
-			<p className={cn('px-4 py-6', open ? 'block' : 'hidden')}>{content}</p>
+			<p className={cn('px-4 py-6 opacity-80', open ? 'block' : 'hidden')}>{content}</p>
 		</article>
 	)
 }
