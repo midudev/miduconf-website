@@ -6,6 +6,8 @@ import { SponsorIcons } from '@/components/icons/sponsors'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
+import type { JSX } from "react";
+
 export const Sponsors = () => {
 	return (
 		<section id='sponsors' className='pt-44 grid lg:grid-cols-[1fr_auto] px-8 gap-8'>
