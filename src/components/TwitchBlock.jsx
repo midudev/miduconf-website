@@ -7,7 +7,7 @@ export function TwitchBlock () {
 			<a
 				className='flex flex-col items-center justify-center w-full h-full transition hover:scale-125 group gap-y-10'
 				target='_blank'
-				href='https://twitch.tv/midudev'
+				href='https://twitch.tv/midudev' rel="noreferrer"
 			>
 				<img
 					alt='Avatar de Twitch del canal de midudev'
