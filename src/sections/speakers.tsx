@@ -56,7 +56,7 @@ export function Speakers() {
 						FAKE_SPEAKERS.map(({ fakeImg, name, title }, index) => {
 							return (
 								<li
-									adia-hidden
+									aria-hidden='true'
 									key={`${name}-${index}`}
 									className={cn(
 										'max-w-80 w-full mx-auto relative blur',
