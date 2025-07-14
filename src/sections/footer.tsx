@@ -35,7 +35,7 @@ export function Footer() {
 					target='_blank'
 				>
 					<EnterArrow className='hidden md:block' />
-					Conome mi Academia
+					Conoce mi Academia
 				</Link>
 			</footer>
 			<small className='block px-8 pt-20 pb-4 uppercase text-pallet-ghost'>
