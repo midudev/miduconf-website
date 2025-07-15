@@ -1,3 +1,4 @@
+import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import Link from 'next/link'
 
@@ -29,14 +30,15 @@ export function Footer() {
 						))}
 					</ul>
 				</article>
-				<Link
+				<Button
+					as={Link}
 					href='https://midu.dev/'
-					className='inline-flex flex-col items-center gap-x-2 py-2.5 px-4 text-xl text-white bg-pallet-primary uppercase rounded-md md:flex-row md:w-max mx-auto md:ml-auto md:mr-0'
+					containerClassName='mx-auto md:ml-auto md:mr-0'
 					target='_blank'
 				>
 					<EnterArrow className='hidden md:block' />
 					Conome mi Academia
-				</Link>
+				</Button>
 			</footer>
 			<small className='block px-8 pt-20 pb-4 uppercase text-pallet-ghost'>
 				Todos los derechos reservados © {new Date().getFullYear()} MiduConf

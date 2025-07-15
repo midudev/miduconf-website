@@ -1,5 +1,7 @@
+import { Button } from '@/components/Button'
 import { Countdown } from '@/components/Countdown'
 import { EnterArrow } from '@/components/icons/enter-arrow'
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 export function Hero() {
@@ -24,15 +26,11 @@ export function Hero() {
 							Twitch
 						</Link>
 					</h2>
-					<button
-						disabled
-						aria-disabled
-						className='inline-flex flex-col items-center gap-x-2 py-2.5 px-4 text-xl text-white bg-pallet-primary uppercase rounded-md disabled:cursor-not-allowed md:flex-row md:w-max'
-					>
+					<Button disabled aria-disabled>
 						<EnterArrow className='hidden md:block' />
 						Consigue tu Ticket
 						<span className='w-full px-2 py-1 text-xs bg-black/40 md:w-auto'>Próximamente</span>
-					</button>
+					</Button>
 				</div>
 			</div>
 		</section>

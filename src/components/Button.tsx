@@ -5,37 +5,46 @@ type Props<C extends React.ElementType> = {
 	as?: C
 	children: React.ReactNode
 	className?: string
-	variant?: 'primary' | 'secondary'
+	containerClassName?: string
 	disabled?: boolean
 } & ComponentPropsWithoutRef<C>
 
 export const Button = <C extends React.ElementType = 'button'>({
 	as,
 	children,
-	variant = 'primary',
 	disabled,
+	className,
+	containerClassName,
 	...restOfProps
 }: Props<C>) => {
 	const As = as ?? 'button'
-
-	const variantStyle = {
-		primary: 'bg-button text-white shadow-button hover:shadow-button-hover hover:scale-110 ',
-		secondary:
-			'border border-pallet-primary/40 bg-[#121226] hover:bg-[#1A1A2E] hover:border-pallet-primary/60'
-	}
 
 	return (
 		<As
 			{...restOfProps}
 			disabled={disabled}
 			className={cn(
-				'flex items-center cursor-pointer gap-2 rounded-lg text-white px-3 py-[10px] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed',
-				variantStyle[variant],
-				restOfProps.className,
-				disabled && 'opacity-50 cursor-not-allowed pointer-events-none'
+				'inline-flex flex-col items-center gap-x-2 text-xl text-white bg-pallet-primary uppercase rounded-md disabled:cursor-not-allowed md:flex-row md:w-max relative group overflow-hidden',
+				containerClassName
 			)}
 		>
-			{children}
+			<div
+				className={cn(
+					'inline-flex flex-col items-center gap-x-2 py-2.5 px-4 text-xl text-white bg-pallet-primary uppercase rounded-md group-disabled:cursor-not-allowed md:flex-row md:w-max relative translate-y-0 group-hover:translate-y-full transition ease-[cubic-bezier(0.746,_-0.622,_0.362,_1.546)] duration-300 w-full h-full group-focus-visible:translate-y-full',
+					className
+				)}
+			>
+				{children}
+			</div>
+			<div
+				aria-disabled
+				className={cn(
+					'inline-flex flex-col items-center gap-x-2 py-2.5 px-4 text-xl text-white bg-pallet-primary uppercase rounded-md group-disabled:cursor-not-allowed md:flex-row md:w-max absolute inset-0 -translate-y-full group-hover:translate-y-0 transition ease-[cubic-bezier(0.746,_-0.622,_0.362,_1.546)] duration-300 group-focus-visible:translate-y-0',
+					className
+				)}
+			>
+				{children}
+			</div>
 		</As>
 	)
 }

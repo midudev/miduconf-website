@@ -18,13 +18,15 @@ export const Sponsors = () => {
 					<p className='mx-auto text-xl text-white text-pretty max-w-[42ch] text-center'>
 						Gracias a ellos hacemos posible el evento
 					</p>
-					<Link
+					<Button
+						as={Link}
 						href='mailto:hi@midu.dev'
-						className='w-full flex mt-4 flex-col items-center gap-x-2 py-2.5 px-4 text-base text-white bg-pallet-primary uppercase rounded-md disabled:cursor-not-allowed lg:flex-row justify-center'
+						containerClassName='w-full md:w-full'
+						className='justify-center w-full md:w-full'
 					>
 						<EnterArrow className='hidden w-auto h-3 lg:block' />
 						Ser Patrocinador
-					</Link>
+					</Button>
 				</header>
 			</div>
 
