@@ -19,7 +19,7 @@ export const Sponsors = () => {
 						Gracias a ellos hacemos posible el evento
 					</p>
 					<Link
-						href='mailto:miduga@gmail.com'
+						href='mailto:hi@midu.dev'
 						className='w-full flex mt-4 flex-col items-center gap-x-2 py-2.5 px-4 text-base text-white bg-pallet-primary uppercase rounded-md disabled:cursor-not-allowed lg:flex-row justify-center'
 					>
 						<EnterArrow className='hidden w-auto h-3 lg:block' />
