@@ -8,8 +8,8 @@ export function Hero() {
 			<div className='absolute bottom-0 left-0 flex flex-col items-center justify-between w-full px-8 py-16 md:items-end md:flex-row gap-y-4 bg-gradient-to-t from-black md:bg-none animate-fade-in-up'>
 				<div className='flex flex-col items-center md:items-start'>
 					<Countdown className='mb-4' />
-					<h3 className='text-4xl text-center md:text-left md:text-6xl uppercase leading-normal font-bold max-w-[24ch] text-white text-balance'>
-						La nueva era del desarrollo web
+					<h3 className='text-4xl text-center md:text-left md:text-6xl uppercase leading-normal font-medium max-w-[24ch] text-white text-balance'>
+						La nueva era de la Programación
 					</h3>
 				</div>
 				<div className='flex flex-col gap-6'>
