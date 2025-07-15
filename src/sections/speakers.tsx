@@ -3,91 +3,91 @@ import { DotIcon } from '@/components/icons/dot'
 import { cn } from '@/lib/utils'
 
 export function Speakers() {
-	return (
-		<section id='speakers' className='pt-44'>
-			<h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
-				<DotIcon className='text-pallet-primary' /> Speakers{' '}
-				<DotIcon className='text-pallet-primary' />
-			</h2>
-			<p className='mx-auto mb-16 text-xl text-white text-pretty max-w-[42ch] text-center'>
-				Creadores y líderes que acercan la tecnología y el código a todos
-			</p>
-			<div className='relative'>
-				<p className='text-4xl text-wrap text-center max-w-[24ch] text-white mx-auto px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase font-bold flex items-center gap-2 z-10'>
-					<DiamondIcon className='w-8 h-auto' />
-					¡Muy pronto revelaremos los speakers!
-					<DiamondIcon className='w-8 h-auto' />
-				</p>
-
-				<ul
-					className={cn(
-						'grid justify-center grid-cols-2 px-4 mx-auto gap-x-4 gap-y-4 md:px-0 md:grid-cols-3 md:gap-y-24',
-						SPEAKERS.length === 0 && '[mask-image:linear-gradient(to_bottom,#000,_transparent)]'
-					)}
-				>
-					{SPEAKERS.length > 0 &&
-						SPEAKERS.map(({ img, name, title }, index) => {
-							return (
-								<li
-									key={`${name}-${index}`}
-									className={cn(
-										'max-w-80 w-full mx-auto relative',
-										(index - 1) % 3 === 0
-											? 'animation-speaker-peer md:translate-y-16'
-											: 'animation-speaker',
-										(index - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
-									)}
-								>
-									<div className='relative aspect-[9/12] overflow-hidden w-full rounded-md'>
-										<img
-											src={`/img/speakers/${img}.jpg`}
-											className='object-cover w-full h-full'
-											alt={`Retrato de ${name}`}
-										/>
-										<p className='absolute inline-flex items-center gap-2 px-2 py-1 text-sm text-white uppercase border rounded-md md:text-base bg-pallet-b-foreground-primary border-pallet-border-foreground bottom-2 left-2'>
-											<DiamondIcon className='w-4 h-auto text-pallet-primary' /> {name}
-										</p>
-									</div>
-									<p className='pl-2 mt-6 uppercase text-pallet-ghost text-balance'>{title}</p>
-								</li>
-							)
-						})}
-					{SPEAKERS.length === 0 &&
-						FAKE_SPEAKERS.map(({ fakeImg, name, title }, index) => {
-							return (
-								<li
-									aria-hidden='true'
-									key={`${name}-${index}`}
-									className={cn(
-										'max-w-80 w-full mx-auto relative blur',
-										(index - 1) % 3 === 0
-											? 'animation-speaker-peer md:translate-y-16'
-											: 'animation-speaker',
-										(index - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
-									)}
-								>
-									<div className='relative aspect-[9/12] overflow-hidden w-full rounded-md'>
-										<img
-											src={fakeImg}
-											className='object-cover w-full h-full'
-											alt={`Retrato de ${name}`}
-										/>
-										<p className='absolute inline-flex items-center gap-2 px-2 py-1 text-sm text-white uppercase border rounded-md md:text-base bg-pallet-b-foreground-primary border-pallet-border-foreground bottom-2 left-2'>
-											<DiamondIcon className='w-4 h-auto text-pallet-primary' /> {name}
-										</p>
-									</div>
-									<p className='pl-2 mt-6 uppercase text-pallet-ghost text-balance'>{title}</p>
-								</li>
-							)
-						})}
-				</ul>
-			</div>
-		</section>
-	)
+  return (
+    <section id='speakers' className='pt-44'>
+      <h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
+        <DotIcon className='text-pallet-primary' /> Speakers{' '}
+        <DotIcon className='text-pallet-primary' />
+      </h2>
+      <p className='mx-auto mb-16 text-xl text-white text-pretty max-w-[42ch] text-center'>
+        Creadores y líderes que acercan la tecnología y el código a todos
+      </p>
+      <div className='relative'>
+        <ul
+          className={cn(
+            'grid justify-center grid-cols-2 px-4 mx-auto gap-x-4 gap-y-4 md:px-0 md:grid-cols-3 md:gap-y-24',
+            SPEAKERS.length === 0 && '[mask-image:linear-gradient(to_bottom,#000,_transparent)]'
+          )}
+        >
+          {SPEAKERS.length > 0 &&
+            SPEAKERS.map(({ img, name, title, isPlaceholder }, index) => {
+              return (
+                <li
+                  key={`${name}-${index}`}
+                  className={cn(
+                    'max-w-80 w-full mx-auto relative',
+                    (index - 1) % 3 === 0
+                      ? 'animation-speaker-peer md:translate-y-16'
+                      : 'animation-speaker',
+                    (index - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0',
+                    isPlaceholder && 'blur'
+                  )}
+                >
+                  <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md'>
+                    <img
+                      src={`/speakers/${img}.webp`}
+                      className='object-cover w-full h-full'
+                      alt={`Retrato de ${name}`}
+                    />
+                    <p className='absolute inline-flex items-center gap-2 px-2 py-1 mr-2 text-xs text-white uppercase border rounded-md md:text-base bg-pallet-b-foreground-primary border-pallet-border-foreground bottom-2 left-2'>
+                      <DiamondIcon className='w-3 h-auto md:w-4 text-pallet-primary' /> {name}
+                    </p>
+                  </div>
+                  <p className='pl-2 mt-2 text-xs uppercase md:mt-6 text-pallet-ghost text-balance md:text-base'>
+                    {title}
+                  </p>
+                </li>
+              )
+            })}
+          <li
+            className={cn(
+              'max-w-80 w-full mx-auto relative',
+              (SPEAKERS.length - 1) % 3 === 0
+                ? 'animation-speaker-peer md:translate-y-16'
+                : 'animation-speaker',
+              (SPEAKERS.length - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
+            )}
+          >
+            <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-pallet-border-foreground'>
+              <p className='text-xs md:text-xl text-wrap text-center max-w-[24ch] text-white mx-auto px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase font-bold flex items-center md:gap-2 z-10'>
+                <DiamondIcon className='w-4 h-auto md:w-8' />
+                ¡Muy pronto revelaremos más speakers!
+                <DiamondIcon className='w-4 h-auto md:w-8' />
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  )
 }
 
 const SPEAKERS = [
-	/* {
+  {
+    name: 'Miguel Ángel Durán',
+    title: 'Creador de contenido y divulgador @ midudev',
+    twitter: 'midudev',
+    img: 'midudev',
+    isPlaceholder: false
+  },
+  {
+    name: 'Guillermo Rauch',
+    title: 'CEO @ Vercel',
+    twitter: 'rauchg',
+    img: 'guillermo-rauch',
+    isPlaceholder: false
+  }
+  /* {
 		name: 'Guillermo Rauch',
 		title: 'CEO @ Vercel',
 		twitter: 'rauchg',
@@ -188,25 +188,25 @@ const SPEAKERS = [
 ]
 
 const FAKE_SPEAKERS = [
-	{
-		name: 'Nadie Sabe',
-		title: 'Quien es el/ella',
-		twitter: 'notiene',
-		fakeImg: '/speakers/speaker-01.webp',
-		country: '🇪🇸'
-	},
-	{
-		name: 'Nadie Sabe',
-		title: 'Quien es el/ella',
-		twitter: 'notiene',
-		fakeImg: '/speakers/speaker-02.webp',
-		country: '🇪🇸'
-	},
-	{
-		name: 'Nadie Sabe',
-		title: 'Quien es el/ella',
-		twitter: 'notiene',
-		fakeImg: '/speakers/speaker-03.webp',
-		country: '🇪🇸'
-	}
+  {
+    name: 'Nadie Sabe',
+    title: 'Quien es el/ella',
+    twitter: 'notiene',
+    fakeImg: '/speakers/speaker-01.webp',
+    country: '🇪🇸'
+  },
+  {
+    name: 'Nadie Sabe',
+    title: 'Quien es el/ella',
+    twitter: 'notiene',
+    fakeImg: '/speakers/speaker-02.webp',
+    country: '🇪🇸'
+  },
+  {
+    name: 'Nadie Sabe',
+    title: 'Quien es el/ella',
+    twitter: 'notiene',
+    fakeImg: '/speakers/speaker-03.webp',
+    country: '🇪🇸'
+  }
 ]
