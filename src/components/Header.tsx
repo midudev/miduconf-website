@@ -19,12 +19,15 @@ export function Header() {
 
 function Title() {
 	return (
-		<h1 className='flex items-center text-2xl font-extrabold text-white'>
-			MIDU.<span className='text-pallet-primary'>CONF</span>
-			<span className='px-1 py-1 ml-1 text-xs leading-none border text-pallet-primary border-pallet-primary'>
-				25
-			</span>
-		</h1>
+		<>
+			<h1 className='sr-only'>MIDU.CONF 2025</h1>
+			<Link href='/' className='flex items-center text-2xl font-extrabold text-white'>
+				MIDU.<span className='text-pallet-primary'>CONF</span>
+				<span className='px-1 py-1 ml-1 text-xs leading-none border text-pallet-primary border-pallet-primary'>
+					25
+				</span>
+			</Link>
+		</>
 	)
 }
 

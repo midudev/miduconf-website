@@ -1,18 +1,19 @@
+import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 
 export function GetTicket() {
 	return (
 		<section className='relative h-[800px] bg-pallet-b-foreground-primary flex items-center justify-center mt-44 overflow-hidden'>
 			<h1 className='sr-only'>Obtener ticket</h1>
-			<button
+			<Button
 				disabled
 				aria-disabled
-				className='inline-flex flex-col items-center px-4 py-2.5 md:px-40 md:py-20 text-xl md:text-4xl text-white uppercase rounded-md mix-blend-screen gap-x-4 bg-pallet-primary disabled:cursor-not-allowed md:flex-row md:w-max'
+				className='px-4 py-2.5 md:px-40 md:py-20 text-xl md:text-4xl gap-x-4 duration-500'
 			>
 				<EnterArrow className='hidden w-auto h-10 md:block' />
 				Consigue tu Ticket
 				<span className='w-full px-4 py-2 text-sm bg-black/40 md:w-auto'>Próximamente</span>
-			</button>
+			</Button>
 		</section>
 	)
 }
