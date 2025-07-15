@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 export function Footer() {
@@ -11,7 +12,13 @@ export function Footer() {
           <ul className='flex flex-col gap-2'>
             {SITEMAP_LINKS.map(({ href, title }) => (
               <li key={href}>
-                <Link href={href} className='text-[#EFF4FF] underline hover:text-white'>
+                <Link
+                  href={href}
+                  className={cn(
+                    'text-[#EFF4FF] hover:text-white overflow-hidden inline-flex',
+                    'relative before:h-0.5 before:w-full before:absolute before:bg-white before:bottom-0 before:left-0 before:-translate-x-full hover:before:translate-x-0 before:transition before:duration-300 focus-visible:before:translate-x-0'
+                  )}
+                >
                   {title}
                 </Link>
               </li>
@@ -23,7 +30,14 @@ export function Footer() {
           <ul className='flex flex-col gap-2'>
             {SHARE_LINKS.map(({ href, title }) => (
               <li key={href}>
-                <Link href={href} target='_blank' className='text-[#EFF4FF] hover:text-white'>
+                <Link
+                  href={href}
+                  target='_blank'
+                  className={cn(
+                    'text-[#EFF4FF] hover:text-white overflow-hidden inline-flex',
+                    'relative before:h-0.5 before:w-full before:absolute before:bg-white before:bottom-0 before:left-0 before:-translate-x-full hover:before:translate-x-0 before:transition before:duration-300 focus-visible:before:translate-x-0'
+                  )}
+                >
                   {title}
                 </Link>
               </li>
