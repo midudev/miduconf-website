@@ -28,24 +28,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		const invalidTierRequiredMessage = isRequiredTierLessThanTier && hasTier ? 'false' : 'true'
 
 		let queryParam = new URLSearchParams({
-			tier,
+			tier: tier || '',
 			notAccessTier: 'false',
-			error: tierErrorMessage
+			error: tierErrorMessage || ''
 		})
 
 		if (!hasRequiredTier) {
 			queryParam = new URLSearchParams({
-				tier,
+				tier: tier || '',
 				notAccessTier: 'false',
-				error: tierErrorMessage
+				error: tierErrorMessage || ''
 			})
 		}
 
 		if (hasRequiredTier && !isRequiredTierLessThanTier) {
 			queryParam = new URLSearchParams({
-				tier,
+				tier: tier || '',
 				notAccessTier: 'true',
-				error: tierErrorMessage
+				error: tierErrorMessage || ''
 			})
 		}
 
@@ -64,7 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		const {
 			user: { id: userSessionId }
-		} = session
+		} = session!
 
 		/* update tier in supabase */
 		await supabase

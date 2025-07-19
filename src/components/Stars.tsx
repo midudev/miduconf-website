@@ -9,7 +9,7 @@ export function Stars() {
 		const stars = divRef.current
 		if (!stars) return
 
-		divRef.current.querySelectorAll('div').forEach((star) => {
+		stars.querySelectorAll('div').forEach((star) => {
 			const size = Math.random() > 0.5 ? 1 : 2
 			star.style.width = `${size}px`
 			star.style.height = `${size}px`
