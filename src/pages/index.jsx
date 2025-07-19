@@ -13,46 +13,46 @@ const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/p
 
 const title = 'miduConf - La conferencia de programación y desarrollo'
 const description =
-	'Conferencia de programación y tecnología para el día del programador y la programadora'
+  'Conferencia de programación y tecnología para el día del programador y la programadora'
 const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
 export default function Home({
-	username,
-	flavor,
-	ticketNumber,
-	burst,
-	material,
-	stickers,
-	twitchTier,
-	noUser
+  username,
+  flavor,
+  ticketNumber,
+  burst,
+  material,
+  stickers,
+  twitchTier,
+  noUser
 }) {
-	const ogImage = username
-		? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?c=${burst}`
-		: `${url}${defaultOgImage}`
+  const ogImage = username
+    ? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?c=${burst}`
+    : `${url}${defaultOgImage}`
 
-	const metadata = {
-		title,
-		description,
-		ogImage,
-		url
-	}
+  const metadata = {
+    title,
+    description,
+    ogImage,
+    url
+  }
 
-	return (
-		<Layout meta={metadata}>
-			<main>
-				<Hero />
-				<WhatToExpect />
-				<Speakers />
-				<Sponsors />
-				<Agenda />
-				<FAQS />
-				<GetTicket />
-				<PreFooter />
-				<Footer />
-			</main>
-		</Layout>
-	)
+  return (
+    <Layout meta={metadata}>
+      <main>
+        <Hero />
+        <WhatToExpect />
+        <Speakers />
+        <Sponsors />
+        <Agenda />
+        <FAQS />
+        <GetTicket />
+        <PreFooter />
+        <Footer />
+      </main>
+    </Layout>
+  )
 }
 
 /* export const getServerSideProps = async (ctx) => {

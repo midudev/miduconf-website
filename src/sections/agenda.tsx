@@ -39,8 +39,9 @@ export const Agenda = () => {
 							{LIST_OF_TALKS_NEW.map((props, i) => {
 								return (
 									<AgendaItem
-										key={`${props.speaker.name}-${i}`}
+										key={`${props.speaker?.name || 'speaker'}-${i}`}
 										{...props}
+										disabledContent={props.disabledContent ?? false}
 										index={i}
 										onHover={handleChangeImage}
 									/>
@@ -51,8 +52,8 @@ export const Agenda = () => {
 					<div className='relative items-start justify-center hidden md:flex'>
 						<img
 							className='max-w-60 rounded-md w-full aspect-[9/12] object-cover sticky top-20'
-							src={LIST_OF_TALKS_NEW[currentIndexHovered].speaker.imgUrl}
-							alt={`Avatar del Speaker ${LIST_OF_TALKS_NEW[currentIndexHovered].title}`}
+							src={LIST_OF_TALKS_NEW[currentIndexHovered]?.speaker?.imgUrl || ''}
+							alt={`Avatar del Speaker ${LIST_OF_TALKS_NEW[currentIndexHovered]?.title || ''}`}
 						/>
 					</div>
 				</div>
@@ -156,7 +157,7 @@ type TimeHook = (props: { timestamp: number; durationInMinutes: number }) => nul
 }
 
 const useTime: TimeHook = ({ timestamp, durationInMinutes }) => {
-	const [time, setTime] = useState(null)
+	const [time, setTime] = useState<{startAt: string, endAt: string} | null>(null)
 
 	if (!timestamp) return null
 
@@ -184,7 +185,7 @@ const useTime: TimeHook = ({ timestamp, durationInMinutes }) => {
 }
 
 export const useGetTimezone = () => {
-	const [timezone, setTimezone] = useState(null)
+	const [timezone, setTimezone] = useState<string | null>(null)
 
 	useEffect(() => {
 		const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -227,7 +228,17 @@ const LIST_OF_FAKE_TALKS = [
 	}
 ]
 
-const LIST_OF_TALKS_NEW = [
+const LIST_OF_TALKS_NEW: Array<{
+	speaker: {
+		name: string;
+		description: string;
+		imgUrl: string;
+	};
+	title: string;
+	startAt: number;
+	durationInMinutes: number;
+	disabledContent?: boolean;
+}> = [
 	/* {
 		speaker: {
 			name: 'Grimer Loner',

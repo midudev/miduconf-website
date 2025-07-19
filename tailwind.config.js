@@ -23,7 +23,7 @@ module.exports = {
 			boxShadow: {
 				button:
 					'inset 0 6px 12px #4C64D2, 0 0 17px rgba(110, 137, 255, 0.77), inset 0 1px 10px rgba(255, 255, 255, 0.55)',
-				['button-hover']:
+				'button-hover':
 					' inset 0 6px 12px #4C64D2, 0 0 34px rgba(110, 137, 255, 0.77), inset 0 1px 10px rgba(255, 255, 255, 0.55)'
 			},
 			animation: {
@@ -82,12 +82,12 @@ module.exports = {
 				pallet: {
 					background: '#09090E',
 					ghost: '#9799A0',
-					['b-foreground-primary']: '#121319',
+					'b-foreground-primary': '#121319',
 					primary: '#5A8CF6',
-					['border-primary']: '#95B8FB',
-					['bg-foreground-secondary']: '#5A8CF6',
+					'border-primary': '#95B8FB',
+					'bg-foreground-secondary': '#5A8CF6',
 					default: '#EFF4FF',
-					['border-foreground']: '#1E1F26'
+					'border-foreground': '#1E1F26'
 				},
 				twitch: '#6441a5'
 			},
