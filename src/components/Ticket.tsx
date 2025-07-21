@@ -157,7 +157,7 @@ export default function Ticket({
 								isSizeFixed && avatar
 									? 'block'
 									: `${avatar ? 'hidden' : 'flex'} md:block flex-col-reverse md:flex-row`,
-								avatar == null ?? 'hidden'
+								avatar == null ? 'hidden' : ''
 							)}
 						>
 							<MiduLogo

@@ -16,12 +16,12 @@ export const HeaderIndex = () => {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 				>
-					<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-					<path d='M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z'></path>
-					<path d='M16 3l0 4'></path>
-					<path d='M8 3l0 4'></path>
-					<path d='M4 11l16 0'></path>
-					<path d='M8 15h2v2h-2z'></path>
+					<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+					<path d='M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z' />
+					<path d='M16 3l0 4' />
+					<path d='M8 3l0 4' />
+					<path d='M4 11l16 0' />
+					<path d='M8 15h2v2h-2z' />
 				</svg>
 				Ver agenda del evento
 			</a>
@@ -40,11 +40,11 @@ export const HeaderIndex = () => {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 				>
-					<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-					<path d='M3 8m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z'></path>
-					<path d='M12 8l0 13'></path>
-					<path d='M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7'></path>
-					<path d='M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5'></path>
+					<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+					<path d='M3 8m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z' />
+					<path d='M12 8l0 13' />
+					<path d='M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7' />
+					<path d='M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5' />
 				</svg>
 				Ver los 256 regalos
 			</a>
@@ -63,12 +63,12 @@ export const HeaderIndex = () => {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 				>
-					<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-					<path d='M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z'></path>
-					<path d='M16 3l0 4'></path>
-					<path d='M8 3l0 4'></path>
-					<path d='M4 11l16 0'></path>
-					<path d='M8 15h2v2h-2z'></path>
+					<path stroke='none' d='M0 0h24v24H0z' fill='none' />
+					<path d='M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z' />
+					<path d='M16 3l0 4' />
+					<path d='M8 3l0 4' />
+					<path d='M4 11l16 0' />
+					<path d='M8 15h2v2h-2z' />
 				</svg>
 				Descubrir patrocinadores
 			</a>

@@ -111,7 +111,7 @@ interface MagicCardProps {
 	 * @description
 	 * The component to be rendered as the card
 	 * */
-	as?: ReactElement
+	as?: ReactElement<any>
 	/**
 	 * @default ""
 	 * @type string
