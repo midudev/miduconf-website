@@ -1,26 +1,17 @@
-export function TwitchIcon({ className = '', ...props }) {
-	return (
-		<svg
-			width='2400'
-			height='2800'
-			viewBox='0 0 2400 2800'
-			fill='none'
-			className={className}
-			{...props}
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<g clipPath='url(#clip0_33_542)'>
-				<path
-					d='M500 0L0 500V2300H600V2800L1100 2300H1500L2400 1400V0H500ZM2200 1300L1800 1700H1400L1050 2050V1700H600V200H2200V1300Z'
-					fill='currentColor'
-				/>
-				<path d='M1700 550H1900V1150H1700V550ZM1150 550H1350V1150H1150V550Z' fill='currentColor' />
-			</g>
-			<defs>
-				<clipPath id='clip0_33_542'>
-					<rect width='2400' height='2800' fill='currentColor' />
-				</clipPath>
-			</defs>
-		</svg>
-	)
+export function TwitchIcon({ ...props }) {
+  return (
+    <svg
+      width='30'
+      height='26'
+      viewBox='0 0 30 26'
+      fill='none'
+      {...props}
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        d='M28.5714 2.88889V4.33333H30V5.77778H28.5714V13H27.1429V15.8889H25.7143V18.7778H24.2857V20.2222H22.8571V21.6667H21.4286V23.1111H18.5714V24.5556H14.2857V26H4.28571V24.5556H1.42857V23.1111H0V21.6667H2.85714V23.1111H7.14286V21.6667H8.57143V20.2222H5.71429V18.7778H4.28571V17.3333H2.85714V15.8889H5.71429V14.4444H2.85714V13H1.42857V10.1111H4.28571V8.66667H2.85714V7.22222H1.42857V1.44444H2.85714V2.88889H4.28571V4.33333H5.71429V5.77778H8.57143V7.22222H12.8571V8.66667H15.7143V2.88889H17.1429V1.44444H18.5714V0H25.7143V1.44444H30V2.88889H28.5714Z'
+        fill='currentColor'
+      />
+    </svg>
+  )
 }

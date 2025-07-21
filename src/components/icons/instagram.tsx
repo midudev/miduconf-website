@@ -1,0 +1,22 @@
+export const InstagramIcon = ({ ...props }) => {
+  return (
+    <svg
+      width='30'
+      height='30'
+      viewBox='0 0 30 30'
+      fill='none'
+      {...props}
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        d='M21.25 11.25V10H20V8.75H18.75V7.5H11.25V8.75H10V10H8.75V11.25H7.5V18.75H8.75V20H10V21.25H11.25V22.5H18.75V21.25H20V20H21.25V18.75H22.5V11.25H21.25ZM20 17.5H18.75V18.75H17.5V20H12.5V18.75H11.25V17.5H10V12.5H11.25V11.25H12.5V10H17.5V11.25H18.75V12.5H20V17.5Z'
+        fill='currentColor'
+      />
+      <path
+        d='M27.5 6.25V3.75H26.25V2.5H23.75V1.25H6.25V2.5H3.75V3.75H2.5V6.25H1.25V23.75H2.5V26.25H3.75V27.5H6.25V28.75H23.75V27.5H26.25V26.25H27.5V23.75H28.75V6.25H27.5ZM26.25 23.75H25V25H23.75V26.25H6.25V25H5V23.75H3.75V6.25H5V5H6.25V3.75H23.75V5H25V6.25H26.25V23.75Z'
+        fill='currentColor'
+      />
+      <path d='M23.75 6.25H21.25V8.75H23.75V6.25Z' fill='currentColor' />
+    </svg>
+  )
+}
