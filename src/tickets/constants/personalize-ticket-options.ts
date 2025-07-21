@@ -19,5 +19,13 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     GREEN: 'green',
     PINK: 'pink',
     GRAY: 'gray'
+  },
+  HOLOGRAM: {
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6'
   }
 } as const

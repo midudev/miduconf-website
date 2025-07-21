@@ -8,6 +8,7 @@ import { HearthIcon } from '../icons/structure-ticket/hearth'
 import { StructureOpcion } from '../types/structure-option'
 import { AnimationOption } from '../types/animation-option'
 import { ColorOption } from '../types/color-option'
+import { HologramOption } from '../types/hologram-option'
 
 interface Props {
   handleChangeStructure: (option: StructureOpcion) => void
@@ -15,13 +16,14 @@ interface Props {
     animation: AnimationOption
     structure: StructureOpcion
     color: ColorOption
+    hologram: HologramOption
   }
 }
 
 export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Props) => {
   return (
     <article className='pt-6'>
-      <h3 className='ml-1 text-sm text-pallet-ghost'>Estructura</h3>
+      <h3 className='ml-1 text-xs uppercase text-pallet-ghost'>Estructura</h3>
       <ul className='flex flex-wrap items-center gap-4 p-4 mt-2 rounded-md bg-pallet-ghost/10'>
         <li>
           <Button

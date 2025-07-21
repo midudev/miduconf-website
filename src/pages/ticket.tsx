@@ -7,6 +7,8 @@ import { ShareTicketPanel } from '@/tickets/components/share-ticket-panel'
 import { useDesignTicket } from '@/tickets/hooks/use-design-ticket'
 import { SelectAnimationPanel } from '@/tickets/components/select-animation-panel'
 import { SelectStructurePanel } from '@/tickets/components/select-structure-panel'
+import { SelectColorPanel } from '@/tickets/components/select-color-panel'
+import { SelectHologramPanel } from '@/tickets/components/select-hologram-panel'
 
 interface Props {
   user: {
@@ -41,7 +43,13 @@ export default function Ticket({
   showAcheivementModal
 }: Props) {
   const metadata = getMetadata({ ticketNumber, username: user.username })
-  const { ticketDesign, handleChangeAnimation, handleChangeStructure } = useDesignTicket()
+  const {
+    ticketDesign,
+    handleChangeAnimation,
+    handleChangeStructure,
+    handleChangeColor,
+    handleChangeHologram
+  } = useDesignTicket()
 
   return (
     <Layout meta={metadata}>
@@ -59,6 +67,11 @@ export default function Ticket({
           <SelectStructurePanel
             ticketDesign={ticketDesign}
             handleChangeStructure={handleChangeStructure}
+          />
+          <SelectColorPanel ticketDesign={ticketDesign} handleChangeColor={handleChangeColor} />
+          <SelectHologramPanel
+            ticketDesign={ticketDesign}
+            handleChangeHologram={handleChangeHologram}
           />
         </section>
       </main>
