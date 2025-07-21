@@ -9,10 +9,16 @@ import { SelectAnimationPanel } from '@/tickets/components/select-animation-pane
 import { SelectStructurePanel } from '@/tickets/components/select-structure-panel'
 import { SelectColorPanel } from '@/tickets/components/select-color-panel'
 import { SelectHologramPanel } from '@/tickets/components/select-hologram-panel'
+import { use } from 'react'
+import { MiduLogo } from '@/components/logos/midudev'
+import { WhiteMidudevLogo } from '@/tickets/icons/white-midudev-logo'
+import { PreFooter } from '@/sections/pre-footer'
 
 interface Props {
   user: {
     username: string
+    fullname: string
+    avatar: string
   }
   ticketNumber: number
   selectedFlavor: 'javascript'
@@ -56,7 +62,25 @@ export default function Ticket({
       <main className='text-white grid grid-cols-[auto_1fr_auto] items-start min-h-full pt-32 px-8'>
         <ShareTicketPanel />
         <section className='flex items-center justify-center'>
-          <div className='bg-pallet-ghost w-[426px] h-[640px]'></div>
+          <article className='bg-[#101015] border border-pallet-border-foreground rounded-2xl w-[426px] h-[640px] flex flex-col'>
+            <header className='flex items-start justify-between p-6 uppercase font-geist'>
+              <div>
+                <p className='text-pallet-ghost'>/@{user.username}</p>
+                <h3 className='mt-2 text-3xl text-pretty max-w-[16ch]'>{user.fullname}</h3>
+              </div>
+              <WhiteMidudevLogo currentColor className='w-auto h-8 text-white' />
+            </header>
+            <footer className='flex flex-col justify-end flex-1 px-6'>
+              <PreFooter />
+              <time
+                dateTime='2025-09-10T16:00:00'
+                className='flex items-center justify-between gap-4 py-6 text-pallet-ghost'
+              >
+                <span>Sept.10 2025</span>
+                <span>16:00h CEST</span>
+              </time>
+            </footer>
+          </article>
         </section>
         <section className='h-full max-w-md p-8 border rounded-lg border-pallet-border-foreground bg-pallet-b-foreground-primary w-max'>
           <h2 className='w-auto text-5xl font-semibold text-pretty'>Personaliza tu ticket</h2>
