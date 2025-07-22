@@ -80,9 +80,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
     }
   }
 
-  const ticketByUser = await supabaseGetTicketByUsername(req, res, {
-    username: ticket
-  })
+  const ticketByUser = ticket
+    ? await supabaseGetTicketByUsername(req, res, {
+        username: ticket
+      })
+    : null
 
   // if no ticket, return empty props
   if (!ticketByUser) {
