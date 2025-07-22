@@ -15,7 +15,7 @@ export function Hero() {
 				<MiduLogo3D />
 			</div>
 
-			<div className='relative py-8 z-10 flex-1 flex flex-col items-center justify-start md:justify-between md:items-end md:flex-row w-full px-8 gap-y-4 bg-gradient-to-t from-black md:bg-none animate-fade-in-up md:absolute md:bottom-0 md:left-0'>
+			<div className='relative py-8 z-10 flex-1 flex flex-col items-center justify-end md:justify-between md:items-end md:flex-row w-full px-8 gap-y-4 bg-gradient-to-t from-black md:bg-none animate-fade-in-up md:absolute md:bottom-0 md:left-0'>
 				<div className='flex flex-col items-center md:items-start'>
 					<Countdown className='mb-4' />
 					<h1
