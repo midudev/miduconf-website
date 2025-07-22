@@ -7,12 +7,26 @@ interface MeteorsProps {
 	number?: number
 }
 
+interface MeteorStyle {
+	head: {
+		top: string
+		left: string
+		animationDelay: string
+		animationDuration: string
+	}
+	tail: {
+		background: string
+	}
+}
+
 export const Meteors = ({ number = 5 }: MeteorsProps) => {
-	const [meteorStyles, setMeteorStyles] = useState([])
-	const ref = useRef(null)
+	const [meteorStyles, setMeteorStyles] = useState<MeteorStyle[]>([])
+	const ref = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		// get height of container using ref
+		if (!ref.current) return
+
 		const height = ref.current.clientHeight
 
 		const styles = [...new Array(number)].map(() => ({
@@ -23,9 +37,8 @@ export const Meteors = ({ number = 5 }: MeteorsProps) => {
 				animationDuration: Math.floor(Math.random() * 8 + 2) + 's'
 			},
 			tail: {
-				background: `linear-gradient(to right, ${
-					Math.random() < 0.5 ? '#0099FF' : '#DEF2FF'
-				}, transparent)`
+				background: `linear-gradient(to right, ${Math.random() < 0.5 ? '#0099FF' : '#DEF2FF'
+					}, transparent)`
 			}
 		}))
 
