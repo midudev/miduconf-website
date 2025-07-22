@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
     return {
       props: {
         noUser: true,
-        userData: session.user
+        userData: session?.user ?? null
       }
     }
   }
@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
   if (Array.isArray(ticket)) {
     return {
       props: {
-        userData: session.user
+        userData: session?.user ?? null
       }
     }
   }
@@ -88,14 +88,14 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
   if (!ticketByUser) {
     return {
       props: {
-        userData: session.user
+        userData: session?.user ?? null
       }
     }
   }
 
   return {
     props: {
-      userData: session.user,
+      userData: session?.user ?? null,
       burst: crypto.randomUUID(),
       ticketNumber: ticketByUser.ticketNumber,
       username: ticketByUser.username,
