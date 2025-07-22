@@ -51,7 +51,7 @@ export function Speakers() {
             })}
           <li
             className={cn(
-              'max-w-80 w-full mx-auto relative',
+              'max-w-80 w-full mx-auto relative block md:hidden',
               (SPEAKERS.length - 1) % 3 === 0
                 ? 'animation-speaker-peer md:translate-y-16'
                 : 'animation-speaker',
@@ -67,6 +67,48 @@ export function Speakers() {
             </div>
           </li>
         </ul>
+        <div className='relative hidden md:block'>
+          <p className='text-4xl text-wrap text-center max-w-[24ch] text-white mx-auto px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase font-bold flex items-center gap-2 z-10'>
+            <DiamondIcon className='w-8 h-auto' />
+            ¡Muy pronto revelaremos más Speakers!
+            <DiamondIcon className='w-8 h-auto' />
+          </p>
+          <ul className='grid justify-center grid-cols-2 px-4 mx-auto gap-x-4 gap-y-4 md:px-0 md:grid-cols-3 md:gap-y-24 [mask-image:linear-gradient(to_bottom,#000,_transparent)]'>
+            <li
+              className={cn(
+                'max-w-80 w-full mx-auto relative',
+                (SPEAKERS.length - 1) % 3 === 0
+                  ? 'animation-speaker-peer md:translate-y-16'
+                  : 'animation-speaker',
+                (SPEAKERS.length - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
+              )}
+            >
+              <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-pallet-border-foreground'></div>
+            </li>
+            <li
+              className={cn(
+                'max-w-80 w-full mx-auto relative',
+                (SPEAKERS.length - 1) % 3 !== 0
+                  ? 'animation-speaker-peer md:translate-y-16'
+                  : 'animation-speaker',
+                (SPEAKERS.length - 1) % 2 !== 0 && 'translate-y-16 md:translate-y-0'
+              )}
+            >
+              <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-pallet-border-foreground'></div>
+            </li>
+            <li
+              className={cn(
+                'max-w-80 w-full mx-auto relative',
+                (SPEAKERS.length - 1) % 3 === 0
+                  ? 'animation-speaker-peer md:translate-y-16'
+                  : 'animation-speaker',
+                (SPEAKERS.length - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
+              )}
+            >
+              <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-pallet-border-foreground'></div>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   )
@@ -85,6 +127,13 @@ const SPEAKERS = [
     title: 'CEO @ Vercel',
     twitter: 'rauchg',
     img: 'guillermo-rauch',
+    isPlaceholder: false
+  },
+  {
+    name: 'Darwinglish',
+    title: 'Darwinglish @ Inglés para Devs',
+    twitter: 'darwinglish',
+    img: 'darwinglish',
     isPlaceholder: false
   }
   /* {

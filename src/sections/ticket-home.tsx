@@ -92,8 +92,8 @@ export const TicketHome = ({
                 flavor={flavor}
                 selectedStickers={selectedStickers}
                 user={{
-                  avatar: username ? `https://unavatar.io/github/${username}` : null,
-                  username
+                  avatar: username ? `https://unavatar.io/github/${username}` : '',
+                  username: username || ''
                 }}
               />
             )}
@@ -104,8 +104,8 @@ export const TicketHome = ({
                 flavor={flavor}
                 selectedStickers={selectedStickers}
                 user={{
-                  avatar: username ? `https://unavatar.io/github/${username}` : null,
-                  username
+                  avatar: username ? `https://unavatar.io/github/${username}` : '',
+                  username: username || ''
                 }}
               />
             )}
@@ -116,8 +116,8 @@ export const TicketHome = ({
                 flavor={flavor}
                 selectedStickers={selectedStickers}
                 user={{
-                  avatar: username ? `https://unavatar.io/github/${username}` : null,
-                  username
+                  avatar: username ? `https://unavatar.io/github/${username}` : '',
+                  username: username || ''
                 }}
               />
             )}

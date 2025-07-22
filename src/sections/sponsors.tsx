@@ -139,7 +139,11 @@ export const premiums = [
   }
 ]
 
-export const gold = []
+export const gold: Array<{
+  name: string;
+  link: string;
+  logo: React.ReactElement;
+}> = []
 
 export const normalSponsors = [
   {
