@@ -21,11 +21,12 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     GRAY: 'gray'
   },
   HOLOGRAM: {
-    1: '1',
-    2: '2',
-    3: '3',
-    4: '4',
-    5: '5',
-    6: '6'
+    STANDARD: 'standard',
+    TWITCH_1: 'twitch-1',
+    TWITCH_2: 'twitch-2',
+    TWITCH_3: 'twitch-3',
+    ACADEMIA_MENSUAL: 'academia-mensual',
+    ACADEMIA_TRIMESTRAL: 'academia-trimestral',
+    ACADEMIA_ANUAL: 'academia-anual'
   }
 } as const

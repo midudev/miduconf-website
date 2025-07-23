@@ -1,10 +1,8 @@
 export interface SupabaseTicketData {
   created_at: string | null
-  flavour: string | null
   id: string
   image: string | null
-  material: string
-  stickers: string[] | null
+  hologram: string
   ticket_number: number
   twitch_tier: string | null
   user_fullname: string | null

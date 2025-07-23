@@ -4,18 +4,12 @@ import { AnimationOption } from '../types/animation-option'
 import { StructureOpcion } from '../types/structure-option'
 import { ColorOption } from '../types/color-option'
 import { HologramOption } from '../types/hologram-option'
-
-interface TicketDesignState {
-  animation: AnimationOption
-  structure: StructureOpcion
-  color: ColorOption
-  hologram: HologramOption
-}
+import { TicketDesign } from '../types/ticket-design'
 
 export const useDesignTicket = () => {
-  const [ticketDesign, setTicketDesign] = useState<TicketDesignState>(INITIAL_STATE)
+  const [ticketDesign, setTicketDesign] = useState<TicketDesign>(INITIAL_STATE)
 
-  const handleChangeDesign = (options: Partial<TicketDesignState>) => {
+  const handleChangeDesign = (options: Partial<TicketDesign>) => {
     setTicketDesign((lastDesign) => ({
       animation: options.animation ?? lastDesign.animation,
       color: options.color ?? lastDesign.color,

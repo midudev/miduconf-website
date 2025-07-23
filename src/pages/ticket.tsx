@@ -5,16 +5,18 @@ import { supabaseGetTicketByUserId } from '@/tickets/services/supabase-get-ticke
 import { supabaseCreateTicket } from '@/tickets/services/supabase-create-ticket'
 import { ShareTicketPanel } from '@/tickets/components/share-ticket-panel'
 import { useDesignTicket } from '@/tickets/hooks/use-design-ticket'
-import { SelectAnimationPanel } from '@/tickets/components/select-animation-panel'
-import { SelectStructurePanel } from '@/tickets/components/select-structure-panel'
-import { SelectColorPanel } from '@/tickets/components/select-color-panel'
 import { SelectHologramPanel } from '@/tickets/components/select-hologram-panel'
-import { use } from 'react'
-import { MiduLogo } from '@/components/logos/midudev'
-import { WhiteMidudevLogo } from '@/tickets/icons/white-midudev-logo'
-import { PreFooter } from '@/sections/pre-footer'
 import { TicketCard } from '@/tickets/components/ticket-card'
 import { Container3D } from '@/components/Container3D'
+import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
+import { toJpeg } from 'html-to-image'
+import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import { TicketDesign } from '@/tickets/types/ticket-design'
+import { TICKET_DB_KEY } from '@/tickets/config/ticket-db-key'
+import { useUpdateTicketInDB } from '@/tickets/hooks/use-update-ticket-in-db'
+import { useUpdateTicketImageInDB } from '@/tickets/hooks/use-update-ticket-image-in-db'
+import { useRef, useState } from 'react'
+import { createTicketImage } from '@/tickets/utils/create-ticket-image'
 
 interface Props {
   user: {
@@ -33,11 +35,6 @@ interface Props {
   showAcheivementModal: boolean
 }
 
-interface GetMetadataProps {
-  username: string
-  ticketNumber: number
-}
-
 export default function Ticket({
   user,
   ticketNumber,
@@ -50,7 +47,8 @@ export default function Ticket({
   stickers,
   showAcheivementModal
 }: Props) {
-  const metadata = getMetadata({ ticketNumber, username: user.username })
+  const metadata = getTicketMetadata({ ticketNumber, username: user.username })
+  const [fullname, setFullname] = useState(user.fullname)
   const {
     ticketDesign,
     handleChangeAnimation,
@@ -58,18 +56,17 @@ export default function Ticket({
     handleChangeColor,
     handleChangeHologram
   } = useDesignTicket()
+  const { handleUpdateTicket } = useUpdateTicketInDB()
+  const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
+  const ticketImageElement = useRef<HTMLElement | null>(null)
 
   return (
     <Layout meta={metadata}>
       <main className='text-white grid grid-cols-[auto_1fr_auto] items-start min-h-full pt-32 px-8'>
-        <ShareTicketPanel />
+        <ShareTicketPanel ticketDOMContnet={ticketImageElement.current} username={user.username} />
         <section className='flex items-center justify-center'>
           <Container3D>
-            <TicketCard
-              fullname={user.fullname}
-              ticketNumber={ticketNumber}
-              username={user.username}
-            />
+            <TicketCard fullname={fullname} ticketNumber={ticketNumber} username={user.username} />
           </Container3D>
         </section>
         <section className='h-full max-w-md p-8 border rounded-lg border-pallet-border-foreground bg-pallet-b-foreground-primary w-max'>
@@ -89,27 +86,13 @@ export default function Ticket({
           />
         </section>
       </main>
+      <input value={fullname} onChange={(evt) => setFullname(evt.target.value)} />
+      <section className='h-auto text-white w-max' aria-disabled ref={ticketImageElement}>
+        {/* Contenido para crear captura */}
+        <TicketCard fullname={fullname} ticketNumber={ticketNumber} username={user.username} />
+      </section>
     </Layout>
   )
-}
-
-const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
-
-const getMetadata = ({ username, ticketNumber }: GetMetadataProps) => {
-  const title = 'miduConf - Conferencia de Programación y Tecnología'
-  const description =
-    '¡No te pierdas la miduConf el 12 de SEPTIEMBRE! Charlas para todos los niveles, +256 regalos y premios, ¡y muchas sorpresas!'
-  const hash = crypto.randomUUID().split('-')[0]
-
-  const url = `https://miduconf.com/ticket/${username}/${hash}`
-  const ogImage = `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?${hash}=_buster`
-
-  return {
-    title,
-    description,
-    ogImage,
-    url
-  }
 }
 
 const getInfoFromUser = ({ user }) => {
@@ -152,7 +135,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
 
     const { error } = await supabaseCreateTicket(req, res, {
       ticketInfo: {
-        flavour: 'javascript',
         id: session.user.id,
         user_fullname: fullname,
         user_id: session?.user?.id,
@@ -190,13 +172,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
   return {
     props: {
       userHadPreviousTicket: false,
-      selectedFlavor: ticket.flavour || 'javascript',
       ticketNumber: ticket.ticketNumber || 0,
       initialSession: session,
       user: getInfoFromUser({ user: session?.user }),
-      twitchTier: ticket.twitchTier,
-      material: ticket.material,
-      stickers: ticket.stickers
+      twitchTier: ticket.twitchTier
     }
   }
 }
