@@ -13,6 +13,8 @@ import { use } from 'react'
 import { MiduLogo } from '@/components/logos/midudev'
 import { WhiteMidudevLogo } from '@/tickets/icons/white-midudev-logo'
 import { PreFooter } from '@/sections/pre-footer'
+import { TicketCard } from '@/tickets/components/ticket-card'
+import { Container3D } from '@/components/Container3D'
 
 interface Props {
   user: {
@@ -62,37 +64,25 @@ export default function Ticket({
       <main className='text-white grid grid-cols-[auto_1fr_auto] items-start min-h-full pt-32 px-8'>
         <ShareTicketPanel />
         <section className='flex items-center justify-center'>
-          <article className='bg-[#101015] border border-pallet-border-foreground rounded-2xl w-[426px] h-[640px] flex flex-col'>
-            <header className='flex items-start justify-between p-6 uppercase font-geist'>
-              <div>
-                <p className='text-pallet-ghost'>/@{user.username}</p>
-                <h3 className='mt-2 text-3xl text-pretty max-w-[16ch]'>{user.fullname}</h3>
-              </div>
-              <WhiteMidudevLogo currentColor className='w-auto h-8 text-white' />
-            </header>
-            <footer className='flex flex-col justify-end flex-1 px-6'>
-              <PreFooter />
-              <time
-                dateTime='2025-09-10T16:00:00'
-                className='flex items-center justify-between gap-4 py-6 text-pallet-ghost'
-              >
-                <span>Sept.10 2025</span>
-                <span>16:00h CEST</span>
-              </time>
-            </footer>
-          </article>
+          <Container3D>
+            <TicketCard
+              fullname={user.fullname}
+              ticketNumber={ticketNumber}
+              username={user.username}
+            />
+          </Container3D>
         </section>
         <section className='h-full max-w-md p-8 border rounded-lg border-pallet-border-foreground bg-pallet-b-foreground-primary w-max'>
           <h2 className='w-auto text-5xl font-semibold text-pretty'>Personaliza tu ticket</h2>
-          <SelectAnimationPanel
+          {/* <SelectAnimationPanel
             ticketDesign={ticketDesign}
             handleChangeAnimation={handleChangeAnimation}
           />
           <SelectStructurePanel
             ticketDesign={ticketDesign}
             handleChangeStructure={handleChangeStructure}
-          />
-          <SelectColorPanel ticketDesign={ticketDesign} handleChangeColor={handleChangeColor} />
+          /> */}
+          {/* <SelectColorPanel ticketDesign={ticketDesign} handleChangeColor={handleChangeColor} /> */}
           <SelectHologramPanel
             ticketDesign={ticketDesign}
             handleChangeHologram={handleChangeHologram}
@@ -187,7 +177,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
       props: {
         userHadPreviousTicket: false,
         selectedFlavor: 'javascript',
-        ticketNumber: ticketCreated.ticketNumber,
+        ticketNumber: ticketCreated?.ticketNumber,
         initialSession: session,
         user: getInfoFromUser({ user: session?.user }),
         twitchTier: null,
