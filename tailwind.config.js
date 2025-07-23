@@ -16,7 +16,8 @@ module.exports = {
       },
       fontFamily: {
         inter: 'var(--font-inter)',
-        geist: 'var(--font-geist-mono)'
+        geist: 'var(--font-geist-mono)',
+        'ibm-plex': 'var(--font-ibm-plex)'
       },
       dropShadow: {
         gift: '3px 4px 8px rgba(0, 0, 0, 0.4)'
