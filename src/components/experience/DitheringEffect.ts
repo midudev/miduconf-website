@@ -97,7 +97,7 @@ export class DitheringEffect extends Effect {
     pixelSizeRatio = 1, // Multiplicador de pixelación
     grayscaleOnly = false // Solo escala de grises
   } = {}) {
-    const uniforms = new Map([
+    const uniforms = new Map<string, THREE.Uniform<any>>([
       ['u_time', new THREE.Uniform(time)],
       ['u_resolution', new THREE.Uniform(resolution)],
       ['u_gridSize', new THREE.Uniform(gridSize)],
@@ -109,7 +109,6 @@ export class DitheringEffect extends Effect {
     ])
 
     super('DitheringEffect', ditheringShader, { uniforms })
-    this.uniforms = uniforms
   }
 
   update(renderer, inputBuffer, deltaTime) {
@@ -131,7 +130,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Cambiar tamaño del patrón en tiempo real
-  setGridSize(size) {
+  setGridSize(size: number) {
     const gridSizeUniform = this.uniforms.get('u_gridSize')
     if (gridSizeUniform !== undefined) {
       gridSizeUniform.value = size // Actualiza uniform en GPU
@@ -139,7 +138,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Cambiar intensidad de pixelación
-  setPixelSizeRatio(ratio) {
+  setPixelSizeRatio(ratio: number) {
     const pixelSizeRatioUniform = this.uniforms.get('u_pixelSizeRatio')
     if (pixelSizeRatioUniform !== undefined) {
       pixelSizeRatioUniform.value = ratio
@@ -147,7 +146,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Activar/desactivar escala de grises
-  setGrayscaleOnly(grayscaleOnly) {
+  setGrayscaleOnly(grayscaleOnly: boolean) {
     const grayscaleOnlyUniform = this.uniforms.get('u_grayscaleOnly')
     if (grayscaleOnlyUniform !== undefined) {
       grayscaleOnlyUniform.value = grayscaleOnly ? 1 : 0 // Bool → Float
@@ -155,7 +154,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Activar/desactivar inversión
-  setInvertColor(invert) {
+  setInvertColor(invert: boolean) {
     const invertColorUniform = this.uniforms.get('u_invertColor')
     if (invertColorUniform !== undefined) {
       invertColorUniform.value = invert ? 1 : 0
