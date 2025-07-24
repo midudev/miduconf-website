@@ -39,6 +39,7 @@ export default async function handler(req: NextRequest) {
           >
             <div
               style={{
+                display: 'flex',
                 fontSize: '32px',
                 fontWeight: 'bold',
                 color: '#fbbf24'
@@ -75,6 +76,7 @@ export default async function handler(req: NextRequest) {
             >
               <div
                 style={{
+                  display: 'flex',
                   fontSize: '28px',
                   fontWeight: 'bold',
                   color: 'white',
@@ -85,6 +87,7 @@ export default async function handler(req: NextRequest) {
               </div>
               <div
                 style={{
+                  display: 'flex',
                   fontSize: '18px',
                   color: '#94a3b8'
                 }}
@@ -106,6 +109,7 @@ export default async function handler(req: NextRequest) {
             >
               <div
                 style={{
+                  display: 'flex',
                   fontSize: '16px',
                   color: '#64748b',
                   marginRight: '8px'
@@ -115,6 +119,7 @@ export default async function handler(req: NextRequest) {
               </div>
               <div
                 style={{
+                  display: 'flex',
                   fontSize: '24px',
                   fontWeight: 'bold',
                   color: '#fbbf24'

@@ -40,3 +40,71 @@ This is a Next.js conference website for miduConf using the Pages Router archite
 - TypeScript for type safety
 - Canvas Confetti for animations
 - Matter.js for physics effects
+- @vercel/og for dynamic OG image generation
+
+## Ticket System Architecture (2025)
+
+### Overview
+The ticket system allows users to create, customize, and share personalized conference tickets with intelligent ownership detection and responsive design.
+
+### Routes Structure
+- **`/ticket/[...params].tsx`** - Smart catch-all route handling both owner editor and public sharing
+- **`/ticket.tsx`** - Legacy editor (kept for compatibility, requires login)
+- **`/api/og/ticket.tsx`** - Dynamic OG image generation endpoint
+
+### Ticket Flow Logic
+```
+/ticket/username → Intelligent Detection:
+├── User IS owner → Full editor with customization panels
+├── User NOT owner → Clean public view (Vercel Ship style)  
+└── Username doesn't exist → Redirect to home (/)
+```
+
+### Database Schema (Supabase)
+**Table**: `ticket-2025` (PostgreSQL)
+```sql
+- id: UUID (user ID)
+- user_name: string (GitHub username) 
+- user_fullname: string (display name)
+- ticket_number: serial (auto-increment)
+- hologram: string (customization option)
+- twitch_tier: string (subscription level)
+- created_at: timestamp
+- image: string (generated ticket image URL)
+```
+
+**Storage**: `ticket-2025` bucket for generated ticket images
+
+### Key Features
+
+#### 1. Smart Ownership Detection
+- **Server-side detection**: Compares session username with ticket username
+- **Dual rendering**: Owner sees editor, visitors see public view
+- **Auto-creation**: Creates ticket on first owner visit
+
+#### 2. Dynamic OG Images  
+- **API Endpoint**: `/api/og/ticket?username=X&ticketNumber=Y&fullname=Z`
+- **Technology**: @vercel/og with custom styling
+- **Dimensions**: 1200x630 (standard social media)
+- **Features**: User info, ticket number, branded design
+
+#### 3. Responsive Design
+- **Mobile-first**: Stacked layout on small screens
+- **Desktop**: 3-column grid (Share | Ticket | Customize)
+- **Public view**: Centered ticket with CTA button
+
+#### 4. Customization System
+- **Hologram selection**: Different visual effects
+- **Sticker system**: Twitch tier-based unlock system
+- **Coming soon overlay**: Future features with "Muy pronto" indicator
+
+### URL Patterns
+- `/ticket/username` - Main ticket route (owner editor or public view)
+- `/ticket/username/hash` - Legacy format (hash ignored, still works)
+- `/api/og/ticket` - OG image generation
+- Non-existent usernames redirect to home page
+
+### Integration Points
+- **Hero button**: Links to `/ticket/${username}` instead of separate `/my-ticket`
+- **Share functionality**: Generates URLs with proper OG metadata
+- **Auth flow**: Seamless login integration with ticket creation
