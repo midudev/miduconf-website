@@ -1,14 +1,13 @@
 export const shareTicketOnX = ({ username }) => {
   const hash = crypto.randomUUID().split('-')[0]
   const intent = 'https://x.com/intent/tweet'
-  const text = `¡No te pierdas la miduConf 2025!
+  const text = `miduConf 2025 está cada vez más cerca...
 
-👩‍💻 Conferencia de programación gratuita
-🔥 Speakers TOP internacionales
-🎁 +256 regalos para todos
+¡La conferencia de programación GRATUITA del año!
+Con speakers internacionales que inspiran
 ...¡y muchas sorpresas más!
 
-Apunta la fecha: 10 de SEPTIEMBRE
+📅 10 de SEPTIEMBRE
 
 miduconf.com/ticket/${username}/${hash}`
 
