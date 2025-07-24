@@ -7,6 +7,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { DitheringEffect } from './DitheringEffect'
+import { lights } from './lights'
 import GUI from 'lil-gui'
 import gsap from 'gsap'
 
@@ -21,6 +22,12 @@ export function MiduLogo3D() {
 		model?: THREE.Group
 		animationId?: number
 		cleanup?: () => void
+		raycaster?: THREE.Raycaster
+		pointer?: THREE.Vector2
+		isPressed?: boolean
+		isRotating?: boolean
+		isHovered?: boolean
+		shakeAnimation?: gsap.core.Tween
 	}>({})
 
 	useEffect(() => {
@@ -54,205 +61,24 @@ export function MiduLogo3D() {
 		const scene = new THREE.Scene()
 		sceneRef.current.scene = scene
 
-		// Lighting setup
-		const ambientLight = new THREE.AmbientLight(0xffffff, 1.0)
-		scene.add(ambientLight)
+		// Lighting setup using external lights configuration
+		lights(scene, folderLights || undefined)
 
-		const lights = [
-			{
-				color: 0x9793b4,
-				intensity: 9.45,
-				distance: 12.85,
-				angle: 1.57079,
-				positionX: -12.04,
-				positionY: 12.34,
-				positionZ: -0.46,
-				positionRotationX: 10.37,
-				positionRotationY: -16.33,
-				positionRotationZ: -0.23,
-				penumbra: 0.32,
-				decay: 0.19,
-				isCastShadow: true,
-				mapSizeWidth: 1024,
-				mapSizeHeight: 1024,
-				cameraFov: 44.89,
-				cameraNear: 3.35,
-				cameraFar: 14.47,
-				shadowBias: 0.1,
-				shadowRadius: 3.9
-			},
-			{
-				color: 0x9793b4,
-				intensity: 8.52,
-				distance: 27.25,
-				angle: 0.687,
-				positionX: -2.29,
-				positionY: 22.2,
-				positionZ: 5.45,
-				positionRotationX: 4.87,
-				positionRotationY: -16.33,
-				positionRotationZ: -0.23,
-				penumbra: 0,
-				decay: 0.4,
-				isCastShadow: true,
-				mapSizeWidth: 1024,
-				mapSizeHeight: 1024,
-				cameraFov: 33.18,
-				cameraNear: 25.13,
-				cameraFar: 45.03,
-				shadowBias: 0.1,
-				shadowRadius: 3.9
-			},
-			{
-				color: 0x5a8cf6,
-				intensity: 2.68,
-				distance: 24.11,
-				angle: 1.57079,
-				positionX: -7.52,
-				positionY: 1.26,
-				positionZ: 7.54,
-				positionRotationX: -7.21,
-				positionRotationY: 1.73,
-				positionRotationZ: 0.16,
-				penumbra: 0.31,
-				decay: 0.95,
-				isCastShadow: true,
-				mapSizeWidth: 1032,
-				mapSizeHeight: 1032,
-				cameraFov: 27.64,
-				cameraNear: 5.74,
-				cameraFar: 17.55,
-				shadowBias: 0.0136,
-				shadowRadius: 11.3
-			},
-			{
-				color: 0x5a8cf6,
-				intensity: 4.58,
-				distance: 24.46,
-				angle: 1.201,
-				positionX: 3.59,
-				positionY: 0.85999,
-				positionZ: 7.86,
-				positionRotationX: -8.7,
-				positionRotationY: 0.46999,
-				positionRotationZ: -7.42,
-				penumbra: 0.4,
-				decay: 0.9,
-				isCastShadow: true,
-				mapSizeWidth: 1035,
-				mapSizeHeight: 1035,
-				cameraFov: 27.64,
-				cameraNear: 5.74,
-				cameraFar: 24.44,
-				shadowBias: 0.0121,
-				shadowRadius: 11.3
-			}
-		]
+		// Raycaster setup
+		const pointer = new THREE.Vector2()
+		const raycaster = new THREE.Raycaster()
+		let isPressed = false
+		let isRotating = false
+		let isHovered = false
+		let shakeAnimation: gsap.core.Tween | null = null
 
-		lights.forEach(
-			(
-				{
-					color,
-					intensity,
-					distance,
-					angle,
-					positionX,
-					positionY,
-					positionZ,
-					positionRotationX,
-					positionRotationY,
-					positionRotationZ,
-					penumbra,
-					decay,
-					isCastShadow,
-					mapSizeWidth,
-					mapSizeHeight,
-					cameraFov,
-					cameraFar,
-					cameraNear,
-					shadowBias,
-					shadowRadius
-				},
-				idx
-			) => {
-				const spotLight = new THREE.SpotLight(color, intensity, distance, angle)
-				spotLight.distance = distance
-				spotLight.position.set(positionX, positionY, positionZ)
-				spotLight.target.position.set(positionRotationX, positionRotationY, positionRotationZ)
-				spotLight.penumbra = penumbra
-				spotLight.decay = decay
+		sceneRef.current.raycaster = raycaster
+		sceneRef.current.pointer = pointer
+		sceneRef.current.isPressed = isPressed
+		sceneRef.current.isRotating = isRotating
+		sceneRef.current.isHovered = isHovered
+		sceneRef.current.shakeAnimation = shakeAnimation || undefined
 
-				spotLight.castShadow = isCastShadow
-				spotLight.shadow.mapSize.width = mapSizeWidth
-				spotLight.shadow.mapSize.height = mapSizeHeight
-				spotLight.shadow.camera.fov = cameraFov
-				spotLight.shadow.camera.near = cameraNear
-				spotLight.shadow.camera.far = cameraFar
-				spotLight.shadow.bias = shadowBias
-				spotLight.shadow.radius = shadowRadius
-
-				scene.add(spotLight)
-				scene.add(spotLight.target)
-
-				const spotLightCameraHelper = new THREE.CameraHelper(spotLight.shadow.camera)
-				spotLightCameraHelper.visible = false
-				scene.add(spotLightCameraHelper)
-
-				// GUI controls
-				if (window.location.hash === '#controls' && folderLights && gui) {
-					const lightFolder = folderLights.addFolder(`Light ${idx + 1}`)
-					lightFolder.close()
-
-					lightFolder.add(spotLight, 'visible').name('Light Visible/Hidden')
-					lightFolder.add(spotLightCameraHelper, 'visible').name('Light Helper Visible/Hidden')
-					lightFolder.add(spotLight.position, 'x', -40, 40, 0.01).name('Light Position X')
-					lightFolder.add(spotLight.position, 'y', -40, 40, 0.01).name('Light Position Y')
-					lightFolder.add(spotLight.position, 'z', -40, 40, 0.01).name('Light Position Z')
-					lightFolder.add(spotLight.target.position, 'x', -30, 30, 0.01).name('Light Rotation X')
-					lightFolder.add(spotLight.target.position, 'y', -30, 30, 0.01).name('Light Rotation Y')
-					lightFolder.add(spotLight.target.position, 'z', -30, 30, 0.01).name('Light Rotation Z')
-					lightFolder.add(spotLight, 'intensity', 0, 15, 0.01).name('Light Intensity')
-					lightFolder.add(spotLight, 'distance', 0, 30, 0.01).name('Light Distance')
-					lightFolder
-						.add(spotLight.shadow.camera, 'far', 0, 100, 0.01)
-						.name('Light Far')
-						.onChange(() => {
-							spotLight.shadow.camera.updateProjectionMatrix()
-							spotLightCameraHelper.update()
-						})
-					lightFolder
-						.add(spotLight.shadow.camera, 'near', 0, 50, 0.01)
-						.name('Light Near')
-						.onChange(() => {
-							spotLight.shadow.camera.updateProjectionMatrix()
-							spotLightCameraHelper.update()
-						})
-					lightFolder
-						.add(spotLight.shadow.camera, 'fov', 1, 180, 0.01)
-						.name('Shadow Camera FOV')
-						.onChange(() => {
-							spotLight.shadow.camera.updateProjectionMatrix()
-							spotLightCameraHelper.update()
-						})
-					lightFolder.add(spotLight, 'angle', 0, Math.PI / 2, 0.001).name('Light Angle')
-					lightFolder.add(spotLight, 'penumbra', 0, 1, 0.01).name('Light Penumbra')
-					lightFolder.add(spotLight, 'decay', 0, 2, 0.01).name('Light Decay')
-					lightFolder
-						.addColor({ color: spotLight.color.getHex() }, 'color')
-						.name('Light Color')
-						.onChange((c: number) => spotLight.color.setHex(c))
-					lightFolder.add(spotLight, 'castShadow').name('Cast Shadows')
-					lightFolder.add(spotLight.shadow, 'bias', -0.1, 0.1, 0.0001).name('Shadow Bias')
-					lightFolder
-						.add(spotLight.shadow.mapSize, 'width', 128, 2048, 1)
-						.name('Shadow Map Width')
-						.onChange(() => {
-							spotLight.shadow.mapSize.height = spotLight.shadow.mapSize.width
-						})
-					lightFolder.add(spotLight.shadow, 'radius', 1, 20, 0.1).name('Shadow Radius')
-				}
-			}
-		)
 
 		// Camera setup
 		const ARCamera = sizes.width / sizes.height
@@ -363,6 +189,142 @@ export function MiduLogo3D() {
 			scene.environmentIntensity = 0.02
 		})
 
+		// Mouse interaction functions
+		function onMouseMoveRaycaster(event: MouseEvent) {
+			if (!canvas) return
+			const rect = canvas.getBoundingClientRect()
+
+			const x = event.clientX - rect.left
+			const y = event.clientY - rect.top
+
+			pointer.x = (x / sizes.width) * 2 - 1
+			pointer.y = -(y / sizes.height) * 2 + 1
+		}
+
+		function onEnter() {
+			if (!sceneRef.current.model) return
+			gsap.to(sceneRef.current.model.scale, {
+				x: 1.1,
+				y: 1.1,
+				z: 1.1,
+				duration: 0.5,
+				ease: 'elastic.out(1, 0.55)'
+			})
+		}
+
+		function onLeave() {
+			if (!sceneRef.current.model) return
+			gsap.to(sceneRef.current.model.scale, {
+				x: 1.0,
+				y: 1.0,
+				z: 1.0,
+				duration: 0.5,
+				ease: 'elastic.out(1, 0.55)'
+			})
+		}
+
+		function moveRaycast(event: MouseEvent) {
+			if (!sceneRef.current.model || sceneRef.current.isPressed) return
+
+			onMouseMoveRaycaster(event)
+			raycaster.setFromCamera(pointer, camera)
+			const intersects = raycaster.intersectObjects(sceneRef.current.model.children)
+
+			if (intersects.length > 0) {
+				if (!sceneRef.current.isHovered) {
+					sceneRef.current.isHovered = true
+					if (typeof document !== 'undefined') {
+						document.body.style.cursor = 'pointer'
+					}
+					onEnter()
+				}
+			} else {
+				if (sceneRef.current.isHovered) {
+					sceneRef.current.isHovered = false
+					if (typeof document !== 'undefined') {
+						document.body.style.cursor = 'default'
+					}
+					onLeave()
+				}
+			}
+		}
+
+		function onPress(event: MouseEvent) {
+			if (!sceneRef.current.model) return
+
+			onMouseMoveRaycaster(event)
+			raycaster.setFromCamera(pointer, camera)
+			const intersects = raycaster.intersectObjects(sceneRef.current.model.children)
+
+			if (intersects.length) {
+				sceneRef.current.isPressed = true
+
+				gsap.to(sceneRef.current.model.scale, {
+					x: 0.8,
+					y: 0.8,
+					z: 0.8
+				})
+
+				sceneRef.current.shakeAnimation = gsap.to(sceneRef.current.model.position, {
+					x: '+=0.04',
+					y: '+=0.04',
+					z: '+=0.04',
+					yoyo: true,
+					repeat: -1,
+					duration: 0.05,
+					ease: 'steps(10)'
+				})
+			}
+		}
+
+		function onRelease() {
+			if (!sceneRef.current.model || !sceneRef.current.isPressed) return
+
+			sceneRef.current.isPressed = false
+			sceneRef.current.isRotating = true
+
+			if (sceneRef.current.shakeAnimation) {
+				sceneRef.current.shakeAnimation.kill()
+			}
+
+			gsap.to(sceneRef.current.model.scale, {
+				x: 1,
+				y: 1,
+				z: 1,
+				duration: 0.5,
+				ease: 'elastic.out(1, 0.55)',
+				onUpdate: () => {
+					if (!sceneRef.current.model) return
+					raycaster.setFromCamera(pointer, camera)
+					const intersects = raycaster.intersectObjects(sceneRef.current.model.children, true)
+					if (intersects.length) {
+						sceneRef.current.isHovered = true
+						onEnter()
+					}
+				}
+			})
+
+			gsap.to(sceneRef.current.model.rotation, {
+				z: `+=${Math.PI * 2}`,
+				duration: 1,
+				ease: 'elastic.out(1, 0.55)',
+				onComplete: () => {
+					sceneRef.current.isRotating = false
+				}
+			})
+
+			gsap.to(sceneRef.current.model.position, {
+				x: 0,
+				y: 0,
+				z: 0
+			})
+		}
+
+		// Event listeners for mouse interactions
+		window.addEventListener('mousemove', moveRaycast)
+		window.addEventListener('mousedown', onPress)
+		window.addEventListener('mouseup', onRelease)
+
 		// Model loading
 		const loader = new GLTFLoader()
 
@@ -387,8 +349,9 @@ export function MiduLogo3D() {
 
 				gsap.fromTo(child.scale, { x: 0, y: 0, z: 0 }, { x: 178, y: 178, z: 178 })
 
+				const offsetZ = sizes.width < 768 ? 3.5 : sizes.width < 1024 ? 2 : 0.3
 				gsap.to(child.position, {
-					z: finalZ,
+					z: finalZ - offsetZ,
 					duration: 1.2,
 					ease: 'elastic.out(1, 0.5)',
 					delay: idx * 0.1
@@ -425,20 +388,22 @@ export function MiduLogo3D() {
 			const elapsedTime = clock.getElapsedTime()
 
 			if (sceneRef.current.model) {
-				mouse.targetX = mouse.mouseX * 0.0002
-				mouse.targetY = mouse.mouseY * 0.0002
+				mouse.targetX = mouse.mouseX * 0.0003
+				mouse.targetY = mouse.mouseY * 0.0003
 
 				currentRotationY += (mouse.targetX - currentRotationY) * 0.06
 				currentRotationX += (mouse.targetY - currentRotationX) * 0.06
 
 				sceneRef.current.model.rotation.x = currentRotationX + Math.PI / 2
-				sceneRef.current.model.rotation.z = currentRotationY
+				if (!sceneRef.current.isRotating) {
+					sceneRef.current.model.rotation.z = currentRotationY
+				}
 
-				sceneRef.current.model.position.y = Math.sin(elapsedTime * 0.14)
+				// Floating animation
+				sceneRef.current.model.position.y = Math.sin(elapsedTime * 3) * 0.15
 			}
 
 			controls.update()
-			camera.lookAt(new THREE.Vector3(0, 0, 0))
 
 			composer.render()
 			sceneRef.current.animationId = requestAnimationFrame(animation)
@@ -482,6 +447,9 @@ export function MiduLogo3D() {
 				cancelAnimationFrame(sceneRef.current.animationId)
 			}
 			window.removeEventListener('resize', handleResize)
+			window.removeEventListener('mousemove', moveRaycast)
+			window.removeEventListener('mousedown', onPress)
+			window.removeEventListener('mouseup', onRelease)
 			document.removeEventListener('mousemove', onMouseMove)
 			if (gui) {
 				gui.destroy()
@@ -502,12 +470,12 @@ export function MiduLogo3D() {
 	}, [canvasRef.current])
 
 	return (
-		<div className='w-full h-screen'>
-			<div className='absolute w-full h-screen bg-gradient-radial from-transparent from-40% to-black to-70%' />
-			<canvas ref={canvasRef} className='absolute top-0 -z-[1]' />
+		<div className='w-full h-screen experience'>
+			<div className='absolute w-full h-screen bg-radial from-transparent from-60% to-dark to-90% lg:from-45% lg:to-75%' />
+			<canvas ref={canvasRef} id='midu3d' className='absolute -z-[1]' />
 			<div
-				className='block balls absolute w-full h-screen -z-[2] bg-cover bg-center bg-no-repeat'
-				style={{ backgroundImage: 'url("/img/balls.png")' }}
+				className='balls block absolute w-full h-screen -z-[2] bg-cover bg-center bg-no-repeat'
+				style={{ backgroundImage: 'url("/images/balls.png")' }}
 			/>
 		</div>
 	)

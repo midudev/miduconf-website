@@ -15,19 +15,19 @@ bool getValue(float brightness, vec2 pos) {
   // Casos extremos
   if (brightness > 16.0/17.0) return false;
   if (brightness < 1.0/17.0) return true;
-
+  
   // Calcular posición en la matriz 4x4
   vec2 pixel = floor(mod(pos.xy / u_gridSize, 4.0));
   int x = int(pixel.x);
   int y = int(pixel.y);
-
+  
   // Matriz de Bayer 4x4 - más eficiente
   if (x == 0) {
     if (y == 0) return brightness < 16.0/17.0;
     if (y == 1) return brightness < 5.0/17.0;
     if (y == 2) return brightness < 13.0/17.0;
     return brightness < 1.0/17.0; // y == 3
-  }
+  } 
   else if (x == 1) {
     if (y == 0) return brightness < 8.0/17.0;
     if (y == 1) return brightness < 12.0/17.0;
@@ -56,25 +56,25 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
   float pixelSize = u_gridSize * u_pixelSizeRatio;
   vec2 pixelatedUV = floor(fragCoord / pixelSize) * pixelSize / u_resolution;
   baseColor = texture2D(inputBuffer, pixelatedUV).rgb;
-
+  
   // Calcular luminancia
   float luminance = dot(baseColor, vec3(1.0, 1.0, 1.0));
-
+  
   // Aplicar escala de grises si está habilitado
   if (u_grayscaleOnly > 0.0) {
     baseColor = vec3(luminance);
   }
-
+      
   // Aplicar patrón de dithering
   bool dithered = getValue(luminance, fragCoord);
-
+  
   // Crear versión con dithering del píxel
   vec3 ditherColor = dithered ? vec3(0.0) : baseColor;
-
+  
   // Aplicar dithering solo al píxel específico
   vec2 currentPixel = floor(fragCoord / pixelSize);
   vec2 originalPixel = floor(uv * u_resolution / pixelSize);
-
+  
   baseColor = (currentPixel == originalPixel) ? ditherColor : baseColor;
 
   // Invertir color
@@ -97,18 +97,18 @@ export class DitheringEffect extends Effect {
     pixelSizeRatio = 1, // Multiplicador de pixelación
     grayscaleOnly = false // Solo escala de grises
   } = {}) {
-    const uniforms = {
-      u_time: new THREE.Uniform(time),
-      u_resolution: new THREE.Uniform(resolution),
-      u_gridSize: new THREE.Uniform(gridSize),
-      u_luminanceMethod: new THREE.Uniform(luminanceMethod),
-      u_invertColor: new THREE.Uniform(invertColor ? 1 : 0), // Bool → Float
-      u_ditheringEnabled: new THREE.Uniform(1), // Siempre habilitado
-      u_pixelSizeRatio: new THREE.Uniform(pixelSizeRatio),
-      u_grayscaleOnly: new THREE.Uniform(grayscaleOnly ? 1 : 0)
-    }
+    const uniforms = new Map<string, THREE.Uniform<any>>([
+      ['u_time', new THREE.Uniform(time)],
+      ['u_resolution', new THREE.Uniform(resolution)],
+      ['u_gridSize', new THREE.Uniform(gridSize)],
+      ['u_luminanceMethod', new THREE.Uniform(luminanceMethod)],
+      ['u_invertColor', new THREE.Uniform(invertColor ? 1 : 0)], // Bool → Float
+      ['u_ditheringEnabled', new THREE.Uniform(1)], // Siempre habilitado
+      ['u_pixelSizeRatio', new THREE.Uniform(pixelSizeRatio)],
+      ['u_grayscaleOnly', new THREE.Uniform(grayscaleOnly ? 1 : 0)]
+    ])
 
-    super('DitheringEffect', ditheringShader, { uniforms: new Map(Object.entries(uniforms)) })
+    super('DitheringEffect', ditheringShader, { uniforms })
   }
 
   update(renderer, inputBuffer, deltaTime) {
@@ -130,7 +130,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Cambiar tamaño del patrón en tiempo real
-  setGridSize(size) {
+  setGridSize(size: number) {
     const gridSizeUniform = this.uniforms.get('u_gridSize')
     if (gridSizeUniform !== undefined) {
       gridSizeUniform.value = size // Actualiza uniform en GPU
@@ -138,7 +138,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Cambiar intensidad de pixelación
-  setPixelSizeRatio(ratio) {
+  setPixelSizeRatio(ratio: number) {
     const pixelSizeRatioUniform = this.uniforms.get('u_pixelSizeRatio')
     if (pixelSizeRatioUniform !== undefined) {
       pixelSizeRatioUniform.value = ratio
@@ -146,7 +146,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Activar/desactivar escala de grises
-  setGrayscaleOnly(grayscaleOnly) {
+  setGrayscaleOnly(grayscaleOnly: boolean) {
     const grayscaleOnlyUniform = this.uniforms.get('u_grayscaleOnly')
     if (grayscaleOnlyUniform !== undefined) {
       grayscaleOnlyUniform.value = grayscaleOnly ? 1 : 0 // Bool → Float
@@ -154,7 +154,7 @@ export class DitheringEffect extends Effect {
   }
 
   // Activar/desactivar inversión
-  setInvertColor(invert) {
+  setInvertColor(invert: boolean) {
     const invertColorUniform = this.uniforms.get('u_invertColor')
     if (invertColorUniform !== undefined) {
       invertColorUniform.value = invert ? 1 : 0
