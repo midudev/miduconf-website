@@ -9,10 +9,7 @@ import { PreFooter } from '@/sections/pre-footer'
 import { Speakers } from '@/sections/speakers'
 import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
-import { supabaseGetTicketByUsername } from '@/tickets/services/supabase-get-ticket-by-username'
 import { GetServerSideProps } from 'next'
-
-const PREFIX_CDN = 'https://ljizvfycxyxnupniyyxb.supabase.co/storage/v1/object/public/tickets'
 
 const title = 'miduConf - La conferencia de programación y desarrollo'
 const description =
@@ -20,15 +17,11 @@ const description =
 const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
-export default function Home({ username, ticketNumber, burst, userData }) {
-  const ogImage = username
-    ? `${PREFIX_CDN}/ticket-${ticketNumber}.jpg?c=${burst}`
-    : `${url}${defaultOgImage}`
-
+export default function Home({ userData }) {
   const metadata = {
     title,
     description,
-    ogImage,
+    ogImage: `${url}${defaultOgImage}`,
     url
   }
 
@@ -50,8 +43,6 @@ export default function Home({ username, ticketNumber, burst, userData }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query, req, res }) => {
-  // read query parameter
-  const { ticket, 'no-user': noUser } = query
   const { session, error } = await supabaseGetServerSession(req, res)
 
   if (error) {
@@ -63,48 +54,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
     }
   }
 
-  if (noUser != null) {
-    return {
-      props: {
-        noUser: true,
-        userData: session?.user ?? null
-      }
-    }
-  }
-
-  if (Array.isArray(ticket)) {
-    return {
-      props: {
-        userData: session?.user ?? null
-      }
-    }
-  }
-
-  const ticketByUser = ticket
-    ? await supabaseGetTicketByUsername(req, res, {
-        username: ticket
-      })
-    : null
-
-  // if no ticket, return empty props
-  if (!ticketByUser) {
-    return {
-      props: {
-        userData: session?.user ?? null
-      }
-    }
-  }
-
   return {
     props: {
-      userData: session?.user ?? null,
-      burst: crypto.randomUUID(),
-      ticketNumber: ticketByUser.ticketNumber,
-      username: ticketByUser.username,
-      flavor: ticketByUser.flavour,
-      material: ticketByUser.material,
-      stickers: ticketByUser.stickers,
-      twitchTier: ticketByUser.twitchTier
+      userData: session?.user ?? null
     }
   }
 }
