@@ -1,17 +1,10 @@
 import { Button } from '@/components/Button'
-import { StructureOpcion } from '../types/structure-option'
-import { AnimationOption } from '../types/animation-option'
 import { ColorOption } from '../types/color-option'
-import { HologramOption } from '../types/hologram-option'
+import { TicketDesign } from '../types/ticket-design'
 
 interface Props {
   handleChangeColor: (option: ColorOption) => void
-  ticketDesign: {
-    animation: AnimationOption
-    structure: StructureOpcion
-    color: ColorOption
-    hologram: HologramOption
-  }
+  ticketDesign: TicketDesign
 }
 
 export const SelectColorPanel = ({ ticketDesign, handleChangeColor }: Props) => {

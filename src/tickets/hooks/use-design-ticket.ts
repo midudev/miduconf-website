@@ -5,6 +5,7 @@ import { StructureOpcion } from '../types/structure-option'
 import { ColorOption } from '../types/color-option'
 import { HologramOption } from '../types/hologram-option'
 import { TicketDesign } from '../types/ticket-design'
+import { StickerOption } from '../types/sticker-option'
 
 export const useDesignTicket = () => {
   const [ticketDesign, setTicketDesign] = useState<TicketDesign>(INITIAL_STATE)
@@ -14,7 +15,8 @@ export const useDesignTicket = () => {
       animation: options.animation ?? lastDesign.animation,
       color: options.color ?? lastDesign.color,
       structure: options.structure ?? lastDesign.structure,
-      hologram: options.hologram ?? lastDesign.hologram
+      hologram: options.hologram ?? lastDesign.hologram,
+      sticker: options.sticker ?? lastDesign.sticker
     }))
   }
 
@@ -54,12 +56,21 @@ export const useDesignTicket = () => {
     })
   }
 
+  const handleChangeSticker = (sticker: StickerOption) => {
+    const allStickersSet = new Set(ticketDesign.sticker ?? [])
+    allStickersSet.add(sticker)
+    handleChangeDesign({
+      sticker: [...allStickersSet]
+    })
+  }
+
   return {
     ticketDesign,
     handleChangeAnimation,
     handleChangeStructure,
     handleChangeColor,
-    handleChangeHologram
+    handleChangeHologram,
+    handleChangeSticker
   }
 }
 
@@ -67,5 +78,6 @@ const INITIAL_STATE = {
   animation: PERSONALIZE_TIKET_OPTIONS.ANIMATION.DEFAULT,
   structure: PERSONALIZE_TIKET_OPTIONS.STRUCTURE.CIRCLE,
   color: PERSONALIZE_TIKET_OPTIONS.COLOR.BLUE,
-  hologram: PERSONALIZE_TIKET_OPTIONS.HOLOGRAM[1]
+  hologram: PERSONALIZE_TIKET_OPTIONS.HOLOGRAM[1],
+  sticker: null
 }

@@ -17,6 +17,9 @@ import { useUpdateTicketInDB } from '@/tickets/hooks/use-update-ticket-in-db'
 import { useUpdateTicketImageInDB } from '@/tickets/hooks/use-update-ticket-image-in-db'
 import { useRef, useState } from 'react'
 import { createTicketImage } from '@/tickets/utils/create-ticket-image'
+import { HologramOption } from '@/tickets/types/hologram-option'
+import { SelectStickerPanel } from '@/tickets/components/select-sticker-panel'
+import { DiamondIcon } from '@/components/icons/diamond'
 
 interface Props {
   user: {
@@ -25,28 +28,14 @@ interface Props {
     avatar: string
   }
   ticketNumber: number
-  selectedFlavor: 'javascript'
   twitchTier: 1000 | 2000 | 3000
-  material: 'standard' | 'special' | 'premium'
+  hologram: HologramOption
   tierQueryData: '1000' | '2000' | '3000'
   notAccessTier: boolean
   userHadPreviousTicket: boolean
-  stickers: Array<string | null>
-  showAcheivementModal: boolean
 }
 
-export default function Ticket({
-  user,
-  ticketNumber,
-  selectedFlavor = 'javascript',
-  twitchTier,
-  material: defaultMaterial,
-  tierQueryData,
-  notAccessTier,
-  userHadPreviousTicket,
-  stickers,
-  showAcheivementModal
-}: Props) {
+export default function Ticket({ user, ticketNumber }: Props) {
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
   const [fullname, setFullname] = useState(user.fullname)
   const {
@@ -54,7 +43,8 @@ export default function Ticket({
     handleChangeAnimation,
     handleChangeStructure,
     handleChangeColor,
-    handleChangeHologram
+    handleChangeHologram,
+    handleChangeSticker
   } = useDesignTicket()
   const { handleUpdateTicket } = useUpdateTicketInDB()
   const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
@@ -71,19 +61,32 @@ export default function Ticket({
         </section>
         <section className='h-full max-w-md p-8 border rounded-lg border-pallet-border-foreground bg-pallet-b-foreground-primary w-max'>
           <h2 className='w-auto text-5xl font-semibold text-pretty'>Personaliza tu ticket</h2>
-          {/* <SelectAnimationPanel
+          <div className='relative'>
+            <p className='absolute flex items-center gap-2 text-2xl font-medium text-center uppercase -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 font-ibm-plex'>
+              <DiamondIcon className='w-auto h-4' />
+              Muy pronto
+              <DiamondIcon className='w-auto h-4' />
+            </p>
+            {/* <SelectAnimationPanel
             ticketDesign={ticketDesign}
             handleChangeAnimation={handleChangeAnimation}
-          />
-          <SelectStructurePanel
+						/>
+						<SelectStructurePanel
             ticketDesign={ticketDesign}
             handleChangeStructure={handleChangeStructure}
-          /> */}
-          {/* <SelectColorPanel ticketDesign={ticketDesign} handleChangeColor={handleChangeColor} /> */}
-          <SelectHologramPanel
-            ticketDesign={ticketDesign}
-            handleChangeHologram={handleChangeHologram}
-          />
+						/> */}
+            {/* <SelectColorPanel ticketDesign={ticketDesign} handleChangeColor={handleChangeColor} /> */}
+            <div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
+              <SelectHologramPanel
+                ticketDesign={ticketDesign}
+                handleChangeHologram={handleChangeHologram}
+              />
+              <SelectStickerPanel
+                ticketDesign={ticketDesign}
+                handleChangeSticker={handleChangeSticker}
+              />
+            </div>
+          </div>
         </section>
       </main>
       <input value={fullname} onChange={(evt) => setFullname(evt.target.value)} />
@@ -128,6 +131,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
     id: session.user.id
   })
 
+  console.log({ ticket })
   // si no tenemos ticket -> lo creamos
   if (ticket == null) {
     const metadata = session?.user?.user_metadata ?? {}
@@ -157,14 +161,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
 
     return {
       props: {
-        userHadPreviousTicket: false,
-        selectedFlavor: 'javascript',
+        userHadPreviousTicket: true,
         ticketNumber: ticketCreated?.ticketNumber,
         initialSession: session,
         user: getInfoFromUser({ user: session?.user }),
         twitchTier: null,
-        material: 'standard',
-        stickers: ['null', 'null', 'null']
+        hologram: 'standard'
       }
     }
   }
@@ -175,7 +177,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
       ticketNumber: ticket.ticketNumber || 0,
       initialSession: session,
       user: getInfoFromUser({ user: session?.user }),
-      twitchTier: ticket.twitchTier
+      twitchTier: ticket.twitchTier,
+      hologram: ticket.hologram
     }
   }
 }

@@ -1,12 +1,14 @@
 import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
+import { HologramOption } from '../types/hologram-option'
 
 interface Props {
   username: string
   fullname: string
   ticketNumber: number
+  hologram?: HologramOption
 }
 
-export const TicketCard = ({ fullname, ticketNumber, username }: Props) => {
+export const TicketCard = ({ fullname, ticketNumber, username, hologram = 'standard' }: Props) => {
   return (
     <article className='w-[426px] h-[640px] overflow-hidden p-2 bg-gradient-to-tr from-white/20 via-transparent to-white/20 rounded-2xl border border-pallet-border-foreground'>
       <div className='bg-gradient-to-tr from-[#1f1f25] via-[#101015] to-[#1f1f25] border border-pallet-border-foreground rounded-xl flex flex-col relative h-full overflow-hidden font-ibm-plex'>
