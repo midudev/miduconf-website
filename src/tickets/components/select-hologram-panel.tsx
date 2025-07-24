@@ -1,17 +1,11 @@
 import { Button } from '@/components/Button'
-import { StructureOpcion } from '../types/structure-option'
-import { AnimationOption } from '../types/animation-option'
-import { ColorOption } from '../types/color-option'
 import { HologramOption } from '../types/hologram-option'
+import { TicketDesign } from '../types/ticket-design'
+import { PERSONALIZE_TIKET_OPTIONS } from '../constants/personalize-ticket-options'
 
 interface Props {
   handleChangeHologram: (option: HologramOption) => void
-  ticketDesign: {
-    animation: AnimationOption
-    structure: StructureOpcion
-    color: ColorOption
-    hologram: HologramOption
-  }
+  ticketDesign: TicketDesign
 }
 
 export const SelectHologramPanel = ({ ticketDesign, handleChangeHologram }: Props) => {
@@ -19,23 +13,27 @@ export const SelectHologramPanel = ({ ticketDesign, handleChangeHologram }: Prop
     <article className='pt-6'>
       <h3 className='ml-1 text-xs uppercase text-pallet-ghost'>Holográfico</h3>
       <ul className='flex flex-wrap items-center gap-4 p-4 mt-2 rounded-md bg-pallet-ghost/10'>
-        {listOfHolograms.map(({ label, value }) => (
-          <li key={value}>
+        {Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM).map((label, index) => (
+          <li key={label}>
             <Button
               title={`Aplicar ${label} Holograma`}
               containerClassName='bg-pallet-ghost/10'
               aria-label='Aplicar estructura circular'
               className='px-3 text-sm duration-300 aspect-square'
-              onClick={() => handleChangeHologram(value)}
-              variant={ticketDesign.hologram === value ? 'border' : 'ghost'}
+              onClick={() => handleChangeHologram(label)}
+              variant={ticketDesign.hologram === label ? 'border' : 'ghost'}
             >
-              <img
-                src={`/tickets/holograms/${value}.png`}
-                alt={`Representación del ${label} Holograma`}
-                className='w-4 h-4 rounded-full'
-                width='30'
-                height='30'
-              />
+              {index === 0 ? (
+                <div className='w-6 h-6 rounded-full border-pallet-border-primary'></div>
+              ) : (
+                <img
+                  src={`/tickets/holograms/${index}.png`}
+                  alt={`Representación del ${label} Holograma`}
+                  className='w-6 h-6 rounded-full'
+                  width='30'
+                  height='30'
+                />
+              )}
             </Button>
           </li>
         ))}
@@ -43,30 +41,3 @@ export const SelectHologramPanel = ({ ticketDesign, handleChangeHologram }: Prop
     </article>
   )
 }
-
-const listOfHolograms = [
-  {
-    label: 'Primer',
-    value: '1'
-  },
-  {
-    label: 'Segundo',
-    value: '2'
-  },
-  {
-    label: 'Tercer',
-    value: '3'
-  },
-  {
-    label: 'Cuarto',
-    value: '4'
-  },
-  {
-    label: 'Quinto',
-    value: '5'
-  },
-  {
-    label: 'Sexto',
-    value: '6'
-  }
-] as const
