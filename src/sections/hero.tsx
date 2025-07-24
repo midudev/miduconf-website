@@ -48,7 +48,7 @@ export function Hero({ userData }: Props) {
 
           {userData ? (
             <div className='flex flex-wrap items-center gap-2'>
-              <Button as={Link} href={`/ticket/${userData.user_metadata?.preferred_username}`}>
+              <Button as={Link} href={`/ticket`}>
                 <EnterArrow className='hidden md:block' />
                 Ver tu Ticket
               </Button>
