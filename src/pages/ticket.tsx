@@ -9,17 +9,15 @@ import { SelectHologramPanel } from '@/tickets/components/select-hologram-panel'
 import { TicketCard } from '@/tickets/components/ticket-card'
 import { Container3D } from '@/components/Container3D'
 import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
-import { toJpeg } from 'html-to-image'
-import { useSupabaseClient } from '@supabase/auth-helpers-react'
-import { TicketDesign } from '@/tickets/types/ticket-design'
-import { TICKET_DB_KEY } from '@/tickets/config/ticket-db-key'
 import { useUpdateTicketInDB } from '@/tickets/hooks/use-update-ticket-in-db'
 import { useUpdateTicketImageInDB } from '@/tickets/hooks/use-update-ticket-image-in-db'
-import { useRef, useState } from 'react'
-import { createTicketImage } from '@/tickets/utils/create-ticket-image'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { HologramOption } from '@/tickets/types/hologram-option'
 import { SelectStickerPanel } from '@/tickets/components/select-sticker-panel'
 import { DiamondIcon } from '@/components/icons/diamond'
+import { createTicketImage } from '@/tickets/utils/create-ticket-image'
+import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-element'
+import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
 
 interface Props {
   user: {
@@ -35,9 +33,8 @@ interface Props {
   userHadPreviousTicket: boolean
 }
 
-export default function Ticket({ user, ticketNumber }: Props) {
+export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Props) {
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
-  const [fullname, setFullname] = useState(user.fullname)
   const {
     ticketDesign,
     handleChangeAnimation,
@@ -49,6 +46,24 @@ export default function Ticket({ user, ticketNumber }: Props) {
   const { handleUpdateTicket } = useUpdateTicketInDB()
   const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
   const ticketImageElement = useRef<HTMLElement | null>(null)
+  const ticketOGImageElement = useRef<HTMLElement | null>(null)
+
+  useLayoutEffect(() => {
+    if (userHadPreviousTicket) return
+
+    const handler = async () => {
+      if (ticketOGImageElement.current == null) return
+
+      const { fileImage, filename } = await createTicketImage({
+        ticketDOMContnet: ticketOGImageElement.current,
+        ticketNumber
+      })
+
+      await handleUpdateImageTicket({ filename, file: fileImage })
+    }
+
+    handler()
+  }, [userHadPreviousTicket])
 
   return (
     <Layout meta={metadata}>
@@ -56,7 +71,11 @@ export default function Ticket({ user, ticketNumber }: Props) {
         <ShareTicketPanel ticketDOMContnet={ticketImageElement.current} username={user.username} />
         <section className='flex items-center justify-center'>
           <Container3D>
-            <TicketCard fullname={fullname} ticketNumber={ticketNumber} username={user.username} />
+            <TicketCard
+              fullname={user.fullname}
+              ticketNumber={ticketNumber}
+              username={user.username}
+            />
           </Container3D>
         </section>
         <section className='h-full max-w-md p-8 border rounded-lg border-pallet-border-foreground bg-pallet-b-foreground-primary w-max'>
@@ -89,11 +108,20 @@ export default function Ticket({ user, ticketNumber }: Props) {
           </div>
         </section>
       </main>
-      <input value={fullname} onChange={(evt) => setFullname(evt.target.value)} />
-      <section className='h-auto text-white w-max' aria-disabled ref={ticketImageElement}>
-        {/* Contenido para crear captura */}
-        <TicketCard fullname={fullname} ticketNumber={ticketNumber} username={user.username} />
-      </section>
+      {/* Contenido para crear captura */}
+      <HideTicketImageElement
+        ref={ticketImageElement}
+        fullname={user.fullname}
+        ticketNumber={ticketNumber}
+        username={user.username}
+      />
+      {/* Contenido para crear OG Image */}
+      <HideOGTicketImageElement
+        ref={ticketOGImageElement}
+        fullname={user.fullname}
+        ticketNumber={ticketNumber}
+        username={user.username}
+      />
     </Layout>
   )
 }
@@ -131,7 +159,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
     id: session.user.id
   })
 
-  console.log({ ticket })
   // si no tenemos ticket -> lo creamos
   if (ticket == null) {
     const metadata = session?.user?.user_metadata ?? {}
@@ -161,7 +188,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
 
     return {
       props: {
-        userHadPreviousTicket: true,
+        userHadPreviousTicket: false,
         ticketNumber: ticketCreated?.ticketNumber,
         initialSession: session,
         user: getInfoFromUser({ user: session?.user }),
@@ -173,7 +200,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
 
   return {
     props: {
-      userHadPreviousTicket: false,
+      userHadPreviousTicket: true,
       ticketNumber: ticket.ticketNumber || 0,
       initialSession: session,
       user: getInfoFromUser({ user: session?.user }),

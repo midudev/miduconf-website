@@ -3,14 +3,14 @@ import { TICKET_DB_KEY } from '../config/ticket-db-key'
 
 interface Props {
   filename: string
-  file: string
+  file: File
 }
 
 export const useUpdateTicketImageInDB = () => {
   const supabase = useSupabaseClient()
 
   const handleUpdateImageTicket = async ({ filename, file }: Props) => {
-    const { error } = await supabase.storage.from(TICKET_DB_KEY).upload(filename, file, {
+    const { error, data } = await supabase.storage.from(TICKET_DB_KEY).upload(filename, file, {
       cacheControl: '3600',
       upsert: true
     })
@@ -19,7 +19,10 @@ export const useUpdateTicketImageInDB = () => {
       console.error('[update-ticket-image-error]: ', error)
     }
 
-    return error
+    return {
+      error,
+      data
+    }
   }
 
   return {
