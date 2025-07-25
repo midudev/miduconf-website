@@ -9,7 +9,7 @@ export const supabaseGetTotalTicketsNumber = async (req: NextApiRequest, res: Ne
       .from(TICKET_DB_KEY)
       .select('*', { count: 'exact', head: true })
 
-    if (error) {
+    if (error || count == null) {
       throw new Error('Imposible get Number of total tickets', {
         cause: error
       })

@@ -35,7 +35,7 @@ export default function Home({ userData }) {
         <Agenda />
         <FAQS />
         <GetTicket />
-        <PreFooter />
+        <PreFooter className='w-full mt-20' />
         <Footer />
       </main>
     </Layout>
