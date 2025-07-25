@@ -10,7 +10,7 @@ interface Props {
 
 export const HideTicketImageElement = ({ fullname, username, ticketNumber, ref }: Props) => {
   return (
-    <div className='absolute -left-[200vw]'>
+    <div className='absolute -left-[1000vw]'>
       <section className='relative h-auto text-white w-max' aria-disabled ref={ref}>
         <TicketCard fullname={fullname} ticketNumber={ticketNumber} username={username} />
       </section>
