@@ -10,13 +10,15 @@ import { TicketCard } from '@/tickets/components/ticket-card'
 import { Container3D } from '@/components/Container3D'
 import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
 import { useUpdateTicketImageInDB } from '@/tickets/hooks/use-update-ticket-image-in-db'
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { HologramOption } from '@/tickets/types/hologram-option'
 import { SelectStickerPanel } from '@/tickets/components/select-sticker-panel'
 import { DiamondIcon } from '@/components/icons/diamond'
 import { createTicketImage } from '@/tickets/utils/create-ticket-image'
 import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-element'
 import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
+import { DraggablePanel } from '@/components/DraggablePanel'
+import { cn } from '@/lib/utils'
 
 interface Props {
 	user: {
@@ -33,6 +35,7 @@ interface Props {
 }
 
 export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Props) {
+	const [isPanelOpen, setIsPanelOpen] = useState(false)
 	const metadata = getTicketMetadata({ ticketNumber, username: user.username })
 	const {
 		ticketDesign,
@@ -62,11 +65,19 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Pr
 
 	return (
 		<Layout meta={metadata}>
-			<main className='text-white min-h-screen flex items-center justify-center px-8 py-8'>
-				<div className='w-full mx-auto'>
-					{/* Mobile Layout - Stack vertically */}
-					<div className='lg:hidden space-y-8'>
-						<div className='flex flex-col items-center space-y-6'>
+			<main className='flex flex-col justify-center items-center text-white min-h-screen'>
+				{/* Mobile/Tablet Layout - Full screen with draggable panel */}
+				<div className='lg:hidden relative min-h-screen w-full'>
+					<div className='absolute top-16 left-8 z-40'>
+						<ShareTicketPanel ticketDOMContnet={ticketImageElement.current} username={user.username} />
+					</div>
+
+					<div className={`flex items-center justify-center transition-all duration-300 ${isPanelOpen ? 'h-[50vh]' : 'min-h-screen pb-20 pt-32 px-4'
+						}`}>
+						<div className={cn(
+							'transition-transform duration-300',
+							isPanelOpen ? 'scale-[0.6] pt-16' : 'scale-90 sm:scale-100'
+						)}>
 							<Container3D>
 								<TicketCard
 									fullname={user.fullname}
@@ -74,71 +85,74 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Pr
 									username={user.username}
 								/>
 							</Container3D>
-
-							<ShareTicketPanel ticketDOMContnet={ticketImageElement.current} username={user.username} />
-
-							<div className='w-full p-6 border rounded-xl border-pallet-border-foreground bg-pallet-b-foreground-primary'>
-								<h2 className='text-3xl font-semibold mb-6 text-center'>Personaliza tu ticket</h2>
-								<div className='relative min-h-[300px]'>
-									<div className='absolute inset-0 flex items-center justify-center z-10'>
-										<p className='flex items-center gap-2 text-xl font-medium text-center uppercase font-ibm-plex bg-pallet-b-foreground-primary px-4 py-2 rounded-lg border border-pallet-border-foreground'>
-											<DiamondIcon className='w-auto h-4' />
-											Muy pronto
-											<DiamondIcon className='w-auto h-4' />
-										</p>
-									</div>
-									<div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
-										<SelectHologramPanel
-											ticketDesign={ticketDesign}
-											handleChangeHologram={handleChangeHologram}
-										/>
-										<SelectStickerPanel
-											ticketDesign={ticketDesign}
-											handleChangeSticker={handleChangeSticker}
-										/>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 
-					{/* Desktop Layout - Flex with justify-between for better spacing */}
-					<div className='hidden lg:flex lg:items-start lg:justify-between lg:min-h-[80vh] lg:w-full'>
-						<div className='sticky top-8 flex-shrink-0'>
-							<ShareTicketPanel ticketDOMContnet={ticketImageElement.current} username={user.username} />
+					<DraggablePanel
+						title="Personaliza tu ticket"
+						isOpen={isPanelOpen}
+						onToggle={() => setIsPanelOpen(!isPanelOpen)}
+					>
+						<div className='p-6'>
+							<div className='relative min-h-[400px]'>
+								<div className='absolute inset-0 flex items-center justify-center z-10'>
+									<p className='flex items-center gap-2 text-xl font-medium text-center uppercase font-ibm-plex bg-pallet-b-foreground-primary px-4 py-2 rounded-lg border border-pallet-border-foreground'>
+										<DiamondIcon className='w-auto h-4' />
+										Muy pronto
+										<DiamondIcon className='w-auto h-4' />
+									</p>
+								</div>
+								<div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
+									<SelectHologramPanel
+										ticketDesign={ticketDesign}
+										handleChangeHologram={handleChangeHologram}
+									/>
+									<SelectStickerPanel
+										ticketDesign={ticketDesign}
+										handleChangeSticker={handleChangeSticker}
+									/>
+								</div>
+							</div>
 						</div>
+					</DraggablePanel>
+				</div>
 
-						<div className='flex items-center justify-center flex-1 px-16 min-h-[80vh]'>
-							<Container3D>
-								<TicketCard
-									fullname={user.fullname}
-									ticketNumber={ticketNumber}
-									username={user.username}
-								/>
-							</Container3D>
-						</div>
+				{/* Desktop Layout */}
+				<div className='hidden lg:flex lg:items-start lg:justify-between lg:min-h-[80vh] lg:w-full mx-auto px-8 py-8'>
+					<div className='sticky top-8 flex-shrink-0'>
+						<ShareTicketPanel ticketDOMContnet={ticketImageElement.current} username={user.username} />
+					</div>
 
-						<div className='sticky top-8 flex-shrink-0 w-80'>
-							<div className='p-6 border rounded-xl border-pallet-border-foreground bg-pallet-b-foreground-primary'>
-								<h2 className='text-3xl font-semibold mb-6 text-pretty'>Personaliza tu ticket</h2>
-								<div className='relative min-h-[400px]'>
-									<div className='absolute inset-0 flex items-center justify-center z-10'>
-										<p className='flex items-center gap-2 text-xl font-medium text-center uppercase font-ibm-plex bg-pallet-b-foreground-primary px-4 py-2 rounded-lg border border-pallet-border-foreground'>
-											<DiamondIcon className='w-auto h-4' />
-											Muy pronto
-											<DiamondIcon className='w-auto h-4' />
-										</p>
-									</div>
-									<div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
-										<SelectHologramPanel
-											ticketDesign={ticketDesign}
-											handleChangeHologram={handleChangeHologram}
-										/>
-										<SelectStickerPanel
-											ticketDesign={ticketDesign}
-											handleChangeSticker={handleChangeSticker}
-										/>
-									</div>
+					<div className='flex items-center justify-center flex-1 px-16 min-h-[80vh]'>
+						<Container3D>
+							<TicketCard
+								fullname={user.fullname}
+								ticketNumber={ticketNumber}
+								username={user.username}
+							/>
+						</Container3D>
+					</div>
+
+					<div className='sticky top-8 flex-shrink-0 w-80'>
+						<div className='p-6 border rounded-xl border-pallet-border-foreground bg-pallet-b-foreground-primary'>
+							<h2 className='text-3xl font-semibold mb-6 text-pretty'>Personaliza tu ticket</h2>
+							<div className='relative min-h-[400px]'>
+								<div className='absolute inset-0 flex items-center justify-center z-10'>
+									<p className='flex items-center gap-2 text-xl font-medium text-center uppercase font-ibm-plex bg-pallet-b-foreground-primary px-4 py-2 rounded-lg border border-pallet-border-foreground'>
+										<DiamondIcon className='w-auto h-4' />
+										Muy pronto
+										<DiamondIcon className='w-auto h-4' />
+									</p>
+								</div>
+								<div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
+									<SelectHologramPanel
+										ticketDesign={ticketDesign}
+										handleChangeHologram={handleChangeHologram}
+									/>
+									<SelectStickerPanel
+										ticketDesign={ticketDesign}
+										handleChangeSticker={handleChangeSticker}
+									/>
 								</div>
 							</div>
 						</div>
