@@ -10,7 +10,7 @@ interface Props {
 
 export const HideOGTicketImageElement = ({ fullname, username, ticketNumber, ref }: Props) => {
   return (
-    <div className='absolute -left-[200vw]'>
+    <div className='sr-only'>
       <section
         ref={ref}
         aria-disabled
