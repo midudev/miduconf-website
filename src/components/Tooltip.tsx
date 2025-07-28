@@ -67,7 +67,7 @@ export function Tooltip({
           style={floatingStyles}
           {...getFloatingProps()}
           className={cn(
-            'px-2 z-10 py-1 text-sm text-white bg-pallet-primary rounded',
+            'px-2 z-10 py-1 text-sm text-white bg-pallet-primary rounded w-max',
             tooltipClassName
           )}
         >

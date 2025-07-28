@@ -64,10 +64,16 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Pr
       <main className='flex flex-col items-center justify-center min-h-screen text-white'>
         {/* Mobile/Tablet Layout - Full screen with draggable panel */}
         <div className='relative w-full min-h-screen lg:hidden'>
-          <div className='absolute z-40 top-16 left-8'>
+          <div
+            className={cn(
+              'absolute z-40 -translate-x-1/2 top-16 transition',
+              isPanelOpen ? 'left-6 translate-x-0' : 'left-1/2 -translate-x-1/2'
+            )}
+          >
             <ShareTicketPanel
               ticketDOMContnet={ticketImageElement.current}
               username={user.username}
+              className={cn(isPanelOpen ? 'flex-col' : 'flex-row')}
             />
           </div>
 
@@ -123,7 +129,7 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Pr
 
         {/* Desktop Layout */}
         <div className='hidden lg:flex lg:items-start lg:justify-between lg:min-h-[80vh] lg:w-full mx-auto px-8 py-8 pt-20'>
-          <div className='sticky flex-shrink-0 top-8'>
+          <div className='relative'>
             <ShareTicketPanel
               ticketDOMContnet={ticketImageElement.current}
               username={user.username}
