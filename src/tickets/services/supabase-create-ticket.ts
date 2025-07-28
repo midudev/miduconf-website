@@ -8,7 +8,7 @@ interface Props {
 
 export const supabaseCreateTicket = async (req: any, res: any, { ticketInfo }: Props) => {
   const supabase = createPagesServerClient({ req, res })
-  console.log({ supabase })
+
   const { error } = await supabase.from(TICKET_DB_KEY).insert({
     ...ticketInfo
   })
