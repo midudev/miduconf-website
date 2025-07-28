@@ -48,7 +48,7 @@ export function Hero({ userData, hasEarlyAccess }: Props) {
           </p>
 
           {userData ? (
-            <div className='flex flex-wrap items-center gap-2'>
+            <div className='flex flex-wrap items-center gap-2 mx-auto md:mx-0'>
               <Button as={Link} href={`/ticket`}>
                 <EnterArrow className='hidden md:block' />
                 Ver tu Ticket
