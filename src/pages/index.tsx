@@ -17,7 +17,7 @@ const description =
 const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
-export default function Home({ userData }) {
+export default function Home({ userData, hasEarlyAccess }) {
   const metadata = {
     title,
     description,
@@ -28,7 +28,7 @@ export default function Home({ userData }) {
   return (
     <Layout meta={metadata}>
       <main>
-        <Hero userData={userData} />
+        <Hero hasEarlyAccess={hasEarlyAccess} userData={userData} />
         <WhatToExpect />
         <Speakers />
         <Sponsors />
@@ -44,6 +44,7 @@ export default function Home({ userData }) {
 
 export const getServerSideProps: GetServerSideProps = async ({ query, req, res }) => {
   const { session, error } = await supabaseGetServerSession(req, res)
+  const hasEarlyAccess = req.cookies['early-access'] === 'true'
 
   if (error) {
     return {
@@ -56,7 +57,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req, res }
 
   return {
     props: {
-      userData: session?.user ?? null
+      userData: session?.user ?? null,
+      hasEarlyAccess
     }
   }
 }

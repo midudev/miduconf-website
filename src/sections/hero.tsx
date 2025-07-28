@@ -8,9 +8,10 @@ import { MiduLogo3D } from '@/components/experience/MiduLogo3D'
 
 interface Props {
   userData?: User
+  hasEarlyAccess?: boolean
 }
 
-export function Hero({ userData }: Props) {
+export function Hero({ userData, hasEarlyAccess }: Props) {
   const { signin } = useSupabaseSignInByGitHub()
   return (
     <section
@@ -66,9 +67,12 @@ export function Hero({ userData }: Props) {
             </div>
           ) : (
             <>
-              <Button onClick={signin}>
+              <Button disabled={!hasEarlyAccess} onClick={signin}>
                 <EnterArrow className='hidden md:block' />
                 Consigue tu Ticket
+                {!hasEarlyAccess && (
+                  <span className='px-2 py-1 text-xs rounded bg-pallet-background'>Muy Pronto</span>
+                )}
               </Button>
             </>
           )}
