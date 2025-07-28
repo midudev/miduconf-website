@@ -92,3 +92,26 @@ body {
 		transform: translateY(4rem);
 	}
 }
+
+
+.custom-scroll::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+/* Track */
+.custom-scroll::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 9999px;
+}
+
+/* Handle */
+.custom-scroll::-webkit-scrollbar-thumb {
+	background: rgb(255, 255, 255, 0.2);
+	border-radius: 9999px;
+}
+
+/* Handle on hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+	background: rgb(255, 255, 255, 0.4);
+}

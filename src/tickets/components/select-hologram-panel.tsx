@@ -19,12 +19,12 @@ export const SelectHologramPanel = ({ ticketDesign, handleChangeHologram }: Prop
               title={`Aplicar ${label} Holograma`}
               containerClassName='bg-pallet-ghost/10'
               aria-label='Aplicar estructura circular'
-              className='px-3 text-sm duration-300 aspect-square'
+              className='px-1 py-1 text-sm duration-300 aspect-square'
               onClick={() => handleChangeHologram(label)}
               variant={ticketDesign.hologram === label ? 'border' : 'ghost'}
             >
               {index === 0 ? (
-                <div className='w-6 h-6 rounded-full border-pallet-border-primary'></div>
+                <div className='relative w-6 h-6 overflow-hidden border rounded-full border-pallet-ghost after:h-px after:w-full after:-rotate-45 after:bg-pallet-ghost after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2'></div>
               ) : (
                 <img
                   src={`/tickets/holograms/${index}.png`}
