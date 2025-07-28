@@ -3,16 +3,16 @@ import { supabaseGetServerSession } from '@/auth/services/supabase-get-server-se
 import { GetServerSideProps } from 'next'
 import { supabaseGetTicketByUserId } from '@/tickets/services/supabase-get-ticket-by-user-id'
 import { supabaseCreateTicket } from '@/tickets/services/supabase-create-ticket'
-import { useDesignTicket } from '@/tickets/hooks/use-design-ticket'
+import { TicketCard } from '@/tickets/components/ticket-card'
+import { Container3D } from '@/components/Container3D'
 import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
 import { useUpdateTicketImageInDB } from '@/tickets/hooks/use-update-ticket-image-in-db'
-import { useLayoutEffect, useRef } from 'react'
+import { useRef, useState } from 'react'
 import { HologramOption } from '@/tickets/types/hologram-option'
 import { createTicketImage } from '@/tickets/utils/create-ticket-image'
-import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-element'
 import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
-import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
-import { ViewTicketDesktop } from '@/tickets/components/view-ticket-desktop'
+import { isAdminUser } from '@/auth/utils/is-admin-user'
+import { Button } from '@/components/Button'
 
 interface Props {
   user: {
@@ -28,69 +28,94 @@ interface Props {
   userHadPreviousTicket: boolean
 }
 
-export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Props) {
+export default function CustomOGTicketImage({ user, ticketNumber, userHadPreviousTicket }: Props) {
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
-  const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket()
+  const [ogValues, setOgValues] = useState({
+    username: user.username,
+    fullname: user.fullname,
+    ticketNumber
+  })
   const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
-  const ticketImageElement = useRef<HTMLElement | null>(null)
   const ticketOGImageElement = useRef<HTMLElement | null>(null)
 
-  useLayoutEffect(() => {
-    if (userHadPreviousTicket) return
+  const handleUpdateOGImage = async (evt: any) => {
+    evt.preventDefault()
+    if (ticketOGImageElement.current == null) return
 
-    const handler = async () => {
-      if (ticketOGImageElement.current == null) return
+    const { fileImage, filename } = await createTicketImage({
+      ticketDOMContnet: ticketOGImageElement.current,
+      ticketNumber: ogValues.ticketNumber
+    })
 
-      const { fileImage, filename } = await createTicketImage({
-        ticketDOMContnet: ticketOGImageElement.current,
-        ticketNumber
-      })
+    await handleUpdateImageTicket({ filename, file: fileImage })
+  }
 
-      await handleUpdateImageTicket({ filename, file: fileImage })
-    }
+  const handleChangeUsername = (username: string) => {
+    setOgValues((lastValues) => ({
+      ...lastValues,
+      username
+    }))
+  }
 
-    handler()
-  }, [userHadPreviousTicket])
+  const handleChangeFullname = (fullname: string) => {
+    setOgValues((lastValues) => ({
+      ...lastValues,
+      fullname
+    }))
+  }
+
+  const handleChangeTicketNumber = (ticketNumber: number) => {
+    setOgValues((lastValues) => ({
+      ...lastValues,
+      ticketNumber
+    }))
+  }
 
   return (
     <Layout meta={metadata}>
       <main className='flex flex-col items-center justify-center min-h-screen text-white'>
-        {/* Mobile/Tablet Layout - Full screen with draggable panel */}
-        <ViewTicketMobile
-          fullname={user.fullname}
-          username={user.username}
-          ticketNumber={ticketNumber}
-          ticketDesign={ticketDesign}
-          ticketDOMContnet={ticketImageElement.current}
-          handleChangeHologram={handleChangeHologram}
-          handleChangeSticker={handleChangeSticker}
-        />
-
         {/* Desktop Layout */}
-        <ViewTicketDesktop
-          fullname={user.fullname}
-          username={user.username}
-          ticketNumber={ticketNumber}
-          ticketDesign={ticketDesign}
-          ticketDOMContnet={ticketImageElement.current}
-          handleChangeHologram={handleChangeHologram}
-          handleChangeSticker={handleChangeSticker}
-        />
+        <div className='py-20 mx-auto'>
+          <HideOGTicketImageElement
+            noHidden
+            ref={ticketOGImageElement}
+            fullname={ogValues.fullname}
+            ticketNumber={ogValues.ticketNumber}
+            username={ogValues.username}
+          />
+        </div>
+        <form
+          onSubmit={handleUpdateOGImage}
+          className='flex flex-col items-center px-6 py-4 border rounded border-pallet-border-foreground bg-pallet-b-foreground-primary gap-4 max-w-[600px] w-full'
+        >
+          <label className='flex flex-col gap-1'>
+            <span>Nick de GitHub</span>
+            <input
+              value={ogValues.username}
+              onChange={(evt) => handleChangeUsername(evt.target.value)}
+              className='px-4 py-2 border bg-pallet-border-foreground border-pallet-ghost/10'
+            />
+          </label>
+          <label className='flex flex-col gap-1'>
+            <span>Nombre completo</span>
+            <input
+              value={ogValues.fullname}
+              onChange={(evt) => handleChangeFullname(evt.target.value)}
+              className='px-4 py-2 border bg-pallet-border-foreground border-pallet-ghost/10'
+            />
+          </label>
+          <label className='flex flex-col gap-1'>
+            <span>Número de ticket</span>
+            <input
+              type='number'
+              value={ogValues.ticketNumber}
+              onChange={(evt) => handleChangeTicketNumber(+evt.target.value)}
+              className='px-4 py-2 border bg-pallet-border-foreground border-pallet-ghost/10'
+            />
+          </label>
+          <Button>Generar nueva OG Image</Button>
+        </form>
       </main>
-      {/* Contenido para crear captura */}
-      <HideTicketImageElement
-        ref={ticketImageElement}
-        fullname={user.fullname}
-        ticketNumber={ticketNumber}
-        username={user.username}
-      />
-      {/* Contenido para crear OG Image */}
-      <HideOGTicketImageElement
-        ref={ticketOGImageElement}
-        fullname={user.fullname}
-        ticketNumber={ticketNumber}
-        username={user.username}
-      />
     </Layout>
   )
 }
@@ -120,6 +145,17 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       redirect: {
         destination: '/?error=not_logged_in',
         permanent: false
+      }
+    }
+  }
+
+  const isAdmin = isAdminUser(session.user.email ?? '#')
+
+  if (!isAdmin) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true
       }
     }
   }

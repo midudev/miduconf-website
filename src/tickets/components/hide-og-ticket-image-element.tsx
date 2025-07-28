@@ -1,16 +1,24 @@
 import { RefObject } from 'react'
 import { TicketCard } from './ticket-card'
+import { cn } from '@/lib/utils'
 
 interface Props {
   fullname: string
   ticketNumber: number
   username: string
   ref: RefObject<HTMLElement | null>
+  noHidden?: boolean
 }
 
-export const HideOGTicketImageElement = ({ fullname, username, ticketNumber, ref }: Props) => {
+export const HideOGTicketImageElement = ({
+  fullname,
+  username,
+  ticketNumber,
+  ref,
+  noHidden = false
+}: Props) => {
   return (
-    <div className='absolute -left-[1000vw]'>
+    <div className={cn(!noHidden && 'absolute -left-[1000vw]')}>
       <section
         ref={ref}
         aria-disabled
