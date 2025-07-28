@@ -193,16 +193,6 @@ const getInfoFromUser = ({ user }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const { error: sessionError, session } = await supabaseGetServerSession(req, res)
-  const hasEarlyAccess = req.cookies['early-access'] === 'true'
-
-  if (!hasEarlyAccess) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
-  }
 
   if (sessionError) {
     console.error(sessionError)
