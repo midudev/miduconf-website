@@ -12,12 +12,22 @@ module.exports = {
   theme: {
     extend: {
       imageRendering: {
-        pixelated: 'pixelated'
+        pixelated: 'pixelated',
+      },
+      spacing: {
+        8: '0.5rem',
+        16: '1rem',
+        24: '1.5rem',
+        32: '2rem',
+        40: '2.5rem',
+        64: '4rem',
+        96: '6rem',
+        180: '11.25rem'
       },
       fontFamily: {
-        inter: 'var(--font-inter)',
-        geist: 'var(--font-geist-mono)',
-        'ibm-plex': 'var(--font-ibm-plex)'
+				sans: ['"Inter", sans-serif'],
+				code: ['code-regular', 'monospace'],
+				cta: ['code-medium', 'monospace'],
       },
       dropShadow: {
         gift: '3px 4px 8px rgba(0, 0, 0, 0.4)'

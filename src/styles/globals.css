@@ -2,16 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-	scroll-behavior: smooth;
+:root {
+	--font-family-monospace: "code-regular", monospace;
+	--font-family-cta: "code-medium", monospace;
+
+	/* PC */
+	--heading-4xl-pc: 4.62rem;
+	--heading-3xl-pc: 3.5rem;
+	--heading-2xl-pc: 1.875rem;
+	--heading-xl-pc: 1.5rem;
+	--heading-xl-code-pc: 1.25rem;
+	--heading-body-pc: 1.125rem;
+	--heading-body-code-pc: 1.125rem;
+	--heading-small-code-pc: 0.875rem;
+
+	/* LAPTOP-IPAD */
+	--heading-4xl-ipad: 4rem;
+	--heading-3xl-ipad: 3.125rem;
+	--heading-2xl-ipad: 1.625rem;
+	--heading-xl-ipad: 1.25rem;
+	--heading-xl-code-ipad: 1.125rem;
+	--heading-body-ipad: 1rem;
+	--heading-body-code-ipad: 1rem;
+	--heading-small-code-ipad: 0.875rem;
+
+	/* MOVIL */
+	--heading-4xl-movil: 2.3rem;
+	--heading-3xl-movil: 1.875rem;
+	--heading-2xl-movil: 1.375rem;
+	--heading-xl-movil: 1.125rem;
+	--heading-xl-code-movil: 1rem;
+	--heading-body-movil: 0.875rem;
+	--heading-body-code-movil: 0.875rem;
+	--heading-small-code-movil: 0.75rem;
 }
 
-body {
-	background: #09090e;
-	overflow-x: hidden;
+@layer base {
+	@font-face {
+		font-family: "code-regular";
+		src: url("/fonts/IBMPlexMono-Regular.woff2") format("woff2");
+		font-weight: 400;
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: "code-medium";
+		src: url("/fonts/IBMPlexMono-Medium.woff2") format("woff2");
+		font-weight: 500;
+		font-style: normal;
+	}
 }
 
 @layer utilities {
+	.font-code {
+		font-family: var(--font-family-monospace);
+	}
+
+	.font-cta {
+		font-family: var(--font-family-cta);
+	}
+
+	.text-4xl-semibold {
+		font-size: clamp(var(--heading-4xl-movil), 1.712rem + 2.307vw, var(--heading-4xl-pc));
+		line-height: clamp(3.025rem, 2rem + 2.597vw, 5.813rem);
+		letter-spacing: -1.48px;
+	}
+
+	.text-3xl-semibold {
+		font-size: clamp(var(--heading-3xl-movil), 1.584rem + 1.774vw, var(--heading-3xl-pc));
+		line-height: clamp(2.625rem, 2.244rem + 1.626vw, 4rem);
+		letter-spacing: -1.12px;
+	}
+
+	.text-2xl-semibold {
+		font-size: clamp(var(--heading-2xl-movil), 1.236rem + 0.591vw, var(--heading-2xl-pc));
+		line-height: clamp(1.75rem, 1.577rem + 0.739vw, 2.375rem);
+		letter-spacing: -0.6px;
+	}
+
+	.text-xl-medium {
+		font-size: clamp(var(--heading-xl-movil), 1.021rem + 0.323vw, var(--heading-xl-pc));
+		line-height: clamp(1.688rem, 1.602rem + 0.369vw, 2rem);
+		font-weight: 500;
+		letter-spacing: 0.48px;
+	}
+
+	.text-xl-code {
+		@apply uppercase font-code;
+		font-size: clamp(var(--heading-xl-code-movil), 0.931rem + 0.196vw, var(--heading-xl-code-pc));
+		line-height: clamp(1.25rem, 1.042rem + 0.687vw, 2rem);
+		letter-spacing: 0.4px;
+	}
+
+	.text-body {
+		font-size: clamp(var(--heading-body-movil), 0.806rem + 0.296vw, var(--heading-body-pc));
+		line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
+		letter-spacing: 0.36px;
+	}
+
+	.text-body-code {
+		@apply uppercase font-code;
+		font-size: clamp(var(--heading-body-code-movil), 0.806rem + 0.296vw, var(--heading-body-code-pc));
+		line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
+		letter-spacing: 0.36px;
+	}
+
+	.text-small-code {
+		@apply uppercase font-code;
+		font-size: clamp(var(--heading-small-code-movil), 0.715rem + 0.148vw, var(--heading-small-code-pc));
+		line-height: clamp(1rem, 0.827rem + 0.739vw, 1.625rem);
+		letter-spacing: -0.28px;
+	}
+
+	@utility clipHidden {
+		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	}
+
+	@utility clipVisible {
+		clip-path: none;
+	}
+
 	.hidden-scroll::-webkit-scrollbar {
 		width: 0;
 	}
@@ -23,6 +133,46 @@ body {
 	::-webkit-scrollbar-thumb {
 		/* Customize the scrollbar thumb */
 	}
+}
+
+html {
+	scroll-behavior: smooth;
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	button,
+	p,
+	a,
+	h1,
+	h2,
+	h3,
+	h4,
+	th,
+	td,
+	a div {
+		text-box-trim: trim-both;
+		text-box-edge: cap alphabetic;
+		font-feature-settings:
+			"liga" 1,
+			"dlig" 1,
+			"hlig" 1,
+			"cswh" 1,
+			"kern" 1,
+			"ss02" 1 !important;
+	}
+
+}
+
+body {
+	background: #09090e;
+	overflow-x: hidden;
+	color: #EFF4FF;
 }
 
 @keyframes reduce-header {

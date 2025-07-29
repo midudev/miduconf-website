@@ -1,8 +1,5 @@
 import { Header } from '@/components/Header'
 import Head from 'next/head'
-import { fonts } from '@/config/fonts'
-
-import { cn } from '@/lib/utils'
 
 interface Props {
   children: React.ReactNode
@@ -33,14 +30,7 @@ export function Layout({ children, meta: { title, description, ogImage, url } }:
         <link rel='icon' type='image/png' href='/favicon.png' />
         <link rel='manifest' href='/site.webmanifest' />
       </Head>
-      <div
-        className={cn(
-          fonts.geistMono.variable,
-          fonts.inter.variable,
-          fonts.ibmPlexMono.variable,
-          'font-inter'
-        )}
-      >
+      <div>
         <Header />
         {children}
       </div>
