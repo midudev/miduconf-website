@@ -1,7 +1,6 @@
 import { ShareTicketPanel } from './share-ticket-panel'
 import { Container3D } from '@/components/Container3D'
 import { TicketCard } from './ticket-card'
-import { DiamondIcon } from '@/components/icons/diamond'
 import { SelectHologramPanel } from './select-hologram-panel'
 import { SelectStickerPanel } from './select-sticker-panel'
 import { HologramOption } from '../types/hologram-option'
