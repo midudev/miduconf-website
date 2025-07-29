@@ -5,6 +5,7 @@ import { PERSONALIZE_TIKET_OPTIONS } from '../constants/personalize-ticket-optio
 import { Tooltip } from '@/components/Tooltip'
 import { LockIcon } from '@/components/icons/lock'
 import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
+import { TwitchIcon } from '@/components/icons/twitch'
 
 interface Props {
   handleChangeHologram: (option: HologramOption) => void
@@ -41,8 +42,8 @@ export const SelectHologramPanel = ({ ticketDesign, twitchTier, handleChangeHolo
           </li>
         </ul>
       </div>
-      <div className='mt-2 rounded-md bg-pallet-ghost/10'>
-        <span className='text-[10px] uppercase text-pallet-ghost px-4 py-2 block'>
+      <div className='relative mt-2 rounded-md bg-pallet-ghost/10'>
+        <span className='text-[10px] uppercase text-pallet-ghost block px-4 py-2'>
           Especiales de Twitch
         </span>
         <ul className='flex flex-wrap items-center gap-4 px-4 pb-3'>
@@ -71,6 +72,14 @@ export const SelectHologramPanel = ({ ticketDesign, twitchTier, handleChangeHolo
             </li>
           ))}
         </ul>
+        <a
+          href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier: twitchTier })}
+          target='_blank'
+          className='relative flex items-center text-[10px] uppercase w-full justify-center px-4 py-1 bg-pallet-ghost/20 gap-2 hover:bg-pallet-ghost/40 transition rounded-b-md'
+        >
+          <TwitchIcon className='w-auto h-3' />
+          Desbloquear
+        </a>
       </div>
       <div className='mt-2 rounded-md bg-pallet-ghost/10'>
         <span className='ml-0.5 text-[10px] uppercase text-pallet-ghost px-4 py-2 block'>
@@ -116,11 +125,7 @@ function LockTwitchButton({
 }) {
   return (
     <Tooltip text={`Desbloquear con Tier ${tierNumber} de Twitch`} tooltipPosition='top'>
-      <a
-        href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier })}
-        target='_blank'
-        className='relative flex items-center gap-1'
-      >
+      <div className='relative flex items-center gap-1 cursor-not-allowed'>
         <LockIcon className='absolute w-auto h-6 -translate-x-1/2 -translate-y-1/2 text-pallet-ghost left-1/2 top-1/2' />
         <div className='relative p-1 text-xs border rounded-md opacity-20 bg-pallet-ghost/20 aspect-square border-pallet-ghost'>
           <img
@@ -131,7 +136,7 @@ function LockTwitchButton({
             height='30'
           />
         </div>
-      </a>
+      </div>
     </Tooltip>
   )
 }
