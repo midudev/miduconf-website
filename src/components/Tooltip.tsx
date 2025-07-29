@@ -72,15 +72,7 @@ export function Tooltip({
           )}
         >
           {text}
-          <FloatingArrow
-            ref={arrowRef}
-            context={context}
-            className={cn(
-              'fill-pallet-primary',
-              tooltipPosition === 'top' && 'mt-[1px]',
-              tooltipPosition === 'bottom' && 'mb-[1px]'
-            )}
-          />
+          <FloatingArrow ref={arrowRef} context={context} className={cn('fill-pallet-primary')} />
         </div>
       )}
     </>

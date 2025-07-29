@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       imageRendering: {
-        pixelated: 'pixelated',
+        pixelated: 'pixelated'
       },
       spacing: {
         8: '0.5rem',
@@ -25,9 +25,10 @@ module.exports = {
         180: '11.25rem'
       },
       fontFamily: {
-				sans: ['"Inter", sans-serif'],
-				code: ['code-regular', 'monospace'],
-				cta: ['code-medium', 'monospace'],
+        sans: ['"Inter", sans-serif'],
+        code: ['code-regular', 'monospace'],
+        cta: ['code-medium', 'monospace'],
+        'ibm-plex': 'var(--font-ibm-plex)'
       },
       dropShadow: {
         gift: '3px 4px 8px rgba(0, 0, 0, 0.4)'

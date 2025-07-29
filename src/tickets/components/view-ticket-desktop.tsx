@@ -4,13 +4,16 @@ import { TicketCard } from './ticket-card'
 import { DiamondIcon } from '@/components/icons/diamond'
 import { SelectHologramPanel } from './select-hologram-panel'
 import { SelectStickerPanel } from './select-sticker-panel'
-import { TicketDesign } from '../types/ticket-design'
 import { HologramOption } from '../types/hologram-option'
 import { StickerOption } from '../types/sticker-option'
+import { TicketDesign } from '../types/ticket-design'
+import { Button } from '@/components/Button'
+import { TwitchIcon } from '@/components/icons/twitch'
 
 interface Props {
   ticketDOMContnet: HTMLElement | null
   username: string
+  twitchTier: '1' | '2' | '3' | null
   fullname: string
   ticketNumber: number
   ticketDesign: TicketDesign
@@ -24,6 +27,7 @@ export const ViewTicketDesktop = ({
   fullname,
   ticketNumber,
   ticketDesign,
+  twitchTier,
   handleChangeHologram,
   handleChangeSticker
 }: Props) => {
@@ -31,8 +35,8 @@ export const ViewTicketDesktop = ({
     <div className='hidden lg:flex lg:items-start lg:justify-between lg:min-h-[80vh] lg:w-full mx-auto px-8 py-8 pt-20'>
       <div className='relative'>
         <ShareTicketPanel ticketDOMContnet={ticketDOMContnet} username={username} />
+        <p className='text-white'>tier {twitchTier}</p>
       </div>
-
       <div className='flex items-center justify-center flex-1 px-16 min-h-[80vh]'>
         <Container3D>
           <TicketCard
@@ -50,6 +54,7 @@ export const ViewTicketDesktop = ({
           <div className='relative min-h-[400px]'>
             <SelectHologramPanel
               ticketDesign={ticketDesign}
+              twitchTier={twitchTier}
               handleChangeHologram={handleChangeHologram}
             />
             {/* <SelectStickerPanel

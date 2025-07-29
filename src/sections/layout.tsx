@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header'
+import { fonts } from '@/config/fonts'
 import Head from 'next/head'
 
 interface Props {
@@ -30,7 +31,7 @@ export function Layout({ children, meta: { title, description, ogImage, url } }:
         <link rel='icon' type='image/png' href='/favicon.png' />
         <link rel='manifest' href='/site.webmanifest' />
       </Head>
-      <div>
+      <div className={fonts.ibmPlexMono.variable}>
         <Header />
         {children}
       </div>

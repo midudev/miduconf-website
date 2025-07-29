@@ -13,6 +13,7 @@ import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-e
 import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
 import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
 import { ViewTicketDesktop } from '@/tickets/components/view-ticket-desktop'
+import { TicketData } from '@/tickets/types/ticket-data'
 
 interface Props {
   user: {
@@ -21,14 +22,14 @@ interface Props {
     avatar: string
   }
   ticketNumber: number
-  twitchTier: 1000 | 2000 | 3000
+  twitchTier: TicketData['twitchTier']
   hologram: HologramOption
   tierQueryData: '1000' | '2000' | '3000'
   notAccessTier: boolean
   userHadPreviousTicket: boolean
 }
 
-export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Props) {
+export default function Ticket({ user, ticketNumber, userHadPreviousTicket, twitchTier }: Props) {
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
   const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket()
   const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
@@ -68,6 +69,7 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Pr
 
         {/* Desktop Layout */}
         <ViewTicketDesktop
+          twitchTier={twitchTier}
           fullname={user.fullname}
           username={user.username}
           ticketNumber={ticketNumber}
