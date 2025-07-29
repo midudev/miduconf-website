@@ -1,20 +1,7 @@
-export function DiscordIcon(props) {
+export function DiscordIcon({...props}) {
 	return (
-		<svg
-			width='22'
-			height='16'
-			viewBox='0 0 22 16'
-			fill='none'
-			{...props}
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<path
-				d='M21 7V4H20V2H19V1H17V0H14V1H8V0H5V1H3V2H2V4H1V7H0V14H2V15H4V16H6V14H5V13H7V14H8V15H14V14H15V13H17V14H16V16H18V15H20V14H22V7H21ZM8 11H6V10H5V8H6V7H8V8H9V10H8V11ZM17 10H16V11H14V10H13V8H14V7H16V8H17V10Z'
-				fill='currentColor'
-				style={{
-					mixBlendMode: 'difference'
-				}}
-			/>
+		<svg width="24" height="24" {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M22 11V8H21V6H20V5H18V4H15V5H9V4H6V5H4V6H3V8H2V11H1V18H3V19H5V20H7V18H6V17H8V18H9V19H15V18H16V17H18V18H17V20H19V19H21V18H23V11H22ZM9 15H7V14H6V12H7V11H9V12H10V14H9V15ZM18 14H17V15H15V14H14V12H15V11H17V12H18V14Z" fill="#EFF4FF"/>
 		</svg>
 	)
 }
