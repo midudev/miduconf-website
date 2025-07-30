@@ -12,99 +12,98 @@ import { HologramOption } from '../types/hologram-option'
 import { StickerOption } from '../types/sticker-option'
 
 interface Props {
-  twitchTier: '1' | '2' | '3' | null
-  ticketDOMContnet: HTMLElement | null
-  ticketOGImageElement: HTMLElement | null
-  username: string
-  fullname: string
-  ticketNumber: number
-  ticketDesign: TicketDesign
-  handleChangeHologram: (hologram: HologramOption) => void
-  handleChangeSticker: (sticker: StickerOption) => void
+	twitchTier: '1' | '2' | '3' | null
+	ticketDOMContnet: HTMLElement | null
+	ticketOGImageElement: HTMLElement | null
+	username: string
+	fullname: string
+	ticketNumber: number
+	ticketDesign: TicketDesign
+	handleChangeHologram: (hologram: HologramOption) => void
+	handleChangeSticker: (sticker: StickerOption) => void
 }
 
 export const ViewTicketMobile = ({
-  twitchTier,
-  ticketDOMContnet,
-  username,
-  fullname,
-  ticketNumber,
-  ticketDesign,
-  ticketOGImageElement,
-  handleChangeHologram,
-  handleChangeSticker
+	twitchTier,
+	ticketDOMContnet,
+	username,
+	fullname,
+	ticketNumber,
+	ticketDesign,
+	ticketOGImageElement,
+	handleChangeHologram,
+	handleChangeSticker
 }: Props) => {
-  const [isPanelOpen, setIsPanelOpen] = useState(false)
+	const [isPanelOpen, setIsPanelOpen] = useState(false)
 
-  return (
-    <div className='relative w-full min-h-screen lg:hidden'>
-      <div
-        className={cn(
-          'absolute z-40 -translate-x-1/2 top-16 transition',
-          isPanelOpen ? 'left-6 translate-x-0' : 'left-1/2 -translate-x-1/2'
-        )}
-      >
-        <ShareTicketPanel
-          ticketDesign={ticketDesign}
-          ticketDOMContnet={ticketDOMContnet}
-          username={username}
-          className={cn(isPanelOpen ? 'flex-col' : 'flex-row')}
-        />
-      </div>
+	return (
+		<div className='relative w-full min-h-screen lg:hidden'>
+			<div
+				className={cn(
+					'absolute z-40 transition',
+					isPanelOpen ? 'hidden' : 'left-1/2 -translate-x-1/2 top-[100px] md:left-4 md:top-[40%] md:translate-x-0'
+				)}
+			>
+				<ShareTicketPanel
+					ticketDesign={ticketDesign}
+					ticketDOMContnet={ticketDOMContnet}
+					username={username}
+					className={cn(isPanelOpen ? 'flex-row' : 'flex-row md:flex-col')}
+				/>
+			</div>
 
-      <div
-        className={`flex items-center justify-center transition-all duration-300 ${
-          isPanelOpen ? 'h-[50vh]' : 'min-h-screen pb-20 pt-32 px-4'
-        }`}
-      >
-        <div
-          className={cn(
-            'transition-transform duration-300',
-            isPanelOpen ? 'scale-[0.6] pt-16' : 'scale-90 sm:scale-100'
-          )}
-        >
-          <Container3D>
-            <TicketCard
-              fullname={fullname}
-              ticketNumber={ticketNumber}
-              username={username}
-              hologram={ticketDesign.hologram}
-            />
-          </Container3D>
-        </div>
-      </div>
+			<div
+				className={`flex items-center justify-center transition-all duration-300 ${isPanelOpen ? 'h-[50vh]' : 'min-h-screen pb-20 pt-32 px-4'
+					}`}
+			>
+				<div
+					className={cn(
+						'transition-transform duration-300',
+						isPanelOpen ? 'scale-[0.6] pt-16' : 'scale-90 sm:scale-100'
+					)}
+				>
+					<Container3D>
+						<TicketCard
+							fullname={fullname}
+							ticketNumber={ticketNumber}
+							username={username}
+							hologram={ticketDesign.hologram}
+						/>
+					</Container3D>
+				</div>
+			</div>
 
-      <DraggablePanel
-        title='Personaliza tu ticket'
-        isOpen={isPanelOpen}
-        onToggle={() => setIsPanelOpen(!isPanelOpen)}
-      >
-        <div className='p-6'>
-          <div className='relative min-h-[400px]'>
-            <div className='absolute inset-0 z-10 flex items-center justify-center'>
-              <p className='flex items-center gap-2 px-4 py-2 text-xl font-medium text-center uppercase border rounded-lg font-ibm-plex bg-pallet-b-foreground-primary border-pallet-border-foreground'>
-                <DiamondIcon className='w-auto h-4' />
-                Muy pronto
-                <DiamondIcon className='w-auto h-4' />
-              </p>
-            </div>
-            <div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
-              <SelectHologramPanel
-                ticketNumber={ticketNumber}
-                ticketOGImageElement={ticketOGImageElement}
-                username={username}
-                twitchTier={twitchTier}
-                ticketDesign={ticketDesign}
-                handleChangeHologram={handleChangeHologram}
-              />
-              <SelectStickerPanel
-                ticketDesign={ticketDesign}
-                handleChangeSticker={handleChangeSticker}
-              />
-            </div>
-          </div>
-        </div>
-      </DraggablePanel>
-    </div>
-  )
+			<DraggablePanel
+				title='Personaliza tu ticket'
+				isOpen={isPanelOpen}
+				onToggle={() => setIsPanelOpen(!isPanelOpen)}
+			>
+				<div className='p-6'>
+					<div className='relative min-h-[400px]'>
+						<div className='absolute inset-0 z-10 flex items-center justify-center'>
+							<p className='flex items-center gap-2 px-4 py-2 text-xl font-medium text-center uppercase border rounded-lg font-ibm-plex bg-pallet-b-foreground-primary border-pallet-border-foreground'>
+								<DiamondIcon className='w-auto h-4' />
+								Muy pronto
+								<DiamondIcon className='w-auto h-4' />
+							</p>
+						</div>
+						<div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
+							<SelectHologramPanel
+								ticketNumber={ticketNumber}
+								ticketOGImageElement={ticketOGImageElement}
+								username={username}
+								twitchTier={twitchTier}
+								ticketDesign={ticketDesign}
+								handleChangeHologram={handleChangeHologram}
+							/>
+							<SelectStickerPanel
+								ticketDesign={ticketDesign}
+								handleChangeSticker={handleChangeSticker}
+							/>
+						</div>
+					</div>
+				</div>
+			</DraggablePanel>
+		</div>
+	)
 }
