@@ -5,17 +5,29 @@ import { XIcon } from '@/components/icons/x'
 import { useDownloadTicketImage } from '../hooks/use-download-ticket-image'
 import { Tooltip } from '@/components/Tooltip'
 import { cn } from '@/lib/utils'
+import { useEffect } from 'react'
+import { TicketDesign } from '../types/ticket-design'
 
 interface Props {
   username: string
   ticketDOMContnet: HTMLElement | null
   className?: string
+  ticketDesign: TicketDesign
 }
 
-export const ShareTicketPanel = ({ username, ticketDOMContnet, className }: Props) => {
-  const { sharedTicketImageLink } = useDownloadTicketImage({
+export const ShareTicketPanel = ({
+  username,
+  ticketDOMContnet,
+  className,
+  ticketDesign
+}: Props) => {
+  const { sharedTicketImageLink, handleCreateImageImage } = useDownloadTicketImage({
     ticketDOMContnet
   })
+
+  useEffect(() => {
+    handleCreateImageImage()
+  }, [ticketDesign])
 
   return (
     <nav>

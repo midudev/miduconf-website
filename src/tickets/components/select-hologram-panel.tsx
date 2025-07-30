@@ -6,21 +6,56 @@ import { Tooltip } from '@/components/Tooltip'
 import { LockIcon } from '@/components/icons/lock'
 import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
 import { TwitchIcon } from '@/components/icons/twitch'
+import { useUpdateTicketInDB } from '../hooks/use-update-ticket-in-db'
+import { useUpdateTicketImageInDB } from '../hooks/use-update-ticket-image-in-db'
+import { createTicketImage } from '../utils/create-ticket-image'
 
 interface Props {
   handleChangeHologram: (option: HologramOption) => void
+  ticketOGImageElement: HTMLElement | null
   ticketDesign: TicketDesign
   twitchTier: '1' | '2' | '3' | null
+  username: string
+  ticketNumber: number
 }
 
-export const SelectHologramPanel = ({ ticketDesign, twitchTier, handleChangeHologram }: Props) => {
-  const STANDARD_HOLOGRAM = PERSONALIZE_TIKET_OPTIONS.HOLOGRAM.STANDARD
-  const TWITCH_HOLOGRAMS = Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM).filter((label) =>
-    label.startsWith('twitch')
-  )
-  const ACADEMIA_HOLOGRAMS = Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM).filter((label) =>
-    label.startsWith('academia')
-  )
+export const SelectHologramPanel = ({
+  ticketDesign,
+  twitchTier,
+  username,
+  ticketOGImageElement,
+  ticketNumber,
+  handleChangeHologram
+}: Props) => {
+  const { handleUpdateTicket } = useUpdateTicketInDB()
+  const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
+
+  const handleChangeHologramAndSave = async (hologram: HologramOption) => {
+    handleChangeHologram(hologram)
+
+    await handleUpdateTicket({
+      ticketInfo: {
+        hologram
+      },
+      username
+    })
+
+    console.log({ ticketOGImageElement })
+
+    if (ticketOGImageElement == null) return
+
+    const { fileImage, filename } = await createTicketImage({
+      ticketDOMContnet: ticketOGImageElement,
+      ticketNumber
+    })
+
+    console.log({ fileImage, filename })
+
+    await handleUpdateImageTicket({
+      file: fileImage,
+      filename
+    })
+  }
 
   return (
     <article className='pt-6'>
@@ -34,7 +69,7 @@ export const SelectHologramPanel = ({ ticketDesign, twitchTier, handleChangeHolo
               containerClassName='bg-pallet-ghost/10'
               aria-label='Aplicar estructura circular'
               className='px-1 py-1 text-sm duration-300 aspect-square'
-              onClick={() => handleChangeHologram(STANDARD_HOLOGRAM)}
+              onClick={async () => await handleChangeHologramAndSave(STANDARD_HOLOGRAM)}
               variant={ticketDesign.hologram === STANDARD_HOLOGRAM ? 'border' : 'ghost'}
             >
               <div className='relative w-6 h-6 overflow-hidden border rounded-full border-pallet-ghost after:h-px after:w-full after:-rotate-45 after:bg-pallet-ghost after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2'></div>
@@ -57,7 +92,7 @@ export const SelectHologramPanel = ({ ticketDesign, twitchTier, handleChangeHolo
                   containerClassName='bg-pallet-ghost/10'
                   aria-label='Aplicar estructura circular'
                   className='px-1 py-1 text-sm duration-300 aspect-square'
-                  onClick={() => handleChangeHologram(label)}
+                  onClick={async () => await handleChangeHologramAndSave(label)}
                   variant={ticketDesign.hologram === label ? 'border' : 'ghost'}
                 >
                   <img
@@ -96,7 +131,7 @@ export const SelectHologramPanel = ({ ticketDesign, twitchTier, handleChangeHolo
                   containerClassName='bg-pallet-ghost/10'
                   aria-label='Aplicar estructura circular'
                   className='px-1 py-1 text-sm duration-300 aspect-square'
-                  onClick={() => handleChangeHologram(label)}
+                  onClick={async () => await handleChangeHologramAndSave(label)}
                   variant={ticketDesign.hologram === label ? 'border' : 'ghost'}
                 >
                   <img
@@ -140,3 +175,11 @@ function LockTwitchButton({
     </Tooltip>
   )
 }
+
+const STANDARD_HOLOGRAM = PERSONALIZE_TIKET_OPTIONS.HOLOGRAM.STANDARD
+const TWITCH_HOLOGRAMS = Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM).filter((label) =>
+  label.startsWith('twitch')
+)
+const ACADEMIA_HOLOGRAMS = Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM).filter((label) =>
+  label.startsWith('academia')
+)

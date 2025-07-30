@@ -5,10 +5,8 @@ import { supabaseGetTicketByUserId } from '@/tickets/services/supabase-get-ticke
 import { supabaseCreateTicket } from '@/tickets/services/supabase-create-ticket'
 import { useDesignTicket } from '@/tickets/hooks/use-design-ticket'
 import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
-import { useUpdateTicketImageInDB } from '@/tickets/hooks/use-update-ticket-image-in-db'
-import { useLayoutEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { HologramOption } from '@/tickets/types/hologram-option'
-import { createTicketImage } from '@/tickets/utils/create-ticket-image'
 import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-element'
 import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
 import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
@@ -29,40 +27,32 @@ interface Props {
   userHadPreviousTicket: boolean
 }
 
-export default function Ticket({ user, ticketNumber, userHadPreviousTicket, twitchTier }: Props) {
+export default function Ticket({
+  user,
+  ticketNumber,
+  userHadPreviousTicket,
+  twitchTier,
+  hologram
+}: Props) {
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
-  const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket()
-  const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
+  const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket({
+    hologram
+  })
   const ticketImageElement = useRef<HTMLElement | null>(null)
   const ticketOGImageElement = useRef<HTMLElement | null>(null)
-
-  useLayoutEffect(() => {
-    if (userHadPreviousTicket) return
-
-    const handler = async () => {
-      if (ticketOGImageElement.current == null) return
-
-      const { fileImage, filename } = await createTicketImage({
-        ticketDOMContnet: ticketOGImageElement.current,
-        ticketNumber
-      })
-
-      await handleUpdateImageTicket({ filename, file: fileImage })
-    }
-
-    handler()
-  }, [userHadPreviousTicket])
 
   return (
     <Layout meta={metadata}>
       <main className='flex flex-col items-center justify-center min-h-screen text-white'>
         {/* Mobile/Tablet Layout - Full screen with draggable panel */}
         <ViewTicketMobile
+          twitchTier={twitchTier}
           fullname={user.fullname}
           username={user.username}
           ticketNumber={ticketNumber}
           ticketDesign={ticketDesign}
           ticketDOMContnet={ticketImageElement.current}
+          ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
           handleChangeSticker={handleChangeSticker}
         />
@@ -75,12 +65,14 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket, twit
           ticketNumber={ticketNumber}
           ticketDesign={ticketDesign}
           ticketDOMContnet={ticketImageElement.current}
+          ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
           handleChangeSticker={handleChangeSticker}
         />
       </main>
       {/* Contenido para crear captura */}
       <HideTicketImageElement
+        hologram={ticketDesign.hologram}
         ref={ticketImageElement}
         fullname={user.fullname}
         ticketNumber={ticketNumber}
@@ -88,7 +80,10 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket, twit
       />
       {/* Contenido para crear OG Image */}
       <HideOGTicketImageElement
+        noHidden
         ref={ticketOGImageElement}
+        userHadPreviousTicket={userHadPreviousTicket}
+        hologram={ticketDesign.hologram}
         fullname={user.fullname}
         ticketNumber={ticketNumber}
         username={user.username}

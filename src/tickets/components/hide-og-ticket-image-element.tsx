@@ -1,22 +1,48 @@
-import { RefObject } from 'react'
+import { RefObject, useLayoutEffect } from 'react'
 import { TicketCard } from './ticket-card'
 import { cn } from '@/lib/utils'
+import { HologramOption } from '../types/hologram-option'
+import { useUpdateTicketImageInDB } from '../hooks/use-update-ticket-image-in-db'
+import { createTicketImage } from '../utils/create-ticket-image'
 
 interface Props {
+  hologram: HologramOption
   fullname: string
   ticketNumber: number
-  username: string
   ref: RefObject<HTMLElement | null>
+  username: string
   noHidden?: boolean
+  userHadPreviousTicket?: boolean
 }
 
 export const HideOGTicketImageElement = ({
+  hologram,
   fullname,
   username,
   ticketNumber,
-  ref,
-  noHidden = false
+  noHidden = false,
+  userHadPreviousTicket = false,
+  ref
 }: Props) => {
+  const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
+
+  useLayoutEffect(() => {
+    if (userHadPreviousTicket) return
+
+    const handler = async () => {
+      if (ref.current == null) return
+
+      const { fileImage, filename } = await createTicketImage({
+        ticketDOMContnet: ref.current,
+        ticketNumber
+      })
+
+      await handleUpdateImageTicket({ filename, file: fileImage })
+    }
+
+    handler()
+  }, [userHadPreviousTicket])
+
   return (
     <div className={cn(!noHidden && 'absolute -left-[1000vw]')}>
       <section
@@ -45,7 +71,12 @@ export const HideOGTicketImageElement = ({
           </div>
         </div>
         <div className='mr-10 text-white scale-[85%]'>
-          <TicketCard fullname={fullname} ticketNumber={ticketNumber} username={username} />
+          <TicketCard
+            hologram={hologram}
+            fullname={fullname}
+            ticketNumber={ticketNumber}
+            username={username}
+          />
         </div>
       </section>
     </div>

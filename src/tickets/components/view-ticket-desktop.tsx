@@ -11,6 +11,7 @@ import { TwitchIcon } from '@/components/icons/twitch'
 
 interface Props {
   ticketDOMContnet: HTMLElement | null
+  ticketOGImageElement: HTMLElement | null
   username: string
   twitchTier: '1' | '2' | '3' | null
   fullname: string
@@ -22,6 +23,7 @@ interface Props {
 
 export const ViewTicketDesktop = ({
   ticketDOMContnet,
+  ticketOGImageElement,
   username,
   fullname,
   ticketNumber,
@@ -33,8 +35,11 @@ export const ViewTicketDesktop = ({
   return (
     <div className='hidden lg:flex lg:items-start lg:justify-between lg:min-h-[80vh] lg:w-full mx-auto px-8 py-8 pt-20'>
       <div className='relative'>
-        <ShareTicketPanel ticketDOMContnet={ticketDOMContnet} username={username} />
-        <p className='text-white'>tier {twitchTier}</p>
+        <ShareTicketPanel
+          ticketDesign={ticketDesign}
+          ticketDOMContnet={ticketDOMContnet}
+          username={username}
+        />
       </div>
       <div className='flex items-center justify-center flex-1 px-16 min-h-[80vh]'>
         <Container3D>
@@ -52,6 +57,9 @@ export const ViewTicketDesktop = ({
           <h2 className='mb-6 text-3xl font-semibold text-pretty'>Personaliza tu ticket</h2>
           <div className='relative min-h-[400px]'>
             <SelectHologramPanel
+              ticketNumber={ticketNumber}
+              ticketOGImageElement={ticketOGImageElement}
+              username={username}
               ticketDesign={ticketDesign}
               twitchTier={twitchTier}
               handleChangeHologram={handleChangeHologram}
