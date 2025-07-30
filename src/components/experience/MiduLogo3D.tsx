@@ -470,13 +470,10 @@ export function MiduLogo3D() {
 	}, [canvasRef.current])
 
 	return (
-		<div className='w-full h-screen experience'>
-			<div className='absolute w-full h-screen bg-radial from-transparent from-60% to-dark to-90% lg:from-45% lg:to-75%' />
+		<div className='w-full h-screen experience overflow-hidden'>
+			<div className="bg-image"></div>
 			<canvas ref={canvasRef} id='midu3d' className='absolute -z-[1]' />
-			<div
-				className='balls block absolute w-full h-screen -z-[2] bg-cover bg-center bg-no-repeat'
-				style={{ backgroundImage: 'url("/images/balls.png")' }}
-			/>
+			<div className="balls"></div>
 		</div>
 	)
 }
