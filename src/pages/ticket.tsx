@@ -5,13 +5,21 @@ import { supabaseGetTicketByUserId } from '@/tickets/services/supabase-get-ticke
 import { supabaseCreateTicket } from '@/tickets/services/supabase-create-ticket'
 import { useDesignTicket } from '@/tickets/hooks/use-design-ticket'
 import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HologramOption } from '@/tickets/types/hologram-option'
 import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-element'
 import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
 import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
 import { ViewTicketDesktop } from '@/tickets/components/view-ticket-desktop'
 import { TicketData } from '@/tickets/types/ticket-data'
+import { Modal } from '@/components/Modal'
+import { Button } from '@/components/Button'
+import { TwitchIcon } from '@/components/icons/twitch'
+import { throwConfetti } from '@/utils/throw-confetti'
+import { cn } from '@/lib/utils'
+import { ModalTwitchAccessContent } from '@/twitch/components/modal-twitch-access-content'
+import { ModalNoTwitchSubContent } from '@/twitch/components/modal-no-twitch-sub-content'
+import { ModalNoTHasMoreTierContent } from '@/twitch/components/modal-no-has-more-tier-content'
 
 interface Props {
   user: {
@@ -22,8 +30,11 @@ interface Props {
   ticketNumber: number
   twitchTier: TicketData['twitchTier']
   hologram: HologramOption
-  tierQueryData: '1000' | '2000' | '3000'
-  notAccessTier: boolean
+  tierQueryData: {
+    tier: string | null
+    error: string | null
+  }
+  notAccessTier: string
   userHadPreviousTicket: boolean
 }
 
@@ -32,14 +43,32 @@ export default function Ticket({
   ticketNumber,
   userHadPreviousTicket,
   twitchTier,
-  hologram
+  hologram,
+  tierQueryData,
+  notAccessTier
 }: Props) {
   const ticketImageElement = useRef<HTMLElement | null>(null)
   const ticketOGImageElement = useRef<HTMLElement | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(() => {
+    return tierQueryData == null ? false : true
+  })
+
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
   const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket({
     hologram
   })
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    /* remove queryparams in url */
+    window.history.replaceState({}, document.title, window.location.pathname)
+  }
+
+  useEffect(() => {
+    if (tierQueryData == null) return
+
+    throwConfetti()
+  }, [tierQueryData])
 
   return (
     <Layout meta={metadata}>
@@ -87,6 +116,18 @@ export default function Ticket({
         ticketNumber={ticketNumber}
         username={user.username}
       />
+      <Modal onClose={handleCloseModal} isOpen={isModalOpen}>
+        {tierQueryData?.tier === 'null' && tierQueryData?.error && <ModalNoTwitchSubContent />}
+        {['1', '2', '3'].includes(tierQueryData?.tier!) && notAccessTier === 'false' && (
+          <ModalTwitchAccessContent
+            tierNumber={tierQueryData?.tier ? +tierQueryData?.tier : null}
+            handleCloseModal={handleCloseModal}
+          />
+        )}
+        {notAccessTier === 'true' && tierQueryData?.error === 'null' && (
+          <ModalNoTHasMoreTierContent />
+        )}
+      </Modal>
     </Layout>
   )
 }
@@ -98,7 +139,7 @@ const getInfoFromUser = ({ user }) => {
   return { avatar, fullname, username }
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
   const { error: sessionError, session } = await supabaseGetServerSession(req, res)
 
   if (sessionError) {
@@ -163,6 +204,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   }
 
+  const tierLevelFromQueryParam = query?.tier
+  const tierErrorFromQueryParam = query?.error
+  const notAccessTier = query?.notAccessTier ?? null
+
+  const tierQueryData =
+    tierLevelFromQueryParam == null && tierErrorFromQueryParam == null
+      ? null
+      : {
+          tier: tierLevelFromQueryParam,
+          error: tierErrorFromQueryParam
+        }
+
   return {
     props: {
       userHadPreviousTicket: true,
@@ -170,7 +223,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       initialSession: session,
       user: getInfoFromUser({ user: session?.user }),
       twitchTier: ticket.twitchTier,
-      hologram: ticket.hologram
+      hologram: ticket.hologram,
+      notAccessTier,
+      tierQueryData
     }
   }
 }
