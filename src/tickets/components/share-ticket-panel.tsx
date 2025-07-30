@@ -34,7 +34,7 @@ export const ShareTicketPanel = ({
 			<h2 className='sr-only'>Opciones para compartir:</h2>
 			<ul
 				className={cn(
-					'flex gap-4 p-2 text-white border rounded-lg lg:p-4 border-pallet-border-foreground bg-pallet-b-foreground-primary',
+					'flex flex-col gap-4 p-2 text-white border rounded-lg lg:p-4 border-pallet-border-foreground bg-pallet-b-foreground-primary',
 					className
 				)}
 			>
