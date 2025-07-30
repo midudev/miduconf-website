@@ -40,16 +40,12 @@ export const SelectHologramPanel = ({
       username
     })
 
-    console.log({ ticketOGImageElement })
-
     if (ticketOGImageElement == null) return
 
     const { fileImage, filename } = await createTicketImage({
       ticketDOMContnet: ticketOGImageElement,
       ticketNumber
     })
-
-    console.log({ fileImage, filename })
 
     await handleUpdateImageTicket({
       file: fileImage,
@@ -107,14 +103,16 @@ export const SelectHologramPanel = ({
             </li>
           ))}
         </ul>
-        <a
-          href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier: twitchTier })}
-          target='_blank'
-          className='relative flex items-center text-[10px] uppercase w-full justify-center px-4 py-1 bg-pallet-ghost/20 gap-2 hover:bg-pallet-ghost/40 transition rounded-b-md'
-        >
-          <TwitchIcon className='w-auto h-3' />
-          Desbloquear
-        </a>
+        {twitchTier !== '3' && (
+          <a
+            href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier: twitchTier })}
+            target='_blank'
+            className='relative flex items-center text-[10px] uppercase w-full justify-center px-4 py-1 bg-pallet-ghost/20 gap-2 hover:bg-pallet-ghost/40 transition rounded-b-md'
+          >
+            <TwitchIcon className='w-auto h-3' />
+            Desbloquear
+          </a>
+        )}
       </div>
       <div className='mt-2 rounded-md bg-pallet-ghost/10'>
         <span className='ml-0.5 text-[10px] uppercase text-pallet-ghost px-4 py-2 block'>
