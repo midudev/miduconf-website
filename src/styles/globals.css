@@ -114,11 +114,17 @@
 		letter-spacing: -0.28px;
 	}
 
-	@utility clipHidden {
-		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	.navbar-item:hover ~ .navbar-item a,
+  .navbar-item:has(~ .navbar-item:hover) a {
+    color: #9799A0;
+  }
+
+
+	.clipHidden {
+		clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
 	}
 
-	@utility clipVisible {
+	.clipVisible {
 		clip-path: none;
 	}
 
