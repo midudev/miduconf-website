@@ -18,7 +18,7 @@ export const HideTicketImageElement = ({
   ref
 }: Props) => {
   return (
-    <div className=''>
+    <div className='absolute -left-[1000vw] '>
       <section className='relative h-auto text-white w-max' aria-disabled ref={ref}>
         <TicketCard
           fullname={fullname}
@@ -30,5 +30,3 @@ export const HideTicketImageElement = ({
     </div>
   )
 }
-
-/* absolute -left-[1000vw] */

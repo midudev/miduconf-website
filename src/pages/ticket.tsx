@@ -34,12 +34,12 @@ export default function Ticket({
   twitchTier,
   hologram
 }: Props) {
+  const ticketImageElement = useRef<HTMLElement | null>(null)
+  const ticketOGImageElement = useRef<HTMLElement | null>(null)
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
   const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket({
     hologram
   })
-  const ticketImageElement = useRef<HTMLElement | null>(null)
-  const ticketOGImageElement = useRef<HTMLElement | null>(null)
 
   return (
     <Layout meta={metadata}>
@@ -80,7 +80,6 @@ export default function Ticket({
       />
       {/* Contenido para crear OG Image */}
       <HideOGTicketImageElement
-        noHidden
         ref={ticketOGImageElement}
         userHadPreviousTicket={userHadPreviousTicket}
         hologram={ticketDesign.hologram}

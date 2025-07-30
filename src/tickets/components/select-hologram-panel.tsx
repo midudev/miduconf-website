@@ -124,7 +124,7 @@ export const SelectHologramPanel = ({
           {ACADEMIA_HOLOGRAMS.map((label, index) => (
             <li key={label}>
               {TWITCH_HOLOGRAMS.length + 1 > Number(twitchTier ?? 0) ? (
-                <LockTwitchButton currentTier={twitchTier} tierNumber={index + 1} />
+                <LockAcademiaButton hologramIndex={TWITCH_HOLOGRAMS.length + index + 1} />
               ) : (
                 <Button
                   title={`Aplicar ${label} Holograma`}
@@ -146,14 +146,35 @@ export const SelectHologramPanel = ({
             </li>
           ))}
         </ul>
+        <div className='relative flex items-center text-[10px] uppercase w-full justify-center px-4 py-1 bg-pallet-ghost/20 gap-2 rounded-b-md'>
+          Muy Pronto
+        </div>
       </div>
     </article>
   )
 }
 
+function LockAcademiaButton({ hologramIndex }: { hologramIndex: number }) {
+  return (
+    <Tooltip text={`Suscripción en midu.dev`} tooltipPosition='top'>
+      <div className='relative flex items-center gap-1 cursor-not-allowed'>
+        <LockIcon className='absolute w-auto h-6 -translate-x-1/2 -translate-y-1/2 text-pallet-ghost left-1/2 top-1/2' />
+        <div className='relative p-1 text-xs border rounded-md opacity-20 bg-pallet-ghost/20 aspect-square border-pallet-ghost'>
+          <img
+            src={`/tickets/holograms/${hologramIndex}.png`}
+            alt={`Representación del Holograma`}
+            className='w-6 h-6 rounded-full'
+            width='30'
+            height='30'
+          />
+        </div>
+      </div>
+    </Tooltip>
+  )
+}
+
 function LockTwitchButton({
-  tierNumber,
-  currentTier
+  tierNumber
 }: {
   tierNumber: number
   currentTier: '1' | '2' | '3' | null

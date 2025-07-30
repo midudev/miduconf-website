@@ -70,7 +70,7 @@ export const HideOGTicketImageElement = ({
             <p>twitch.tv/midudev</p>
           </div>
         </div>
-        <div className='mr-10 text-white scale-[85%]'>
+        <div className='mr-10 text-white scale-[85%] rounded-2xl overflow-hidden'>
           <TicketCard
             hologram={hologram}
             fullname={fullname}
