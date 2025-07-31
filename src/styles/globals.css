@@ -121,11 +121,6 @@
     letter-spacing: -0.28px;
   }
 
-  .navbar-item:hover ~ .navbar-item a,
-  .navbar-item:has(~ .navbar-item:hover) a {
-    color: #9799a0;
-  }
-
   .clipHidden {
     clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
   }
@@ -195,13 +190,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100vh;
-    background: radial-gradient(circle, transparent 60%, #0a0a0a 90%);
-  }
-
-  @media (min-width: 1024px) {
-    .bg-image {
-      background: radial-gradient(circle, transparent 32%, #0a0a0a 88%);
-    }
+    background: radial-gradient(ellipse at center, transparent 44%, #09090e 75%);
   }
 }
 

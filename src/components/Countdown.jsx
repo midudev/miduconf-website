@@ -14,33 +14,37 @@ export function Countdown({ className }) {
   })
   const [show, setShow] = useState(false)
   const clockRef = useRef(null)
+  const scrollClockRef = useRef(null)
 
-  function clockAnimation(item, rotate) {
-    gsap.to(item, {
-      rotate,
-      y: -1,
-      delay: 1.0,
-      duration: 1.0,
-      transformOrigin: 'center 100%',
-      ease: 'elastic.out(1, 0.5)'
-    })
-  }
   useEffect(() => {
-    const clock = clockRef.current
-    if (!clock) return
+    const animateClock = (ref) => {
+      const clock = ref.current
+      if (!clock) return
 
-    let currentRotation = 90
+      let currentRotation = 90
+      const rect = clock.querySelectorAll('rect')
+      if (!rect[6]) return
 
-    const rect = clock.querySelectorAll('rect')
-    if (!rect[6]) return
+      const interval = setInterval(() => {
+        gsap.to(rect[6], {
+          rotate: currentRotation,
+          y: -1,
+          duration: 1.0,
+          transformOrigin: 'center 100%',
+          ease: 'elastic.out(1, 0.5)'
+        })
+        currentRotation += 90
+      }, 1000)
+      return interval
+    }
 
-    clockAnimation(rect[6], currentRotation)
+    const interval1 = animateClock(clockRef)
+    const interval2 = animateClock(scrollClockRef)
 
-    const interval = setInterval(() => {
-      currentRotation += 90
-      clockAnimation(rect[6], currentRotation)
-    }, 1000)
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval1)
+      clearInterval(interval2)
+    }
   }, [])
   useEffect(() => {
     // solo en client side para evitar problemas de hidratacion
@@ -58,26 +62,26 @@ export function Countdown({ className }) {
     <>
       <div
         className={cn(
-          'flex items-center gap-3 text-xl-code bg-pallet-b-foreground-primary border border-pallet-border-foreground px-spacing-16 py-spacing-8',
+          'flex items-center gap-3 text-xl-code bg-pallet-b-foreground-primary border border-pallet-border-foreground p-spacing-8 md:px-3 rounded-[5px]',
           className
         )}
       >
         <Clock ref={clockRef} className='clock size-[18px]' />
-        <span className='uppercase text-pallet-ghost'>Empezamos en:</span>
+        <span className='text-pallet-ghost text-xl-code'>Empezamos en:</span>
         <div className='flex items-center gap-1'>
           {[days, null, hours, null, minutes, null, seconds].map((value, index) => {
             return (
               <div key={index}>
                 <div className='flex items-center justify-center text-center'>
-                  <span className='tabular-nums'>{showValue(value)}</span>
-                  <span className=''>{value === null ? ' ' : LITERALS[index]}</span>
+                  <span className='tabular-nums text-xl-code'>{showValue(value)}</span>
+                  <span className='text-xl-code'>{value === null ? ' ' : LITERALS[index]}</span>
                 </div>
               </div>
             )
           })}
         </div>
       </div>
-      <ScrollCountdown />
+      <ScrollCountdown scrollClockRef={scrollClockRef} />
     </>
   )
 }
