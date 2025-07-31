@@ -16,14 +16,14 @@ module.exports = {
         pixelated: 'pixelated'
       },
       spacing: {
-        8: '0.5rem',
-        16: '1rem',
-        24: '1.5rem',
-        32: '2rem',
-        40: '2.5rem',
-        64: '4rem',
-        96: '6rem',
-        180: '11.25rem'
+        'spacing-8': '0.5rem',
+        'spacing-16': '1rem',
+        'spacing-24': '1.5rem',
+        'spacing-32': '2rem',
+        'spacing-40': '2.5rem',
+        'spacing-64': '4rem',
+        'spacing-96': '6rem',
+        'spacing-180': '11.25rem'
       },
       fontFamily: {
         sans: ['"Inter", sans-serif'],
