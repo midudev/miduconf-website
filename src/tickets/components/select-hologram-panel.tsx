@@ -15,6 +15,7 @@ interface Props {
   ticketOGImageElement: HTMLElement | null
   ticketDesign: TicketDesign
   twitchTier: '1' | '2' | '3' | null
+  midudevTypeSub: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
   username: string
   ticketNumber: number
   midudevTokentId: string
@@ -27,6 +28,7 @@ export const SelectHologramPanel = ({
   ticketOGImageElement,
   ticketNumber,
   midudevTokentId,
+  midudevTypeSub,
   handleChangeHologram
 }: Props) => {
   const { handleUpdateTicket } = useUpdateTicketInDB()
@@ -121,30 +123,34 @@ export const SelectHologramPanel = ({
           Especiales de midu.dev
         </span>
         <ul className='flex flex-wrap items-center gap-4 px-4 pb-3'>
-          {ACADEMIA_HOLOGRAMS.map((label, index) => (
-            <li key={label}>
-              {TWITCH_HOLOGRAMS.length + 1 > Number(twitchTier ?? 0) ? (
-                <LockAcademiaButton hologramIndex={TWITCH_HOLOGRAMS.length + index + 1} />
-              ) : (
-                <Button
-                  title={`Aplicar ${label} Holograma`}
-                  containerClassName='bg-pallet-ghost/10'
-                  aria-label='Aplicar estructura circular'
-                  className='px-1 py-1 text-sm duration-300 aspect-square'
-                  onClick={async () => await handleChangeHologramAndSave(label)}
-                  variant={ticketDesign.hologram === label ? 'border' : 'ghost'}
-                >
-                  <img
-                    src={`/tickets/holograms/${TWITCH_HOLOGRAMS.length + index + 1}.png`}
-                    alt={`Representación del ${label} Holograma`}
-                    className='w-6 h-6 rounded-full'
-                    width='30'
-                    height='30'
-                  />
-                </Button>
-              )}
-            </li>
-          ))}
+          {ACADEMIA_HOLOGRAMS.map((label, index) => {
+            const indexOfAcademyValue = getAcademyTierIndex(midudevTypeSub)
+            console.log({ indexOfAcademyValue, index: index + 1 })
+            return (
+              <li key={label}>
+                {index + 1 > indexOfAcademyValue ? (
+                  <LockAcademiaButton hologramIndex={TWITCH_HOLOGRAMS.length + index + 1} />
+                ) : (
+                  <Button
+                    title={`Aplicar ${label} Holograma`}
+                    containerClassName='bg-pallet-ghost/10'
+                    aria-label='Aplicar estructura circular'
+                    className='px-1 py-1 text-sm duration-300 aspect-square'
+                    onClick={async () => await handleChangeHologramAndSave(label)}
+                    variant={ticketDesign.hologram === label ? 'border' : 'ghost'}
+                  >
+                    <img
+                      src={`/tickets/holograms/${TWITCH_HOLOGRAMS.length + index + 1}.png`}
+                      alt={`Representación del ${label} Holograma`}
+                      className='w-6 h-6 rounded-full'
+                      width='30'
+                      height='30'
+                    />
+                  </Button>
+                )}
+              </li>
+            )
+          })}
         </ul>
         <a
           href={`http://localhost:4321/miduconf/ticket/${midudevTokentId}`}
@@ -207,3 +213,11 @@ const TWITCH_HOLOGRAMS = Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM).filte
 const ACADEMIA_HOLOGRAMS = Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM).filter((label) =>
   label.startsWith('academia')
 )
+
+const getAcademyTierIndex = (midudevTypeSub: Props['midudevTypeSub']) => {
+  if (midudevTypeSub === 'monthly') return 1
+  if (midudevTypeSub === 'quarterly') return 2
+  if (midudevTypeSub === 'annual') return 3
+  if (midudevTypeSub === 'lifetime') return 4
+  return 0
+}

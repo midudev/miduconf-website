@@ -8,6 +8,7 @@ import { HologramOption } from '../types/hologram-option'
 
 interface Props {
   twitchTier: '1' | '2' | '3' | null
+  midudevTypeSub: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
   ticketDOMContnet: HTMLElement | null
   ticketOGImageElement: HTMLElement | null
   username: string
@@ -27,6 +28,7 @@ export const ViewTicketMobile = ({
   ticketDesign,
   ticketOGImageElement,
   midudevTokentId,
+  midudevTypeSub,
   handleChangeHologram
 }: Props) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false)
@@ -71,6 +73,7 @@ export const ViewTicketMobile = ({
         <h1 className='text-2xl font-bold normal-case'>Personaliza tu ticket</h1>
         <div className='relative min-h-[400px]'>
           <SelectHologramPanel
+            midudevTypeSub={midudevTypeSub}
             ticketNumber={ticketNumber}
             ticketOGImageElement={ticketOGImageElement}
             username={username}

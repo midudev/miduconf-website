@@ -13,6 +13,7 @@ interface Props {
   ticketDOMContnet: HTMLElement | null
   ticketOGImageElement: HTMLElement | null
   username: string
+  midudevTypeSub: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
   twitchTier: '1' | '2' | '3' | null
   fullname: string
   ticketNumber: number
@@ -31,6 +32,7 @@ export const ViewTicketDesktop = ({
   ticketDesign,
   twitchTier,
   midudevTokentId,
+  midudevTypeSub,
   handleChangeHologram,
   handleChangeSticker
 }: Props) => {
@@ -59,6 +61,7 @@ export const ViewTicketDesktop = ({
           <h2 className='mb-6 text-3xl font-semibold text-pretty'>Personaliza tu ticket</h2>
           <div className='relative min-h-[400px]'>
             <SelectHologramPanel
+              midudevTypeSub={midudevTypeSub}
               ticketNumber={ticketNumber}
               ticketOGImageElement={ticketOGImageElement}
               username={username}

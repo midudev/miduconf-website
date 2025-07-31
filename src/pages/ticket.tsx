@@ -13,10 +13,7 @@ import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
 import { ViewTicketDesktop } from '@/tickets/components/view-ticket-desktop'
 import { TicketData } from '@/tickets/types/ticket-data'
 import { Modal } from '@/components/Modal'
-import { Button } from '@/components/Button'
-import { TwitchIcon } from '@/components/icons/twitch'
 import { throwConfetti } from '@/utils/throw-confetti'
-import { cn } from '@/lib/utils'
 import { ModalTwitchAccessContent } from '@/twitch/components/modal-twitch-access-content'
 import { ModalNoTwitchSubContent } from '@/twitch/components/modal-no-twitch-sub-content'
 import { ModalNoTHasMoreTierContent } from '@/twitch/components/modal-no-has-more-tier-content'
@@ -36,7 +33,7 @@ interface Props {
   }
   notAccessTier: string
   userHadPreviousTicket: boolean
-  midudevTypeSub: string | null
+  midudevTypeSub: 'monthly' | 'quarterly' | 'annual' | 'lifetime'
   midudevTokentId: string
 }
 
@@ -85,6 +82,7 @@ export default function Ticket({
           username={user.username}
           ticketNumber={ticketNumber}
           ticketDesign={ticketDesign}
+          midudevTypeSub={midudevTypeSub}
           ticketDOMContnet={ticketImageElement.current}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
@@ -97,6 +95,7 @@ export default function Ticket({
           fullname={user.fullname}
           username={user.username}
           ticketNumber={ticketNumber}
+          midudevTypeSub={midudevTypeSub}
           ticketDesign={ticketDesign}
           ticketDOMContnet={ticketImageElement.current}
           ticketOGImageElement={ticketOGImageElement.current}
