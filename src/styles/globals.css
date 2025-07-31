@@ -218,6 +218,18 @@ body {
   }
 }
 
+.animation-ul {
+  animation: animation-ul linear both;
+  animation-timeline: scroll();
+  animation-range: 0 200px;
+}
+
+@keyframes animation-ul {
+  to {
+		top: 15px;
+  }
+}
+
 @media (width>768px) {
   /* movimiento y opacidad en las cards de los speakers */
   .animation-speaker {
