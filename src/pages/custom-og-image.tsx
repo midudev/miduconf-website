@@ -28,7 +28,7 @@ interface Props {
   userHadPreviousTicket: boolean
 }
 
-export default function CustomOGTicketImage({ user, ticketNumber, userHadPreviousTicket }: Props) {
+export default function CustomOGTicketImage({ user, ticketNumber, hologram }: Props) {
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
   const [ogValues, setOgValues] = useState({
     username: user.username,
@@ -77,7 +77,7 @@ export default function CustomOGTicketImage({ user, ticketNumber, userHadPreviou
         {/* Desktop Layout */}
         <div className='py-20 mx-auto'>
           <HideOGTicketImageElement
-            noHidden
+            hologram={hologram}
             ref={ticketOGImageElement}
             fullname={ogValues.fullname}
             ticketNumber={ogValues.ticketNumber}

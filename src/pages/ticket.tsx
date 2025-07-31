@@ -13,10 +13,7 @@ import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
 import { ViewTicketDesktop } from '@/tickets/components/view-ticket-desktop'
 import { TicketData } from '@/tickets/types/ticket-data'
 import { Modal } from '@/components/Modal'
-import { Button } from '@/components/Button'
-import { TwitchIcon } from '@/components/icons/twitch'
 import { throwConfetti } from '@/utils/throw-confetti'
-import { cn } from '@/lib/utils'
 import { ModalTwitchAccessContent } from '@/twitch/components/modal-twitch-access-content'
 import { ModalNoTwitchSubContent } from '@/twitch/components/modal-no-twitch-sub-content'
 import { ModalNoTHasMoreTierContent } from '@/twitch/components/modal-no-has-more-tier-content'
@@ -83,7 +80,6 @@ export default function Ticket({
           ticketDOMContnet={ticketImageElement.current}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
-          handleChangeSticker={handleChangeSticker}
         />
 
         {/* Desktop Layout */}
