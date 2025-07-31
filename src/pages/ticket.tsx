@@ -88,7 +88,6 @@ export default function Ticket({
           ticketDOMContnet={ticketImageElement.current}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
-          handleChangeSticker={handleChangeSticker}
         />
 
         {/* Desktop Layout */}
