@@ -4,14 +4,20 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 interface CalltoActionType {
-	href: string;
-	IconComponent: React.ComponentType<{className?: string}>;
-	estilo: "default" | "discord";
-	text: string;
-	className?: string;
+  href: string
+  IconComponent: React.ComponentType<{ className?: string }>
+  estilo: 'default' | 'discord'
+  text: string
+  className?: string
 }
 
-export const CallToAction = ({ href, IconComponent, estilo, text, className }: CalltoActionType) => {
+export const CallToAction = ({
+  href,
+  IconComponent,
+  estilo,
+  text,
+  className
+}: CalltoActionType) => {
   const style = {
     default: 'bg-pallet-bg-foreground-secondary',
     discord: 'border border-pallet-border-foreground bg-pallet-b-foreground-primary navbar-discord'
@@ -21,7 +27,7 @@ export const CallToAction = ({ href, IconComponent, estilo, text, className }: C
 
   useEffect(() => {
     const cta = ctaRef.current
-    if (!cta) return;
+    if (!cta) return
 
     const $ctaContent = cta.querySelector('.cta-content')
     const items = $ctaContent?.querySelectorAll('.cta-info')
@@ -37,23 +43,23 @@ export const CallToAction = ({ href, IconComponent, estilo, text, className }: C
       })
     }
 
-    const handleEnter = () => animateItems(32);
-    const handleLeave = () => animateItems(0);
+    const handleEnter = () => animateItems(32)
+    const handleLeave = () => animateItems(0)
 
-		cta.addEventListener("mouseenter", handleEnter);
-		cta.addEventListener("mouseleave", handleLeave);
+    cta.addEventListener('mouseenter', handleEnter)
+    cta.addEventListener('mouseleave', handleLeave)
 
-		return () => {
-			cta.removeEventListener("mouseenter", handleEnter);
-			cta.removeEventListener("mouseleave", handleLeave);
-		};
+    return () => {
+      cta.removeEventListener('mouseenter', handleEnter)
+      cta.removeEventListener('mouseleave', handleLeave)
+    }
   })
 
   return (
     <Link
       href={href}
       ref={ctaRef}
-			target='_blank'
+      target='_blank'
       rel='noopener noreferrer'
       className={cn(
         'cta rounded-[5px] w-auto inline-block relative overflow-hidden text-pallet-default',
@@ -61,12 +67,12 @@ export const CallToAction = ({ href, IconComponent, estilo, text, className }: C
         className
       )}
     >
-      <div className='cta-content py-[10px] px-16 lg:py-[6px] lg:px-[12px]'>
-        <div className='cta-info flex items-center gap-8 absolute -translate-y-32'>
+      <div className='cta-content py-[10px] px-4 lg:py-[6px] lg:px-[12px]'>
+        <div className='absolute flex items-center gap-2 -translate-y-8 cta-info'>
           <IconComponent className='size-5 lg:size-6' />
-          <span className="text-xl-code !font-cta">{text}</span>
+          <span className='text-xl-code !font-cta'>{text}</span>
         </div>
-        <div className='cta-info flex items-center gap-8'>
+        <div className='flex items-center gap-2 cta-info'>
           <IconComponent className='size-5 lg:size-6' />
           <span className='text-xl-code !font-cta'>{text}</span>
         </div>
