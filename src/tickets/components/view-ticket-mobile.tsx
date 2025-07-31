@@ -42,8 +42,8 @@ export const ViewTicketMobile = ({
 				</div>
 			)}
 
-			<div className={`flex items-center justify-center p-4 md:p-8 ${isPanelOpen ? 'h-[calc(100vh-55vh)]' : 'min-h-screen pb-20 pt-32'}`}>
-				<div className={`transition-transform duration-300 ${isPanelOpen ? 'scale-75' : 'scale-100'}`}>
+			<div className={`flex items-center justify-center p-4 md:p-8 ${isPanelOpen ? 'h-[calc(100vh-55vh)] pt-20' : 'min-h-screen pb-20 pt-32'}`}>
+				<div className={`transition-transform duration-300 ${isPanelOpen ? 'scale-[0.55] sm:scale-[0.6] md:scale-[0.65]' : 'scale-100'}`}>
 					<TicketCard
 						fullname={fullname}
 						ticketNumber={ticketNumber}
