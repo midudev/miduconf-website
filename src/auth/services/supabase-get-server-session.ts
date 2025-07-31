@@ -1,5 +1,4 @@
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
-import { NextApiRequest, NextApiResponse } from 'next'
 
 export const supabaseGetServerSession = async (req: any, res: any) => {
   const supabase = createPagesServerClient({ req, res })

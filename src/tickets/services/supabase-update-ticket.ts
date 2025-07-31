@@ -4,10 +4,10 @@ import { SupabaseTicketData } from '../types/supabase-ticket-data'
 
 interface Props {
   ticketInfo: Partial<SupabaseTicketData>
-  username: string
+  userId: string
 }
 
-export const supabaseUpdateTicket = async (req: any, res: any, { ticketInfo, username }: Props) => {
+export const supabaseUpdateTicket = async (req: any, res: any, { ticketInfo, userId }: Props) => {
   const supabase = createPagesServerClient({ req, res })
 
   const { error } = await supabase
@@ -15,7 +15,7 @@ export const supabaseUpdateTicket = async (req: any, res: any, { ticketInfo, use
     .update({
       ...ticketInfo
     })
-    .eq('user_name', username)
+    .eq('user_id', userId)
 
   return {
     error

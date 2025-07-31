@@ -52,53 +52,53 @@
     font-style: normal;
   }
 }
+
 @layer utilities {
-  .font-code {
-    font-family: var(--font-family-monospace);
-  }
+	.font-code {
+		font-family: var(--font-family-monospace);
+	}
 
-  .font-cta {
-    font-family: var(--font-family-cta);
-  }
+	.font-cta {
+		font-family: var(--font-family-cta);
+	}
 
-  .text-4xl-semibold {
-    font-size: clamp(var(--heading-4xl-movil), 1.712rem + 2.307vw, var(--heading-4xl-pc));
-    line-height: clamp(3.025rem, 2rem + 2.597vw, 5.813rem);
-    letter-spacing: -1.48px;
-  }
+	.text-4xl-semibold {
+		font-size: clamp(var(--heading-4xl-movil), 1.712rem + 2.307vw, var(--heading-4xl-pc));
+		line-height: clamp(3.025rem, 2rem + 2.597vw, 5.813rem);
+		letter-spacing: -1.48px;
+	}
 
-  .text-3xl-semibold {
-    font-size: clamp(var(--heading-3xl-movil), 1.584rem + 1.774vw, var(--heading-3xl-pc));
-    line-height: clamp(2.625rem, 2.244rem + 1.626vw, 4rem);
-    letter-spacing: -1.12px;
-  }
+	.text-3xl-semibold {
+		font-size: clamp(var(--heading-3xl-movil), 1.584rem + 1.774vw, var(--heading-3xl-pc));
+		line-height: clamp(2.625rem, 2.244rem + 1.626vw, 4rem);
+		letter-spacing: -1.12px;
+	}
 
-  .text-2xl-semibold {
-    font-size: clamp(var(--heading-2xl-movil), 1.236rem + 0.591vw, var(--heading-2xl-pc));
-    line-height: clamp(1.75rem, 1.577rem + 0.739vw, 2.375rem);
-    letter-spacing: -0.6px;
-  }
+	.text-2xl-semibold {
+		font-size: clamp(var(--heading-2xl-movil), 1.236rem + 0.591vw, var(--heading-2xl-pc));
+		line-height: clamp(1.75rem, 1.577rem + 0.739vw, 2.375rem);
+		letter-spacing: -0.6px;
+	}
 
-  .text-xl-medium {
-    font-size: clamp(var(--heading-xl-movil), 1.021rem + 0.323vw, var(--heading-xl-pc));
-    line-height: clamp(1.688rem, 1.602rem + 0.369vw, 2rem);
-    font-weight: 500;
-    letter-spacing: 0.48px;
-  }
+	.text-xl-medium {
+		font-size: clamp(var(--heading-xl-movil), 1.021rem + 0.323vw, var(--heading-xl-pc));
+		line-height: clamp(1.688rem, 1.602rem + 0.369vw, 2rem);
+		font-weight: 500;
+		letter-spacing: 0.48px;
+	}
 
-  .text-xl-code {
-    @apply font-code uppercase;
-    font-size: clamp(var(--heading-xl-code-movil), 0.931rem + 0.196vw, var(--heading-xl-code-pc));
-    line-height: clamp(1.25rem, 1.042rem + 0.687vw, 2rem);
-    letter-spacing: 0.4px;
-  }
+	.text-xl-code {
+		@apply uppercase font-code;
+		font-size: clamp(var(--heading-xl-code-movil), 0.931rem + 0.196vw, var(--heading-xl-code-pc));
+		line-height: clamp(1.25rem, 1.042rem + 0.687vw, 2rem);
+		letter-spacing: 0.4px;
+	}
 
-  .text-body {
-    font-size: clamp(var(--heading-body-movil), 0.806rem + 0.296vw, var(--heading-body-pc));
-    line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
-    letter-spacing: 0.36px;
-  }
-
+	.text-body {
+		font-size: clamp(var(--heading-body-movil), 0.806rem + 0.296vw, var(--heading-body-pc));
+		line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
+		letter-spacing: 0.36px;
+	}
   .text-body-code {
     @apply font-code uppercase;
     font-size: clamp(
@@ -271,4 +271,27 @@ body {
     opacity: 1;
     transform: translateY(4rem);
   }
+}
+
+
+.custom-scroll::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+/* Track */
+.custom-scroll::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 9999px;
+}
+
+/* Handle */
+.custom-scroll::-webkit-scrollbar-thumb {
+	background: rgb(255, 255, 255, 0.2);
+	border-radius: 9999px;
+}
+
+/* Handle on hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+	background: rgb(255, 255, 255, 0.4);
 }

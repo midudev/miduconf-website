@@ -3,22 +3,23 @@ import { supabaseGetServerSession } from '@/auth/services/supabase-get-server-se
 import { GetServerSideProps } from 'next'
 import { supabaseGetTicketByUserId } from '@/tickets/services/supabase-get-ticket-by-user-id'
 import { supabaseCreateTicket } from '@/tickets/services/supabase-create-ticket'
-import { ShareTicketPanel } from '@/tickets/components/share-ticket-panel'
 import { useDesignTicket } from '@/tickets/hooks/use-design-ticket'
-import { SelectHologramPanel } from '@/tickets/components/select-hologram-panel'
-import { TicketCard } from '@/tickets/components/ticket-card'
-import { Container3D } from '@/components/Container3D'
 import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
-import { useUpdateTicketImageInDB } from '@/tickets/hooks/use-update-ticket-image-in-db'
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HologramOption } from '@/tickets/types/hologram-option'
-import { SelectStickerPanel } from '@/tickets/components/select-sticker-panel'
-import { DiamondIcon } from '@/components/icons/diamond'
-import { createTicketImage } from '@/tickets/utils/create-ticket-image'
 import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-element'
 import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
-import { DraggablePanel } from '@/components/DraggablePanel'
+import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
+import { ViewTicketDesktop } from '@/tickets/components/view-ticket-desktop'
+import { TicketData } from '@/tickets/types/ticket-data'
+import { Modal } from '@/components/Modal'
+import { Button } from '@/components/Button'
+import { TwitchIcon } from '@/components/icons/twitch'
+import { throwConfetti } from '@/utils/throw-confetti'
 import { cn } from '@/lib/utils'
+import { ModalTwitchAccessContent } from '@/twitch/components/modal-twitch-access-content'
+import { ModalNoTwitchSubContent } from '@/twitch/components/modal-no-twitch-sub-content'
+import { ModalNoTHasMoreTierContent } from '@/twitch/components/modal-no-has-more-tier-content'
 
 interface Props {
   user: {
@@ -27,153 +28,80 @@ interface Props {
     avatar: string
   }
   ticketNumber: number
-  twitchTier: 1000 | 2000 | 3000
+  twitchTier: TicketData['twitchTier']
   hologram: HologramOption
-  tierQueryData: '1000' | '2000' | '3000'
-  notAccessTier: boolean
+  tierQueryData: {
+    tier: string | null
+    error: string | null
+  }
+  notAccessTier: string
   userHadPreviousTicket: boolean
 }
 
-export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Props) {
-  const [isPanelOpen, setIsPanelOpen] = useState(false)
-  const metadata = getTicketMetadata({ ticketNumber, username: user.username })
-  const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket()
-  const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
+export default function Ticket({
+  user,
+  ticketNumber,
+  userHadPreviousTicket,
+  twitchTier,
+  hologram,
+  tierQueryData,
+  notAccessTier
+}: Props) {
   const ticketImageElement = useRef<HTMLElement | null>(null)
   const ticketOGImageElement = useRef<HTMLElement | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(() => {
+    return tierQueryData == null ? false : true
+  })
 
-  useLayoutEffect(() => {
-    if (userHadPreviousTicket) return
+  const metadata = getTicketMetadata({ ticketNumber, username: user.username })
+  const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket({
+    hologram
+  })
 
-    const handler = async () => {
-      if (ticketOGImageElement.current == null) return
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    /* remove queryparams in url */
+    window.history.replaceState({}, document.title, window.location.pathname)
+  }
 
-      const { fileImage, filename } = await createTicketImage({
-        ticketDOMContnet: ticketOGImageElement.current,
-        ticketNumber
-      })
+  useEffect(() => {
+    if (tierQueryData == null) return
 
-      await handleUpdateImageTicket({ filename, file: fileImage })
-    }
-
-    handler()
-  }, [userHadPreviousTicket])
+    throwConfetti()
+  }, [tierQueryData])
 
   return (
     <Layout meta={metadata}>
       <main className='flex flex-col items-center justify-center min-h-screen text-white'>
         {/* Mobile/Tablet Layout - Full screen with draggable panel */}
-        <div className='relative w-full min-h-screen lg:hidden'>
-          <div
-            className={cn(
-              'absolute z-40 -translate-x-1/2 top-16 transition',
-              isPanelOpen ? 'left-6 translate-x-0' : 'left-1/2 -translate-x-1/2'
-            )}
-          >
-            <ShareTicketPanel
-              ticketDOMContnet={ticketImageElement.current}
-              username={user.username}
-              className={cn(isPanelOpen ? 'flex-col' : 'flex-row')}
-            />
-          </div>
-
-          <div
-            className={`flex items-center justify-center transition-all duration-300 ${
-              isPanelOpen ? 'h-[50vh]' : 'min-h-screen pb-20 pt-32 px-4'
-            }`}
-          >
-            <div
-              className={cn(
-                'transition-transform duration-300',
-                isPanelOpen ? 'scale-[0.6] pt-16' : 'scale-90 sm:scale-100'
-              )}
-            >
-              <Container3D>
-                <TicketCard
-                  fullname={user.fullname}
-                  ticketNumber={ticketNumber}
-                  username={user.username}
-                />
-              </Container3D>
-            </div>
-          </div>
-
-          <DraggablePanel
-            title='Personaliza tu ticket'
-            isOpen={isPanelOpen}
-            onToggle={() => setIsPanelOpen(!isPanelOpen)}
-          >
-            <div className='p-6'>
-              <div className='relative min-h-[400px]'>
-                <div className='absolute inset-0 z-10 flex items-center justify-center'>
-                  <p className='flex items-center gap-2 px-4 py-2 text-xl font-medium text-center uppercase border rounded-lg font-ibm-plex bg-pallet-b-foreground-primary border-pallet-border-foreground'>
-                    <DiamondIcon className='w-auto h-4' />
-                    Muy pronto
-                    <DiamondIcon className='w-auto h-4' />
-                  </p>
-                </div>
-                <div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
-                  <SelectHologramPanel
-                    ticketDesign={ticketDesign}
-                    handleChangeHologram={handleChangeHologram}
-                  />
-                  <SelectStickerPanel
-                    ticketDesign={ticketDesign}
-                    handleChangeSticker={handleChangeSticker}
-                  />
-                </div>
-              </div>
-            </div>
-          </DraggablePanel>
-        </div>
+        <ViewTicketMobile
+          twitchTier={twitchTier}
+          fullname={user.fullname}
+          username={user.username}
+          ticketNumber={ticketNumber}
+          ticketDesign={ticketDesign}
+          ticketDOMContnet={ticketImageElement.current}
+          ticketOGImageElement={ticketOGImageElement.current}
+          handleChangeHologram={handleChangeHologram}
+          handleChangeSticker={handleChangeSticker}
+        />
 
         {/* Desktop Layout */}
-        <div className='hidden lg:flex lg:items-start lg:justify-between lg:min-h-[80vh] lg:w-full mx-auto px-8 py-8 pt-20'>
-          <div className='relative'>
-            <ShareTicketPanel
-              ticketDOMContnet={ticketImageElement.current}
-              username={user.username}
-            />
-          </div>
-
-          <div className='flex items-center justify-center flex-1 px-16 min-h-[80vh]'>
-            <Container3D>
-              <TicketCard
-                fullname={user.fullname}
-                ticketNumber={ticketNumber}
-                username={user.username}
-              />
-            </Container3D>
-          </div>
-
-          <div className='sticky flex-shrink-0 top-8 w-80'>
-            <div className='p-6 border rounded-xl border-pallet-border-foreground bg-pallet-b-foreground-primary max-h-[calc(100dvh_-_140px)]'>
-              <h2 className='mb-6 text-3xl font-semibold text-pretty'>Personaliza tu ticket</h2>
-              <div className='relative min-h-[400px]'>
-                <div className='absolute inset-0 z-10 flex items-center justify-center'>
-                  <p className='flex items-center gap-2 px-4 py-2 text-xl font-medium text-center uppercase border rounded-lg font-ibm-plex bg-pallet-b-foreground-primary border-pallet-border-foreground'>
-                    <DiamondIcon className='w-auto h-4' />
-                    Muy pronto
-                    <DiamondIcon className='w-auto h-4' />
-                  </p>
-                </div>
-                <div className='opacity-20 [mask-image:linear-gradient(#000_20%,_transparent)] select-none pointer-events-none'>
-                  <SelectHologramPanel
-                    ticketDesign={ticketDesign}
-                    handleChangeHologram={handleChangeHologram}
-                  />
-                  <SelectStickerPanel
-                    ticketDesign={ticketDesign}
-                    handleChangeSticker={handleChangeSticker}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ViewTicketDesktop
+          twitchTier={twitchTier}
+          fullname={user.fullname}
+          username={user.username}
+          ticketNumber={ticketNumber}
+          ticketDesign={ticketDesign}
+          ticketDOMContnet={ticketImageElement.current}
+          ticketOGImageElement={ticketOGImageElement.current}
+          handleChangeHologram={handleChangeHologram}
+          handleChangeSticker={handleChangeSticker}
+        />
       </main>
       {/* Contenido para crear captura */}
       <HideTicketImageElement
+        hologram={ticketDesign.hologram}
         ref={ticketImageElement}
         fullname={user.fullname}
         ticketNumber={ticketNumber}
@@ -182,10 +110,24 @@ export default function Ticket({ user, ticketNumber, userHadPreviousTicket }: Pr
       {/* Contenido para crear OG Image */}
       <HideOGTicketImageElement
         ref={ticketOGImageElement}
+        userHadPreviousTicket={userHadPreviousTicket}
+        hologram={ticketDesign.hologram}
         fullname={user.fullname}
         ticketNumber={ticketNumber}
         username={user.username}
       />
+      <Modal onClose={handleCloseModal} isOpen={isModalOpen}>
+        {tierQueryData?.tier === 'null' && tierQueryData?.error && <ModalNoTwitchSubContent />}
+        {['1', '2', '3'].includes(tierQueryData?.tier!) && notAccessTier === 'false' && (
+          <ModalTwitchAccessContent
+            tierNumber={tierQueryData?.tier ? +tierQueryData?.tier : null}
+            handleCloseModal={handleCloseModal}
+          />
+        )}
+        {notAccessTier === 'true' && tierQueryData?.error === 'null' && (
+          <ModalNoTHasMoreTierContent />
+        )}
+      </Modal>
     </Layout>
   )
 }
@@ -197,7 +139,7 @@ const getInfoFromUser = ({ user }) => {
   return { avatar, fullname, username }
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
   const { error: sessionError, session } = await supabaseGetServerSession(req, res)
 
   if (sessionError) {
@@ -262,6 +204,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   }
 
+  const tierLevelFromQueryParam = query?.tier
+  const tierErrorFromQueryParam = query?.error
+  const notAccessTier = query?.notAccessTier ?? null
+
+  const tierQueryData =
+    tierLevelFromQueryParam == null && tierErrorFromQueryParam == null
+      ? null
+      : {
+          tier: tierLevelFromQueryParam,
+          error: tierErrorFromQueryParam
+        }
+
   return {
     props: {
       userHadPreviousTicket: true,
@@ -269,7 +223,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       initialSession: session,
       user: getInfoFromUser({ user: session?.user }),
       twitchTier: ticket.twitchTier,
-      hologram: ticket.hologram
+      hologram: ticket.hologram,
+      notAccessTier,
+      tierQueryData
     }
   }
 }

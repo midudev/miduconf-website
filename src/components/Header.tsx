@@ -22,7 +22,7 @@ export function Header() {
 function Title() {
   return (
     <>
-      <Link href='/' className='flex items-center text-pallet-default relative z-20'>
+      <Link href='/' className='relative z-20 flex items-center text-pallet-default'>
         <Midudev className='size-[42px] block lg:hidden' />
         <Miduconf className='hidden lg:block' />
       </Link>
