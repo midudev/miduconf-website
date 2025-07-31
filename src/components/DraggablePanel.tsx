@@ -79,10 +79,10 @@ export const DraggablePanel = ({ children, title, isOpen, onToggle }: Props) => 
 	return (
 		<div
 			ref={panelRef}
-			className={`fixed bottom-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-y-0' : 'translate-y-[calc(100%-80px)]'
+			className={`fixed bottom-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out flex flex-col ${isOpen ? 'translate-y-0' : 'translate-y-[calc(100%-60px)]'
 				}`}
 			style={{
-				height: '50vh',
+				height: '55vh',
 				transform: isDragging
 					? `translateY(${Math.max(0, Math.min(currentY - startY, window.innerHeight * 0.5))}px)`
 					: undefined
@@ -119,7 +119,7 @@ export const DraggablePanel = ({ children, title, isOpen, onToggle }: Props) => 
 			</div>
 
 			{/* Content */}
-			<div className="bg-pallet-b-foreground-primary border-t border-pallet-border-foreground flex-1 overflow-y-auto">
+			<div className="bg-pallet-b-foreground-primary px-6 pb-6 border-pallet-border-foreground flex-1 overflow-y-auto">
 				{children}
 			</div>
 		</div>

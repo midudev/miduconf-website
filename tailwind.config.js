@@ -95,7 +95,7 @@ module.exports = {
         },
         pallet: {
           background: '#09090E',
-          ghost: '#9799A0',
+          ghost: '#B8BBC5',
           'b-foreground-primary': '#121319',
           primary: '#5A8CF6',
           'border-primary': '#95B8FB',
