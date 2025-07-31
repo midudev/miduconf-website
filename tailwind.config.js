@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
+    './src/components/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/sections/**/*.{js,ts,jsx,tsx}',
     './src/tickets/components/*.{js,ts,jsx,tsx}',
@@ -27,7 +28,8 @@ module.exports = {
       fontFamily: {
         sans: ['"Inter", sans-serif'],
         code: ['code-regular', 'monospace'],
-        cta: ['code-medium', 'monospace']
+        cta: ['code-medium', 'monospace'],
+        'ibm-plex': 'var(--font-ibm-plex)'
       },
       dropShadow: {
         gift: '3px 4px 8px rgba(0, 0, 0, 0.4)'
@@ -93,7 +95,7 @@ module.exports = {
         },
         pallet: {
           background: '#09090E',
-          ghost: '#9799A0',
+          ghost: '#B8BBC5',
           'b-foreground-primary': '#121319',
           primary: '#5A8CF6',
           'border-primary': '#95B8FB',

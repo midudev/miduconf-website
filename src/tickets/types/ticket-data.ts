@@ -4,7 +4,7 @@ export interface TicketData {
   image: string | null
   hologram: string
   ticketNumber: number
-  twitchTier: string | null
+  twitchTier: '1' | '2' | '3' | null
   userFullname: string | null
   userId: string | null
   userame: string | null

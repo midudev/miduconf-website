@@ -12,7 +12,7 @@ export const Sponsors = () => {
   return (
     <section id='sponsors' className='pt-44 grid lg:grid-cols-[1fr_auto] px-8 gap-8'>
       <div className='h-full'>
-        <header className='flex flex-col gap-2 max-w-80 lg:col-[2/3] lg:row-[1/2] mt-8 sticky top-40 mx-auto'>
+        <header className='flex flex-col gap-2 max-w-80 lg:col-[2/3] lg:row-[1/2] mt-8 sticky top-[80px] mx-auto'>
           <h2 className='flex items-center justify-center gap-4 text-4xl font-bold text-white uppercase'>
             <DotIcon className='text-pallet-primary' /> Sponsors{' '}
             <DotIcon className='text-pallet-primary' />
@@ -140,9 +140,9 @@ export const premiums = [
 ]
 
 export const gold: Array<{
-  name: string;
-  link: string;
-  logo: React.ReactElement;
+  name: string
+  link: string
+  logo: React.ReactElement
 }> = []
 
 export const normalSponsors = [

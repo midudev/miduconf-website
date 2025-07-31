@@ -1,18 +1,20 @@
 'use client'
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DiscordIcon } from './icons/discord'
-import { HorizontalEllipses } from './icons/horizontal-ellipses'
-import { CrossIcon } from './icons/cross'
+import { Miduconf } from './icons/miduconf'
+import { Midudev } from './icons/midudev'
+import { Burger } from "./icons/burger";
+import { CallToAction } from './CallToAction'
+import { gsap } from "gsap"
 
 export function Header() {
   return (
-    <header className='fixed top-0 left-0 z-[9999] flex items-center justify-between w-full px-8 py-4 animate-fade-in-down font-geist animation-header'>
+    <header className='fixed pt-5 px-5 z-[9999] flex items-center justify-between w-full animate-fade-in-down font-geist animation-header'>
       <Title />
       <Navbar />
-      <DiscordLink />
     </header>
   )
 }
@@ -20,12 +22,9 @@ export function Header() {
 function Title() {
   return (
     <>
-      <h1 className='sr-only'>MIDU.CONF 2025</h1>
-      <Link href='/' className='flex items-center text-2xl font-extrabold text-white'>
-        MIDU.<span className='text-pallet-primary'>CONF</span>
-        <span className='px-1 py-1 ml-1 text-xs leading-none border text-pallet-primary border-pallet-primary'>
-          25
-        </span>
+      <Link href='/' className='flex items-center text-pallet-default relative z-20'>
+        <Midudev className='size-[42px] block lg:hidden' />
+        <Miduconf className='hidden lg:block' />
       </Link>
     </>
   )
@@ -35,84 +34,126 @@ function Navbar() {
   const currentHash = useCurrentHashOnLink()
   const [isOpen, setIsOpen] = useState(false)
   const navbarId = useId()
+	const refButton = useRef<HTMLButtonElement>(null);
+	const refNavbarList = useRef<HTMLUListElement>(null);
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+	function toggleNavbar(open: boolean) {
+		let tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 0.5, stagger: 0.05 } });
+		const burgerRect = refButton.current?.querySelectorAll<SVGRectElement>("svg rect");
+		const navbarList = refNavbarList.current;
+		const navbarItems = navbarList?.querySelectorAll(".navbar-item");
+
+		if(!burgerRect || !navbarList || !navbarItems) return;
+
+		tl.clear();
+
+		if (open) {
+			tl.to(burgerRect[0], {
+				y: 5,
+				rotation: -45,
+				transformOrigin: "50% center",
+			}).to(burgerRect[1], {
+				y: -5,
+				rotation: 45,
+				transformOrigin: "55% 55%",
+			}, "<").to(navbarList, {
+				clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
+			}, "-=0.4").to(navbarItems, {
+				x: 0,
+				opacity: 1,
+				ease: "elastic.out(1, 0.75)",
+			}, "-=0.2")
+		} else {
+			tl.to(navbarItems, {
+				x: 100,
+				opacity: 0,
+				ease: "elastic.out(1, 0.75)",
+			}).to(navbarList, {
+				clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+			}, "-=0.4").to(burgerRect[0], {
+				y: 0,
+				rotation: 0,
+			}, "<").to(burgerRect[1], {
+				y: 0,
+				rotation: 0,
+			}, "<");
+		}
+	}
+
+  const toggleMenu = () => setIsOpen(prev => {
+		const newState = !prev;
+			toggleNavbar(newState);
+			return newState;
+	})
+
+	const handleItemClick = () => {
+		if (window.innerWidth < 1024) {
+			setIsOpen(false)
+			toggleNavbar(false)
+		}
+	}
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
 
+		const handleResize = () => {
+      if (window.innerWidth >= 1024 && refNavbarList.current) {
+        gsap.set(refNavbarList.current, { clearProps: "all" });
+        const items = refNavbarList.current.querySelectorAll(".navbar-item");
+        items.forEach((item) => {
+          gsap.set(item, { clearProps: "all" });
+        });
+      }
+    };
+		window.addEventListener("resize", handleResize);
+    handleResize();
+
     return () => {
       document.body.style.overflow = ''
+			window.removeEventListener("resize", handleResize);
     }
   }, [isOpen])
 
   return (
-    <nav>
-      <button
-        onClick={toggleMenu}
-        className={cn(
-          'z-50 w-auto p-2 text-white border rounded border-pallet-border-foreground aspect-square bg-pallet-background md:hidden',
-          'focus:outline focus:outline-white focus:border-pallet-ghost'
-        )}
-        aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
-        aria-controls={navbarId}
-        aria-expanded={isOpen}
-      >
-        {isOpen ? (
-          <CrossIcon className='w-4 h-auto' />
-        ) : (
-          <HorizontalEllipses className='w-4 h-auto' />
-        )}
-      </button>
-      <ul
-        id={navbarId}
-        className={cn(
-          'flex flex-col gap-x-2 gap-y-4 pb-20 pr-4 items-end text-white w-full h-dvh absolute left-0 top-0 -z-10 justify-end text-2xl translate-x-full transition bg-transparent',
-          'md:flex-row md:items-center md:mt-0 md:z-0 md:relative md:translate-x-0 md:justify-start md:h-auto md:pb-0 md:pr-0 md:text-base',
-          isOpen ? 'flex translate-x-0 bg-pallet-background' : 'md:flex',
-          'md:flex'
-        )}
-      >
-        {NAV_ITEMS.map(({ href, title }) => {
-          return (
-            <li key={href}>
-              <Link
-                href={href}
-                onClick={() => setIsOpen(false)}
-                className={cn(
-                  'px-2.5 py-2 border rounded-md border-transparent hover:border-pallet-primary hover:text-pallet-primary transition uppercase',
-                  'focus-visible:text-pallet-primary focus-visible:border-pallet-primary focus-visible:outline-none focus-visible:outline focus-visible:outline-white',
-                  currentHash === href && 'bg-pallet-primary border-pallet-primary',
-                  currentHash === href && 'hover:text-white',
-                  currentHash === href &&
-                    'focus-visible:text-white focus-visible:border-white focus-visible:outline focus-visible:outline-white'
-                )}
-              >
-                {title}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
-    </nav>
-  )
-}
-
-function DiscordLink() {
-  return (
-    <Link
-      href='https://discord.gg/midudev'
-      target='_blank'
-      rel='noopener noreferrer'
-      className={cn(
-        'hidden md:inline-flex items-center gap-2 px-4 py-2 text-white uppercase border rounded-md border-pallet-border-foreground',
-        'hover:bg-pallet-border-foreground hover:border-pallet-ghost transition',
-        'focus-visible:outline focus-visible:outline-white focus-visible:bg-pallet-border-foreground focus-visible:border-pallet-ghost'
-      )}
-    >
-      <DiscordIcon className='w-5 h-auto' />
-      <span>Discord</span>
-    </Link>
+		<>
+			<nav>
+				<ul className="flex gap-16 relative z-20">
+					<CallToAction text='Discord' estilo='discord' IconComponent={DiscordIcon} href='https://discord.gg/midudev' />
+					<button ref={refButton} onClick={toggleMenu} className="burguer px-[12px] py-[10px] border border-pallet-border-foreground bg-pallet-b-foreground-primary rounded-[5px] flex justify-center items-center lg:hidden cursor-pointer">
+						<Burger className="size-16" />
+					</button>
+				</ul>
+				<ul
+					id={navbarId}
+					ref={refNavbarList}
+					className={cn(
+						"navbarList clipHidden absolute inset-0 lg:inset-auto h-screen lg:h-auto flex flex-col lg:flex-row justify-end items-end p-5 space-y-24 bg-pallet-background lg:top-[28px] lg:bottom-auto pt-[80px] pb-5 lg:clipVisible lg:bg-transparent lg:p-0 lg:left-1/2 lg:-translate-x-1/2 lg:justify-center lg:items-center lg:space-y-0"
+					)}
+				>
+					{NAV_ITEMS.map(({ href, title }) => {
+						return (
+							<li key={href} className="navbar-item translate-x-full opacity-0 lg:translate-x-0 lg:opacity-100 text-right transition-colors duration-300">
+								<Link
+									href={href}
+									onClick={handleItemClick}
+									className={cn(
+										'px-4 py-2 text-2xl lg:text-xl-code',
+										"text-2xl font-code inline uppercase overflow-hidden rounded-[5px] relative text-default transition-colors duration-200 navbar-link",
+										 currentHash === href ? 'text-pallet-default hover:text-pallet-default'
+											: 'text-pallet-ghost hover:text-pallet-default',
+										currentHash === href &&
+											'focus-visible:text-pallet-default focus-visible:border-pallet-default focus-visible:outline focus-visible:outline-pallet-default'
+									)}
+								>
+									{title}
+								</Link>
+							</li>
+						)
+					})}
+				</ul>
+			</nav>
+			<div className='navbar-overlay bg-pallet-background opacity-50 invisible w-full h-screen absolute z-9 inset-0'></div>
+		</>
   )
 }
 

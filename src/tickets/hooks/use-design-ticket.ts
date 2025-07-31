@@ -7,8 +7,16 @@ import { HologramOption } from '../types/hologram-option'
 import { TicketDesign } from '../types/ticket-design'
 import { StickerOption } from '../types/sticker-option'
 
-export const useDesignTicket = () => {
-  const [ticketDesign, setTicketDesign] = useState<TicketDesign>(INITIAL_STATE)
+interface Props {
+  hologram: HologramOption
+}
+
+export const useDesignTicket = ({ hologram }: Props) => {
+  const [ticketDesign, setTicketDesign] = useState<TicketDesign>(() =>
+    getInitialState({
+      hologram
+    })
+  )
 
   const handleChangeDesign = (options: Partial<TicketDesign>) => {
     setTicketDesign((lastDesign) => ({
@@ -74,10 +82,17 @@ export const useDesignTicket = () => {
   }
 }
 
+const getInitialState = ({ ...design }: Partial<TicketDesign>) => {
+  return {
+    ...INITIAL_STATE,
+    ...design
+  }
+}
+
 const INITIAL_STATE = {
   animation: PERSONALIZE_TIKET_OPTIONS.ANIMATION.DEFAULT,
   structure: PERSONALIZE_TIKET_OPTIONS.STRUCTURE.CIRCLE,
   color: PERSONALIZE_TIKET_OPTIONS.COLOR.BLUE,
   hologram: PERSONALIZE_TIKET_OPTIONS.HOLOGRAM[1],
   sticker: null
-}
+} as TicketDesign

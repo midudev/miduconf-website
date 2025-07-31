@@ -9,13 +9,12 @@ export const useDownloadTicketImage = ({ ticketDOMContnet }: Props) => {
   const [sharedTicketImageLink, setSharedTicketImageLink] = useState<string | null>(null)
 
   useLayoutEffect(() => {
-    console.log({ sharedTicketImageLink, ticketDOMContnet })
     if (sharedTicketImageLink != null) return
 
-    handleDownloadImage()
+    handleCreateImageImage()
   }, [ticketDOMContnet])
 
-  const handleDownloadImage = async () => {
+  const handleCreateImageImage = async () => {
     if (ticketDOMContnet == null) return
 
     const { dataURL } = await transformElementToJpeg({ ticketDOMContnet })
@@ -24,6 +23,6 @@ export const useDownloadTicketImage = ({ ticketDOMContnet }: Props) => {
 
   return {
     sharedTicketImageLink,
-    handleDownloadImage
+    handleCreateImageImage
   }
 }

@@ -1,20 +1,20 @@
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { TICKET_DB_KEY } from '../config/ticket-db-key'
-import { TicketDesign } from '../types/ticket-design'
+import { SupabaseTicketData } from '../types/supabase-ticket-data'
 
 interface UseUpdateTicketInDBProps {
-  ticketDesign: TicketDesign
+  ticketInfo: Partial<SupabaseTicketData>
   username: string
 }
 
 export const useUpdateTicketInDB = () => {
   const supabase = useSupabaseClient()
 
-  const handleUpdateTicket = async ({ ticketDesign, username }: UseUpdateTicketInDBProps) => {
-    const { error } = await supabase
+  const handleUpdateTicket = async ({ ticketInfo, username }: UseUpdateTicketInDBProps) => {
+    const { error, data } = await supabase
       .from(TICKET_DB_KEY)
       .update({
-        hologram: ticketDesign.hologram
+        hologram: ticketInfo.hologram
       })
       .eq('user_name', username)
 

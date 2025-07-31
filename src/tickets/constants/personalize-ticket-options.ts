@@ -27,7 +27,8 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     TWITCH_3: 'twitch-3',
     ACADEMIA_MENSUAL: 'academia-mensual',
     ACADEMIA_TRIMESTRAL: 'academia-trimestral',
-    ACADEMIA_ANUAL: 'academia-anual'
+    ACADEMIA_ANUAL: 'academia-anual',
+    ACADEMIA_LIFETIME: 'academia-lifetime'
   },
   STICKER: {
     MIDU_WINK: 'midu-wink',
