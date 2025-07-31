@@ -1,64 +1,56 @@
-import { DotIcon } from '@/components/icons/dot'
-import Marquee from 'react-fast-marquee'
+import { Highlight } from '@/components/Highlight'
+import { Title } from '@/components/Title'
+import { useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
 
 export function WhatToExpect() {
-	return (
-		<section id='lo-que-puedes-esperar' className='pt-32'>
-			<h2 className='flex items-center justify-center gap-4 mb-16 text-4xl font-bold text-white uppercase'>
-				<DotIcon className='text-pallet-primary' /> Qué esperar{' '}
-				<DotIcon className='text-pallet-primary' />
-			</h2>
-			<Marquee className='mb-6' autoFill gradient gradientColor='#09090E'>
-				{getRandomOrderList(LIST_OF_ITEMS).map((item) => {
-					return (
-						<div
-							className='px-4 py-2 mx-4 text-2xl text-white uppercase transition rounded-md hover:bg-pallet-primary cursor-crosshair'
-							key={item}
-						>
-							{item}
-						</div>
-					)
-				})}
-			</Marquee>
-			<Marquee className='mb-6' direction='right' autoFill gradient gradientColor='#09090E'>
-				{getRandomOrderList(LIST_OF_ITEMS).map((item) => {
-					return (
-						<div
-							className='px-4 py-2 mx-4 text-2xl text-white uppercase transition rounded-md hover:bg-pallet-primary cursor-crosshair'
-							key={item}
-						>
-							{item}
-						</div>
-					)
-				})}
-			</Marquee>
-			<Marquee autoFill gradient gradientColor='#09090E'>
-				{getRandomOrderList(LIST_OF_ITEMS).map((item) => {
-					return (
-						<div
-							className='px-4 py-2 mx-4 text-2xl text-white uppercase transition rounded-md hover:bg-pallet-primary cursor-crosshair'
-							key={item}
-						>
-							{item}
-						</div>
-					)
-				})}
-			</Marquee>
-		</section>
-	)
+  const refScrollTop = useRef<HTMLUListElement>(null)
+  const refScrollBottom = useRef<HTMLUListElement>(null)
+
+  useEffect(() => {
+    const scrollTop = refScrollTop.current
+    const scrollBottom = refScrollBottom.current
+
+    function cloneItems(container: HTMLUListElement | null) {
+      if (!container) return
+      const items = container.querySelectorAll('.highlight-item')
+      items.forEach((item: Element) => {
+        // clonar el elemento con todo su contenido
+        const clone = item.cloneNode(true)
+        container.appendChild(clone)
+      })
+    }
+    cloneItems(scrollTop)
+    cloneItems(scrollBottom)
+
+    gsap.to('.star-highlight', {
+      rotation: 180,
+      duration: 0.8,
+      stagger: { from: 'random', amount: 1.5 },
+      repeat: -1,
+      ease: 'elastic.out(1, 0.75)'
+    })
+  }, [])
+  return (
+    <section id='lo-que-puedes-esperar' className='mt-spacing-180'>
+      <Title>Que esperar</Title>
+      <div className='pt-spacing-64 flex flex-col gap-spacing-40 container-infinite-scroll'>
+        <Highlight
+          position='infinite-scroll-top'
+          refHighlight={refScrollTop}
+          highlights={HIGHLIGHTS_1}
+        />
+        <Highlight
+          position='infinite-scroll-bottom'
+          refHighlight={refScrollBottom}
+          direction='right'
+          data-direction='right'
+          highlights={HIGHLIGHTS_2}
+        />
+      </div>
+    </section>
+  )
 }
 
-const LIST_OF_ITEMS = [
-	'IA',
-	'UI/UX',
-	'Live Coding',
-	'Charlas',
-	'Workshops',
-	'Animaciones',
-	'Novedades',
-	'Sorteos'
-]
-
-const getRandomOrderList = (list) => {
-	return [...list].sort(() => Math.random() - 0.5)
-}
+const HIGHLIGHTS_1 = ['I.A.', 'ui/ux', 'animaciones', 'charlas']
+const HIGHLIGHTS_2 = ['workshops', 'live coding', 'novedades', 'sorteos']
