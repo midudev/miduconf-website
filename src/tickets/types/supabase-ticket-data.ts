@@ -10,4 +10,6 @@ export interface SupabaseTicketData {
   user_fullname: string | null
   user_id: string | null
   user_name: string | null
+  midudev_token_id: string
+  midudev_type_sub: string | null
 }

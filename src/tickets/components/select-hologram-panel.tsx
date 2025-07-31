@@ -17,6 +17,7 @@ interface Props {
   twitchTier: '1' | '2' | '3' | null
   username: string
   ticketNumber: number
+  midudevTokentId: string
 }
 
 export const SelectHologramPanel = ({
@@ -25,6 +26,7 @@ export const SelectHologramPanel = ({
   username,
   ticketOGImageElement,
   ticketNumber,
+  midudevTokentId,
   handleChangeHologram
 }: Props) => {
   const { handleUpdateTicket } = useUpdateTicketInDB()
@@ -144,9 +146,12 @@ export const SelectHologramPanel = ({
             </li>
           ))}
         </ul>
-        <div className='relative flex items-center text-[10px] uppercase w-full justify-center px-4 py-1 bg-pallet-ghost/20 gap-2 rounded-b-md'>
-          Muy Pronto
-        </div>
+        <a
+          href={`http://localhost:4321/miduconf/ticket/${midudevTokentId}`}
+          className='relative flex items-center text-[10px] uppercase w-full justify-center px-4 py-1 bg-pallet-ghost/20 gap-2 rounded-b-md transition hover:bg-pallet-ghost/40'
+        >
+          Desbloquear
+        </a>
       </div>
     </article>
   )
