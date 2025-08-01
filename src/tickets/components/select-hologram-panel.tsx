@@ -66,7 +66,6 @@ export const SelectHologramPanel = ({
 					<li>
 						<Button
 							title={`Aplicar Holograma Standard`}
-							containerClassName='bg-palette-ghost/10'
 							aria-label='Aplicar estructura circular'
 							className='px-1 py-1 text-sm duration-300 aspect-square'
 							onClick={async () => await handleChangeHologramAndSave(STANDARD_HOLOGRAM)}
@@ -89,7 +88,6 @@ export const SelectHologramPanel = ({
 							) : (
 								<Button
 									title={`Aplicar ${label} Holograma`}
-									containerClassName='bg-palette-ghost/10'
 									aria-label='Aplicar estructura circular'
 									className='px-1 py-1 text-sm duration-300 aspect-square'
 									onClick={async () => await handleChangeHologramAndSave(label)}
@@ -133,7 +131,6 @@ export const SelectHologramPanel = ({
 								) : (
 									<Button
 										title={`Aplicar ${label} Holograma`}
-										containerClassName='bg-palette-ghost/10'
 										aria-label='Aplicar estructura circular'
 										className='px-1 py-1 text-sm duration-300 aspect-square'
 										onClick={async () => await handleChangeHologramAndSave(label)}
@@ -167,8 +164,7 @@ function LockAcademiaButton({ hologramIndex }: { hologramIndex: number }) {
 	return (
 		<Tooltip text={`Suscripción en midu.dev`} tooltipPosition='top'>
 			<div className='relative flex items-center gap-1 cursor-not-allowed'>
-				<LockIcon className='absolute w-auto h-6 -translate-x-1/2 -translate-y-1/2 text-palette-ghost left-1/2 top-1/2' />
-				<div className='relative p-1 text-xs border rounded-md opacity-20 bg-palette-ghost/20 aspect-square border-palette-ghost'>
+				<div className='relative p-1 text-xs rounded-md aspect-square'>
 					<img
 						src={`/tickets/holograms/${hologramIndex}.png`}
 						alt={`Representación del Holograma`}
@@ -176,6 +172,7 @@ function LockAcademiaButton({ hologramIndex }: { hologramIndex: number }) {
 						width='30'
 						height='30'
 					/>
+					<LockIcon className='absolute -top-2 -right-2 size-7.5 text-palette-ghost bg-palette-dark rounded-full p-0.5' />
 				</div>
 			</div>
 		</Tooltip>
@@ -191,8 +188,7 @@ function LockTwitchButton({
 	return (
 		<Tooltip text={`Desbloquear con Tier ${tierNumber} de Twitch`} tooltipPosition='top'>
 			<div className='relative flex items-center gap-1 cursor-not-allowed'>
-				<LockIcon className='absolute w-auto h-6 -translate-x-1/2 -translate-y-1/2 text-palette-ghost left-1/2 top-1/2' />
-				<div className='relative p-1 text-xs border rounded-md opacity-20 bg-palette-ghost/20 aspect-square border-palette-ghost'>
+				<div className='relative p-1 text-xs rounded-md aspect-square'>
 					<img
 						src={`/tickets/holograms/${tierNumber}.png`}
 						alt={`Representación del Holograma`}
@@ -200,6 +196,7 @@ function LockTwitchButton({
 						width='30'
 						height='30'
 					/>
+					<LockIcon className='absolute -top-2 -right-2 size-7.5 text-palette-ghost bg-palette-dark rounded-full p-0.5' />
 				</div>
 			</div>
 		</Tooltip>

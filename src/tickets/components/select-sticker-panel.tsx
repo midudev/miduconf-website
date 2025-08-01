@@ -20,7 +20,6 @@ export const SelectStickerPanel = ({ ticketDesign, handleChangeSticker }: Props)
 							title={`Aplicar ${label} Holograma`}
 							containerClassName='bg-palette-ghost/10'
 							aria-label='Aplicar estructura circular'
-							className='px-3 text-sm duration-300 aspect-square'
 							onClick={() => handleChangeSticker(label)}
 							variant={ticketDesign.sticker?.includes(label) ? 'border' : 'ghost'}
 						>

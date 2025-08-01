@@ -26,13 +26,20 @@ export const Button = <C extends React.ElementType = 'button'>({
 			{...restOfProps}
 			disabled={disabled}
 			className={cn(
-				'inline-flex flex-col items-center gap-x-2 text-xl text-white uppercase rounded-md disabled:cursor-not-allowed md:flex-row md:w-max relative group overflow-hidden disabled:opacity-60 border border-transparent',
+				'inline-flex flex-col items-center gap-x-2 text-xl text-white uppercase disabled:cursor-not-allowed md:flex-row md:w-max relative group overflow-hidden disabled:opacity-60',
+				variant !== 'border' && 'border border-transparent rounded-md',
+				variant === 'border' && 'before:absolute before:z-10 before:top-0 before:left-0 before:w-3 before:h-3 before:border-t-2 before:border-l-2 before:border-palette-primary after:absolute after:z-10 after:top-0 after:right-0 after:w-3 after:h-3 after:border-t-2 after:border-r-2 after:border-palette-primary',
 				containerClassName,
 				variant === 'default' && 'bg-palette-primary',
-				variant === 'border' && 'border-palette-primary hover:bg-palette-ghost/10',
 				variant === 'ghost' && 'hover:bg-palette-ghost/20'
 			)}
 		>
+			{variant === 'border' && (
+				<>
+					<div className="absolute z-10 bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-palette-primary" />
+					<div className="absolute z-10 bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-palette-primary" />
+				</>
+			)}
 			<div
 				className={cn(
 					'inline-flex flex-col items-center gap-x-2 py-2.5 px-4 text-xl text-white uppercase rounded-md group-disabled:cursor-not-allowed md:flex-row md:w-max relative translate-y-0 group-hover:translate-y-full transition ease-[cubic-bezier(0.746,_-0.622,_0.362,_1.546)] duration-300 w-full h-full group-focus-visible:translate-y-full',
