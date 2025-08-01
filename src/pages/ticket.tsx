@@ -33,6 +33,8 @@ interface Props {
   }
   notAccessTier: string
   userHadPreviousTicket: boolean
+  midudevTypeSub: 'monthly' | 'quarterly' | 'annual' | 'lifetime'
+  midudevTokentId: string
 }
 
 export default function Ticket({
@@ -42,7 +44,9 @@ export default function Ticket({
   twitchTier,
   hologram,
   tierQueryData,
-  notAccessTier
+  notAccessTier,
+  midudevTokentId,
+  midudevTypeSub
 }: Props) {
   const ticketImageElement = useRef<HTMLElement | null>(null)
   const ticketOGImageElement = useRef<HTMLElement | null>(null)
@@ -72,11 +76,13 @@ export default function Ticket({
       <main className='flex flex-col items-center justify-center min-h-screen text-white'>
         {/* Mobile/Tablet Layout - Full screen with draggable panel */}
         <ViewTicketMobile
+          midudevTokentId={midudevTokentId}
           twitchTier={twitchTier}
           fullname={user.fullname}
           username={user.username}
           ticketNumber={ticketNumber}
           ticketDesign={ticketDesign}
+          midudevTypeSub={midudevTypeSub}
           ticketDOMContnet={ticketImageElement.current}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
@@ -84,10 +90,12 @@ export default function Ticket({
 
         {/* Desktop Layout */}
         <ViewTicketDesktop
+          midudevTokentId={midudevTokentId}
           twitchTier={twitchTier}
           fullname={user.fullname}
           username={user.username}
           ticketNumber={ticketNumber}
+          midudevTypeSub={midudevTypeSub}
           ticketDesign={ticketDesign}
           ticketDOMContnet={ticketImageElement.current}
           ticketOGImageElement={ticketOGImageElement.current}
@@ -192,6 +200,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
       props: {
         userHadPreviousTicket: false,
         ticketNumber: ticketCreated?.ticketNumber,
+        midudevTypeSub: ticketCreated?.midudevTypeSub,
+        midudevTokentId: ticketCreated?.midudevTokentId,
         initialSession: session,
         user: getInfoFromUser({ user: session?.user }),
         twitchTier: null,
@@ -217,6 +227,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
       userHadPreviousTicket: true,
       ticketNumber: ticket.ticketNumber || 0,
       initialSession: session,
+      midudevTypeSub: ticket.midudevTypeSub,
+      midudevTokentId: ticket.midudevTokentId,
       user: getInfoFromUser({ user: session?.user }),
       twitchTier: ticket.twitchTier,
       hologram: ticket.hologram,

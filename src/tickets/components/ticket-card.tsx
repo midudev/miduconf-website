@@ -23,13 +23,13 @@ export const TicketCard = ({
 	return (
 		<article
 			className={cn(
-				'w-full max-w-[320px] md:max-w-[500px] aspect-[397/597] overflow-hidden p-2 bg-gradient-to-tr from-white/20 via-transparent to-white/20 rounded-2xl border border-pallet-border-foreground',
+				'w-[280px] md:w-[350px] lg:w-[400px] aspect-[397/597] overflow-hidden p-2 bg-gradient-to-tr from-white/20 via-transparent to-white/20 rounded-2xl border border-palette-border-foreground',
 				hologramStyles.outer
 			)}
 		>
 			<div
 				className={cn(
-					'bg-gradient-to-tr from-[#1f1f25] via-[#101015] to-[#1f1f25] border border-pallet-border-foreground rounded-xl flex flex-col relative h-full overflow-hidden font-ibm-plex',
+					'bg-gradient-to-tr from-[#1f1f25] via-[#101015] to-[#1f1f25] border border-palette-border-foreground rounded-xl flex flex-col relative h-full overflow-hidden font-ibm-plex',
 					hologramStyles.inner
 				)}
 			>
@@ -54,12 +54,12 @@ export const TicketCard = ({
 					)}
 				/>
 				<header className='p-6 uppercase max-sm:p-5'>
-					<p className={cn('text-pallet-ghost mt-2', hologramStyles.text && hologramStyles.text)}>
+					<p className={cn('text-palette-ghost mt-2', hologramStyles.text && hologramStyles.text)}>
 						/@{username}
 					</p>
 					<h3
 						className={cn(
-							'mt-6 text-4xl max-sm:text-3xl font-medium text-pretty max-w-[16ch]',
+							'mt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-pretty max-w-[16ch]',
 							hologramStyles.text && hologramStyles.text
 						)}
 					>
@@ -69,7 +69,7 @@ export const TicketCard = ({
 				<footer className='flex flex-col justify-end flex-1'>
 					<span
 						className={cn(
-							'mb-2 mx-auto font-medium text-[calc(426px_/_8)] sm:text-[calc(375px_/_6)] md:text-[calc(375px_/_6)] tabular-nums leading-none',
+							'mb-2 mx-auto font-medium text-[3.5rem] md:text-7xl lg:text-[5.3rem] tabular-nums leading-none',
 							hologramStyles.text && hologramStyles.text
 						)}
 					>
@@ -78,7 +78,7 @@ export const TicketCard = ({
 					<time
 						dateTime='2025-09-10T16:00:00'
 						className={cn(
-							'flex items-center text-pallet-ghost justify-between gap-4 font-light px-3 pb-2 text-xs sm:px-5 sm:pb-5 sm:text-base',
+							'flex items-center text-palette-ghost justify-between gap-4 font-light px-3 pb-2 text-xs sm:px-5 sm:pb-5',
 							hologramStyles.text && hologramStyles.text
 						)}
 					>
@@ -107,7 +107,7 @@ const getHologramStyles = (hologram: HologramOption) => {
 			styles.inner =
 				'after:w-full after:h-full after:absolute after:left-0 after:top-0 after:bg-[url(/tickets/gradient.png)] after:opacity-20 from-pink-200/20 to-sky-200/20 before:w-full before:h-full before:absolute before:left-0 before:top-0 before:bg-gradient-to-tr before:from-[#1f1f25] before:via-[#101015] before:to-[#1f1f25] before:-z-10'
 			styles.logo =
-				'text-pallet-background [filter:drop-shadow(-2px_-2px_.5px_#695f68)_drop-shadow(2px_2px_.5px_#59646f)_drop-shadow(-2px_2px_.5px_#695f68)_drop-shadow(2px_-2px_.5px_#596460)]'
+				'text-palette-background [filter:drop-shadow(-2px_-2px_.5px_#695f68)_drop-shadow(2px_2px_.5px_#59646f)_drop-shadow(-2px_2px_.5px_#695f68)_drop-shadow(2px_-2px_.5px_#596460)]'
 			styles.text =
 				'bg-gradient-to-r from-pink-200 via-white to-sky-200 bg-clip-text text-transparent'
 			styles.badge = {
