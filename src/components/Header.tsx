@@ -12,7 +12,7 @@ import { gsap } from 'gsap'
 
 export function Header() {
 	return (
-		<header className='fixed pt-5 px-5 z-[9999] flex items-center justify-between w-full animate-fade-in-down font-geist animation-header'>
+		<header className='fixed pt-5 px-4 z-[9999] flex items-center justify-between w-full animate-fade-in-down font-geist animation-header'>
 			<Title />
 			<Navbar />
 		</header>
