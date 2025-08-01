@@ -11,7 +11,7 @@ export const ModalTwitchAccessContent = ({ tierNumber, handleCloseModal }: Props
 	return (
 		<div className='flex flex-col items-center justify-center gap-2 text-balance'>
 			<header className='w-full px-4 py-4 border-b border-palette-border-foreground bg-gradient-to-tr from-[#1f1f25] via-[#101015] to-[#1f1f25] flex items-center justify-center gap-2'>
-				<TwitchIcon className='w-auto h-5 text-white' />
+				<TwitchIcon className='size-5 text-white' />
 				<p className='text-lg font-bold text-white uppercase'>| Twitch</p>
 			</header>
 			<div className='px-4 py-6'>
