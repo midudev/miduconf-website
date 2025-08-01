@@ -7,7 +7,7 @@ import { MiduLogo3D } from '@/components/experience/MiduLogo3D'
 import { CallToAction } from '@/components/CallToAction'
 
 interface Props {
-  userData?: User
+	userData?: User
 }
 
 export function Hero({ userData }: Props) {

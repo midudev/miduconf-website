@@ -20,42 +20,42 @@ export const CallToAction = ({
   className,
   onClick
 }: CalltoActionType) => {
-  const style = {
-    default: 'bg-pallet-bg-foreground-secondary',
-    discord: 'border border-pallet-border-foreground bg-pallet-b-foreground-primary navbar-discord'
-  }
+	const style = {
+		default: 'bg-palette-bg-foreground-secondary',
+		discord: 'border border-palette-border-foreground bg-palette-bg-foreground-primary navbar-discord'
+	}
 
   const ctaRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
 
-  useEffect(() => {
-    const cta = ctaRef.current
-    if (!cta) return
+	useEffect(() => {
+		const cta = ctaRef.current
+		if (!cta) return
 
-    const $ctaContent = cta.querySelector('.cta-content')
-    const items = $ctaContent?.querySelectorAll('.cta-info')
+		const $ctaContent = cta.querySelector('.cta-content')
+		const items = $ctaContent?.querySelectorAll('.cta-info')
 
-    const animateItems = (y: number) => {
-      items?.forEach((item) => {
-        gsap.to(item.children, {
-          y,
-          duration: 0.7,
-          stagger: 0.05,
-          ease: 'elastic.out(1, 0.75)'
-        })
-      })
-    }
+		const animateItems = (y: number) => {
+			items?.forEach((item) => {
+				gsap.to(item.children, {
+					y,
+					duration: 0.7,
+					stagger: 0.05,
+					ease: 'elastic.out(1, 0.75)'
+				})
+			})
+		}
 
-    const handleEnter = () => animateItems(32)
-    const handleLeave = () => animateItems(0)
+		const handleEnter = () => animateItems(32)
+		const handleLeave = () => animateItems(0)
 
-    cta.addEventListener('mouseenter', handleEnter)
-    cta.addEventListener('mouseleave', handleLeave)
+		cta.addEventListener('mouseenter', handleEnter)
+		cta.addEventListener('mouseleave', handleLeave)
 
-    return () => {
-      cta.removeEventListener('mouseenter', handleEnter)
-      cta.removeEventListener('mouseleave', handleLeave)
-    }
-  })
+		return () => {
+			cta.removeEventListener('mouseenter', handleEnter)
+			cta.removeEventListener('mouseleave', handleLeave)
+		}
+	})
 
   if (href) {
     return (

@@ -93,10 +93,10 @@ module.exports = {
           black: '#0F0F0F',
           white: '#ffffff'
         },
-        pallet: {
+        palette: {
           background: '#09090E',
           ghost: '#B8BBC5',
-          'b-foreground-primary': '#121319',
+          'bg-foreground-primary': '#121319',
           primary: '#5A8CF6',
           'border-primary': '#95B8FB',
           'bg-foreground-secondary': '#5A8CF6',

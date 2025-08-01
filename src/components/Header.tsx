@@ -20,32 +20,32 @@ export function Header() {
 }
 
 function Title() {
-  return (
-    <>
-      <Link href='/' className='relative z-20 flex items-center text-pallet-default'>
-        <Midudev className='size-[42px] block lg:hidden' />
-        <Miduconf className='hidden lg:block' />
-      </Link>
-    </>
-  )
+	return (
+		<>
+			<Link href='/' className='relative z-20 flex items-center text-palette-default'>
+				<Midudev className='size-[42px] block lg:hidden' />
+				<Miduconf className='hidden lg:block' />
+			</Link>
+		</>
+	)
 }
 
 function Navbar() {
-  const currentHash = useCurrentHashOnLink()
-  const [isOpen, setIsOpen] = useState(false)
-  const navbarId = useId()
-  const refButton = useRef<HTMLButtonElement>(null)
-  const refNavbarList = useRef<HTMLUListElement>(null)
+	const currentHash = useCurrentHashOnLink()
+	const [isOpen, setIsOpen] = useState(false)
+	const navbarId = useId()
+	const refButton = useRef<HTMLButtonElement>(null)
+	const refNavbarList = useRef<HTMLUListElement>(null)
 
-  function toggleNavbar(open: boolean) {
-    let tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 0.5, stagger: 0.05 } })
-    const burgerRect = refButton.current?.querySelectorAll<SVGRectElement>('svg rect')
-    const navbarList = refNavbarList.current
-    const navbarItems = navbarList?.querySelectorAll('.navbar-item')
+	function toggleNavbar(open: boolean) {
+		let tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 0.5, stagger: 0.05 } })
+		const burgerRect = refButton.current?.querySelectorAll<SVGRectElement>('svg rect')
+		const navbarList = refNavbarList.current
+		const navbarItems = navbarList?.querySelectorAll('.navbar-item')
 
-    if (!burgerRect || !navbarList || !navbarItems) return
+		if (!burgerRect || !navbarList || !navbarItems) return
 
-    tl.clear()
+		tl.clear()
 
     if (open) {
       tl.to(burgerRect[0], {
@@ -64,41 +64,41 @@ function Navbar() {
     }
   }
 
-  const toggleMenu = () =>
-    setIsOpen((prev) => {
-      const newState = !prev
-      toggleNavbar(newState)
-      return newState
-    })
+	const toggleMenu = () =>
+		setIsOpen((prev) => {
+			const newState = !prev
+			toggleNavbar(newState)
+			return newState
+		})
 
-  const handleItemClick = () => {
-    if (window.innerWidth < 1024) {
-      setIsOpen(false)
-      toggleNavbar(false)
-    }
-  }
+	const handleItemClick = () => {
+		if (window.innerWidth < 1024) {
+			setIsOpen(false)
+			toggleNavbar(false)
+		}
+	}
 
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : ''
+	useEffect(() => {
+		document.body.style.overflow = isOpen ? 'hidden' : ''
 
-    const handleResize = () => {
-      if (window.innerWidth >= 1024 && refNavbarList.current) {
-        gsap.set(refNavbarList.current, { clearProps: 'all' })
-        const items = refNavbarList.current.querySelectorAll('.navbar-item')
-        items.forEach((item) => {
-          gsap.set(item, { clearProps: 'all' })
-        })
-      }
-    }
-    window.addEventListener('resize', handleResize)
-    handleResize()
+		const handleResize = () => {
+			if (window.innerWidth >= 1024 && refNavbarList.current) {
+				gsap.set(refNavbarList.current, { clearProps: 'all' })
+				const items = refNavbarList.current.querySelectorAll('.navbar-item')
+				items.forEach((item) => {
+					gsap.set(item, { clearProps: 'all' })
+				})
+			}
+		}
+		window.addEventListener('resize', handleResize)
+		handleResize()
 
-    return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [isOpen])
-
+		return () => {
+			document.body.style.overflow = ''
+			window.removeEventListener('resize', handleResize)
+		}
+	}, [isOpen])
+  
   return (
     <>
       <nav>
@@ -151,8 +151,8 @@ function Navbar() {
 }
 
 function useCurrentHashOnLink() {
-  const { asPath: currentPath } = useRouter()
-  return currentPath
+	const { asPath: currentPath } = useRouter()
+	return currentPath
 }
 
 const NAV_ITEMS = [
