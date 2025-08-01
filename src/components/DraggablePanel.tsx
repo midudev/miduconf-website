@@ -90,7 +90,7 @@ export const DraggablePanel = ({ children, title, isOpen, onToggle }: Props) => 
 		>
 			{/* Handle */}
 			<div
-				className="bg-pallet-b-foreground-primary border-t border-pallet-border-foreground cursor-grab active:cursor-grabbing"
+				className="bg-palette-bg-foreground-primary border-t border-palette-border-foreground cursor-grab active:cursor-grabbing"
 				onTouchStart={handleTouchStart}
 				onTouchMove={handleTouchMove}
 				onTouchEnd={handleTouchEnd}
@@ -119,7 +119,7 @@ export const DraggablePanel = ({ children, title, isOpen, onToggle }: Props) => 
 			</div>
 
 			{/* Content */}
-			<div className="bg-pallet-b-foreground-primary px-6 pb-6 border-pallet-border-foreground flex-1 overflow-y-auto">
+			<div className="bg-palette-bg-foreground-primary px-6 pb-6 border-palette-border-foreground flex-1 overflow-y-auto">
 				{children}
 			</div>
 		</div>

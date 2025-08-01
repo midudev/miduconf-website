@@ -34,7 +34,7 @@ export const ShareTicketPanel = ({
 			<h2 className='sr-only'>Opciones para compartir:</h2>
 			<ul
 				className={cn(
-					'flex flex-col gap-4 p-2 text-white border rounded-lg lg:p-4 border-pallet-border-foreground bg-pallet-b-foreground-primary',
+					'flex flex-col gap-4 p-2 text-white border rounded-lg lg:p-4 border-palette-border-foreground bg-palette-bg-foreground-primary',
 					className
 				)}
 			>
@@ -74,7 +74,7 @@ export const ShareTicketPanel = ({
 				{/* <li>
           <Link
             href='#'
-            className='bg-[rgba(39,_40,_48,_0.4)] p-2.5 rounded-md flex items-center justify-center hover:bg-pallet-ghost/20 transition'
+            className='bg-[rgba(39,_40,_48,_0.4)] p-2.5 rounded-md flex items-center justify-center hover:bg-palette-ghost/20 transition'
             title='Compartir en Instagram'
             aria-label='Compartir ticket en Instagram'
           >

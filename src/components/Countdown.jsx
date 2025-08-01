@@ -27,12 +27,12 @@ export function Countdown({ className }) {
   return (
     <div
       className={cn(
-        'text-base md:text-xl flex items-center gap-3 text-white font-geist bg-pallet-b-foreground-primary border border-pallet-border-foreground px-4 py-2 w-max',
+        'text-base md:text-xl flex items-center gap-3 text-white font-geist bg-palette-bg-foreground-primary border border-palette-border-foreground px-4 py-2 w-max',
         className
       )}
     >
-      <DiamondIcon className='text-pallet-primary' />
-      <span className='uppercase text-pallet-ghost'>Empezamos en:</span>
+      <DiamondIcon className='text-palette-primary' />
+      <span className='uppercase text-palette-ghost'>Empezamos en:</span>
       <div className='flex items-center gap-1 text-white'>
         {[days, null, hours, null, minutes, null, seconds].map((value, index) => {
           return (

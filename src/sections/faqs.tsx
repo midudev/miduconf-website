@@ -7,8 +7,8 @@ export function FAQS() {
 	return (
 		<section id='faqs' className='px-4 pt-44 md:px-8'>
 			<h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
-				<DotIcon className='text-pallet-primary' /> FAQ'S{' '}
-				<DotIcon className='text-pallet-primary' />
+				<DotIcon className='text-palette-primary' /> FAQ'S{' '}
+				<DotIcon className='text-palette-primary' />
 			</h2>
 			<p className='mx-auto mb-16 text-xl text-white text-pretty max-w-[42ch] text-center'>
 				Aquí resolvemos las dudas más comunes. Si tienes alguna otra pregunta, no dudes en
@@ -36,14 +36,14 @@ interface Props {
 function FAQItem({ isOpen, title, content }: Props) {
 	const [open, setOpen] = useState(isOpen ?? false)
 	return (
-		<article className='text-white border rounded-md bg-pallet-b-foreground-primary border-pallet-border-foreground'>
+		<article className='text-white border rounded-md bg-palette-bg-foreground-primary border-palette-border-foreground'>
 			<header
 				onClick={() => setOpen(!open)}
 				className='flex items-center justify-between px-4 py-2 cursor-pointer select-none'
 			>
 				<h3>{title}</h3>
 				<button
-					className='px-2 rounded-md aspect-square bg-pallet-primary'
+					className='px-2 rounded-md aspect-square bg-palette-primary'
 					title={open ? 'Cerrar' : 'Abrir'}
 				>
 					<ArrowIcon className={cn('w-4 h-auto transition', open && 'rotate-180')} />
