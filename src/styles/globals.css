@@ -273,6 +273,21 @@ body {
   }
 }
 
+.scroll-container {
+  animation: infinite-scroll var(--duration, 20s) linear infinite var(--direction, normal);
+}
+.scroll-container[data-direction='right'] {
+  --direction: reverse;
+}
+
+@keyframes infinite-scroll {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(calc(var(--position, -50%) - 1.5rem));
+  }
+}
 
 .custom-scroll::-webkit-scrollbar {
 	width: 6px;
