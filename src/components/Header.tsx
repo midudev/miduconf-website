@@ -11,12 +11,12 @@ import { CallToAction } from './CallToAction'
 import { gsap } from 'gsap'
 
 export function Header() {
-  return (
-    <header className='fixed pt-5 px-5 z-[9999] flex items-center justify-between w-full animate-fade-in-down animation-header'>
-      <Title />
-      <Navbar />
-    </header>
-  )
+	return (
+		<header className='fixed pt-5 px-5 z-[9999] flex items-center justify-between w-full animate-fade-in-down animation-header'>
+			<Title />
+			<Navbar />
+		</header>
+	)
 }
 
 function Title() {
@@ -47,22 +47,22 @@ function Navbar() {
 
 		tl.clear()
 
-    if (open) {
-      tl.to(burgerRect[0], {
-        y: 5,
-        rotation: -45,
-        transformOrigin: '50% center'
-      })
-        .to(burgerRect[1], { y: -5, rotation: 45, transformOrigin: '55% 55%' }, '<')
-        .to(navbarList, { clipPath: 'polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)' }, '-=0.4')
-        .to(navbarItems, { x: 0, opacity: 1, ease: 'elastic.out(1, 0.75)' }, '-=0.2')
-    } else {
-      tl.to(navbarItems, { x: 100, opacity: 0, ease: 'elastic.out(1, 0.75)' })
-        .to(navbarList, { clipPath: 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)' }, '-=0.4')
-        .to(burgerRect[0], { y: 0, rotation: 0 }, '<')
-        .to(burgerRect[1], { y: 0, rotation: 0 }, '<')
-    }
-  }
+		if (open) {
+			tl.to(burgerRect[0], {
+				y: 5,
+				rotation: -45,
+				transformOrigin: '50% center'
+			})
+				.to(burgerRect[1], { y: -5, rotation: 45, transformOrigin: '55% 55%' }, '<')
+				.to(navbarList, { clipPath: 'polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)' }, '-=0.4')
+				.to(navbarItems, { x: 0, opacity: 1, ease: 'elastic.out(1, 0.75)' }, '-=0.2')
+		} else {
+			tl.to(navbarItems, { x: 100, opacity: 0, ease: 'elastic.out(1, 0.75)' })
+				.to(navbarList, { clipPath: 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)' }, '-=0.4')
+				.to(burgerRect[0], { y: 0, rotation: 0 }, '<')
+				.to(burgerRect[1], { y: 0, rotation: 0 }, '<')
+		}
+	}
 
 	const toggleMenu = () =>
 		setIsOpen((prev) => {
@@ -98,56 +98,56 @@ function Navbar() {
 			window.removeEventListener('resize', handleResize)
 		}
 	}, [isOpen])
-  
-  return (
-    <>
-      <nav>
-        <ul className='flex gap-spacing-16 relative z-20'>
-          <CallToAction
-            text='Discord'
-            estilo='discord'
-            IconComponent={DiscordIcon}
-            href='https://discord.gg/midudev'
-          />
-          <button
-            ref={refButton}
-            onClick={toggleMenu}
-            className='burguer px-3 py-[10px] border border-pallet-border-foreground bg-pallet-b-foreground-primary rounded-[5px] flex justify-center items-center lg:hidden cursor-pointer'
-          >
-            <Burger className='size-spacing-16' />
-          </button>
-        </ul>
-        <ul
-          id={navbarId}
-          ref={refNavbarList}
-          className={cn(
-            'navbarList animation-ul group clipHidden absolute inset-0 lg:inset-auto h-screen lg:h-auto flex flex-col lg:flex-row justify-end items-end p-5 space-y-spacing-24 bg-pallet-background lg:top-[28px] lg:bottom-auto pt-[80px] pb-5 lg:clipVisible lg:bg-transparent lg:p-0 lg:left-1/2 lg:-translate-x-1/2 lg:justify-center lg:items-center lg:space-y-0'
-          )}
-        >
-          {NAV_ITEMS.map(({ href, title }) => (
-            <li
-              key={href}
-              className='navbar-item translate-x-full opacity-0 lg:translate-x-0 lg:opacity-100 text-right transition-colors duration-300'
-            >
-              <Link
-                href={href}
-                onClick={handleItemClick}
-                className={cn(
-                  'px-4 py-2 text-2xl lg:text-xl-code',
-                  'text-2xl font-code inline uppercase overflow-hidden rounded-[5px] relative navbar-link transition-colors duration-200',
-                  'lg:group-hover:text-pallet-ghost hover:!text-pallet-default',
-                  currentHash === href ? 'text-pallet-default' : 'text-pallet-default'
-                )}
-              >
-                <span className='relative z-10'>{title}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div className='navbar-overlay bg-pallet-background opacity-50 invisible w-full h-screen absolute z-9 inset-0'></div>
-    </>
-  )
+
+	return (
+		<>
+			<nav>
+				<ul className='flex gap-spacing-16 relative z-20'>
+					<CallToAction
+						text='Discord'
+						estilo='discord'
+						IconComponent={DiscordIcon}
+						href='https://discord.gg/midudev'
+					/>
+					<button
+						ref={refButton}
+						onClick={toggleMenu}
+						className='burguer px-3 py-[10px] border border-palette-border-foreground bg-palette-bg-foreground-primary rounded-[5px] flex justify-center items-center lg:hidden cursor-pointer'
+					>
+						<Burger className='size-spacing-16' />
+					</button>
+				</ul>
+				<ul
+					id={navbarId}
+					ref={refNavbarList}
+					className={cn(
+						'navbarList animation-ul group clipHidden absolute inset-0 lg:inset-auto h-screen lg:h-auto flex flex-col lg:flex-row justify-end items-end p-5 space-y-spacing-24 bg-palette-background lg:top-[28px] lg:bottom-auto pt-[80px] pb-5 lg:clipVisible lg:bg-transparent lg:p-0 lg:left-1/2 lg:-translate-x-1/2 lg:justify-center lg:items-center lg:space-y-0'
+					)}
+				>
+					{NAV_ITEMS.map(({ href, title }) => (
+						<li
+							key={href}
+							className='navbar-item translate-x-full opacity-0 lg:translate-x-0 lg:opacity-100 text-right transition-colors duration-300'
+						>
+							<Link
+								href={href}
+								onClick={handleItemClick}
+								className={cn(
+									'px-4 py-2 text-2xl lg:text-xl-code',
+									'text-2xl font-code inline uppercase overflow-hidden rounded-[5px] relative navbar-link transition-colors duration-200',
+									'lg:group-hover:text-palette-ghost hover:!text-palette-default',
+									currentHash === href ? 'text-palette-default' : 'text-palette-default'
+								)}
+							>
+								<span className='relative z-10'>{title}</span>
+							</Link>
+						</li>
+					))}
+				</ul>
+			</nav>
+			<div className='navbar-overlay bg-palette-background opacity-50 invisible w-full h-screen absolute z-9 inset-0'></div>
+		</>
+	)
 }
 
 function useCurrentHashOnLink() {
@@ -156,20 +156,20 @@ function useCurrentHashOnLink() {
 }
 
 const NAV_ITEMS = [
-  {
-    href: '/#speakers',
-    title: 'Speakers'
-  },
-  {
-    href: '/#sponsors',
-    title: 'sponsors'
-  },
-  {
-    href: '/#agenda',
-    title: 'Agenda'
-  },
-  {
-    href: '/#faqs',
-    title: 'FAQS'
-  }
+	{
+		href: '/#speakers',
+		title: 'Speakers'
+	},
+	{
+		href: '/#sponsors',
+		title: 'sponsors'
+	},
+	{
+		href: '/#agenda',
+		title: 'Agenda'
+	},
+	{
+		href: '/#faqs',
+		title: 'FAQS'
+	}
 ]

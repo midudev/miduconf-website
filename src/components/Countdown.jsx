@@ -62,12 +62,12 @@ export function Countdown({ className }) {
     <>
       <div
         className={cn(
-          'flex items-center gap-3 text-xl-code bg-pallet-b-foreground-primary border border-pallet-border-foreground p-spacing-8 md:px-3 rounded-[5px]',
+          'flex items-center gap-3 text-xl-code bg-palette-bg-foreground-primary border border-palette-border-foreground p-spacing-8 md:px-3 rounded-[5px]',
           className
         )}
       >
         <Clock ref={clockRef} className='clock size-[18px]' />
-        <span className='text-pallet-ghost text-xl-code'>Empezamos en:</span>
+        <span className='text-palette-ghost text-xl-code'>Empezamos en:</span>
         <div className='flex items-center gap-1'>
           {[days, null, hours, null, minutes, null, seconds].map((value, index) => {
             return (

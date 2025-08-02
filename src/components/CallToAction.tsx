@@ -4,28 +4,28 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 interface CalltoActionType {
-  href?: string
-  IconComponent: React.ComponentType<{ className?: string }>
-  estilo: 'default' | 'discord'
-  text: string
-  className?: string
-  onClick?: () => void
+	href?: string
+	IconComponent: React.ComponentType<{ className?: string }>
+	estilo: 'default' | 'discord'
+	text: string
+	className?: string
+	onClick?: () => void
 }
 
 export const CallToAction = ({
-  href,
-  IconComponent,
-  estilo,
-  text,
-  className,
-  onClick
+	href,
+	IconComponent,
+	estilo,
+	text,
+	className,
+	onClick
 }: CalltoActionType) => {
 	const style = {
 		default: 'bg-palette-bg-foreground-secondary',
 		discord: 'border border-palette-border-foreground bg-palette-bg-foreground-primary navbar-discord'
 	}
 
-  const ctaRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
+	const ctaRef = useRef<HTMLAnchorElement | HTMLButtonElement>(null)
 
 	useEffect(() => {
 		const cta = ctaRef.current
@@ -57,54 +57,54 @@ export const CallToAction = ({
 		}
 	})
 
-  if (href) {
-    return (
-      <Link
-        href={href}
-        ref={ctaRef as React.Ref<HTMLAnchorElement>}
-        target='_blank'
-        rel='noopener noreferrer'
-        className={cn(
-          'cta rounded-[5px] w-auto inline-block relative overflow-hidden text-pallet-default',
-          style[estilo],
-          className
-        )}
-      >
-        <div className='cta-content py-[12px] px-spacing-16 lg:py-[6px] lg:px-3'>
-          <div className='cta-info flex items-center gap-spacing-8 absolute -translate-y-spacing-32'>
-            <IconComponent className='size-5 lg:size-6' />
-            <span className='text-xl-code !font-cta'>{text}</span>
-          </div>
-          <div className='cta-info flex items-center gap-spacing-8'>
-            <IconComponent className='size-5 lg:size-6' />
-            <span className='text-xl-code !font-cta'>{text}</span>
-          </div>
-        </div>
-      </Link>
-    )
-  }
+	if (href) {
+		return (
+			<Link
+				href={href}
+				ref={ctaRef as React.Ref<HTMLAnchorElement>}
+				target='_blank'
+				rel='noopener noreferrer'
+				className={cn(
+					'cta rounded-[5px] w-auto inline-block relative overflow-hidden text-palette-default',
+					style[estilo],
+					className
+				)}
+			>
+				<div className='cta-content py-[12px] px-spacing-16 lg:py-[6px] lg:px-3'>
+					<div className='cta-info flex items-center gap-spacing-8 absolute -translate-y-spacing-32'>
+						<IconComponent className='size-5 lg:size-6' />
+						<span className='text-xl-code !font-cta'>{text}</span>
+					</div>
+					<div className='cta-info flex items-center gap-spacing-8'>
+						<IconComponent className='size-5 lg:size-6' />
+						<span className='text-xl-code !font-cta'>{text}</span>
+					</div>
+				</div>
+			</Link>
+		)
+	}
 
-  return (
-    <button
-      ref={ctaRef as React.Ref<HTMLButtonElement>}
-      type='button'
-      onClick={onClick}
-      className={cn(
-        'cta rounded-[5px] w-auto inline-block relative overflow-hidden text-pallet-default',
-        style[estilo],
-        className
-      )}
-    >
-      <div className='cta-content py-[10px] px-spacing-16 lg:py-[6px] lg:px-3'>
-        <div className='cta-info flex items-center gap-spacing-8 absolute -translate-y-spacing-32'>
-          <IconComponent className='size-5 lg:size-6' />
-          <span className='text-xl-code !font-cta'>{text}</span>
-        </div>
-        <div className='cta-info flex items-center gap-spacing-8'>
-          <IconComponent className='size-5 lg:size-6' />
-          <span className='text-xl-code !font-cta'>{text}</span>
-        </div>
-      </div>
-    </button>
-  )
+	return (
+		<button
+			ref={ctaRef as React.Ref<HTMLButtonElement>}
+			type='button'
+			onClick={onClick}
+			className={cn(
+				'cta rounded-[5px] w-auto inline-block relative overflow-hidden text-palette-default',
+				style[estilo],
+				className
+			)}
+		>
+			<div className='cta-content py-[10px] px-spacing-16 lg:py-[6px] lg:px-3'>
+				<div className='cta-info flex items-center gap-spacing-8 absolute -translate-y-spacing-32'>
+					<IconComponent className='size-5 lg:size-6' />
+					<span className='text-xl-code !font-cta'>{text}</span>
+				</div>
+				<div className='cta-info flex items-center gap-spacing-8'>
+					<IconComponent className='size-5 lg:size-6' />
+					<span className='text-xl-code !font-cta'>{text}</span>
+				</div>
+			</div>
+		</button>
+	)
 }
