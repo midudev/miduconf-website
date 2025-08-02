@@ -9,6 +9,7 @@ import { TwitchIcon } from '@/components/icons/twitch'
 import { useUpdateTicketInDB } from '../hooks/use-update-ticket-in-db'
 import { useUpdateTicketImageInDB } from '../hooks/use-update-ticket-image-in-db'
 import { createTicketImage } from '../utils/create-ticket-image'
+import { StickerOption } from '../types/sticker-option'
 
 interface Props {
 	handleChangeHologram: (option: HologramOption) => void
@@ -19,6 +20,7 @@ interface Props {
 	username: string
 	ticketNumber: number
 	midudevTokentId: string
+	handleChangeSticker: (sticker: StickerOption) => void
 }
 
 export const SelectHologramPanel = ({
@@ -29,7 +31,8 @@ export const SelectHologramPanel = ({
 	ticketNumber,
 	midudevTokentId,
 	midudevTypeSub,
-	handleChangeHologram
+	handleChangeHologram,
+	handleChangeSticker
 }: Props) => {
 	const { handleUpdateTicket } = useUpdateTicketInDB()
 	const { handleUpdateImageTicket } = useUpdateTicketImageInDB()

@@ -8,6 +8,7 @@ import { PencilIcon } from '../icons/structure-ticket/pencil'
 import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import { useState } from 'react'
+import { StickerOption } from '../types/sticker-option'
 
 interface Props {
 	ticketDOMContnet: HTMLElement | null
@@ -20,6 +21,7 @@ interface Props {
 	ticketDesign: TicketDesign
 	midudevTokentId: string
 	handleChangeHologram: (hologram: HologramOption) => void
+	handleChangeSticker: (sticker: StickerOption) => void
 }
 
 export const ViewTicketDesktop = ({
@@ -32,7 +34,8 @@ export const ViewTicketDesktop = ({
 	twitchTier,
 	midudevTokentId,
 	midudevTypeSub,
-	handleChangeHologram
+	handleChangeHologram,
+	handleChangeSticker
 }: Props) => {
 	const [isPanelMinimized, setIsPanelMinimized] = useState(false)
 	return (
@@ -106,6 +109,7 @@ export const ViewTicketDesktop = ({
 							twitchTier={twitchTier}
 							midudevTokentId={midudevTokentId}
 							handleChangeHologram={handleChangeHologram}
+							handleChangeSticker={handleChangeSticker}
 						/>
 					</div>
 				</div>
