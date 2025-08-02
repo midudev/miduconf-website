@@ -55,7 +55,7 @@ export default function Ticket({
 	})
 
 	const metadata = getTicketMetadata({ ticketNumber, username: user.username })
-	const { ticketDesign, handleChangeHologram, handleChangeSticker } = useDesignTicket({
+	const { ticketDesign, handleChangeHologram, handleChangeSticker, handleChangeColor } = useDesignTicket({
 		hologram
 	})
 
@@ -87,6 +87,7 @@ export default function Ticket({
 					ticketOGImageElement={ticketOGImageElement.current}
 					handleChangeHologram={handleChangeHologram}
 					handleChangeSticker={handleChangeSticker}
+					handleChangeColor={handleChangeColor}
 				/>
 
 				{/* Desktop Layout */}
@@ -102,11 +103,13 @@ export default function Ticket({
 					ticketOGImageElement={ticketOGImageElement.current}
 					handleChangeHologram={handleChangeHologram}
 					handleChangeSticker={handleChangeSticker}
+					handleChangeColor={handleChangeColor}
 				/>
 			</main>
 			{/* Contenido para crear captura */}
 			<HideTicketImageElement
 				hologram={ticketDesign.hologram}
+				color={ticketDesign.color}
 				ref={ticketImageElement}
 				fullname={user.fullname}
 				ticketNumber={ticketNumber}
@@ -117,6 +120,7 @@ export default function Ticket({
 				ref={ticketOGImageElement}
 				userHadPreviousTicket={userHadPreviousTicket}
 				hologram={ticketDesign.hologram}
+				color={ticketDesign.color}
 				fullname={user.fullname}
 				ticketNumber={ticketNumber}
 				username={user.username}

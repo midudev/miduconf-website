@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
 import { HologramOption } from '../types/hologram-option'
+import { ColorOption } from '../types/color-option'
 import { TwitchIcon } from '@/components/icons/twitch'
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 	fullname: string
 	ticketNumber: number
 	hologram?: HologramOption
+	color?: ColorOption
 	twitchTier?: string | null
 }
 
@@ -16,21 +18,26 @@ export const TicketCard = ({
 	ticketNumber,
 	username,
 	hologram = 'standard',
+	color = 'blue',
 	twitchTier
 }: Props) => {
 	const hologramStyles = getHologramStyles(hologram)
+	const colorStyles = getColorStyles(color)
 
 	return (
 		<article
 			className={cn(
 				'w-[280px] md:w-[350px] lg:w-[400px] aspect-[397/597] overflow-hidden p-2 bg-gradient-to-tr from-white/20 via-transparent to-white/20 rounded-2xl border border-palette-border-foreground',
-				hologramStyles.outer
+				hologramStyles.outer,
+				colorStyles.outer
 			)}
 		>
 			<div
 				className={cn(
-					'bg-gradient-to-tr from-[#1f1f25] via-[#101015] to-[#1f1f25] border border-palette-border-foreground rounded-xl flex flex-col relative h-full overflow-hidden font-ibm-plex',
-					hologramStyles.inner
+					'bg-gradient-to-tr border border-palette-border-foreground rounded-xl flex flex-col relative h-full overflow-hidden font-ibm-plex',
+					!colorStyles.inner.includes('from-') ? 'from-[#1f1f25] via-[#101015] to-[#1f1f25]' : '',
+					hologramStyles.inner,
+					colorStyles.inner
 				)}
 			>
 				{hologramStyles.badge && (
@@ -156,6 +163,42 @@ const getHologramStyles = (hologram: HologramOption) => {
 		case 'academia-anual':
 		case 'academia-lifetime':
 			// Sin estilos - usar default
+			break
+	}
+
+	return styles
+}
+
+const getColorStyles = (color: ColorOption) => {
+	const styles = {
+		outer: '',
+		inner: ''
+	}
+
+	switch (color) {
+		case 'blue':
+			styles.outer = 'border-blue-500/30 from-blue-500/10 via-blue-400/5 to-blue-600/10'
+			styles.inner = 'border-blue-500/20 from-blue-900/20 via-blue-800/10 to-blue-900/20'
+			break
+		case 'orange':
+			styles.outer = 'border-orange-500/30 from-orange-500/10 via-orange-400/5 to-orange-600/10'
+			styles.inner = 'border-orange-500/20 from-orange-900/20 via-orange-800/10 to-orange-900/20'
+			break
+		case 'red':
+			styles.outer = 'border-red-500/30 from-red-500/10 via-red-400/5 to-red-600/10'
+			styles.inner = 'border-red-500/20 from-red-900/20 via-red-800/10 to-red-900/20'
+			break
+		case 'green':
+			styles.outer = 'border-green-500/30 from-green-500/10 via-green-400/5 to-green-600/10'
+			styles.inner = 'border-green-500/20 from-green-900/20 via-green-800/10 to-green-900/20'
+			break
+		case 'pink':
+			styles.outer = 'border-pink-500/30 from-pink-500/10 via-pink-400/5 to-pink-600/10'
+			styles.inner = 'border-pink-500/20 from-pink-900/20 via-pink-800/10 to-pink-900/20'
+			break
+		case 'gray':
+			styles.outer = 'border-gray-500/30 from-gray-500/10 via-gray-400/5 to-gray-600/10'
+			styles.inner = 'border-gray-500/20 from-gray-900/20 via-gray-800/10 to-gray-900/20'
 			break
 	}
 

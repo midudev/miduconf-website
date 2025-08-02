@@ -9,6 +9,7 @@ import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import { useState } from 'react'
 import { StickerOption } from '../types/sticker-option'
+import { ColorOption } from '../types/color-option'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -23,6 +24,7 @@ interface Props {
 	midudevTokentId: string
 	handleChangeHologram: (hologram: HologramOption) => void
 	handleChangeSticker: (sticker: StickerOption) => void
+	handleChangeColor?: (color: ColorOption) => void
 }
 
 export const ViewTicketDesktop = ({
@@ -36,7 +38,8 @@ export const ViewTicketDesktop = ({
 	midudevTokentId,
 	midudevTypeSub,
 	handleChangeHologram,
-	handleChangeSticker
+	handleChangeSticker,
+	handleChangeColor
 }: Props) => {
 	const [isPanelMinimized, setIsPanelMinimized] = useState(false)
 	return (
@@ -76,6 +79,7 @@ export const ViewTicketDesktop = ({
 						ticketNumber={ticketNumber}
 						username={username}
 						hologram={ticketDesign.hologram}
+						color={ticketDesign.color}
 					/>
 				</Container3D>
 			</div>
@@ -193,50 +197,35 @@ export const ViewTicketDesktop = ({
 							<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>COLORES</h3>
 							<div className='bg-palette-border-foreground rounded-lg p-4'>
 								<div className='grid grid-cols-6 gap-2'>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-									>
-										<div className='size-8 bg-blue-500 rounded-full'></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-									>
-										<div className='size-8 bg-orange-500 rounded-full'></div>
-									</Button>
-									<Button
-										variant='border'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-									>
-										<div className='size-8 bg-red-500 rounded-full'></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-									>
-										<div className='size-8 bg-green-500 rounded-full'></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-										disabled
-									>
-										<div className='size-8 bg-gray-600 rounded'></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-										disabled
-									>
-										<div className='w-6 h-6 bg-yellow-600 rounded'></div>
-									</Button>
+									{(() => {
+										const colors = [
+											{ value: 'blue', bg: 'bg-blue-500' },
+											{ value: 'orange', bg: 'bg-orange-500' },
+											{ value: 'red', bg: 'bg-red-500' },
+											{ value: 'green', bg: 'bg-green-500' },
+											{ value: 'pink', bg: 'bg-pink-500', disabled: true },
+											{ value: 'gray', bg: 'bg-gray-500', disabled: true },
+										];
+
+										return colors.map((color) => {
+											const isSelected = ticketDesign.color === color.value;
+
+											return (
+												<Button
+													key={color.value}
+													variant={isSelected ? 'border' : 'ghost'}
+													size='small'
+													className={cn(
+														'aspect-square p-2 flex items-center justify-center',
+													)}
+													disabled={color.disabled}
+													onClick={() => !color.disabled && handleChangeColor?.(color.value as ColorOption)}
+												>
+													<div className={cn('size-8 rounded-full', color.bg, isSelected && 'border-palette-default border-2')}></div>
+												</Button>
+											);
+										});
+									})()}
 								</div>
 							</div>
 						</div>

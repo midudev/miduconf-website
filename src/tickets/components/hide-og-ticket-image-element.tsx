@@ -2,11 +2,13 @@ import { RefObject, useLayoutEffect } from 'react'
 import { TicketCard } from './ticket-card'
 import { cn } from '@/lib/utils'
 import { HologramOption } from '../types/hologram-option'
+import { ColorOption } from '../types/color-option'
 import { useUpdateTicketImageInDB } from '../hooks/use-update-ticket-image-in-db'
 import { createTicketImage } from '../utils/create-ticket-image'
 
 interface Props {
 	hologram: HologramOption
+	color?: ColorOption
 	fullname: string
 	ticketNumber: number
 	ref: RefObject<HTMLElement | null>
@@ -17,6 +19,7 @@ interface Props {
 
 export const HideOGTicketImageElement = ({
 	hologram,
+	color,
 	fullname,
 	username,
 	ticketNumber,
@@ -73,6 +76,7 @@ export const HideOGTicketImageElement = ({
 				<div className='mr-10 text-white scale-[85%] rounded-2xl overflow-hidden'>
 					<TicketCard
 						hologram={hologram}
+						color={color}
 						fullname={fullname}
 						ticketNumber={ticketNumber}
 						username={username}

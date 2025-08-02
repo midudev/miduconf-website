@@ -9,6 +9,7 @@ import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import Link from 'next/link'
 import { HologramOption } from '@/tickets/types/hologram-option'
+import { ColorOption } from '@/tickets/types/color-option'
 
 interface Props {
   user: {
@@ -18,9 +19,10 @@ interface Props {
   }
   ticketNumber: number
   hologram: HologramOption
+  color?: ColorOption
 }
 
-export default function TicketPage({ user, ticketNumber, hologram }: Props) {
+export default function TicketPage({ user, ticketNumber, hologram, color }: Props) {
   const metadata = getTicketMetadata({
     ticketNumber,
     username: user.username,
@@ -42,6 +44,7 @@ export default function TicketPage({ user, ticketNumber, hologram }: Props) {
             <Container3D>
               <TicketCard
                 hologram={hologram}
+                color={color}
                 fullname={user.fullname}
                 ticketNumber={ticketNumber}
                 username={user.username}
@@ -79,6 +82,7 @@ export default function TicketPage({ user, ticketNumber, hologram }: Props) {
               <Container3D>
                 <TicketCard
                   hologram={hologram}
+                  color={color}
                   fullname={user.fullname}
                   ticketNumber={ticketNumber}
                   username={user.username}
@@ -147,7 +151,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req, res 
           avatar: ''
         },
         ticketNumber: ticket.ticketNumber,
-        hologram: ticket.hologram
+        hologram: ticket.hologram,
+        color: ticket.color || 'blue'
       }
     }
   } catch (error) {
