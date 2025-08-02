@@ -95,7 +95,7 @@ module.exports = {
         },
         palette: {
           background: '#09090E',
-          ghost: '#B8BBC5',
+          ghost: '#9297A6',
           'bg-foreground-primary': '#121319',
           primary: '#5A8CF6',
           'border-primary': '#95B8FB',

@@ -31,7 +31,7 @@ export const Button = <C extends React.ElementType = 'button'>({
 				'inline-flex flex-col items-center gap-x-2 text-xl text-white uppercase disabled:cursor-not-allowed md:flex-row md:w-max relative group overflow-hidden disabled:opacity-60',
 				variant !== 'border' && 'border border-transparent rounded-md',
 				variant === 'secondary' && 'border-palette-border-foreground bg-palette-bg-foreground-primary',
-				variant === 'border' && 'before:absolute before:z-10 before:top-0 before:left-0 before:w-3 before:h-3 before:border-t-2 before:border-l-2 before:border-palette-primary after:absolute after:z-10 after:top-0 after:right-0 after:w-3 after:h-3 after:border-t-2 after:border-r-2 after:border-palette-primary',
+				variant === 'border' && 'before:absolute before:z-10 before:top-0 before:left-0 before:size-[7px] before:border-t-2 before:border-l-2 before:border-palette-default after:absolute after:z-10 after:top-0 after:right-0 after:size-[7px] after:border-t-2 after:border-r-2 after:border-palette-default',
 				variant === 'icon' && size === 'default' && 'w-10 h-10 flex-row justify-center',
 				variant === 'icon' && size === 'small' && 'w-8 h-8 flex-row justify-center',
 				containerClassName,
@@ -41,8 +41,8 @@ export const Button = <C extends React.ElementType = 'button'>({
 		>
 			{variant === 'border' && (
 				<>
-					<div className="absolute z-10 bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-palette-primary" />
-					<div className="absolute z-10 bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-palette-primary" />
+					<div className="absolute z-10 bottom-0 left-0 size-[7px] border-b-2 border-l-2 border-palette-default" />
+					<div className="absolute z-10 bottom-0 right-0 size-[7px] border-b-2 border-r-2 border-palette-default" />
 				</>
 			)}
 			<div

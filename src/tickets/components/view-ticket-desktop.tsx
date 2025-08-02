@@ -9,6 +9,7 @@ import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import { useState } from 'react'
 import { StickerOption } from '../types/sticker-option'
+import { cn } from '@/lib/utils'
 
 interface Props {
 	ticketDOMContnet: HTMLElement | null
@@ -85,13 +86,13 @@ export const ViewTicketDesktop = ({
 				: 'transform translate-x-0 opacity-100 mr-0'
 				}`}>
 				<div className='p-4 border rounded-md border-palette-border-foreground bg-palette-bg-foreground-primary flex-1 overflow-auto custom-scroll flex flex-col'>
-					<div className='flex items-center justify-between mb-8'>
-						<h2 className='text-2xl normal-case font-semibold text-pretty'>Personaliza tu ticket</h2>
+					<div className='flex items-center justify-between mb-12'>
+						<h2 className='text-2xl normal-case font-medium text-white'>Personaliza tu ticket</h2>
 						<Button
 							variant='icon'
 							size='small'
 							onClick={() => setIsPanelMinimized(true)}
-							containerClassName='bg-palette-bg-foreground-secondary hover:bg-palette-bg-foreground-secondary/80'
+							containerClassName='bg-palette-primary hover:bg-palette-primary/80'
 							aria-label='Minimizar panel'
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,18 +100,187 @@ export const ViewTicketDesktop = ({
 							</svg>
 						</Button>
 					</div>
-					<div className='relative flex-1'>
-						<SelectHologramPanel
-							midudevTypeSub={midudevTypeSub}
-							ticketNumber={ticketNumber}
-							ticketOGImageElement={ticketOGImageElement}
-							username={username}
-							ticketDesign={ticketDesign}
-							twitchTier={twitchTier}
-							midudevTokentId={midudevTokentId}
-							handleChangeHologram={handleChangeHologram}
-							handleChangeSticker={handleChangeSticker}
-						/>
+					<div className='relative flex-1 space-y-6'>
+						{/* ANIMACIÓN Section */}
+						<div>
+							<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>ANIMACIÓN</h3>
+							<div className='flex gap-2 mb-6'>
+								<Button
+									variant='border'
+									size='small'
+									className='px-4 text-sm py-1 uppercase'
+								>
+									Default
+								</Button>
+								<Button
+									variant='ghost'
+									size='small'
+									className='px-4 py-1 text-sm uppercase'
+								>
+									Pirámide
+								</Button>
+								<Button
+									variant='ghost'
+									size='small'
+									className='px-4 py-1 text-sm uppercase'
+								>
+									Fricción
+								</Button>
+							</div>
+						</div>
+
+						{/* ESTRUCTURA Section */}
+						<div>
+							<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>ESTRUCTURA</h3>
+							<div className='bg-palette-border-foreground rounded-lg p-4'>
+								<div className='grid grid-cols-6 gap-2'>
+									<Button
+										variant='border'
+										size='small'
+										className='aspect-square p-0 flex items-center justify-center'
+									>
+										<div className='size-8 bg-white rounded'></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-0 flex items-center justify-center'
+									>
+										<div className='size-8 bg-white'
+											style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-0 flex items-center justify-center'
+									>
+										<div className='size-8 bg-white'
+											style={{
+												backgroundImage: 'linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white), linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white)',
+												backgroundSize: '3px 3px',
+												backgroundPosition: '0 0, 1.5px 1.5px'
+											}}></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-0 flex items-center justify-center'
+									>
+										<div className='size-8 bg-white rounded-full'></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+										disabled
+									>
+										<div className='size-8 bg-gray-600 rounded'></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+										disabled
+									>
+										<div className='w-6 h-6 bg-gray-600 rounded'></div>
+									</Button>
+								</div>
+							</div>
+						</div>
+
+						{/* COLORES Section */}
+						<div>
+							<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>COLORES</h3>
+							<div className='bg-palette-border-foreground rounded-lg p-4'>
+								<div className='grid grid-cols-6 gap-2'>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+									>
+										<div className='size-8 bg-blue-500 rounded-full'></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+									>
+										<div className='size-8 bg-orange-500 rounded-full'></div>
+									</Button>
+									<Button
+										variant='border'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+									>
+										<div className='size-8 bg-red-500 rounded-full'></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+									>
+										<div className='size-8 bg-green-500 rounded-full'></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+										disabled
+									>
+										<div className='size-8 bg-gray-600 rounded'></div>
+									</Button>
+									<Button
+										variant='ghost'
+										size='small'
+										className='aspect-square p-2 flex items-center justify-center'
+										disabled
+									>
+										<div className='w-6 h-6 bg-yellow-600 rounded'></div>
+									</Button>
+								</div>
+							</div>
+						</div>
+
+						{/* HOLOGRÁFICO Section */}
+						<div>
+							<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>HOLOGRÁFICO</h3>
+							<div className='bg-palette-border-foreground rounded-lg p-4'>
+								<div className='grid grid-cols-6 gap-2'>
+									{(() => {
+										const holograms = [
+											{ value: 'standard', imageIndex: 1 },
+											{ value: 'twitch-1', imageIndex: 2 },
+											{ value: 'twitch-2', imageIndex: 3 },
+											{ value: 'twitch-3', imageIndex: 4 },
+											{ value: 'academia-mensual', imageIndex: 5 },
+											{ value: 'academia-anual', imageIndex: 6 },
+										];
+
+										return holograms.map((hologram) => {
+											const isSelected = ticketDesign.hologram === hologram.value;
+
+											return (
+												<Button
+													key={hologram.value}
+													variant={isSelected ? 'border' : 'ghost'}
+													size="small"
+													className="aspect-square p-2 flex items-center justify-center"
+													onClick={() => handleChangeHologram(hologram.value as any)}
+												>
+													<img
+														src={`/tickets/holograms/${hologram.imageIndex}.png`}
+														alt={`Holograma ${hologram.value}`}
+														className={cn('w-full h-full object-cover rounded-full', isSelected && 'border-2 border-palette-default')}
+														width='28'
+														height='28'
+													/>
+												</Button>
+											);
+										});
+									})()}
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
