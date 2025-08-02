@@ -1,7 +1,9 @@
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRemainingTime } from '../hooks/useRemainingTime'
-import { DiamondIcon } from './icons/diamond'
+import { Clock } from './icons/clock'
+import { gsap } from 'gsap'
+import { ScrollCountdown } from './ScrollCountdown'
 
 const LITERALS = ['d', null, 'h', null, 'm', null, 's']
 // const EVENT_DATE = 1757512800000 // 10 de septiembre de 2025 - 16:00h CEST
@@ -11,7 +13,39 @@ export function Countdown({ className }) {
     fillingZeros: true
   })
   const [show, setShow] = useState(false)
+  const clockRef = useRef(null)
+  const scrollClockRef = useRef(null)
 
+  useEffect(() => {
+    const animateClock = (ref) => {
+      const clock = ref.current
+      if (!clock) return
+
+      let currentRotation = 90
+      const rect = clock.querySelectorAll('rect')
+      if (!rect[6]) return
+
+      const interval = setInterval(() => {
+        gsap.to(rect[6], {
+          rotate: currentRotation,
+          y: -1,
+          duration: 1.0,
+          transformOrigin: 'center 100%',
+          ease: 'elastic.out(1, 0.5)'
+        })
+        currentRotation += 90
+      }, 1000)
+      return interval
+    }
+
+    const interval1 = animateClock(clockRef)
+    const interval2 = animateClock(scrollClockRef)
+
+    return () => {
+      clearInterval(interval1)
+      clearInterval(interval2)
+    }
+  }, [])
   useEffect(() => {
     // solo en client side para evitar problemas de hidratacion
     setShow(true)
@@ -25,26 +59,29 @@ export function Countdown({ className }) {
   }
 
   return (
-    <div
-      className={cn(
-        'text-base md:text-xl flex items-center gap-3 text-white font-geist bg-palette-bg-foreground-primary border border-palette-border-foreground px-4 py-2 w-max',
-        className
-      )}
-    >
-      <DiamondIcon className='text-palette-primary' />
-      <span className='uppercase text-palette-ghost'>Empezamos en:</span>
-      <div className='flex items-center gap-1 text-white'>
-        {[days, null, hours, null, minutes, null, seconds].map((value, index) => {
-          return (
-            <div key={index}>
-              <div className='flex items-center justify-center text-center'>
-                <span className='tabular-nums'>{showValue(value)}</span>
-                <span className=''>{value === null ? ' ' : LITERALS[index]}</span>
+    <>
+      <div
+        className={cn(
+          'flex items-center gap-3 text-xl-code bg-pallet-b-foreground-primary border border-pallet-border-foreground p-spacing-8 md:px-3 rounded-[5px]',
+          className
+        )}
+      >
+        <Clock ref={clockRef} className='clock size-[18px]' />
+        <span className='text-pallet-ghost text-xl-code'>Empezamos en:</span>
+        <div className='flex items-center gap-1'>
+          {[days, null, hours, null, minutes, null, seconds].map((value, index) => {
+            return (
+              <div key={index}>
+                <div className='flex items-center justify-center text-center'>
+                  <span className='tabular-nums text-xl-code'>{showValue(value)}</span>
+                  <span className='text-xl-code'>{value === null ? ' ' : LITERALS[index]}</span>
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
-    </div>
+      <ScrollCountdown scrollClockRef={scrollClockRef} />
+    </>
   )
 }
