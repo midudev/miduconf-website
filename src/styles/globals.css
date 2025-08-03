@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-	--font-family-monospace: "code-regular", monospace;
-	--font-family-cta: "code-medium", monospace;
+	--font-family-monospace: 'code-regular', monospace;
+	--font-family-cta: 'code-medium', monospace;
 
 	/* PC */
 	--heading-4xl-pc: 4.62rem;
@@ -39,15 +39,15 @@
 
 @layer base {
 	@font-face {
-		font-family: "code-regular";
-		src: url("/fonts/IBMPlexMono-Regular.woff2") format("woff2");
+		font-family: 'code-regular';
+		src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
 		font-weight: 400;
 		font-style: normal;
 	}
 
 	@font-face {
-		font-family: "code-medium";
-		src: url("/fonts/IBMPlexMono-Medium.woff2") format("woff2");
+		font-family: 'code-medium';
+		src: url('/fonts/IBMPlexMono-Medium.woff2') format('woff2');
 		font-weight: 500;
 		font-style: normal;
 	}
@@ -102,23 +102,21 @@
 
 	.text-body-code {
 		@apply uppercase font-code;
-		font-size: clamp(var(--heading-body-code-movil), 0.806rem + 0.296vw, var(--heading-body-code-pc));
+		font-size: clamp(var(--heading-body-code-movil),
+				0.806rem + 0.296vw,
+				var(--heading-body-code-pc));
 		line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
 		letter-spacing: 0.36px;
 	}
 
 	.text-small-code {
 		@apply uppercase font-code;
-		font-size: clamp(var(--heading-small-code-movil), 0.715rem + 0.148vw, var(--heading-small-code-pc));
+		font-size: clamp(var(--heading-small-code-movil),
+				0.715rem + 0.148vw,
+				var(--heading-small-code-pc));
 		line-height: clamp(1rem, 0.827rem + 0.739vw, 1.625rem);
 		letter-spacing: -0.28px;
 	}
-
-	.navbar-item:hover~.navbar-item a,
-	.navbar-item:has(~ .navbar-item:hover) a {
-		color: #9799A0;
-	}
-
 
 	.clipHidden {
 		clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
@@ -164,21 +162,35 @@ html {
 	a div {
 		text-box-trim: trim-both;
 		text-box-edge: cap alphabetic;
-		font-feature-settings:
-			"liga" 1,
-			"dlig" 1,
-			"hlig" 1,
-			"cswh" 1,
-			"kern" 1,
-			"ss02" 1 !important;
+		font-feature-settings: 'liga' 1, 'dlig' 1, 'hlig' 1, 'cswh' 1, 'kern' 1, 'ss02' 1 !important;
 	}
-
 }
 
 body {
 	background: #09090e;
 	overflow-x: hidden;
-	color: #EFF4FF;
+	color: #eff4ff;
+
+	.balls {
+		width: 100%;
+		height: 100vh;
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: -2;
+		background: url('/global/bg.png');
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+
+	.bg-image {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		background: radial-gradient(ellipse at center, transparent 44%, #09090e 75%);
+	}
 }
 
 @keyframes reduce-header {
@@ -202,6 +214,18 @@ body {
 		background-color: #09090e;
 		padding-inline: 1rem;
 		padding-block: 0.5rem;
+	}
+}
+
+.animation-ul {
+	animation: animation-ul linear both;
+	animation-timeline: scroll();
+	animation-range: 0 200px;
+}
+
+@keyframes animation-ul {
+	to {
+		top: 15px;
 	}
 }
 
@@ -249,6 +273,23 @@ body {
 	}
 }
 
+.scroll-container {
+	animation: infinite-scroll var(--duration, 20s) linear infinite var(--direction, normal);
+}
+
+.scroll-container[data-direction='right'] {
+	--direction: reverse;
+}
+
+@keyframes infinite-scroll {
+	from {
+		transform: translate(0);
+	}
+
+	to {
+		transform: translate(calc(var(--position, -50%) - 1.5rem));
+	}
+}
 
 .custom-scroll::-webkit-scrollbar {
 	width: 6px;

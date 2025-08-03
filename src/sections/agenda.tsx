@@ -14,15 +14,15 @@ export const Agenda = () => {
 	return (
 		<section id='agenda' className='pt-44'>
 			<h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
-				<DotIcon className='text-pallet-primary' /> Agenda{' '}
-				<DotIcon className='text-pallet-primary' />
+				<DotIcon className='text-palette-primary' /> Agenda{' '}
+				<DotIcon className='text-palette-primary' />
 			</h2>
 			<p className='mx-auto text-xl text-white text-pretty max-w-[42ch] text-center mb-4'>
 				Todas las charlas en directo y español
 			</p>
-			<p className='flex flex-col items-center px-4 py-2 mx-auto uppercase border rounded-md md:flex-row text-pallet-ghost w-max bg-pallet-b-foreground-primary border-pallet-border-foreground'>
+			<p className='flex flex-col items-center px-4 py-2 mx-auto uppercase border rounded-md md:flex-row text-palette-ghost w-max bg-palette-bg-foreground-primary border-palette-border-foreground'>
 				<span className='flex items-center'>
-					<DiamondIcon className='w-3 h-3 mr-3 text-pallet-primary' />
+					<DiamondIcon className='w-3 h-3 mr-3 text-palette-primary' />
 					Hora zona local:
 				</span>
 				<span className='ml-2 text-white'>{timezone}</span>
@@ -30,7 +30,7 @@ export const Agenda = () => {
 			{LIST_OF_TALKS_NEW.length > 0 && (
 				<div className='grid md:grid-cols-[1fr_auto] gap-8 mt-20 md:px-8 px-4'>
 					<article>
-						<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-pallet-ghost'>
+						<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-palette-ghost'>
 							<span>Hora</span>
 							<span>Nombre</span>
 							<span>Charla</span>
@@ -72,7 +72,7 @@ export const Agenda = () => {
 							className='grid relative md:grid-cols-[1fr_auto] gap-8 mt-20 md:px-8 px-4 select-none pointer-events-none [mask-image:linear-gradient(to_bottom,_#000,_transparent)]'
 						>
 							<article>
-								<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-pallet-ghost'>
+								<div className='hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-palette-ghost'>
 									<span>Hora</span>
 									<span>Nombre</span>
 									<span>Charla</span>
@@ -135,9 +135,9 @@ const AgendaItem = ({
 		<li
 			onMouseEnter={() => onHover(index)}
 			className={cn(
-				'flex flex-col px-4 md:px-0 md:grid grid-cols-3 py-6 text-xl uppercase border-b text-pallet-ghost border-pallet-border-foreground min-h-32 relative cursor-crosshair overflow-hidden group',
+				'flex flex-col px-4 md:px-0 md:grid grid-cols-3 py-6 text-xl uppercase border-b text-palette-ghost border-palette-border-foreground min-h-32 relative cursor-crosshair overflow-hidden group',
 				'before:w-full before:h-full before:absolute before:block before:bg-transparent before:-z-10 before:top-0 before:left-0 before:translate-y-full before:transition before:duration-300',
-				'md:hover:before:translate-y-0 md:hover:text-white md:hover:before:bg-pallet-primary'
+				'md:hover:before:translate-y-0 md:hover:text-white md:hover:before:bg-palette-primary'
 			)}
 		>
 			<p className={cn('transition md:group-hover:translate-x-4', disabledContent && 'blur')}>
@@ -157,7 +157,7 @@ type TimeHook = (props: { timestamp: number; durationInMinutes: number }) => nul
 }
 
 const useTime: TimeHook = ({ timestamp, durationInMinutes }) => {
-	const [time, setTime] = useState<{startAt: string, endAt: string} | null>(null)
+	const [time, setTime] = useState<{ startAt: string, endAt: string } | null>(null)
 
 	if (!timestamp) return null
 
@@ -239,227 +239,227 @@ const LIST_OF_TALKS_NEW: Array<{
 	durationInMinutes: number;
 	disabledContent?: boolean;
 }> = [
-	/* {
-		speaker: {
-			name: 'Grimer Loner',
-			description: 'Músico y Productor',
-			imgUrl: '/img/speakers/grimerloner.jpg'
+		/* {
+			speaker: {
+				name: 'Grimer Loner',
+				description: 'Músico y Productor',
+				imgUrl: '/img/speakers/grimerloner.jpg'
+			},
+			title: '¡Cuenta atrás con Grimer!',
+			startAt: 1726152000000,
+			durationInMinutes: 20
 		},
-		title: '¡Cuenta atrás con Grimer!',
-		startAt: 1726152000000,
-		durationInMinutes: 20
-	},
-	{
-		speaker: {
-			name: 'Miguel Ángel Durán',
-			description: 'Creador de contenido y divulgador',
-			imgUrl: '/img/speakers/midudev.jpg'
+		{
+			speaker: {
+				name: 'Miguel Ángel Durán',
+				description: 'Creador de contenido y divulgador',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: '¡Bienvenidos a la miduConf! + Sorteo',
+			startAt: 1726153200000,
+			durationInMinutes: 5
 		},
-		title: '¡Bienvenidos a la miduConf! + Sorteo',
-		startAt: 1726153200000,
-		durationInMinutes: 5
-	},
-	{
-		speaker: {
-			name: 'Javi y Rafa de Codely',
-			description: 'CodelyTV',
-			imgUrl: '/img/speakers/codely-agenda.jpg'
+		{
+			speaker: {
+				name: 'Javi y Rafa de Codely',
+				description: 'CodelyTV',
+				imgUrl: '/img/speakers/codely-agenda.jpg'
+			},
+			title: 'Charla con Codely + Sorteo',
+			startAt: 1726153500000,
+			durationInMinutes: 10
 		},
-		title: 'Charla con Codely + Sorteo',
-		startAt: 1726153500000,
-		durationInMinutes: 10
-	},
-	{
-		speaker: {
-			name: 'Guillermo Rauch',
-			description: 'CEO de Vercel',
-			imgUrl: '/img/speakers/rauchg.jpg'
+		{
+			speaker: {
+				name: 'Guillermo Rauch',
+				description: 'CEO de Vercel',
+				imgUrl: '/img/speakers/rauchg.jpg'
+			},
+			title: 'Q&A con Guillermo Rauch',
+			startAt: 1726154100000,
+			durationInMinutes: 30
 		},
-		title: 'Q&A con Guillermo Rauch',
-		startAt: 1726154100000,
-		durationInMinutes: 30
-	},
-	{
-		speaker: {
-			name: 'Fernando Rodríguez',
-			description: 'Co-Founder de KeepCoding',
-			imgUrl: '/img/speakers/fernando-rodriguez.jpg'
+		{
+			speaker: {
+				name: 'Fernando Rodríguez',
+				description: 'Co-Founder de KeepCoding',
+				imgUrl: '/img/speakers/fernando-rodriguez.jpg'
+			},
+			title: 'Del caos al orden: 5 virtudes para un código imbatible',
+			startAt: 1726155900000,
+			durationInMinutes: 10
 		},
-		title: 'Del caos al orden: 5 virtudes para un código imbatible',
-		startAt: 1726155900000,
-		durationInMinutes: 10
-	},
-	{
-		speaker: {
-			name: 'Miguel Ángel Durán',
-			description: 'Creador de contenido y divulgador',
-			imgUrl: '/img/speakers/midudev.jpg'
+		{
+			speaker: {
+				name: 'Miguel Ángel Durán',
+				description: 'Creador de contenido y divulgador',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: '¡SORPRESA! Notición para 2025...',
+			startAt: 1726156500000,
+			durationInMinutes: 5
 		},
-		title: '¡SORPRESA! Notición para 2025...',
-		startAt: 1726156500000,
-		durationInMinutes: 5
-	},
-	{
-		speaker: {
-			name: 'Freddy Vega',
-			description: 'CEO de Platzi',
-			imgUrl: '/img/speakers/freddyVega.jpg'
+		{
+			speaker: {
+				name: 'Freddy Vega',
+				description: 'CEO de Platzi',
+				imgUrl: '/img/speakers/freddyVega.jpg'
+			},
+			title: 'Charla con Freddy Vega + Sorteo Platzi',
+			startAt: 1726156800000,
+			durationInMinutes: 30
 		},
-		title: 'Charla con Freddy Vega + Sorteo Platzi',
-		startAt: 1726156800000,
-		durationInMinutes: 30
-	},
-	{
-		speaker: {
-			name: 'S4vitar',
-			description: 'Hack4u CEO & Founder',
-			imgUrl: '/img/speakers/s4vitar.jpg'
+		{
+			speaker: {
+				name: 'S4vitar',
+				description: 'Hack4u CEO & Founder',
+				imgUrl: '/img/speakers/s4vitar.jpg'
+			},
+			title: 'S4vitar + Sorteo',
+			startAt: 1726158900000,
+			durationInMinutes: 10
 		},
-		title: 'S4vitar + Sorteo',
-		startAt: 1726158900000,
-		durationInMinutes: 10
-	},
-	{
-		speaker: {
-			name: 'Carmen Ansio',
-			description: 'Design Engineer en LottieFiles',
-			imgUrl: '/img/speakers/carmen.jpg'
+		{
+			speaker: {
+				name: 'Carmen Ansio',
+				description: 'Design Engineer en LottieFiles',
+				imgUrl: '/img/speakers/carmen.jpg'
+			},
+			title: 'Animaciones CSS con scroll',
+			startAt: 1726159500000,
+			durationInMinutes: 25
 		},
-		title: 'Animaciones CSS con scroll',
-		startAt: 1726159500000,
-		durationInMinutes: 25
-	},
-	{
-		speaker: {
-			name: 'miduConf',
-			description: 'Sorteos',
-			imgUrl: '/img/speakers/midudev.jpg'
+		{
+			speaker: {
+				name: 'miduConf',
+				description: 'Sorteos',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: '¡Participa en el Mega Trivial!',
+			startAt: 1726161000000,
+			durationInMinutes: 10
 		},
-		title: '¡Participa en el Mega Trivial!',
-		startAt: 1726161000000,
-		durationInMinutes: 10
-	},
-	{
-		speaker: {
-			name: 'Alba Silvente',
-			description: 'FullStack en StoryBlok',
-			imgUrl: '/img/speakers/dawntraoz.jpg'
+		{
+			speaker: {
+				name: 'Alba Silvente',
+				description: 'FullStack en StoryBlok',
+				imgUrl: '/img/speakers/dawntraoz.jpg'
+			},
+			title: 'El poder de las Web Extensions',
+			startAt: 1726161600000,
+			durationInMinutes: 20
 		},
-		title: 'El poder de las Web Extensions',
-		startAt: 1726161600000,
-		durationInMinutes: 20
-	},
-	{
-		speaker: {
-			name: 'Malt',
-			description: 'Sorteo',
-			imgUrl: '/img/speakers/malt.jpg'
+		{
+			speaker: {
+				name: 'Malt',
+				description: 'Sorteo',
+				imgUrl: '/img/speakers/malt.jpg'
+			},
+			title: 'Sorteo con Malt',
+			startAt: 1726162800000,
+			durationInMinutes: 5
 		},
-		title: 'Sorteo con Malt',
-		startAt: 1726162800000,
-		durationInMinutes: 5
-	},
-	{
-		speaker: {
-			name: 'Estefany Aguilar',
-			description: 'Sr. Frontend Dev en Platzi',
-			imgUrl: '/img/speakers/teffcode.jpg'
+		{
+			speaker: {
+				name: 'Estefany Aguilar',
+				description: 'Sr. Frontend Dev en Platzi',
+				imgUrl: '/img/speakers/teffcode.jpg'
+			},
+			title: 'Guía Práctica para Medir la Complejidad Algorítmica',
+			startAt: 1726163100000,
+			durationInMinutes: 30
 		},
-		title: 'Guía Práctica para Medir la Complejidad Algorítmica',
-		startAt: 1726163100000,
-		durationInMinutes: 30
-	},
-	{
-		speaker: {
-			name: 'miduConf',
-			description: 'Sorteo',
-			imgUrl: '/img/speakers/midudev.jpg'
+		{
+			speaker: {
+				name: 'miduConf',
+				description: 'Sorteo',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: '¡Participa en el Mega Trivial!',
+			startAt: 1726164900000,
+			durationInMinutes: 10
 		},
-		title: '¡Participa en el Mega Trivial!',
-		startAt: 1726164900000,
-		durationInMinutes: 10
-	},
-	{
-		speaker: {
-			name: 'Pelado Nerd',
-			description: 'Divulgador DevOps',
-			imgUrl: '/img/speakers/pablokbs.jpg'
+		{
+			speaker: {
+				name: 'Pelado Nerd',
+				description: 'Divulgador DevOps',
+				imgUrl: '/img/speakers/pablokbs.jpg'
+			},
+			title: 'Pelado Nerd + Sorteo',
+			startAt: 1726165500000,
+			durationInMinutes: 20
 		},
-		title: 'Pelado Nerd + Sorteo',
-		startAt: 1726165500000,
-		durationInMinutes: 20
-	},
-	{
-		speaker: {
-			name: 'miduConf',
-			description: 'Sorteo',
-			imgUrl: '/img/speakers/midudev.jpg'
+		{
+			speaker: {
+				name: 'miduConf',
+				description: 'Sorteo',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: 'Sorteos de la #miduConf',
+			startAt: 1726166700000,
+			durationInMinutes: 5
 		},
-		title: 'Sorteos de la #miduConf',
-		startAt: 1726166700000,
-		durationInMinutes: 5
-	},
-	{
-		speaker: {
-			name: 'Cloudinary',
-			description: 'Charla y sorteo',
-			imgUrl: '/img/speakers/cloudinary.jpg'
+		{
+			speaker: {
+				name: 'Cloudinary',
+				description: 'Charla y sorteo',
+				imgUrl: '/img/speakers/cloudinary.jpg'
+			},
+			title: 'Charla Cloudinary + Sorteo',
+			startAt: 1726167000000,
+			durationInMinutes: 10
 		},
-		title: 'Charla Cloudinary + Sorteo',
-		startAt: 1726167000000,
-		durationInMinutes: 10
-	},
-	{
-		speaker: {
-			name: 'Miguel Ángel Durán',
-			description: 'Creador de contenido y divulgador',
-			imgUrl: '/img/speakers/midudev.jpg'
+		{
+			speaker: {
+				name: 'Miguel Ángel Durán',
+				description: 'Creador de contenido y divulgador',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: '¡Más novedades midudev!',
+			startAt: 1726167600000,
+			durationInMinutes: 5
 		},
-		title: '¡Más novedades midudev!',
-		startAt: 1726167600000,
-		durationInMinutes: 5
-	},
-	{
-		speaker: {
-			name: 'miduConf',
-			description: 'Sorteo',
-			imgUrl: '/img/speakers/midudev.jpg'
+		{
+			speaker: {
+				name: 'miduConf',
+				description: 'Sorteo',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: 'Sorteos de la #miduConf',
+			startAt: 1726167900000,
+			durationInMinutes: 5
 		},
-		title: 'Sorteos de la #miduConf',
-		startAt: 1726167900000,
-		durationInMinutes: 5
-	},
-	{
-		speaker: {
-			name: 'Fazt',
-			description: 'Creador de contenido',
-			imgUrl: '/img/speakers/fazt.jpg'
+		{
+			speaker: {
+				name: 'Fazt',
+				description: 'Creador de contenido',
+				imgUrl: '/img/speakers/fazt.jpg'
+			},
+			title: 'Charla con Fazt + Sorteo',
+			startAt: 1726168200000,
+			durationInMinutes: 25
 		},
-		title: 'Charla con Fazt + Sorteo',
-		startAt: 1726168200000,
-		durationInMinutes: 25
-	},
-	{
-		speaker: {
-			name: 'DotCSV',
-			description: 'Divulgador de IA',
-			imgUrl: '/img/speakers/dotcsv.jpg'
+		{
+			speaker: {
+				name: 'DotCSV',
+				description: 'Divulgador de IA',
+				imgUrl: '/img/speakers/dotcsv.jpg'
+			},
+			title: 'Charla con DotCSV',
+			startAt: 1726169700000,
+			durationInMinutes: 30
 		},
-		title: 'Charla con DotCSV',
-		startAt: 1726169700000,
-		durationInMinutes: 30
-	},
-	{
-		speaker: {
-			name: 'miduConf',
-			description: 'Sorteo',
-			imgUrl: '/img/speakers/midudev.jpg'
-		},
-		title: '¡Participa en el Mega Trivial!',
-		startAt: 1726171500000,
-		durationInMinutes: 10
-	} */
-]
+		{
+			speaker: {
+				name: 'miduConf',
+				description: 'Sorteo',
+				imgUrl: '/img/speakers/midudev.jpg'
+			},
+			title: '¡Participa en el Mega Trivial!',
+			startAt: 1726171500000,
+			durationInMinutes: 10
+		} */
+	]
 
 /* 
 16:40    17:00    Cuenta atrás con Grimer
