@@ -114,10 +114,10 @@
 		letter-spacing: -0.28px;
 	}
 
-	.navbar-item:hover ~ .navbar-item a,
-  .navbar-item:has(~ .navbar-item:hover) a {
-    color: #9799A0;
-  }
+	.navbar-item:hover~.navbar-item a,
+	.navbar-item:has(~ .navbar-item:hover) a {
+		color: #9799A0;
+	}
 
 
 	.clipHidden {
@@ -270,4 +270,12 @@ body {
 /* Handle on hover */
 .custom-scroll::-webkit-scrollbar-thumb:hover {
 	background: rgb(255, 255, 255, 0.4);
+}
+
+.academia-mensual::after {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: transparent;
+	background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20L0 20z' fill='%2300000010' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
