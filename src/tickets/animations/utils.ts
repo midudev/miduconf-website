@@ -29,43 +29,43 @@ export const createShape = (x: number, y: number, structure: StructureType): Mat
       case 'circle':
         return {
           ...baseProps,
-          restitution: 0.5,
-          friction: 0.2,
-          frictionAir: 0.01
+          restitution: 0.3, // Less bouncy for more realistic rolling
+          friction: 0.4, // More friction for controlled sliding
+          frictionAir: 0.02 // Natural air resistance
         }
       case 'piramide':
         return {
           ...baseProps,
-          restitution: 0.3,
-          friction: 0.4,
-          frictionAir: 0.02
+          restitution: 0.2, // Minimal bounce
+          friction: 0.6, // Higher friction for stability
+          frictionAir: 0.025
         }
       case 'prism':
         return {
           ...baseProps,
-          restitution: 0.4,
-          friction: 0.3,
-          frictionAir: 0.015
+          restitution: 0.25,
+          friction: 0.5, // Good friction for sliding
+          frictionAir: 0.022
         }
       case 'background':
         return {
           ...baseProps,
-          restitution: 0.4,
-          friction: 0.3,
-          frictionAir: 0.015
+          restitution: 0.25,
+          friction: 0.5, // Good friction for sliding
+          frictionAir: 0.022
         }
       case 'heart':
         return {
           ...baseProps,
-          restitution: 0.6,
-          friction: 0.2,
-          frictionAir: 0.01
+          restitution: 0.35, // Slightly more bouncy but still controlled
+          friction: 0.3, // Medium friction
+          frictionAir: 0.018
         }
       default: // box
         return {
           ...baseProps,
           restitution: 0.3,
-          friction: 0.4,
+          friction: 0.4, // Natural friction
           frictionAir: 0.02
         }
     }

@@ -14,6 +14,7 @@ import { ColorOption } from '../types/color-option'
 import { AnimationType, StructureType } from '../animations'
 import { StructureOpcion } from '../types/structure-option'
 import { cn } from '@/lib/utils'
+import { AtroposSyncProvider } from '../context/AtroposSync'
 
 interface Props {
 	ticketDOMContnet: HTMLElement | null
@@ -86,8 +87,9 @@ export const ViewTicketDesktop = ({
 		animation: selectedAnimation as any // temp cast
 	}
 	return (
-		<div className={`hidden lg:flex lg:items-center lg:justify-center lg:min-h-screen lg:w-full mx-auto py-8 pt-20 relative transition-all duration-500 ease-in-out ${isPanelMinimized ? 'px-8' : 'pl-8 pr-96'
-			}`}>
+		<AtroposSyncProvider>
+			<div className={`hidden lg:flex lg:items-center lg:justify-center lg:min-h-screen lg:w-full mx-auto py-8 pt-20 relative transition-all duration-500 ease-in-out ${isPanelMinimized ? 'px-8' : 'pl-8 pr-96'
+				}`}>
 			{/* Share Panel - Absolute Left */}
 			<div className='absolute left-4 top-24'>
 				<ShareTicketPanel
@@ -282,6 +284,7 @@ export const ViewTicketDesktop = ({
 					</Button>
 				</div>
 			)}
-		</div>
+			</div>
+		</AtroposSyncProvider>
 	)
 }

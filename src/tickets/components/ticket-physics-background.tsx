@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Matter from 'matter-js'
 import { getAnimation, AnimationType, StructureType, AnimationContext } from '../animations'
+import { useAtroposSync } from '../context/AtroposSync'
 
 interface Props {
 	structure: StructureType
@@ -16,6 +17,16 @@ export const TicketPhysicsBackground = ({ structure, animation, className = '' }
 	const renderRef = useRef<Matter.Render | null>(null)
 	const runnerRef = useRef<Matter.Runner | null>(null)
 	const currentAnimationRef = useRef<{ cleanup?: () => void } | null>(null)
+	const baseGravityRef = useRef<{ x: number; y: number }>({ x: 0, y: 1 })
+	
+	// Try to get Atropos sync context, but don't fail if it's not available
+	let setTiltHandler: ((handler: (x: number, y: number) => void) => void) | null = null
+	try {
+		const sync = useAtroposSync()
+		setTiltHandler = sync.setTiltHandler
+	} catch {
+		// Context not available, that's okay
+	}
 
 	useEffect(() => {
 		if (!sceneRef.current) return
@@ -98,6 +109,40 @@ export const TicketPhysicsBackground = ({ structure, animation, className = '' }
 		const animationModule = getAnimation(animation)
 		currentAnimationRef.current = animationModule
 		animationModule.setup(context)
+
+		// Set up Atropos tilt handler for realistic gravity physics
+		const handleTilt = (normalizedX: number, normalizedY: number) => {
+			if (!engineRef.current) return
+			
+			// Realistic physics: when tilted right, gravity pulls right (objects fall right)
+			const gravityStrength = isMobile ? 0.6 : 0.8 // Moderate gravity strength
+			const tiltSensitivity = 1.2 // Moderate sensitivity for smooth movement
+			
+			// Map tilt to gravity direction (corrected physics mapping)
+			// When mouse is RIGHT, objects should fall RIGHT (positive X gravity)
+			// When mouse is LEFT, objects should fall LEFT (negative X gravity)  
+			// When mouse is DOWN, objects should fall DOWN (positive Y gravity)
+			// When mouse is UP, objects should fall UP (negative Y gravity)
+			const gravityX = normalizedX * tiltSensitivity * gravityStrength // Direct mapping: right = positive
+			const gravityY = baseGravityRef.current.y + (normalizedY * tiltSensitivity * gravityStrength * 0.3)
+			
+			// Apply smooth gravity transition (not instant)
+			const currentGravityX = engineRef.current.gravity.x
+			const currentGravityY = engineRef.current.gravity.y
+			
+			const smoothing = 0.15 // Smooth transition factor
+			const newGravityX = currentGravityX + (gravityX - currentGravityX) * smoothing
+			const newGravityY = currentGravityY + (gravityY - currentGravityY) * smoothing
+			
+			// Update engine gravity with smooth, realistic physics
+			engineRef.current.gravity.x = newGravityX
+			engineRef.current.gravity.y = Math.max(0.2, newGravityY) // Maintain minimum downward gravity
+		}
+
+		// Register the tilt handler if context is available
+		if (setTiltHandler) {
+			setTiltHandler(handleTilt)
+		}
 
 		// Cleanup function
 		return () => {
