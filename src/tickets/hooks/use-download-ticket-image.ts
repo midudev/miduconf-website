@@ -1,23 +1,23 @@
-import { useLayoutEffect, useState } from 'react'
+import { RefObject, useLayoutEffect, useState } from 'react'
 import { transformElementToJpeg } from '../utils/transform-element-to-jpeg'
 
 interface Props {
-  ticketDOMContnet: HTMLElement | null
+  ticketDOMContnet: RefObject<HTMLElement | null>
 }
 
 export const useDownloadTicketImage = ({ ticketDOMContnet }: Props) => {
   const [sharedTicketImageLink, setSharedTicketImageLink] = useState<string | null>(null)
 
   useLayoutEffect(() => {
-    if (sharedTicketImageLink != null) return
+    if (ticketDOMContnet?.current == null) return
 
     handleCreateImageImage()
-  }, [ticketDOMContnet])
+  }, [ticketDOMContnet?.current])
 
   const handleCreateImageImage = async () => {
-    if (ticketDOMContnet == null) return
+    if (ticketDOMContnet?.current == null) return
 
-    const { dataURL } = await transformElementToJpeg({ ticketDOMContnet })
+    const { dataURL } = await transformElementToJpeg({ ticketDOMContnet: ticketDOMContnet.current })
     setSharedTicketImageLink(dataURL)
   }
 

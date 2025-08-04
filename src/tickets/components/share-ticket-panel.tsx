@@ -6,12 +6,12 @@ import { DiscordIcon } from '@/components/icons/discord'
 import { useDownloadTicketImage } from '../hooks/use-download-ticket-image'
 import { Tooltip } from '@/components/Tooltip'
 import { cn } from '@/lib/utils'
-import { useEffect } from 'react'
+import { RefObject, useEffect } from 'react'
 import { TicketDesign } from '../types/ticket-design'
 
 interface Props {
   username: string
-  ticketDOMContnet: HTMLElement | null
+  ticketDOMContnet: RefObject<HTMLElement | null>
   className?: string
   ticketDesign: TicketDesign
 }

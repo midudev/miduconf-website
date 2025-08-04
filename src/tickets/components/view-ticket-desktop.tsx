@@ -7,11 +7,11 @@ import { TicketDesign } from '../types/ticket-design'
 import { PencilIcon } from '../icons/structure-ticket/pencil'
 import { Button } from '@/components/Button'
 import { EnterArrow } from '@/components/icons/enter-arrow'
-import { useState } from 'react'
+import { RefObject, useState } from 'react'
 import { StickerOption } from '../types/sticker-option'
 
 interface Props {
-  ticketDOMContnet: HTMLElement | null
+  ticketDOMContnet: RefObject<HTMLElement | null>
   ticketOGImageElement: HTMLElement | null
   username: string
   midudevTypeSub: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
