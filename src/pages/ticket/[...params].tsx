@@ -48,7 +48,7 @@ export default function TicketPage({ user, ticketNumber, hologram }: Props) {
               />
             </Container3D>
 
-            <Button as={Link} href='/' className='w-full max-w-xs'>
+            <Button as={Link} href='/ticket' className='w-full max-w-xs'>
               Obtén tu Ticket
             </Button>
           </div>
@@ -69,7 +69,7 @@ export default function TicketPage({ user, ticketNumber, hologram }: Props) {
                 </p>
               </div>
 
-              <Button as={Link} href='/' className='inline-flex items-center gap-2'>
+              <Button as={Link} href='/ticket' className='inline-flex items-center gap-2'>
                 <EnterArrow className='w-4 h-4' />
                 Obtén tu Ticket
               </Button>
