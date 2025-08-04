@@ -1,9 +1,8 @@
 import { cn } from '@/lib/utils'
+import { gsap } from 'gsap'
 import { useEffect, useRef, useState } from 'react'
 import { useRemainingTime } from '../hooks/useRemainingTime'
 import { Clock } from './icons/clock'
-import { gsap } from 'gsap'
-import { ScrollCountdown } from './ScrollCountdown'
 
 const LITERALS = ['d', null, 'h', null, 'm', null, 's']
 // const EVENT_DATE = 1757512800000 // 10 de septiembre de 2025 - 16:00h CEST
@@ -81,7 +80,7 @@ export function Countdown({ className }) {
           })}
         </div>
       </div>
-      <ScrollCountdown scrollClockRef={scrollClockRef} />
+      {/* <ScrollCountdown scrollClockRef={scrollClockRef} /> */}
     </>
   )
 }
