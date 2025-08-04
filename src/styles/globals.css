@@ -3,54 +3,54 @@
 @tailwind utilities;
 
 :root {
-  --font-family-monospace: 'code-regular', monospace;
-  --font-family-cta: 'code-medium', monospace;
+	--font-family-monospace: 'code-regular', monospace;
+	--font-family-cta: 'code-medium', monospace;
 
-  /* PC */
-  --heading-4xl-pc: 4.62rem;
-  --heading-3xl-pc: 3.5rem;
-  --heading-2xl-pc: 1.875rem;
-  --heading-xl-pc: 1.5rem;
-  --heading-xl-code-pc: 1.25rem;
-  --heading-body-pc: 1.125rem;
-  --heading-body-code-pc: 1.125rem;
-  --heading-small-code-pc: 0.875rem;
+	/* PC */
+	--heading-4xl-pc: 4.62rem;
+	--heading-3xl-pc: 3.5rem;
+	--heading-2xl-pc: 1.875rem;
+	--heading-xl-pc: 1.5rem;
+	--heading-xl-code-pc: 1.25rem;
+	--heading-body-pc: 1.125rem;
+	--heading-body-code-pc: 1.125rem;
+	--heading-small-code-pc: 0.875rem;
 
-  /* LAPTOP-IPAD */
-  --heading-4xl-ipad: 4rem;
-  --heading-3xl-ipad: 3.125rem;
-  --heading-2xl-ipad: 1.625rem;
-  --heading-xl-ipad: 1.25rem;
-  --heading-xl-code-ipad: 1.125rem;
-  --heading-body-ipad: 1rem;
-  --heading-body-code-ipad: 1rem;
-  --heading-small-code-ipad: 0.875rem;
+	/* LAPTOP-IPAD */
+	--heading-4xl-ipad: 4rem;
+	--heading-3xl-ipad: 3.125rem;
+	--heading-2xl-ipad: 1.625rem;
+	--heading-xl-ipad: 1.25rem;
+	--heading-xl-code-ipad: 1.125rem;
+	--heading-body-ipad: 1rem;
+	--heading-body-code-ipad: 1rem;
+	--heading-small-code-ipad: 0.875rem;
 
-  /* MOVIL */
-  --heading-4xl-movil: 2.3rem;
-  --heading-3xl-movil: 1.875rem;
-  --heading-2xl-movil: 1.375rem;
-  --heading-xl-movil: 1.125rem;
-  --heading-xl-code-movil: 1rem;
-  --heading-body-movil: 0.875rem;
-  --heading-body-code-movil: 0.875rem;
-  --heading-small-code-movil: 0.75rem;
+	/* MOVIL */
+	--heading-4xl-movil: 2.3rem;
+	--heading-3xl-movil: 1.875rem;
+	--heading-2xl-movil: 1.375rem;
+	--heading-xl-movil: 1.125rem;
+	--heading-xl-code-movil: 1rem;
+	--heading-body-movil: 0.875rem;
+	--heading-body-code-movil: 0.875rem;
+	--heading-small-code-movil: 0.75rem;
 }
 
 @layer base {
-  @font-face {
-    font-family: 'code-regular';
-    src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-  }
+	@font-face {
+		font-family: 'code-regular';
+		src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+		font-weight: 400;
+		font-style: normal;
+	}
 
-  @font-face {
-    font-family: 'code-medium';
-    src: url('/fonts/IBMPlexMono-Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-  }
+	@font-face {
+		font-family: 'code-medium';
+		src: url('/fonts/IBMPlexMono-Medium.woff2') format('woff2');
+		font-weight: 500;
+		font-style: normal;
+	}
 }
 
 @layer utilities {
@@ -99,194 +99,196 @@
 		line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
 		letter-spacing: 0.36px;
 	}
-  .text-body-code {
-    @apply font-code uppercase;
-    font-size: clamp(
-      var(--heading-body-code-movil),
-      0.806rem + 0.296vw,
-      var(--heading-body-code-pc)
-    );
-    line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
-    letter-spacing: 0.36px;
-  }
 
-  .text-small-code {
-    @apply font-code uppercase;
-    font-size: clamp(
-      var(--heading-small-code-movil),
-      0.715rem + 0.148vw,
-      var(--heading-small-code-pc)
-    );
-    line-height: clamp(1rem, 0.827rem + 0.739vw, 1.625rem);
-    letter-spacing: -0.28px;
-  }
+	.text-body-code {
+		@apply uppercase font-code;
+		font-size: clamp(var(--heading-body-code-movil),
+				0.806rem + 0.296vw,
+				var(--heading-body-code-pc));
+		line-height: clamp(1.375rem, 1.306rem + 0.296vw, 1.625rem);
+		letter-spacing: 0.36px;
+	}
 
-  .clipHidden {
-    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
-  }
+	.text-small-code {
+		@apply uppercase font-code;
+		font-size: clamp(var(--heading-small-code-movil),
+				0.715rem + 0.148vw,
+				var(--heading-small-code-pc));
+		line-height: clamp(1rem, 0.827rem + 0.739vw, 1.625rem);
+		letter-spacing: -0.28px;
+	}
 
-  .clipVisible {
-    clip-path: none;
-  }
+	.clipHidden {
+		clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+	}
 
-  .hidden-scroll::-webkit-scrollbar {
-    width: 0;
-  }
+	.clipVisible {
+		clip-path: none;
+	}
 
-  ::-webkit-scrollbar-track {
-    /* Customize the scrollbar track */
-  }
+	.hidden-scroll::-webkit-scrollbar {
+		width: 0;
+	}
 
-  ::-webkit-scrollbar-thumb {
-    /* Customize the scrollbar thumb */
-  }
+	::-webkit-scrollbar-track {
+		/* Customize the scrollbar track */
+	}
+
+	::-webkit-scrollbar-thumb {
+		/* Customize the scrollbar thumb */
+	}
 }
 
 html {
-  scroll-behavior: smooth;
-  h1,
-  h2,
-  h3,
-  h4 {
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  button,
-  p,
-  a,
-  h1,
-  h2,
-  h3,
-  h4,
-  th,
-  td,
-  a div {
-    text-box-trim: trim-both;
-    text-box-edge: cap alphabetic;
-    font-feature-settings: 'liga' 1, 'dlig' 1, 'hlig' 1, 'cswh' 1, 'kern' 1, 'ss02' 1 !important;
-  }
+	scroll-behavior: smooth;
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	button,
+	p,
+	a,
+	h1,
+	h2,
+	h3,
+	h4,
+	th,
+	td,
+	a div {
+		text-box-trim: trim-both;
+		text-box-edge: cap alphabetic;
+		font-feature-settings: 'liga' 1, 'dlig' 1, 'hlig' 1, 'cswh' 1, 'kern' 1, 'ss02' 1 !important;
+	}
 }
 
 body {
-  background: #09090e;
-  overflow-x: hidden;
-  color: #eff4ff;
+	background: #09090e;
+	overflow-x: hidden;
+	color: #eff4ff;
 
-  .balls {
-    width: 100%;
-    height: 100vh;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -2;
-    background: url('/global/bg.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-  }
+	.balls {
+		width: 100%;
+		height: 100vh;
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: -2;
+		background: url('/global/bg.png');
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
 
-  .bg-image {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    background: radial-gradient(ellipse at center, transparent 44%, #09090e 75%);
-  }
+	.bg-image {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		background: radial-gradient(ellipse at center, transparent 44%, #09090e 75%);
+	}
 }
 
 @keyframes reduce-header {
-  to {
-    box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, 0.1), 0 0 0 1px hsla(0, 0%, 100%, 0.1);
-    background: rgba(0, 0, 0, 0.3);
-    padding-block: 1rem;
-    backdrop-filter: blur(10px);
-  }
+	to {
+		box-shadow: 0 5px 50px -5px hsla(0, 0%, 100%, 0.1), 0 0 0 1px hsla(0, 0%, 100%, 0.1);
+		background: rgba(0, 0, 0, 0.3);
+		padding-block: 1rem;
+		backdrop-filter: blur(10px);
+	}
 }
 
 /* aplicar background al header cuando hacemos scroll */
 .animation-header {
-  animation: animation-header-scroll linear both;
-  animation-timeline: scroll();
-  animation-range: 0 200px;
+	animation: animation-header-scroll linear both;
+	animation-timeline: scroll();
+	animation-range: 0 200px;
 }
 
 @keyframes animation-header-scroll {
-  to {
-    background-color: #09090e;
-    padding-inline: 1rem;
-    padding-block: 0.5rem;
-  }
+	to {
+		background-color: #09090e;
+		padding-inline: 1rem;
+		padding-block: 0.5rem;
+	}
 }
 
 .animation-ul {
-  animation: animation-ul linear both;
-  animation-timeline: scroll();
-  animation-range: 0 200px;
+	animation: animation-ul linear both;
+	animation-timeline: scroll();
+	animation-range: 0 200px;
 }
 
 @keyframes animation-ul {
-  to {
+	to {
 		top: 15px;
-  }
+	}
 }
 
 @media (width>768px) {
-  /* movimiento y opacidad en las cards de los speakers */
-  .animation-speaker {
-    view-timeline-name: --reveal;
-    animation-name: animation-speaker-scroll;
-    animation-fill-mode: both;
-    animation-timeline: --reveal;
-    animation-range: entry 25% cover 50%;
-  }
 
-  .animation-speaker-peer {
-    view-timeline-name: --reveal-peer;
-    animation-name: animation-speaker-scroll-peer;
-    animation-fill-mode: both;
-    animation-timeline: --reveal-peer;
-    animation-range: entry 25% cover 50%;
-  }
+	/* movimiento y opacidad en las cards de los speakers */
+	.animation-speaker {
+		view-timeline-name: --reveal;
+		animation-name: animation-speaker-scroll;
+		animation-fill-mode: both;
+		animation-timeline: --reveal;
+		animation-range: entry 25% cover 50%;
+	}
+
+	.animation-speaker-peer {
+		view-timeline-name: --reveal-peer;
+		animation-name: animation-speaker-scroll-peer;
+		animation-fill-mode: both;
+		animation-timeline: --reveal-peer;
+		animation-range: entry 25% cover 50%;
+	}
 }
 
 @keyframes animation-speaker-scroll {
-  from {
-    opacity: 0;
-    transform: translateY(4rem);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(4rem);
+	}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes animation-speaker-scroll-peer {
-  from {
-    opacity: 0;
-    transform: translateY(8rem);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(8rem);
+	}
 
-  to {
-    opacity: 1;
-    transform: translateY(4rem);
-  }
+	to {
+		opacity: 1;
+		transform: translateY(4rem);
+	}
 }
 
 .scroll-container {
-  animation: infinite-scroll var(--duration, 20s) linear infinite var(--direction, normal);
+	animation: infinite-scroll var(--duration, 20s) linear infinite var(--direction, normal);
 }
+
 .scroll-container[data-direction='right'] {
-  --direction: reverse;
+	--direction: reverse;
 }
 
 @keyframes infinite-scroll {
-  from {
-    transform: translate(0);
-  }
-  to {
-    transform: translate(calc(var(--position, -50%) - 1.5rem));
-  }
+	from {
+		transform: translate(0);
+	}
+
+	to {
+		transform: translate(calc(var(--position, -50%) - 1.5rem));
+	}
 }
 
 .custom-scroll::-webkit-scrollbar {
@@ -309,4 +311,12 @@ body {
 /* Handle on hover */
 .custom-scroll::-webkit-scrollbar-thumb:hover {
 	background: rgb(255, 255, 255, 0.4);
+}
+
+.academia-mensual::after {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: transparent;
+	background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20L0 20z' fill='%2300000010' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
 }

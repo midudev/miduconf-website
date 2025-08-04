@@ -13,7 +13,7 @@ export const SelectStickerPanel = ({ ticketDesign, handleChangeSticker }: Props)
 	return (
 		<article className='pt-6'>
 			<h3 className='ml-1 text-xs uppercase text-palette-ghost'>Stickers</h3>
-			<ul className='flex flex-wrap items-center gap-4 p-4 mt-2 rounded-md bg-palette-ghost/10'>
+			<ul className='flex flex-wrap items-center gap-4 p-4 mt-2  rounded-md bg-palette-ghost/10'>
 				{Object.values(PERSONALIZE_TIKET_OPTIONS.STICKER).map((label) => (
 					<li key={label}>
 						<Button

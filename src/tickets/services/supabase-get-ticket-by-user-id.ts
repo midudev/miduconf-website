@@ -23,7 +23,7 @@ export const supabaseGetTicketByUserId = async (req: any, res: any, { id }: Prop
     }
 
     if (data == null) return null
-    console.log({ data })
+
     const normalizedData = normalizeTicketData(data as SupabaseTicketData)
     return normalizedData
   } catch (err) {
