@@ -128,7 +128,7 @@ export const SelectHologramPanel = ({
         <ul className='flex flex-wrap items-center gap-4 px-4 pb-3'>
           {ACADEMIA_HOLOGRAMS.map((label, index) => {
             const indexOfAcademyValue = getAcademyTierIndex(midudevTypeSub)
-            console.log({ indexOfAcademyValue, index: index + 1 })
+
             return (
               <li key={label}>
                 {index + 1 > indexOfAcademyValue ? (
