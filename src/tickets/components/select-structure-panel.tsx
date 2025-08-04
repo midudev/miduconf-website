@@ -4,11 +4,13 @@ import { PrismIcon } from '../icons/structure-ticket/prism'
 import { BackgroundIcon } from '../icons/structure-ticket/background'
 import { PiramideIcon } from '../icons/structure-ticket/piramide'
 import { BoxIcon } from '../icons/structure-ticket/box'
-import { HearthIcon } from '../icons/structure-ticket/hearth'
+import { HeartIcon } from '../icons/structure-ticket/heart'
+import { LockIcon } from '../icons/structure-ticket/lock'
 import { StructureOpcion } from '../types/structure-option'
 import { AnimationOption } from '../types/animation-option'
 import { ColorOption } from '../types/color-option'
 import { HologramOption } from '../types/hologram-option'
+import { cn } from '@/lib/utils'
 
 interface Props {
 	handleChangeStructure: (option: StructureOpcion) => void
@@ -20,83 +22,78 @@ interface Props {
 	}
 }
 
+const listOfStructures = [
+	{
+		label: 'circular',
+		value: 'circle' as const,
+		icon: CircleIcon,
+		disabled: false
+	},
+	{
+		label: 'prisma',
+		value: 'prism' as const,
+		icon: PrismIcon,
+		disabled: false
+	},
+	{
+		label: 'background',
+		value: 'background' as const,
+		icon: BackgroundIcon,
+		disabled: false
+	},
+	{
+		label: 'pirámide',
+		value: 'piramide' as const,
+		icon: PiramideIcon,
+		disabled: false
+	},
+	{
+		label: 'caja',
+		value: 'box' as const,
+		icon: BoxIcon,
+		disabled: true
+	},
+	{
+		label: 'corazón',
+		value: 'heart' as const,
+		icon: HeartIcon,
+		disabled: true
+	}
+]
+
 export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Props) => {
 	return (
-		<article className='pt-6'>
-			<h3 className='ml-1 text-xs uppercase text-palette-ghost'>Estructura</h3>
-			<ul className='flex flex-wrap items-center gap-4 p-4 mt-2 rounded-md bg-palette-ghost/10'>
-				<li>
-					<Button
-						title='Aplicar estructura circular'
-						containerClassName='bg-palette-ghost/10'
-						aria-label='Aplicar estructura circular'
-						className='px-3 text-sm duration-300 aspect-square'
-						onClick={() => handleChangeStructure('circle')}
-						variant={ticketDesign.structure === 'circle' ? 'border' : 'ghost'}
-					>
-						<CircleIcon className='w-auto h-4' />
-					</Button>
-				</li>
-				<li>
-					<Button
-						title='Aplicar estructura de prisma'
-						containerClassName='bg-palette-ghost/10'
-						aria-label='Aplicar estructura de prisma'
-						className='px-3 text-sm duration-300 aspect-square'
-						onClick={() => handleChangeStructure('prism')}
-						variant={ticketDesign.structure === 'prism' ? 'border' : 'ghost'}
-					>
-						<PrismIcon className='w-auto h-4' />
-					</Button>
-				</li>
-				<li>
-					<Button
-						title='Aplicar estructura de Background'
-						containerClassName='bg-palette-ghost/10'
-						aria-label='Aplicar estructura de Background'
-						className='px-3 text-sm duration-300 aspect-square'
-						onClick={() => handleChangeStructure('background')}
-						variant={ticketDesign.structure === 'background' ? 'border' : 'ghost'}
-					>
-						<BackgroundIcon className='w-auto h-4' />
-					</Button>
-				</li>
-				<li>
-					<Button
-						title='Aplicar estructura de piramide'
-						containerClassName='bg-palette-ghost/10'
-						aria-label='Aplicar estructura de piramide'
-						className='px-3 text-sm duration-300 aspect-square'
-						onClick={() => handleChangeStructure('piramide')}
-						variant={ticketDesign.structure === 'piramide' ? 'border' : 'ghost'}
-					>
-						<PiramideIcon className='w-4 h-auto' />
-					</Button>
-				</li>
-				<li>
-					<Button
-						title='Aplicar estructura de caja'
-						containerClassName='bg-palette-ghost/10'
-						aria-label='Aplicar estructura de caja'
-						className='px-3 text-sm duration-300 aspect-square'
-						onClick={() => handleChangeStructure('box')}
-						variant={ticketDesign.structure === 'box' ? 'border' : 'ghost'}
-					>
-						<BoxIcon className='w-auto h-4' />
-					</Button>
-				</li>
-				<li>
-					<Button
-						title='Aplicar estructura de corazón'
-						containerClassName='bg-palette-ghost/10'
-						aria-label='Aplicar estructura de corazón'
-						className='px-3 text-sm duration-300 aspect-square'
-						onClick={() => handleChangeStructure('hearth')}
-						variant={ticketDesign.structure === 'hearth' ? 'border' : 'ghost'}
-					>
-						<HearthIcon className='w-auto h-4' />
-					</Button>
-				</li>
+		<article className='flex flex-col gap-4'>
+			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Estructura</h3>
+			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
+				{listOfStructures.map(({ label, value, icon: Icon, disabled }) => (
+					<li key={value}>
+						{disabled ? (
+							<div className="relative">
+								<Button
+									title={`Estructura ${label} bloqueada`}
+									aria-label='Estructura bloqueada'
+									className='px-3 text-sm duration-300 aspect-square cursor-not-allowed'
+									disabled={true}
+									variant='ghost'
+								>
+									<Icon className='size-6' />
+								</Button>
+								<LockIcon className="absolute top-0 -right-1 size-8 text-palette-ghost bg-palette-dark rounded-full p-0.5" />
+							</div>
+						) : (
+							<Button
+								title={`Aplicar estructura ${label}`}
+								aria-label={`Aplicar estructura ${label}`}
+								className={cn('px-3 text-sm aspect-square', ticketDesign.structure === value && 'bg-palette-ghost/50 scale-[0.8]')}
+								onClick={() => handleChangeStructure(value)}
+								variant={ticketDesign.structure === value ? 'border' : 'ghost'}
+							>
+								<Icon className={cn('size-6 transition-transform duration-300', ticketDesign.structure === value && 'scale-[1.2]')} />
+							</Button>
+						)}
+					</li>
+				))}
 			</ul>
 		</article>
 	)

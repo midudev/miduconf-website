@@ -1,6 +1,8 @@
 import { Button } from '@/components/Button'
 import { ColorOption } from '../types/color-option'
 import { TicketDesign } from '../types/ticket-design'
+import { LockIcon } from '../icons/structure-ticket/lock'
+import { cn } from '@/lib/utils'
 
 interface Props {
 	handleChangeColor: (option: ColorOption) => void
@@ -9,26 +11,46 @@ interface Props {
 
 export const SelectColorPanel = ({ ticketDesign, handleChangeColor }: Props) => {
 	return (
-		<article className='pt-6'>
-			<h3 className='ml-1 text-xs uppercase text-palette-ghost'>Colores</h3>
-			<ul className='flex flex-wrap items-center gap-4 p-4 mt-2 rounded-md bg-palette-ghost/10'>
-				{listOfCOlors.map(({ label, value, color }) => (
+		<article className='flex flex-col gap-4'>
+			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Colores</h3>
+			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
+				{listOfCOlors.map(({ label, value, color, disabled }) => (
 					<li key={value}>
-						<Button
-							title={`Aplicar color ${label}`}
-							containerClassName='bg-palette-ghost/10'
-							aria-label='Aplicar estructura circular'
-							className='px-3 text-sm duration-300 aspect-square'
-							onClick={() => handleChangeColor(value)}
-							variant={ticketDesign.color === value ? 'border' : 'ghost'}
-						>
-							<div
-								style={{
-									backgroundColor: color
-								}}
-								className='w-4 h-4 rounded-full'
-							/>
-						</Button>
+						{disabled ? (
+							<div className="relative">
+								<Button
+									title={`Color ${label} bloqueado`}
+									aria-label='Color bloqueado'
+									className='px-3 text-sm duration-300 aspect-square cursor-not-allowed'
+									disabled={true}
+									variant='ghost'
+								>
+									<div
+										style={{
+											backgroundColor: color,
+											boxShadow: `0 0 6px 1px ${color}, inset 0 0 8px ${color}`,
+										}}
+										className='size-6 rounded-full'
+									/>
+								</Button>
+								<LockIcon className="absolute top-0 -right-1 size-8 text-palette-ghost bg-palette-dark rounded-full p-0.5" />
+							</div>
+						) : (
+							<Button
+								title={`Aplicar color ${label}`}
+								aria-label='Aplicar estructura circular'
+								className={cn('px-3 text-sm aspect-square', ticketDesign.color === value && 'bg-palette-ghost/50 scale-[0.8]')}
+								onClick={() => handleChangeColor(value)}
+								variant={ticketDesign.color === value ? 'border' : 'ghost'}
+							>
+								<div
+									style={{
+										backgroundColor: color
+									}}
+									className={cn('size-6 rounded-full', ticketDesign.color === value && 'border-2 border-palette-default scale-[1.2]')}
+								/>
+							</Button>
+						)}
 					</li>
 				))}
 			</ul>
@@ -40,31 +62,37 @@ const listOfCOlors = [
 	{
 		label: 'azul',
 		value: 'blue',
-		color: '#5A8CF6'
+		color: '#5A8CF6',
+		disabled: false
 	},
 	{
 		label: 'naranja',
 		value: 'orange',
-		color: '#FC9211'
+		color: '#FC9211',
+		disabled: false
 	},
 	{
 		label: 'rojo',
 		value: 'red',
-		color: '#FA444A'
+		color: '#FA444A',
+		disabled: false
 	},
 	{
 		label: 'verde',
 		value: 'green',
-		color: '#00FC65'
+		color: '#00FC65',
+		disabled: false
 	},
 	{
 		label: 'rosa',
 		value: 'pink',
-		color: '#FB4AD8'
+		color: '#A26E93',
+		disabled: true
 	},
 	{
-		label: 'gris',
-		value: 'gray',
-		color: '#949494'
+		label: 'amarillo',
+		value: 'yellow',
+		color: '#DFDFC2',
+		disabled: true
 	}
 ] as const

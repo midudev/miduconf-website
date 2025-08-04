@@ -6,6 +6,7 @@ import { SelectHologramPanel } from './select-hologram-panel'
 import { TicketDesign } from '../types/ticket-design'
 import { HologramOption } from '../types/hologram-option'
 import { StickerOption } from '../types/sticker-option'
+import { ColorOption } from '../types/color-option'
 
 interface Props {
   twitchTier: '1' | '2' | '3' | null
@@ -19,6 +20,7 @@ interface Props {
   midudevTokentId: string
   handleChangeHologram: (hologram: HologramOption) => void
   handleChangeSticker: (sticker: StickerOption) => void
+  handleChangeColor?: (color: ColorOption) => void
 }
 
 export const ViewTicketMobile = ({
@@ -32,7 +34,8 @@ export const ViewTicketMobile = ({
   midudevTokentId,
   midudevTypeSub,
   handleChangeHologram,
-  handleChangeSticker
+  handleChangeSticker,
+  handleChangeColor
 }: Props) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false)
 
@@ -64,6 +67,7 @@ export const ViewTicketMobile = ({
             ticketNumber={ticketNumber}
             username={username}
             hologram={ticketDesign.hologram}
+            color={ticketDesign.color}
           />
         </div>
       </div>
