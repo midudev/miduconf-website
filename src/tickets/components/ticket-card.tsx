@@ -3,6 +3,8 @@ import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
 import { HologramOption } from '../types/hologram-option'
 import { ColorOption } from '../types/color-option'
 import { TwitchIcon } from '@/components/icons/twitch'
+import { TicketPhysicsBackground } from './ticket-physics-background'
+import { StructureType, AnimationType } from '../animations'
 
 interface Props {
 	username: string
@@ -11,6 +13,8 @@ interface Props {
 	hologram?: HologramOption
 	color?: ColorOption
 	twitchTier?: string | null
+	structure?: StructureType
+	animation?: AnimationType
 }
 
 export const TicketCard = ({
@@ -19,7 +23,9 @@ export const TicketCard = ({
 	username,
 	hologram = 'standard',
 	color = 'blue',
-	twitchTier
+	twitchTier,
+	structure = 'box',
+	animation = 'default'
 }: Props) => {
 	const hologramStyles = getHologramStyles(hologram)
 	const colorStyles = getColorStyles(color)
@@ -40,10 +46,12 @@ export const TicketCard = ({
 					colorStyles.inner
 				)}
 			>
+				{/* Physics Background */}
+				<TicketPhysicsBackground structure={structure} animation={animation} />
 				{hologramStyles.badge && (
 					<span
 						className={cn(
-							'absolute top-4 right-4 flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-full border border-white/20 backdrop-blur-sm',
+							'absolute top-4 right-4 flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-full border border-white/20 backdrop-blur-sm z-10',
 							hologramStyles.badge.gradient,
 							hologramStyles.badge.textColor,
 							hologramStyles.badge.shadow,
@@ -56,11 +64,11 @@ export const TicketCard = ({
 				)}
 				<WhiteMidudevLogo
 					className={cn(
-						'absolute w-auto h-20 max-sm:h-[70px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2',
+						'absolute w-auto h-20 max-sm:h-[70px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 z-10',
 						hologramStyles.logo
 					)}
 				/>
-				<header className='p-6 uppercase max-sm:p-5'>
+				<header className='p-6 uppercase max-sm:p-5 relative z-10'>
 					<p className={cn('text-palette-ghost mt-2', hologramStyles.text && hologramStyles.text)}>
 						/@{username}
 					</p>
@@ -73,7 +81,7 @@ export const TicketCard = ({
 						{fullname}
 					</h3>
 				</header>
-				<footer className='flex flex-col justify-end flex-1'>
+				<footer className='flex flex-col justify-end flex-1 relative z-10'>
 					<span
 						className={cn(
 							'mb-2 mx-auto font-medium text-[3.5rem] md:text-7xl lg:text-[5.3rem] tabular-nums leading-none',

@@ -152,7 +152,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req, res 
         },
         ticketNumber: ticket.ticketNumber,
         hologram: ticket.hologram,
-        color: ticket.color || 'blue'
+        color: 'blue'
       }
     }
   } catch (error) {

@@ -10,7 +10,7 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     BACKGROUND: 'background',
     PIRAMIDE: 'piramide',
     BOX: 'box',
-    HEARTH: 'hearth'
+    HEART: 'heart'
   },
   COLOR: {
     BLUE: 'blue',

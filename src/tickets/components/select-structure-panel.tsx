@@ -4,7 +4,7 @@ import { PrismIcon } from '../icons/structure-ticket/prism'
 import { BackgroundIcon } from '../icons/structure-ticket/background'
 import { PiramideIcon } from '../icons/structure-ticket/piramide'
 import { BoxIcon } from '../icons/structure-ticket/box'
-import { HearthIcon } from '../icons/structure-ticket/hearth'
+import { HeartIcon } from '../icons/structure-ticket/heart'
 import { StructureOpcion } from '../types/structure-option'
 import { AnimationOption } from '../types/animation-option'
 import { ColorOption } from '../types/color-option'
@@ -34,7 +34,7 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Pr
 						onClick={() => handleChangeStructure('circle')}
 						variant={ticketDesign.structure === 'circle' ? 'border' : 'ghost'}
 					>
-						<CircleIcon className='w-auto h-4' />
+						<CircleIcon className='w-auto h-3' />
 					</Button>
 				</li>
 				<li>
@@ -46,7 +46,7 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Pr
 						onClick={() => handleChangeStructure('prism')}
 						variant={ticketDesign.structure === 'prism' ? 'border' : 'ghost'}
 					>
-						<PrismIcon className='w-auto h-4' />
+						<PrismIcon className='w-auto h-3' />
 					</Button>
 				</li>
 				<li>
@@ -58,7 +58,7 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Pr
 						onClick={() => handleChangeStructure('background')}
 						variant={ticketDesign.structure === 'background' ? 'border' : 'ghost'}
 					>
-						<BackgroundIcon className='w-auto h-4' />
+						<BackgroundIcon className='w-auto h-3' />
 					</Button>
 				</li>
 				<li>
@@ -70,7 +70,7 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Pr
 						onClick={() => handleChangeStructure('piramide')}
 						variant={ticketDesign.structure === 'piramide' ? 'border' : 'ghost'}
 					>
-						<PiramideIcon className='w-4 h-auto' />
+						<PiramideIcon className='w-3 h-auto' />
 					</Button>
 				</li>
 				<li>
@@ -82,7 +82,7 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Pr
 						onClick={() => handleChangeStructure('box')}
 						variant={ticketDesign.structure === 'box' ? 'border' : 'ghost'}
 					>
-						<BoxIcon className='w-auto h-4' />
+						<BoxIcon className='w-auto h-3' />
 					</Button>
 				</li>
 				<li>
@@ -91,10 +91,10 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Pr
 						containerClassName='bg-palette-ghost/10'
 						aria-label='Aplicar estructura de corazón'
 						className='px-3 text-sm duration-300 aspect-square'
-						onClick={() => handleChangeStructure('hearth')}
-						variant={ticketDesign.structure === 'hearth' ? 'border' : 'ghost'}
+						onClick={() => handleChangeStructure('heart')}
+						variant={ticketDesign.structure === 'heart' ? 'border' : 'ghost'}
 					>
-						<HearthIcon className='w-auto h-4' />
+						<HeartIcon className='w-auto h-3' />
 					</Button>
 				</li>
 			</ul>

@@ -2,6 +2,7 @@ import { ShareTicketPanel } from './share-ticket-panel'
 import { Container3D } from '@/components/Container3D'
 import { TicketCard } from './ticket-card'
 import { SelectHologramPanel } from './select-hologram-panel'
+import { SelectStructurePanel } from './select-structure-panel'
 import { HologramOption } from '../types/hologram-option'
 import { TicketDesign } from '../types/ticket-design'
 import { PencilIcon } from '../icons/structure-ticket/pencil'
@@ -10,6 +11,8 @@ import { EnterArrow } from '@/components/icons/enter-arrow'
 import { useState } from 'react'
 import { StickerOption } from '../types/sticker-option'
 import { ColorOption } from '../types/color-option'
+import { AnimationType, StructureType } from '../animations'
+import { StructureOpcion } from '../types/structure-option'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -42,6 +45,46 @@ export const ViewTicketDesktop = ({
 	handleChangeColor
 }: Props) => {
 	const [isPanelMinimized, setIsPanelMinimized] = useState(false)
+	const [selectedStructure, setSelectedStructure] = useState<StructureType>('box')
+	const [selectedAnimation, setSelectedAnimation] = useState<AnimationType>('default')
+
+
+	// Map between the two type systems
+	const mapStructureToOpcion = (structure: StructureType): StructureOpcion => {
+		const mapping: Record<StructureType, StructureOpcion> = {
+			'box': 'box',
+			'circle': 'circle',
+			'piramide': 'piramide',
+			'prism': 'prism',
+			'background': 'background',
+			'heart': 'heart'
+		}
+		return mapping[structure] || 'box'
+	}
+
+	const mapOpcionToStructure = (opcion: StructureOpcion): StructureType => {
+		const mapping: Record<StructureOpcion, StructureType> = {
+			'box': 'box',
+			'circle': 'circle',
+			'piramide': 'piramide',
+			'prism': 'prism',
+			'background': 'background',
+			'heart': 'heart'
+		}
+		return mapping[opcion] || 'box'
+	}
+
+	const handleChangeStructure = (opcion: StructureOpcion) => {
+		const newStructure = mapOpcionToStructure(opcion)
+		setSelectedStructure(newStructure)
+	}
+
+	// Create ticketDesign object for SelectStructurePanel
+	const extendedTicketDesign = {
+		...ticketDesign,
+		structure: mapStructureToOpcion(selectedStructure),
+		animation: selectedAnimation as any // temp cast
+	}
 	return (
 		<div className={`hidden lg:flex lg:items-center lg:justify-center lg:min-h-screen lg:w-full mx-auto py-8 pt-20 relative transition-all duration-500 ease-in-out ${isPanelMinimized ? 'px-8' : 'pl-8 pr-96'
 			}`}>
@@ -80,6 +123,8 @@ export const ViewTicketDesktop = ({
 						username={username}
 						hologram={ticketDesign.hologram}
 						color={ticketDesign.color}
+						structure={selectedStructure}
+						animation={selectedAnimation}
 					/>
 				</Container3D>
 			</div>
@@ -110,87 +155,37 @@ export const ViewTicketDesktop = ({
 							<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>ANIMACIÓN</h3>
 							<div className='flex gap-2 mb-6'>
 								<Button
-									variant='border'
+									variant={selectedAnimation === 'default' ? 'border' : 'ghost'}
 									size='small'
 									className='px-4 text-sm py-1 uppercase'
+									onClick={() => setSelectedAnimation('default')}
 								>
 									Default
 								</Button>
 								<Button
-									variant='ghost'
+									variant={selectedAnimation === 'pyramid' ? 'border' : 'ghost'}
 									size='small'
 									className='px-4 py-1 text-sm uppercase'
+									onClick={() => setSelectedAnimation('pyramid')}
 								>
 									Pirámide
 								</Button>
 								<Button
-									variant='ghost'
+									variant={selectedAnimation === 'friction' ? 'border' : 'ghost'}
 									size='small'
 									className='px-4 py-1 text-sm uppercase'
+									onClick={() => setSelectedAnimation('friction')}
 								>
-									Fricción
+									Orbital
 								</Button>
 							</div>
 						</div>
 
 						{/* ESTRUCTURA Section */}
-						<div>
-							<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>ESTRUCTURA</h3>
-							<div className='bg-palette-border-foreground rounded-lg p-4'>
-								<div className='grid grid-cols-6 gap-2'>
-									<Button
-										variant='border'
-										size='small'
-										className='aspect-square p-0 flex items-center justify-center'
-									>
-										<div className='size-8 bg-white rounded'></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-0 flex items-center justify-center'
-									>
-										<div className='size-8 bg-white'
-											style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-0 flex items-center justify-center'
-									>
-										<div className='size-8 bg-white'
-											style={{
-												backgroundImage: 'linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white), linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white)',
-												backgroundSize: '3px 3px',
-												backgroundPosition: '0 0, 1.5px 1.5px'
-											}}></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-0 flex items-center justify-center'
-									>
-										<div className='size-8 bg-white rounded-full'></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-										disabled
-									>
-										<div className='size-8 bg-gray-600 rounded'></div>
-									</Button>
-									<Button
-										variant='ghost'
-										size='small'
-										className='aspect-square p-2 flex items-center justify-center'
-										disabled
-									>
-										<div className='w-6 h-6 bg-gray-600 rounded'></div>
-									</Button>
-								</div>
-							</div>
-						</div>
+						<SelectStructurePanel
+							ticketDesign={extendedTicketDesign}
+							handleChangeStructure={handleChangeStructure}
+						/>
 
 						{/* COLORES Section */}
 						<div>
