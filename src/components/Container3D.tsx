@@ -57,7 +57,7 @@ export const Container3D = ({ children }: Props) => {
 					) : (
 						<Atropos
 							highlight={true}
-							innerClassName='backdrop-blur-xl rounded-[17px]'
+							innerClassName='backdrop-blur-xl rounded-xl'
 							className='block w-max h-auto mx-auto shadow-2xl [box-sizing:border-box]'
 							onRotate={handleRotate}
 						>

@@ -44,6 +44,7 @@ export const TicketCard = ({
 				hologram === 'academia-lifetime' && 'from-yellow-200/10 via-transparent to-yellow-200/10'
 			)}
 		>
+			{/* Physics Background */}
 			{['academia-mensual', 'academia-trimestral', 'academia-anual', 'academia-lifetime'].includes(
 				hologram
 			) && (
@@ -152,6 +153,7 @@ export const TicketCard = ({
 						{fullname}
 					</h3>
 				</header>
+				<TicketPhysicsBackground structure={structure} animation={animation} />
 				<footer className='flex flex-col justify-end flex-1'>
 					<span
 						className={cn(
