@@ -83,7 +83,7 @@ export default function Ticket({
           ticketNumber={ticketNumber}
           ticketDesign={ticketDesign}
           midudevTypeSub={midudevTypeSub}
-          ticketDOMContnet={ticketImageElement.current}
+          ticketDOMContnet={ticketImageElement}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
           handleChangeSticker={handleChangeSticker}
@@ -98,7 +98,7 @@ export default function Ticket({
           ticketNumber={ticketNumber}
           midudevTypeSub={midudevTypeSub}
           ticketDesign={ticketDesign}
-          ticketDOMContnet={ticketImageElement.current}
+          ticketDOMContnet={ticketImageElement}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
           handleChangeSticker={handleChangeSticker}
@@ -107,7 +107,7 @@ export default function Ticket({
       {/* Contenido para crear captura */}
       <HideTicketImageElement
         hologram={ticketDesign.hologram}
-        ref={ticketImageElement}
+        refElement={ticketImageElement}
         fullname={user.fullname}
         ticketNumber={ticketNumber}
         username={user.username}
