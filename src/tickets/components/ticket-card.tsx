@@ -33,9 +33,9 @@ export const TicketCard = ({
 	return (
 		<article
 			className={cn(
-				'w-[280px] md:w-[350px] lg:w-[400px] aspect-[397/597] overflow-hidden p-2 bg-gradient-to-tr from-white/20 via-transparent to-white/20 rounded-xl border relative border-palette-border-foreground',
+				'w-[280px] md:w-[350px] lg:w-[400px] aspect-[397/597] overflow-hidden p-2 rounded-xl border relative',
+				hologram === 'standard' ? `bg-gradient-to-tr ${colorStyles.outer}` : 'bg-gradient-to-tr from-white/20 via-transparent to-white/20 border-palette-border-foreground',
 				hologramStyles.outer,
-				colorStyles.outer,
 				hologram === 'academia-mensual' && 'from-yellow-200/10 via-transparent to-yellow-200/10',
 				hologram === 'academia-trimestral' &&
 				'from-sky-400/10 via-pink-500/20 to-sky-400/10 border-sky-100/10',
@@ -55,7 +55,8 @@ export const TicketCard = ({
 				)}
 			<div
 				className={cn(
-					'bg-gradient-to-tr from-[#1f1f25] via-[#101015] to-[#1f1f25] border border-palette-border-foreground rounded-xl flex flex-col relative h-full overflow-hidden font-ibm-plex',
+					'rounded-xl flex flex-col relative h-full overflow-hidden font-ibm-plex',
+					hologram === 'standard' ? `bg-gradient-to-tr ${colorStyles.inner}` : 'bg-gradient-to-tr from-[#1f1f25] via-[#101015] to-[#1f1f25] border border-palette-border-foreground',
 					hologramStyles.inner,
 					hologram === 'academia-mensual' &&
 					'bg-gradient-to-t from-yellow-200/10 via-orange-500/5 to-violet-800/10 ',

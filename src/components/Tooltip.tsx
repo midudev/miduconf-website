@@ -22,6 +22,7 @@ interface Props {
 	tooltipPosition?: Placement
 	offsetNumber?: number
 	tooltipClassName?: string
+	arrowClassName?: string
 }
 
 export function Tooltip({
@@ -29,7 +30,8 @@ export function Tooltip({
 	text,
 	tooltipPosition = 'bottom',
 	offsetNumber = 12,
-	tooltipClassName = ''
+	tooltipClassName = '',
+	arrowClassName = ''
 }: Props) {
 	const [isOpen, setIsOpen] = useState(false)
 	const arrowRef = useRef(null)
@@ -72,7 +74,7 @@ export function Tooltip({
 					)}
 				>
 					{text}
-					<FloatingArrow ref={arrowRef} context={context} className={cn('fill-palette-primary')} />
+					<FloatingArrow ref={arrowRef} context={context} className={cn('fill-palette-primary', arrowClassName)} />
 				</div>
 			)}
 		</>

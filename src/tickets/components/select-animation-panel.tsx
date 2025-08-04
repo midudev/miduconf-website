@@ -1,44 +1,71 @@
 import { Button } from '@/components/Button'
-import { AnimationOption } from '../types/animation-option'
-import { TicketDesign } from '../types/ticket-design'
+import { LockIcon } from '../icons/structure-ticket/lock'
+import { cn } from '@/lib/utils'
+import { AnimationType } from '../animations'
 
 interface Props {
-	handleChangeAnimation: (option: AnimationOption) => void
-	ticketDesign: TicketDesign
+	handleChangeAnimation: (option: AnimationType) => void
+	selectedAnimation: AnimationType
 }
 
-export const SelectAnimationPanel = ({ handleChangeAnimation, ticketDesign }: Props) => {
+const listOfAnimations = [
+	{
+		label: 'Default',
+		value: 'default' as const,
+		disabled: false
+	},
+	{
+		label: 'Pirámide',
+		value: 'pyramid' as const,
+		disabled: false
+	},
+	{
+		label: 'Orbital',
+		value: 'friction' as const,
+		disabled: false
+	}
+]
+
+export const SelectAnimationPanel = ({ handleChangeAnimation, selectedAnimation }: Props) => {
+
 	return (
-		<article className='pt-6'>
-			<h3 className='ml-1 text-xs uppercase text-palette-ghost'>Animación</h3>
-			<ul className='flex flex-wrap items-center gap-4 mt-2'>
-				<li>
-					<Button
-						className='px-3 py-1 text-sm duration-300'
-						onClick={() => handleChangeAnimation('default')}
-						variant={ticketDesign.animation === 'default' ? 'border' : 'ghost'}
-					>
-						Default
-					</Button>
-				</li>
-				<li>
-					<Button
-						className='px-3 py-1 text-sm duration-300'
-						onClick={() => handleChangeAnimation('piramide')}
-						variant={ticketDesign.animation === 'piramide' ? 'border' : 'ghost'}
-					>
-						Piramide
-					</Button>
-				</li>
-				<li>
-					<Button
-						className='px-3 py-1 text-sm duration-300'
-						onClick={() => handleChangeAnimation('friccion')}
-						variant={ticketDesign.animation === 'friccion' ? 'border' : 'ghost'}
-					>
-						Fricción
-					</Button>
-				</li>
+		<article className='flex flex-col gap-4'>
+			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Animación</h3>
+			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
+				{listOfAnimations.map(({ label, value, disabled }) => {
+					const isSelected = selectedAnimation === value
+
+					return (
+						<li key={value}>
+							{disabled ? (
+								<div className="relative">
+									<Button
+										title={`Animación ${label} bloqueada`}
+										aria-label='Animación bloqueada'
+										className='px-3 py-1 text-base duration-300 cursor-not-allowed'
+										disabled={true}
+										variant='ghost'
+									>
+										{label}
+									</Button>
+									<LockIcon className="absolute -top-1 -right-4 size-8 text-palette-ghost bg-palette-dark rounded-full p-0.5" />
+								</div>
+							) : (
+								<Button
+									title={`Aplicar animación ${label}`}
+									aria-label={`Aplicar animación ${label}`}
+									className={cn('px-3 py-1 text-base duration-300', isSelected && 'bg-palette-ghost/50 scale-[0.8]')}
+									onClick={() => handleChangeAnimation(value)}
+									variant={isSelected ? 'border' : 'ghost'}
+								>
+									<span className={cn('transition-transform duration-300', isSelected && 'scale-[1.2]')}>
+										{label}
+									</span>
+								</Button>
+							)}
+						</li>
+					)
+				})}
 			</ul>
 		</article>
 	)

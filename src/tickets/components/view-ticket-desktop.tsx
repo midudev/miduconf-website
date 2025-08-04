@@ -1,20 +1,24 @@
 import { ShareTicketPanel } from './share-ticket-panel'
 import { Container3D } from '@/components/Container3D'
 import { TicketCard } from './ticket-card'
-import { SelectHologramPanel } from './select-hologram-panel'
 import { SelectStructurePanel } from './select-structure-panel'
+import { SelectColorPanel } from './select-color-panel'
+import { SelectHologramPanel } from './select-hologram-panel'
+import { SelectAnimationPanel } from './select-animation-panel'
 import { HologramOption } from '../types/hologram-option'
 import { TicketDesign } from '../types/ticket-design'
 import { PencilIcon } from '../icons/structure-ticket/pencil'
 import { Button } from '@/components/Button'
-import { EnterArrow } from '@/components/icons/enter-arrow'
 import { useState } from 'react'
 import { StickerOption } from '../types/sticker-option'
 import { ColorOption } from '../types/color-option'
 import { AnimationType, StructureType } from '../animations'
 import { StructureOpcion } from '../types/structure-option'
+import { AnimationOption } from '../types/animation-option'
 import { cn } from '@/lib/utils'
 import { AtroposSyncProvider } from '../context/AtroposSync'
+import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
+import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
 
 interface Props {
 	ticketDOMContnet: HTMLElement | null
@@ -47,7 +51,19 @@ export const ViewTicketDesktop = ({
 }: Props) => {
 	const [isPanelMinimized, setIsPanelMinimized] = useState(false)
 	const [selectedStructure, setSelectedStructure] = useState<StructureType>('box')
-	const [selectedAnimation, setSelectedAnimation] = useState<AnimationType>('default')
+	const [selectedAnimation, setSelectedAnimation] = useState<AnimationType>(() => {
+		// Initialize with current animation from ticketDesign
+		const mapping: Record<string, AnimationType> = {
+			'default': 'default',
+			'piramide': 'pyramid',
+			'friccion': 'friction'
+		}
+		return mapping[ticketDesign.animation] || 'default'
+	})
+
+	const handleChangeAnimation = (animation: AnimationType) => {
+		setSelectedAnimation(animation)
+	}
 
 
 	// Map between the two type systems
@@ -80,11 +96,30 @@ export const ViewTicketDesktop = ({
 		setSelectedStructure(newStructure)
 	}
 
+	// Map between AnimationType and AnimationOption
+	const mapAnimationToOption = (animationType: AnimationType): AnimationOption => {
+		const mapping: Record<AnimationType, AnimationOption> = {
+			'default': 'default' as AnimationOption,
+			'pyramid': 'piramide' as AnimationOption,
+			'friction': 'friccion' as AnimationOption
+		}
+		return mapping[animationType] || 'default' as AnimationOption
+	}
+
+	const mapOptionToAnimation = (option: AnimationOption): AnimationType => {
+		const mapping: Record<string, AnimationType> = {
+			'default': 'default',
+			'piramide': 'pyramid',
+			'friccion': 'friction'
+		}
+		return mapping[option] || 'default'
+	}
+
 	// Create ticketDesign object for SelectStructurePanel
 	const extendedTicketDesign = {
 		...ticketDesign,
 		structure: mapStructureToOpcion(selectedStructure),
-		animation: selectedAnimation as any // temp cast
+		animation: mapAnimationToOption(selectedAnimation)
 	}
 	return (
 		<AtroposSyncProvider>
@@ -137,7 +172,7 @@ export const ViewTicketDesktop = ({
 					: 'transform translate-x-0 opacity-100 mr-0'
 					}`}>
 					<div className='p-4 border rounded-md border-palette-border-foreground bg-palette-bg-foreground-primary flex-1 overflow-auto custom-scroll flex flex-col'>
-						<div className='flex items-center justify-between mb-12'>
+						<div className='flex items-center justify-between mb-8'>
 							<h2 className='text-2xl normal-case font-medium text-white'>Personaliza tu ticket</h2>
 							<Button
 								variant='icon'
@@ -151,37 +186,81 @@ export const ViewTicketDesktop = ({
 								</svg>
 							</Button>
 						</div>
+
+						{/* Connection Status Buttons */}
+						<div className='mb-6 flex flex-col gap-4'>
+							<h4 className='uppercase text-sm font-medium text-palette-ghost tracking-wide'>Vincula tu cuenta</h4>
+							{/* Academia Connection Button */}
+							<div className='flex gap-3'>
+								{midudevTypeSub ? (
+									<Button
+										variant='default'
+										size='small'
+										className='py-3 px-4 bg-palette-primary hover:bg-palette-primary/80 text-white font-medium text-sm uppercase tracking-wide'
+										disabled={true}
+									>
+										<div className='flex items-center justify-center gap-2'>
+											<WhiteMidudevLogo className='size-5' />
+											ACADEMIA
+										</div>
+									</Button>
+								) : (
+									<Button
+										variant='default'
+										size='small'
+										href={`https://midu.dev/miduconf/ticket/${midudevTokentId}`}
+										target='_blank'
+										rel='noopener noreferrer'
+										as='a'
+									>
+										<div className='uppercase text-sm flex items-center justify-center gap-2'>
+											<WhiteMidudevLogo className='size-5' />
+											Academia
+										</div>
+									</Button>
+								)}
+
+								{/* Twitch Connection Button */}
+								{twitchTier ? (
+									<Button
+										variant='ghost'
+										size='small'
+										className='py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white font-medium text-sm uppercase tracking-wide border border-purple-600'
+										disabled={true}
+									>
+										<div className='flex items-center justify-center gap-2'>
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+												<path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+											</svg>
+											TWITCH TIER {twitchTier}
+										</div>
+									</Button>
+								) : (
+									<Button
+										variant='ghost'
+										size='small'
+										className='py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white font-medium text-sm uppercase tracking-wide border border-purple-600'
+										href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier: twitchTier })}
+										target='_blank'
+										rel='noopener noreferrer'
+										as='a'
+									>
+										<div className='flex items-center justify-center gap-2'>
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+												<path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+											</svg>
+											TWITCH
+										</div>
+									</Button>
+								)}
+							</div>
+						</div>
 						<div className='relative flex-1 space-y-6'>
 							{/* ANIMACIÓN Section */}
-							<div>
-								<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>ANIMACIÓN</h3>
-								<div className='flex gap-2 mb-6'>
-									<Button
-										variant={selectedAnimation === 'default' ? 'border' : 'ghost'}
-										size='small'
-										className='px-4 text-sm py-1 uppercase'
-										onClick={() => setSelectedAnimation('default')}
-									>
-										Default
-									</Button>
-									<Button
-										variant={selectedAnimation === 'pyramid' ? 'border' : 'ghost'}
-										size='small'
-										className='px-4 py-1 text-sm uppercase'
-										onClick={() => setSelectedAnimation('pyramid')}
-									>
-										Pirámide
-									</Button>
-									<Button
-										variant={selectedAnimation === 'friction' ? 'border' : 'ghost'}
-										size='small'
-										className='px-4 py-1 text-sm uppercase'
-										onClick={() => setSelectedAnimation('friction')}
-									>
-										Orbital
-									</Button>
-								</div>
-							</div>
+							<SelectAnimationPanel
+								selectedAnimation={selectedAnimation}
+								handleChangeAnimation={handleChangeAnimation}
+							/>
 
 							{/* ESTRUCTURA Section */}
 							<SelectStructurePanel
@@ -190,83 +269,23 @@ export const ViewTicketDesktop = ({
 							/>
 
 							{/* COLORES Section */}
-							<div>
-								<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>COLORES</h3>
-								<div className='bg-palette-border-foreground rounded-lg p-4'>
-									<div className='grid grid-cols-6 gap-2'>
-										{(() => {
-											const colors = [
-												{ value: 'blue', bg: 'bg-blue-500' },
-												{ value: 'orange', bg: 'bg-orange-500' },
-												{ value: 'red', bg: 'bg-red-500' },
-												{ value: 'green', bg: 'bg-green-500' },
-												{ value: 'pink', bg: 'bg-pink-500', disabled: true },
-												{ value: 'gray', bg: 'bg-gray-500', disabled: true },
-											];
-
-											return colors.map((color) => {
-												const isSelected = ticketDesign.color === color.value;
-
-												return (
-													<Button
-														key={color.value}
-														variant={isSelected ? 'border' : 'ghost'}
-														size='small'
-														className={cn(
-															'aspect-square p-2 flex items-center justify-center',
-														)}
-														disabled={color.disabled}
-														onClick={() => !color.disabled && handleChangeColor?.(color.value as ColorOption)}
-													>
-														<div className={cn('size-8 rounded-full', color.bg, isSelected && 'border-palette-default border-2')}></div>
-													</Button>
-												);
-											});
-										})()}
-									</div>
-								</div>
-							</div>
+							<SelectColorPanel
+								ticketDesign={ticketDesign}
+								handleChangeColor={handleChangeColor || (() => { })}
+							/>
 
 							{/* HOLOGRÁFICO Section */}
-							<div>
-								<h3 className='text-sm font-medium text-palette-ghost mb-4 tracking-wide'>HOLOGRÁFICO</h3>
-								<div className='bg-palette-border-foreground rounded-lg p-4'>
-									<div className='grid grid-cols-6 gap-2'>
-										{(() => {
-											const holograms = [
-												{ value: 'standard', imageIndex: 1 },
-												{ value: 'twitch-1', imageIndex: 2 },
-												{ value: 'twitch-2', imageIndex: 3 },
-												{ value: 'twitch-3', imageIndex: 4 },
-												{ value: 'academia-mensual', imageIndex: 5 },
-												{ value: 'academia-anual', imageIndex: 6 },
-											];
-
-											return holograms.map((hologram) => {
-												const isSelected = ticketDesign.hologram === hologram.value;
-
-												return (
-													<Button
-														key={hologram.value}
-														variant={isSelected ? 'border' : 'ghost'}
-														size="small"
-														className="aspect-square p-2 flex items-center justify-center"
-														onClick={() => handleChangeHologram(hologram.value as any)}
-													>
-														<img
-															src={`/tickets/holograms/${hologram.imageIndex}.png`}
-															alt={`Holograma ${hologram.value}`}
-															className={cn('w-full h-full object-cover rounded-full', isSelected && 'border-2 border-palette-default')}
-															width='28'
-															height='28'
-														/>
-													</Button>
-												);
-											});
-										})()}
-									</div>
-								</div>
-							</div>
+							<SelectHologramPanel
+								ticketDesign={ticketDesign}
+								twitchTier={twitchTier}
+								midudevTypeSub={midudevTypeSub}
+								username={username}
+								ticketNumber={ticketNumber}
+								midudevTokentId={midudevTokentId}
+								ticketOGImageElement={ticketOGImageElement}
+								handleChangeHologram={handleChangeHologram}
+								handleChangeSticker={handleChangeSticker}
+							/>
 						</div>
 					</div>
 				</div>
