@@ -2,11 +2,14 @@ import { RefObject } from 'react'
 import { TicketCard } from './ticket-card'
 import { HologramOption } from '../types/hologram-option'
 import { ColorOption } from '../types/color-option'
+import { AnimationType, StructureType } from '../animations'
 import { cn } from '@/lib/utils'
 
 interface Props {
   hologram: HologramOption
   color?: ColorOption
+  structure?: StructureType
+  animation?: AnimationType
   fullname: string
   ticketNumber: number
   username: string
@@ -20,6 +23,8 @@ export const HideTicketImageElement = ({
   ticketNumber,
   hologram,
   color,
+  structure,
+  animation,
   noHidden = false,
   refElement
 }: Props) => {
@@ -32,6 +37,8 @@ export const HideTicketImageElement = ({
           username={username}
           hologram={hologram}
           color={color}
+          structure={structure}
+          animation={animation}
         />
       </section>
     </div>

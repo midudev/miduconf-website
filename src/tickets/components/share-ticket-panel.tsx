@@ -8,19 +8,24 @@ import { Tooltip } from '@/components/Tooltip'
 import { cn } from '@/lib/utils'
 import { RefObject, useEffect, useLayoutEffect } from 'react'
 import { TicketDesign } from '../types/ticket-design'
+import { AnimationType, StructureType } from '../animations'
 
 interface Props {
   username: string
   ticketDOMContnet: RefObject<HTMLElement | null>
   className?: string
   ticketDesign: TicketDesign
+  structure?: StructureType
+  animation?: AnimationType
 }
 
 export const ShareTicketPanel = ({
   username,
   ticketDOMContnet,
   className,
-  ticketDesign
+  ticketDesign,
+  structure,
+  animation
 }: Props) => {
   const { sharedTicketImageLink, handleCreateImageImage } = useDownloadTicketImage({
     ticketDOMContnet
@@ -28,7 +33,7 @@ export const ShareTicketPanel = ({
 
   useLayoutEffect(() => {
     handleCreateImageImage()
-  }, [ticketDesign])
+  }, [ticketDesign, structure, animation])
 
   return (
     <nav>

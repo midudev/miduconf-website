@@ -19,6 +19,7 @@ import { cn } from '@/lib/utils'
 import { AtroposSyncProvider } from '../context/AtroposSync'
 import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
 import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
+import { EnterArrow } from '@/components/icons/enter-arrow'
 
 interface Props {
   ticketDOMContnet: RefObject<HTMLElement | null>
@@ -33,9 +34,58 @@ interface Props {
   handleChangeHologram: (hologram: HologramOption) => void
   handleChangeSticker: (sticker: StickerOption) => void
   handleChangeColor?: (color: ColorOption) => void
+  handleChangeStructure?: (structure: StructureOpcion) => void
+  handleChangeAnimation?: (animation: AnimationOption) => void
+  hasUnsavedChanges?: boolean
+  isSaving?: boolean
+  onSave?: () => void
 }
 
-export const ViewTicketDesktop = ({
+// Map between the two type systems
+const mapStructureToOpcion = (structure: StructureType): StructureOpcion => {
+  const mapping: Record<StructureType, StructureOpcion> = {
+    box: 'box',
+    circle: 'circle',
+    piramide: 'piramide',
+    prism: 'prism',
+    background: 'background',
+    heart: 'heart'
+  }
+  return mapping[structure] || 'box'
+}
+
+const mapOpcionToStructure = (opcion: StructureOpcion): StructureType => {
+  const mapping: Record<StructureOpcion, StructureType> = {
+    box: 'box',
+    circle: 'circle',
+    piramide: 'piramide',
+    prism: 'prism',
+    background: 'background',
+    heart: 'heart'
+  }
+  return mapping[opcion] || 'box'
+}
+
+// Map between AnimationType and AnimationOption
+const mapAnimationToOption = (animationType: AnimationType): AnimationOption => {
+  const mapping: Record<AnimationType, AnimationOption> = {
+    default: 'default' as AnimationOption,
+    pyramid: 'piramide' as AnimationOption,
+    friction: 'friccion' as AnimationOption
+  }
+  return mapping[animationType] || ('default' as AnimationOption)
+}
+
+const mapOptionToAnimation = (option: AnimationOption): AnimationType => {
+  const mapping: Record<string, AnimationType> = {
+    default: 'default',
+    piramide: 'pyramid',
+    friccion: 'friction'
+  }
+  return mapping[option] || 'default'
+}
+
+const ViewTicketDesktopInner = ({
   ticketDOMContnet,
   ticketOGImageElement,
   username,
@@ -47,71 +97,26 @@ export const ViewTicketDesktop = ({
   midudevTypeSub,
   handleChangeHologram,
   handleChangeSticker,
-  handleChangeColor
+  handleChangeColor,
+  handleChangeStructure,
+  handleChangeAnimation,
+  hasUnsavedChanges = false,
+  isSaving = false,
+  onSave
 }: Props) => {
   const [isPanelMinimized, setIsPanelMinimized] = useState(false)
-  const [selectedStructure, setSelectedStructure] = useState<StructureType>('box')
-  const [selectedAnimation, setSelectedAnimation] = useState<AnimationType>(() => {
-    // Initialize with current animation from ticketDesign
-    const mapping: Record<string, AnimationType> = {
-      default: 'default',
-      piramide: 'pyramid',
-      friccion: 'friction'
-    }
-    return mapping[ticketDesign.animation] || 'default'
-  })
+  
+  // Get current structure and animation from ticketDesign
+  const selectedStructure = mapOpcionToStructure(ticketDesign.structure)
+  const selectedAnimation = mapOptionToAnimation(ticketDesign.animation)
 
-  const handleChangeAnimation = (animation: AnimationType) => {
-    setSelectedAnimation(animation)
+  const handleAnimationChange = (animation: AnimationType) => {
+    const animationOption = mapAnimationToOption(animation)
+    handleChangeAnimation?.(animationOption)
   }
 
-  // Map between the two type systems
-  const mapStructureToOpcion = (structure: StructureType): StructureOpcion => {
-    const mapping: Record<StructureType, StructureOpcion> = {
-      box: 'box',
-      circle: 'circle',
-      piramide: 'piramide',
-      prism: 'prism',
-      background: 'background',
-      heart: 'heart'
-    }
-    return mapping[structure] || 'box'
-  }
-
-  const mapOpcionToStructure = (opcion: StructureOpcion): StructureType => {
-    const mapping: Record<StructureOpcion, StructureType> = {
-      box: 'box',
-      circle: 'circle',
-      piramide: 'piramide',
-      prism: 'prism',
-      background: 'background',
-      heart: 'heart'
-    }
-    return mapping[opcion] || 'box'
-  }
-
-  const handleChangeStructure = (opcion: StructureOpcion) => {
-    const newStructure = mapOpcionToStructure(opcion)
-    setSelectedStructure(newStructure)
-  }
-
-  // Map between AnimationType and AnimationOption
-  const mapAnimationToOption = (animationType: AnimationType): AnimationOption => {
-    const mapping: Record<AnimationType, AnimationOption> = {
-      default: 'default' as AnimationOption,
-      pyramid: 'piramide' as AnimationOption,
-      friction: 'friccion' as AnimationOption
-    }
-    return mapping[animationType] || ('default' as AnimationOption)
-  }
-
-  const mapOptionToAnimation = (option: AnimationOption): AnimationType => {
-    const mapping: Record<string, AnimationType> = {
-      default: 'default',
-      piramide: 'pyramid',
-      friccion: 'friction'
-    }
-    return mapping[option] || 'default'
+  const handleStructureChange = (opcion: StructureOpcion) => {
+    handleChangeStructure?.(opcion)
   }
 
   // Create ticketDesign object for SelectStructurePanel
@@ -133,25 +138,47 @@ export const ViewTicketDesktop = ({
             ticketDesign={ticketDesign}
             ticketDOMContnet={ticketDOMContnet}
             username={username}
+            structure={selectedStructure}
+            animation={selectedAnimation}
           />
         </div>
 
-        {/* <div className='absolute bottom-0 left-0 right-0 flex flex-col gap-4 p-4'>
-				<Button
-					variant='default'
-					className='flex items-center justify-center w-full gap-2 py-2 text-lg uppercase'
-				>
-					<EnterArrow className='w-4 h-4' />
-					Guardar
-				</Button>
-				<Button
-					variant='secondary'
-					className='w-full py-2 text-lg uppercase'
-					onClick={() => setIsPanelMinimized(true)}
-				>
-					Cancelar
-				</Button>
-			</div> */}
+        <div 
+          className={`absolute bottom-0 left-0 right-0 flex flex-col gap-4 p-4 transition-all duration-700 ease-out ${
+            hasUnsavedChanges 
+              ? 'transform translate-x-0 opacity-100' 
+              : 'transform -translate-x-full opacity-0 pointer-events-none'
+          }`}
+        >
+          <Button
+            variant='default'
+            onClick={onSave}
+            disabled={isSaving}
+            className={`flex items-center justify-center w-full gap-2 py-2 text-lg uppercase transition-all duration-300 ${
+              isSaving ? 'bg-green-600 hover:bg-green-600' : ''
+            }`}
+          >
+            {isSaving ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                Guardando...
+              </>
+            ) : (
+              <>
+                <EnterArrow className='w-4 h-4' />
+                Guardar
+              </>
+            )}
+          </Button>
+          <Button
+            variant='secondary'
+            className='w-full py-2 text-lg uppercase transition-all duration-300'
+            onClick={() => setIsPanelMinimized(true)}
+            disabled={isSaving}
+          >
+            Cancelar
+          </Button>
+        </div>
 
         {/* Ticket - Always Centered */}
         <div className='flex items-center justify-center'>
@@ -290,13 +317,13 @@ export const ViewTicketDesktop = ({
               {/* ANIMACIÓN Section */}
               <SelectAnimationPanel
                 selectedAnimation={selectedAnimation}
-                handleChangeAnimation={handleChangeAnimation}
+                handleChangeAnimation={handleAnimationChange}
               />
 
               {/* ESTRUCTURA Section */}
               <SelectStructurePanel
                 ticketDesign={extendedTicketDesign}
-                handleChangeStructure={handleChangeStructure}
+                handleChangeStructure={handleStructureChange}
               />
 
               {/* COLORES Section */}
@@ -337,4 +364,8 @@ export const ViewTicketDesktop = ({
       </div>
     </AtroposSyncProvider>
   )
+}
+
+export const ViewTicketDesktop = (props: Props) => {
+  return <ViewTicketDesktopInner {...props} />
 }

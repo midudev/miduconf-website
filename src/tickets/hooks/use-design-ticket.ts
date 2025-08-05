@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { PERSONALIZE_TIKET_OPTIONS } from '../constants/personalize-ticket-options'
 import { AnimationOption } from '../types/animation-option'
 import { StructureOpcion } from '../types/structure-option'
@@ -6,17 +6,51 @@ import { ColorOption } from '../types/color-option'
 import { HologramOption } from '../types/hologram-option'
 import { TicketDesign } from '../types/ticket-design'
 import { StickerOption } from '../types/sticker-option'
+import { useUpdateTicketInDB } from './use-update-ticket-in-db'
 
 interface Props {
   hologram: HologramOption
+  savedDesign?: string | null // JSON string from database flavour field
+  username?: string
 }
 
-export const useDesignTicket = ({ hologram }: Props) => {
+export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
+  const { handleUpdateTicketDesign } = useUpdateTicketInDB()
+  
   const [ticketDesign, setTicketDesign] = useState<TicketDesign>(() =>
     getInitialState({
-      hologram
+      hologram,
+      savedDesign,
+      username
     })
   )
+
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+
+  // Auto-save to localStorage on design changes
+  useEffect(() => {
+    if (!username) return
+
+    const designData = JSON.stringify({
+      hologram: ticketDesign.hologram,
+      color: ticketDesign.color,
+      structure: ticketDesign.structure,
+      animation: ticketDesign.animation,
+      sticker: ticketDesign.sticker,
+      _metadata: { type: 'design_data', version: '1.0' }
+    })
+
+    try {
+      localStorage.setItem(`ticket_design_${username}`, designData)
+      
+      // Compare with DB state to determine if there are unsaved changes
+      const dbDesign = savedDesign || getDefaultDesignJson(hologram)
+      setHasUnsavedChanges(designData !== dbDesign)
+    } catch (error) {
+      console.error('Error saving to localStorage:', error)
+    }
+  }, [ticketDesign, savedDesign, username, hologram])
 
   const handleChangeDesign = (options: Partial<TicketDesign>) => {
     setTicketDesign((lastDesign) => ({
@@ -72,21 +106,83 @@ export const useDesignTicket = ({ hologram }: Props) => {
     })
   }
 
+  const handleSaveDesign = async () => {
+    if (!username) {
+      console.error('No username provided for saving design')
+      return { error: 'No username provided' }
+    }
+
+    setIsSaving(true)
+
+    try {
+      const result = await handleUpdateTicketDesign({
+        ticketDesign,
+        username
+      })
+
+      if (!result.error) {
+        // Wait a bit for user to see success state
+        await new Promise(resolve => setTimeout(resolve, 500))
+        setHasUnsavedChanges(false)
+      }
+
+      return result
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
   return {
     ticketDesign,
+    hasUnsavedChanges,
+    isSaving,
     handleChangeAnimation,
     handleChangeStructure,
     handleChangeColor,
     handleChangeHologram,
-    handleChangeSticker
+    handleChangeSticker,
+    handleSaveDesign
   }
 }
 
-const getInitialState = ({ ...design }: Partial<TicketDesign>) => {
+const getInitialState = ({ hologram, savedDesign, username }: { hologram: HologramOption, savedDesign?: string | null, username?: string }) => {
+  // Try to load from localStorage first, then from DB
+  let parsedDesign: Partial<TicketDesign> = {}
+  
+  // 1. Try localStorage
+  if (username && typeof window !== 'undefined') {
+    try {
+      const localData = localStorage.getItem(`ticket_design_${username}`)
+      if (localData) {
+        parsedDesign = JSON.parse(localData)
+      }
+    } catch (error) {
+      console.error('Error parsing localStorage design:', error)
+    }
+  }
+  
+  // 2. Fallback to DB saved design if no localStorage
+  if (Object.keys(parsedDesign).length === 0 && savedDesign) {
+    try {
+      parsedDesign = JSON.parse(savedDesign)
+    } catch (error) {
+      console.error('Error parsing saved design:', error)
+    }
+  }
+
   return {
     ...INITIAL_STATE,
-    ...design
+    hologram, // Use the passed hologram as fallback/override
+    ...parsedDesign // Apply saved design if available
   }
+}
+
+const getDefaultDesignJson = (hologram: HologramOption): string => {
+  return JSON.stringify({
+    ...INITIAL_STATE,
+    hologram,
+    _metadata: { type: 'design_data', version: '1.0' }
+  })
 }
 
 const INITIAL_STATE = {

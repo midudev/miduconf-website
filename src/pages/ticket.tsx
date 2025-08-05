@@ -7,6 +7,9 @@ import { useDesignTicket } from '@/tickets/hooks/use-design-ticket'
 import { getTicketMetadata } from '@/tickets/utils/get-ticket-metadata'
 import { useEffect, useRef, useState } from 'react'
 import { HologramOption } from '@/tickets/types/hologram-option'
+import { AnimationType, StructureType } from '@/tickets/animations'
+import { AnimationOption } from '@/tickets/types/animation-option'
+import { StructureOpcion } from '@/tickets/types/structure-option'
 import { HideTicketImageElement } from '@/tickets/components/hide-ticket-image-element'
 import { HideOGTicketImageElement } from '@/tickets/components/hide-og-ticket-image-element'
 import { ViewTicketMobile } from '@/tickets/components/view-ticket-mobile'
@@ -18,6 +21,28 @@ import { ModalTwitchAccessContent } from '@/twitch/components/modal-twitch-acces
 import { ModalNoTwitchSubContent } from '@/twitch/components/modal-no-twitch-sub-content'
 import { ModalNoTHasMoreTierContent } from '@/twitch/components/modal-no-has-more-tier-content'
 
+// Map between the two type systems
+const mapOpcionToStructure = (opcion: StructureOpcion): StructureType => {
+  const mapping: Record<StructureOpcion, StructureType> = {
+    box: 'box',
+    circle: 'circle',
+    piramide: 'piramide',
+    prism: 'prism',
+    background: 'background',
+    heart: 'heart'
+  }
+  return mapping[opcion] || 'box'
+}
+
+const mapOptionToAnimation = (option: AnimationOption): AnimationType => {
+  const mapping: Record<string, AnimationType> = {
+    default: 'default',
+    piramide: 'pyramid',
+    friccion: 'friction'
+  }
+  return mapping[option] || 'default'
+}
+
 interface Props {
   user: {
     username: string
@@ -27,6 +52,7 @@ interface Props {
   ticketNumber: number
   twitchTier: TicketData['twitchTier']
   hologram: HologramOption
+  savedDesign?: string | null
   tierQueryData: {
     tier: string | null
     error: string | null
@@ -43,6 +69,7 @@ export default function Ticket({
   userHadPreviousTicket,
   twitchTier,
   hologram,
+  savedDesign,
   tierQueryData,
   notAccessTier,
   midudevTokentId,
@@ -55,9 +82,11 @@ export default function Ticket({
   })
 
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
-  const { ticketDesign, handleChangeHologram, handleChangeSticker, handleChangeColor } =
+  const { ticketDesign, hasUnsavedChanges, isSaving, handleChangeHologram, handleChangeSticker, handleChangeColor, handleChangeStructure, handleChangeAnimation, handleSaveDesign } =
     useDesignTicket({
-      hologram
+      hologram,
+      savedDesign,
+      username: user.username
     })
 
   const handleCloseModal = () => {
@@ -105,11 +134,19 @@ export default function Ticket({
           handleChangeHologram={handleChangeHologram}
           handleChangeSticker={handleChangeSticker}
           handleChangeColor={handleChangeColor}
+          handleChangeStructure={handleChangeStructure}
+          handleChangeAnimation={handleChangeAnimation}
+          hasUnsavedChanges={hasUnsavedChanges}
+          isSaving={isSaving}
+          onSave={handleSaveDesign}
         />
       </main>
       {/* Contenido para crear captura */}
       <HideTicketImageElement
         hologram={ticketDesign.hologram}
+        color={ticketDesign.color}
+        structure={mapOpcionToStructure(ticketDesign.structure)}
+        animation={mapOptionToAnimation(ticketDesign.animation)}
         refElement={ticketImageElement}
         fullname={user.fullname}
         ticketNumber={ticketNumber}
@@ -236,6 +273,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
       user: getInfoFromUser({ user: session?.user }),
       twitchTier: ticket.twitchTier,
       hologram: ticket.hologram,
+      savedDesign: ticket.designData || null,
       notAccessTier,
       tierQueryData
     }
