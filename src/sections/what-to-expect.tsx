@@ -32,9 +32,9 @@ export function WhatToExpect() {
     })
   }, [])
   return (
-    <section id='lo-que-puedes-esperar' className='mt-spacing-180'>
+    <section id='lo-que-puedes-esperar' className='overflow-hidden mt-spacing-180'>
       <Title>Que esperar</Title>
-      <div className='pt-spacing-64 flex flex-col gap-spacing-40 container-infinite-scroll'>
+      <div className='flex flex-col pt-spacing-64 gap-spacing-40 container-infinite-scroll'>
         <Highlight
           position='infinite-scroll-top'
           refHighlight={refScrollTop}
