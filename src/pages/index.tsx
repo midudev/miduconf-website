@@ -9,6 +9,7 @@ import { PreFooter } from '@/sections/pre-footer'
 import { Speakers } from '@/sections/speakers'
 import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
+import TwitchStream from '@/twitch/components/twitch-stream'
 import { GetServerSideProps } from 'next'
 
 const title = 'miduConf - La conferencia de programación y desarrollo'
@@ -27,6 +28,7 @@ export default function Home({ userData }) {
 
   return (
     <Layout meta={metadata}>
+      <TwitchStream />
       <main>
         <Hero userData={userData} />
         <WhatToExpect />
