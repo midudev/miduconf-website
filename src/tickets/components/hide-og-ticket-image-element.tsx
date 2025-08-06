@@ -5,12 +5,13 @@ import { HologramOption } from '../types/hologram-option'
 import { ColorOption } from '../types/color-option'
 import { useUpdateTicketImageInDB } from '../hooks/use-update-ticket-image-in-db'
 import { createTicketImage } from '../utils/create-ticket-image'
-import { PERSONALIZE_TIKET_OPTIONS } from '../constants/personalize-ticket-options'
-import { useMounted } from '@/hooks/use-mounted'
+import { AnimationType, StructureType } from '../animations'
 
 interface Props {
   hologram: HologramOption
   color?: ColorOption
+  structure?: StructureType
+  animation?: AnimationType
   fullname: string
   ticketNumber: number
   ref: RefObject<HTMLElement | null>
@@ -27,10 +28,11 @@ export const HideOGTicketImageElement = ({
   ticketNumber,
   noHidden = false,
   userHadPreviousTicket = false,
+  animation,
+  structure,
   ref
 }: Props) => {
   const { handleUpdateImageTicket } = useUpdateTicketImageInDB()
-  const mounted = useMounted()
 
   useLayoutEffect(() => {
     if (userHadPreviousTicket) return
@@ -62,80 +64,76 @@ export const HideOGTicketImageElement = ({
           width='1200'
           height='630'
         />
-        {mounted && (
-          <div className='flex items-center justify-end w-full h-full pr-16'>
-            <div className='relative w-max h-max scale-[75%]'>
-              <div className='overflow-hidden text-white rounded-2xl'>
-                <div className='bg-palette-background'>
-                  <TicketCard
-                    hologram={hologram}
-                    fullname={fullname}
-                    ticketNumber={ticketNumber}
-                    username={username}
-                    color={color}
-                  />
-                </div>
+        <div className='flex items-center justify-end w-full h-full pr-16'>
+          <div className='relative w-max h-max scale-[75%]'>
+            <div className='overflow-hidden text-white rounded-2xl'>
+              <div className='bg-palette-background'>
+                <TicketCard
+                  hologram={hologram}
+                  fullname={fullname}
+                  ticketNumber={ticketNumber}
+                  username={username}
+                  color={color}
+                  animation={animation}
+                  structure={structure}
+                />
               </div>
-              <div className='absolute left-0 overflow-hidden text-white rounded-2xl top-[calc(-100%_-_16px)] opacity-40'>
-                <div className='bg-palette-background'>
-                  <TicketCard
-                    hologram={getRandomHologram()}
-                    fullname={fullname}
-                    ticketNumber={ticketNumber}
-                    username={username}
-                    color={getRandomColor()}
-                  />
-                </div>
+            </div>
+            <div className='absolute left-0 overflow-hidden text-white rounded-2xl top-[calc(-100%_-_16px)] opacity-40'>
+              <div className='bg-palette-background'>
+                <TicketCard
+                  hologram={'academia-trimestral'}
+                  fullname={fullname}
+                  ticketNumber={ticketNumber}
+                  username={username}
+                  color={'blue'}
+                  animation={animation}
+                  structure={structure}
+                />
               </div>
-              <div className='absolute left-0 overflow-hidden text-white rounded-2xl top-[calc(100%_+_16px)] opacity-40'>
-                <div className='bg-palette-background'>
-                  <TicketCard
-                    hologram={getRandomHologram()}
-                    fullname={fullname}
-                    ticketNumber={ticketNumber}
-                    username={username}
-                    color={getRandomColor()}
-                  />
-                </div>
+            </div>
+            <div className='absolute left-0 overflow-hidden text-white rounded-2xl top-[calc(100%_+_16px)] opacity-40'>
+              <div className='bg-palette-background'>
+                <TicketCard
+                  hologram={'academia-lifetime'}
+                  fullname={fullname}
+                  ticketNumber={ticketNumber}
+                  username={username}
+                  color={'blue'}
+                  animation={animation}
+                  structure={structure}
+                />
               </div>
-              <div className='absolute left-[calc(100%_+_16px)] overflow-hidden text-white rounded-2xl top-[calc(50%_+_8px)] opacity-40'>
-                <div className='bg-palette-background'>
-                  <TicketCard
-                    hologram={getRandomHologram()}
-                    fullname={fullname}
-                    ticketNumber={ticketNumber}
-                    username={username}
-                    color={getRandomColor()}
-                  />
-                </div>
+            </div>
+            <div className='absolute left-[calc(100%_+_16px)] overflow-hidden text-white rounded-2xl top-[calc(50%_+_8px)] opacity-40'>
+              <div className='bg-palette-background'>
+                <TicketCard
+                  hologram={'twitch-3'}
+                  fullname={fullname}
+                  ticketNumber={ticketNumber}
+                  username={username}
+                  color={'blue'}
+                  animation={animation}
+                  structure={structure}
+                />
               </div>
-              <div className='absolute left-[calc(100%_+_16px)] overflow-hidden text-white rounded-2xl top-[calc(-50%_-_8px)] opacity-40'>
-                <div className='bg-palette-background'>
-                  <TicketCard
-                    hologram={getRandomHologram()}
-                    fullname={fullname}
-                    ticketNumber={ticketNumber}
-                    username={username}
-                    color={getRandomColor()}
-                  />
-                </div>
+            </div>
+            <div className='absolute left-[calc(100%_+_16px)] overflow-hidden text-white rounded-2xl top-[calc(-50%_-_8px)] opacity-40'>
+              <div className='bg-palette-background'>
+                <TicketCard
+                  hologram={'academia-anual'}
+                  fullname={fullname}
+                  ticketNumber={ticketNumber}
+                  username={username}
+                  color={'blue'}
+                  animation={animation}
+                  structure={structure}
+                />
               </div>
             </div>
           </div>
-        )}
+        </div>
       </section>
     </div>
   )
-}
-
-const getRandomHologram = () => {
-  const holograms = Object.values(PERSONALIZE_TIKET_OPTIONS.HOLOGRAM)
-  const randomHologram = holograms[Math.floor(Math.random() * holograms.length)]
-  return randomHologram
-}
-
-const getRandomColor = () => {
-  const colors = Object.values(PERSONALIZE_TIKET_OPTIONS.COLOR)
-  const randomColor = colors[Math.floor(Math.random() * colors.length)]
-  return randomColor
 }
