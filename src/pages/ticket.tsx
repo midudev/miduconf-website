@@ -82,12 +82,21 @@ export default function Ticket({
   })
 
   const metadata = getTicketMetadata({ ticketNumber, username: user.username })
-  const { ticketDesign, hasUnsavedChanges, isSaving, handleChangeHologram, handleChangeSticker, handleChangeColor, handleChangeStructure, handleChangeAnimation, handleSaveDesign } =
-    useDesignTicket({
-      hologram,
-      savedDesign,
-      username: user.username
-    })
+  const {
+    ticketDesign,
+    hasUnsavedChanges,
+    isSaving,
+    handleChangeHologram,
+    handleChangeSticker,
+    handleChangeColor,
+    handleChangeStructure,
+    handleChangeAnimation,
+    handleSaveDesign
+  } = useDesignTicket({
+    hologram,
+    savedDesign,
+    username: user.username
+  })
 
   const handleCloseModal = () => {
     setIsModalOpen(false)
