@@ -15,13 +15,10 @@ import { ColorOption } from '../types/color-option'
 import { AnimationType, StructureType } from '../animations'
 import { StructureOpcion } from '../types/structure-option'
 import { AnimationOption } from '../types/animation-option'
-import { cn } from '@/lib/utils'
 import { AtroposSyncProvider } from '../context/AtroposSync'
 import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
 import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
 import { EnterArrow } from '@/components/icons/enter-arrow'
-import { RefObject, useState } from 'react'
-import { StickerOption } from '../types/sticker-option'
 
 interface Props {
   ticketDOMContnet: RefObject<HTMLElement | null>

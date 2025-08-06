@@ -31,7 +31,7 @@ export const ShareTicketPanel = ({
     ticketDOMContnet
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     handleCreateImageImage()
   }, [ticketDesign, structure, animation])
 
