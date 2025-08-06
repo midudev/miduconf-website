@@ -139,7 +139,7 @@ export const premiums = [
   },
   {
     name: 'Ignia Cloud',
-    link: 'https://codely.com/pro/midudev',
+    link: 'https://www.ignia.cloud/',
     logo: <SponsorIcons.igniaCloud className='w-auto h-20' />,
     slogan: 'Confidencialidad, Integridad y Disponibilidad en un solo lugar'
   }
