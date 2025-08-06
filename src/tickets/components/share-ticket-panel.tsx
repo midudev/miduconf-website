@@ -6,7 +6,7 @@ import { DiscordIcon } from '@/components/icons/discord'
 import { useDownloadTicketImage } from '../hooks/use-download-ticket-image'
 import { Tooltip } from '@/components/Tooltip'
 import { cn } from '@/lib/utils'
-import { RefObject, useEffect, useLayoutEffect } from 'react'
+import { RefObject, useEffect } from 'react'
 import { TicketDesign } from '../types/ticket-design'
 import { AnimationType, StructureType } from '../animations'
 

@@ -20,6 +20,8 @@ import { AtroposSyncProvider } from '../context/AtroposSync'
 import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
 import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
 import { EnterArrow } from '@/components/icons/enter-arrow'
+import { RefObject, useState } from 'react'
+import { StickerOption } from '../types/sticker-option'
 
 interface Props {
   ticketDOMContnet: RefObject<HTMLElement | null>
@@ -105,7 +107,7 @@ const ViewTicketDesktopInner = ({
   onSave
 }: Props) => {
   const [isPanelMinimized, setIsPanelMinimized] = useState(false)
-  
+
   // Get current structure and animation from ticketDesign
   const selectedStructure = mapOpcionToStructure(ticketDesign.structure)
   const selectedAnimation = mapOptionToAnimation(ticketDesign.animation)
@@ -143,10 +145,10 @@ const ViewTicketDesktopInner = ({
           />
         </div>
 
-        <div 
+        <div
           className={`absolute bottom-0 left-0 right-0 flex flex-col gap-4 p-4 transition-all duration-700 ease-out ${
-            hasUnsavedChanges 
-              ? 'transform translate-x-0 opacity-100' 
+            hasUnsavedChanges
+              ? 'transform translate-x-0 opacity-100'
               : 'transform -translate-x-full opacity-0 pointer-events-none'
           }`}
         >
@@ -160,7 +162,7 @@ const ViewTicketDesktopInner = ({
           >
             {isSaving ? (
               <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className='w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin' />
                 Guardando...
               </>
             ) : (

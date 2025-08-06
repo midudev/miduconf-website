@@ -217,6 +217,21 @@ body {
 	}
 }
 
+
+/* aplicar movimiento a la preview de Twitch cuando hacemos scroll */
+.animation-twitch {
+	animation: animation-twitch-scroll linear both;
+	animation-timeline: scroll();
+	animation-range: 0 200px;
+}
+
+@keyframes animation-twitch-scroll {
+	to {
+		top: 60px;
+	}
+}
+
+
 .animation-ul {
 	animation: animation-ul linear both;
 	animation-timeline: scroll();
