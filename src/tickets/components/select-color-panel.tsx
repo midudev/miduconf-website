@@ -20,16 +20,23 @@ export const SelectColorPanel = ({ ticketDesign, handleChangeColor, twitchTier, 
 		if (midudevTypeSub) return true
 		return false
 	}
+
+	// Colors are disabled when a non-standard hologram is selected
+	const isColorPanelDisabled = ticketDesign.hologram !== 'standard'
 	return (
 		<article className='flex flex-col gap-4'>
 			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Colores</h3>
 			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
 				{listOfCOlors.map(({ label, value, color, disabled }) => {
-					// Override disabled state based on tier
-					const isDisabled = disabled && !hasUnlockingTier()
+					// Override disabled state based on tier for locked colors
+					const isLockedByTier = disabled && !hasUnlockingTier()
+					// All colors are disabled when hologram is not standard (including the selected one)
+					const isDisabledByHologram = isColorPanelDisabled
+					const isCurrentlyDisabled = isLockedByTier || isDisabledByHologram
+
 					return (
 					<li key={value}>
-						{isDisabled ? (
+						{isLockedByTier ? (
 							<div className="relative">
 								<Button
 									title={`Color ${label} bloqueado`}
@@ -50,17 +57,25 @@ export const SelectColorPanel = ({ ticketDesign, handleChangeColor, twitchTier, 
 							</div>
 						) : (
 							<Button
-								title={`Aplicar color ${label}`}
-								aria-label='Aplicar estructura circular'
-								className={cn('px-3 text-sm aspect-square', ticketDesign.color === value && 'bg-palette-ghost/50 scale-[0.8]')}
-								onClick={() => handleChangeColor(value)}
+								title={isDisabledByHologram ? `Color ${label} no aplica con holograma seleccionado` : `Aplicar color ${label}`}
+								aria-label={isDisabledByHologram ? `Color ${label} deshabilitado` : `Aplicar color ${label}`}
+								className={cn(
+									'px-3 text-sm aspect-square transition-opacity duration-200',
+									ticketDesign.color === value && 'bg-palette-ghost/50 scale-[0.8]',
+									isDisabledByHologram && 'opacity-40 cursor-not-allowed'
+								)}
+								onClick={isDisabledByHologram ? undefined : () => handleChangeColor(value)}
+								disabled={isDisabledByHologram}
 								variant={ticketDesign.color === value ? 'border' : 'ghost'}
 							>
 								<div
 									style={{
 										backgroundColor: color
 									}}
-									className={cn('size-6 rounded-full', ticketDesign.color === value && 'border-2 border-palette-default scale-[1.2]')}
+									className={cn(
+										'size-6 rounded-full transition-all duration-200',
+										ticketDesign.color === value && 'border-2 border-palette-default scale-[1.2]'
+									)}
 								/>
 							</Button>
 						)}
