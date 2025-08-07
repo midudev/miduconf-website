@@ -12,7 +12,6 @@ interface Props {
 	ticketNumber: number
 	hologram?: HologramOption
 	color?: ColorOption
-	twitchTier?: string | null
 	structure?: StructureType
 	animation?: AnimationType
 }
@@ -23,7 +22,6 @@ export const TicketCard = ({
 	username,
 	hologram = 'standard',
 	color = 'blue',
-	twitchTier,
 	structure = 'box',
 	animation = 'default'
 }: Props) => {
@@ -44,6 +42,10 @@ export const TicketCard = ({
 				hologram === 'academia-lifetime' && 'from-yellow-200/10 via-transparent to-yellow-200/10'
 			)}
 		>
+			{/* Diagonal gradient overlay for standard hologram */}
+			{hologram === 'standard' && (
+				<div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-white/10 via-transparent to-white/10 opacity-80 pointer-events-none" />
+			)}
 			{/* Physics Background */}
 			{['academia-mensual', 'academia-trimestral', 'academia-anual', 'academia-lifetime'].includes(
 				hologram
@@ -294,7 +296,7 @@ const getColorStyles = (color: ColorOption) => {
 			styles.outer = 'border-pink-500/30 from-pink-500/10 via-pink-400/5 to-pink-600/10'
 			styles.inner = 'border-pink-500/20 from-pink-900/20 via-pink-800/10 to-pink-900/20'
 			break
-		case 'gray':
+		case 'neutral':
 			styles.outer = 'border-gray-500/30 from-gray-500/10 via-gray-400/5 to-gray-600/10'
 			styles.inner = 'border-gray-500/20 from-gray-900/20 via-gray-800/10 to-gray-900/20'
 			break

@@ -74,6 +74,12 @@ export const SelectColorPanel = ({ ticketDesign, handleChangeColor, twitchTier, 
 
 const listOfCOlors = [
 	{
+		label: 'neutro',
+		value: 'neutral',
+		color: '#6B7280',
+		disabled: false
+	},
+	{
 		label: 'azul',
 		value: 'blue',
 		color: '#5A8CF6',

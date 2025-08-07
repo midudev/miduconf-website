@@ -195,7 +195,7 @@ const getDefaultDesignJson = (hologram: HologramOption): string => {
 const INITIAL_STATE = {
   animation: PERSONALIZE_TIKET_OPTIONS.ANIMATION.DEFAULT,
   structure: PERSONALIZE_TIKET_OPTIONS.STRUCTURE.CIRCLE,
-  color: PERSONALIZE_TIKET_OPTIONS.COLOR.BLUE,
+  color: PERSONALIZE_TIKET_OPTIONS.COLOR.NEUTRAL,
   hologram: PERSONALIZE_TIKET_OPTIONS.HOLOGRAM[1],
   sticker: null
 } as TicketDesign
