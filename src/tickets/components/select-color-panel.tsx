@@ -7,16 +7,29 @@ import { cn } from '@/lib/utils'
 interface Props {
 	handleChangeColor: (option: ColorOption) => void
 	ticketDesign: TicketDesign
+	twitchTier?: '1' | '2' | '3' | null
+	midudevTypeSub?: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
 }
 
-export const SelectColorPanel = ({ ticketDesign, handleChangeColor }: Props) => {
+export const SelectColorPanel = ({ ticketDesign, handleChangeColor, twitchTier, midudevTypeSub }: Props) => {
+	// Helper function to check if user has unlocking tier
+	const hasUnlockingTier = () => {
+		// Twitch tier 1 or higher unlocks
+		if (twitchTier && Number(twitchTier) >= 1) return true
+		// Academia mensual or higher unlocks
+		if (midudevTypeSub) return true
+		return false
+	}
 	return (
 		<article className='flex flex-col gap-4'>
 			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Colores</h3>
 			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
-				{listOfCOlors.map(({ label, value, color, disabled }) => (
+				{listOfCOlors.map(({ label, value, color, disabled }) => {
+					// Override disabled state based on tier
+					const isDisabled = disabled && !hasUnlockingTier()
+					return (
 					<li key={value}>
-						{disabled ? (
+						{isDisabled ? (
 							<div className="relative">
 								<Button
 									title={`Color ${label} bloqueado`}
@@ -52,7 +65,8 @@ export const SelectColorPanel = ({ ticketDesign, handleChangeColor }: Props) => 
 							</Button>
 						)}
 					</li>
-				))}
+					)
+				})}
 			</ul>
 		</article>
 	)

@@ -323,12 +323,16 @@ const ViewTicketDesktopInner = ({
               <SelectStructurePanel
                 ticketDesign={extendedTicketDesign}
                 handleChangeStructure={handleStructureChange}
+                twitchTier={twitchTier}
+                midudevTypeSub={midudevTypeSub}
               />
 
               {/* COLORES Section */}
               <SelectColorPanel
                 ticketDesign={ticketDesign}
                 handleChangeColor={handleChangeColor || (() => {})}
+                twitchTier={twitchTier}
+                midudevTypeSub={midudevTypeSub}
               />
 
               {/* HOLOGRÁFICO Section */}
