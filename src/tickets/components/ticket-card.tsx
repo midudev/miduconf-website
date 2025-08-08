@@ -161,7 +161,7 @@ export const TicketCard = ({
           </p>
           <h3
             className={cn(
-              'mt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-pretty max-w-[16ch]',
+              'pt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-pretty max-w-[16ch]',
               hologramStyles.text && hologramStyles.text,
               hologram === 'academia-mensual' &&
                 'bg-gradient-to-r from-yellow-200/40 via-white/80 to-sky-200/80 bg-clip-text text-transparent leading-normal',
