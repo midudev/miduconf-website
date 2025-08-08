@@ -31,7 +31,7 @@ export const SelectAnimationPanel = ({ handleChangeAnimation, selectedAnimation 
 	return (
 		<article className='flex flex-col gap-4'>
 			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Animación</h3>
-			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
+			<ul className='flex flex-wrap items-center gap-1 mb-3 rounded-md'>
 				{listOfAnimations.map(({ label, value, disabled }) => {
 					const isSelected = selectedAnimation === value
 

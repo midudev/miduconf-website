@@ -153,7 +153,7 @@ export const SelectHologramPanel = ({
     <div>
       <h3 className='mb-4 text-sm font-medium tracking-wide text-palette-ghost'>HOLOGRÁFICO</h3>
       <div className='p-4 rounded-lg bg-palette-border-foreground'>
-        <div className='grid grid-cols-6 gap-1'>
+        <div className='grid grid-cols-4 grid-rows-2 gap-1 lg:grid-cols-6 lg:grid-rows-1'>
           {holograms.map((hologram) => {
             const isSelected = ticketDesign.hologram === hologram.value
             const {

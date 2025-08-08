@@ -300,10 +300,6 @@ const getColorStyles = (color: ColorOption) => {
 			styles.outer = 'border-gray-500/30 from-gray-500/10 via-gray-400/5 to-gray-600/10'
 			styles.inner = 'border-gray-500/20 from-gray-900/20 via-gray-800/10 to-gray-900/20'
 			break
-		case 'yellow':
-			styles.outer = 'border-yellow-500/30 from-yellow-500/10 via-yellow-400/5 to-yellow-600/10'
-			styles.inner = 'border-yellow-500/20 from-yellow-900/20 via-yellow-800/10 to-yellow-900/20'
-			break
 	}
 
 	return styles

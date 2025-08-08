@@ -75,7 +75,7 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure, twit
 	return (
 		<article className='flex flex-col gap-4'>
 			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Estructura</h3>
-			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
+			<ul className='grid grid-cols-3 grid-rows-2 gap-1 p-3 rounded-md bg-palette-ghost/10 lg:flex lg:flex-wrap lg:items-center lg:gap-x-1'>
 				{listOfStructures.map(({ label, value, icon: Icon, disabled }) => {
 					// Override disabled state based on tier
 					const isDisabled = disabled && !hasUnlockingTier()
