@@ -142,6 +142,12 @@ export const premiums = [
     link: 'https://www.ignia.cloud/',
     logo: <SponsorIcons.igniaCloud className='w-auto h-20' />,
     slogan: 'Confidencialidad, Integridad y Disponibilidad en un solo lugar'
+  },
+  {
+    name: 'InfoJobs',
+    link: 'https://www.infojobs.net/',
+    logo: <SponsorIcons.infojobs className='w-auto h-14' />,
+    slogan: 'Entra y encuentra el trabajo perfecto para ti'
   }
 ]
 
