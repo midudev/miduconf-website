@@ -13,17 +13,8 @@ export const Stickers = {
   MiduSnif: ({ className }) => <img className={className} src='/stickers/midu-snif.png' alt='' />,
   MiduWow: ({ className }) => <img className={className} src='/stickers/midu-wow.png' alt='' />,
   MiduLove: ({ className }) => <img className={className} src='/stickers/midu-love.png' alt='' />,
-  ThisIsFine: ({ className }) => (
-    <img className={className} src='/stickers/this-is-fine-normal.png' alt='' />
-  ),
   Start: ({ className }) => <img className={className} src='/stickers/start.png' alt='' />,
   Midu: ({ className }) => <img className={className} src='/stickers/midu.png' alt='' />,
-  KeepCoding: ({ className }) => (
-    <img className={className} src='/stickers/keep-coding.png' alt='' />
-  ),
-  Cloudinary: ({ className }) => (
-    <img className={className} src='/stickers/cloudinary.png' alt='' />
-  ),
   Mario: ({ className }) => <img className={className} src='/stickers/mario.png' alt='' />,
   LibroGit: ({ className }) => <img className={className} src='/stickers/libro-git.png' alt='' />,
   Vercel: ({ className }) => <img className={className} src='/stickers/vercel.png' alt='' />,
