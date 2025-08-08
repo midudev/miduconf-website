@@ -3,6 +3,7 @@ import { Agenda } from '@/sections/agenda'
 import { FAQS } from '@/sections/faqs'
 import { Footer } from '@/sections/footer'
 import { GetTicket } from '@/sections/get-ticket'
+import { Gifts } from '@/sections/gifts'
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
 import { PreFooter } from '@/sections/pre-footer'
@@ -34,6 +35,7 @@ export default function Home({ userData }) {
         <WhatToExpect />
         <Speakers />
         <Sponsors />
+        <Gifts />
         <Agenda />
         <FAQS />
         <GetTicket />

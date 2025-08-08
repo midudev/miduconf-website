@@ -5,6 +5,7 @@ export const shareTicketOnX = ({ username }) => {
 
 ¡La conferencia de programación GRATUITA del año!
 Con speakers internacionales que inspiran
++128 regalos
 ...¡y muchas sorpresas más!
 
 📅 10 de SEPTIEMBRE
