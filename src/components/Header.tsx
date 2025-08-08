@@ -166,6 +166,10 @@ const NAV_ITEMS = [
     title: 'sponsors'
   },
   {
+    href: '/#regalos',
+    title: 'Regalos'
+  },
+  {
     href: '/#agenda',
     title: 'Agenda'
   },
