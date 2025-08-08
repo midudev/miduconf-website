@@ -6,12 +6,14 @@ import { ColorOption } from '../types/color-option'
 import { useUpdateTicketImageInDB } from '../hooks/use-update-ticket-image-in-db'
 import { createTicketImage } from '../utils/create-ticket-image'
 import { AnimationType, StructureType } from '../animations'
+import { StickerOption } from '../types/sticker-option'
 
 interface Props {
   hologram: HologramOption
   color?: ColorOption
   structure?: StructureType
   animation?: AnimationType
+  sticker?: Array<StickerOption | null> | null
   fullname: string
   ticketNumber: number
   ref: RefObject<HTMLElement | null>
@@ -23,6 +25,7 @@ interface Props {
 export const HideOGTicketImageElement = ({
   hologram,
   color,
+  sticker,
   fullname,
   username,
   ticketNumber,
@@ -69,6 +72,7 @@ export const HideOGTicketImageElement = ({
             <div className='overflow-hidden text-white rounded-2xl'>
               <div className='bg-palette-background'>
                 <TicketCard
+                  stickers={sticker}
                   hologram={hologram}
                   fullname={fullname}
                   ticketNumber={ticketNumber}

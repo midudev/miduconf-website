@@ -4,10 +4,12 @@ import { HologramOption } from '../types/hologram-option'
 import { ColorOption } from '../types/color-option'
 import { AnimationType, StructureType } from '../animations'
 import { cn } from '@/lib/utils'
+import { StickerOption } from '../types/sticker-option'
 
 interface Props {
   hologram: HologramOption
   color?: ColorOption
+  sticker?: Array<StickerOption | null> | null
   structure?: StructureType
   animation?: AnimationType
   fullname: string
@@ -24,6 +26,7 @@ export const HideTicketImageElement = ({
   hologram,
   color,
   structure,
+  sticker,
   animation,
   noHidden = false,
   refElement
@@ -36,6 +39,7 @@ export const HideTicketImageElement = ({
           ticketNumber={ticketNumber}
           username={username}
           hologram={hologram}
+          stickers={sticker}
           color={color}
           structure={structure}
           animation={animation}

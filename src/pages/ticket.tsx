@@ -162,6 +162,7 @@ export default function Ticket({
       <HideTicketImageElement
         hologram={ticketDesign.hologram}
         color={ticketDesign.color}
+        sticker={ticketDesign.sticker}
         structure={mapOpcionToStructure(ticketDesign.structure)}
         animation={mapOptionToAnimation(ticketDesign.animation)}
         refElement={ticketImageElement}
@@ -175,6 +176,7 @@ export default function Ticket({
         userHadPreviousTicket={userHadPreviousTicket}
         hologram={ticketDesign.hologram}
         color={ticketDesign.color}
+        sticker={ticketDesign.sticker}
         structure={mapOpcionToStructure(ticketDesign.structure)}
         animation={mapOptionToAnimation(ticketDesign.animation)}
         fullname={user.fullname}
