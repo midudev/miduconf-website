@@ -128,6 +128,11 @@ export default function Ticket({
           handleChangeHologram={handleChangeHologram}
           handleAddSticker={handleAddSticker}
           handleChangeColor={handleChangeColor}
+          handleChangeStructure={handleChangeStructure}
+          handleChangeAnimation={handleChangeAnimation}
+          hasUnsavedChanges={hasUnsavedChanges}
+          isSaving={isSaving}
+          onSave={handleSaveDesign}
           handleRemoveSticker={handleRemoveSticker}
         />
 

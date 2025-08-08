@@ -20,13 +20,33 @@ export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
   const [ticketDesign, setTicketDesign] = useState<TicketDesign>(() =>
     getInitialState({
       hologram,
-      savedDesign,
-      username
+      savedDesign
     })
   )
 
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+
+  // Load from localStorage after hydration
+  useEffect(() => {
+    if (!username) return
+
+    try {
+      const localData = localStorage.getItem(`ticket_design_${username}`)
+      if (localData) {
+        const parsedDesign = JSON.parse(localData)
+        // Only update if different from current state to avoid unnecessary re-renders
+        if (JSON.stringify(parsedDesign) !== JSON.stringify(ticketDesign)) {
+          setTicketDesign((prevDesign) => ({
+            ...prevDesign,
+            ...parsedDesign
+          }))
+        }
+      }
+    } catch (error) {
+      console.error('Error loading from localStorage:', error)
+    }
+  }, [username]) // Remove ticketDesign from deps to avoid infinite loop
 
   // Auto-save to localStorage on design changes
   useEffect(() => {
@@ -181,30 +201,15 @@ export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
 
 const getInitialState = ({
   hologram,
-  savedDesign,
-  username
+  savedDesign
 }: {
   hologram: HologramOption
   savedDesign?: string | null
-  username?: string
 }) => {
-  // Try to load from localStorage first, then from DB
+  // Only use DB saved design for initial state (no localStorage to avoid hydration mismatch)
   let parsedDesign: Partial<TicketDesign> = {}
 
-  // 1. Try localStorage
-  if (username && typeof window !== 'undefined') {
-    try {
-      const localData = localStorage.getItem(`ticket_design_${username}`)
-      if (localData) {
-        parsedDesign = JSON.parse(localData)
-      }
-    } catch (error) {
-      console.error('Error parsing localStorage design:', error)
-    }
-  }
-
-  // 2. Fallback to DB saved design if no localStorage
-  if (Object.keys(parsedDesign).length === 0 && savedDesign) {
+  if (savedDesign) {
     try {
       parsedDesign = JSON.parse(savedDesign)
     } catch (error) {
@@ -230,7 +235,7 @@ const getDefaultDesignJson = (hologram: HologramOption): string => {
 const INITIAL_STATE = {
   animation: PERSONALIZE_TIKET_OPTIONS.ANIMATION.DEFAULT,
   structure: PERSONALIZE_TIKET_OPTIONS.STRUCTURE.CIRCLE,
-  color: PERSONALIZE_TIKET_OPTIONS.COLOR.BLUE,
+  color: PERSONALIZE_TIKET_OPTIONS.COLOR.NEUTRAL,
   hologram: PERSONALIZE_TIKET_OPTIONS.HOLOGRAM[1],
   sticker: null
 } as TicketDesign
