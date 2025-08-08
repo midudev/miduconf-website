@@ -134,12 +134,16 @@ export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
     })
   }
 
-  const handleAddSticker = (sticker: StickerOption) => {
+  const handleAddSticker = (sticker: StickerOption, maxListOfStickers: number) => {
     const defaultStickers = ticketDesign.sticker ?? [null, null, null]
-    const allStickers = Array.from({ length: 3 }, (_, i) => defaultStickers[i] ?? null)
+    const allStickers = Array.from(
+      { length: maxListOfStickers },
+      (_, i) => defaultStickers[i] ?? null
+    )
 
-    // si agregamos un 4to sticker, remplazamos el 3ro
+    // si agregamos un sticker mas, remplazamos el ultimo
     const isStickersFilled = allStickers.every((s) => s != null)
+
     if (isStickersFilled) {
       allStickers.splice(allStickers.length - 1, 1, sticker)
 

@@ -57,14 +57,14 @@ export const STICKERS_LIST = [
     name: 'midu',
     StickerImage: <Stickers.Midu className='w-auto h-6' />
   },
-  {
+  /*   {
     name: 'vercel',
     StickerImage: <Stickers.Vercel className='w-auto h-6' />
   },
   {
     name: 'malt',
     StickerImage: <Stickers.Malt className='w-auto h-6' />
-  },
+  }, */
   {
     name: 'libro-git',
     StickerImage: <Stickers.LibroGit className='w-auto h-6' />

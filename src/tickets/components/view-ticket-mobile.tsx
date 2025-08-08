@@ -14,6 +14,7 @@ import { ColorOption } from '../types/color-option'
 import { StructureOpcion } from '../types/structure-option'
 import { AnimationOption } from '../types/animation-option'
 import { AnimationType, StructureType } from '../animations'
+import { SelectStickerPanel } from './select-sticker-panel'
 
 interface Props {
   twitchTier: '1' | '2' | '3' | null
@@ -26,7 +27,7 @@ interface Props {
   ticketDesign: TicketDesign
   midudevTokentId: string
   handleChangeHologram: (hologram: HologramOption) => void
-  handleAddSticker: (sticker: StickerOption) => void
+  handleAddSticker: (sticker: StickerOption, maxListOfStickers: number) => void
   handleChangeColor?: (color: ColorOption) => void
   handleRemoveSticker: (sticker: StickerOption) => void
   handleChangeStructure?: (structure: StructureOpcion) => void
@@ -139,9 +140,12 @@ export const ViewTicketMobile = ({
           <TicketCard
             fullname={fullname}
             ticketNumber={ticketNumber}
+            twitchTier={twitchTier}
+            midudevTypeSub={midudevTypeSub}
             username={username}
             hologram={ticketDesign.hologram}
             color={ticketDesign.color}
+            stickers={ticketDesign.sticker}
             structure={mapOpcionToStructure(ticketDesign.structure)}
             animation={mapOptionToAnimation(ticketDesign.animation)}
             handleRemoveSticker={handleRemoveSticker}
@@ -208,6 +212,13 @@ export const ViewTicketMobile = ({
                     midudevTokentId={midudevTokentId}
                     ticketOGImageElement={ticketOGImageElement}
                     handleChangeHologram={handleChangeHologram}
+                  />
+                </div>
+                <div className='col-span-2 md:col-span-1'>
+                  <SelectStickerPanel
+                    twitchTier={twitchTier}
+                    midudevTypeSub={midudevTypeSub}
+                    ticketDesign={ticketDesign}
                     handleAddSticker={handleAddSticker}
                     handleRemoveSticker={handleRemoveSticker}
                   />

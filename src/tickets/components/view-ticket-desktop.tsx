@@ -31,7 +31,7 @@ interface Props {
   ticketDesign: TicketDesign
   midudevTokentId: string
   handleChangeHologram: (hologram: HologramOption) => void
-  handleAddSticker: (sticker: StickerOption) => void
+  handleAddSticker: (sticker: StickerOption, maxListOfStickers: number) => void
   handleChangeColor?: (color: ColorOption) => void
   handleChangeStructure?: (structure: StructureOpcion) => void
   handleChangeAnimation?: (animation: AnimationOption) => void
@@ -106,11 +106,9 @@ const ViewTicketDesktopInner = ({
   onSave
 }: Props) => {
   const [isPanelMinimized, setIsPanelMinimized] = useState(false)
-
   // Get current structure and animation from ticketDesign
   const selectedStructure = mapOpcionToStructure(ticketDesign.structure)
   const selectedAnimation = mapOptionToAnimation(ticketDesign.animation)
-
 
   const handleAnimationChange = (animation: AnimationType) => {
     const animationOption = mapAnimationToOption(animation)
@@ -188,6 +186,8 @@ const ViewTicketDesktopInner = ({
             <TicketCard
               fullname={fullname}
               stickers={ticketDesign.sticker ?? [null, null, null]}
+              twitchTier={twitchTier}
+              midudevTypeSub={midudevTypeSub}
               ticketNumber={ticketNumber}
               username={username}
               hologram={ticketDesign.hologram}
@@ -275,11 +275,12 @@ const ViewTicketDesktopInner = ({
                 midudevTokentId={midudevTokentId}
                 ticketOGImageElement={ticketOGImageElement}
                 handleChangeHologram={handleChangeHologram}
-                handleAddSticker={handleAddSticker}
               />
 
               {/* STICKETS Section */}
               <SelectStickerPanel
+                twitchTier={twitchTier}
+                midudevTypeSub={midudevTypeSub}
                 ticketDesign={extendedTicketDesign}
                 handleAddSticker={handleAddSticker}
                 handleRemoveSticker={handleRemoveSticker}

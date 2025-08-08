@@ -45,8 +45,8 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     GLASSES: 'glasses',
     START: 'start',
     MIDU: 'midu',
-    MALT: 'malt',
-    VERCEL: 'vercel',
+    /* MALT: 'malt',
+    VERCEL: 'vercel', */
     LIBRO_GIT: 'libro-git'
   }
 } as const

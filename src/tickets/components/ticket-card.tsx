@@ -10,6 +10,9 @@ import { STICKERS_LIST } from '../constants/stickers-list'
 import { cloneElement } from 'react'
 import { Button } from '@/components/Button'
 import { CrossIcon } from '@/components/icons/cross'
+import { LockIcon } from '../icons/structure-ticket/lock'
+import { getMaxStickersUnlock } from '../utils/get-max-stickers-unlock'
+import { Tooltip } from '@/components/Tooltip'
 
 interface Props {
   username: string
@@ -18,10 +21,11 @@ interface Props {
   hologram?: HologramOption
   color?: ColorOption
   stickers?: Array<StickerOption | null> | null
-  twitchTier?: string | null
   structure?: StructureType
   animation?: AnimationType
   handleRemoveSticker?: (sticker: StickerOption) => void
+  twitchTier?: '1' | '2' | '3' | null
+  midudevTypeSub?: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
 }
 
 export const TicketCard = ({
@@ -32,6 +36,7 @@ export const TicketCard = ({
   color = 'blue',
   stickers,
   twitchTier,
+  midudevTypeSub,
   structure = 'box',
   animation = 'default',
   handleRemoveSticker
@@ -172,17 +177,21 @@ export const TicketCard = ({
           </h3>
         </header>
         {stickers != null && (
-          <div className='z-50 flex items-center gap-4 px-6 mt-2 uppercase max-sm:p-5'>
-            {stickers.map((sticker, i) => {
+          <div className='z-50 flex items-center px-6 uppercase md:gap-4 md:mt-2 max-md:p-2 max-md:pb-2'>
+            {Array.from({ length: 3 }, (_, i) => stickers[i] ?? null).map((sticker, i, list) => {
               const StickerComponent = STICKERS_LIST.find(({ name }) => name === sticker)
+              const numberOfStickersUnlock = getMaxStickersUnlock(twitchTier, midudevTypeSub)
 
-              return (
-                <div
-                  className={cn(
-                    'group opacity-80 relative group p-2 flex items-center justify-center'
-                  )}
-                >
-                  {StickerComponent?.StickerImage && (
+              const hasSticker = sticker != null
+
+              if (hasSticker)
+                return (
+                  <div
+                    key={`Sticker-${i}`}
+                    className={cn(
+                      'group opacity-80 relative group p-2 flex items-center justify-center'
+                    )}
+                  >
                     <div className='absolute items-center justify-center hidden w-full h-full border border-dashed group-hover:flex bg-palette-ghost/20 border-white/5'>
                       <Button
                         title='Eliminar Sticker'
@@ -194,16 +203,39 @@ export const TicketCard = ({
                         <CrossIcon className='w-auto h-3' />
                       </Button>
                     </div>
-                  )}
-                  {StickerComponent?.StickerImage ? (
-                    cloneElement(StickerComponent?.StickerImage, {
-                      className: 'h-12 w-auto block'
-                    })
-                  ) : (
-                    <div className='block size-12'></div>
-                  )}
-                </div>
-              )
+
+                    {StickerComponent?.StickerImage &&
+                      cloneElement(StickerComponent?.StickerImage, {
+                        className: 'max-md:h-6 h-12 w-auto block'
+                      })}
+                  </div>
+                )
+
+              /* si es para el og o download */
+              if (handleRemoveSticker == null) {
+                return <div key={`Sticker-${i}`} className='size-16 max-md:size-8'></div>
+              }
+
+              const tooltipTextBySubscriptionLevel = {
+                1: 'Tier 1 o Academia Mensual',
+                2: 'Tier 2 o Academia Trimestral',
+                3: 'Tier 3 o Academia Anual/Lifetime'
+              }
+
+              if (i + 1 > numberOfStickersUnlock) {
+                return (
+                  <div
+                    key={`Sticker-${i}`}
+                    className='flex items-center justify-center size-16 max-md:size-8 border-white/5 bg-palette-ghost/20'
+                  >
+                    <Tooltip text={tooltipTextBySubscriptionLevel[i + 1]}>
+                      <LockIcon className='w-auto h-6 max-md:h-4 bg-palette-ghost' />
+                    </Tooltip>
+                  </div>
+                )
+              }
+
+              return <div key={`Sticker-${i}`} className='size-16 max-md:size-8'></div>
             })}
           </div>
         )}
