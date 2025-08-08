@@ -98,6 +98,7 @@ export default function Ticket({
     username: user.username
   })
 
+
   const handleCloseModal = () => {
     setIsModalOpen(false)
     /* remove queryparams in url */
@@ -127,6 +128,11 @@ export default function Ticket({
           handleChangeHologram={handleChangeHologram}
           handleChangeSticker={handleChangeSticker}
           handleChangeColor={handleChangeColor}
+          handleChangeStructure={handleChangeStructure}
+          handleChangeAnimation={handleChangeAnimation}
+          hasUnsavedChanges={hasUnsavedChanges}
+          isSaving={isSaving}
+          onSave={handleSaveDesign}
         />
 
         {/* Desktop Layout */}

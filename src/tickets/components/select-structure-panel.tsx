@@ -7,19 +7,12 @@ import { BoxIcon } from '../icons/structure-ticket/box'
 import { HeartIcon } from '../icons/structure-ticket/heart'
 import { LockIcon } from '../icons/structure-ticket/lock'
 import { StructureOpcion } from '../types/structure-option'
-import { AnimationOption } from '../types/animation-option'
-import { ColorOption } from '../types/color-option'
-import { HologramOption } from '../types/hologram-option'
+import { TicketDesign } from '../types/ticket-design'
 import { cn } from '@/lib/utils'
 
 interface Props {
 	handleChangeStructure: (option: StructureOpcion) => void
-	ticketDesign: {
-		animation: AnimationOption
-		structure: StructureOpcion
-		color: ColorOption
-		hologram: HologramOption
-	}
+	ticketDesign: TicketDesign
 	twitchTier?: '1' | '2' | '3' | null
 	midudevTypeSub?: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
 }

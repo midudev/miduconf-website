@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { RefObject, useEffect } from 'react'
 import { TicketDesign } from '../types/ticket-design'
 import { AnimationType, StructureType } from '../animations'
+import { EnterArrow } from '@/components/icons/enter-arrow'
 
 interface Props {
   username: string
@@ -17,6 +18,11 @@ interface Props {
   ticketDesign: TicketDesign
   structure?: StructureType
   animation?: AnimationType
+  // Mobile save/cancel props
+  hasUnsavedChanges?: boolean
+  isSaving?: boolean
+  onSave?: () => void
+  onCancel?: () => void
 }
 
 export const ShareTicketPanel = ({
@@ -25,7 +31,11 @@ export const ShareTicketPanel = ({
   className,
   ticketDesign,
   structure,
-  animation
+  animation,
+  hasUnsavedChanges = false,
+  isSaving = false,
+  onSave,
+  onCancel
 }: Props) => {
   const { sharedTicketImageLink, handleCreateImageImage } = useDownloadTicketImage({
     ticketDOMContnet
@@ -103,6 +113,28 @@ export const ShareTicketPanel = ({
             <InstagramIcon className='w-auto h-4' />
           </Link>
         </li> */}
+        
+        {/* Save Button - Mobile/iPad Only */}
+        {hasUnsavedChanges && onSave && (
+          <li className='lg:hidden'>
+            <Tooltip tooltipPosition='right' text='Guardar cambios' offsetNumber={16}>
+              <Button
+                variant={isSaving ? 'default' : 'icon'}
+                onClick={onSave}
+                disabled={isSaving}
+                containerClassName={`${isSaving ? 'bg-green-600 hover:bg-green-600' : 'bg-palette-primary hover:bg-palette-primary/80'}`}
+                title='Guardar cambios'
+                aria-label='Guardar cambios en el ticket'
+              >
+                {isSaving ? (
+                  <div className='w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin' />
+                ) : (
+                  <EnterArrow className='w-4 h-4' />
+                )}
+              </Button>
+            </Tooltip>
+          </li>
+        )}
       </ul>
     </nav>
   )

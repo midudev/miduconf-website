@@ -14,8 +14,6 @@ import { ColorOption } from '../types/color-option'
 import { StructureOpcion } from '../types/structure-option'
 import { AnimationOption } from '../types/animation-option'
 import { AnimationType, StructureType } from '../animations'
-import { Button } from '@/components/Button'
-import { EnterArrow } from '@/components/icons/enter-arrow'
 
 interface Props {
   twitchTier: '1' | '2' | '3' | null
@@ -38,17 +36,6 @@ interface Props {
 }
 
 // Map between the two type systems (same as desktop)
-const mapStructureToOpcion = (structure: StructureType): StructureOpcion => {
-  const mapping: Record<StructureType, StructureOpcion> = {
-    box: 'box',
-    circle: 'circle',
-    piramide: 'piramide',
-    prism: 'prism',
-    background: 'background',
-    heart: 'heart'
-  }
-  return mapping[structure] || 'box'
-}
 
 const mapOpcionToStructure = (opcion: StructureOpcion): StructureType => {
   const mapping: Record<StructureOpcion, StructureType> = {
@@ -100,10 +87,9 @@ export const ViewTicketMobile = ({
   onSave
 }: Props) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false)
+  
+  // Debug: Log ticketDesign changes
 
-  // Get current structure and animation from ticketDesign
-  const selectedStructure = mapOpcionToStructure(ticketDesign.structure)
-  const selectedAnimation = mapOptionToAnimation(ticketDesign.animation)
 
   const handleAnimationChange = (animation: AnimationType) => {
     const animationOption = mapAnimationToOption(animation)
@@ -114,57 +100,28 @@ export const ViewTicketMobile = ({
     handleChangeStructure?.(opcion)
   }
 
-  // Create ticketDesign object for SelectStructurePanel
-  const extendedTicketDesign = {
-    ...ticketDesign,
-    structure: mapStructureToOpcion(selectedStructure),
-    animation: mapAnimationToOption(selectedAnimation)
-  }
 
   return (
     <div className='relative w-full min-h-screen lg:hidden'>
-      {/* Save Button - Fixed at bottom when changes exist */}
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-50 p-4 transition-all duration-700 ease-out ${
-          hasUnsavedChanges && !isPanelOpen
-            ? 'transform translate-y-0 opacity-100'
-            : 'transform translate-y-full opacity-0 pointer-events-none'
-        }`}
-      >
-        <Button
-          variant='default'
-          onClick={onSave}
-          disabled={isSaving}
-          className={`flex items-center justify-center w-full gap-2 py-3 text-lg uppercase transition-all duration-300 ${
-            isSaving ? 'bg-green-600 hover:bg-green-600' : ''
-          }`}
-        >
-          {isSaving ? (
-            <>
-              <div className='w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin' />
-              Guardando...
-            </>
-          ) : (
-            <>
-              <EnterArrow className='w-4 h-4' />
-              Guardar
-            </>
-          )}
-        </Button>
-      </div>
 
-      {/* Share Panel */}
+      {/* Share Panel and Save/Cancel Buttons */}
       {!isPanelOpen && (
-        <div className='absolute z-40 left-1/2 -translate-x-1/2 top-[85px] sm:left-4 sm:top-[40%] sm:translate-x-0'>
-          <ShareTicketPanel
-            ticketDesign={ticketDesign}
-            ticketDOMContnet={ticketDOMContnet}
-            username={username}
-            structure={selectedStructure}
-            animation={selectedAnimation}
-            className='flex-row sm:flex-col'
-          />
-        </div>
+        <>
+          <div className='absolute z-40 left-1/2 -translate-x-1/2 top-[85px] sm:left-4 sm:top-[40%] sm:translate-x-0'>
+            <ShareTicketPanel
+              ticketDesign={ticketDesign}
+              ticketDOMContnet={ticketDOMContnet}
+              username={username}
+              structure={mapOpcionToStructure(ticketDesign.structure)}
+              animation={mapOptionToAnimation(ticketDesign.animation)}
+              className='flex-row sm:flex-col'
+              hasUnsavedChanges={hasUnsavedChanges}
+              isSaving={isSaving}
+              onSave={onSave}
+              onCancel={() => {/* Add cancel logic if needed */}}
+            />
+          </div>
+        </>
       )}
 
       {/* Ticket Display */}
@@ -184,8 +141,8 @@ export const ViewTicketMobile = ({
             username={username}
             hologram={ticketDesign.hologram}
             color={ticketDesign.color}
-            structure={selectedStructure}
-            animation={selectedAnimation}
+            structure={mapOpcionToStructure(ticketDesign.structure)}
+            animation={mapOptionToAnimation(ticketDesign.animation)}
           />
         </div>
       </div>
@@ -209,10 +166,10 @@ export const ViewTicketMobile = ({
 
           {/* Responsive Grid Container */}
           <div className='flex-1 overflow-y-auto'>
-            <div className='space-y-4 pb-6'>
+            <div className='space-y-4 pb-20'>
               {/* Animation Panel - Full width */}
               <SelectAnimationPanel
-                selectedAnimation={selectedAnimation}
+                selectedAnimation={mapOptionToAnimation(ticketDesign.animation)}
                 handleChangeAnimation={handleAnimationChange}
               />
 
@@ -221,7 +178,7 @@ export const ViewTicketMobile = ({
                 {/* Structure Panel */}
                 <div className='col-span-1'>
                   <SelectStructurePanel
-                    ticketDesign={extendedTicketDesign}
+                    ticketDesign={ticketDesign}
                     handleChangeStructure={handleStructureChange}
                     twitchTier={twitchTier}
                     midudevTypeSub={midudevTypeSub}
@@ -255,6 +212,7 @@ export const ViewTicketMobile = ({
               </div>
             </div>
           </div>
+
         </div>
       </DraggablePanel>
     </div>
