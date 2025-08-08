@@ -16,7 +16,7 @@ interface Props {
 
 export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
   const { handleUpdateTicketDesign } = useUpdateTicketInDB()
-  
+
   const [ticketDesign, setTicketDesign] = useState<TicketDesign>(() =>
     getInitialState({
       hologram,
@@ -43,7 +43,7 @@ export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
 
     try {
       localStorage.setItem(`ticket_design_${username}`, designData)
-      
+
       // Compare with DB state to determine if there are unsaved changes
       const dbDesign = savedDesign || getDefaultDesignJson(hologram)
       setHasUnsavedChanges(designData !== dbDesign)
@@ -98,11 +98,44 @@ export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
     })
   }
 
-  const handleChangeSticker = (sticker: StickerOption) => {
-    const allStickersSet = new Set(ticketDesign.sticker ?? [])
-    allStickersSet.add(sticker)
+  const handleRemoveSticker = (sticker: StickerOption) => {
+    const defaultStickers = ticketDesign.sticker ?? [null, null, null]
+    const allStickers = Array.from({ length: 3 }, (_, i) => defaultStickers[i] ?? null)
+
+    const isStickerExist = allStickers.includes(sticker)
+
+    if (!isStickerExist) return
+
+    const indexOfSticker = allStickers.findIndex((s) => s === sticker)
+    allStickers.splice(indexOfSticker, 1, null)
+
     handleChangeDesign({
-      sticker: [...allStickersSet]
+      sticker: [...allStickers]
+    })
+  }
+
+  const handleAddSticker = (sticker: StickerOption) => {
+    const defaultStickers = ticketDesign.sticker ?? [null, null, null]
+    const allStickers = Array.from({ length: 3 }, (_, i) => defaultStickers[i] ?? null)
+
+    // si agregamos un 4to sticker, remplazamos el 3ro
+    const isStickersFilled = allStickers.every((s) => s != null)
+    if (isStickersFilled) {
+      allStickers.splice(allStickers.length - 1, 1, sticker)
+
+      handleChangeDesign({
+        sticker: [...allStickers]
+      })
+
+      return
+    }
+
+    // cambiamos el primer null por el sticker
+    const firstNullIndex = allStickers.findIndex((s) => s === null)
+    allStickers.splice(firstNullIndex, 1, sticker)
+
+    handleChangeDesign({
+      sticker: [...allStickers]
     })
   }
 
@@ -122,7 +155,7 @@ export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
 
       if (!result.error) {
         // Wait a bit for user to see success state
-        await new Promise(resolve => setTimeout(resolve, 500))
+        await new Promise((resolve) => setTimeout(resolve, 500))
         setHasUnsavedChanges(false)
       }
 
@@ -140,15 +173,24 @@ export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
     handleChangeStructure,
     handleChangeColor,
     handleChangeHologram,
-    handleChangeSticker,
+    handleAddSticker,
+    handleRemoveSticker,
     handleSaveDesign
   }
 }
 
-const getInitialState = ({ hologram, savedDesign, username }: { hologram: HologramOption, savedDesign?: string | null, username?: string }) => {
+const getInitialState = ({
+  hologram,
+  savedDesign,
+  username
+}: {
+  hologram: HologramOption
+  savedDesign?: string | null
+  username?: string
+}) => {
   // Try to load from localStorage first, then from DB
   let parsedDesign: Partial<TicketDesign> = {}
-  
+
   // 1. Try localStorage
   if (username && typeof window !== 'undefined') {
     try {
@@ -160,7 +202,7 @@ const getInitialState = ({ hologram, savedDesign, username }: { hologram: Hologr
       console.error('Error parsing localStorage design:', error)
     }
   }
-  
+
   // 2. Fallback to DB saved design if no localStorage
   if (Object.keys(parsedDesign).length === 0 && savedDesign) {
     try {

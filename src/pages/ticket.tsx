@@ -87,7 +87,8 @@ export default function Ticket({
     hasUnsavedChanges,
     isSaving,
     handleChangeHologram,
-    handleChangeSticker,
+    handleAddSticker,
+    handleRemoveSticker,
     handleChangeColor,
     handleChangeStructure,
     handleChangeAnimation,
@@ -125,8 +126,9 @@ export default function Ticket({
           ticketDOMContnet={ticketImageElement}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
-          handleChangeSticker={handleChangeSticker}
+          handleAddSticker={handleAddSticker}
           handleChangeColor={handleChangeColor}
+          handleRemoveSticker={handleRemoveSticker}
         />
 
         {/* Desktop Layout */}
@@ -141,13 +143,14 @@ export default function Ticket({
           ticketDOMContnet={ticketImageElement}
           ticketOGImageElement={ticketOGImageElement.current}
           handleChangeHologram={handleChangeHologram}
-          handleChangeSticker={handleChangeSticker}
+          handleAddSticker={handleAddSticker}
           handleChangeColor={handleChangeColor}
           handleChangeStructure={handleChangeStructure}
           handleChangeAnimation={handleChangeAnimation}
           hasUnsavedChanges={hasUnsavedChanges}
           isSaving={isSaving}
           onSave={handleSaveDesign}
+          handleRemoveSticker={handleRemoveSticker}
         />
       </main>
       {/* Contenido para crear captura */}

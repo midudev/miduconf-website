@@ -19,8 +19,9 @@ interface Props {
   ticketDesign: TicketDesign
   midudevTokentId: string
   handleChangeHologram: (hologram: HologramOption) => void
-  handleChangeSticker: (sticker: StickerOption) => void
+  handleAddSticker: (sticker: StickerOption) => void
   handleChangeColor?: (color: ColorOption) => void
+  handleRemoveSticker: (sticker: StickerOption) => void
 }
 
 export const ViewTicketMobile = ({
@@ -34,8 +35,9 @@ export const ViewTicketMobile = ({
   midudevTokentId,
   midudevTypeSub,
   handleChangeHologram,
-  handleChangeSticker,
-  handleChangeColor
+  handleAddSticker,
+  handleChangeColor,
+  handleRemoveSticker
 }: Props) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false)
 
@@ -68,6 +70,7 @@ export const ViewTicketMobile = ({
             username={username}
             hologram={ticketDesign.hologram}
             color={ticketDesign.color}
+            handleRemoveSticker={handleRemoveSticker}
           />
         </div>
       </div>
@@ -88,11 +91,11 @@ export const ViewTicketMobile = ({
             ticketDesign={ticketDesign}
             midudevTokentId={midudevTokentId}
             handleChangeHologram={handleChangeHologram}
-            handleChangeSticker={handleChangeSticker}
+            handleAddSticker={handleAddSticker}
           />
           {/* <SelectStickerPanel
                 ticketDesign={ticketDesign}
-                handleChangeSticker={handleChangeSticker}
+                handleAddSticker={handleAddSticker}
               /> */}
         </div>
       </DraggablePanel>

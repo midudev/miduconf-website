@@ -19,6 +19,7 @@ import { AtroposSyncProvider } from '../context/AtroposSync'
 import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
 import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
 import { EnterArrow } from '@/components/icons/enter-arrow'
+import { SelectStickerPanel } from './select-sticker-panel'
 
 interface Props {
   ticketDOMContnet: RefObject<HTMLElement | null>
@@ -31,10 +32,11 @@ interface Props {
   ticketDesign: TicketDesign
   midudevTokentId: string
   handleChangeHologram: (hologram: HologramOption) => void
-  handleChangeSticker: (sticker: StickerOption) => void
+  handleAddSticker: (sticker: StickerOption) => void
   handleChangeColor?: (color: ColorOption) => void
   handleChangeStructure?: (structure: StructureOpcion) => void
   handleChangeAnimation?: (animation: AnimationOption) => void
+  handleRemoveSticker: (sticker: StickerOption) => void
   hasUnsavedChanges?: boolean
   isSaving?: boolean
   onSave?: () => void
@@ -95,10 +97,11 @@ const ViewTicketDesktopInner = ({
   midudevTokentId,
   midudevTypeSub,
   handleChangeHologram,
-  handleChangeSticker,
+  handleAddSticker,
   handleChangeColor,
   handleChangeStructure,
   handleChangeAnimation,
+  handleRemoveSticker,
   hasUnsavedChanges = false,
   isSaving = false,
   onSave
@@ -184,12 +187,14 @@ const ViewTicketDesktopInner = ({
           <Container3D>
             <TicketCard
               fullname={fullname}
+              stickers={ticketDesign.sticker ?? [null, null, null]}
               ticketNumber={ticketNumber}
               username={username}
               hologram={ticketDesign.hologram}
               color={ticketDesign.color}
               structure={selectedStructure}
               animation={selectedAnimation}
+              handleRemoveSticker={handleRemoveSticker}
             />
           </Container3D>
         </div>
@@ -341,7 +346,14 @@ const ViewTicketDesktopInner = ({
                 midudevTokentId={midudevTokentId}
                 ticketOGImageElement={ticketOGImageElement}
                 handleChangeHologram={handleChangeHologram}
-                handleChangeSticker={handleChangeSticker}
+                handleAddSticker={handleAddSticker}
+              />
+
+              {/* STICKETS Section */}
+              <SelectStickerPanel
+                ticketDesign={extendedTicketDesign}
+                handleAddSticker={handleAddSticker}
+                handleRemoveSticker={handleRemoveSticker}
               />
             </div>
           </div>

@@ -9,5 +9,5 @@ export interface TicketDesign {
   structure: StructureOpcion
   color: ColorOption
   hologram: HologramOption
-  sticker: StickerOption[] | null
+  sticker: Array<StickerOption | null> | null
 }

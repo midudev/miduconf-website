@@ -21,7 +21,7 @@ interface Props {
   username: string
   ticketNumber: number
   midudevTokentId: string
-  handleChangeSticker: (sticker: StickerOption) => void
+  handleAddSticker: (sticker: StickerOption) => void
 }
 
 export const SelectHologramPanel = ({
@@ -33,7 +33,7 @@ export const SelectHologramPanel = ({
   midudevTokentId,
   midudevTypeSub,
   handleChangeHologram,
-  handleChangeSticker
+  handleAddSticker
 }: Props) => {
   const { handleUpdateTicket } = useUpdateTicketInDB()
   const { handleUpdateImageTicket } = useUpdateTicketImageInDB()

@@ -41,6 +41,12 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     MIDU_LUL: 'midu-lul',
     MIDU_SNIF: 'midu-snif',
     MIDU_WOW: 'midu-wow',
-    MIDU_LOVE: 'midu-love'
+    MIDU_LOVE: 'midu-love',
+    GLASSES: 'glasses',
+    START: 'start',
+    MIDU: 'midu',
+    MALT: 'malt',
+    VERCEL: 'vercel',
+    LIBRO_GIT: 'libro-git'
   }
 } as const
