@@ -9,14 +9,23 @@ export const LIST_OF_GIFTS = [
     )
   },
   {
+    imgUrl: '/gifts/macmini.webp',
+    imgSmallUrl: '/gifts/macmini-small.webp',
+    className: 'row-span-2',
+    title: (
+      <>
+        Un ordenador <br /> Apple Mac Mini M4
+      </>
+    )
+  },
+  {
     imgUrl: '/gifts/midudev-anual.webp',
     imgSmallUrl: '/gifts/midudev-anual-small.webp',
     title: (
       <>
         10 cupones de <br /> un año en midu.dev
       </>
-    ),
-    className: 'row-span-2'
+    )
   },
   {
     imgUrl: '/gifts/academia-trimestral.webp',
@@ -24,6 +33,24 @@ export const LIST_OF_GIFTS = [
     title: (
       <>
         25 cupones trimestrales <br /> en midu.dev
+      </>
+    )
+  },
+  {
+    imgUrl: '/gifts/aprende-git-fisico.webp',
+    imgSmallUrl: '/gifts/aprende-git-fisico-small.webp',
+    title: (
+      <>
+        5 libros físicos de <br /> Aprendiendo Git
+      </>
+    )
+  },
+  {
+    imgUrl: '/gifts/codigo-sostenible.webp',
+    imgSmallUrl: '/gifts/codigo-sostenible-small.webp',
+    title: (
+      <>
+        10 libros de <br /> Código Sostenible
       </>
     )
   }
