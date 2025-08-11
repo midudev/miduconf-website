@@ -5,6 +5,7 @@ import { SelectStructurePanel } from './select-structure-panel'
 import { SelectColorPanel } from './select-color-panel'
 import { SelectHologramPanel } from './select-hologram-panel'
 import { SelectAnimationPanel } from './select-animation-panel'
+import { AccountConnectionPanel } from './account-connection-panel'
 import { HologramOption } from '../types/hologram-option'
 import { TicketDesign } from '../types/ticket-design'
 import { PencilIcon } from '../icons/structure-ticket/pencil'
@@ -15,10 +16,9 @@ import { ColorOption } from '../types/color-option'
 import { AnimationType, StructureType } from '../animations'
 import { StructureOpcion } from '../types/structure-option'
 import { AnimationOption } from '../types/animation-option'
-import { cn } from '@/lib/utils'
 import { AtroposSyncProvider } from '../context/AtroposSync'
-import { WhiteMidudevLogo } from '../icons/white-midudev-logo'
-import { getTwitchAuthorizeUrl } from '@/twitch/utils/get-twitch-authorize-url'
+import { EnterArrow } from '@/components/icons/enter-arrow'
+import { SelectStickerPanel } from './select-sticker-panel'
 
 interface Props {
   ticketDOMContnet: RefObject<HTMLElement | null>
@@ -31,11 +31,61 @@ interface Props {
   ticketDesign: TicketDesign
   midudevTokentId: string
   handleChangeHologram: (hologram: HologramOption) => void
-  handleChangeSticker: (sticker: StickerOption) => void
+  handleAddSticker: (sticker: StickerOption, maxListOfStickers: number) => void
   handleChangeColor?: (color: ColorOption) => void
+  handleChangeStructure?: (structure: StructureOpcion) => void
+  handleChangeAnimation?: (animation: AnimationOption) => void
+  handleRemoveSticker: (sticker: StickerOption) => void
+  hasUnsavedChanges?: boolean
+  isSaving?: boolean
+  onSave?: () => void
 }
 
-export const ViewTicketDesktop = ({
+// Map between the two type systems
+const mapStructureToOpcion = (structure: StructureType): StructureOpcion => {
+  const mapping: Record<StructureType, StructureOpcion> = {
+    box: 'box',
+    circle: 'circle',
+    piramide: 'piramide',
+    prism: 'prism',
+    background: 'background',
+    heart: 'heart'
+  }
+  return mapping[structure] || 'box'
+}
+
+const mapOpcionToStructure = (opcion: StructureOpcion): StructureType => {
+  const mapping: Record<StructureOpcion, StructureType> = {
+    box: 'box',
+    circle: 'circle',
+    piramide: 'piramide',
+    prism: 'prism',
+    background: 'background',
+    heart: 'heart'
+  }
+  return mapping[opcion] || 'box'
+}
+
+// Map between AnimationType and AnimationOption
+const mapAnimationToOption = (animationType: AnimationType): AnimationOption => {
+  const mapping: Record<AnimationType, AnimationOption> = {
+    default: 'default' as AnimationOption,
+    pyramid: 'piramide' as AnimationOption,
+    friction: 'friccion' as AnimationOption
+  }
+  return mapping[animationType] || ('default' as AnimationOption)
+}
+
+const mapOptionToAnimation = (option: AnimationOption): AnimationType => {
+  const mapping: Record<string, AnimationType> = {
+    default: 'default',
+    piramide: 'pyramid',
+    friccion: 'friction'
+  }
+  return mapping[option] || 'default'
+}
+
+const ViewTicketDesktopInner = ({
   ticketDOMContnet,
   ticketOGImageElement,
   username,
@@ -46,72 +96,27 @@ export const ViewTicketDesktop = ({
   midudevTokentId,
   midudevTypeSub,
   handleChangeHologram,
-  handleChangeSticker,
-  handleChangeColor
+  handleAddSticker,
+  handleChangeColor,
+  handleChangeStructure,
+  handleChangeAnimation,
+  handleRemoveSticker,
+  hasUnsavedChanges = false,
+  isSaving = false,
+  onSave
 }: Props) => {
   const [isPanelMinimized, setIsPanelMinimized] = useState(false)
-  const [selectedStructure, setSelectedStructure] = useState<StructureType>('box')
-  const [selectedAnimation, setSelectedAnimation] = useState<AnimationType>(() => {
-    // Initialize with current animation from ticketDesign
-    const mapping: Record<string, AnimationType> = {
-      default: 'default',
-      piramide: 'pyramid',
-      friccion: 'friction'
-    }
-    return mapping[ticketDesign.animation] || 'default'
-  })
+  // Get current structure and animation from ticketDesign
+  const selectedStructure = mapOpcionToStructure(ticketDesign.structure)
+  const selectedAnimation = mapOptionToAnimation(ticketDesign.animation)
 
-  const handleChangeAnimation = (animation: AnimationType) => {
-    setSelectedAnimation(animation)
+  const handleAnimationChange = (animation: AnimationType) => {
+    const animationOption = mapAnimationToOption(animation)
+    handleChangeAnimation?.(animationOption)
   }
 
-  // Map between the two type systems
-  const mapStructureToOpcion = (structure: StructureType): StructureOpcion => {
-    const mapping: Record<StructureType, StructureOpcion> = {
-      box: 'box',
-      circle: 'circle',
-      piramide: 'piramide',
-      prism: 'prism',
-      background: 'background',
-      heart: 'heart'
-    }
-    return mapping[structure] || 'box'
-  }
-
-  const mapOpcionToStructure = (opcion: StructureOpcion): StructureType => {
-    const mapping: Record<StructureOpcion, StructureType> = {
-      box: 'box',
-      circle: 'circle',
-      piramide: 'piramide',
-      prism: 'prism',
-      background: 'background',
-      heart: 'heart'
-    }
-    return mapping[opcion] || 'box'
-  }
-
-  const handleChangeStructure = (opcion: StructureOpcion) => {
-    const newStructure = mapOpcionToStructure(opcion)
-    setSelectedStructure(newStructure)
-  }
-
-  // Map between AnimationType and AnimationOption
-  const mapAnimationToOption = (animationType: AnimationType): AnimationOption => {
-    const mapping: Record<AnimationType, AnimationOption> = {
-      default: 'default' as AnimationOption,
-      pyramid: 'piramide' as AnimationOption,
-      friction: 'friccion' as AnimationOption
-    }
-    return mapping[animationType] || ('default' as AnimationOption)
-  }
-
-  const mapOptionToAnimation = (option: AnimationOption): AnimationType => {
-    const mapping: Record<string, AnimationType> = {
-      default: 'default',
-      piramide: 'pyramid',
-      friccion: 'friction'
-    }
-    return mapping[option] || 'default'
+  const handleStructureChange = (opcion: StructureOpcion) => {
+    handleChangeStructure?.(opcion)
   }
 
   // Create ticketDesign object for SelectStructurePanel
@@ -133,37 +138,63 @@ export const ViewTicketDesktop = ({
             ticketDesign={ticketDesign}
             ticketDOMContnet={ticketDOMContnet}
             username={username}
+            structure={selectedStructure}
+            animation={selectedAnimation}
           />
         </div>
 
-        {/* <div className='absolute bottom-0 left-0 right-0 flex flex-col gap-4 p-4'>
-				<Button
-					variant='default'
-					className='flex items-center justify-center w-full gap-2 py-2 text-lg uppercase'
-				>
-					<EnterArrow className='w-4 h-4' />
-					Guardar
-				</Button>
-				<Button
-					variant='secondary'
-					className='w-full py-2 text-lg uppercase'
-					onClick={() => setIsPanelMinimized(true)}
-				>
-					Cancelar
-				</Button>
-			</div> */}
+        <div
+          className={`absolute bottom-0 left-0 right-0 flex flex-col gap-4 p-4 transition-all duration-700 ease-out ${
+            hasUnsavedChanges
+              ? 'transform translate-x-0 opacity-100'
+              : 'transform -translate-x-full opacity-0 pointer-events-none'
+          }`}
+        >
+          <Button
+            variant='default'
+            onClick={onSave}
+            disabled={isSaving}
+            className={`flex items-center justify-center w-full gap-2 py-2 text-lg uppercase transition-all duration-300 ${
+              isSaving ? 'bg-green-600 hover:bg-green-600' : ''
+            }`}
+          >
+            {isSaving ? (
+              <>
+                <div className='w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin' />
+                Guardando...
+              </>
+            ) : (
+              <>
+                <EnterArrow className='w-4 h-4' />
+                Guardar
+              </>
+            )}
+          </Button>
+          <Button
+            variant='secondary'
+            className='w-full py-2 text-lg uppercase transition-all duration-300'
+            onClick={() => setIsPanelMinimized(true)}
+            disabled={isSaving}
+          >
+            Cancelar
+          </Button>
+        </div>
 
         {/* Ticket - Always Centered */}
         <div className='flex items-center justify-center'>
           <Container3D>
             <TicketCard
               fullname={fullname}
+              stickers={ticketDesign.sticker ?? [null, null, null]}
+              twitchTier={twitchTier}
+              midudevTypeSub={midudevTypeSub}
               ticketNumber={ticketNumber}
               username={username}
               hologram={ticketDesign.hologram}
               color={ticketDesign.color}
               structure={selectedStructure}
               animation={selectedAnimation}
+              handleRemoveSticker={handleRemoveSticker}
             />
           </Container3D>
         </div>
@@ -205,104 +236,33 @@ export const ViewTicketDesktop = ({
             </div>
 
             {/* Connection Status Buttons */}
-            <div className='flex flex-col gap-4 mb-6'>
-              <h4 className='text-sm font-medium tracking-wide uppercase text-palette-ghost'>
-                Vincula tu cuenta
-              </h4>
-              {/* Academia Connection Button */}
-              <div className='flex gap-3'>
-                {midudevTypeSub ? (
-                  <Button
-                    variant='default'
-                    size='small'
-                    className='px-4 py-3 text-sm font-medium tracking-wide text-white uppercase bg-palette-primary hover:bg-palette-primary/80'
-                    disabled={true}
-                  >
-                    <div className='flex items-center justify-center gap-2'>
-                      <WhiteMidudevLogo className='size-5' />
-                      ACADEMIA
-                    </div>
-                  </Button>
-                ) : (
-                  <Button
-                    variant='default'
-                    size='small'
-                    href={`https://midu.dev/miduconf/ticket/${midudevTokentId}`}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    as='a'
-                  >
-                    <div className='flex items-center justify-center gap-2 text-sm uppercase'>
-                      <WhiteMidudevLogo className='size-5' />
-                      Academia
-                    </div>
-                  </Button>
-                )}
-
-                {/* Twitch Connection Button */}
-                {twitchTier ? (
-                  <Button
-                    variant='ghost'
-                    size='small'
-                    className='px-4 py-3 text-sm font-medium tracking-wide text-white uppercase bg-purple-600 border border-purple-600 hover:bg-purple-700'
-                    disabled={true}
-                  >
-                    <div className='flex items-center justify-center gap-2'>
-                      <svg
-                        width='16'
-                        height='16'
-                        viewBox='0 0 24 24'
-                        fill='currentColor'
-                        className='text-white'
-                      >
-                        <path d='M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z' />
-                      </svg>
-                      TWITCH TIER {twitchTier}
-                    </div>
-                  </Button>
-                ) : (
-                  <Button
-                    variant='ghost'
-                    size='small'
-                    className='px-4 py-3 text-sm font-medium tracking-wide text-white uppercase bg-purple-600 border border-purple-600 hover:bg-purple-700'
-                    href={getTwitchAuthorizeUrl({ requiredTier: '1', currentTier: twitchTier })}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    as='a'
-                  >
-                    <div className='flex items-center justify-center gap-2'>
-                      <svg
-                        width='16'
-                        height='16'
-                        viewBox='0 0 24 24'
-                        fill='currentColor'
-                        className='text-white'
-                      >
-                        <path d='M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z' />
-                      </svg>
-                      TWITCH
-                    </div>
-                  </Button>
-                )}
-              </div>
-            </div>
+            <AccountConnectionPanel
+              twitchTier={twitchTier}
+              midudevTypeSub={midudevTypeSub}
+              midudevTokentId={midudevTokentId}
+              username={username}
+            />
             <div className='relative flex-1 space-y-6'>
               {/* ANIMACIÓN Section */}
               <SelectAnimationPanel
                 selectedAnimation={selectedAnimation}
-                handleChangeAnimation={handleChangeAnimation}
+                handleChangeAnimation={handleAnimationChange}
               />
 
               {/* ESTRUCTURA Section */}
               <SelectStructurePanel
                 ticketDesign={extendedTicketDesign}
-                handleChangeStructure={handleChangeStructure}
+                handleChangeStructure={handleStructureChange}
+                twitchTier={twitchTier}
+                midudevTypeSub={midudevTypeSub}
               />
 
               {/* COLORES Section */}
               <SelectColorPanel
                 ticketDesign={ticketDesign}
                 handleChangeColor={handleChangeColor || (() => {})}
+                twitchTier={twitchTier}
+                midudevTypeSub={midudevTypeSub}
               />
 
               {/* HOLOGRÁFICO Section */}
@@ -315,7 +275,15 @@ export const ViewTicketDesktop = ({
                 midudevTokentId={midudevTokentId}
                 ticketOGImageElement={ticketOGImageElement}
                 handleChangeHologram={handleChangeHologram}
-                handleChangeSticker={handleChangeSticker}
+              />
+
+              {/* STICKETS Section */}
+              <SelectStickerPanel
+                twitchTier={twitchTier}
+                midudevTypeSub={midudevTypeSub}
+                ticketDesign={extendedTicketDesign}
+                handleAddSticker={handleAddSticker}
+                handleRemoveSticker={handleRemoveSticker}
               />
             </div>
           </div>
@@ -337,4 +305,8 @@ export const ViewTicketDesktop = ({
       </div>
     </AtroposSyncProvider>
   )
+}
+
+export const ViewTicketDesktop = (props: Props) => {
+  return <ViewTicketDesktopInner {...props} />
 }

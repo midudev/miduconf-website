@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { PERSONALIZE_TIKET_OPTIONS } from '../constants/personalize-ticket-options'
 import { AnimationOption } from '../types/animation-option'
 import { StructureOpcion } from '../types/structure-option'
@@ -6,17 +6,71 @@ import { ColorOption } from '../types/color-option'
 import { HologramOption } from '../types/hologram-option'
 import { TicketDesign } from '../types/ticket-design'
 import { StickerOption } from '../types/sticker-option'
+import { useUpdateTicketInDB } from './use-update-ticket-in-db'
 
 interface Props {
   hologram: HologramOption
+  savedDesign?: string | null // JSON string from database flavour field
+  username?: string
 }
 
-export const useDesignTicket = ({ hologram }: Props) => {
+export const useDesignTicket = ({ hologram, savedDesign, username }: Props) => {
+  const { handleUpdateTicketDesign } = useUpdateTicketInDB()
+
   const [ticketDesign, setTicketDesign] = useState<TicketDesign>(() =>
     getInitialState({
-      hologram
+      hologram,
+      savedDesign
     })
   )
+
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+
+  // Load from localStorage after hydration
+  useEffect(() => {
+    if (!username) return
+
+    try {
+      const localData = localStorage.getItem(`ticket_design_${username}`)
+      if (localData) {
+        const parsedDesign = JSON.parse(localData)
+        // Only update if different from current state to avoid unnecessary re-renders
+        if (JSON.stringify(parsedDesign) !== JSON.stringify(ticketDesign)) {
+          setTicketDesign((prevDesign) => ({
+            ...prevDesign,
+            ...parsedDesign
+          }))
+        }
+      }
+    } catch (error) {
+      console.error('Error loading from localStorage:', error)
+    }
+  }, [username]) // Remove ticketDesign from deps to avoid infinite loop
+
+  // Auto-save to localStorage on design changes
+  useEffect(() => {
+    if (!username) return
+
+    const designData = JSON.stringify({
+      hologram: ticketDesign.hologram,
+      color: ticketDesign.color,
+      structure: ticketDesign.structure,
+      animation: ticketDesign.animation,
+      sticker: ticketDesign.sticker,
+      _metadata: { type: 'design_data', version: '1.0' }
+    })
+
+    try {
+      localStorage.setItem(`ticket_design_${username}`, designData)
+
+      // Compare with DB state to determine if there are unsaved changes
+      const dbDesign = savedDesign || getDefaultDesignJson(hologram)
+      setHasUnsavedChanges(designData !== dbDesign)
+    } catch (error) {
+      console.error('Error saving to localStorage:', error)
+    }
+  }, [ticketDesign, savedDesign, username, hologram])
 
   const handleChangeDesign = (options: Partial<TicketDesign>) => {
     setTicketDesign((lastDesign) => ({
@@ -64,35 +118,128 @@ export const useDesignTicket = ({ hologram }: Props) => {
     })
   }
 
-  const handleChangeSticker = (sticker: StickerOption) => {
-    const allStickersSet = new Set(ticketDesign.sticker ?? [])
-    allStickersSet.add(sticker)
+  const handleRemoveSticker = (sticker: StickerOption) => {
+    const defaultStickers = ticketDesign.sticker ?? [null, null, null]
+    const allStickers = Array.from({ length: 3 }, (_, i) => defaultStickers[i] ?? null)
+
+    const isStickerExist = allStickers.includes(sticker)
+
+    if (!isStickerExist) return
+
+    const indexOfSticker = allStickers.findIndex((s) => s === sticker)
+    allStickers.splice(indexOfSticker, 1, null)
+
     handleChangeDesign({
-      sticker: [...allStickersSet]
+      sticker: [...allStickers]
     })
+  }
+
+  const handleAddSticker = (sticker: StickerOption, maxListOfStickers: number) => {
+    const defaultStickers = ticketDesign.sticker ?? [null, null, null]
+    const allStickers = Array.from(
+      { length: maxListOfStickers },
+      (_, i) => defaultStickers[i] ?? null
+    )
+
+    // si agregamos un sticker mas, remplazamos el ultimo
+    const isStickersFilled = allStickers.every((s) => s != null)
+
+    if (isStickersFilled) {
+      allStickers.splice(allStickers.length - 1, 1, sticker)
+
+      handleChangeDesign({
+        sticker: [...allStickers]
+      })
+
+      return
+    }
+
+    // cambiamos el primer null por el sticker
+    const firstNullIndex = allStickers.findIndex((s) => s === null)
+    allStickers.splice(firstNullIndex, 1, sticker)
+
+    handleChangeDesign({
+      sticker: [...allStickers]
+    })
+  }
+
+  const handleSaveDesign = async () => {
+    if (!username) {
+      console.error('No username provided for saving design')
+      return { error: 'No username provided' }
+    }
+
+    setIsSaving(true)
+
+    try {
+      const result = await handleUpdateTicketDesign({
+        ticketDesign,
+        username
+      })
+
+      if (!result.error) {
+        // Wait a bit for user to see success state
+        await new Promise((resolve) => setTimeout(resolve, 500))
+        setHasUnsavedChanges(false)
+      }
+
+      return result
+    } finally {
+      setIsSaving(false)
+    }
   }
 
   return {
     ticketDesign,
+    hasUnsavedChanges,
+    isSaving,
     handleChangeAnimation,
     handleChangeStructure,
     handleChangeColor,
     handleChangeHologram,
-    handleChangeSticker
+    handleAddSticker,
+    handleRemoveSticker,
+    handleSaveDesign
   }
 }
 
-const getInitialState = ({ ...design }: Partial<TicketDesign>) => {
+const getInitialState = ({
+  hologram,
+  savedDesign
+}: {
+  hologram: HologramOption
+  savedDesign?: string | null
+}) => {
+  // Only use DB saved design for initial state (no localStorage to avoid hydration mismatch)
+  let parsedDesign: Partial<TicketDesign> = {}
+
+  if (savedDesign) {
+    try {
+      parsedDesign = JSON.parse(savedDesign)
+    } catch (error) {
+      console.error('Error parsing saved design:', error)
+    }
+  }
+
   return {
     ...INITIAL_STATE,
-    ...design
+    hologram, // Use the passed hologram as fallback/override
+    ...parsedDesign // Apply saved design if available
   }
+}
+
+const getDefaultDesignJson = (hologram: HologramOption): string => {
+  return JSON.stringify({
+    ...INITIAL_STATE,
+    hologram,
+    _metadata: { type: 'design_data', version: '1.0' }
+  })
 }
 
 const INITIAL_STATE = {
   animation: PERSONALIZE_TIKET_OPTIONS.ANIMATION.DEFAULT,
   structure: PERSONALIZE_TIKET_OPTIONS.STRUCTURE.CIRCLE,
-  color: PERSONALIZE_TIKET_OPTIONS.COLOR.BLUE,
+  color: PERSONALIZE_TIKET_OPTIONS.COLOR.NEUTRAL,
   hologram: PERSONALIZE_TIKET_OPTIONS.HOLOGRAM[1],
   sticker: null
 } as TicketDesign

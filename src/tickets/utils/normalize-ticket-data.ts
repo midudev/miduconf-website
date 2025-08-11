@@ -9,6 +9,8 @@ export const normalizeTicketData = ({
   user_name,
   midudev_token_id,
   midudev_type_sub,
+  image,
+  design_data,
   ...restOfProps
 }: Partial<SupabaseTicketData>) => {
   return {
@@ -20,6 +22,8 @@ export const normalizeTicketData = ({
     username: user_name,
     midudevTokentId: midudev_token_id,
     midudevTypeSub: midudev_type_sub,
+    image: image,
+    designData: design_data, // Extracted design data
     ...restOfProps
   }
 }

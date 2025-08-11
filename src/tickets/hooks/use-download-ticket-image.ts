@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useLayoutEffect, useState } from 'react'
+import { RefObject, useLayoutEffect, useState } from 'react'
 import { transformElementToJpeg } from '../utils/transform-element-to-jpeg'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 export const useDownloadTicketImage = ({ ticketDOMContnet }: Props) => {
   const [sharedTicketImageLink, setSharedTicketImageLink] = useState<string | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (ticketDOMContnet?.current == null) return
 
     handleCreateImageImage()

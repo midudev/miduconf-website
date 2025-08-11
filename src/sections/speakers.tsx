@@ -135,7 +135,7 @@ export function Speakers() {
               (SPEAKERS.length - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
             )}
           >
-            <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-palette-border-foreground'>
+            <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-palette-border-foreground md:hidden'>
               <p className='text-xs md:text-xl text-wrap text-center max-w-[24ch] text-white mx-auto px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase font-bold flex items-center md:gap-2 z-10'>
                 <DiamondIcon className='w-4 h-auto md:w-8' />
                 ¡Muy pronto revelaremos más speakers!
@@ -227,11 +227,11 @@ const SPEAKERS = [
     isPlaceholder: false
   },
   {
-    name: '',
-    title: '',
-    twitter: '',
-    img: 'sin-nombre',
-    isPlaceholder: true
+    name: 'Gisela Torres',
+    title: 'Senior Global Blackbelt @ Microsoft',
+    twitter: '0gis0',
+    img: 'gisela-torres',
+    isPlaceholder: false
   }
   /* {
 		name: 'Guillermo Rauch',

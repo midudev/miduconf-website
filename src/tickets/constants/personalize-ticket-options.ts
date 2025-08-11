@@ -13,12 +13,12 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     HEART: 'heart'
   },
   COLOR: {
+    NEUTRAL: 'neutral',
     BLUE: 'blue',
     ORANGE: 'orange',
     RED: 'red',
     GREEN: 'green',
-    PINK: 'pink',
-    GRAY: 'gray'
+    PINK: 'pink'
   },
   HOLOGRAM: {
     STANDARD: 'standard',
@@ -41,6 +41,12 @@ export const PERSONALIZE_TIKET_OPTIONS = {
     MIDU_LUL: 'midu-lul',
     MIDU_SNIF: 'midu-snif',
     MIDU_WOW: 'midu-wow',
-    MIDU_LOVE: 'midu-love'
+    MIDU_LOVE: 'midu-love',
+    GLASSES: 'glasses',
+    START: 'start',
+    MIDU: 'midu',
+    /* MALT: 'malt',
+    VERCEL: 'vercel', */
+    LIBRO_GIT: 'libro-git'
   }
 } as const

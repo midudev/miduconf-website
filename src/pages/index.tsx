@@ -3,12 +3,14 @@ import { Agenda } from '@/sections/agenda'
 import { FAQS } from '@/sections/faqs'
 import { Footer } from '@/sections/footer'
 import { GetTicket } from '@/sections/get-ticket'
+import { Gifts } from '@/sections/gifts'
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
 import { PreFooter } from '@/sections/pre-footer'
 import { Speakers } from '@/sections/speakers'
 import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
+import TwitchStream from '@/twitch/components/twitch-stream'
 import { GetServerSideProps } from 'next'
 
 const title = 'miduConf - La conferencia de programación y desarrollo'
@@ -27,11 +29,13 @@ export default function Home({ userData }) {
 
   return (
     <Layout meta={metadata}>
+      <TwitchStream />
       <main>
         <Hero userData={userData} />
         <WhatToExpect />
         <Speakers />
         <Sponsors />
+        <Gifts />
         <Agenda />
         <FAQS />
         <GetTicket />

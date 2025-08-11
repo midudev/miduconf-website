@@ -122,7 +122,7 @@ function Navbar() {
           id={navbarId}
           ref={refNavbarList}
           className={cn(
-            'navbarList animation-ul group clipHidden absolute inset-0 lg:inset-auto h-screen lg:h-auto flex flex-col lg:flex-row justify-end items-end p-5 space-y-spacing-24 bg-palette-background lg:top-[28px] lg:bottom-auto pt-[80px] pb-5 lg:clipVisible lg:bg-transparent lg:p-0 lg:left-1/2 lg:-translate-x-1/2 lg:justify-center lg:items-center lg:space-y-0'
+            'navbarList animation-ul group clipHidden absolute inset-0 lg:inset-auto h-dvh lg:h-auto flex flex-col lg:flex-row justify-end items-end p-5 space-y-spacing-24 bg-palette-background lg:top-[28px] lg:bottom-auto pt-[80px] pb-5 lg:clipVisible lg:bg-transparent lg:p-0 lg:left-1/2 lg:-translate-x-1/2 lg:justify-center lg:items-center lg:space-y-0'
           )}
         >
           {NAV_ITEMS.map(({ href, title }) => (
@@ -164,6 +164,10 @@ const NAV_ITEMS = [
   {
     href: '/#sponsors',
     title: 'sponsors'
+  },
+  {
+    href: '/#regalos',
+    title: 'Regalos'
   },
   {
     href: '/#agenda',

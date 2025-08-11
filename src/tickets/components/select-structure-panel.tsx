@@ -7,19 +7,14 @@ import { BoxIcon } from '../icons/structure-ticket/box'
 import { HeartIcon } from '../icons/structure-ticket/heart'
 import { LockIcon } from '../icons/structure-ticket/lock'
 import { StructureOpcion } from '../types/structure-option'
-import { AnimationOption } from '../types/animation-option'
-import { ColorOption } from '../types/color-option'
-import { HologramOption } from '../types/hologram-option'
+import { TicketDesign } from '../types/ticket-design'
 import { cn } from '@/lib/utils'
 
 interface Props {
 	handleChangeStructure: (option: StructureOpcion) => void
-	ticketDesign: {
-		animation: AnimationOption
-		structure: StructureOpcion
-		color: ColorOption
-		hologram: HologramOption
-	}
+	ticketDesign: TicketDesign
+	twitchTier?: '1' | '2' | '3' | null
+	midudevTypeSub?: 'monthly' | 'quarterly' | 'annual' | 'lifetime' | null
 }
 
 const listOfStructures = [
@@ -61,14 +56,25 @@ const listOfStructures = [
 	}
 ]
 
-export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Props) => {
+export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure, twitchTier, midudevTypeSub }: Props) => {
+	// Helper function to check if user has unlocking tier
+	const hasUnlockingTier = () => {
+		// Twitch tier 1 or higher unlocks
+		if (twitchTier && Number(twitchTier) >= 1) return true
+		// Academia mensual or higher unlocks
+		if (midudevTypeSub) return true
+		return false
+	}
 	return (
 		<article className='flex flex-col gap-4'>
 			<h3 className='text-sm font-medium uppercase text-palette-ghost'>Estructura</h3>
-			<ul className='flex flex-wrap items-center gap-1 p-3 rounded-md bg-palette-ghost/10'>
-				{listOfStructures.map(({ label, value, icon: Icon, disabled }) => (
+			<ul className='grid grid-cols-3 grid-rows-2 gap-1 p-3 rounded-md bg-palette-ghost/10 lg:flex lg:flex-wrap lg:items-center lg:gap-x-1'>
+				{listOfStructures.map(({ label, value, icon: Icon, disabled }) => {
+					// Override disabled state based on tier
+					const isDisabled = disabled && !hasUnlockingTier()
+					return (
 					<li key={value}>
-						{disabled ? (
+						{isDisabled ? (
 							<div className="relative">
 								<Button
 									title={`Estructura ${label} bloqueada`}
@@ -93,7 +99,8 @@ export const SelectStructurePanel = ({ ticketDesign, handleChangeStructure }: Pr
 							</Button>
 						)}
 					</li>
-				))}
+					)
+				})}
 			</ul>
 		</article>
 	)
