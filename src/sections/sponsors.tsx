@@ -77,7 +77,7 @@ const sponsors = [
         name: 'Plain Concepts',
         link: 'https://www.plainconcepts.com/',
         logo: <SponsorIcons.plainConcepts className='clamp-sponsor' />,
-        slogan: 'Donde la limpieza del código encuentra la creatividad'
+        slogan: 'Impulsamos la transformación digital de empresas con soluciones innovadoras'
       }
     ]
   }
