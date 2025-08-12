@@ -184,7 +184,7 @@ export default function Ticket({
         username={user.username}
       />
       <Modal onClose={handleCloseModal} isOpen={isModalOpen}>
-        {tierQueryData?.tier === 'null' && tierQueryData?.error && <ModalNoTwitchSubContent />}
+        {tierQueryData?.tier === '' && tierQueryData?.error && <ModalNoTwitchSubContent />}
         {['1', '2', '3'].includes(tierQueryData?.tier!) && notAccessTier === 'false' && (
           <ModalTwitchAccessContent
             tierNumber={tierQueryData?.tier ? +tierQueryData?.tier : null}
