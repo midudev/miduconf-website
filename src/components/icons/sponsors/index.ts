@@ -6,6 +6,7 @@ import { CodelyIcon } from './codely'
 import { PlainConcepts } from './plain-concepts'
 import { IgniaCLoudIcon } from './ignia-cloud'
 import { Infojobs } from './infojobs'
+import { DonDominioIcon } from './don-dominio'
 
 export const SponsorIcons = {
   cloudinary: CloudinaryIcon,
@@ -15,5 +16,6 @@ export const SponsorIcons = {
   malt: MaltIcon,
   codely: CodelyIcon,
   plainConcepts: PlainConcepts,
-  infojobs: Infojobs
+  infojobs: Infojobs,
+  donDominio: DonDominioIcon
 }
