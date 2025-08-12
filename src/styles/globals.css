@@ -125,10 +125,11 @@
 	.clipVisible {
 		clip-path: none;
 	}
-  	.clamp-sponsor {
-    		width: calc(clamp(12.125rem, 2.99vw + 11.424rem, 14.25rem));
-    		height: calc(clamp(3rem, 4.398vw + 1.969rem, 6.125rem));
-  	}
+
+	.clamp-sponsor {
+		width: calc(clamp(12.125rem, 2.99vw + 11.424rem, 14.25rem));
+		height: calc(clamp(3rem, 4.398vw + 1.969rem, 6.125rem));
+	}
 
 	.hidden-scroll::-webkit-scrollbar {
 		width: 0;

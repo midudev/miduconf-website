@@ -20,7 +20,7 @@ export const ReviewCard = ({ level, sponsors }: ReviewCardProps) => {
 
   return (
     <div>
-      <div className='flex items-center mb-spacing-32 justify-center gap-2 lg:justify-start'>
+      <div className='flex items-center justify-center gap-2 mb-spacing-32 lg:justify-start'>
         <DiamondIcon
           className={cn(
             'size-4 lg:size-5',
@@ -45,9 +45,14 @@ export const ReviewCard = ({ level, sponsors }: ReviewCardProps) => {
           )}
         />
       </div>
-      <div className='space-y-[20px] md:space-y-0 md:grid md:grid-cols-2 md:gap-[20px]'>
+      <div
+        className={cn(
+          'space-y-[20px] md:space-y-0 md:grid md:grid-cols-2 md:gap-[20px]',
+          level === 'pro' && 'xl:grid-cols-3'
+        )}
+      >
         {sponsors.map((sponsor, idx) => (
-          <Sponsor key={idx} sponsor={sponsor} />
+          <Sponsor key={idx} sponsor={sponsor} level={level} />
         ))}
       </div>
     </div>

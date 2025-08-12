@@ -15,7 +15,7 @@ export const Sponsors = () => {
       <div className='h-full'>
         <header className='flex flex-col lg:sticky lg:top-[80px] lg:items-start'>
           <Title>Sponsors</Title>
-          <p className='mx-auto lg:ml-0 text-xl-medium text-pretty text-center lg:text-left pt-spacing-32 pb-spacing-40'>
+          <p className='mx-auto text-center lg:ml-0 text-xl-medium text-pretty lg:text-left pt-spacing-32 pb-spacing-40'>
             Gracias a ellos hacemos posible el evento
           </p>
           <CallToAction
@@ -55,7 +55,7 @@ const sponsors = [
       {
         name: 'Codely',
         link: 'https://codely.com/pro/midudev',
-        logo: <SponsorIcons.codely className='clamp-sponsor' />,
+        logo: <SponsorIcons.codely className='clamp-sponsor md:w-auto md:h-16' />,
         slogan: 'Codely enseña y entretiene'
       },
       {
@@ -71,13 +71,19 @@ const sponsors = [
     sponsors: []
   },
   {
-    level: 'basic',
+    level: 'pro',
     sponsors: [
       {
         name: 'Plain Concepts',
         link: 'https://www.plainconcepts.com/',
-        logo: <SponsorIcons.plainConcepts className='clamp-sponsor' />,
-        slogan: 'Impulsamos la transformación digital de empresas con soluciones innovadoras'
+        logo: <SponsorIcons.plainConcepts className='clamp-sponsor md:h-14 md:w-auto' />,
+        slogan: 'Impulsamos la transformación digital de empresas'
+      },
+      {
+        name: 'Don Dominio',
+        link: 'https://www.dondominio.com/es/',
+        logo: <SponsorIcons.donDominio className='clamp-sponsor md:h-6 md:w-auto' />,
+        slogan: 'Donde tu web se hace realidad'
       }
     ]
   }

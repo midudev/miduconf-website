@@ -1,5 +1,6 @@
 import { JSX, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { cn } from '@/lib/utils'
 
 interface Sponsor {
   name?: string
@@ -8,7 +9,7 @@ interface Sponsor {
   slogan?: string
 }
 
-export const Sponsor = ({ sponsor }: { sponsor: Sponsor }) => {
+export const Sponsor = ({ sponsor, level }: { sponsor: Sponsor; level: string }) => {
   const containerRef = useRef<HTMLAnchorElement>(null)
   const logoRef = useRef<HTMLSpanElement>(null)
   const descriptionRef = useRef<HTMLParagraphElement>(null)
@@ -157,7 +158,10 @@ export const Sponsor = ({ sponsor }: { sponsor: Sponsor }) => {
       )}
       {sponsor.slogan && (
         <p
-          className='text-center text-palette-ghost w-[300px] lg:w-[400px] text-balance leading-tight text-body-code lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:translate-y-spacing-64 lg:opacity-0'
+          className={cn(
+            'text-center text-palette-ghost w-[300px] lg:w-[400px] text-balance leading-tight text-body-code lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:translate-y-spacing-64 lg:opacity-0',
+            level === 'pro' && 'scale-75 md:scale-95'
+          )}
           ref={descriptionRef}
         >
           {sponsor.slogan}
