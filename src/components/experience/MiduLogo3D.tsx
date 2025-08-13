@@ -437,8 +437,11 @@ export function MiduLogo3D() {
         currentRotationY += (mouse.targetX - currentRotationY) * 0.06
         currentRotationX += (mouse.targetY - currentRotationX) * 0.06
 
-        if (sceneRef.current.model) {
+        // Solo modificar la posición si NO está presionado (para no sobrescribir el shake)
+        if (!sceneRef.current.isPressed) {
           sceneRef.current.model.position.set(0, 0, 0)
+          // Floating animation
+          sceneRef.current.model.position.y = Math.sin(elapsedTime * 3) * 0.15
         }
 
         sceneRef.current.model.rotation.x = currentRotationX + Math.PI / 2
@@ -446,9 +449,6 @@ export function MiduLogo3D() {
           const angleDiff = shortestAngleDiff(currentRotationY, sceneRef.current.model.rotation.z)
           sceneRef.current.model.rotation.z += angleDiff * 0.06
         }
-
-        // Floating animation
-        sceneRef.current.model.position.y = Math.sin(elapsedTime * 3) * 0.15
       }
 
       controls.update()
