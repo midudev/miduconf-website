@@ -82,8 +82,12 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     baseColor = 1.0 - baseColor;
   }
 
-  // Salida final preservando el canal alfa
-  outputColor = vec4(baseColor * 2.0, inputColor.a);
+    // Función para aumentar saturación
+    float saturation = 1.2; // Ajusta este valor para más/menos saturación
+    float luma = dot(baseColor, vec3(0.299, 0.587, 0.114));
+    baseColor = mix(vec3(luma), baseColor, saturation);
+    // Salida final preservando el canal alfa
+    outputColor = vec4(baseColor, inputColor.a);
 }
 `
 

@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { EffectPass, RenderPass, EffectComposer } from 'postprocessing'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { DitheringEffect } from './DitheringEffect'
 import { lights } from './lights'
@@ -29,6 +28,24 @@ export function MiduLogo3D() {
     isHovered?: boolean
     shakeAnimation?: gsap.core.Tween
   }>({})
+
+  function shortestAngleDiff(target: number, current: number): number {
+    // Normalizar ambos ángulos al rango [0, 2π]
+    target = ((target % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)
+    current = ((current % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)
+
+    // Calcular la diferencia
+    let delta = target - current
+
+    // Ajustar para obtener el camino más corto
+    if (delta > Math.PI) {
+      delta -= 2 * Math.PI
+    } else if (delta < -Math.PI) {
+      delta += 2 * Math.PI
+    }
+
+    return delta
+  }
 
   useEffect(() => {
     if (!canvasRef.current) return
@@ -82,13 +99,14 @@ export function MiduLogo3D() {
     // Camera setup
     const ARCamera = sizes.width / sizes.height
     let zoom = 0
-    if (sizes.width < 768) {
-      zoom = 12.5 // mobile
-    } else if (sizes.width < 1024) {
-      zoom = 9 // tablet
-    } else {
-      zoom = 6.5 // laptop & desktop
+
+    function getZoom(width: number) {
+      if (width < 768) return 12.5 // mobile
+      if (width < 1024) return 9 // tablet
+      return 6.5 // desktop
     }
+
+    zoom = getZoom(sizes.width)
 
     const camera = new THREE.OrthographicCamera(
       -ARCamera * zoom + 0.6,
@@ -179,15 +197,6 @@ export function MiduLogo3D() {
     controls.enableDamping = false
     sceneRef.current.controls = controls
 
-    // Environment setup
-    const hdr = 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/je_gray_park_1k.hdr'
-
-    new RGBELoader().load(hdr, (texture) => {
-      texture.mapping = THREE.EquirectangularReflectionMapping
-      scene.environment = texture
-      scene.environmentIntensity = 0.02
-    })
-
     // Mouse interaction functions
     function onMouseMoveRaycaster(event: MouseEvent) {
       if (!canvas) return
@@ -206,7 +215,7 @@ export function MiduLogo3D() {
         x: 1.1,
         y: 1.1,
         z: 1.1,
-        duration: 0.5,
+        duration: 0.6,
         ease: 'elastic.out(1, 0.55)'
       })
     }
@@ -217,28 +226,43 @@ export function MiduLogo3D() {
         x: 1.0,
         y: 1.0,
         z: 1.0,
-        duration: 0.5,
+        duration: 0.6,
         ease: 'elastic.out(1, 0.55)'
       })
     }
 
     function moveRaycast(event: MouseEvent) {
-      if (!sceneRef.current.model || sceneRef.current.isPressed) return
+      if (!sceneRef.current.model) return
 
+      // siempre actualiza pointer
       onMouseMoveRaycaster(event)
-      raycaster.setFromCamera(pointer, camera)
-      const intersects = raycaster.intersectObjects(sceneRef.current.model.children)
 
-      if (intersects.length > 0) {
-        if (!sceneRef.current.isHovered) {
+      raycaster.setFromCamera(pointer, camera)
+      const intersects = raycaster.intersectObjects(sceneRef.current.model.children, true)
+
+      const hovering = intersects.length > 0
+
+      if (sceneRef.current.isPressed) {
+        // comportamiento durante el press
+        if (hovering) {
+          // mantener estado hovered mientras presionas dentro
+          if (!sceneRef.current.isHovered) {
+            sceneRef.current.isHovered = true
+            if (typeof document !== 'undefined') {
+              document.body.style.cursor = 'pointer'
+            }
+            onEnter()
+          }
+        }
+        // Si se sale mientras presionas, no cambia el estado para evitar el parpadeo
+      } else {
+        if (hovering && !sceneRef.current.isHovered) {
           sceneRef.current.isHovered = true
           if (typeof document !== 'undefined') {
             document.body.style.cursor = 'pointer'
           }
           onEnter()
-        }
-      } else {
-        if (sceneRef.current.isHovered) {
+        } else if (!hovering && sceneRef.current.isHovered) {
           sceneRef.current.isHovered = false
           if (typeof document !== 'undefined') {
             document.body.style.cursor = 'default'
@@ -261,7 +285,9 @@ export function MiduLogo3D() {
         gsap.to(sceneRef.current.model.scale, {
           x: 0.8,
           y: 0.8,
-          z: 0.8
+          z: 0.8,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.75)'
         })
 
         sceneRef.current.shakeAnimation = gsap.to(sceneRef.current.model.position, {
@@ -292,22 +318,40 @@ export function MiduLogo3D() {
         z: 1,
         duration: 0.5,
         ease: 'elastic.out(1, 0.55)',
-        onUpdate: () => {
+        onComplete: () => {
+          // después de que termine el rescale, recalculamos hover
           if (!sceneRef.current.model) return
           raycaster.setFromCamera(pointer, camera)
           const intersects = raycaster.intersectObjects(sceneRef.current.model.children, true)
           if (intersects.length) {
-            sceneRef.current.isHovered = true
-            onEnter()
+            if (!sceneRef.current.isHovered) {
+              sceneRef.current.isHovered = true
+              if (typeof document !== 'undefined') {
+                document.body.style.cursor = 'pointer'
+              }
+              onEnter()
+            }
+          } else {
+            if (sceneRef.current.isHovered) {
+              sceneRef.current.isHovered = false
+              if (typeof document !== 'undefined') {
+                document.body.style.cursor = 'default'
+              }
+              onLeave()
+            }
           }
         }
       })
 
       gsap.to(sceneRef.current.model.rotation, {
-        z: `+=${Math.PI * 2}`,
+        z: sceneRef.current.model.rotation.z + Math.PI * 2,
         duration: 1,
         ease: 'elastic.out(1, 0.55)',
         onComplete: () => {
+          // normalizar la rotacion
+          if (!sceneRef.current.model) return
+          sceneRef.current.model.rotation.z =
+            ((sceneRef.current.model.rotation.z % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)
           sceneRef.current.isRotating = false
         }
       })
@@ -393,9 +437,14 @@ export function MiduLogo3D() {
         currentRotationY += (mouse.targetX - currentRotationY) * 0.06
         currentRotationX += (mouse.targetY - currentRotationX) * 0.06
 
+        if (sceneRef.current.model) {
+          sceneRef.current.model.position.set(0, 0, 0)
+        }
+
         sceneRef.current.model.rotation.x = currentRotationX + Math.PI / 2
         if (!sceneRef.current.isRotating) {
-          sceneRef.current.model.rotation.z = currentRotationY
+          const angleDiff = shortestAngleDiff(currentRotationY, sceneRef.current.model.rotation.z)
+          sceneRef.current.model.rotation.z += angleDiff * 0.06
         }
 
         // Floating animation
@@ -413,16 +462,13 @@ export function MiduLogo3D() {
       sizes.width = window.innerWidth
       sizes.height = window.innerHeight
 
+      mouse.windowHalfX = sizes.width / 2
+      mouse.windowHalfY = sizes.height / 2
+
       const ARCamera = sizes.width / sizes.height
       let zoom: number
 
-      if (sizes.width < 768) {
-        zoom = 14 // mobile
-      } else if (sizes.width < 1024) {
-        zoom = 9 // tablet
-      } else {
-        zoom = 7 // laptop & desktop
-      }
+      zoom = getZoom(sizes.width)
 
       camera.left = -ARCamera * zoom + 0.6
       camera.right = ARCamera * zoom - 1
