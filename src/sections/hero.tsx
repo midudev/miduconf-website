@@ -7,6 +7,7 @@ import { MiduLogo3D } from '@/components/experience/MiduLogo3D'
 import { CallToAction } from '@/components/CallToAction'
 import { useMounted } from '@/hooks/use-mounted'
 import { useMediaQuery } from '@/hooks/use-media-query'
+import { Background3D } from '@/components/Background3D'
 
 interface Props {
   userData?: User
@@ -31,11 +32,14 @@ export function Hero({ userData }: Props) {
             className='object-cover h-full animate-fade-in'
           />
         ) : (
-          <MiduLogo3D />
+          <>
+            <MiduLogo3D />
+            <Background3D />
+          </>
         )}
       </div>
 
-      <div className='absolute bottom-0 z-10 space-y-spacing-40 lg:grid lg:grid-cols-2 xl:grid-cols-[726px_500px] items-end justify-between w-full px-5 pb-5 bg-gradient-to-t from-black md:bg-none animate-fade-in-up md:bottom-0 md:left-0'>
+      <div className='absolute bottom-0 z-10 space-y-spacing-40 lg:grid lg:grid-cols-2 xl:grid-cols-[726px_550px] items-end justify-between w-full px-5 pb-5 bg-gradient-to-t from-black md:bg-none animate-fade-in-up md:bottom-0 md:left-0'>
         <div className='flex flex-col items-center mx-auto lg:ml-0 lg:items-start gap-spacing-24'>
           <Countdown className='' />
           <h1 id='hero-title' className='text-center lg:text-left text-4xl-semibold text-balance'>
