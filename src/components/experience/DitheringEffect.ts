@@ -58,7 +58,10 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
   baseColor = texture2D(inputBuffer, pixelatedUV).rgb;
   
   // Calcular luminancia
-  float luminance = dot(baseColor, vec3(1.0, 1.0, 1.0));
+  // float luminance = dot(baseColor, vec3(1.0, 1.0, 1.0));
+	float luminance = dot(baseColor, vec3(1.0)) / 1.0;
+
+	baseColor *= 1.5;
   
   // Aplicar escala de grises si está habilitado
   if (u_grayscaleOnly > 0.0) {
@@ -82,12 +85,13 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     baseColor = 1.0 - baseColor;
   }
 
-    // Función para aumentar saturación
-    float saturation = 1.2; // Ajusta este valor para más/menos saturación
-    float luma = dot(baseColor, vec3(0.299, 0.587, 0.114));
-    baseColor = mix(vec3(luma), baseColor, saturation);
-    // Salida final preservando el canal alfa
-    outputColor = vec4(baseColor, inputColor.a);
+	// Función para aumentar saturación
+	float saturation = 1.05;
+	float luma = dot(baseColor, vec3(0.353,0.549,0.965));
+	baseColor = mix(vec3(luma), baseColor, saturation);
+
+	// Salida final preservando el canal alfa
+	outputColor = vec4(baseColor, inputColor.a);
 }
 `
 
