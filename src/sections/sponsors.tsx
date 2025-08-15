@@ -1,5 +1,5 @@
 // import { CallToAction } from '@/components/CallToAction'
-import { EnterArrow } from '@/components/icons/enter-arrow'
+// import { EnterArrow } from '@/components/icons/enter-arrow'
 import { SponsorIcons } from '@/components/icons/sponsors'
 import { ReviewCard } from '@/components/ReviewCard'
 import { Title } from '@/components/Title'
@@ -34,6 +34,7 @@ export const Sponsors = () => {
     </section>
   )
 }
+
 const sponsors = [
   {
     level: 'diamond',
