@@ -63,6 +63,12 @@ const sponsors = [
         link: 'https://www.ignia.cloud/',
         logo: <SponsorIcons.igniaCloud className='clamp-sponsor' />,
         slogan: 'Confidencialidad, Integridad y Disponibilidad en un solo lugar'
+      },
+      {
+        name: 'InfoJobs',
+        link: 'https://www.infojobs.net/',
+        logo: <SponsorIcons.infojobs className='clamp-sponsor' />,
+        slogan: 'Impulsa tu carrera trabajando en una empresa líder'
       }
     ]
   },
