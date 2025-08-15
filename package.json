@@ -5,9 +5,9 @@
     "@supabase/auth-helpers-nextjs": "0.10.0",
     "@supabase/auth-helpers-react": "0.5.0",
     "@supabase/supabase-js": "2.45.6",
-    "@tabler/icons-react": "3.34.0",
-    "@types/matter-js": "^0.19.8",
-    "@types/three": "^0.178.1",
+    "@tabler/icons-react": "3.34.1",
+    "@types/matter-js": "0.20.0",
+    "@types/three": "0.179.0",
     "@vercel/og": "^0.8.4",
     "atropos": "2.0.2",
     "autoprefixer": "10.4.21",
@@ -18,24 +18,24 @@
     "html-to-image": "1.11.13",
     "lil-gui": "^0.20.0",
     "matter-js": "0.20.0",
-    "next": "15.3.5",
-    "postcss": "8.4.40",
+    "next": "15.4.6",
+    "postcss": "8.4.49",
     "postprocessing": "^6.37.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "react-fast-marquee": "1.6.5",
-    "three": "^0.178.0",
+    "three": "0.179.1",
     "zustand": "4.5.7"
   },
   "devDependencies": {
-    "@types/react": "19.1.8",
+    "@types/react": "19.1.10",
     "clsx": "2.1.1",
-    "eslint": "9.31.0",
+    "eslint": "9.33.0",
     "neostandard": "0.12.2",
-    "tailwind-merge": "2.6.0",
+    "tailwind-merge": "3.3.1",
     "tailwindcss": "3.4.17",
     "tailwindcss-textshadow": "2.1.3",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "name": "miduconf.com",
   "private": true,
@@ -46,10 +46,5 @@
     "lint:eslint": "npm run lint",
     "start": "next start"
   },
-  "version": "0.1.0",
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.1.8"
-    }
-  }
+  "version": "0.1.0"
 }
