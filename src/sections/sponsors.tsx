@@ -1,4 +1,4 @@
-import { CallToAction } from '@/components/CallToAction'
+// import { CallToAction } from '@/components/CallToAction'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import { SponsorIcons } from '@/components/icons/sponsors'
 import { ReviewCard } from '@/components/ReviewCard'
@@ -16,13 +16,13 @@ export const Sponsors = () => {
           <p className='mx-auto text-center lg:ml-0 text-xl-medium text-pretty lg:text-left pt-spacing-32 pb-spacing-40'>
             Gracias a ellos hacemos posible el evento
           </p>
-          <CallToAction
+          {/* <CallToAction
             text='Ser patrocinador'
             href='mailto:hi@midu.dev'
             estilo='default'
             IconComponent={EnterArrow}
             className='mx-auto lg:ml-0'
-          />
+          /> */}
         </header>
       </div>
 
