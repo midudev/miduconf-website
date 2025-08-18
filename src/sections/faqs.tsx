@@ -1,20 +1,18 @@
 import { ArrowIcon } from '@/components/icons/arrow'
-import { DotIcon } from '@/components/icons/dot'
+import { Title } from '@/components/Title'
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { gsap } from 'gsap'
+import { useEffect, useRef, useState } from 'react'
 
 export function FAQS() {
 	return (
-		<section id='faqs' className='px-4 pt-44 md:px-8'>
-			<h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
-				<DotIcon className='text-palette-primary' /> FAQ'S{' '}
-				<DotIcon className='text-palette-primary' />
-			</h2>
-			<p className='mx-auto mb-16 text-xl text-white text-pretty max-w-[42ch] text-center'>
-				Aquí resolvemos las dudas más comunes. Si tienes alguna otra pregunta, no dudes en
-				escribirnos
+		<section id='faqs' className='px-5 mt-spacing-180 md:px-8'>
+			<Title>FAQ'S</Title>
+			<p className='mx-auto mb-spacing-64 mt-spacing-32 text-xl-medium text-pretty max-w-[42ch] text-center text-palette-ghost'>
+				Aquí resolvemos las <span className='word-highlight'>dudas más comunes</span>. Si tienes alguna otra <span className='word-highlight'>pregunta, no dudes en
+				escribirnos</span>
 			</p>
-			<ul className='flex flex-col max-w-2xl gap-8 mx-auto'>
+			<ul className='flex flex-col max-w-3xl gap-8 mx-auto'>
 				{LIST_FAQS.map(({ content, title }, i) => {
 					return (
 						<li key={title}>
@@ -35,21 +33,83 @@ interface Props {
 
 function FAQItem({ isOpen, title, content }: Props) {
 	const [open, setOpen] = useState(isOpen ?? false)
+	const contentRef = useRef<HTMLElement>(null)
+	const faqItem = useRef<HTMLElement>(null)
+
+	function animateButton(scale: number, ease: string, duration: number) {
+		if (!faqItem.current) return
+		const button = faqItem.current.querySelector('.faq-item-button')
+		if (!button) return
+
+		gsap.to(button, {
+			scale,
+			duration,
+			ease,
+			overwrite: 'auto'
+		})
+	}
+
+	useEffect(() => {
+		const header = faqItem.current?.querySelector('.faq-item-header')
+		if (!header) return
+
+		header.addEventListener('mouseenter', () => {
+			animateButton(1.1, 'elastic.out(1, 0.5)', 0.7)
+		})
+
+		header.addEventListener('mouseleave', () => {
+			animateButton(1.0, 'elastic.out(1, 0.5)', 0.7)
+		})
+
+		header.addEventListener('mousedown', () => {
+			animateButton(0.90, 'back.out(2)', 0.3)
+		})
+
+		header.addEventListener('mouseup', () => {
+			animateButton(1.0, 'elastic.out(1, 0.5)', 0.7)
+		})
+	}, [])
+
+	useEffect(() => {
+		const content = faqItem.current?.querySelector('.faq-item-content')
+		if (!content) return
+
+		const scrollHeight = content.scrollHeight
+
+		gsap.to(content, {
+			maxHeight: open ? scrollHeight : 0,
+			autoAlpha: open ? 1 : 0,
+			duration: 0.3,
+			ease: 'power4.out',
+		})
+	}, [open])
 	return (
-		<article className='text-white border rounded-md bg-palette-bg-foreground-primary border-palette-border-foreground'>
+		<article
+			ref={faqItem}
+			className="faq-item border rounded-md bg-palette-bg-foreground-primary border-palette-border-foreground"
+		>
 			<header
 				onClick={() => setOpen(!open)}
-				className='flex items-center justify-between px-4 py-2 cursor-pointer select-none'
+				className="faq-item-header flex items-center justify-between p-spacing-16 lg:p-spacing-24 cursor-pointer select-none"
 			>
-				<h3>{title}</h3>
+				<h3 className="text-2xl-semibold !normal-case">{title}</h3>
 				<button
-					className='px-2 rounded-md aspect-square bg-palette-primary'
+					className="faq-item-button px-2 rounded-md aspect-square bg-palette-primary"
 					title={open ? 'Cerrar' : 'Abrir'}
 				>
-					<ArrowIcon className={cn('w-4 h-auto transition', open && 'rotate-180')} />
+					<ArrowIcon
+						className={cn('w-4 h-auto transition', open && 'rotate-180')}
+					/>
 				</button>
 			</header>
-			<p className={cn('px-4 py-6 opacity-80', open ? 'block' : 'hidden')}>{content}</p>
+			<footer
+				ref={contentRef}
+				className="faq-item-content max-h-0 invisible opacity-0 overflow-hidden"
+			>
+				<p className="p-spacing-16 lg:p-spacing-24 text-body">
+					{content}
+				</p>
+			</footer>
 		</article>
 	)
 }
