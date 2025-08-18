@@ -83,7 +83,6 @@
 	.text-xl-medium {
 		font-size: clamp(var(--heading-xl-movil), 1.021rem + 0.323vw, var(--heading-xl-pc));
 		line-height: clamp(1.688rem, 1.602rem + 0.369vw, 2rem);
-		font-weight: 500;
 		letter-spacing: 0.48px;
 	}
 
