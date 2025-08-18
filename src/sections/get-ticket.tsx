@@ -5,7 +5,6 @@ import { EnterArrow } from '@/components/icons/enter-arrow'
 import { useEffect, useRef } from 'react'
 import Matter from 'matter-js'
 import { useSupabaseSignInByGitHub } from '@/auth/hooks/use-supabase-signin-by-github'
-import { PreFooter } from './pre-footer'
 
 function ParticleBackground() {
 	const sceneRef = useRef<HTMLDivElement>(null)
@@ -203,19 +202,16 @@ function ParticleBackground() {
 export function GetTicket() {
 	const { signin } = useSupabaseSignInByGitHub()
 	return (
-		<>
-			<section className='relative h-[800px] z-[10] bg-palette-bg-foreground-primary flex items-center justify-center mt-44 overflow-hidden'>
-				<h1 className='sr-only'>Obtener ticket</h1>
-				<ParticleBackground />
-				<Button
-					onClick={signin}
-					className='px-4 py-2.5 md:px-40 md:py-20 text-xl md:text-6xl gap-x-4 duration-500'
-				>
-					<EnterArrow className='hidden w-auto h-10 md:block' />
-					OBTENER TICKET
-				</Button>
-			</section>
-      <PreFooter />
-		</>
+		<section className='relative h-[800px] z-[10] bg-palette-bg-foreground-primary flex items-center justify-center mt-44 overflow-hidden'>
+			<h1 className='sr-only'>Obtener ticket</h1>
+			<ParticleBackground />
+			<Button
+				onClick={signin}
+				className='px-4 py-2.5 md:px-40 md:py-20 text-xl md:text-6xl gap-x-4 duration-500'
+			>
+				<EnterArrow className='hidden w-auto h-10 md:block' />
+				OBTENER TICKET
+			</Button>
+		</section>
 	)
 }

@@ -2,10 +2,12 @@
 import { CallToAction } from '@/components/CallToAction'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import { ShareLink } from '@/components/ShareLink'
+import { PreFooter } from './pre-footer'
 
 export function Footer() {
 	return (
 		<section className='footer relative z-[5]'>
+			<PreFooter />
 			<footer className='grid items-start space-y-spacing-32 md:space-y-0 md:gap-y-spacing-32 px-5 pt-spacing-32 md:pt-spacing-40 lg:pt-spacing-64 md:grid-cols-2 lg:grid-cols-3 pointer-events-auto'>
 				<article className='flex gap-2 md:mr-auto'>
 					<h3 className='text-xl-code text-palette-ghost'>Sitemap: </h3>
