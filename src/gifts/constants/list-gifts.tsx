@@ -53,6 +53,25 @@ export const LIST_OF_GIFTS = [
         10 libros de <br /> Código Sostenible
       </>
     )
+  },
+  {
+    imgUrl: '/gifts/dominio-dev-com.webp',
+    imgSmallUrl: '/gifts/dominio-dev-com-small.webp',
+    title: (
+      <>
+        dominio .dev o .com
+        <br /> por DonDominio
+      </>
+    )
+  },
+  {
+    imgUrl: '/gifts/alfombrillas.webp',
+    imgSmallUrl: '/gifts/alfombrillas-small.webp',
+    title: (
+      <>
+        3 alfombrillas <br /> DonDominio x midudev
+      </>
+    )
   }
 
   /* {

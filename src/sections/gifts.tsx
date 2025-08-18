@@ -17,7 +17,7 @@ export const Gifts = () => {
         {LIST_OF_GIFTS.map((gift, index) => (
           <GiftItem key={`${gift.title}-${index}`} {...gift} />
         ))}
-        {Array.from({ length: 2 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_, i) => (
           <GiftItem
             key={`${i}-ghost`}
             className='hidden cursor-not-allowed pointer-events-none min-h-44 opacity-40 md:block'
