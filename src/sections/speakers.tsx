@@ -26,8 +26,8 @@ export function Speakers() {
   return (
     <section id='speakers' className='pt-spacing-180 px-5'>
       <Title>Speakers</Title>
-      <p className='mx-auto mt-spacing-32 text-xl text-white text-pretty max-w-[400px] text-center'>
-        Creadores y líderes que acercan la tecnología y el código a todos
+      <p className='mx-auto mt-spacing-32 text-xl text-palette-ghost text-pretty max-w-[400px] text-center'>
+        <span className='word-highlight'>Creadores y líderes</span> que acercan la <span className='word-highlight'>tecnología</span> y el <span className='word-highlight'>código</span> a todos
       </p>
       <ul className='space-y-spacing-40 md:space-y-0 mt-spacing-64 gap-[40px] md:grid md:grid-cols-2 lg:hidden'>
         {SPEAKERS.length > 0 &&

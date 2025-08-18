@@ -1,4 +1,3 @@
-import { DotIcon } from './icons/dot'
 import { cn } from '@/lib/utils'
 
 interface TitleProps {
@@ -14,9 +13,7 @@ export function Title({ className = '', children }: TitleProps) {
 				className
 			)}
 		>
-			<DotIcon className='text-palette-primary' />
 			{children}
-			<DotIcon className='text-palette-primary' />
 		</h2>
 	)
 }

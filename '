@@ -175,7 +175,7 @@ export const Speaker: React.FC<SpeakerProps> = ({ name, img, title, isPlaceholde
             style={{ imageRendering: 'pixelated' }}
           />
         </noscript>
-        <p className='absolute inline-flex items-center gap-2 py-[4px] px-[8px] text-body-code border rounded-[5px] bg-palette-bg-foreground-primary border-palette-border-foreground bottom-spacing-16 left-spacing-16'>
+        <p className='absolute inline-flex items-center gap-2 py-[4px] px-[12px] text-body-code border rounded-[5px] bg-palette-bg-foreground-primary border-palette-border-foreground bottom-spacing-16 left-spacing-16'>
           <DiamondIcon className='w-3 h-auto md:w-4 text-palette-primary' />
           <span className='speaker-monospace'>{name}</span>
         </p>
