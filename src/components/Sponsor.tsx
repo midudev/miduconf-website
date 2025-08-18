@@ -159,8 +159,7 @@ export const Sponsor = ({ sponsor, level }: { sponsor: Sponsor; level: string })
       {sponsor.slogan && (
         <p
           className={cn(
-            'text-center text-palette-ghost w-[300px] lg:w-[400px] text-balance leading-tight text-body-code lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:translate-y-spacing-64 lg:opacity-0',
-            level === 'pro' && 'scale-75 md:scale-95'
+            'text-center text-palette-ghost w-[300px] lg:w-[400px] text-balance leading-tight text-body-code lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:translate-y-spacing-64 lg:opacity-0'
           )}
           ref={descriptionRef}
         >
