@@ -8,9 +8,9 @@ export function FAQS() {
 	return (
 		<section id='faqs' className='px-5 mt-spacing-180 md:px-8'>
 			<Title>FAQ'S</Title>
-			<p className='mx-auto mb-spacing-64 mt-spacing-32 text-xl-medium text-palette-default text-pretty max-w-[42ch] text-center'>
-				Aquí resolvemos las dudas más comunes. Si tienes alguna otra pregunta, no dudes en
-				escribirnos
+			<p className='mx-auto mb-spacing-64 mt-spacing-32 text-xl-medium text-pretty max-w-[42ch] text-center text-palette-ghost'>
+				Aquí resolvemos las <span className='word-highlight'>dudas más comunes</span>. Si tienes alguna otra <span className='word-highlight'>pregunta, no dudes en
+				escribirnos</span>
 			</p>
 			<ul className='flex flex-col max-w-3xl gap-8 mx-auto'>
 				{LIST_FAQS.map(({ content, title }, i) => {
