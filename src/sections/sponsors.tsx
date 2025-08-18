@@ -15,7 +15,7 @@ export const Sponsors = () => {
       <div className='h-full'>
         <header className='flex flex-col lg:sticky lg:top-[80px] lg:items-start'>
           <Title>Sponsors</Title>
-          <p className='mx-auto text-center lg:ml-0 text-xl-medium text-pretty lg:text-left pt-spacing-32 pb-spacing-40 text-palette-ghost'>
+          <p className='w-[350px] lg:w-full mx-auto text-center lg:ml-0 text-xl-medium text-pretty lg:text-left pt-spacing-32 pb-spacing-40 text-palette-ghost'>
             Gracias a nuestros <span className='word-highlight'>sponsors</span> que hacen posible{' '}
             <span className='word-highlight'>este evento</span>
           </p>
