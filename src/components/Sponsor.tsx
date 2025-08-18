@@ -149,7 +149,7 @@ export const Sponsor = ({ sponsor, level }: { sponsor: Sponsor; level: string })
       href={sponsor.link}
       target='_blank'
       rel='noopener noreferrer'
-      className='h-[clamp(194px,17vw,574px)] relative flex flex-col gap-spacing-24 items-center justify-center rounded-[5px] bg-palette-bg-foreground-primary border border-palette-border-foreground focus-visible:outline focus-visible:outline-palette-default focus-visible:bg-palette-border-foreground focus-visible:border-palette-ghost'
+      className='h-[clamp(294px,20vw,774px)] relative flex flex-col gap-spacing-24 items-center justify-center rounded-[5px] bg-palette-bg-foreground-primary border border-palette-border-foreground focus-visible:outline focus-visible:outline-palette-default focus-visible:bg-palette-border-foreground focus-visible:border-palette-ghost'
     >
       {sponsor.logo && (
         <span className='flex items-center justify-center' ref={logoRef}>
