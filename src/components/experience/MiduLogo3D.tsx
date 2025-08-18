@@ -437,11 +437,10 @@ export function MiduLogo3D() {
         currentRotationY += (mouse.targetX - currentRotationY) * 0.06
         currentRotationX += (mouse.targetY - currentRotationX) * 0.06
 
-        // Solo modificar la posición si NO está presionado (para no sobrescribir el shake)
         if (!sceneRef.current.isPressed) {
+					// Solo modificar la posición si NO está presionado (para no sobrescribir el shake)
           sceneRef.current.model.position.set(0, 0, 0)
-          // Floating animation
-          sceneRef.current.model.position.y = Math.sin(elapsedTime * 3) * 0.15
+					sceneRef.current.model.position.y = Math.sin(elapsedTime * 3) * 0.15
         }
 
         sceneRef.current.model.rotation.x = currentRotationX + Math.PI / 2
@@ -518,7 +517,6 @@ export function MiduLogo3D() {
     <div className='w-full h-screen experience overflow-hidden relative'>
       <canvas ref={canvasRef} id='midu3d' className='absolute -z-[1]' />
       <div className='bg-image'></div>
-      <div className='balls'></div>
     </div>
   )
 }

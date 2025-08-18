@@ -1,10 +1,9 @@
-'use client'
+ 'use client'
 import { useEffect, useId, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DiscordIcon } from './icons/discord'
-import { Miduconf } from './icons/miduconf'
 import { Midudev } from './icons/midudev'
 import { Burger } from './icons/burger'
 import { CallToAction } from './CallToAction'
@@ -23,8 +22,7 @@ function Title() {
   return (
     <>
       <Link href='/' className='relative z-20 flex items-center text-palette-default'>
-        <Midudev className='size-[42px] block lg:hidden' />
-        <Miduconf className='hidden lg:block' />
+        <Midudev className='size-[34px] lg:size-[42px]' />
       </Link>
     </>
   )
@@ -113,7 +111,7 @@ function Navbar() {
           <button
             ref={refButton}
             onClick={toggleMenu}
-            className='burguer px-3 py-[10px] border border-palette-border-foreground bg-palette-bg-foreground-primary rounded-[5px] flex justify-center items-center lg:hidden cursor-pointer'
+            className='burguer px-3 py-[8px] border border-palette-border-foreground bg-palette-bg-foreground-primary rounded-[5px] flex justify-center items-center lg:hidden cursor-pointer'
           >
             <Burger className='size-spacing-16' />
           </button>
@@ -122,7 +120,7 @@ function Navbar() {
           id={navbarId}
           ref={refNavbarList}
           className={cn(
-            'navbarList animation-ul group clipHidden absolute inset-0 lg:inset-auto h-screen lg:h-auto flex flex-col lg:flex-row justify-end items-end p-5 space-y-spacing-24 bg-palette-background lg:top-[28px] lg:bottom-auto pt-[80px] pb-5 lg:clipVisible lg:bg-transparent lg:p-0 lg:left-1/2 lg:-translate-x-1/2 lg:justify-center lg:items-center lg:space-y-0'
+            'navbarList animation-ul group clipHidden absolute inset-0 lg:inset-auto h-dvh lg:h-auto flex flex-col lg:flex-row justify-end items-end p-5 space-y-spacing-24 bg-palette-background lg:top-[28px] lg:bottom-auto pt-[80px] pb-5 lg:clipVisible lg:bg-transparent lg:p-0 lg:left-1/2 lg:-translate-x-1/2 lg:justify-center lg:items-center lg:space-y-0'
           )}
         >
           {NAV_ITEMS.map(({ href, title }) => (
@@ -164,6 +162,10 @@ const NAV_ITEMS = [
   {
     href: '/#sponsors',
     title: 'sponsors'
+  },
+  {
+    href: '/#regalos',
+    title: 'Regalos'
   },
   {
     href: '/#agenda',

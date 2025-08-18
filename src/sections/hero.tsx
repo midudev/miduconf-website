@@ -22,7 +22,7 @@ export function Hero({ userData }: Props) {
     <section className='relative h-screen' role='banner' aria-labelledby='hero-title'>
       <div className='absolute inset-0'>
         {!isMounted ? (
-          <div className='w-full h-full bg-black' />
+          <div className='w-full h-full bg-palette-background' />
         ) : matches ? (
           <img
             src='/global/hero.avif'
@@ -39,7 +39,7 @@ export function Hero({ userData }: Props) {
         )}
       </div>
 
-      <div className='absolute bottom-0 z-10 space-y-spacing-40 lg:grid lg:grid-cols-2 xl:grid-cols-[726px_550px] items-end justify-between w-full px-5 pb-5 bg-gradient-to-t from-black md:bg-none animate-fade-in-up md:bottom-0 md:left-0'>
+      <div className='absolute bottom-0 z-10 space-y-spacing-40 lg:grid lg:grid-cols-2 xl:grid-cols-[726px_550px] items-end justify-between w-full px-5 pb-5 md:bg-none animate-fade-in-up md:bottom-0 md:left-0'>
         <div className='flex flex-col items-center mx-auto lg:ml-0 lg:items-start gap-spacing-24'>
           <Countdown className='' />
           <h1 id='hero-title' className='text-center lg:text-left text-4xl-semibold text-balance'>
@@ -48,7 +48,7 @@ export function Hero({ userData }: Props) {
           </h1>
         </div>
         <div className='flex flex-col gap-spacing-24'>
-          <p className='text-center lg:text-left text-xl-medium text-pretty'>
+          <p className='text-center lg:text-right text-xl-medium text-pretty'>
             Conferencia de Programación y Desarrollo en Español en{' '}
             <Link
               href='https://www.twitch.tv/midudev'
@@ -62,14 +62,7 @@ export function Hero({ userData }: Props) {
           </p>
 
           {userData ? (
-            <div className='flex flex-wrap items-center mx-auto gap-spacing-16 lg:mx-0'>
-              <CallToAction
-                className='hidden: md:block'
-                IconComponent={EnterArrow}
-                estilo='default'
-                text='Ver tu Ticket'
-                href='/ticket'
-              />
+            <div className='flex flex-wrap items-center mx-auto gap-spacing-16 lg:mr-0'>
               {userData?.user_metadata.avatar_url && (
                 <img
                   className='object-cover w-10 h-10 rounded-[5px] aspect-square'
@@ -81,6 +74,13 @@ export function Hero({ userData }: Props) {
                   }`}
                 />
               )}
+              <CallToAction
+                className='hidden: md:block'
+                IconComponent={EnterArrow}
+                estilo='default'
+                text='Ver tu Ticket'
+                href='/ticket'
+              />
             </div>
           ) : (
             <>

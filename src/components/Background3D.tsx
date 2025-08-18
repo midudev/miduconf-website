@@ -56,7 +56,7 @@ const fragmentShader = `
 	// fBm con parámetros optimizados
 	float fbm3(vec3 p) {
 		float value = 0.2;
-		float amplitude = 0.5;
+		float amplitude = 0.48;
 		float frequency = 1.0;
 		
 		// Matriz de rotación suave
@@ -89,23 +89,24 @@ const fragmentShader = `
 
 		// === CONTROL DE COBERTURA ===
 		// Aumentar el TH_CORE para MÁS negro (menos manchas)
-		const float TH_CORE  = 0.88;  // 0.70–0.85
-		const float FEATHER  = 0.30;  // 0.05–0.20 suavidad borde
+		const float TH_CORE  = 0.88; // 0.70–0.85
+		const float FEATHER  = 0.30; // 0.05–0.20 suavidad borde
 
 		// núcleo de la mancha y halo difuso
 		float core = soft(n, TH_CORE, TH_CORE + FEATHER);
 		float halo = soft(n, TH_CORE - 0.10, TH_CORE + FEATHER * 0.5) - core;
 
 		// colores
-		vec3 bg   = vec3(0.0, 0.0, 0.0);       // casi negro (#09090e aprox)
-		vec3 blue = vec3(0.141,0.114,0.408);       // #5A8CF6
+		vec3 bg   = vec3(0.0, 0.0, 0.0); // casi negro (#09090e aprox)
+		vec3 blue = vec3(0.208,0.114,0.408); // #5A8CF6
 
 		// composición: fondo negro, halo suave y centro azul
 		vec3 col = bg;
-		col += blue * 0.25 * halo;   // "blur" alrededor
+		col += blue * 0.25 * halo; // "blur" alrededor
 		col  = mix(col, blue, core); // centro saturado
 
-		fragColor = vec4(col, 1.0);  // opaco para garantizar fondo negro
+		float alpha = core + halo * 0.25;
+		fragColor = vec4(col, alpha);  // opaco para garantizar fondo negro
 	}
 `
 
