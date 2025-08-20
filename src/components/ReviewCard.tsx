@@ -27,8 +27,8 @@ export const ReviewCard = ({ level, sponsors }: ReviewCardProps) => {
             level === 'diamond'
               ? 'text-[#b8d8e7]'
               : level === 'premium'
-              ? 'text-yellow-200'
-              : 'text-orange-500'
+                ? 'text-yellow-200'
+                : 'text-orange-500'
           )}
         />
         <h3 className='text-2xl-semibold font-bold !capitalize text-pallet-default lg:justify-start'>
@@ -40,8 +40,8 @@ export const ReviewCard = ({ level, sponsors }: ReviewCardProps) => {
             level === 'diamond'
               ? 'text-[#b8d8e7]'
               : level === 'premium'
-              ? 'text-yellow-200'
-              : 'text-orange-500'
+                ? 'text-yellow-200'
+                : 'text-orange-500'
           )}
         />
       </div>

@@ -8,13 +8,14 @@ export const Sponsors = () => {
   return (
     <section
       id='sponsors'
-      className='relative pt-spacing-180 lg:grid lg:grid-cols-[1fr_0.30fr] lg:gap-spacing-64 px-5'
+      className='relative pt-spacing-180 lg:grid lg:grid-cols-[0.30fr_1fr] lg:gap-spacing-64 px-5'
     >
       <div className='h-full'>
         <header className='flex flex-col lg:sticky lg:top-[80px] lg:items-start'>
           <Title>Sponsors</Title>
-          <p className='mx-auto text-center lg:ml-0 text-xl-medium text-pretty lg:text-left pt-spacing-32 pb-spacing-40'>
-            Gracias a ellos hacemos posible el evento
+          <p className='w-[350px] lg:w-full mx-auto text-center lg:ml-0 text-xl-medium text-pretty lg:text-left pt-spacing-32 pb-spacing-40 text-palette-ghost'>
+            Gracias a nuestros <span className='word-highlight'>sponsors</span> que hacen posible{' '}
+            <span className='word-highlight'>este evento</span>
           </p>
           {/* <CallToAction
             text='Ser patrocinador'
@@ -26,7 +27,7 @@ export const Sponsors = () => {
         </header>
       </div>
 
-      <div className='row-start-1 row-end-2 mt-spacing-64 lg:mt-0 space-y-spacing-40'>
+      <div className='mt-spacing-64 lg:mt-0 space-y-spacing-40'>
         {sponsors.map(({ level, sponsors }) => (
           <ReviewCard key={level} level={level} sponsors={sponsors} />
         ))}
