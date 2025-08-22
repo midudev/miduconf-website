@@ -68,6 +68,12 @@ const sponsors = [
         link: 'https://www.infojobs.net/',
         logo: <SponsorIcons.infojobs className='clamp-sponsor md:h-14' />,
         slogan: 'Entra y encuentra el trabajo perfecto para ti'
+      },
+      {
+        name: 'Windsurf',
+        link: 'https://www.windsurf.com/',
+        logo: <SponsorIcons.windsurf className='clamp-sponsor md:w-auto md:h-32' />,
+        slogan: 'El mejor editor de código con IA'
       }
     ]
   },
