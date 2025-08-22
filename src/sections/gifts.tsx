@@ -17,7 +17,7 @@ export const Gifts = () => {
         {LIST_OF_GIFTS.map((gift, index) => (
           <GiftItem key={`${gift.title}-${index}`} {...gift} />
         ))}
-        {Array.from({ length: 3 }).map((_, i) => (
+        {Array.from({ length: 1 }).map((_, i) => (
           <GiftItem
             key={`${i}-ghost`}
             className='hidden cursor-not-allowed pointer-events-none min-h-44 opacity-40 md:block'
@@ -26,7 +26,7 @@ export const Gifts = () => {
       </div>
       <div className='relative md:hidden'>
         <div className='[mask-image:linear-gradient(#000,_transparent)] relative grid grid-cols-1 gap-4 px-4 mx-auto mt-4 mb-10 sm:grid-cols-2 lg:grid-cols-3 md:px-8'>
-          {Array.from({ length: 1 }).map((_, i) => (
+          {Array.from({ length: 2 }).map((_, i) => (
             <GiftItem
               key={`${i}-ghost`}
               className='cursor-not-allowed pointer-events-none min-h-44 opacity-40'
@@ -54,9 +54,13 @@ export const Gifts = () => {
           <DiamondIcon className='w-4 h-auto md:w-8' />
         </p>
       </div>
-      <small className='text-center w-auto mx-auto block text-white text-sm max-w-xl opacity-80 [text-wrap:balance] py-8'>
+      <small className='text-center w-auto mx-auto block text-white text-sm max-w-xl opacity-80 [text-wrap:balance] pt-8'>
         Si ganas un sorteo y el premio no puede enviarse a tu país, buscaremos una alternativa de
         igual valor.
+      </small>
+      <small className='text-center w-auto mx-auto block text-palette-ghost text-sm max-w-xl opacity-80 [text-wrap:balance] pb-8 pt-2'>
+        * Cubrimos vuelos (desde ciudades con conexión a CDMX, Cancún o Mérida), hotel y el acceso
+        VIP al fest.
       </small>
     </section>
   )

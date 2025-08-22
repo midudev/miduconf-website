@@ -1,3 +1,5 @@
+import { Tooltip } from '@/components/Tooltip'
+
 export const LIST_OF_GIFTS = [
   {
     imgUrl: '/gifts/keychron.webp',
@@ -72,6 +74,35 @@ export const LIST_OF_GIFTS = [
         3 alfombrillas <br /> DonDominio x midudev
       </>
     )
+  },
+  {
+    imgUrl: '/gifts/festival-yucatech.webp',
+    imgSmallUrl: '/gifts/festival-yucatech-small.webp',
+    title: (
+      <>
+        Viaje + Hotel a Yucatan para <br /> la Yucatech Festival 2026<sup>*</sup>
+      </>
+    )
+  },
+  {
+    imgUrl: '/gifts/ignia-10000-creditos.webp',
+    imgSmallUrl: '/gifts/ignia-10000-creditos-small.webp',
+    title: <>$10.000 de crédito en Ignia Cloud</>
+  },
+  {
+    imgUrl: '/gifts/ignia-5000-creditos.webp',
+    imgSmallUrl: '/gifts/ignia-10000-creditos-small.webp',
+    title: <>$5.000 de crédito en Ignia Cloud</>
+  },
+  {
+    imgUrl: '/gifts/frontend-lemon-code.webp',
+    imgSmallUrl: '/gifts/frontend-lemon-code-small.webp',
+    title: <>1x Máster Frontend de LemonCode</>
+  },
+  {
+    imgUrl: '/gifts/lemoncode-devops.webp',
+    imgSmallUrl: '/gifts/frontend-lemon-code-small.webp',
+    title: <>1x Bootcamp DevOps de LemonCode</>
   }
 
   /* {
