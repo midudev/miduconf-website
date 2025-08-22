@@ -103,6 +103,11 @@ export const LIST_OF_GIFTS = [
     imgUrl: '/gifts/lemoncode-devops.webp',
     imgSmallUrl: '/gifts/frontend-lemon-code-small.webp',
     title: <>1x Bootcamp DevOps de LemonCode</>
+  },
+  {
+    imgUrl: '/gifts/minipc.webp',
+    imgSmallUrl: '/gifts/minipc-small.webp',
+    title: <>1x MiniPC GEEKOM A5 2025 Edition</>
   }
 
   /* {
