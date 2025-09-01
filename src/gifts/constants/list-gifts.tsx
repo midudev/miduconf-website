@@ -108,6 +108,15 @@ export const LIST_OF_GIFTS = [
     imgUrl: '/gifts/minipc.webp',
     imgSmallUrl: '/gifts/minipc-small.webp',
     title: <>1x MiniPC GEEKOM A5 2025 Edition</>
+  },
+  {
+    imgUrl: '/gifts/cascos-sony.webp',
+    imgSmallUrl: '/gifts/cascos-sony-small.webp',
+    title: (
+      <>
+        Cascos Sony <br /> WH-1000XM5
+      </>
+    )
   }
 
   /* {
