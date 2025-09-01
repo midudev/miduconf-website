@@ -51,6 +51,28 @@ export function Speakers() {
             })}
           <li
             className={cn(
+              'max-w-80 w-full mx-auto relative [mask-image:linear-gradient(to_bottom,#000,_transparent)] hidden: md:block',
+              (SPEAKERS.length - 1) % 3 === 0
+                ? 'animation-speaker-peer md:translate-y-16'
+                : 'animation-speaker',
+              (SPEAKERS.length - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
+            )}
+          >
+            <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-palette-border-foreground'></div>
+          </li>
+          <li
+            className={cn(
+              'max-w-80 w-full mx-auto relative [mask-image:linear-gradient(to_bottom,#000,_transparent)] hidden: md:block',
+              (SPEAKERS.length - 1) % 3 === 0
+                ? 'animation-speaker-peer md:translate-y-16'
+                : 'animation-speaker',
+              (SPEAKERS.length - 1) % 2 === 0 && 'translate-y-16 md:translate-y-0'
+            )}
+          >
+            <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-palette-border-foreground'></div>
+          </li>
+          <li
+            className={cn(
               'max-w-80 w-full mx-auto relative block',
               (SPEAKERS.length - 1) % 3 === 0
                 ? 'animation-speaker-peer md:translate-y-16'
@@ -155,6 +177,13 @@ const SPEAKERS = [
     title: 'Senior Global Blackbelt @ Microsoft',
     twitter: '0gis0',
     img: 'gisela-torres',
+    isPlaceholder: false
+  },
+  {
+    name: 'Chema Alonso',
+    title: 'Vice President @ Cloudflare',
+    twitter: '0gis0',
+    img: 'chema-alonso',
     isPlaceholder: false
   }
   /* {
