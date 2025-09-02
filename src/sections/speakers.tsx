@@ -1,21 +1,98 @@
-import { DiamondIcon } from '@/components/icons/diamond'
-import { DotIcon } from '@/components/icons/dot'
-import { cn } from '@/lib/utils'
+import { Title } from '@/components/Title'
+import { Speaker } from '@/components/Speaker'
 
 export function Speakers() {
+  type SpeakerType = {
+    name: string
+    title: string
+    twitter: string
+    img: string
+    isPlaceholder: boolean
+  }
+
+  const listA: SpeakerType[] = []
+  const listB: SpeakerType[] = []
+  const listC: SpeakerType[] = []
+
+  for (const speaker of SPEAKERS as SpeakerType[]) {
+    if (listA.length > listC.length) {
+      listC.push(speaker)
+    } else if (listA.length === listC.length && listB.length < listA.length) {
+      listB.push(speaker)
+    } else {
+      listA.push(speaker)
+    }
+  }
   return (
-    <section id='speakers' className='pt-44'>
-      <h2 className='flex items-center justify-center gap-4 mb-8 text-4xl font-bold text-white uppercase'>
-        <DotIcon className='text-palette-primary' /> Speakers{' '}
-        <DotIcon className='text-palette-primary' />
-      </h2>
-      <p className='mx-auto mb-16 text-xl text-white text-pretty max-w-[42ch] text-center'>
-        Creadores y líderes que acercan la tecnología y el código a todos
+    <section id='speakers' className='pt-spacing-180 px-5'>
+      <Title>Speakers</Title>
+      <p className='mx-auto mt-spacing-32 text-xl text-palette-ghost text-pretty max-w-[400px] text-center'>
+        <span className='word-highlight'>Creadores y líderes</span> que acercan la <span className='word-highlight'>tecnología</span> y el <span className='word-highlight'>código</span> a todos
       </p>
-      <div className='relative'>
-        <ul
+      <ul className='space-y-spacing-40 md:space-y-0 mt-spacing-64 gap-[40px] md:grid md:grid-cols-2 lg:hidden'>
+        {SPEAKERS.length > 0 &&
+          SPEAKERS.map(({ img, name, title, isPlaceholder }, index) => {
+            return (
+              <Speaker
+                key={`${name}-${index}`}
+                img={img}
+                name={name}
+                title={title}
+                isPlaceholder={isPlaceholder}
+              />
+            )
+          })}
+      </ul>
+
+      <ul className='pt-spacing-64 space-y-spacing-40 hidden lg:grid lg:grid-cols-3 md:gap-[80px]'>
+        <div className='space-y-spacing-96 2xl:pt-0'>
+          {SPEAKERS.length > 0 &&
+            listA.map(({ img, name, title, isPlaceholder }, index) => {
+              return (
+                <Speaker
+                  key={`${name}-${index}`}
+                  img={img}
+                  name={name}
+                  title={title}
+                  isPlaceholder={isPlaceholder}
+                />
+              )
+            })}
+        </div>
+
+        <div className='space-y-spacing-96 pt-spacing-96 !mt-0'>
+          {SPEAKERS.length > 0 &&
+            listB.map(({ img, name, title, isPlaceholder }, index) => {
+              return (
+                <Speaker
+                  key={`${name}-${index}`}
+                  img={img}
+                  name={name}
+                  title={title}
+                  isPlaceholder={isPlaceholder}
+                />
+              )
+            })}
+        </div>
+
+        <div className='space-y-spacing-96 !mt-0'>
+          {SPEAKERS.length > 0 &&
+            listC.map(({ img, name, title, isPlaceholder }, index) => {
+              return (
+                <Speaker
+                  key={`${name}-${index}`}
+                  img={img}
+                  name={name}
+                  title={title}
+                  isPlaceholder={isPlaceholder}
+                />
+              )
+            })}
+        </div>
+      </ul>
+      {/* <ul
           className={cn(
-            'grid justify-center grid-cols-2 px-4 mx-auto gap-x-4 gap-y-4 md:px-0 md:grid-cols-3 md:gap-y-24',
+            'grid justify-center grid-cols-2 px-5 mx-auto gap-x-4 gap-y-4 md:px-0 md:grid-cols-3 md:gap-y-24',
             SPEAKERS.length === 0 && '[mask-image:linear-gradient(to_bottom,#000,_transparent)]'
           )}
         >
@@ -88,8 +165,8 @@ export function Speakers() {
               </p>
             </div>
           </li>
-        </ul>
-        <div className='relative hidden md:block'>
+        </ul> */}
+      {/* <div className='relative hidden md:block'>
           <p className='text-4xl text-wrap text-center max-w-[24ch] text-white mx-auto px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase font-bold flex items-center gap-2 z-10'>
             <DiamondIcon className='w-8 h-auto' />
             ¡Muy pronto revelaremos más Speakers!
@@ -130,8 +207,7 @@ export function Speakers() {
               <div className='relative aspect-[9/12] overflow-hidden w-full rounded-md bg-palette-border-foreground'></div>
             </li>
           </ul>
-        </div>
-      </div>
+        </div> */}
     </section>
   )
 }
@@ -159,7 +235,7 @@ const SPEAKERS = [
     isPlaceholder: false
   },
   {
-    name: 'theo',
+    name: 'Theo Browne',
     title: 'CEO @ T3 Chat',
     twitter: 'theo',
     img: 'theo',
