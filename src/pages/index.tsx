@@ -6,7 +6,6 @@ import { GetTicket } from '@/sections/get-ticket'
 import { Gifts } from '@/sections/gifts'
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
-import { PreFooter } from '@/sections/pre-footer'
 import { Speakers } from '@/sections/speakers'
 import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
@@ -39,7 +38,6 @@ export default function Home({ userData }) {
         <Agenda />
         <FAQS />
         <GetTicket />
-        <PreFooter className='w-full mt-20' />
         <Footer />
       </main>
     </Layout>
