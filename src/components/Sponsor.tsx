@@ -149,7 +149,7 @@ export const Sponsor = ({ sponsor, level }: { sponsor: Sponsor; level: string })
       href={sponsor.link}
       target='_blank'
       rel='noopener noreferrer'
-      className='h-[clamp(194px,17vw,574px)] relative flex flex-col gap-spacing-24 items-center justify-center rounded-[5px] bg-palette-bg-foreground-primary border border-palette-border-foreground focus-visible:outline focus-visible:outline-palette-default focus-visible:bg-palette-border-foreground focus-visible:border-palette-ghost'
+      className='h-[clamp(264px,20vw,774px)] relative flex flex-col gap-spacing-24 items-center justify-center rounded-[5px] bg-palette-bg-foreground-primary border border-palette-border-foreground focus-visible:outline focus-visible:outline-palette-default focus-visible:bg-palette-border-foreground focus-visible:border-palette-ghost'
     >
       {sponsor.logo && (
         <span className='flex items-center justify-center' ref={logoRef}>
@@ -159,8 +159,7 @@ export const Sponsor = ({ sponsor, level }: { sponsor: Sponsor; level: string })
       {sponsor.slogan && (
         <p
           className={cn(
-            'text-center text-palette-ghost w-[300px] lg:w-[400px] text-balance leading-tight text-body-code lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:translate-y-spacing-64 lg:opacity-0',
-            level === 'pro' && 'scale-75 md:scale-95'
+            'text-center text-palette-ghost w-[300px] lg:w-[400px] text-balance leading-tight text-body-code lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:translate-y-spacing-64 lg:opacity-0'
           )}
           ref={descriptionRef}
         >
