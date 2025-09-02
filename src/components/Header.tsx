@@ -1,10 +1,9 @@
-'use client'
+ 'use client'
 import { useEffect, useId, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DiscordIcon } from './icons/discord'
-import { Miduconf } from './icons/miduconf'
 import { Midudev } from './icons/midudev'
 import { Burger } from './icons/burger'
 import { CallToAction } from './CallToAction'
@@ -23,8 +22,7 @@ function Title() {
   return (
     <>
       <Link href='/' className='relative z-20 flex items-center text-palette-default'>
-        <Midudev className='size-[42px] block lg:hidden' />
-        <Miduconf className='hidden lg:block' />
+        <Midudev className='size-[34px] lg:size-[42px]' />
       </Link>
     </>
   )
@@ -113,7 +111,7 @@ function Navbar() {
           <button
             ref={refButton}
             onClick={toggleMenu}
-            className='burguer px-3 py-[10px] border border-palette-border-foreground bg-palette-bg-foreground-primary rounded-[5px] flex justify-center items-center lg:hidden cursor-pointer'
+            className='burguer px-3 py-[8px] border border-palette-border-foreground bg-palette-bg-foreground-primary rounded-[5px] flex justify-center items-center lg:hidden cursor-pointer'
           >
             <Burger className='size-spacing-16' />
           </button>

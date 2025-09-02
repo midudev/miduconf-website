@@ -73,7 +73,7 @@ export const CallToAction = ({
           className
         )}
       >
-        <div className='cta-content py-[12px] px-spacing-16 lg:py-[6px] lg:px-3'>
+        <div className='cta-content py-[10px] px-spacing-16 lg:py-[6px] lg:px-3'>
           <div className='absolute flex items-center cta-info gap-spacing-8 -translate-y-spacing-32'>
             <IconComponent className='size-5 lg:size-6' />
             <span className='text-xl-code !font-cta'>{text}</span>

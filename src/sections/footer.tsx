@@ -1,63 +1,42 @@
-import { Button } from '@/components/Button'
+'use client'
+import { CallToAction } from '@/components/CallToAction'
 import { EnterArrow } from '@/components/icons/enter-arrow'
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
+import { ShareLink } from '@/components/ShareLink'
+import { PreFooter } from './pre-footer'
 
 export function Footer() {
 	return (
-		<>
-			<footer className='grid items-start px-8 pt-10 mt-20 text-lg uppercase border-t text-palette-ghost border-palette-border-foreground md:grid-cols-3 gap-y-4'>
-				<article className='flex gap-4'>
-					<h3>Sitemap: </h3>
-					<ul className='flex flex-col gap-2'>
+		<section className='footer relative z-[5]'>
+			<PreFooter />
+			<footer className='grid items-start space-y-spacing-32 md:space-y-0 md:gap-y-spacing-32 px-5 pt-spacing-32 md:pt-spacing-40 lg:pt-spacing-64 md:grid-cols-2 lg:grid-cols-3 pointer-events-auto'>
+				<article className='flex gap-2 md:mr-auto'>
+					<h3 className='text-xl-code text-palette-ghost'>Sitemap: </h3>
+					<ul className='flex flex-col gap-2 -translate-y-[6px] lg:-translate-y-[8px]'>
 						{SITEMAP_LINKS.map(({ href, title }) => (
-							<li key={href}>
-								<Link
-									href={href}
-									className={cn(
-										'text-[#EFF4FF] hover:text-white overflow-hidden inline-flex',
-										'relative before:h-0.5 before:w-full before:absolute before:bg-white before:bottom-0 before:left-0 before:-translate-x-full hover:before:translate-x-0 before:transition before:duration-300 focus-visible:before:translate-x-0'
-									)}
-								>
-									{title}
-								</Link>
-							</li>
+							<ShareLink key={href} href={href} title={title} />
 						))}
 					</ul>
 				</article>
-				<article className='flex gap-4 md:mx-auto'>
-					<h3>Descubre: </h3>
-					<ul className='flex flex-col gap-2'>
+				<article className='flex gap-4 md:ml-auto lg:mr-auto'>
+					<h3 className='text-xl-code text-palette-ghost'>Descubre: </h3>
+					<ul className='flex flex-col gap-2 -translate-y-[6px] lg:-translate-y-[8px]'>
 						{SHARE_LINKS.map(({ href, title }) => (
-							<li key={href}>
-								<Link
-									href={href}
-									target='_blank'
-									className={cn(
-										'text-[#EFF4FF] hover:text-white overflow-hidden inline-flex',
-										'relative before:h-0.5 before:w-full before:absolute before:bg-white before:bottom-0 before:left-0 before:-translate-x-full hover:before:translate-x-0 before:transition before:duration-300 focus-visible:before:translate-x-0'
-									)}
-								>
-									{title}
-								</Link>
-							</li>
+							<ShareLink key={href} href={href} title={title} />
 						))}
 					</ul>
 				</article>
-				<Button
-					as={Link}
+				<CallToAction
+					className='mx-auto flex justify-center w-full lg:mr-0 lg:ml-auto md:col-start-1 md:-col-end-1 lg:col-start-auto lg:col-end-auto lg:w-auto'
+					text='Conoce mi academia'
 					href='https://midu.dev/'
-					containerClassName='mx-auto md:ml-auto md:mr-0'
-					target='_blank'
-				>
-					<EnterArrow className='hidden md:block' />
-					Conoce mi Academia
-				</Button>
+					IconComponent={(props) => <EnterArrow {...props} className="" />}
+					estilo='default'
+					/>
 			</footer>
-			<small className='block px-8 pt-20 pb-4 uppercase text-palette-ghost'>
+			<small className='block px-5 pb-5 pt-spacing-40 uppercase text-palette-ghost text-small-code'>
 				Todos los derechos reservados © {new Date().getFullYear()} MiduConf
 			</small>
-		</>
+		</section>
 	)
 }
 

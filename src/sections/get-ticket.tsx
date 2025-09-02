@@ -202,7 +202,7 @@ function ParticleBackground() {
 export function GetTicket() {
 	const { signin } = useSupabaseSignInByGitHub()
 	return (
-		<section className='relative h-[800px] bg-palette-bg-foreground-primary flex items-center justify-center mt-44 overflow-hidden'>
+		<section className='relative h-[800px] z-[10] bg-palette-bg-foreground-primary flex items-center justify-center mt-44 overflow-hidden'>
 			<h1 className='sr-only'>Obtener ticket</h1>
 			<ParticleBackground />
 			<Button
