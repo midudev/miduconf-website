@@ -38,6 +38,7 @@
     "typescript": "5.9.2"
   },
   "name": "miduconf.com",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "next build",
