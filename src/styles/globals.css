@@ -117,6 +117,10 @@
 		letter-spacing: -0.28px;
 	}
 
+	.word-highlight {
+		color: #EFF4FF;
+	}
+
 	.clipHidden {
 		clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
 	}
