@@ -1,5 +1,10 @@
 import { Title } from '@/components/Title'
-import { Speaker } from '@/components/Speaker'
+import dynamic from 'next/dynamic'
+
+const Speaker = dynamic(() => import('@/components/Speaker').then(mod => ({ default: mod.Speaker })), {
+  ssr: false,
+  loading: () => <div className="w-full md:min-w-[336px] md:max-w-[356px] 2xl:max-w-[536px] mx-auto aspect-[534/684] bg-palette-border-foreground rounded-[5px] animate-pulse" />
+})
 
 export function Speakers() {
   type SpeakerType = {
