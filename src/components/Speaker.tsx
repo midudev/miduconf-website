@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import { DiamondIcon } from './icons/diamond'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 interface SpeakerProps {
   name: string
