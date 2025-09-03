@@ -1,16 +1,16 @@
 import { gsap } from "gsap";
 import { useEffect, useId, useRef, useState } from "react";
+import { CONFERENCE_CONFIG } from "@/config/conference";
 import { cn } from "@/lib/utils";
 import { useRemainingTime } from "../hooks/useRemainingTime";
 import { Clock } from "./icons/clock";
 
 const LITERALS = ["d", null, "h", null, "m", null, "s"];
-// const EVENT_DATE = 1757512800000 // 10 de septiembre de 2025 - 16:00h CEST
 
 export function Countdown({ className }) {
 	const id = useId();
 	const { seconds, minutes, hours, days } = useRemainingTime(
-		new Date(1757516400000),
+		new Date(CONFERENCE_CONFIG.EVENT_DATE),
 		{
 			fillingZeros: true,
 		},

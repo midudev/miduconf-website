@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { Calendar } from "@/components/icons/calendar";
+import { CONFERENCE_CONFIG } from "@/config/conference";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -6,6 +8,16 @@ interface Props {
 }
 
 export function ConferenceDate({ className }: Props) {
+	const [formattedDate, setFormattedDate] = useState(() => {
+		const staticFormatted = CONFERENCE_CONFIG.getStaticFormattedDate();
+		return staticFormatted.FULL;
+	});
+
+	useEffect(() => {
+		const formatted = CONFERENCE_CONFIG.getFormattedDate();
+		setFormattedDate(formatted.full);
+	}, []);
+
 	return (
 		<div
 			className={cn(
@@ -14,9 +26,7 @@ export function ConferenceDate({ className }: Props) {
 			)}
 		>
 			<Calendar className="size-[24px] text-[#5A8CF6]" />
-			<span className="text-xl font-cta uppercase">
-				10 DE SEPTIEMBRE 2025 - 17:00H CEST
-			</span>
+			<span className="text-xl font-cta uppercase">{formattedDate}</span>
 		</div>
 	);
 }
