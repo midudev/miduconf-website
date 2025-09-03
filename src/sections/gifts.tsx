@@ -8,7 +8,7 @@ export const Gifts = () => {
 	return (
 		<section id="regalos" className="pt-44">
 			<Title>Regalos</Title>
-			<p className="mx-auto mb-16 text-xl text-white text-pretty max-w-[42ch] text-center px-4">
+			<p className="mx-auto mt-6 mb-16 text-xl text-white text-pretty max-w-[42ch] text-center px-4">
 				+128 regalos. ¡Participa en el evento y gana!
 			</p>
 			<div className="relative grid grid-cols-1 gap-4 px-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3 md:px-8">
