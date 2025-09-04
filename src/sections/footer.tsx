@@ -1,4 +1,5 @@
 'use client'
+
 import { CallToAction } from '@/components/CallToAction'
 import { EnterArrow } from '@/components/icons/enter-arrow'
 import { ShareLink } from '@/components/ShareLink'
