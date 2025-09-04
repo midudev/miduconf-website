@@ -30,7 +30,7 @@ export const Agenda = () => {
 			{LIST_OF_TALKS_NEW.length > 0 && (
 				<div className="grid md:grid-cols-[1fr_auto] gap-8 mt-12 md:px-8 px-4">
 					<article>
-						<div className="hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-palette-ghost">
+						<div className="hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-palette-ghost opacity-75">
 							<span>Hora</span>
 							<span>Nombre</span>
 							<span>Charla</span>
@@ -44,6 +44,7 @@ export const Agenda = () => {
 										disabledContent={props.disabledContent ?? false}
 										index={i}
 										onHover={handleChangeImage}
+										isRaffle={props.isRaffle ?? false}
 									/>
 								);
 							})}
@@ -59,50 +60,6 @@ export const Agenda = () => {
 						/>
 					</div>
 				</div>
-			)}
-			{LIST_OF_TALKS_NEW.length === 0 && (
-				<>
-					<div className="relative">
-						<p className="text-4xl text-wrap text-center max-w-[24ch] text-white mx-auto px-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 uppercase font-bold flex items-center gap-2 z-10">
-							<DiamondIcon className="w-8 h-auto" />
-							¡Muy pronto revelaremos la agenda!
-							<DiamondIcon className="w-8 h-auto" />
-						</p>
-
-						<div
-							aria-hidden
-							className="grid relative md:grid-cols-[1fr_auto] gap-8 mt-20 md:px-8 px-4 select-none pointer-events-none [mask-image:linear-gradient(to_bottom,_#000,_transparent)]"
-						>
-							<article>
-								<div className="hidden grid-cols-3 mb-3 text-xl uppercase md:grid text-palette-ghost">
-									<span>Hora</span>
-									<span>Nombre</span>
-									<span>Charla</span>
-								</div>
-								<ul>
-									{LIST_OF_FAKE_TALKS.map((props, i) => {
-										return (
-											<AgendaItem
-												disabledContent
-												key={`${props.speaker.name}-${i}`}
-												{...props}
-												index={i}
-												onHover={handleChangeImage}
-											/>
-										);
-									})}
-								</ul>
-							</article>
-							<div className="relative items-start justify-center hidden md:flex">
-								<img
-									className="max-w-60 rounded-md w-full aspect-[9/12] object-cover sticky top-20 opacity-20"
-									src={LIST_OF_FAKE_TALKS[currentIndexHovered].speaker.imgUrl}
-									alt={`Avatar del Speaker ${LIST_OF_FAKE_TALKS[currentIndexHovered].title}`}
-								/>
-							</div>
-						</div>
-					</div>
-				</>
 			)}
 		</section>
 	);
@@ -120,6 +77,7 @@ interface AgendaItemProps {
 	onHover: (index: number) => void;
 	index: number;
 	disabledContent: boolean;
+	isRaffle?: boolean;
 }
 
 const AgendaItem = ({
@@ -130,6 +88,7 @@ const AgendaItem = ({
 	onHover,
 	index,
 	disabledContent = false,
+	isRaffle = false,
 }: AgendaItemProps) => {
 	const time = useTime({ timestamp: startAt, durationInMinutes });
 
@@ -137,35 +96,53 @@ const AgendaItem = ({
 		<li
 			onMouseEnter={() => onHover(index)}
 			className={cn(
-				"flex flex-col gap-2 px-4 md:px-0 md:grid grid-cols-3 py-6 text-xl uppercase border-b text-palette-ghost border-palette-border-foreground min-h-32 relative cursor-crosshair overflow-hidden group",
+				"flex flex-col gap-2 px-4 md:px-0 md:grid py-6 text-xl uppercase border-b text-palette-ghost border-palette-border-foreground min-h-32 relative cursor-crosshair overflow-hidden group",
 				"before:w-full before:h-full before:absolute before:block before:bg-transparent before:-z-10 before:top-0 before:left-0 before:translate-y-full before:transition before:duration-300",
 				"md:hover:before:translate-y-0 md:hover:text-white md:hover:before:bg-palette-primary",
+				isRaffle 
+					? "grid-cols-[200px_1fr] bg-yellow-950/20 border-yellow-500/30" 
+					: "grid-cols-[200px_1fr_1fr]"
 			)}
 		>
 			<p
 				className={cn(
-					"transition md:group-hover:translate-x-4 text-sm md:text-xl order-1 md:order-none",
+					"transition md:group-hover:translate-x-4 text-sm md:text-xl order-1 md:order-none flex items-center",
 					disabledContent && "blur",
 				)}
 			>
 				{time?.startAt} - {time?.endAt}
 			</p>
-			<p
-				className={cn(
-					"text-sm md:text-xl font-medium order-2 md:order-none",
-					disabledContent && "blur",
-				)}
-			>
-				{speaker.name}
-			</p>
-			<p
-				className={cn(
-					"text-xl md:text-3xl font-semibold normal-case text-balance text-left order-3 md:order-none",
-					disabledContent && "blur",
-				)}
-			>
-				{title}
-			</p>
+			
+			{isRaffle ? (
+				<div
+					className={cn(
+						"text-lg md:text-3xl font-bold normal-case text-balance text-left order-2 md:order-none flex items-center gap-2",
+						disabledContent && "blur",
+					)}
+				>
+					<span className="text-yellow-100/80">{title}</span>
+				</div>
+			) : (
+				<>
+					<div
+						className={cn(
+							"text-sm md:text-xl font-medium order-2 md:order-none flex flex-col justify-center text-white/80",
+							disabledContent && "blur",
+						)}
+					>
+						<p>{speaker.name}</p>
+						<p className="text-xs mt-2 md:text-sm font-normal opacity-75">{speaker.description}</p>
+					</div>
+					<p
+						className={cn(
+							"text-xl md:text-3xl font-semibold normal-case text-balance text-left order-3 md:order-none flex items-center text-white",
+							disabledContent && "blur",
+						)}
+					>
+						{title}
+					</p>
+				</>
+			)}
 		</li>
 	);
 };
@@ -225,39 +202,6 @@ export const useGetTimezone = () => {
 	return timezone;
 };
 
-const LIST_OF_FAKE_TALKS = [
-	{
-		speaker: {
-			name: "Noexisto",
-			description: "Aqui no hay nadie",
-			imgUrl: "/speakers/speaker-01.webp",
-		},
-		title: "que curioso, aquí no dice nada :)",
-		startAt: 1726152000000,
-		durationInMinutes: 20,
-	},
-	{
-		speaker: {
-			name: "Nadie poraqui",
-			description: "Quien crees que soy",
-			imgUrl: "/speakers/speaker-02.webp",
-		},
-		title: "¡Bienvenidos a la miduConf!",
-		startAt: 1726153200000,
-		durationInMinutes: 5,
-	},
-	{
-		speaker: {
-			name: "Nadie poralli",
-			description: "Secreto",
-			imgUrl: "/speakers/speaker-03.webp",
-		},
-		title: "Muy pronto lo revelaremos",
-		startAt: 1726153500000,
-		durationInMinutes: 10,
-	},
-];
-
 const LIST_OF_TALKS_NEW: Array<{
 	speaker: {
 		name: string;
@@ -268,6 +212,7 @@ const LIST_OF_TALKS_NEW: Array<{
 	startAt: number;
 	durationInMinutes: number;
 	disabledContent?: boolean;
+	isRaffle?: boolean;
 }> = [
 	{
 		speaker: {
@@ -285,7 +230,7 @@ const LIST_OF_TALKS_NEW: Array<{
 			description: "Creador de contenido y divulgador",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Próximos cursos y contenidos por Miguel Ángel Durán",
+		title: "Próximos cursos y contenidos por midudev",
 		startAt: 1757517000000, // 17:10H
 		durationInMinutes: 20,
 	},
@@ -295,9 +240,10 @@ const LIST_OF_TALKS_NEW: Array<{
 			description: "Sorteo de Cascos Sony",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Sorteo de Cascos Sony",
+		title: "Sorteo de Cascos Sony WF-1000XM5",
 		startAt: 1757518200000, // 17:30H
 		durationInMinutes: 10,
+		isRaffle: true,
 	},
 	{
 		speaker: {
@@ -305,7 +251,7 @@ const LIST_OF_TALKS_NEW: Array<{
 			description: "VP Head of International Development en Cloudflare",
 			imgUrl: "/speakers/chema-alonso.webp",
 		},
-		title: "Hablamos con Chema Alonso",
+		title: "Ciberseguridad y su rol en Cloudflare",
 		startAt: 1757518800000, // 17:40H
 		durationInMinutes: 20,
 	},
@@ -318,6 +264,7 @@ const LIST_OF_TALKS_NEW: Array<{
 		title: "Sorteo de teclado Keychron",
 		startAt: 1757520000000, // 18:00H
 		durationInMinutes: 5,
+		isRaffle: true,
 	},
 	{
 		speaker: {
@@ -338,6 +285,7 @@ const LIST_OF_TALKS_NEW: Array<{
 		title: "Sorteo de 2 libros de Git + GitHub",
 		startAt: 1757521500000, // 18:25H
 		durationInMinutes: 5,
+		isRaffle: true,
 	},
 	{
 		speaker: {
@@ -345,7 +293,7 @@ const LIST_OF_TALKS_NEW: Array<{
 			description: "CEO de Vercel",
 			imgUrl: "/speakers/guillermo-rauch.webp",
 		},
-		title: "Hablamos con Guillermo Rauch",
+		title: "Vercel, Next.js, el futuro de React, V0 y más",
 		startAt: 1757521800000, // 18:30H
 		durationInMinutes: 30,
 	},
@@ -358,26 +306,80 @@ const LIST_OF_TALKS_NEW: Array<{
 		title: "Sorteo de teclado Keychron",
 		startAt: 1757523600000, // 19:00H
 		durationInMinutes: 25,
+		isRaffle: true,
 	},
 	{
 		speaker: {
-			name: "InfoJobs",
+			name: "Mario Santiago",
 			description: "Portal de empleo",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Charla con InfoJobs",
+		title: "¿Cómo mejorar tu CV para conseguir empleo en IT?",
 		startAt: 1757525100000, // 19:25H
 		durationInMinutes: 5,
 	},
 	{
 		speaker: {
-			name: "???",
-			description: "Sorpresa especial",
-			imgUrl: "/speakers/speaker-01.webp",
+			name: "dotCSV",
+			description: "Divulgador de IA",
+			imgUrl: "/speakers/dotcsv.webp",
 		},
-		title: "???",
+		title: "¿Qué nos espera en la IA?",
 		startAt: 1757525400000, // 19:30H
-		durationInMinutes: 30,
+		durationInMinutes: 25,
+	},
+	{
+		speaker: {
+			name: "Sorteo Viaje a México",
+			description: "Sorteo de viaje a México",
+			imgUrl: "/speakers/midudev.webp",
+		},
+		title: "Sorteo de viaje a México",
+		startAt: 1757527200000, // 20:00H
+		durationInMinutes: 10,
+		isRaffle: true,
+	},
+	{
+		speaker: {
+			name: "Darwinglish",
+			description: "Darwinglish @ Inglés para Devs",
+			imgUrl: "/speakers/darwinglish.webp",
+		},
+		title: "Inglés para Devs",
+		startAt: 1757527800000, // 20:00H
+		durationInMinutes: 20,
+	},
+	{
+		speaker: {
+			name: "Sorteo de MiniPC",
+			description: "Sorteo de ordenador Geekom A5 2025 Edition",
+			imgUrl: "/speakers/midudev.webp",
+		},
+		title: "Sorteo de ordenador Geekom A5 2025 Edition",
+		startAt: 1757528700000, // 20:25H
+		durationInMinutes: 5,
+		isRaffle: true,
+	},
+	{
+		speaker: {
+			name: "Gisela Torres",
+			description: "Senior Global Blackbelt @ Microsoft",
+			imgUrl: "/speakers/gisela-torres.webp",
+		},
+		title: "Programando tus MCPs",
+		startAt: 1757529000000, // 20:30H
+		durationInMinutes: 25,
+	},
+	{
+		speaker: {
+			name: "Sorteo de LemonCode",
+			description: "2 bootcamps de Programación",
+			imgUrl: "/speakers/midudev.webp",
+		},
+		title: "Sorteo de 2 Bootcamps de LemonCode. Valorados en 2500€ cada uno",
+		startAt: 1757530500000, // 20:55H
+		durationInMinutes: 5,
+		isRaffle: true,
 	},
 	{
 		speaker: {
@@ -386,32 +388,18 @@ const LIST_OF_TALKS_NEW: Array<{
 			imgUrl: "/speakers/theo.webp",
 		},
 		title: "Charla con Theo",
-		startAt: 1757527200000, // 20:00H
-		durationInMinutes: 60,
+		startAt: 1757530800000, // 21:00H
+		durationInMinutes: 25,
 	},
+	{
+		speaker: {
+			name: "Sorteo de Mac Mini",
+			description: "Sorteo de Mac Mini M4",
+			imgUrl: "/speakers/midudev.webp",
+		},
+		title: "Sorteo de Mac Mini M4",
+		startAt: 1757532600000, // 21:30H
+		durationInMinutes: 5,
+		isRaffle: true,
+	}
 ];
-
-/*
-16:40    17:00    Cuenta atrás con Grimer
-17:00    17:30    Q&A con Guillermo Rauch
-17:30    17:40    Charla KeepCoding + Sorteo
-17:40    17:50    Charla con Codely + Sorteo
-17:50    18:00    Novedades midudev
-18:00    18:30    Charla con Freddy Vega
-18:30    18:35    Sorteo Platzi
-18:35    18:45    S4vitar + Sorteo
-18:45    19:10    Carmen Ansio (Animaciones CSS con scroll)
-19:10    19:20    ¡Participa en el Mega Trivial!
-19:20    19:40    Alba Silvente (???)
-19:40    19:45    Sorteo con Malt
-19:45    20:15    Estefany Aguilar (???)
-20:15    20:25    ¡Participa en el Mega Trivial!
-20:25    20:45    Pelado Nerd + Sorteo
-20:45    20:50    Sorteos
-20:50    21:00    Charla Cloudinary + Sorteo
-21:00    21:05    ¡Más novedades midudev!
-21:05    21:10    Sorteos
-21:10    21:35    Charla con Fazt + Sorteo
-21:35    22:05    Charla con DotCSV
-22:05    22:15    ¡Participa en el Mega Trivial!
-*/
