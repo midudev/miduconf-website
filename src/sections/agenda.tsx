@@ -311,10 +311,10 @@ const LIST_OF_TALKS_NEW: Array<{
 	{
 		speaker: {
 			name: "Mario Santiago",
-			description: "Portal de empleo",
+			description: "InfoJobs",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "¿Cómo mejorar tu CV para conseguir empleo en IT?",
+		title: "Tips para Desarrollar tu Carrera Tech",
 		startAt: 1757525100000, // 19:25H
 		durationInMinutes: 5,
 	},
