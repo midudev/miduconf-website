@@ -11,6 +11,8 @@ import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
 import TwitchStream from '@/twitch/components/twitch-stream'
 import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import { CONFERENCE_CONFIG } from '@/config/conference'
 
 const title = 'miduConf - La conferencia de programación y desarrollo'
 const description =
@@ -26,8 +28,37 @@ export default function Home({ userData }) {
     url
   }
 
+  const eventJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: 'miduConf 2025',
+    description,
+    startDate: new Date(CONFERENCE_CONFIG.EVENT_DATE).toISOString(),
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+    url,
+    image: [`${url}${defaultOgImage}`],
+    organizer: {
+      '@type': 'Organization',
+      name: 'midudev',
+      url
+    },
+    location: {
+      '@type': 'VirtualLocation',
+      url: 'https://www.twitch.tv/midudev'
+    },
+    isAccessibleForFree: true,
+    inLanguage: 'es-ES'
+  }
+
   return (
     <Layout meta={metadata}>
+      <Head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
+        />
+      </Head>
       <TwitchStream />
       <main>
         <Hero userData={userData} />
