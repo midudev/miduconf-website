@@ -72,7 +72,7 @@ const sponsors = [
       },
       {
         name: 'Windsurf',
-        link: 'https://www.windsurf.com/',
+        link: 'https://wind.surf/miduconf',
         logo: <SponsorIcons.windsurf className='clamp-sponsor md:w-auto md:h-32' />,
         slogan: 'El mejor editor de código con IA'
       }
