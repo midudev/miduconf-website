@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block admin-only and utility routes
+Disallow: /custom-og-image
+
+Sitemap: https://miduconf.com/sitemap.xml
