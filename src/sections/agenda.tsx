@@ -237,12 +237,12 @@ const LIST_OF_TALKS_NEW: Array<{
 	{
 		speaker: {
 			name: "Sorteo Sony",
-			description: "Sorteo de Cascos Sony",
+			description: "Sorteo Alfombrillas DonDominio x midudev",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Sorteo de Cascos Sony WF-1000XM5",
+		title: "Sorteo de Alfombrillas DonDominio x midudev",
 		startAt: 1757518200000, // 17:30H
-		durationInMinutes: 10,
+		durationInMinutes: 5,
 		isRaffle: true,
 	},
 	{
@@ -279,10 +279,10 @@ const LIST_OF_TALKS_NEW: Array<{
 	{
 		speaker: {
 			name: "Sorteo Libros",
-			description: "Sorteo de 2 libros de Git + GitHub",
+			description: "Sorteo de 3 libros de Git + GitHub",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Sorteo de 2 libros de Git + GitHub",
+		title: "Sorteo de 3 libros de Git + GitHub",
 		startAt: 1757521500000, // 18:25H
 		durationInMinutes: 5,
 		isRaffle: true,
@@ -330,12 +330,12 @@ const LIST_OF_TALKS_NEW: Array<{
 	},
 	{
 		speaker: {
-			name: "Sorteo Viaje a México",
-			description: "Sorteo de viaje a México",
+			name: "Sorteo cascos Sony con Malt",
+			description: "Sorteo cascos Sony con Malt",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Sorteo de viaje a México",
-		startAt: 1757527200000, // 20:00H
+		title: "Sorteo cascos Sony Sony WF-1000XM5 con Malt",
+		startAt: 1757526900000, // 20:00H
 		durationInMinutes: 10,
 		isRaffle: true,
 	},
@@ -346,7 +346,7 @@ const LIST_OF_TALKS_NEW: Array<{
 			imgUrl: "/speakers/darwinglish.webp",
 		},
 		title: "Inglés para Devs",
-		startAt: 1757527800000, // 20:00H
+		startAt: 1757527500000, // 20:05H
 		durationInMinutes: 20,
 	},
 	{
