@@ -257,11 +257,11 @@ const LIST_OF_TALKS_NEW: Array<{
 	},
 	{
 		speaker: {
-			name: "Sorteo Keychron",
-			description: "Sorteo de teclado Keychron",
+			name: "Sorteo cascos Sony con Malt",
+			description: "Sorteo cascos Sony con Malt",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Sorteo de teclado Keychron",
+		title: "Sorteo cascos Sony Sony WF-1000XM5 con Malt",
 		startAt: 1757520000000, // 18:00H
 		durationInMinutes: 5,
 		isRaffle: true,
@@ -315,7 +315,7 @@ const LIST_OF_TALKS_NEW: Array<{
 			imgUrl: "/speakers/midudev.webp",
 		},
 		title: "Tips para Desarrollar tu Carrera Tech",
-		startAt: 1757525100000, // 19:25H
+		startAt: 1757524200000, // 19:10H
 		durationInMinutes: 5,
 	},
 	{
@@ -334,7 +334,7 @@ const LIST_OF_TALKS_NEW: Array<{
 			description: "Sorteo cascos Sony con Malt",
 			imgUrl: "/speakers/midudev.webp",
 		},
-		title: "Sorteo cascos Sony Sony WF-1000XM5 con Malt",
+		title: "Sorteo teclado Keychron",
 		startAt: 1757526900000, // 20:00H
 		durationInMinutes: 10,
 		isRaffle: true,
