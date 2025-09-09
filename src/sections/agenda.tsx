@@ -316,7 +316,7 @@ const LIST_OF_TALKS_NEW: Array<{
 		},
 		title: "Tips para Desarrollar tu Carrera Tech",
 		startAt: 1757524200000, // 19:10H
-		durationInMinutes: 5,
+		durationInMinutes: 10,
 	},
 	{
 		speaker: {
