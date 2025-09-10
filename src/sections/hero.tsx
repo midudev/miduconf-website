@@ -90,11 +90,10 @@ export function Hero({
 									width="40"
 									height="40"
 									src={userData.user_metadata.avatar_url}
-									alt={`Avatar de ${
-										userData.user_metadata.name ??
+									alt={`Avatar de ${userData.user_metadata.name ??
 										userData.user_metadata.full_name ??
 										"tu usuario"
-									}`}
+										}`}
 								/>
 							)}
 							<Button
@@ -108,7 +107,7 @@ export function Hero({
 							</Button>
 						</div>
 					) : (
-						<Button 
+						<Button
 							onClick={signin}
 							className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
 						>
@@ -171,7 +170,7 @@ export function Hero({
 						<span className="block">la programación</span>
 					</h1>
 				</div>
-				<div className="flex flex-col gap-spacing-24">
+				<div className="flex flex-col gap-spacing-24 items-end">
 					<Countdown className="self-end" />
 					<p className="text-center lg:text-right text-xl-medium text-pretty">
 						Conferencia de Programación y Desarrollo en Español en{" "}
@@ -194,29 +193,32 @@ export function Hero({
 									width="60"
 									height="60"
 									src={userData.user_metadata.avatar_url}
-									alt={`Avatar de ${
-										userData.user_metadata.name ??
+									alt={`Avatar de ${userData.user_metadata.name ??
 										userData.user_metadata.full_name ??
 										"tu usuario"
-									}`}
+										}`}
 								/>
 							)}
 							<Button
 								as="a"
 								href="/ticket"
-								className="px-4 py-2.5 text-xl gap-x-2 hidden md:block"
+								containerClassName="!flex-row"
 							>
 								<EnterArrow className="w-auto h-5" />
-								VER TU TICKET
+								<span>
+									VER TU TICKET
+								</span>
 							</Button>
 						</div>
 					) : (
 						<Button
 							onClick={signin}
-							className="mx-auto lg:mr-0 px-4 py-2.5 text-xl gap-x-2"
+							containerClassName="!flex-row"
 						>
 							<EnterArrow className="w-auto h-5" />
-							OBTENER TICKET
+							<span>
+								OBTENER TICKET
+							</span>
 						</Button>
 					)}
 				</div>
