@@ -2,7 +2,7 @@ import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { useSupabaseSignInByGitHub } from "@/auth/hooks/use-supabase-signin-by-github";
 import { Background3D } from "@/components/Background3D";
-import { CallToAction } from "@/components/CallToAction";
+import { Button } from "@/components/Button";
 import { ConferenceDate } from "@/components/ConferenceDate";
 import { Countdown } from "@/components/Countdown";
 import { MiduLogo3D } from "@/components/experience/MiduLogo3D";
@@ -17,14 +17,14 @@ interface Props {
 	isLive?: boolean;
 }
 
-export function Hero({ userData, isLive = false }: Props) {
+export function Hero({
+	userData,
+	isLive = false,
+}: Props) {
 	const { signin } = useSupabaseSignInByGitHub();
 	const isMounted = useMounted();
 	const matches = useMediaQuery("(max-width: 768px)");
-	const { countdownEnded } = useRemainingTime(
-		new Date(CONFERENCE_CONFIG.EVENT_DATE),
-		{ fillingZeros: false },
-	);
+	const { countdownEnded } = useRemainingTime(new Date(CONFERENCE_CONFIG.EVENT_DATE), { fillingZeros: false });
 
 	// Mostrar Hero live cuando el countdown llegue a 0 Y Midu esté en directo
 	const showLiveHero = countdownEnded && isLive;
@@ -86,7 +86,7 @@ export function Hero({ userData, isLive = false }: Props) {
 						<div className="flex items-center gap-4">
 							{userData?.user_metadata.avatar_url && (
 								<img
-									className="object-cover w-10 h-10 rounded-[5px] aspect-square"
+									className="object-cover size-14 rounded-[5px] aspect-square"
 									width="40"
 									height="40"
 									src={userData.user_metadata.avatar_url}
@@ -97,20 +97,25 @@ export function Hero({ userData, isLive = false }: Props) {
 									}`}
 								/>
 							)}
-							<CallToAction
-								IconComponent={EnterArrow}
-								estilo="default"
-								text="Ver tu Ticket"
+							<Button
+								as="a"
 								href={`/ticket/${userData.user_metadata.user_name}`}
-							/>
+								className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
+							>
+								<EnterArrow className="w-auto h-4 sm:h-5" />
+								<span className="hidden sm:inline">VER TU TICKET</span>
+								<span className="sm:hidden">TICKET</span>
+							</Button>
 						</div>
 					) : (
-						<CallToAction
+						<Button 
 							onClick={signin}
-							text="Consigue tu ticket"
-							estilo="default"
-							IconComponent={EnterArrow}
-						/>
+							className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
+						>
+							<EnterArrow className="w-auto h-4 sm:h-5" />
+							<span className="hidden sm:inline">CONSIGUE TU TICKET</span>
+							<span className="sm:hidden">OBTENER</span>
+						</Button>
 					)}
 
 					{/* Iframe de Twitch grande y centrado */}
@@ -196,24 +201,23 @@ export function Hero({ userData, isLive = false }: Props) {
 									}`}
 								/>
 							)}
-							<CallToAction
-								className="hidden: md:block"
-								IconComponent={EnterArrow}
-								estilo="default"
-								text="Ver tu Ticket"
+							<Button
+								as="a"
 								href="/ticket"
-							/>
+								className="px-4 py-2.5 text-xl gap-x-2 hidden md:block"
+							>
+								<EnterArrow className="w-auto h-5" />
+								VER TU TICKET
+							</Button>
 						</div>
 					) : (
-						<>
-							<CallToAction
-								onClick={signin}
-								className="mx-auto lg:mr-0 hero-ticket"
-								text="Obtener ticket"
-								estilo="default"
-								IconComponent={EnterArrow}
-							/>
-						</>
+						<Button
+							onClick={signin}
+							className="mx-auto lg:mr-0 px-4 py-2.5 text-xl gap-x-2"
+						>
+							<EnterArrow className="w-auto h-5" />
+							OBTENER TICKET
+						</Button>
 					)}
 				</div>
 			</div>
