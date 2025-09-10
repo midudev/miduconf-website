@@ -7,30 +7,35 @@ import { ConferenceDate } from "@/components/ConferenceDate";
 import { Countdown } from "@/components/Countdown";
 import { MiduLogo3D } from "@/components/experience/MiduLogo3D";
 import { EnterArrow } from "@/components/icons/enter-arrow";
+import { CONFERENCE_CONFIG } from "@/config/conference";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMounted } from "@/hooks/use-mounted";
 import { useRemainingTime } from "@/hooks/useRemainingTime";
-import { CONFERENCE_CONFIG } from "@/config/conference";
 
 interface Props {
 	userData?: User;
 	isLive?: boolean;
 }
 
-
 export function Hero({ userData, isLive = false }: Props) {
 	const { signin } = useSupabaseSignInByGitHub();
 	const isMounted = useMounted();
 	const matches = useMediaQuery("(max-width: 768px)");
-	const { countdownEnded } = useRemainingTime(new Date(CONFERENCE_CONFIG.EVENT_DATE), { fillingZeros: false });
-	
+	const { countdownEnded } = useRemainingTime(
+		new Date(CONFERENCE_CONFIG.EVENT_DATE),
+		{ fillingZeros: false },
+	);
+
 	// Mostrar Hero live cuando el countdown llegue a 0 Y Midu esté en directo
 	const showLiveHero = countdownEnded && isLive;
 
 	// Si está en directo y el countdown terminó, mostrar Hero live
 	if (showLiveHero) {
-		const { hostname } = typeof window !== 'undefined' ? window.location : { hostname: 'localhost' };
-		
+		const { hostname } =
+			typeof window !== "undefined"
+				? window.location
+				: { hostname: "localhost" };
+
 		return (
 			<section
 				className="relative h-[100dvh]"
@@ -44,7 +49,7 @@ export function Hero({ userData, isLive = false }: Props) {
 						alt="Logo del evento de MiduConf 2025"
 						width="10008"
 						height="1512"
-						className="object-cover h-full"
+						className="object-cover h-full opacity-40"
 					/>
 				</div>
 
