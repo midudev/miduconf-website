@@ -1,13 +1,18 @@
 import { Button } from '@/components/Button'
 import { CrossIcon } from '@/components/icons/cross'
 import { DotIcon } from '@/components/icons/dot'
-import { useEffect, useState } from 'react'
+import { useTwitchOnline } from '@/hooks/use-twitch-online'
+import { useState } from 'react'
 
-export default function TwitchStream() {
+interface Props {
+  hide?: boolean;
+}
+
+export default function TwitchStream({ hide = false }: Props) {
   const [open, setOpen] = useState(true)
   const online = useTwitchOnline()
 
-  if (!online) return <div></div>
+  if (!online || hide) return <div></div>
 
   const { hostname } = document.location
 
@@ -51,19 +56,3 @@ export default function TwitchStream() {
   )
 }
 
-const useTwitchOnline = () => {
-  const [online, setOnline] = useState(false)
-
-  useEffect(() => {
-    fetch('https://midudev-apis.midudev.workers.dev/uptime/midudev')
-      .then((res) => res.json())
-      .then(({ online }) => {
-        setOnline(online)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }, [])
-
-  return online
-}

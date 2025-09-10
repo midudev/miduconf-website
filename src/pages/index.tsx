@@ -10,6 +10,8 @@ import { Speakers } from '@/sections/speakers'
 import { Sponsors } from '@/sections/sponsors'
 import { WhatToExpect } from '@/sections/what-to-expect'
 import TwitchStream from '@/twitch/components/twitch-stream'
+import { useRemainingTime } from '@/hooks/useRemainingTime'
+import { useTwitchOnline } from '@/hooks/use-twitch-online'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { CONFERENCE_CONFIG } from '@/config/conference'
@@ -20,7 +22,13 @@ const description =
 const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
+
 export default function Home({ userData }) {
+  const { countdownEnded } = useRemainingTime(new Date(CONFERENCE_CONFIG.EVENT_DATE), { fillingZeros: false });
+  const isLive = useTwitchOnline();
+  
+  // Si countdown terminó y está live, ocultar el toast
+  const hideToast = countdownEnded && isLive;
   const metadata = {
     title,
     description,
@@ -59,9 +67,9 @@ export default function Home({ userData }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
         />
       </Head>
-      <TwitchStream />
+      <TwitchStream hide={hideToast} />
       <main>
-        <Hero userData={userData} />
+        <Hero userData={userData} isLive={isLive} />
         <WhatToExpect />
         <Speakers />
         <Sponsors />
