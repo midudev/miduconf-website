@@ -1,16 +1,7 @@
-import type { User } from "@supabase/supabase-js";
-import Link from "next/link";
 import { useSupabaseSignInByGitHub } from "@/auth/hooks/use-supabase-signin-by-github";
-import { Background3D } from "@/components/Background3D";
 import { Button } from "@/components/Button";
-import { ConferenceDate } from "@/components/ConferenceDate";
-import { Countdown } from "@/components/Countdown";
-import { MiduLogo3D } from "@/components/experience/MiduLogo3D";
 import { EnterArrow } from "@/components/icons/enter-arrow";
-import { CONFERENCE_CONFIG } from "@/config/conference";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { useMounted } from "@/hooks/use-mounted";
-import { useRemainingTime } from "@/hooks/useRemainingTime";
+import type { User } from "@supabase/supabase-js";
 
 interface Props {
 	userData?: User;
@@ -19,121 +10,9 @@ interface Props {
 
 export function Hero({
 	userData,
-	isLive = false,
 }: Props) {
 	const { signin } = useSupabaseSignInByGitHub();
-	const isMounted = useMounted();
-	const matches = useMediaQuery("(max-width: 768px)");
-	const { countdownEnded } = useRemainingTime(new Date(CONFERENCE_CONFIG.EVENT_DATE), { fillingZeros: false });
 
-	// Mostrar Hero live cuando el countdown llegue a 0 Y Midu esté en directo
-	const showLiveHero = countdownEnded && isLive;
-
-	// Si está en directo y el countdown terminó, mostrar Hero live
-	if (showLiveHero) {
-		const { hostname } =
-			typeof window !== "undefined"
-				? window.location
-				: { hostname: "localhost" };
-
-		return (
-			<section
-				className="relative h-[100dvh]"
-				role="banner"
-				aria-labelledby="hero-title"
-			>
-				{/* Background estático como en mobile */}
-				<div className="absolute inset-0">
-					<img
-						src="/global/hero.avif"
-						alt="Logo del evento de MiduConf 2025"
-						width="10008"
-						height="1512"
-						className="object-cover h-full opacity-40"
-					/>
-				</div>
-
-				{/* Layout centrado como en el wireframe */}
-				<div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-5 space-y-8 pt-20">
-					{/* Badge con dos secciones: Estamos en vivo | Ver en twitch */}
-					<div className="flex items-center overflow-hidden rounded-full bg-black/80 border border-white/20">
-						<div className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white font-medium">
-							<div className="w-2 h-2 bg-white rounded-full animate-ping" />
-							Estamos en vivo
-						</div>
-						<div className="px-4 py-2 text-white font-medium">
-							<Link
-								href="https://www.twitch.tv/midudev"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="hover:text-palette-primary transition-colors"
-							>
-								Ver en twitch
-							</Link>
-						</div>
-					</div>
-
-					{/* Hero text grande y centrado */}
-					<h1
-						id="hero-title"
-						className="text-center text-4xl-semibold text-balance max-w-4xl"
-					>
-						Consigue tu ticket para participar en los sorteos
-					</h1>
-
-					{/* CTA Button centrado */}
-					{userData ? (
-						<div className="flex items-center gap-4">
-							{userData?.user_metadata.avatar_url && (
-								<img
-									className="object-cover size-14 rounded-[5px] aspect-square"
-									width="40"
-									height="40"
-									src={userData.user_metadata.avatar_url}
-									alt={`Avatar de ${userData.user_metadata.name ??
-										userData.user_metadata.full_name ??
-										"tu usuario"
-										}`}
-								/>
-							)}
-							<Button
-								as="a"
-								href={`/ticket/${userData.user_metadata.user_name}`}
-								className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
-							>
-								<EnterArrow className="w-auto h-4 sm:h-5" />
-								<span className="hidden sm:inline">VER TU TICKET</span>
-								<span className="sm:hidden">TICKET</span>
-							</Button>
-						</div>
-					) : (
-						<Button
-							onClick={signin}
-							className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
-						>
-							<EnterArrow className="w-auto h-4 sm:h-5" />
-							<span className="hidden sm:inline">CONSIGUE TU TICKET</span>
-							<span className="sm:hidden">OBTENER</span>
-						</Button>
-					)}
-
-					{/* Iframe de Twitch grande y centrado */}
-					<div className="w-full max-w-5xl aspect-video rounded-xl overflow-hidden shadow-2xl bg-black">
-						<iframe
-							src={`https://player.twitch.tv/?channel=midudev&parent=${hostname}&muted=false`}
-							frameBorder="0"
-							width="100%"
-							height="100%"
-							allowFullScreen={true}
-							scrolling="no"
-						/>
-					</div>
-				</div>
-			</section>
-		);
-	}
-
-	// Hero normal cuando no está en directo o el countdown no ha terminado
 	return (
 		<section
 			className="relative h-[100dvh]"
@@ -141,87 +20,101 @@ export function Hero({
 			aria-labelledby="hero-title"
 		>
 			<div className="absolute inset-0">
-				{!isMounted ? (
-					<div className="w-full h-full bg-palette-background" />
-				) : matches ? (
-					<img
-						src="/global/hero.avif"
-						alt="Logo del evento de MiduConf 2025"
-						width="10008"
-						height="1512"
-						className="object-cover h-full animate-fade-in"
-					/>
-				) : (
-					<>
-						<MiduLogo3D />
-						<Background3D />
-					</>
-				)}
+				<img
+					src="/global/hero.avif"
+					alt="Logo del evento de MiduConf 2025"
+					width="10008"
+					height="1512"
+					className="object-cover h-full opacity-40"
+				/>
 			</div>
 
-			<div className="absolute bottom-0 z-10 space-y-spacing-40 lg:grid lg:grid-cols-2 xl:grid-cols-[726px_550px] items-end justify-between w-full px-5 pb-5 md:bg-none animate-fade-in-up md:bottom-0 md:left-0">
-				<div className="flex flex-col items-center mx-auto lg:ml-0 lg:items-start gap-spacing-24">
-					<ConferenceDate className="" />
-					<h1
-						id="hero-title"
-						className="text-center lg:text-left text-4xl-semibold text-balance"
-					>
-						<span className="block">La nueva era de</span>
-						<span className="block">la programación</span>
-					</h1>
+			<div className="flex absolute inset-0 z-10 flex-col justify-center items-center px-5 pt-20 space-y-8">
+				<div className="flex flex-col rounded-md border md:overflow-hidden md:items-center md:rounded-full md:flex-row bg-black/80 border-white/20">
+					<div className="flex gap-2 items-center px-4 py-2 font-medium text-white bg-green-600 rounded-t-md md:rounded-none">
+						<div className="w-2 h-2 bg-white rounded-full" />
+						Evento finalizado
+					</div>
+					<div className="px-4 py-2 font-medium text-white">
+						¡Gracias por participar!
+					</div>
 				</div>
-				<div className="flex flex-col gap-spacing-24 items-end">
-					<Countdown className="self-end" />
-					<p className="text-center lg:text-right text-xl-medium text-pretty">
-						Conferencia de Programación y Desarrollo en Español en{" "}
-						<Link
-							href="https://www.twitch.tv/midudev"
-							className="underline text-palette-primary focus:outline-none focus:ring-2 focus:ring-palette-primary focus:ring-offset-2 focus:ring-offset-black"
+
+				<div className="space-y-8 max-w-4xl text-center">
+					<h1
+						className="text-4xl-semibold text-balance"
+					>
+						¡Gracias por ser parte de MiduConf 2025!
+					</h1>
+					<p className="text-xl text-white/80 text-balance">
+						Fue increíble compartir esta experiencia contigo
+					</p>
+				</div>
+
+				<div className="grid grid-cols-1 gap-6 w-full max-w-2xl sm:grid-cols-2">
+					<div className="p-6 text-center rounded-xl border backdrop-blur-sm bg-black/60 border-white/10">
+						<div className="mb-2 text-3xl font-bold text-palette-primary">+10K</div>
+						<div className="text-white/80">Viewers permanentes durante el directo</div>
+					</div>
+					<div className="p-6 text-center rounded-xl border backdrop-blur-sm bg-black/60 border-white/10">
+						<div className="mb-2 text-3xl font-bold text-palette-primary">+8,500</div>
+						<div className="text-white/80">Tickets generados</div>
+					</div>
+					<div className="col-span-full w-full max-w-3xl">
+						<a
+							href="https://www.youtube.com/watch?v=e1PqYpfkk7o&list=PLUofhDIg_38oMcKEB_zA9GY-Ldke8hIOy"
 							target="_blank"
 							rel="noopener noreferrer"
-							aria-label="Visitar el canal de Twitch de midudev (se abre en nueva ventana)"
+							className="flex gap-4 justify-center items-center px-6 py-4 text-lg font-medium text-white rounded-xl border backdrop-blur transition-colors border-red-600/60 bg-red-600/40 hover:bg-red-700/80 group"
 						>
-							Twitch
-						</Link>
-					</p>
+							<svg className="flex-shrink-0 w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+							</svg>
+							<span className="text-center">Ver todas las charlas del evento</span>
+							<svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+							</svg>
+						</a>
+					</div>
+				</div>
 
-					{userData ? (
-						<div className="flex flex-wrap items-center mx-auto gap-spacing-16 lg:mr-0">
-							{userData?.user_metadata.avatar_url && (
-								<img
-									className="object-cover w-10 h-10 rounded-[5px] aspect-square"
-									width="60"
-									height="60"
-									src={userData.user_metadata.avatar_url}
-									alt={`Avatar de ${userData.user_metadata.name ??
-										userData.user_metadata.full_name ??
-										"tu usuario"
-										}`}
-								/>
-							)}
-							<Button
-								as="a"
-								href="/ticket"
-								containerClassName="!flex-row"
-							>
-								<EnterArrow className="w-auto h-5" />
-								<span>
-									VER TU TICKET
-								</span>
-							</Button>
-						</div>
-					) : (
+				{userData ? (
+					<div className="flex gap-4 items-center">
+						{userData?.user_metadata.avatar_url && (
+							<img
+								className="object-cover size-14 rounded-[5px] aspect-square"
+								width="40"
+								height="40"
+								src={userData.user_metadata.avatar_url}
+								alt={`Avatar de ${userData.user_metadata.name ??
+									userData.user_metadata.full_name ??
+									"tu usuario"
+									}`}
+							/>
+						)}
+						<Button
+							as="a"
+							href={`/ticket/${userData.user_metadata.user_name}`}
+							className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
+						>
+							<EnterArrow className="w-auto h-4 sm:h-5" />
+							<span className="hidden sm:inline">VER TU TICKET</span>
+							<span className="sm:hidden">TICKET</span>
+						</Button>
+					</div>
+				) : (
+					<div className="space-y-4 text-center">
+						<p className="text-white/60">¿Participaste en el evento?</p>
 						<Button
 							onClick={signin}
-							containerClassName="!flex-row"
+							className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
 						>
-							<EnterArrow className="w-auto h-5" />
-							<span>
-								OBTENER TICKET
-							</span>
+							<EnterArrow className="w-auto h-4 sm:h-5" />
+							<span className="hidden sm:inline">VER TU TICKET</span>
+							<span className="sm:hidden">VER TICKET</span>
 						</Button>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		</section>
 	);
