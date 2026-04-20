@@ -20,7 +20,7 @@
     "html-to-image": "1.11.13",
     "lil-gui": "^0.20.0",
     "matter-js": "0.20.0",
-    "next": "15.4.6",
+    "next": "15.4.10",
     "postcss": "8.4.49",
     "postprocessing": "^6.37.6",
     "react": "19.1.1",
