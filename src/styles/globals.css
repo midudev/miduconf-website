@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+@import "tailwind-animations";
+
+@utility text-shadow {
+	text-shadow: 0px 0px 1px rgb(0 0 0 / 20%), 0px 0px 1px rgb(1 0 5 / 10%);
+}
+
 
 :root {
 	--font-family-monospace: 'code-regular', monospace;

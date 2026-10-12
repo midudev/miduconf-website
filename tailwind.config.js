@@ -117,8 +117,6 @@ export default {
     }
   },
   plugins: [
-    require('flowbite/plugin'),
-    require('tailwindcss-textshadow'),
-    require('@midudev/tailwind-animations')
+    require('flowbite/plugin')
   ]
 }
