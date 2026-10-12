@@ -265,7 +265,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
         ticketNumber: ticketCreated?.ticketNumber,
         midudevTypeSub: ticketCreated?.midudevTypeSub,
         midudevTokentId: ticketCreated?.midudevTokentId,
-        initialSession: session,
         user: getInfoFromUser({ user: session?.user }),
         twitchTier: null,
         hologram: 'standard'
@@ -289,7 +288,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
     props: {
       userHadPreviousTicket: true,
       ticketNumber: ticket.ticketNumber || 0,
-      initialSession: session,
       midudevTypeSub: ticket.midudevTypeSub,
       midudevTokentId: ticket.midudevTokentId,
       user: getInfoFromUser({ user: session?.user }),

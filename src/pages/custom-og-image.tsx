@@ -195,7 +195,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 			props: {
 				userHadPreviousTicket: false,
 				ticketNumber: ticketCreated?.ticketNumber,
-				initialSession: session,
 				user: getInfoFromUser({ user: session?.user }),
 				twitchTier: null,
 				hologram: 'standard'
@@ -207,7 +206,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 		props: {
 			userHadPreviousTicket: true,
 			ticketNumber: ticket.ticketNumber || 0,
-			initialSession: session,
 			user: getInfoFromUser({ user: session?.user }),
 			twitchTier: ticket.twitchTier,
 			hologram: ticket.hologram
