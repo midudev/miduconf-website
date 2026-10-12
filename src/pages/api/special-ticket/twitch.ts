@@ -1,5 +1,5 @@
 import { supabaseUpdateTicket } from '@/tickets/services/supabase-update-ticket'
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (tierErrorMessage != null) return res.redirect(`/ticket?${queryParam}`)
 
     /* get userSession by supabase */
-    const supabase = createPagesServerClient({
+    const supabase = createSupabaseServerClient({
       req,
       res
     })

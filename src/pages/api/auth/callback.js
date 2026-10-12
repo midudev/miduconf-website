@@ -1,11 +1,11 @@
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { createSupabaseServerClient } from '@/lib/supabase-server'
 
 const handler = async (req, res) => {
 	try {
 		const { code } = req.query
 
 		if (code) {
-			const supabase = createPagesServerClient({ req, res })
+			const supabase = createSupabaseServerClient({ req, res })
 			await supabase.auth.exchangeCodeForSession(String(code))
 		}
 

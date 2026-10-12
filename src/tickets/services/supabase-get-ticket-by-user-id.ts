@@ -1,5 +1,5 @@
 import { SupabaseTicketData } from './../types/supabase-ticket-data'
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { TICKET_DB_KEY } from '../config/ticket-db-key'
 import { normalizeTicketData } from '../utils/normalize-ticket-data'
 
@@ -9,7 +9,7 @@ interface Props {
 
 export const supabaseGetTicketByUserId = async (req: any, res: any, { id }: Props) => {
   try {
-    const supabase = createPagesServerClient({ req, res })
+    const supabase = createSupabaseServerClient({ req, res })
     const { data, error } = await supabase
       .from(TICKET_DB_KEY)
       .select('*')

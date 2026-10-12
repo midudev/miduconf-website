@@ -1,7 +1,7 @@
-import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import { getSupabaseBrowserClient } from '@/lib/supabase-browser'
 
 export const useSupabaseSignInByGitHub = () => {
-  const supabase = useSupabaseClient()
+  const supabase = getSupabaseBrowserClient()
 
   const signin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({

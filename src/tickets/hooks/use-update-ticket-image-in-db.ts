@@ -1,4 +1,4 @@
-import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import { getSupabaseBrowserClient } from '@/lib/supabase-browser'
 import { TICKET_DB_KEY } from '../config/ticket-db-key'
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const useUpdateTicketImageInDB = () => {
-  const supabase = useSupabaseClient()
+  const supabase = getSupabaseBrowserClient()
 
   const handleUpdateImageTicket = async ({ filename, file }: Props) => {
     const { error, data } = await supabase.storage.from(TICKET_DB_KEY).upload(filename, file, {
