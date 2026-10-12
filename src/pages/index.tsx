@@ -1,8 +1,6 @@
-import { supabaseGetServerSession } from '@/auth/services/supabase-get-server-session'
 import { Agenda } from '@/sections/agenda'
 import { FAQS } from '@/sections/faqs'
 import { Footer } from '@/sections/footer'
-import { GetTicket } from '@/sections/get-ticket'
 import { Gifts } from '@/sections/gifts'
 import { Hero } from '@/sections/hero'
 import { Layout } from '@/sections/layout'
@@ -12,7 +10,6 @@ import { WhatToExpect } from '@/sections/what-to-expect'
 import TwitchStream from '@/twitch/components/twitch-stream'
 import { useRemainingTime } from '@/hooks/useRemainingTime'
 import { useTwitchOnline } from '@/hooks/use-twitch-online'
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { CONFERENCE_CONFIG } from '@/config/conference'
 
@@ -23,7 +20,7 @@ const defaultOgImage = '/og-image.jpg'
 const url = 'https://miduconf.com'
 
 
-export default function Home({ userData }) {
+export default function Home() {
   const { countdownEnded } = useRemainingTime(new Date(CONFERENCE_CONFIG.EVENT_DATE), { fillingZeros: false });
   const isLive = useTwitchOnline();
   
@@ -69,35 +66,15 @@ export default function Home({ userData }) {
       </Head>
       <TwitchStream hide={hideToast} />
       <main>
-        <Hero userData={userData} isLive={isLive} />
+        <Hero />
         <WhatToExpect />
         <Speakers />
         <Sponsors />
         <Gifts />
         <Agenda />
         <FAQS />
-        <GetTicket />
         <Footer />
       </main>
     </Layout>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ query, req, res }) => {
-  const { session, error } = await supabaseGetServerSession(req, res)
-
-  if (error) {
-    return {
-      redirect: {
-        destination: '/?error-session',
-        permanent: false
-      }
-    }
-  }
-
-  return {
-    props: {
-      userData: session?.user ?? null
-    }
-  }
 }

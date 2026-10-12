@@ -1,18 +1,5 @@
-import { useSupabaseSignInByGitHub } from "@/auth/hooks/use-supabase-signin-by-github";
-import { Button } from "@/components/Button";
-import { EnterArrow } from "@/components/icons/enter-arrow";
-import type { User } from "@supabase/supabase-js";
 
-interface Props {
-	userData?: User;
-	isLive?: boolean;
-}
-
-export function Hero({
-	userData,
-}: Props) {
-	const { signin } = useSupabaseSignInByGitHub();
-
+export function Hero() {
 	return (
 		<section
 			className="relative h-[100dvh]"
@@ -78,43 +65,6 @@ export function Hero({
 					</div>
 				</div>
 
-				{userData ? (
-					<div className="flex gap-4 items-center">
-						{userData?.user_metadata.avatar_url && (
-							<img
-								className="object-cover size-14 rounded-[5px] aspect-square"
-								width="40"
-								height="40"
-								src={userData.user_metadata.avatar_url}
-								alt={`Avatar de ${userData.user_metadata.name ??
-									userData.user_metadata.full_name ??
-									"tu usuario"
-									}`}
-							/>
-						)}
-						<Button
-							as="a"
-							href={`/ticket/${userData.user_metadata.user_name}`}
-							className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
-						>
-							<EnterArrow className="w-auto h-4 sm:h-5" />
-							<span className="hidden sm:inline">VER TU TICKET</span>
-							<span className="sm:hidden">TICKET</span>
-						</Button>
-					</div>
-				) : (
-					<div className="space-y-4 text-center">
-						<p className="text-white/60">¿Participaste en el evento?</p>
-						<Button
-							onClick={signin}
-							className="px-4 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl gap-x-2 !flex-row !items-center"
-						>
-							<EnterArrow className="w-auto h-4 sm:h-5" />
-							<span className="hidden sm:inline">VER TU TICKET</span>
-							<span className="sm:hidden">VER TICKET</span>
-						</Button>
-					</div>
-				)}
 			</div>
 		</section>
 	);
