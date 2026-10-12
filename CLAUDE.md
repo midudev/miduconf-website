@@ -25,7 +25,7 @@ This is a Next.js conference website for miduConf using the Pages Router archite
 - **Supabase Auth Context**: App wrapped in `SessionContextProvider` for authentication state
 - **Ticket System**: Dynamic ticket generation with user data from Supabase
 - **State Management**: Zustand store in `/src/store/` for client-side state
-- **Styling**: Tailwind CSS with custom animations (`@midudev/tailwind-animations`)
+- **Styling**: Tailwind CSS with custom animations (`tailwind-animations`)
 
 ### Component Organization
 - `/components/icons/` - SVG icon components organized by category (languages, sponsors, stickers)
